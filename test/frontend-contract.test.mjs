@@ -35,6 +35,57 @@ test('root exposes the current five-destination mobile shell and keeps the works
   assert.match(entryRedirect, /http:\/\/127\.0\.0\.1:8082\//);
 });
 
+test('visible divider lines use the shared 0.7px thickness without changing component borders', () => {
+  assert.match(mobileCss, /--divider-height:\s*0\.7px;/);
+  assert.match(css, /--divider-height:\s*\.7px;/);
+  assert.match(mobileEntry, /airvana-v4\.css\?v=5\.4\.47/);
+  assert.doesNotMatch(mobileEntry, /border-(?:top|bottom):\s*1px\s+solid/);
+  assert.doesNotMatch(mobileCss, /border-(?:top|bottom):\s*1px\s+solid/);
+  assert.doesNotMatch(css, /border-(?:top|bottom):\s*1px\s+solid/);
+  assert.match(mobileEntry, /height:var\(--divider-height\);background:#F3D7DA/);
+  assert.match(mobileCss, /\.kyc-upload-divider\s*\{[^}]*height:\s*var\(--divider-height\)/);
+  assert.match(mobileCss, /\.create-power-card\s*\{[^}]*border:\s*1px solid #303034/);
+});
+
+test('dark composer sheets use semantic dark surfaces and compact close controls', () => {
+  for (const hook of [
+    'composer-goal-scope', 'composer-goal-deep', 'composer-goal-governance', 'composer-goal-save',
+    'composer-asset-row', 'composer-asset-control', 'composer-asset-boundary'
+  ]) assert.match(mobileEntry, new RegExp(`class="[^"]*${hook}`), `missing dark composer hook: ${hook}`);
+  assert.match(mobileEntry, /className:'composer-goal-chip'/);
+  assert.match(mobileEntry, /className:'composer-goal-connector'/);
+
+  assert.match(mobileCss, /\.composer-sheet-close\s*\{[^}]*width:\s*32px;[^}]*height:\s*32px;/);
+  assert.match(mobileCss, /\.composer-sheet-close::before\s*\{[^}]*inset:\s*-6px;/);
+  assert.match(mobileCss, /\.app-shell\.theme-dark \.composer-sheet-close\s*\{[^}]*background:\s*rgba\(255, 255, 255, 0\.06\)\s*!important;[^}]*color:\s*var\(--text-primary\)\s*!important;[^}]*box-shadow:\s*none;/);
+  assert.match(mobileCss, /\.app-shell\.theme-dark \.composer-goal-chip\s*\{[^}]*background:\s*var\(--surface-control\)\s*!important;/);
+  assert.match(mobileCss, /\.app-shell\.theme-dark \.composer-goal-deep,[\s\S]*?background:\s*var\(--surface-subtle\)\s*!important;/);
+  assert.match(mobileCss, /\.app-shell\.theme-dark \.composer-goal-governance,[\s\S]*?background:\s*#25191d\s*!important;/);
+  assert.match(mobileCss, /\.app-shell\.theme-dark \.composer-goal-save\[aria-disabled="true"\][\s\S]*?background:\s*var\(--surface-control\)\s*!important;/);
+});
+
+test('dark AI inspiration cards avoid light pills and white selection controls', () => {
+  assert.match(mobileCss, /\.app-shell\.theme-dark \.inspiration-suggestion-card\s*\{[^}]*background:\s*var\(--surface-subtle\)/);
+  assert.match(mobileCss, /\.app-shell\.theme-dark \.inspiration-suggestion-title,[\s\S]*?color:\s*var\(--text-primary\)/);
+  assert.match(mobileCss, /\.app-shell\.theme-dark \.inspiration-suggestion-tags > div\s*\{[^}]*background:\s*var\(--surface-control\);[^}]*color:\s*var\(--text-secondary\)/);
+  assert.match(mobileCss, /\.app-shell\.theme-dark \.inspiration-suggestion-check\s*\{[^}]*background:\s*var\(--surface-control\)/);
+  assert.match(mobileCss, /\.app-shell\.theme-dark \.inspiration-suggestion-card\.is-selected \.inspiration-suggestion-check\s*\{[^}]*background:\s*var\(--accent-primary\)/);
+  assert.match(mobileCss, /\.app-shell\.theme-dark \.inspiration-secondary-action\s*\{[^}]*background:\s*var\(--surface-control\);[^}]*color:\s*var\(--text-primary\)/);
+});
+
+test('primary navigation is mounted only on first-level destinations', () => {
+  const navStart = mobileEntry.indexOf('<div class="bottom-nav" role="navigation" aria-label="主导航"');
+  const guardStart = mobileEntry.lastIndexOf('<sc-if value="{{ showPrimaryNavigation }}"', navStart);
+  assert.ok(navStart >= 0 && guardStart >= 0 && guardStart < navStart, 'the primary navigation must be guarded by page hierarchy');
+  assert.match(mobileEntry, /const primaryNavigationScreens = new Set\(\['play','discover','world','messages','me'\]\)/);
+  assert.match(mobileEntry, /const showPrimaryNavigation = s\.ob >= 4[\s\S]{0,320}!s\.panel[\s\S]{0,160}!s\.overlay[\s\S]{0,160}!s\.drawerOpen[\s\S]{0,160}!s\.systemModal[\s\S]{0,160}!s\.pendingDeleteAgentId/);
+  assert.match(mobileEntry, /showPrimaryNavigation,navPlay:/);
+  assert.match(mobileEntry, /class="\{\{ navWorld\.className \}\}" aria-current="\{\{ navWorld\.ariaCurrent \}\}" aria-label="节点"/);
+  assert.match(mobileEntry, /className:active\?'is-active':''[\s\S]{0,100}ariaCurrent:active\?'page':'false'/);
+  assert.match(mobileCss, /\.app-shell\.theme-dark \.bottom-nav__capsule \[aria-current="page"\][\s\S]{0,180}color: #ffffff !important;/);
+  assert.doesNotMatch(mobileEntry, /n\.key === 'me' && s\.screen === 'quests'/);
+});
+
 test('Discover is a separate swipeable 2.5-card gallery while Home remains immersive', () => {
   const feedStart = mobileEntry.indexOf('onPointerDown="{{ feedDown }}"');
   const discoverStart = mobileEntry.indexOf('<sc-if value="{{ isDiscover }}"');
@@ -51,6 +102,26 @@ test('Discover is a separate swipeable 2.5-card gallery while Home remains immer
   assert.doesNotMatch(mobileEntry, /playTabs:|s\.playTab|playTab:/);
 });
 
+test('Home seeds nine additional Playables with one local cover per game', () => {
+  const additions = [
+    [15, 'I AM CAT 猫咪大逃脱', 'i-am-cat.png'],
+    [16, '撒币之旅', 'coin-journey.png'],
+    [17, '潜水员戴夫：丛林探险', 'jungle-diver.png'],
+    [18, '星际前线：裂隙突击', 'rift-frontier.png'],
+    [19, '星砂岛', 'stardust-island.png'],
+    [20, '斗阵骑士', 'battle-knights.png'],
+    [21, '银河玩具店', 'galaxy-toy-shop.png'],
+    [22, '狂野飙车：极速传奇', 'asphalt-legend.png'],
+    [23, '小炮手大战空降恶魔', 'sky-demon-defense.png']
+  ];
+  for (const [id, title, file] of additions) {
+    assert.ok(mobileEntry.includes(`id:${id},type:'game',status:'published',game:'${title}'`), `missing seeded game: ${title}`);
+    assert.ok(mobileEntry.includes(`/assets/game-covers/${file}`), `missing cover mapping: ${file}`);
+    assert.equal(fs.existsSync(path.join(root, 'public/assets/game-covers', file)), true, `missing local cover file: ${file}`);
+  }
+  assert.match(mobileEntry, /const sessions = \[\.\.\.restoredSessions, \.\.\.seededSessions\.filter\(item => !restoredSessionIds\.has\(item\.id\)\)\]/);
+});
+
 test('Home feed actions close the local front-end loop with accessible sheets and truthful events', () => {
   for (const sheet of ['comments-sheet', 'share-sheet', 'remix-sheet', 'unfollow-sheet']) {
     assert.match(mobileEntry, new RegExp(`class="social-action-sheet ${sheet}(?: [^"]*)?"[^>]*role="dialog"[^>]*aria-modal="true"`));
@@ -60,7 +131,7 @@ test('Home feed actions close the local front-end loop with accessible sheets an
   }
   assert.match(mobileEntry, /min-height:44px;display:flex;flex-direction:column/);
   assert.match(mobileEntry, /aria-label="\{\{ r\.ariaLabel \}\}"/);
-  assert.match(mobileEntry, /<div onPointerDown="\{\{ stopFeedPointer \}\}" onClick="\{\{ stopFeedPointer \}\}" style="flex:none;background:#0B0D0C/);
+  assert.match(mobileEntry, /<div class="play-feed__actions" onPointerDown="\{\{ stopFeedPointer \}\}" onClick="\{\{ stopFeedPointer \}\}" style="flex:none;background:#0B0D0C/);
   assert.match(mobileEntry, /min-width:44px;min-height:44px;margin-left:auto;flex:none;display:flex;align-items:center;justify-content:center;cursor:pointer/);
   assert.match(mobileEntry, /min-height:32px;display:flex;align-items:center;gap:6px;background:rgba\(255,255,255,\.12\)/);
   assert.match(mobileEntry, /position:relative;width:34px;height:34px;flex:none/);
@@ -224,8 +295,9 @@ test('Playable detail is experience-first and gates owner operations by role and
   assert.match(mobileEntry, /label:'发布与治理',meta:'审批、暂停与回滚'/);
   assert.doesNotMatch(mobileEntry, /互动试玩 · 得分 \{\{ detailScore \}\}/);
   assert.doesNotMatch(mobileEntry, /detailFollowLabel:detailContent\.owner==='@kai\.builds'\?'本人'/);
-  assert.match(mobileCss, /\.playable-detail__header > \.playable-detail__back::before,[\s\S]*width: 44px/);
-  assert.match(mobileCss, /\.playable-detail__header > \.playable-detail__back \{[\s\S]*width: 32px !important/);
+  assert.match(mobileEntry, /class="app-back-button playable-detail__back"[\s\S]*?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18 9 12 15 6"><\/path><\/svg>/);
+  assert.match(mobileCss, /\.app-back-button \{[\s\S]*?width: var\(--touch-target\) !important;[\s\S]*?background: transparent !important;[\s\S]*?box-shadow: none !important;/);
+  assert.match(mobileCss, /\.app-back-button svg \{[\s\S]*?width: 22px;[\s\S]*?height: 22px;[\s\S]*?stroke-width: 2\.2;/);
 });
 
 test('template interpolation wrappers never receive component box styles twice', () => {
@@ -299,7 +371,9 @@ test('first-batch UI foundation defines responsive shells, readable shared type 
   for (const token of ['--app-max-width: 430px', '--app-max-height: 932px', '--touch-target: 44px', '--type-caption: 11px', '--type-body: 13px', '--type-title: 20px']) {
     assert.ok(mobileCss.includes(token), `missing first-batch token: ${token}`);
   }
-  assert.match(mobileCss, /\.secondary-page-header > \[role="button"\]:first-child,[\s\S]*min-height: var\(--touch-target\) !important/);
+  assert.match(mobileCss, /\.app-back-button \{[\s\S]*min-height: var\(--touch-target\) !important/);
+  assert.ok((mobileEntry.match(/class="app-back-button/g) || []).length >= 9, 'all page-level back controls should use the shared component');
+  assert.doesNotMatch(mobileEntry, />‹<\/div>|>‹<\/button>/);
   assert.match(mobileCss, /\.feature-tab-row > div,[\s\S]*min-height: var\(--touch-target\)/);
   assert.match(mobileCss, /@media \(max-width: 374px\)/);
   assert.match(mobileCss, /@media \(max-width: 430px\)/);
@@ -327,7 +401,7 @@ test('My screen follows a Douyin-inspired profile layout with ordered shortcuts 
   assert.match(mobileEntry, /class="profile-shortcuts"[^>]*grid-template-columns:repeat\(3,1fr\)/);
   assert.match(mobileEntry, /class="my-content-surface"/);
   assert.match(mobileEntry, /border-radius:18px 18px 0 0;background:var\(--surface-card,#FFFFFF\)/);
-  assert.match(mobileEntry, /class="my-content-tabs"[^>]*border-bottom:1px solid var\(--border-primary,#E5E5EA\)/);
+  assert.match(mobileEntry, /class="my-content-tabs"[^>]*border-bottom:var\(--divider-height\) solid var\(--border-primary,#E5E5EA\)/);
   assert.match(mobileEntry, /label:'身份认证',meta:identityDrawerMeta,onPick:\(\)=>this\.setState\(\{drawerOpen:false,panel:'identity'/);
   assert.match(mobileEntry, /panelIdentity:s\.panel==='identity'/);
   assert.match(mobileEntry, /grid-template-columns:repeat\(3,1fr\);gap:7px;padding:10px/);
@@ -484,6 +558,14 @@ test('Growth Network explains the governed five-person economic model and expose
   assert.match(mobileEntry, /真实状态必须由服务端、成员签署与链上交易共同确认/);
 });
 
+test('dark Growth contribution view uses layered surfaces instead of light pills', () => {
+  assert.match(mobileCss, /\.app-shell\.theme-dark \.growth-contribution-hero \{[^}]*background: linear-gradient\(148deg, #24181c 0%, #1c1c21 58%, #181a1f 100%\) !important;/);
+  assert.match(mobileCss, /\.app-shell\.theme-dark \.growth-credit-factor-card \{[^}]*background: linear-gradient\(150deg, #191b20 0%, #1d1b20 100%\) !important;/);
+  assert.match(mobileCss, /\.app-shell\.theme-dark \.growth-contribution-chain > span \{[^}]*background: var\(--surface-control\);/);
+  assert.match(mobileCss, /\.app-shell\.theme-dark \.growth-contribution-row \{[^}]*background: transparent !important;[^}]*box-shadow: none !important;/);
+  assert.match(mobileCss, /\.app-shell\.theme-dark \.growth-network-tier-card \{[^}]*background: var\(--surface-card\);/);
+});
+
 test('Node globe halo stays inside its canvas and does not clip above the metric cards', () => {
   assert.match(mobileEntry, /cx = W \/ 2, cy = H \/ 2, R = 222, tilt = 0\.3/);
   assert.match(mobileEntry, /Keep the 1\.26x brand halo fully inside the canvas/);
@@ -506,9 +588,11 @@ test('creator operations are consolidated under Creator Center and the fourth ta
   assert.match(mobileEntry, /navMessages/);
   assert.match(mobileEntry, /运营待处理/);
   assert.match(mobileEntry, /玩家动态/);
-  assert.match(mobileEntry, /class="messages-screen"[^>]*padding:8px 0 20px[^>]*gap:0/);
+  assert.match(mobileEntry, /color:s\.messageTab===key\?'var\(--text-primary,#1C1C1E\)'\s*:\s*'var\(--text-tertiary,#8E8E93\)'/);
+  assert.doesNotMatch(mobileEntry, /color:s\.messageTab===key\?'#1C1C1E':'#8E8E93'/);
+  assert.match(mobileEntry, /class="messages-screen main-tab-scroll"[^>]*padding:8px 0 20px[^>]*gap:0/);
   assert.match(mobileEntry, /class="message-card"[^>]*width:100%;min-height:82px;border-radius:0/);
-  assert.match(mobileEntry, /border:0;border-bottom:1px solid \{\{ n\.border \}\};padding:15px 20px/);
+  assert.match(mobileEntry, /border:0;border-bottom:var\(--divider-height\) solid \{\{ n\.border \}\};padding:15px 20px/);
   assert.doesNotMatch(mobileEntry, /class="message-card"[^>]*border-radius:16px/);
   assert.match(mobileEntry, /isLegacyLocalTitle=\/本地\\s\*MVP\/\.test\(n\.title\|\|''\)/);
   assert.doesNotMatch(mobileEntry, /我的持续增长资产/);
@@ -535,7 +619,20 @@ test('structured frontend delivery exposes launch, AI twin, search, messaging, r
   assert.match(mobileEntry, /productCenterRoleView:'kol'/);
   assert.match(mobileEntry, /product_center_role_view_change/);
   assert.match(mobileEntry, /permission_changed:false/);
+  assert.match(mobileEntry, /class="launch-splash__logo" src="logo\.png" alt="airvana\.ai"/);
+  assert.match(mobileCss, /\.launch-splash__logo\s*\{[^}]*background:transparent;[^}]*filter:none;[^}]*mix-blend-mode:multiply;/);
+  assert.match(mobileCss, /img\[alt="airvana\.ai"\]:not\(\.launch-splash__logo\)/);
+  assert.match(mobileCss, /\.app-shell\.theme-dark \.launch-splash__logo\s*\{[^}]*filter:none;[^}]*mix-blend-mode:multiply !important;/);
   assert.match(mobileEntry, /当前仅为 KOL 功能预览，请先完成创作者身份开通/);
+});
+
+test('global search uses a legible SVG icon without inflating the input layout', () => {
+  assert.match(mobileEntry, /class="global-search-icon" aria-hidden="true"><svg viewBox="0 0 24 24"/);
+  assert.doesNotMatch(mobileEntry, /class="global-search-box"><span>⌕<\/span>/);
+  assert.match(mobileEntry, /aria-label="搜索 Playable、KOL、Campaign" placeholder="搜索 Playable、KOL、Campaign"/);
+  assert.match(mobileCss, /\.global-search-icon\s*\{[^}]*width:\s*32px;[^}]*height:\s*32px;/);
+  assert.match(mobileCss, /\.global-search-icon svg\s*\{[^}]*width:\s*22px;[^}]*height:\s*22px;[^}]*stroke-width:\s*2\.2;/);
+  assert.match(mobileCss, /\.global-search-box input\s*\{[^}]*min-height:\s*var\(--touch-target\)/);
 });
 
 test('AI Twin separates public profile identity and completes scene, locale, campaign and version governance', () => {
@@ -724,15 +821,18 @@ test('top headers route messages explicitly and My keeps the settings drawer wit
 });
 
 test('Settings exposes legal, product information, appearance and governed account deletion controls', () => {
-  for (const term of ['用户协议', '隐私协议', '关于我们', '推送设置', '外观模式', '浅色', '深色', '删除账号', '30 天冷静期', '取消删除申请']) {
+  for (const term of ['用户协议', '隐私协议', '关于我们', '推送设置', '外观模式', '跟随系统', '浅色', '深色', '删除账号', '30 天冷静期', '取消删除申请']) {
     assert.ok(mobileEntry.includes(term), `missing settings term: ${term}`);
   }
   assert.match(mobileEntry, /role="switch" tabindex="0" aria-label="推送设置"/);
-  assert.match(mobileEntry, /pushEnabled: true, themeMode: 'light'/);
-  assert.match(mobileEntry, /themeClass:s\.themeMode==='dark'\?'theme-dark':''/);
+  assert.match(mobileEntry, /pushEnabled: true, themeMode:\(typeof document!==/);
+  assert.match(mobileEntry, /themeClass:this\.resolveThemeMode\(s\.themeMode\)==='dark'\?'theme-dark':''/);
   assert.match(mobileEntry, /themeStorageKey = 'airvana\.v5\.theme-mode'/);
   assert.match(mobileEntry, /localStorage\.setItem\(this\.themeStorageKey, themeMode\)/);
-  assert.match(mobileEntry, /useLightTheme:\(\)=>this\.setThemeMode\('light'\),useDarkTheme:\(\)=>this\.setThemeMode\('dark'\)/);
+  assert.match(mobileEntry, /useSystemTheme:\(\)=>this\.setThemeMode\('system'\),useLightTheme:\(\)=>this\.setThemeMode\('light'\),useDarkTheme:\(\)=>this\.setThemeMode\('dark'\)/);
+  assert.match(mobileEntry, /matchMedia\('\(prefers-color-scheme: dark\)'\)/);
+  assert.match(mobileEntry, /dataset\.airvanaTheme/);
+  assert.match(mobileEntry, /meta\[name="theme-color"\]/);
   assert.match(mobileEntry, /openTermsFromSettings:\(\)=>this\.setState\(\{panel:'terms',panelReturn:'settings'\}\)/);
   assert.match(mobileEntry, /openPrivacyFromSettings:\(\)=>this\.setState\(\{panel:'privacy',panelReturn:'settings'\}\)/);
   assert.match(mobileEntry, /openAbout:\(\)=>this\.setState\(\{panel:'about',panelReturn:'settings'\}\)/);
@@ -748,7 +848,7 @@ test('Settings exposes legal, product information, appearance and governed accou
   assert.doesNotMatch(mobileEntry, /localStorage\.clear\(/);
   assert.match(mobileEntry, /panelAbout:s\.panel==='about'/);
   assert.match(mobileCss, /\.app-shell\.theme-dark/);
-  for (const token of ['--surface-canvas: #101114', '--surface-card: #1b1d21', '--surface-elevated: #202227', '--text-secondary: #a3a6ae', '--border-primary: #303238']) {
+  for (const token of ['--surface-canvas: #0f1013', '--surface-card: #181a1f', '--surface-elevated: #202329', '--surface-media: #08090b', '--text-primary: #f5f6f8', '--text-secondary: #b1b4bc', '--text-tertiary: #7d818b', '--border-primary: #30333a', '--accent-primary: #ff5869']) {
     assert.ok(mobileCss.includes(token), `missing dark theme token: ${token}`);
   }
   assert.match(mobileEntry, /class="message-card"/);
@@ -825,6 +925,11 @@ test('center publish action uses a prompt-first quick/deep creator with governed
   assert.match(mobileEntry, /class="create-power-grid"><sc-for list="\{\{ createPowers \}\}"/);
   assert.match(mobileEntry, /const powerDisplayCount=visiblePowers\.length;/);
   assert.match(mobileEntry, /border:selected\?\(s\.composerMode==='deep'\?'#18D8DE':'#FF5A70'\):'#303034'/);
+  assert.match(mobileEntry, /actionClass:selected\?'is-selected':''/);
+  assert.match(mobileEntry, /class="create-power-card__action \{\{ p\.actionClass \}\}"/);
+  assert.match(mobileEntry, /class="create-power-card__action-visual"/);
+  assert.match(mobileCss, /\.create-power-card__action\s*\{[^}]*min-width:\s*44px;[^}]*height:\s*44px;/);
+  assert.match(mobileCss, /\.create-power-card__action\.is-selected \.create-power-card__action-visual\s*\{[^}]*width:\s*32px;[^}]*height:\s*32px;[^}]*font-size:\s*16px !important;/);
   assert.doesNotMatch(mobileEntry, /shadow:selected\?'inset\s+\d+px\s+0\s+0/);
   assert.doesNotMatch(mobileEntry, /box-shadow:\{\{ p\.shadow \}\}/);
   assert.match(mobileCss, /\.create-power-card\s*\{[^}]*box-sizing:\s*border-box;[^}]*border:\s*1px solid #303034;/);
@@ -843,6 +948,9 @@ test('center publish action uses a prompt-first quick/deep creator with governed
   assert.doesNotMatch(mobileEntry, /KOL 是运营者，Playable 是可自主运营的营销智能体；当前生成的是本地演示预览。/);
   assert.match(mobileEntry, /class="create-idea-input \{\{ createModeClass \}\}"/);
   assert.match(mobileCss, /\.create-idea-input \{[\s\S]*min-height: 96px;[\s\S]*font-size: 17px;/);
+  assert.match(mobileCss, /\.app-shell\.theme-dark \.create-mode-canvas \.create-idea-input \{[\s\S]*?background: transparent !important;[\s\S]*?box-shadow: none !important;[\s\S]*?color: #ffffff !important;/);
+  assert.match(mobileCss, /\.app-shell\.theme-dark \.create-mode-canvas \.create-idea-input\.mode-deep \{[\s\S]*?color: #07191b !important;[\s\S]*?caret-color: #07191b;/);
+  assert.match(mobileCss, /\.app-shell\.theme-dark \.create-mode-canvas \.create-idea-input\.mode-deep::placeholder \{[\s\S]*?color: rgba\(7, 25, 27, 0\.48\) !important;/);
   assert.doesNotMatch(mobileEntry, /createScopeTitle|createScopeBadge|createScopeDescription/);
   assert.match(mobileEntry, /createModeBg:s\.composerMode==='deep'\?'linear-gradient\(155deg,#18E4DF 0%,#00C8D4 52%,#16A8E8 100%\)'/);
   assert.match(mobileEntry, /'linear-gradient\(155deg,#FF5968 0%,#FF3B74 52%,#B62EE8 100%\)'/);
@@ -1068,7 +1176,7 @@ test('prompt-first composer closes inspiration, asset, goal and preflight loops 
   assert.match(mobileCss, /\.composer-sheet-scroll\s*\{[\s\S]*?min-height:\s*0;[\s\S]*?overscroll-behavior-y:\s*contain/);
   assert.match(mobileCss, /\.inspiration-mode-option\s*\{[\s\S]*?min-height:\s*44px/);
   assert.match(mobileCss, /@media \(max-width: 360px\)/);
-  assert.match(mobileEntry, /airvana-v4\.css\?v=5\.4\.30/);
+  assert.match(mobileEntry, /airvana-v4\.css\?v=5\.4\.47/);
   assert.match(mobileEntry, /indexedDB\.open\('airvana\.local-composer-assets\.v1',1\)/);
   assert.match(mobileEntry, /composerAssetManifest\(assets\)/);
   assert.match(mobileEntry, /authorization:'pending'/);

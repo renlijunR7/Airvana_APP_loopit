@@ -13,6 +13,83 @@ const collectCreationPowers = component => {
   return powers;
 };
 
+test('mobile primary navigation follows page hierarchy and returns after secondary work', () => {
+  const {component} = createMobileComponent();
+  const primaryState = {
+    ob:4,
+    launchVisible:false,
+    panel:null,
+    overlay:null,
+    drawerOpen:false,
+    systemModal:null,
+    pendingDeleteAgentId:null
+  };
+
+  for (const screen of ['play','discover','world','messages','me']) {
+    component.setState({...primaryState,screen});
+    assert.equal(component.renderVals().showPrimaryNavigation, true, `${screen} must keep the primary navigation`);
+  }
+
+  component.setState({...primaryState,screen:'quests'});
+  assert.equal(component.renderVals().showPrimaryNavigation, false, 'Creator Center is a secondary destination');
+
+  for (const layer of [
+    {screen:'me',panel:'profile'},
+    {screen:'play',overlay:'content'},
+    {screen:'me',drawerOpen:true},
+    {screen:'play',systemModal:'daily'},
+    {screen:'me',pendingDeleteAgentId:1},
+    {screen:'play',launchVisible:true},
+    {screen:'play',ob:3}
+  ]) {
+    component.setState({...primaryState,...layer});
+    assert.equal(component.renderVals().showPrimaryNavigation, false, `secondary layer must hide navigation: ${JSON.stringify(layer)}`);
+  }
+
+  component.setState({...primaryState,screen:'quests'});
+  component.renderVals().creatorCenterBack();
+  assert.equal(component.state.screen, 'me');
+  assert.equal(component.renderVals().showPrimaryNavigation, true);
+
+  component.setState({...primaryState,screen:'world'});
+  const worldNavigation = component.renderVals();
+  assert.equal(worldNavigation.navWorld.className, 'is-active');
+  assert.equal(worldNavigation.navWorld.ariaCurrent, 'page');
+  assert.equal(worldNavigation.navPlay.className, '');
+  assert.equal(worldNavigation.navPlay.ariaCurrent, 'false');
+});
+
+test('mobile Home exposes every supplied cover as an independent playable and keeps seeded games after local restore', () => {
+  const additions = [
+    [15, 'I AM CAT 猫咪大逃脱', '/assets/game-covers/i-am-cat.png'],
+    [16, '撒币之旅', '/assets/game-covers/coin-journey.png'],
+    [17, '潜水员戴夫：丛林探险', '/assets/game-covers/jungle-diver.png'],
+    [18, '星际前线：裂隙突击', '/assets/game-covers/rift-frontier.png'],
+    [19, '星砂岛', '/assets/game-covers/stardust-island.png'],
+    [20, '斗阵骑士', '/assets/game-covers/battle-knights.png'],
+    [21, '银河玩具店', '/assets/game-covers/galaxy-toy-shop.png'],
+    [22, '狂野飙车：极速传奇', '/assets/game-covers/asphalt-legend.png'],
+    [23, '小炮手大战空降恶魔', '/assets/game-covers/sky-demon-defense.png']
+  ];
+  const {component} = createMobileComponent();
+  const slides = component.renderVals().sessionSlides;
+  assert.equal(slides.length, 23);
+  for (const [id, title, cover] of additions) {
+    const slide = slides.find(item => item.id === id);
+    assert.ok(slide, `missing Home slide: ${title}`);
+    assert.equal(slide.game, title);
+    assert.equal(slide.cover, cover);
+    assert.equal(typeof slide.onOpen, 'function');
+  }
+
+  const storedState = JSON.stringify({ob:4,sessions:[component.state.sessions[0]]});
+  const restored = createMobileComponent({stored:{'airvana.v5.agentic-positioning.v2':storedState}});
+  restored.mount();
+  assert.equal(restored.component.state.sessions.some(item=>item.id===1), true);
+  for (const [id] of additions) assert.equal(restored.component.state.sessions.some(item=>item.id===id), true);
+  restored.unmount();
+});
+
 test('mobile Component toggles one like idempotently and keeps the feed count in sync', () => {
   const {component} = createMobileComponent();
   const contentId = 2;
@@ -227,6 +304,7 @@ test('selecting a capability preserves the prompt and mode while updating the se
 
   camera = values.createPowers.find(item=>item.id==='cameraAr');
   assert.equal(camera.selected, true);
+  assert.equal(camera.actionClass, 'is-selected');
   assert.equal(camera.actionLabel, '✓');
   assert.equal(camera.border, '#FF5A70');
   assert.equal(Object.hasOwn(camera, 'shadow'), false);
@@ -1538,6 +1616,16 @@ test('mobile messaging, rights and governance stay local and expose truthful ser
   assert.equal(values.meTabs.map(tab=>tab.key).join(','), 'playables,drafts,saved,history');
   assert.equal(values.profileShortcuts.map(item=>item.label).join(','), '创作者中心,KOL AI 分身,品牌合作');
   assert.equal(values.showProfileShortcuts, true);
+  assert.equal(values.messageCards.find(card=>card.id==='ai-twin').bg, 'var(--message-unread-bg,#FFF8F8)');
+  assert.equal(values.messageCards.find(card=>card.id==='ai-twin').border, 'var(--message-unread-border,#FFD6DA)');
+  assert.equal(values.messageCards.find(card=>card.id==='nina').bg, 'var(--message-read-bg,#FFFFFF)');
+  assert.equal(values.messageCards.find(card=>card.id==='nina').border, 'var(--message-read-border,#E5E5EA)');
+  component.setState({messageTab:'social'});
+  values = component.renderVals();
+  assert.ok(values.messageCards.every(card=>card.bg==='var(--message-read-bg,#FFFFFF)'));
+  assert.ok(values.messageCards.every(card=>card.border==='var(--message-read-border,#E5E5EA)'));
+  component.setState({messageTab:'direct'});
+  values = component.renderVals();
   values.messageCards.find(card=>card.id==='nina').onOpen();
   assert.equal(component.state.panel, 'chat');
   values = component.renderVals();

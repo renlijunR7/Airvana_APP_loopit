@@ -5,9 +5,11 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
+import android.view.WindowInsets;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
@@ -23,13 +25,24 @@ public final class MainActivity extends Activity {
     private WebView webView;
     private LocalAssetServer localServer;
     private ValueCallback<Uri[]> fileCallback;
+    private int nativeTopInsetPx;
+    private int nativeBottomInsetPx;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setStatusBarColor(Color.rgb(242, 242, 247));
-        getWindow().setNavigationBarColor(Color.rgb(242, 242, 247));
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
+        getWindow().setNavigationBarColor(Color.TRANSPARENT);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            getWindow().setNavigationBarContrastEnforced(false);
+        }
+        getWindow().getDecorView().setSystemUiVisibility(
+            View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+                | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
+        );
 
         try {
             localServer = new LocalAssetServer(getAssets(), 8082);
@@ -40,6 +53,15 @@ public final class MainActivity extends Activity {
 
         webView = new WebView(this);
         webView.setBackgroundColor(Color.rgb(242, 242, 247));
+        webView.setOnApplyWindowInsetsListener(new View.OnApplyWindowInsetsListener() {
+            @Override
+            public WindowInsets onApplyWindowInsets(View view, WindowInsets insets) {
+                nativeTopInsetPx = insets.getSystemWindowInsetTop();
+                nativeBottomInsetPx = insets.getSystemWindowInsetBottom();
+                injectNativeSafeArea();
+                return insets;
+            }
+        });
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setDomStorageEnabled(true);
@@ -51,6 +73,12 @@ public final class MainActivity extends Activity {
         settings.setDisplayZoomControls(false);
 
         webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                injectNativeSafeArea();
+            }
+
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 Uri uri = request.getUrl();
@@ -93,7 +121,28 @@ public final class MainActivity extends Activity {
         });
 
         setContentView(webView);
-        webView.loadUrl("http://127.0.0.1:8082/");
+        webView.requestApplyInsets();
+        webView.loadUrl("http://127.0.0.1:8082/?native-shell=1");
+    }
+
+    private void injectNativeSafeArea() {
+        if (webView == null) {
+            return;
+        }
+        float density = getResources().getDisplayMetrics().density;
+        float topCssPx = density > 0 ? nativeTopInsetPx / density : nativeTopInsetPx;
+        float bottomCssPx = density > 0 ? nativeBottomInsetPx / density : nativeBottomInsetPx;
+        String topValue = Float.toString(topCssPx) + "px";
+        String bottomValue = Float.toString(bottomCssPx) + "px";
+        String script = "(function(){"
+            + "var root=document.documentElement;"
+            + "if(!root){return;}"
+            + "root.style.setProperty('--native-safe-top','" + topValue + "');"
+            + "root.style.setProperty('--safe-top','var(--native-safe-top)');"
+            + "root.style.setProperty('--native-safe-bottom','" + bottomValue + "');"
+            + "root.style.setProperty('--safe-bottom','var(--native-safe-bottom)');"
+            + "})();";
+        webView.evaluateJavascript(script, null);
     }
 
     @Override
