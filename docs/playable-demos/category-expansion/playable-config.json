@@ -1,0 +1,84 @@
+{
+  "schema_version": "1.0.0",
+  "playable_id": "plb_category_expansion_collection",
+  "campaign_id": "cmp_category_expansion_demo_20260814",
+  "contract_version": "2.0.0",
+  "version": "2.0.0",
+  "status": "draft",
+  "template_id": "tpl_category_expansion_deep_v2",
+  "locales": {"default": "zh-CN", "supported": ["zh-CN"]},
+  "presentation": {
+    "title": "Airvana Category Expansion - 6 Deep Games + 5 Complete Local DEMOS",
+    "tone": "editorial, tactile, accessible, original, and clearly labeled as local demo",
+    "theme": "Six depth-upgraded mobile game worlds with matched gameplay scenes, plus five preserved complete local demos",
+    "logo_asset_id": "asset_category_expansion_original_covers",
+    "color_tokens": {"primary": "#FF3B4A", "secondary": "#80D7C2", "background": "#101216", "text": "#FFFFFF"},
+    "copy_pack": {
+      "intro_headline": "6 款深度玩法 · 3 阶段完整成长",
+      "intro_body": "Six 3-5 minute depth games add stages, progression, tactical choices, pause, replay, sound, scoring, and local best records; the other five complete demos remain available.",
+      "start_button": "开始试玩",
+      "success_title": "挑战完成",
+      "failure_title": "再试一次",
+      "retry_button": "再玩一次",
+      "cta_label": "",
+      "share_copy": "LOCAL DEMO only",
+      "reward_eligibility": "No reward is offered.",
+      "reward_terms": "NOT_APPLICABLE"
+    }
+  },
+  "gameplay": {
+    "mechanic": "other",
+    "core_loop": "Select one of six depth-upgraded games, learn the distinctive mechanic, make escalating tactical decisions through three stages, gain score or persistent run upgrades, reach a success or failure summary, then replay for a better local result. The other five complete demos retain their concise loops.",
+    "rounds": 3,
+    "target_duration_seconds": 240,
+    "difficulty": {"minimum": 2, "maximum": 8, "default": 4},
+    "input_modes": ["tap", "drag", "swipe", "keyboard"],
+    "state_transitions": [
+      {"from": "intro", "event": "start", "to": "playing", "guard": "selected content ID is 34-44"},
+      {"from": "playing", "event": "pause", "to": "paused", "guard": null},
+      {"from": "paused", "event": "resume", "to": "playing", "guard": null},
+      {"from": "playing", "event": "stage_complete", "to": "playing", "guard": "stage is below three"},
+      {"from": "playing", "event": "complete_success", "to": "success", "guard": "third-stage objective is complete"},
+      {"from": "playing", "event": "complete_failure", "to": "failure", "guard": "score below threshold"},
+      {"from": "failure", "event": "retry", "to": "playing", "guard": null},
+      {"from": "success", "event": "replay", "to": "playing", "guard": null},
+      {"from": "success", "event": "exit", "to": "exit", "guard": null}
+    ],
+    "scoring": {"enabled": true, "rule": "Each game applies a mechanic-specific local score for correct actions, efficiency, survival, objectives, combos, and remaining resources; only local best scores are retained.", "minimum": 0, "maximum": 10000}
+  },
+  "screens": [
+    {"screen_id": "screen_intro", "state": "intro", "copy_keys": ["intro_headline", "intro_body", "start_button"], "asset_ids": ["asset_category_expansion_original_covers"], "actions": ["start", "toggle_sound", "exit"]},
+    {"screen_id": "screen_playing", "state": "playing", "copy_keys": [], "asset_ids": ["asset_category_expansion_original_covers", "asset_deep_gameplay_scenes_v2"], "actions": ["interact", "pause", "resume", "toggle_sound", "exit"]},
+    {"screen_id": "screen_success", "state": "success", "copy_keys": ["success_title", "retry_button"], "asset_ids": ["asset_category_expansion_original_covers"], "actions": ["replay", "exit"]},
+    {"screen_id": "screen_failure", "state": "failure", "copy_keys": ["failure_title", "retry_button"], "asset_ids": ["asset_category_expansion_original_covers"], "actions": ["retry", "exit"]}
+  ],
+  "cta": {"cta_id": "cta_none", "type": "none", "label_key": "cta_label", "destination_id": "NOT_APPLICABLE", "allowed_states": [], "open_mode": "same_context"},
+  "reward_presentation": {"reward_id": "reward_none", "type": "none", "eligibility_copy_key": "reward_eligibility", "terms_copy_key": "reward_terms", "claim_action": "NOT_APPLICABLE"},
+  "field_authority": {
+    "locked_fields": ["cta", "reward_presentation", "constraints", "build.environment", "telemetry", "gameplay.scoring"],
+    "editable_fields": ["presentation.theme"],
+    "agentic_fields": [],
+    "runtime_fields": ["runtime.session_id", "runtime.locale", "runtime.device_class", "runtime.experiment_assignment"]
+  },
+  "runtime_policy": {"segmentation_inputs": ["locale", "device_class", "approved_region_bucket"], "agentic_bounds": [], "experiment_id": null, "variant_id": null, "fallback_behavior": "Use default approved copy, visuals, and fixed difficulty."},
+  "telemetry": {
+    "required_events": ["impression", "play_start", "valid_interaction", "level_complete", "play_complete", "play_fail", "replay", "error"],
+    "common_properties": ["event_id", "event_time", "campaign_id", "contract_version", "playable_id", "playable_config_version", "build_id", "creative_id", "channel_id", "kol_id", "link_id", "session_id", "locale", "region", "device_class", "consent_state"],
+    "deduplication_strategy": "Generate a unique event_id per transition and ignore retries with the same event_id.",
+    "consent_behavior": "Keep events in the device-local demo log only; do not send network analytics."
+  },
+  "build": {"target": "in_app_webview", "entry": "public/index.html", "asset_base": "public/assets/", "minimum_viewport_width": 360, "supported_orientations": ["portrait"], "dependency_lock": "package-lock.json and packaged Android assets", "environment": "preview"},
+  "constraints": {
+    "approved_asset_ids": ["asset_category_expansion_original_covers", "asset_deep_gameplay_scenes_v2"],
+    "prohibited_phrases": ["guaranteed reward", "guaranteed return", "official commercial-game partnership", "real online multiplayer"],
+    "required_disclosures": ["LOCAL DEMO - no reward, wallet, settlement, or verified commercial conversion", "IO opponents are local bots"],
+    "privacy_prohibited_fields": ["seed_phrase", "private_key", "raw_kyc_document", "password"],
+    "manual_review_required": true
+  },
+  "metadata": {
+    "created_at": "2026-08-14T12:00:00+08:00",
+    "updated_at": "2026-08-14T19:00:00+08:00",
+    "created_by": "airvana-interactive-marketing-game local DEMO workflow",
+    "notes": ["Playable content IDs are 34-44.", "All eleven content IDs provide complete local interaction loops.", "Depth-upgraded v2 playables: plb_star_mower, plb_star_deck, plb_adventurer_journal, plb_idiom_detective, plb_hex_frontier, plb_garden_renewal.", "No external release, reward, wallet, attribution, or settlement is enabled."]
+  }
+}

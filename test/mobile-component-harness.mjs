@@ -74,7 +74,8 @@ export function createMobileComponent({props = {skipOnboarding:true}, stored = {
     console,
     Math,
     Date,
-    Intl
+    Intl,
+    URLSearchParams
   };
   context.FileReader = TestFileReader;
   vm.createContext(context);

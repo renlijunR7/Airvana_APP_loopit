@@ -1,0 +1,28 @@
+{
+  "manifest_version": "1.0.0",
+  "playable_config_version": "1.0.3",
+  "generated_with": "OpenAI built-in image generation",
+  "format": "JPEG",
+  "width": 900,
+  "height": 1600,
+  "source_policy": "The original non-v2 covers remain in place for rollback. Home and Discover use only the versioned v2 files.",
+  "art_direction": [
+    "Preserve each game concept and mobile portrait composition.",
+    "Use grounded materials, coherent anatomy and geometry, and restrained cinematic lighting.",
+    "Reduce generic neon overload, plastic surfaces, excessive particles, fake HDR, and symmetrical concept-art staging.",
+    "Keep the lower portion quiet enough for the existing game controls and metadata.",
+    "Do not include text, logos, watermarks, reward claims, or third-party game branding."
+  ],
+  "assets": [
+    {"slug": "neon-dash", "path": "public/assets/game-covers/home-arcade/neon-dash-v2.jpg", "sha256": "dbf55afff9a67f9ee8c3ee144f6c04da0c6503782f02beb450156d656ef48974"},
+    {"slug": "pulse-forge", "path": "public/assets/game-covers/home-arcade/pulse-forge-v2.jpg", "sha256": "ee0cc6f7159e25e9710192e213b62485afbd572d378992456306bc4fccb0434c"},
+    {"slug": "sky-stack", "path": "public/assets/game-covers/home-arcade/sky-stack-v2.jpg", "sha256": "12090a22f7e43e66633139c201df6e92dd7e3692f1e4b6a878afd1d2242c7b8b"},
+    {"slug": "rune-circuit", "path": "public/assets/game-covers/home-arcade/rune-circuit-v2.jpg", "sha256": "5235845f4e1c310d0d9d9ab60ab6728806154449147b900f577294a7225a18be"},
+    {"slug": "prism-match", "path": "public/assets/game-covers/home-arcade/prism-match-v2.jpg", "sha256": "3937837ee0fe117cd3eca0b5a33873645accc10c9d914681f20dfa3632bd9f31"},
+    {"slug": "star-cups", "path": "public/assets/game-covers/home-arcade/star-cups-v2.jpg", "sha256": "225d74d7418d8213846e42b70008df20c16749b4ba13afe5336905c137a50746"},
+    {"slug": "deep-catch", "path": "public/assets/game-covers/home-arcade/deep-catch-v2.jpg", "sha256": "e96596953200d7675baefe83a135b4933ae351eff7dc8e0eae74fc46df46ef2d"},
+    {"slug": "ember-bastion", "path": "public/assets/game-covers/home-arcade/ember-bastion-v2.jpg", "sha256": "14a6944ba336987b401185661a37364e70cc17656b4647dd6571c46bbb1fbe8c"},
+    {"slug": "nova-drift", "path": "public/assets/game-covers/home-arcade/nova-drift-v2.jpg", "sha256": "3c664fe30f42e2d251405bb07d45f853c10d6339a5e69e55fdafa1a6d38f57c2"},
+    {"slug": "void-squadron", "path": "public/assets/game-covers/home-arcade/void-squadron-v2.jpg", "sha256": "b27cca24d4aebff731ed502225527a84c523057f828a9b0d914ed0e1a1df9e5c"}
+  ]
+}

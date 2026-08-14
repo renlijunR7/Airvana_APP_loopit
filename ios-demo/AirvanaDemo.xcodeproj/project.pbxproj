@@ -1,0 +1,364 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		04ACF5C6FB068B8A9AB2B573 /* AirvanaWebContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA40F86FC9A3DC63E5372885 /* AirvanaWebContainer.swift */; };
+		1C630D70A0992B2A4E9B1C9F /* LocalAssetSchemeHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9703D1ED6DF300F0FA324284 /* LocalAssetSchemeHandler.swift */; };
+		250762CC7F43F7490C151E2D /* AppIcon60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AEBE065A19B50105BDFF88C4 /* AppIcon60@3x.png */; };
+		39A4CBEB52873A2D225D8EF1 /* AppIcon60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 193D4F54F01E825F7E03A66D /* AppIcon60@2x.png */; };
+		C7A705CF1FB725A98100EBE3 /* AppIcon-master.svg in Resources */ = {isa = PBXBuildFile; fileRef = 405315CB66A0FCF8416B9528 /* AppIcon-master.svg */; };
+		DCDD43027FA741353CE07AEE /* AirvanaDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B183A833BAFD368AEBFE42DE /* AirvanaDemoApp.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		193D4F54F01E825F7E03A66D /* AppIcon60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon60@2x.png"; sourceTree = "<group>"; };
+		1B90A69723EABD96EEF7503C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		405315CB66A0FCF8416B9528 /* AppIcon-master.svg */ = {isa = PBXFileReference; path = "AppIcon-master.svg"; sourceTree = "<group>"; };
+		7E0EB39327F3B85EA253C041 /* AirvanaDemo.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = AirvanaDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9703D1ED6DF300F0FA324284 /* LocalAssetSchemeHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAssetSchemeHandler.swift; sourceTree = "<group>"; };
+		AEBE065A19B50105BDFF88C4 /* AppIcon60@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon60@3x.png"; sourceTree = "<group>"; };
+		B183A833BAFD368AEBFE42DE /* AirvanaDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirvanaDemoApp.swift; sourceTree = "<group>"; };
+		CA40F86FC9A3DC63E5372885 /* AirvanaWebContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirvanaWebContainer.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		0702B61225D432AD8B3BFED5 = {
+			isa = PBXGroup;
+			children = (
+				51561C4BED375986B387FF48 /* AirvanaDemo */,
+				7AB2D4F9279E33976AD7DDC7 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		22250518940B884F5520F473 /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				405315CB66A0FCF8416B9528 /* AppIcon-master.svg */,
+				193D4F54F01E825F7E03A66D /* AppIcon60@2x.png */,
+				AEBE065A19B50105BDFF88C4 /* AppIcon60@3x.png */,
+			);
+			path = Icons;
+			sourceTree = "<group>";
+		};
+		51561C4BED375986B387FF48 /* AirvanaDemo */ = {
+			isa = PBXGroup;
+			children = (
+				B183A833BAFD368AEBFE42DE /* AirvanaDemoApp.swift */,
+				CA40F86FC9A3DC63E5372885 /* AirvanaWebContainer.swift */,
+				1B90A69723EABD96EEF7503C /* Info.plist */,
+				9703D1ED6DF300F0FA324284 /* LocalAssetSchemeHandler.swift */,
+				22250518940B884F5520F473 /* Icons */,
+			);
+			path = AirvanaDemo;
+			sourceTree = "<group>";
+		};
+		7AB2D4F9279E33976AD7DDC7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7E0EB39327F3B85EA253C041 /* AirvanaDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		16D7F9686346AA06E712E6A6 /* AirvanaDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 085ABBFEA08BD8AABA0DB88B /* Build configuration list for PBXNativeTarget "AirvanaDemo" */;
+			buildPhases = (
+				69474CBA111B145E8F042663 /* Sources */,
+				EF5FB305140D43C7D058D768 /* Resources */,
+				07BF4D92740A5B5CC5EF7A2A /* Sync Loopit v2 Web Assets */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AirvanaDemo;
+			packageProductDependencies = (
+			);
+			productName = AirvanaDemo;
+			productReference = 7E0EB39327F3B85EA253C041 /* AirvanaDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		64D3135E0B3F7C62E12AA8C4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					16D7F9686346AA06E712E6A6 = {
+						DevelopmentTeam = AFPAHT853U;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = A031F224B47B3D87F51AF08C /* Build configuration list for PBXProject "AirvanaDemo" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 0702B61225D432AD8B3BFED5;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 7AB2D4F9279E33976AD7DDC7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				16D7F9686346AA06E712E6A6 /* AirvanaDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EF5FB305140D43C7D058D768 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C7A705CF1FB725A98100EBE3 /* AppIcon-master.svg in Resources */,
+				39A4CBEB52873A2D225D8EF1 /* AppIcon60@2x.png in Resources */,
+				250762CC7F43F7490C151E2D /* AppIcon60@3x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		07BF4D92740A5B5CC5EF7A2A /* Sync Loopit v2 Web Assets */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Sync Loopit v2 Web Assets";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/scripts/sync-web-assets.sh\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		69474CBA111B145E8F042663 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCDD43027FA741353CE07AEE /* AirvanaDemoApp.swift in Sources */,
+				04ACF5C6FB068B8A9AB2B573 /* AirvanaWebContainer.swift in Sources */,
+				1C630D70A0992B2A4E9B1C9F /* LocalAssetSchemeHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		5CC4DE741D641A70B307C085 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 13;
+				DEVELOPMENT_TEAM = AFPAHT853U;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = AirvanaDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.11;
+				PRODUCT_BUNDLE_IDENTIFIER = com.renlijun.airvana.loopit.demo;
+				PRODUCT_NAME = Airvana;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		7B582CA4C23D97E34C7ED283 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 13;
+				DEVELOPMENT_TEAM = AFPAHT853U;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = AirvanaDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.11;
+				PRODUCT_BUNDLE_IDENTIFIER = com.renlijun.airvana.loopit.demo;
+				PRODUCT_NAME = Airvana;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		89145B74620A28FB0C79B531 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		E5954DE0E509F14119445475 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		085ABBFEA08BD8AABA0DB88B /* Build configuration list for PBXNativeTarget "AirvanaDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7B582CA4C23D97E34C7ED283 /* Debug */,
+				5CC4DE741D641A70B307C085 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		A031F224B47B3D87F51AF08C /* Build configuration list for PBXProject "AirvanaDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E5954DE0E509F14119445475 /* Debug */,
+				89145B74620A28FB0C79B531 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 64D3135E0B3F7C62E12AA8C4 /* Project object */;
+}

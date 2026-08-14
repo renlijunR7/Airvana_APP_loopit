@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="background" x1="118" y1="82" x2="906" y2="942" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.55" stop-color="#fafafd"/>
+      <stop offset="1" stop-color="#f1f3f8"/>
+    </linearGradient>
+    <radialGradient id="redGlow" cx="0" cy="0" r="1" gradientTransform="translate(258 200) rotate(46) scale(488)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ff3b4a" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#ff3b4a" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="blueGlow" cx="0" cy="0" r="1" gradientTransform="translate(824 810) rotate(-139) scale(432)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2f7df6" stop-opacity="0.13"/>
+      <stop offset="1" stop-color="#2f7df6" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="markShadow" x="150" y="130" width="724" height="770" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="28" stdDeviation="34" flood-color="#12141a" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+
+  <rect width="1024" height="1024" fill="url(#background)"/>
+  <rect width="1024" height="1024" fill="url(#redGlow)"/>
+  <rect width="1024" height="1024" fill="url(#blueGlow)"/>
+
+  <g filter="url(#markShadow)">
+    <circle cx="414" cy="345" r="151" fill="#ff3b4a"/>
+    <circle cx="414" cy="655" r="177" fill="#101115"/>
+    <circle cx="665" cy="655" r="108" fill="#2f7df6"/>
+  </g>
+</svg>

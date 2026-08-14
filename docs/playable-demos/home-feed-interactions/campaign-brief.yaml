@@ -1,0 +1,102 @@
+brief_version: "1.0.0"
+campaign:
+  campaign_id: "cmp_home_feed_interactions_demo"
+  working_name: "DEMO - 首页封面区互动案例"
+  brand_legal_entity: "【待人工录入】"
+  market_timezone: "Asia/Hong_Kong"
+  target_launch_at: "NOT_APPLICABLE - 仅本地预览"
+  target_end_at: "NOT_APPLICABLE - 仅本地预览"
+owners:
+  business_owner: "【待人工录入】"
+  operations_owner: "Airvana 本地演示"
+  approval_owner: "【待人工录入】"
+  kill_switch_owner: "Airvana 本地演示"
+objective:
+  primary: "engagement"
+  primary_success_event: "play_complete"
+  secondary: ["产品教育", "复玩意愿"]
+  target_value: "NOT_APPLICABLE - 不设置演示业绩目标"
+  target_window: "单次 15 至 30 秒"
+  funnel_boundary: "首页封面区内开始、互动、完成或失败、重试；不进入外部转化"
+audience:
+  included_regions: ["HK"]
+  excluded_regions: []
+  languages: ["zh-CN"]
+  minimum_age: 0
+  interests: ["轻量互动游戏", "Agentic Playable"]
+  lifecycle_stages: ["mixed"]
+  accessibility_requirements: ["单手点击", "非颜色唯一反馈", "键盘可操作", "减少动态效果"]
+  device_network_assumptions: ["360 至 430 像素竖屏", "无需网络即可完成"]
+channels:
+  distribution: ["in_app"]
+  kol_ids: ["@kai.builds", "@nina", "@marco.fire"]
+  landing_context: "Airvana 首页沉浸式作品流"
+  attribution_window_days: 0
+brand_assets:
+  source_folder_or_url: "public/logo.png 与现有 CSS 图形；仅限本地演示"
+  logo: ["asset_local_airvana_logo"]
+  product_images: []
+  colors: ["#FF3B4A", "#0B0D0C", "#FFFFFF"]
+  typography: ["系统字体"]
+  approved_copy: ["本地互动 DEMO", "分数仅保存在当前设备"]
+  prohibited_copy: ["保证收益", "保证奖励", "已上线", "已获品牌批准"]
+  audio_video: []
+  authorization_status: "pending - 仅允许本地预览"
+gameplay:
+  preferred_mechanics: ["scenario_choice", "tap_challenge", "match"]
+  prohibited_mechanics: ["chance_reward", "wallet_connection", "raw_kyc_collection"]
+  target_duration_seconds: 25
+  rounds: 3
+  input_modes: ["tap", "keyboard"]
+  required_states: ["intro", "playing", "success", "failure", "retry", "exit"]
+  tone_theme: "快速进入、即时反馈、短回合、可重试"
+  kol_personalization: "仅显示现有本地演示作者信息，不新增人物或品牌声明"
+cta:
+  type: "none"
+  label: "NOT_APPLICABLE"
+  destination: "NOT_APPLICABLE"
+  display_states: []
+  approval_status: "draft"
+reward:
+  type: "none"
+  value_description: "不发放 AIP、AIT、现金、加密资产或其他权益"
+  eligibility: "NOT_APPLICABLE"
+  inventory_cap: 0
+  expiry: "NOT_APPLICABLE"
+  fulfillment_owner: "NOT_APPLICABLE"
+  material_terms: "本地分数不代表奖励、收益或商业转化"
+compliance_privacy:
+  legal_entity: "【待人工录入】"
+  regulated_activity: "NOT_APPLICABLE - 无交易、钱包、KYC 或金融推广"
+  prohibited_claims: ["保证收益", "保证奖励", "真实商业转化"]
+  required_disclosures: ["本地互动 DEMO", "不发放奖励"]
+  consent_requirements: []
+  data_collected: ["本地会话 ID", "玩法状态", "回合", "分数"]
+  data_retention: "浏览器本地事件日志最多 200 条"
+  manual_review_required: true
+  approval_evidence: "【待人工录入】"
+measurement:
+  primary_kpi: "完成互动的本地演示会话数"
+  required_events: ["play_start", "valid_interaction", "level_complete", "play_complete", "play_fail", "replay", "error"]
+  attribution_model: "none"
+  dimensions: ["campaign_id", "playable_id", "playable_config_version", "session_id", "device_class", "locale"]
+  exclusion_rules: ["快速重复提交", "非当前作品的缓冲滑页"]
+  reporting_cadence: "NOT_APPLICABLE - 本地调试时查看事件日志"
+commercial_delivery:
+  build_budget: "【待人工录入】"
+  media_budget: "NOT_APPLICABLE"
+  reward_budget: "NOT_APPLICABLE"
+  kol_settlement_budget: "NOT_APPLICABLE"
+  supported_targets: ["in_app_webview"]
+  hosting_owner: "Airvana 本地演示"
+  release_owner: "【待人工录入】"
+  rollback_target: "删除 feedMiniGame 配置并恢复上一版 public/index.html 与 CSS"
+assumptions:
+  - "ASSUMPTION: 用户本次授权只覆盖本地前端互动原型，不包含生产发布。"
+  - "ASSUMPTION: HK 仅作为本地测试地区占位，不代表对外投放批准。"
+open_questions:
+  - "正式 Campaign 的品牌法人与素材授权是谁？"
+  - "正式上线地区、年龄限制、成功事件与外部 CTA 是什么？"
+evidence_sources:
+  - "用户提供的 Airvana 首页截图"
+  - "当前本地 Airvana 作品流与既有演示素材"

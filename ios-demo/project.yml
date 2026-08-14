@@ -1,0 +1,50 @@
+name: AirvanaDemo
+
+options:
+  createIntermediateGroups: true
+  deploymentTarget:
+    iOS: "16.0"
+
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    IPHONEOS_DEPLOYMENT_TARGET: "16.0"
+    CODE_SIGN_STYLE: Automatic
+    ENABLE_USER_SCRIPT_SANDBOXING: NO
+
+targets:
+  AirvanaDemo:
+    type: application
+    platform: iOS
+    sources:
+      - path: AirvanaDemo
+        excludes:
+          - Assets.xcassets
+          - Icons
+      - path: AirvanaDemo/Icons
+        buildPhase: resources
+    settings:
+      base:
+        INFOPLIST_FILE: AirvanaDemo/Info.plist
+        GENERATE_INFOPLIST_FILE: NO
+        PRODUCT_BUNDLE_IDENTIFIER: com.renlijun.airvana.loopit.demo
+        PRODUCT_NAME: Airvana
+        DEVELOPMENT_TEAM: AFPAHT853U
+        MARKETING_VERSION: 1.0.11
+        CURRENT_PROJECT_VERSION: 13
+        TARGETED_DEVICE_FAMILY: "1"
+        ASSETCATALOG_COMPILER_APPICON_NAME: ""
+        SUPPORTS_MACCATALYST: NO
+    postBuildScripts:
+      - name: Sync Loopit v2 Web Assets
+        script: |
+          "${SRCROOT}/scripts/sync-web-assets.sh"
+        basedOnDependencyAnalysis: false
+
+schemes:
+  AirvanaDemo:
+    build:
+      targets:
+        AirvanaDemo: all
+    run:
+      config: Debug

@@ -1,0 +1,174 @@
+{
+  "schema_version": "1.0.0",
+  "campaign_id": "cmp_home_arcade_demo_20260813",
+  "version": "1.0.1",
+  "status": "draft",
+  "owners": {
+    "business_owner": "Airvana local demo owner",
+    "operations_owner": "Airvana local demo owner",
+    "approval_owner": "Human approval required before any external release",
+    "kill_switch_owner": "Airvana local demo owner"
+  },
+  "objective": {
+    "primary": "engagement",
+    "primary_success_event": "play_complete",
+    "primary_kpi": "local play completion rate",
+    "secondary": ["valid interaction rate", "replay rate"],
+    "target_value": null,
+    "target_window": null,
+    "funnel_boundary": "The DEMO ends at a local success or failure screen. It has no external CTA, reward, wallet, leaderboard, attribution, or settlement."
+  },
+  "audience": {
+    "included_regions": ["HK", "SG"],
+    "excluded_regions": [],
+    "languages": ["zh-CN"],
+    "minimum_age": 18,
+    "lifecycle_stages": ["mixed"],
+    "interests": ["short interactive mobile games"],
+    "accessibility_requirements": ["tap-only fallback", "reduced motion"]
+  },
+  "channels": [
+    {
+      "channel_id": "airvana_home_local_demo",
+      "channel_type": "in_app",
+      "kol_id": null,
+      "placement": "Airvana home feed, Discover original-games gallery, and packaged Android WebView"
+    }
+  ],
+  "brand": {
+    "legal_entity": "Airvana local prototype - no commercial offer",
+    "asset_manifest": [
+      {
+        "asset_id": "asset_home_arcade_original_covers",
+        "asset_type": "background",
+        "location": "public/assets/game-covers/home-arcade/",
+        "locale": null,
+        "checksum": null,
+        "authorization_status": "approved",
+        "usage_restrictions": ["Airvana local DEMO only", "No claim of third-party IP association"]
+      }
+    ],
+    "approved_claims": ["Ten original local interactive game demos"],
+    "prohibited_claims": ["guaranteed reward", "guaranteed return", "official commercial-game partnership"],
+    "required_disclosures": ["LOCAL DEMO - no reward, wallet, settlement, or verified commercial conversion"],
+    "authorization_status": "approved"
+  },
+  "gameplay": {
+    "mechanic": "other",
+    "template_id": "tpl_home_arcade_collection_v1",
+    "target_duration_seconds": 45,
+    "rounds": 8,
+    "required_states": ["intro", "playing", "success", "failure", "retry", "replay", "exit"],
+    "input_modes": ["tap", "drag", "keyboard"],
+    "difficulty_bounds": {
+      "minimum": 2,
+      "maximum": 6,
+      "default": 4
+    }
+  },
+  "cta": {
+    "cta_id": "cta_none",
+    "type": "none",
+    "label": "",
+    "destination": "NOT_APPLICABLE",
+    "allowed_states": []
+  },
+  "reward": {
+    "reward_id": "reward_none",
+    "type": "none",
+    "value_description": "NOT_APPLICABLE",
+    "eligibility": "NOT_APPLICABLE",
+    "inventory_cap": null,
+    "expiry": null,
+    "fulfillment_owner": "NOT_APPLICABLE",
+    "material_terms": "No reward is offered in this DEMO contract."
+  },
+  "compliance": {
+    "legal_entity": "Airvana local prototype - no commercial offer",
+    "promoted_activity": "Local entertainment interaction only",
+    "target_regions_reviewed": ["HK", "SG"],
+    "manual_review_required": true,
+    "legal_approval_status": "not_required",
+    "prohibited_claims": ["guaranteed reward", "guaranteed return", "official commercial-game partnership"],
+    "required_disclosures": ["LOCAL DEMO - no reward, wallet, settlement, or verified commercial conversion"],
+    "evidence_sources": ["Original cover prompts and generated source paths recorded in project delivery notes"]
+  },
+  "data_policy": {
+    "collected_fields": ["local_session_id", "campaign_id", "playable_id", "score", "mute_preference"],
+    "prohibited_fields": ["seed_phrase", "private_key", "raw_kyc_document"],
+    "consent_requirements": ["No network analytics in this local DEMO"],
+    "retention_days": 0,
+    "privacy_owner": "Airvana local demo owner"
+  },
+  "measurement": {
+    "primary_kpi": "local play completion rate",
+    "primary_success_event": "play_complete",
+    "required_events": ["impression", "play_start", "valid_interaction", "level_complete", "play_complete", "play_fail", "replay", "error"],
+    "dimensions": ["campaign_id", "creative_id", "channel_id", "kol_id", "playable_config_version", "region", "locale", "device_class"],
+    "deduplication_rule": "Generate a unique local event ID per interaction transition.",
+    "bot_fraud_rule": "All events are explicitly labeled local demo and are never eligible for settlement.",
+    "source_of_truth": "Device-local event log only; not a server-confirmed analytics source"
+  },
+  "attribution": {
+    "model": "none",
+    "window_days": 0,
+    "success_event": "play_complete",
+    "kol_priority": "not_applicable",
+    "cross_device_policy": "Not applicable; device-local only.",
+    "deduplication_key": "local_event_id",
+    "exclusion_rules": ["all local demo traffic is excluded from commercial reporting"],
+    "settlement_status": "not_applicable",
+    "payable_event": null,
+    "terms_reference": null
+  },
+  "commercial": {
+    "currency": "USD",
+    "build_budget_cap": null,
+    "media_budget_cap": null,
+    "reward_budget_cap": null,
+    "kol_settlement_budget_cap": null
+  },
+  "governance": {
+    "locked_fields": [
+      "commercial",
+      "audience.included_regions",
+      "audience.excluded_regions",
+      "audience.minimum_age",
+      "cta.destination",
+      "reward",
+      "compliance",
+      "data_policy",
+      "attribution.model",
+      "attribution.window_days",
+      "attribution.kol_priority",
+      "measurement.primary_success_event",
+      "approval",
+      "release.kill_switch"
+    ],
+    "editable_fields": ["playable.presentation.theme", "playable.presentation.copy_pack.share_copy"],
+    "agentic_fields": ["playable.presentation.copy_pack.intro_headline", "playable.gameplay.difficulty.default"],
+    "runtime_fields": ["runtime.session_id", "runtime.locale", "runtime.device_class", "runtime.experiment_assignment"],
+    "allowed_experiment_fields": ["playable.presentation.copy_pack.intro_headline", "playable.gameplay.difficulty.default"]
+  },
+  "approval": {
+    "status": "draft",
+    "approved_by": [],
+    "approved_at": null,
+    "evidence": []
+  },
+  "release": {
+    "targets": ["web_h5"],
+    "release_owner": "Airvana local demo owner",
+    "rollback_target": "Previous verified local APK",
+    "kill_switch": {
+      "owner": "Airvana local demo owner",
+      "mechanism": "Remove featured content IDs or restore the previous packaged web bundle"
+    }
+  },
+  "metadata": {
+    "created_at": "2026-08-13T19:00:00+08:00",
+    "updated_at": "2026-08-13T20:12:00+08:00",
+    "source_brief": "docs/playable-demos/home-arcade/campaign-brief.yaml",
+    "notes": ["Version 1.0.1 synchronizes the ten existing local DEMO games to the Discover original-games gallery.", "LOCAL DEMO only. External publication, rewards, wallets, attribution, settlement, or brand claims require a new approved Campaign Contract."]
+  }
+}

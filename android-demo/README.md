@@ -12,7 +12,7 @@ demo APK. It intentionally does not bundle the Node.js/SQLite backend.
 The installable debug APK is written to:
 
 ```text
-build/outputs/Airvana-Demo-v1.0.0-debug.apk
+build/outputs/Airvana-v1.0.14-debug.apk
 ```
 
 The app uses the temporary demo application ID `ai.airvana.demo`. Production

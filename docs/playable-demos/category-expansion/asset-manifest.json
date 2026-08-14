@@ -1,0 +1,42 @@
+{
+  "manifest_version": "2.0.0",
+  "campaign_id": "cmp_category_expansion_demo_20260814",
+  "generated_at": "2026-08-14T00:00:00+08:00",
+  "usage": "local Airvana home/discover promotional covers and six depth-gameplay scenes",
+  "source": "OpenAI built-in image generation; original prompts in this campaign package",
+  "reference_policy": "Official App Store pages informed mechanic and composition research only. No store artwork, character, logo, screenshot, UI, or trademark was copied into these assets.",
+  "render_spec": {
+    "width": 900,
+    "height": 1600,
+    "format": "jpeg covers and png gameplay scenes",
+    "quality": 88,
+    "bottom_safe_zone_percent": 28,
+    "text_inside_image": false
+  },
+  "quality_rules": [
+    "single readable gameplay action",
+    "believable materials and one explainable key light",
+    "restrained saturation and no fake HDR",
+    "coherent anatomy, geometry, object count and perspective",
+    "no brand, reward, wallet, store badge, watermark or pseudo-text"
+  ],
+  "assets": [
+    {"content_id":34,"slug":"orchard-merge","path":"public/assets/game-covers/category-expansion/orchard-merge.jpg","sha256":"637c04c8ee616e0515b75b23fe2c70f3bb4c23f15471db316f5c61f7063039ba"},
+    {"content_id":35,"slug":"star-mower","path":"public/assets/game-covers/category-expansion/star-mower.jpg","sha256":"3d72b6b3537fed9d644729ed13bb2cd752a38bee6cb7d2c08dc5d8ec67078d3d"},
+    {"content_id":36,"slug":"moonlight-tea-shop","path":"public/assets/game-covers/category-expansion/moonlight-tea-shop.jpg","sha256":"2378fbf624f0e72d694161697e77e66922f520e3a717b26726173d27f8f2714f"},
+    {"content_id":37,"slug":"microbe-arena","path":"public/assets/game-covers/category-expansion/microbe-arena.jpg","sha256":"3349770bd7a01b25d16ad179e43f5a07901474172ac96b6df1e5fe0d17abcefc"},
+    {"content_id":38,"slug":"star-deck","path":"public/assets/game-covers/category-expansion/star-deck.jpg","sha256":"14cc4d91d60652e86a2c8fe6f95c8f8014aadcf93cec912bb030c555db9c9677"},
+    {"content_id":39,"slug":"crystal-bastion","path":"public/assets/game-covers/category-expansion/crystal-bastion.jpg","sha256":"08ebd0c8b74a6fcb5a4eaa7ba3a9ada4d63ceb4fd9061c99d5c656ace2b97f3e"},
+    {"content_id":40,"slug":"adventurer-journal","path":"public/assets/game-covers/category-expansion/adventurer-journal.jpg","sha256":"8c05d94333a418c5f1449cfe2dba7906fdb1d18765ce7c81de2751c98549882c"},
+    {"content_id":41,"slug":"idiom-detective","path":"public/assets/game-covers/category-expansion/idiom-detective.jpg","sha256":"ca8515fe94c3abcc511f33a9f094574d6acb54c7afc076910f2547a95879011a"},
+    {"content_id":42,"slug":"hex-frontier","path":"public/assets/game-covers/category-expansion/hex-frontier.jpg","sha256":"6cd4d73032aa8e0af35d5fbffc58a91ab3fcc698bee838b32ca885194cef2b35"},
+    {"content_id":43,"slug":"studio-wardrobe","path":"public/assets/game-covers/category-expansion/studio-wardrobe.jpg","sha256":"d2279331b6733a3a38e65d0f082f3a4afc5aeb4e1fb3c23df4ba5da84e07f819"},
+    {"content_id":44,"slug":"garden-renewal","path":"public/assets/game-covers/category-expansion/garden-renewal.jpg","sha256":"004b631a746de188e7fbdd99b5ea90219cca188eebe4cea02b8c84c24ef14a35"},
+    {"content_id":35,"slug":"star-mower-gameplay-v2","path":"public/assets/deep-games/v2/star-mower-gameplay-v2.png","sha256":"c4c903a45e6266be74165b023d07d57564ccdd44b405eba10cf03ff5074c4a02","prompt_summary":"Alien grass survival arena with readable lanes, enemy pods and a central player-safe region, matched to the existing star-mower cover palette."},
+    {"content_id":38,"slug":"star-deck-gameplay-v2","path":"public/assets/deep-games/v2/star-deck-gameplay-v2.png","sha256":"14e5d7777a8d272b821e6515c97638ea541697aff3503bd70a8f4c610b0d430a","prompt_summary":"Tactile navy-and-brass parchment battle board with enemy ranks and five player card sockets, matched to the existing star-deck cover."},
+    {"content_id":40,"slug":"adventurer-journal-gameplay-v2","path":"public/assets/deep-games/v2/adventurer-journal-gameplay-v2.png","sha256":"4ee2a52fc1ec9c1bd1be9c9ebf0ee3b8a1b4694d6f6fe9276fb1166ef7e0f37a","prompt_summary":"Open explorer journal with three route bands and progression nodes toward an observatory, matched to the existing journal cover."},
+    {"content_id":41,"slug":"idiom-detective-gameplay-v2","path":"public/assets/deep-games/v2/idiom-detective-gameplay-v2.png","sha256":"ff51015f74d50c4e539c0dac994500f1a438a1334766b176238e08d07d863e8a","prompt_summary":"Warm detective desk with clue cards, a central analysis ring and six evidence slots, matched to the existing idiom-detective cover."},
+    {"content_id":42,"slug":"hex-frontier-gameplay-v2","path":"public/assets/deep-games/v2/hex-frontier-gameplay-v2.png","sha256":"f1705f588804100cd02f3544679e81be81bab350702a130b7ebbae7bea6f22a8","prompt_summary":"Blue-and-yellow hex strategy board with camps, outposts, river and terrain, matched to the existing hex-frontier cover."},
+    {"content_id":44,"slug":"garden-renewal-gameplay-v2","path":"public/assets/deep-games/v2/garden-renewal-gameplay-v2.png","sha256":"45837119580ebe0ad7227e54392f11886597291ad0bbbc473db7a020aca9e347","prompt_summary":"Mediterranean courtyard with renovation targets and an empty seven-by-seven stone puzzle grid, matched to the existing garden-renewal cover."}
+  ]
+}

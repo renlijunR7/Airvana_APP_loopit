@@ -1,0 +1,100 @@
+brief_version: "1.0.0"
+campaign:
+  campaign_id: "cmp_home_arcade_demo_20260813"
+  working_name: "Airvana 首页十款原创互动游戏"
+  brand_legal_entity: "Airvana local prototype - no commercial offer"
+  market_timezone: "Asia/Hong_Kong"
+  target_launch_at: "2026-08-13T20:00:00+08:00"
+  target_end_at: null
+owners:
+  business_owner: "Airvana local demo owner"
+  operations_owner: "Airvana local demo owner"
+  approval_owner: "Human approval required before external release"
+  kill_switch_owner: "Airvana local demo owner"
+objective:
+  primary: "engagement"
+  primary_success_event: "play_complete"
+  secondary: ["valid_interaction", "replay"]
+  target_value: null
+  target_window: "local usability verification only"
+  funnel_boundary: "Ends at local success/failure; no CTA, wallet, reward, attribution, or settlement."
+audience:
+  included_regions: ["HK", "SG"]
+  excluded_regions: []
+  languages: ["zh-CN"]
+  minimum_age: 18
+  interests: ["short mobile games", "interactive content"]
+  lifecycle_stages: ["mixed"]
+  accessibility_requirements: ["44px touch targets", "tap fallback for drag", "reduced motion", "sound mute control"]
+  device_network_assumptions: ["portrait mobile", "360px minimum width", "fully offline after packaging"]
+channels:
+  distribution: ["Airvana home feed", "Airvana Discover original-games gallery", "Android in-app WebView"]
+  kol_ids: []
+  landing_context: "Existing Airvana homepage vertical feed plus the Discover tab original-games gallery"
+  attribution_window_days: 0
+brand_assets:
+  source_folder_or_url: "public/assets/game-covers/home-arcade/"
+  logo: []
+  product_images: []
+  colors: ["#FF3B4A", "#74E7FF", "#070812", "#FFFFFF"]
+  typography: ["system-ui"]
+  approved_copy: ["LOCAL DEMO", "本地互动 DEMO", "不发放 AIP / AIT 或其他奖励"]
+  prohibited_copy: ["保证奖励", "保证收益", "官方商业游戏合作"]
+  audio_video: ["Procedural Web Audio tones generated on-device after first interaction"]
+  authorization_status: "Original generated assets approved for local DEMO use"
+gameplay:
+  preferred_mechanics: ["runner", "rhythm tap", "tower stack", "drag puzzle", "match", "cup memory", "fishing reflex", "tower defense", "racing drift", "space shooter"]
+  prohibited_mechanics: ["real-money wagering", "wallet signing", "paid loot boxes", "real leaderboard claims"]
+  target_duration_seconds: "30-60"
+  rounds: "4-8"
+  input_modes: ["tap", "drag with tap fallback", "keyboard accessibility"]
+  required_states: ["intro", "playing", "success", "failure", "retry", "replay", "exit"]
+  tone_theme: "Ten distinct original worlds in one consistent Airvana dark-tech system"
+  kol_personalization: "None in this platform-local DEMO"
+cta:
+  type: "none"
+  label: ""
+  destination: "NOT_APPLICABLE"
+  display_states: []
+  approval_status: "not_applicable"
+reward:
+  type: "none"
+  value_description: "NOT_APPLICABLE"
+  eligibility: "NOT_APPLICABLE"
+  inventory_cap: null
+  expiry: null
+  fulfillment_owner: "NOT_APPLICABLE"
+  material_terms: "No reward is offered. Scores and best scores remain local."
+compliance_privacy:
+  legal_entity: "Airvana local prototype - no commercial offer"
+  regulated_activity: "none"
+  prohibited_claims: ["guaranteed reward", "guaranteed return", "official commercial-game partnership"]
+  required_disclosures: ["LOCAL DEMO - no reward, wallet, settlement, or verified commercial conversion"]
+  consent_requirements: ["No network analytics in this local DEMO"]
+  data_collected: ["device-local score", "device-local best score", "device-local mute preference"]
+  data_retention: "Device local storage until app data is cleared"
+  manual_review_required: true
+  approval_evidence: "Draft contract and PlayableConfig validation"
+measurement:
+  primary_kpi: "local play completion rate"
+  required_events: ["impression", "play_start", "valid_interaction", "level_complete", "play_complete", "play_fail", "replay", "error"]
+  attribution_model: "none"
+  dimensions: ["playable_id", "round", "score", "device_class"]
+  exclusion_rules: ["all local demo traffic excluded from commercial reporting and settlement"]
+  reporting_cadence: "manual QA only"
+commercial_delivery:
+  build_budget: null
+  media_budget: null
+  reward_budget: 0
+  kol_settlement_budget: 0
+  supported_targets: ["web_h5", "in_app_webview"]
+  hosting_owner: "local device"
+  release_owner: "Airvana local demo owner"
+  rollback_target: "previous verified local APK"
+assumptions:
+  - "All ten covers are original generated assets with no copied commercial-game characters or trademarks."
+  - "Procedural audio satisfies offline sound requirements without shipping third-party music."
+open_questions: []
+evidence_sources:
+  - "Original image prompts and generator output paths recorded in the task delivery."
+  - "Automated tests and mobile viewport browser checks."

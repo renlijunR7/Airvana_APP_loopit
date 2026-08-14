@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0.0",
+  "playable_id": "plb_feed_safety_choice",
+  "campaign_id": "cmp_home_feed_interactions_demo",
+  "contract_version": "1.0.0",
+  "version": "1.0.0",
+  "status": "draft",
+  "template_id": "tpl_feed_scenario_choice_v1",
+  "locales": {"default": "zh-CN", "supported": ["zh-CN"]},
+  "presentation": {
+    "title": "Crypto City 安全选择",
+    "tone": "clear and safety-first",
+    "theme": "dark city safety console",
+    "logo_asset_id": "asset_local_airvana_logo",
+    "color_tokens": {"primary": "#58E5B1", "secondary": "#FF3B4A", "background": "#071B18", "text": "#FFFFFF"},
+    "copy_pack": {"intro_headline": "3 个安全情境，你会怎么选？", "intro_body": "只做本地安全教育，不连接真实钱包。", "start_button": "开始判断", "success_title": "安全判断完成", "failure_title": "复盘后再试一次", "retry_button": "重新挑战", "reward_eligibility": "不发放奖励。", "reward_terms": "本地分数仅用于演示。"}
+  },
+  "gameplay": {
+    "mechanic": "scenario_choice",
+    "core_loop": "Read one wallet-safety scenario, tap the safest action, receive immediate feedback, and continue for three rounds.",
+    "rounds": 3,
+    "target_duration_seconds": 30,
+    "difficulty": {"minimum": 1, "maximum": 4, "default": 2},
+    "input_modes": ["tap", "keyboard"],
+    "state_transitions": [
+      {"from": "intro", "event": "start", "to": "playing", "guard": null},
+      {"from": "playing", "event": "answer", "to": "playing", "guard": "rounds remain"},
+      {"from": "playing", "event": "complete_success", "to": "success", "guard": "score >= 2"},
+      {"from": "playing", "event": "complete_failure", "to": "failure", "guard": "score < 2"},
+      {"from": "failure", "event": "retry", "to": "playing", "guard": null},
+      {"from": "success", "event": "exit", "to": "exit", "guard": null}
+    ],
+    "scoring": {"enabled": true, "rule": "One point per safest action.", "minimum": 0, "maximum": 3}
+  },
+  "screens": [
+    {"screen_id": "safety_intro", "state": "intro", "copy_keys": ["intro_headline", "intro_body", "start_button"], "asset_ids": ["asset_builtin_game_shapes"], "actions": ["start"]},
+    {"screen_id": "safety_playing", "state": "playing", "copy_keys": [], "asset_ids": ["asset_builtin_game_shapes"], "actions": ["answer"]},
+    {"screen_id": "safety_success", "state": "success", "copy_keys": ["success_title"], "asset_ids": ["asset_builtin_game_shapes"], "actions": ["replay", "exit"]},
+    {"screen_id": "safety_failure", "state": "failure", "copy_keys": ["failure_title", "retry_button"], "asset_ids": ["asset_builtin_game_shapes"], "actions": ["retry", "exit"]}
+  ],
+  "cta": {"cta_id": "cta_none_safety", "type": "none", "label_key": "", "destination_id": "", "allowed_states": [], "open_mode": "same_context"},
+  "reward_presentation": {"reward_id": "reward_none", "type": "none", "eligibility_copy_key": "reward_eligibility", "terms_copy_key": "reward_terms", "claim_action": "NOT_APPLICABLE"},
+  "field_authority": {"locked_fields": ["cta", "reward_presentation", "constraints", "telemetry"], "editable_fields": ["presentation.copy_pack"], "agentic_fields": [], "runtime_fields": ["runtime.session_id", "runtime.locale", "runtime.device_class"]},
+  "runtime_policy": {"segmentation_inputs": ["locale", "device_class"], "agentic_bounds": [], "experiment_id": null, "variant_id": null, "fallback_behavior": "Render the static intro with a retry action if gameplay cannot initialize."},
+  "telemetry": {"required_events": ["impression", "play_start", "valid_interaction", "level_complete", "play_complete", "play_fail", "replay", "error"], "common_properties": ["event_id", "event_time", "campaign_id", "contract_version", "playable_id", "playable_config_version", "build_id", "creative_id", "channel_id", "kol_id", "link_id", "session_id", "locale", "region", "device_class", "consent_state"], "deduplication_strategy": "One unique event_id per accepted transition.", "consent_behavior": "Store only the local demo event log; collect no personal or wallet data."},
+  "build": {"target": "in_app_webview", "entry": "public/index.html", "asset_base": "public/", "minimum_viewport_width": 360, "supported_orientations": ["portrait"], "dependency_lock": "package-lock.json", "environment": "local"},
+  "constraints": {"approved_asset_ids": ["asset_local_airvana_logo", "asset_builtin_game_shapes"], "prohibited_phrases": ["保证收益", "保证奖励"], "required_disclosures": ["本地互动 DEMO", "不连接真实钱包"], "privacy_prohibited_fields": ["seed_phrase", "private_key", "raw_kyc_document"], "manual_review_required": true},
+  "metadata": {"created_at": "2026-08-13T15:30:00+08:00", "updated_at": "2026-08-13T15:30:00+08:00", "created_by": "airvana-interactive-marketing-game DEMO", "notes": ["Prototype only; no production approval"]}
+}

@@ -117,9 +117,9 @@ function loginView() {
     <section class="login-hero">
       <div class="logo"><span class="logo-mark">A</span>airvana.ai</div>
       <div class="hero-copy">
-        <div class="eyebrow">内容驱动的 Agent World</div>
-        <h1>让内容成为<br><em>Agent 的行动结果</em></h1>
-        <p>从安全约束、真实任务运行到内容发布、Campaign 交付与双积分账本，每个状态都可验证、可审核、可追溯。</p>
+        <div class="eyebrow">Agentic Playable 工作台</div>
+        <h1>让每一位 KOL<br><em>运营自己的 Playable</em></h1>
+        <p>从 Campaign Contract、版本预览和人工审核，到发布意向、归因证据与结算边界，当前阶段优先完成可审阅的前端流程。</p>
       </div>
       <div class="hero-grid">
         <div class="hero-chip"><strong>Agent 运行管线</strong>队列、权限、审核、版本</div>
@@ -128,6 +128,7 @@ function loginView() {
       </div>
     </section>
     <section class="login-panel"><div class="login-card">
+      <div class="workspace-scope"><strong>FRONTEND DEMO</strong><span>后端阶段暂缓；开发入口与工作台数据只用于本地验收，不代表生产权限。</span></div>
       <div class="eyebrow">数字钱包身份工作区</div>
       <h2>进入你的内容世界</h2>
       <p class="muted">选择身份后使用数字钱包签名登录。签名不会触发链上交易，也不会申请资产转移权限。</p>

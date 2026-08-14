@@ -2,7 +2,16 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createMobileComponent} from './mobile-component-harness.mjs';
 
-const slideById = (component, id) => component.renderVals().sessionSlides.find(slide => slide.id === id);
+const slideById = (component, id) => {
+  let slide=component.renderVals().sessionSlides.find(item=>item.id===id&&item.windowClass==='is-active');
+  if (slide) return slide;
+  for (let index=0; index<component.state.sessions.length; index+=1) {
+    component.setState({playIdx:index});
+    slide=component.renderVals().sessionSlides.find(item=>item.id===id&&item.windowClass==='is-active');
+    if (slide) return slide;
+  }
+  return undefined;
+};
 const creationCategoryKeys = ['content','mechanics','narrative','sensing','social','operations','other'];
 const collectCreationPowers = component => {
   const powers = new Map();
@@ -57,10 +66,81 @@ test('mobile primary navigation follows page hierarchy and returns after seconda
   assert.equal(worldNavigation.navWorld.ariaCurrent, 'page');
   assert.equal(worldNavigation.navPlay.className, '');
   assert.equal(worldNavigation.navPlay.ariaCurrent, 'false');
+
+  component.setState({...primaryState,screen:'discover',playIdx:8,feedMiniGame:{...component.emptyFeedMiniGameState(),contentId:1,status:'playing'}});
+  component.renderVals().navPlay.onClick();
+  assert.equal(component.state.screen, 'play');
+  assert.equal(component.state.playIdx, 0, 'opening Home should return to the featured interactive games');
+  assert.equal(component.state.feedMiniGame.status, 'idle');
 });
 
-test('mobile Home exposes every supplied cover as an independent playable and keeps seeded games after local restore', () => {
+test('mobile My opens on Playables after startup and preserves later in-session tab choices', () => {
+  const persistedKey = 'airvana.v5.agentic-positioning.v2';
+  const {component, mount} = createMobileComponent({
+    stored:{[persistedKey]:JSON.stringify({ob:4,meTab:'history'})}
+  });
+
+  mount();
+  assert.equal(component.state.meTab, 'playables', 'a tab from the previous app session must not replace the default Works tab');
+
+  component.setState({screen:'me',meTab:'saved'});
+  component.setState({screen:'play'});
+  component.renderVals().navMe.onClick();
+  assert.equal(component.state.screen, 'me');
+  assert.equal(component.state.meTab, 'saved', 'returning during the same session should preserve the user selection');
+});
+
+test('mobile settings drawer touch fallback scrolls a short viewport without triggering a row action', () => {
+  const {component} = createMobileComponent();
+  component.setState({ob:4,launchVisible:false,screen:'me',drawerOpen:true,overlay:null,panel:null});
+  const values = component.renderVals();
+  const target = {
+    clientHeight:600,
+    scrollHeight:920,
+    scrollTop:0,
+    setPointerCapture() {},
+    releasePointerCapture() {}
+  };
+
+  values.drawerScrollStart({pointerType:'touch',pointerId:7,clientY:520,currentTarget:target});
+  values.drawerScrollMove({pointerId:7,clientY:330,currentTarget:target,cancelable:true,preventDefault() {}});
+  assert.equal(target.scrollTop, 190);
+  assert.equal(component._drawerScrollMoved, true);
+
+  let prevented = false;
+  values.drawerPrimaryRows[0].onPick({preventDefault() { prevented=true; }});
+  assert.equal(prevented, true);
+  assert.equal(component.state.drawerOpen, true);
+  assert.equal(component.state.overlay, null);
+
+  values.drawerScrollWheel({deltaY:90,currentTarget:target,cancelable:true,preventDefault() {}});
+  assert.equal(target.scrollTop, 280);
+  values.drawerScrollEnd({pointerId:7,currentTarget:target});
+});
+
+test('mobile Home keeps every seeded playable while rendering only the active feed window', () => {
   const additions = [
+    [34, '果园合合塔 Orchard Merge', '/assets/game-covers/category-expansion/orchard-merge.jpg'],
+    [35, '星尘割草 Star Mower', '/assets/game-covers/category-expansion/star-mower.jpg'],
+    [36, '月光奶茶铺 Moonlight Tea Shop', '/assets/game-covers/category-expansion/moonlight-tea-shop.jpg'],
+    [37, '微粒竞技场 Microbe Arena', '/assets/game-covers/category-expansion/microbe-arena.jpg'],
+    [38, '星轨牌阵 Star Deck Tactics', '/assets/game-covers/category-expansion/star-deck.jpg'],
+    [39, '晶核防线 Crystal Bastion', '/assets/game-covers/category-expansion/crystal-bastion.jpg'],
+    [40, '冒险者日志 Adventurer Journal', '/assets/game-covers/category-expansion/adventurer-journal.jpg'],
+    [41, '成语侦探 Idiom Detective', '/assets/game-covers/category-expansion/idiom-detective.jpg'],
+    [42, '六角前线 Hex Frontier', '/assets/game-covers/category-expansion/hex-frontier.jpg'],
+    [43, '今日造型师 Studio Wardrobe', '/assets/game-covers/category-expansion/studio-wardrobe.jpg'],
+    [44, '花园焕新 Garden Renewal', '/assets/game-covers/category-expansion/garden-renewal.jpg'],
+    [24, '霓虹疾跑 Neon Dash', '/assets/game-covers/home-arcade/neon-dash-v2.jpg'],
+    [25, '节拍熔炉 Pulse Forge', '/assets/game-covers/home-arcade/pulse-forge-v2.jpg'],
+    [26, '天际叠塔 Sky Stack', '/assets/game-covers/home-arcade/sky-stack-v2.jpg'],
+    [27, '符文回路 Rune Circuit', '/assets/game-covers/home-arcade/rune-circuit-v2.jpg'],
+    [28, '棱镜连击 Prism Match', '/assets/game-covers/home-arcade/prism-match-v2.jpg'],
+    [29, '星杯幻术 Star Cups', '/assets/game-covers/home-arcade/star-cups-v2.jpg'],
+    [30, '深海寻光 Deep Catch', '/assets/game-covers/home-arcade/deep-catch-v2.jpg'],
+    [31, '赤焰防线 Ember Bastion', '/assets/game-covers/home-arcade/ember-bastion-v2.jpg'],
+    [32, '新星漂移 Nova Drift', '/assets/game-covers/home-arcade/nova-drift-v2.jpg'],
+    [33, '虚空小队 Void Squadron', '/assets/game-covers/home-arcade/void-squadron-v2.jpg'],
     [15, 'I AM CAT 猫咪大逃脱', '/assets/game-covers/i-am-cat.png'],
     [16, '撒币之旅', '/assets/game-covers/coin-journey.png'],
     [17, '潜水员戴夫：丛林探险', '/assets/game-covers/jungle-diver.png'],
@@ -72,22 +152,257 @@ test('mobile Home exposes every supplied cover as an independent playable and ke
     [23, '小炮手大战空降恶魔', '/assets/game-covers/sky-demon-defense.png']
   ];
   const {component} = createMobileComponent();
-  const slides = component.renderVals().sessionSlides;
-  assert.equal(slides.length, 23);
+  let slides = component.renderVals().sessionSlides;
+  assert.equal(slides.length, 2);
+  assert.deepEqual(Array.from(slides, item=>item.id), [34,35]);
+  assert.equal(slides[0].windowClass, 'is-active');
+  assert.equal(slides[0].ariaHidden, 'false');
+  assert.equal(slides[1].windowClass, 'is-buffered');
+  assert.equal(slides[1].ariaHidden, 'true');
+  component.setState({playIdx:2});
+  slides = component.renderVals().sessionSlides;
+  assert.deepEqual(Array.from(slides, item=>item.id), [35,36,37]);
+  assert.equal(slides[1].windowClass, 'is-active');
   for (const [id, title, cover] of additions) {
-    const slide = slides.find(item => item.id === id);
-    assert.ok(slide, `missing Home slide: ${title}`);
-    assert.equal(slide.game, title);
-    assert.equal(slide.cover, cover);
-    assert.equal(typeof slide.onOpen, 'function');
+    const playable = component.state.sessions.find(item => item.id === id);
+    assert.ok(playable, `missing Home playable: ${title}`);
+    assert.equal(playable.game, title);
+    assert.equal(playable.cover, cover);
   }
+  component.setState({playIdx:component.state.sessions.filter(item=>item.status==='published'||item.status==='archived').length-1});
+  slides = component.renderVals().sessionSlides;
+  assert.deepEqual(Array.from(slides, item=>item.id), [22,23]);
+  assert.equal(slides.at(-1).windowClass, 'is-active');
+  assert.equal(typeof slides.at(-1).onOpen, 'function');
 
-  const storedState = JSON.stringify({ob:4,sessions:[component.state.sessions[0]]});
+  const stalePreview={...component.state.sessions.find(item=>item.id===35),stage:'玩法预览',article:'旧版预览',versions:[{id:'35-v1',label:'PREVIEW v1',status:'玩法预览',time:'昨天'}],likes:17};
+  const storedState = JSON.stringify({ob:4,playIdx:14,sessions:[component.state.sessions[0],stalePreview]});
   const restored = createMobileComponent({stored:{'airvana.v5.agentic-positioning.v2':storedState}});
   restored.mount();
+  assert.equal(restored.component.state.playIdx,0, 'a position from the previous app session must not hide the featured games');
   assert.equal(restored.component.state.sessions.some(item=>item.id===1), true);
   for (const [id] of additions) assert.equal(restored.component.state.sessions.some(item=>item.id===id), true);
+  const migratedStarMower=restored.component.state.sessions.find(item=>item.id===35);
+  assert.equal(migratedStarMower.stage,'深度试玩');
+  assert.equal(migratedStarMower.versions[0].id,'35-v3');
+  assert.equal(migratedStarMower.likes,17,'catalog migration should preserve local engagement metrics');
   restored.unmount();
+});
+
+test('mobile Home runs safety, farm and cup games through success, failure and replay states', () => {
+  const {component, runTimers} = createMobileComponent();
+
+  component.setState({playIdx:10});
+  let safety = slideById(component, 1);
+  assert.equal(safety.hasMiniGame, true);
+  assert.equal(safety.miniGameIdle, true);
+  safety.onMiniGameStart();
+  for (const answer of [1,0,1]) {
+    safety = slideById(component, 1);
+    safety.miniGameChoices[answer].onPick();
+    assert.equal(component.state.feedMiniGame.status, 'feedback');
+    safety = slideById(component, 1);
+    safety.onMiniGameAdvance();
+  }
+  assert.equal(component.state.feedMiniGame.status, 'success');
+  assert.equal(component.state.feedMiniGame.score, 3);
+  safety = slideById(component, 1);
+  safety.onMiniGameReplay();
+  assert.equal(component.state.feedMiniGame.status, 'playing');
+  assert.equal(component.state.feedMiniGame.score, 0);
+
+  component.setState({playIdx:11,feedMiniGame:component.emptyFeedMiniGameState()});
+  let farm = slideById(component, 2);
+  farm.onMiniGameStart();
+  for (let miss=0; miss<3; miss+=1) {
+    const target=component.state.feedMiniGame.target;
+    component.actFeedMiniGame(2,(target+1)%9);
+  }
+  assert.equal(component.state.feedMiniGame.status, 'failure');
+  assert.equal(component.state.feedMiniGame.lives, 0);
+  farm = slideById(component, 2);
+  farm.onMiniGameReplay();
+  for (let hit=0; hit<5; hit+=1) component.actFeedMiniGame(2,component.state.feedMiniGame.target);
+  assert.equal(component.state.feedMiniGame.status, 'success');
+  assert.equal(component.state.feedMiniGame.score, 5);
+
+  component.setState({playIdx:12,feedMiniGame:component.emptyFeedMiniGameState()});
+  let cups = slideById(component, 6);
+  cups.onMiniGameStart();
+  for (let round=0; round<3; round+=1) {
+    assert.equal(component.state.feedMiniGame.status, 'preview');
+    runTimers(900);
+    assert.equal(component.state.feedMiniGame.status, 'playing');
+    const game=component.state.feedMiniGame;
+    const correctPosition=game.cupOrder.indexOf(game.targetCup);
+    component.actFeedMiniGame(6,correctPosition);
+    assert.equal(component.state.feedMiniGame.status, 'feedback');
+    component.advanceFeedMiniGame(6);
+  }
+  assert.equal(component.state.feedMiniGame.status, 'success');
+  assert.equal(component.state.feedMiniGame.score, 3);
+
+  const events=component.state.localEventLog;
+  assert.ok(events.some(event=>event.event_name==='play_complete'&&event.playable_id==='plb_feed_red_cup_shuffle'));
+  assert.ok(events.some(event=>event.event_name==='play_fail'&&event.playable_id==='plb_feed_energy_farm'));
+  assert.ok(events.every(event=>event.properties.reward_issued!==true));
+});
+
+test('mobile Home ships ten original offline arcade games with sound, best scores and complete replay loops', () => {
+  const {component, runTimers} = createMobileComponent();
+  const arcadeIds=[24,25,26,27,28,29,30,31,32,33];
+  const playableIds=new Set();
+  const stages=new Set();
+
+  for (const contentId of arcadeIds) {
+    const definition=component.getFeedMiniGameDefinition(contentId);
+    assert.ok(definition, `missing game definition ${contentId}`);
+    playableIds.add(definition.playableId);
+    if (definition.stage) stages.add(definition.stage);
+    component.startFeedMiniGame(contentId);
+    if (definition.type==='cups') {
+      for (let round=0; round<definition.rounds; round+=1) {
+        runTimers(900);
+        const game=component.state.feedMiniGame;
+        component.actFeedMiniGame(contentId,game.cupOrder.indexOf(game.targetCup));
+        component.advanceFeedMiniGame(contentId);
+      }
+    } else {
+      while (!['success','failure'].includes(component.state.feedMiniGame.status)) {
+        component.actFeedMiniGame(contentId,component.state.feedMiniGame.target);
+        if (component.state.feedMiniGame.status==='feedback') component.advanceFeedMiniGame(contentId);
+      }
+    }
+    assert.equal(component.state.feedMiniGame.status,'success',`game ${contentId} should complete successfully`);
+    assert.ok(component.state.feedMiniGameBestScores[contentId]>=definition.successThreshold);
+    component.startFeedMiniGame(contentId,true);
+    assert.equal(component.state.feedMiniGame.status,definition.type==='cups'?'preview':'playing');
+    component.exitFeedMiniGame();
+  }
+
+  assert.equal(playableIds.size,10);
+  assert.equal(stages.size,9);
+  assert.equal(component.state.sessions.filter(item=>arcadeIds.includes(item.id)&&item.cover?.includes('/home-arcade/')).length,10);
+  component.toggleFeedMiniGameSound();
+  assert.equal(component.state.feedMiniGameMuted,true);
+});
+
+test('mobile Home runs all eleven category demos through complete local replay loops', () => {
+  const {component}=createMobileComponent();
+  const completeIds=[34,35,36,37,38,39,40,41,42,43,44];
+  const deepIds=new Set([35,38,40,41,42,44]);
+
+  for (const contentId of completeIds) {
+    const definition=component.getFeedMiniGameDefinition(contentId);
+    assert.ok(definition, `missing complete category game ${contentId}`);
+    if (deepIds.has(contentId)) {
+      assert.equal(definition.type,'deep');
+      assert.equal(definition.stages,3);
+      assert.match(definition.deepAsset,/^\.\/assets\/deep-games\/v2\/.+-gameplay-v2\.png$/);
+      assert.ok(definition.deepGameKey);
+      continue;
+    }
+    component.startFeedMiniGame(contentId);
+    while (!['success','failure'].includes(component.state.feedMiniGame.status)) {
+      const game=component.state.feedMiniGame;
+      const choice=definition.type==='safety'?definition.rounds[game.round].correct:game.target;
+      component.actFeedMiniGame(contentId,choice);
+      if (component.state.feedMiniGame.status==='feedback') component.advanceFeedMiniGame(contentId);
+    }
+    assert.equal(component.state.feedMiniGame.status,'success');
+    assert.ok(component.state.feedMiniGameBestScores[contentId]>=definition.successThreshold);
+    const event=component.state.localEventLog.find(entry=>entry.event_name==='play_complete'&&entry.playable_id===definition.playableId);
+    assert.equal(event?.campaign_id,'cmp_category_expansion_demo_20260814');
+    assert.equal(event?.contract_version,'2.0.0');
+    assert.equal(event?.properties.playable_config_version,'2.0.0');
+    assert.equal(event?.properties.reward_issued,false);
+    assert.equal(component.state.sessions.find(item=>item.id===contentId)?.stage,'完整试玩');
+  }
+  assert.deepEqual(completeIds.filter(contentId=>component.getFeedMiniGameDefinition(contentId).type==='deep'),[35,38,40,41,42,44]);
+  assert.match(component.state.sessions.find(item=>item.id===37).article,/本地机器人，不代表真人或实时多人联机/);
+  assert.match(component.state.sessions.find(item=>item.id===42).article,/确定性本地逻辑，不是真人联机/);
+});
+
+test('mobile Discover synchronizes all 21 original games into the first gallery section', () => {
+  const {component}=createMobileComponent();
+  component.setState({screen:'discover',discoverCat:'recommend'});
+  const values=component.renderVals();
+  assert.equal(values.discoverSections[0].tag,'原创新游');
+  assert.deepEqual(Array.from(values.discoverSections[0].items,item=>item.id),[34,35,36,37,38,39,40,41,42,43,44,24,25,26,27,28,29,30,31,32,33]);
+  assert.ok(values.discoverSections[0].items.every(item=>item.hasCover&&/\/(?:category-expansion|home-arcade)\//.test(item.cover)));
+  assert.ok(values.discoverSections[0].items.every(item=>typeof item.onOpen==='function'));
+});
+
+test('mobile Home clears active mini-game state when the feed moves to another work', () => {
+  const {component} = createMobileComponent();
+  component.setState({playIdx:10});
+  slideById(component,1).onMiniGameStart();
+  const activeIndex=component.state.playIdx;
+  const values=component.renderVals();
+  values.feedDown({clientY:620,pointerId:4,currentTarget:{setPointerCapture(){}}});
+  values.feedMove({clientY:500});
+  values.feedUp();
+  assert.equal(component.state.playIdx,activeIndex+1);
+  assert.equal(component.state.feedMiniGame.status,'idle');
+  assert.equal(component.state.feedMiniGame.contentId,null);
+});
+
+test('mobile Home lower info area switches games vertically without firing a social action', () => {
+  const {component} = createMobileComponent();
+  const contentId = 1;
+  const beforeLikes = component.state.sessions.find(item => item.id === contentId).likes;
+  let values = component.renderVals();
+  values.feedInfoDown({clientY:700,pointerId:14,currentTarget:{setPointerCapture(){}}});
+  values.feedInfoMove({clientY:560});
+  values.feedInfoUp({pointerId:14,currentTarget:{releasePointerCapture(){}}});
+  assert.equal(component.state.playIdx,1,'an upward gesture on the info rail must show the next game');
+
+  values = component.renderVals();
+  slideById(component,contentId).rail[0].onClick({preventDefault(){},stopPropagation(){}});
+  assert.equal(component.state.sessions.find(item => item.id === contentId).likes,beforeLikes,'the click synthesized after a swipe must be ignored');
+
+  slideById(component,contentId).rail[0].onClick({stopPropagation(){}});
+  assert.equal(component.state.sessions.find(item => item.id === contentId).likes,beforeLikes+1,'a later deliberate tap must still work');
+});
+
+test('mobile Home action buttons keep pointer ownership and remain tappable', () => {
+  const {component} = createMobileComponent();
+  const contentId = 1;
+  const beforeLikes = component.state.sessions.find(item => item.id === contentId).likes;
+  let pointerCaptured = false;
+  let propagationStopped = false;
+  const actionTarget = {closest(selector){return selector.includes('[role="button"]') ? this : null;}};
+  const values = component.renderVals();
+
+  values.feedInfoDown({
+    clientY:700,
+    pointerId:15,
+    target:actionTarget,
+    currentTarget:{setPointerCapture(){pointerCaptured=true;}},
+    stopPropagation(){propagationStopped=true;}
+  });
+
+  assert.equal(propagationStopped,true,'the outer feed must not start a competing drag');
+  assert.equal(pointerCaptured,false,'the info rail must not capture a pointer that started on an action button');
+  assert.equal(component._fdrag,false);
+  slideById(component,contentId).rail[0].onClick({stopPropagation(){}});
+  assert.equal(component.state.sessions.find(item => item.id === contentId).likes,beforeLikes+1);
+});
+
+test('mobile Home game exit restores feed swipe and keeps a compact replay launcher', () => {
+  const {component} = createMobileComponent();
+  slideById(component,1).onMiniGameExit();
+  const activeIndex=component.state.playIdx;
+  let safety = slideById(component,1);
+  assert.equal(safety.hasMiniGame,false);
+  assert.equal(safety.hasMiniGameLauncher,true);
+
+  const values=component.renderVals();
+  values.feedDown({clientY:620,pointerId:5,currentTarget:{setPointerCapture(){}}});
+  values.feedMove({clientY:500});
+  values.feedUp();
+  assert.equal(component.state.playIdx,activeIndex+1);
+  assert.equal(component.state.feedMiniGameDismissedContentId,null);
 });
 
 test('mobile Component toggles one like idempotently and keeps the feed count in sync', () => {
@@ -170,6 +485,23 @@ test('mobile Component separates share intent from link copy and resolves the at
   assert.equal(component.state.detailMode, 'detail');
 });
 
+test('Playable detail starts the selected complete local game on the Home feed', () => {
+  const {component} = createMobileComponent();
+
+  component.openContent(35, 'detail');
+  const values = component.renderVals();
+  assert.equal(values.detailTitle, '星尘割草 Star Mower');
+  assert.equal(values.detailPrimaryActionLabel, '开始互动');
+
+  values.detailPrimaryAction();
+
+  assert.equal(component.state.screen, 'play');
+  assert.equal(component.state.overlay, null);
+  assert.equal(component.state.playIdx, 1);
+  assert.equal(component.state.feedMiniGame.contentId, 35);
+  assert.equal(component.state.feedMiniGame.status, 'playing');
+});
+
 test('mobile Component clears a stale playable hash and opens the home feed on normal startup', () => {
   const {component, setLocationHash, location, mount} = createMobileComponent();
 
@@ -210,6 +542,10 @@ test('creation capability catalog exposes recommendation plus seven atomic categ
   assert.deepEqual(new Set([...kolPowers.values()].map(item=>item.statusLabel)), new Set(['可生成原型','前端原型','需设备授权','需实时服务','需审批']));
   assert.equal([...kolPowers.values()].filter(item=>item.itemKind==='flow').length, 0);
   assert.equal([...kolPowers.values()].filter(item=>item.itemKind==='capability').length, 47);
+  assert.equal([...kolPowers.values()].every(item=>typeof item.iconPath==='string'&&item.iconPath.startsWith('M')), true);
+  assert.equal([...kolPowers.values()].every(item=>item.hasIconImage&&item.iconImage.startsWith('./assets/capability-icons/')), true);
+  assert.equal([...kolPowers.values()].every(item=>!item.hasIconVector), true);
+  assert.equal(new Set([...kolPowers.values()].map(item=>item.iconImage)).size, 47);
   assert.equal(kolPowers.has('remixFlow'), false);
 
   component.setState({createRoleScope:'player',composerMode:'quick',createPowerCat:'popular',selectedPowerIds:[],powerSearchQuery:''});
@@ -242,6 +578,11 @@ test('other capability category filters shared experimental powers and selection
     ['proceduralAnimation','mirrorDrawing','vrExperience','threeDScene','touchscreenSimulation','proceduralWorld','softBodyPhysics','guidedCreator']
   );
   assert.equal(values.createPowers.every(item=>item.cat==='other'), true);
+  assert.equal(values.createPowers.every(item=>typeof item.iconPath==='string'&&item.iconPath.startsWith('M')), true);
+  assert.equal(new Set(values.createPowers.map(item=>item.iconPath)).size, 8);
+  assert.equal(values.createPowers.every(item=>item.hasIconImage&&item.iconImage.startsWith('./assets/capability-icons/')), true);
+  assert.equal(values.createPowers.every(item=>!item.hasIconVector), true);
+  assert.equal(new Set(values.createPowers.map(item=>item.iconImage)).size, 8);
   assert.match(values.powerCategoryHint, /实验型.*跨媒介.*专用创作能力/);
 
   const threeDScene = values.createPowers.find(item=>item.id==='threeDScene');
@@ -279,6 +620,28 @@ test('creation recommendations combine prompt goals, missing categories and trut
   assert.doesNotMatch(values.powerCategoryHint, /Remix/);
   assert.equal(Object.hasOwn(values, 'showControlledRemix'), false);
   assert.equal(values.powerResultMeta, `动态推荐 ${values.createPowers.length} 项`);
+});
+
+test('creation recommendations disclose four relevant capabilities before the full catalog', () => {
+  const {component} = createMobileComponent();
+  component.setState({
+    overlay:'create',createStep:'home',createHomeTab:'create',createRoleScope:'kol',createPowerCat:'popular',
+    gamePrompt:'创建一个摄像头 AR 互动挑战，并通过 Telegram 外部渠道发布。',
+    composerGoalObjective:'记录归因转化',recentPowerIds:[],selectedPowerIds:[],powerSearchQuery:'',powerCatalogExpanded:false
+  });
+
+  let values = component.renderVals();
+  assert.equal(values.createPowers.length, 4);
+  assert.equal(values.showPowerCatalogToggle, true);
+  assert.match(values.powerCatalogToggleLabel, /查看全部/);
+  values.togglePowerCatalog();
+
+  values = component.renderVals();
+  assert.ok(values.createPowers.length > 4);
+  assert.equal(component.state.powerCatalogExpanded, true);
+  assert.match(values.powerCatalogToggleLabel, /收起/);
+  values.togglePowerCatalog();
+  assert.equal(component.state.powerCatalogExpanded, false);
 });
 
 test('selecting a capability preserves the prompt and mode while updating the selected tray', () => {
@@ -799,19 +1162,32 @@ test('production display environment suppresses demo popups without changing acc
   assert.match(component.state.toast, /生产环境不展示演示弹窗/);
 });
 
-test('mobile Component saves a support request as a local draft and exposes truthful profile-stat panels', () => {
+test('mobile Component saves categorized feedback locally, opens support chat, and exposes truthful profile-stat panels', () => {
   const {component} = createMobileComponent();
 
   let values = component.renderVals();
   assert.equal(values.supportSubmitDisabled, true);
+  values.supportCategoryRows.find(row => row.key === 'bug').onPick();
+  values = component.renderVals();
+  values.setSupportContact({target:{value:'feedback@example.com'}});
   values.setSupportDraft({target:{value:'这是一个需要继续跟进的本地问题描述'}});
   values = component.renderVals();
   assert.equal(values.supportSubmitDisabled, false);
   values.submitSupportTicket();
 
   assert.equal(component.state.supportTickets.length, 1);
-  assert.equal(component.state.supportTickets[0].status, 'local-draft');
+  assert.equal(component.state.supportTickets[0].status, 'local-record');
+  assert.equal(component.state.supportTickets[0].category, 'bug');
+  assert.equal(component.state.supportTickets[0].contact, 'feedback@example.com');
   assert.equal(component.state.supportDraft, '');
+  assert.equal(component.state.supportContact, '');
+  values = component.renderVals();
+  assert.equal(values.supportTicketRows[0].categoryLabel, '功能异常');
+  assert.equal(values.supportTicketRows[0].hasContact, true);
+  values.contactSupport();
+  assert.equal(component.state.panel, 'chat');
+  assert.equal(component.state.panelReturn, 'support');
+  assert.equal(component.state.messageThreadId, 'support');
 
   component.renderVals().openLikesStat();
   values = component.renderVals();
@@ -898,6 +1274,9 @@ test('mobile identity center fails closed and completes the local KYC, node and 
   assert.equal(component.state.panel, 'identity');
   assert.equal(component.state.identityDetailRole, null);
   component.renderVals().resetIdentityDemo();
+  assert.equal(component.state.identityKycStatus, 'verified_demo');
+  assert.equal(component.state.destructiveAction.type, 'reset-identity');
+  component.renderVals().confirmDestructiveAction();
   assert.equal(component.state.identityKycStatus, 'unverified');
   assert.equal(component.state.identityNodeStatus, 'locked');
   assert.equal(component.state.identitySuperNodeStatus, 'locked');
@@ -931,6 +1310,69 @@ test('mobile KYC document step supports passport and rejects unsafe files withou
   assert.equal(Object.keys(component.state.identityKycUploads).length, 0);
   assert.equal(component.state.identityAuditLog[0].action, 'kyc_document_submission_demo');
   assert.equal(JSON.stringify(component.state.identityAuditLog).includes('passport-private'), false);
+});
+
+test('mobile KYC country picker searches and selects a global country or region in-app', () => {
+  const {component} = createMobileComponent();
+  component.setState({panel:'identity',identityDetailRole:'kyc',identityKycStatus:'document_demo',identityKycCountry:'HK',identityCountryPickerOpen:false,identityCountryQuery:''});
+
+  let values = component.renderVals();
+  assert.ok(values.identityCountryTotal >= 240);
+  assert.equal(values.identityKycCountryLabel, '中国香港');
+  values.openIdentityCountryPicker();
+  values = component.renderVals();
+  assert.equal(values.showIdentityCountryPicker, true);
+  values.setIdentityCountryQuery({target:{value:'法国'}});
+  values = component.renderVals();
+  assert.equal(values.identityKycCountryOptions.length, 1);
+  assert.equal(values.identityKycCountryOptions[0].value, 'FR');
+  values.identityKycCountryOptions[0].onPick();
+  values = component.renderVals();
+  assert.equal(component.state.identityKycCountry, 'FR');
+  assert.equal(values.identityKycCountryLabel, '法国');
+  assert.equal(values.showIdentityCountryPicker, false);
+});
+
+test('mobile email login validates, sends, expires and verifies the local one-time code', () => {
+  const {component} = createMobileComponent();
+  component.setState({ob:3,panel:'emailLogin',loginEmailValue:'',loginEmailCodeSent:false,loginEmailCooldown:0});
+
+  let values = component.renderVals();
+  values.setLoginEmailValue({target:{value:'红红火火'}});
+  values = component.renderVals();
+  assert.equal(values.emailLoginActionDisabled, true);
+  values.setLoginEmailValue({target:{value:'Creator@Example.com'}});
+  values = component.renderVals();
+  assert.equal(values.emailLoginActionDisabled, false);
+  values.confirmEmailLogin();
+  values = component.renderVals();
+  assert.equal(values.emailCodeSent, true);
+  assert.equal(component.state.loginEmailSentTo, 'creator@example.com');
+  assert.match(component.state.loginEmailDemoCode, /^\d{6}$/);
+  values.setLoginEmailOtpValue({target:{value:component.state.loginEmailDemoCode}});
+  values = component.renderVals();
+  assert.equal(values.emailLoginActionDisabled, false);
+  values.confirmEmailLogin();
+  assert.equal(component.state.loginProvider, 'email');
+  assert.equal(component.state.ob, 4);
+  assert.equal(component.state.panel, null);
+});
+
+test('mobile destructive actions keep data until the shared confirmation is accepted', () => {
+  const {component} = createMobileComponent();
+  component.setState({playerPostMediaPreview:'data:image/png;base64,preview',playerPostMediaType:'image',playerPostMediaName:'preview.png'});
+
+  let values = component.renderVals();
+  values.clearPlayerPostMedia();
+  values = component.renderVals();
+  assert.equal(values.showDestructiveConfirm, true);
+  assert.equal(component.state.playerPostMediaName, 'preview.png');
+  values.cancelDestructiveAction();
+  assert.equal(component.state.playerPostMediaName, 'preview.png');
+  component.renderVals().clearPlayerPostMedia();
+  component.renderVals().confirmDestructiveAction();
+  assert.equal(component.state.playerPostMediaPreview, '');
+  assert.equal(component.state.destructiveAction, null);
 });
 
 test('mobile creator identity application stays a local demo and opens creator center only after activation', () => {
@@ -1119,9 +1561,9 @@ test('mobile inspiration invalidates previews after Contract edits and never und
   assert.equal(component.state.gamePrompt,'用户手工修改后的文案');
 });
 
-test('mobile composer manages a local Asset Manifest and deep mode fails closed on pending authorization', () => {
+test('mobile composer manages a local Asset Manifest without a separate authorization step', () => {
   const {component} = createMobileComponent();
-  component.setState({overlay:'create',createStep:'home',createHomeTab:'create',composerMode:'deep',gamePrompt:'创建一个面向新用户的三步安全教育互动挑战，并展示获批行动',composerAssets:[],composerGoalObjective:'品牌认知',composerGoalAudience:'18+ 新用户（本地演示）',composerGoalSuccessEvent:'playable_complete（需服务器确认）',composerGoalCTAType:'了解更多',composerGoalSaved:true});
+  component.setState({overlay:'create',createStep:'home',createHomeTab:'create',composerMode:'quick',gamePrompt:'创建一个面向新用户的三步安全教育互动挑战，并展示获批行动',composerAssets:[],composerGoalObjective:'品牌认知',composerGoalAudience:'18+ 新用户（本地演示）',composerGoalSuccessEvent:'playable_complete（需服务器确认）',composerGoalCTAType:'了解更多',composerGoalSaved:true});
 
   let values = component.renderVals();
   assert.ok(values.composerAssetLibrary.length >= 2);
@@ -1129,15 +1571,14 @@ test('mobile composer manages a local Asset Manifest and deep mode fails closed 
   values = component.renderVals();
   assert.equal(values.composerAssetRows.length, 1);
   assert.equal(values.composerTools.find(item=>item.label==='项目素材').badge, '1');
-  assert.equal(values.composerAssetRows[0].authLabel, '授权待确认');
-  assert.match(component.state.campaignAssets, /授权待确认/);
-  assert.match(values.composerSendLabel, /^完善 /);
+  assert.equal(values.composerAssetRows[0].onNextAuthorization, undefined);
+  assert.doesNotMatch(component.state.campaignAssets, /授权/);
+  assert.equal(values.composerPreflightIssues.some(issue => issue.id === 'pending-assets' || issue.id === 'blocked-assets'), false);
+  assert.equal(values.composerSendLabel, '生成预览');
   values.composerSend();
-  assert.equal(component.state.composerSheet, 'preflight');
-  assert.ok(component.renderVals().composerPreflightIssues.some(issue => issue.id === 'pending-assets'));
+  assert.equal(component.state.composerSheet, 'confirm');
 
-  values = component.renderVals();
-  values.composerPreflightIssues.find(issue => issue.id === 'pending-assets').onFix();
+  component.setState({composerSheet:'assets'});
   values = component.renderVals();
   values.composerAssetRows[0].onNextPurpose();
   values = component.renderVals();
@@ -1145,9 +1586,6 @@ test('mobile composer manages a local Asset Manifest and deep mode fails closed 
   values.composerAssetRows[0].onNextFocus();
   values = component.renderVals();
   assert.equal(values.composerAssetRows[0].focusLabel, '顶部');
-  values.composerAssetRows[0].onNextAuthorization();
-  values = component.renderVals();
-  assert.equal(values.composerAssetRows[0].authLabel, '授权已确认');
 
   values.composerAssetLibrary[1].onPick();
   values = component.renderVals();
@@ -1155,6 +1593,9 @@ test('mobile composer manages a local Asset Manifest and deep mode fails closed 
   values.composerAssetRows[1].onMoveUp();
   assert.equal(component.renderVals().composerAssetRows[0].name, secondName);
   component.renderVals().composerAssetRows[0].onRemove();
+  assert.equal(component.renderVals().composerAssetRows.length, 2);
+  assert.equal(component.state.destructiveAction.type, 'remove-composer-asset');
+  component.renderVals().confirmDestructiveAction();
   assert.equal(component.renderVals().composerAssetRows.length, 1);
 });
 
@@ -1178,8 +1619,8 @@ test('mobile quick composer saves four goals, confirms the scheme and only start
   values = component.renderVals();
   values.composerAssetLibrary[0].onPick();
   values = component.renderVals();
-  assert.equal(values.composerSendLabel, '检查并生成');
-  assert.equal(values.composerSendClass, 'is-review');
+  assert.equal(values.composerSendLabel, '生成预览');
+  assert.equal(values.composerSendClass, 'is-ready');
   values.composerSend();
   assert.equal(component.state.composerSheet, 'confirm');
   values = component.renderVals();
@@ -1614,7 +2055,11 @@ test('mobile messaging, rights and governance stay local and expose truthful ser
   assert.match(values.profileRoleMeta, /KOL/);
   assert.equal(values.roleMainActionLabel, '创作游戏');
   assert.equal(values.meTabs.map(tab=>tab.key).join(','), 'playables,drafts,saved,history');
-  assert.equal(values.profileShortcuts.map(item=>item.label).join(','), '创作者中心,KOL AI 分身,品牌合作');
+  assert.equal(values.profileShortcuts.map(item=>item.label).join(','), '钱包,创作者中心,KOL AI 分身');
+  assert.equal(values.profileShortcuts.find(item=>item.label==='钱包').meta, 'AIP 与 AIT');
+  values.profileShortcuts.find(item=>item.label==='钱包').onPick();
+  assert.equal(component.state.overlay, 'wallet');
+  component.setState({overlay:null,screen:'messages'});
   assert.equal(values.showProfileShortcuts, true);
   assert.equal(values.messageCards.find(card=>card.id==='ai-twin').bg, 'var(--message-unread-bg,#FFF8F8)');
   assert.equal(values.messageCards.find(card=>card.id==='ai-twin').border, 'var(--message-unread-border,#FFD6DA)');
@@ -1648,10 +2093,20 @@ test('mobile messaging, rights and governance stay local and expose truthful ser
   values = component.renderVals();
   const beforeAip = component.state.aip;
   const right = values.rightItems.find(item=>item.id==='badge');
-  right.onRedeem();
+  right.onOpen();
+  assert.equal(component.state.rightRedeemId, 'badge');
+  values = component.renderVals();
+  assert.equal(values.rightsRedeemOpen, true);
+  assert.equal(values.rightsSelectedTitle, '贡献徽章');
+  assert.equal(values.rightsSelectedBalanceAfter, (beforeAip-right.cost).toLocaleString());
+  values.confirmRightRedeem();
   assert.equal(component.state.aip, beforeAip-right.cost);
-  assert.equal(component.state.rightsOrders[0].status, '本地演示');
+  assert.equal(component.state.rightsOrders[0].status, 'active-local-demo');
+  assert.equal(component.state.rightsOrders[0].statusLabel, '已生效 · 本地演示');
   assert.equal(component.state.localEventLog[0].properties.server_confirmed, false);
+  values = component.renderVals();
+  assert.equal(values.rightItems.find(item=>item.id==='badge').actionLabel, '已生效');
+  assert.equal(values.rightsActiveCount, 1);
 
   component.setState({panel:'governance',governanceTab:'control'});
   values = component.renderVals();

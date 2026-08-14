@@ -1,0 +1,125 @@
+{
+  "schema_version": "1.0.0",
+  "playable_id": "plb_home_arcade_collection",
+  "campaign_id": "cmp_home_arcade_demo_20260813",
+  "contract_version": "1.0.1",
+  "version": "1.0.3",
+  "status": "draft",
+  "template_id": "tpl_home_arcade_collection_v1",
+  "locales": {
+    "default": "zh-CN",
+    "supported": ["zh-CN"]
+  },
+  "presentation": {
+    "title": "Airvana Home Arcade - 10 Original Local DEMOS",
+    "tone": "energetic, accessible, and clearly labeled as local demo",
+    "theme": "Airvana dark-tech arcade with ten original game worlds",
+    "logo_asset_id": "asset_home_arcade_original_covers",
+    "color_tokens": {
+      "primary": "#FF3B4A",
+      "secondary": "#74E7FF",
+      "background": "#070812",
+      "text": "#FFFFFF"
+    },
+    "copy_pack": {
+      "intro_headline": "LOCAL DEMO: Choose a game and play instantly",
+      "intro_body": "Ten original 30-60 second games with local audio and scores.",
+      "start_button": "开始游戏",
+      "success_title": "挑战完成",
+      "failure_title": "再试一次",
+      "retry_button": "再玩一次",
+      "cta_label": "",
+      "share_copy": "LOCAL DEMO only",
+      "reward_eligibility": "No reward is offered.",
+      "reward_terms": "NOT_APPLICABLE"
+    }
+  },
+  "gameplay": {
+    "mechanic": "other",
+    "core_loop": "Choose one of ten original games, tap or drag the active target through four to eight rounds, receive immediate audio-visual feedback, then reach success or failure and replay.",
+    "rounds": 8,
+    "target_duration_seconds": 45,
+    "difficulty": {
+      "minimum": 2,
+      "maximum": 6,
+      "default": 4
+    },
+    "input_modes": ["tap", "drag", "keyboard"],
+    "state_transitions": [
+      {"from": "intro", "event": "start", "to": "playing", "guard": null},
+      {"from": "playing", "event": "complete_success", "to": "success", "guard": "score meets threshold"},
+      {"from": "playing", "event": "complete_failure", "to": "failure", "guard": "score below threshold"},
+      {"from": "failure", "event": "retry", "to": "playing", "guard": null},
+      {"from": "success", "event": "replay", "to": "playing", "guard": null},
+      {"from": "success", "event": "exit", "to": "exit", "guard": null}
+    ],
+    "scoring": {
+      "enabled": true,
+      "rule": "One point per correct target interaction; thresholds are fixed per game and only local best scores are retained.",
+      "minimum": 0,
+      "maximum": 8
+    }
+  },
+  "screens": [
+    {"screen_id": "screen_intro", "state": "intro", "copy_keys": ["intro_headline", "intro_body", "start_button"], "asset_ids": ["asset_home_arcade_original_covers"], "actions": ["start", "toggle_sound"]},
+    {"screen_id": "screen_playing", "state": "playing", "copy_keys": [], "asset_ids": ["asset_home_arcade_original_covers"], "actions": ["interact", "toggle_sound", "exit"]},
+    {"screen_id": "screen_success", "state": "success", "copy_keys": ["success_title", "retry_button"], "asset_ids": ["asset_home_arcade_original_covers"], "actions": ["replay", "exit"]},
+    {"screen_id": "screen_failure", "state": "failure", "copy_keys": ["failure_title", "retry_button"], "asset_ids": ["asset_home_arcade_original_covers"], "actions": ["retry", "exit"]}
+  ],
+  "cta": {
+    "cta_id": "cta_none",
+    "type": "none",
+    "label_key": "cta_label",
+    "destination_id": "NOT_APPLICABLE",
+    "allowed_states": [],
+    "open_mode": "same_context"
+  },
+  "reward_presentation": {
+    "reward_id": "reward_none",
+    "type": "none",
+    "eligibility_copy_key": "reward_eligibility",
+    "terms_copy_key": "reward_terms",
+    "claim_action": "NOT_APPLICABLE"
+  },
+  "field_authority": {
+    "locked_fields": ["cta", "reward_presentation", "constraints", "build.environment", "telemetry", "gameplay.scoring"],
+    "editable_fields": ["presentation.theme"],
+    "agentic_fields": [],
+    "runtime_fields": ["runtime.session_id", "runtime.locale", "runtime.device_class", "runtime.experiment_assignment"]
+  },
+  "runtime_policy": {
+    "segmentation_inputs": ["locale", "device_class", "approved_region_bucket"],
+    "agentic_bounds": [],
+    "experiment_id": null,
+    "variant_id": null,
+    "fallback_behavior": "Use the default approved copy and difficulty when a decision cannot be made."
+  },
+  "telemetry": {
+    "required_events": ["impression", "play_start", "valid_interaction", "level_complete", "play_complete", "play_fail", "replay", "error"],
+    "common_properties": ["event_id", "event_time", "campaign_id", "contract_version", "playable_id", "playable_config_version", "build_id", "creative_id", "channel_id", "kol_id", "link_id", "session_id", "locale", "region", "device_class", "consent_state"],
+    "deduplication_strategy": "Generate a unique event_id per transition and ignore retries with the same event_id.",
+    "consent_behavior": "Keep events in the device-local demo log only; do not send network analytics."
+  },
+  "build": {
+    "target": "in_app_webview",
+    "entry": "public/index.html",
+    "asset_base": "public/assets/",
+    "minimum_viewport_width": 360,
+    "supported_orientations": ["portrait"],
+    "dependency_lock": "package-lock.json and packaged Android assets",
+    "environment": "preview"
+  },
+  "constraints": {
+    "approved_asset_ids": ["asset_home_arcade_original_covers"],
+    "prohibited_phrases": ["guaranteed reward", "guaranteed return", "official commercial-game partnership"],
+    "required_disclosures": ["LOCAL DEMO - no reward, wallet, settlement, or verified commercial conversion"],
+    "privacy_prohibited_fields": ["seed_phrase", "private_key", "raw_kyc_document"],
+    "manual_review_required": true
+  },
+  "metadata": {
+    "created_at": "2026-08-13T19:00:00+08:00",
+    "updated_at": "2026-08-13T20:40:00+08:00",
+    "created_by": "airvana-interactive-marketing-game local DEMO workflow",
+    "notes": ["The ten runtime definitions are plb_neon_dash, plb_pulse_forge, plb_sky_stack, plb_rune_circuit, plb_prism_match, plb_star_cups, plb_deep_catch, plb_ember_bastion, plb_nova_drift, and plb_void_squadron.", "Version 1.0.1 synchronizes all ten items to the Discover tab original-games gallery without changing CTA, reward, attribution, or settlement boundaries.", "Version 1.0.2 keeps each original cover clearly visible on the Home idle screen and moves readable controls into the lower contrast zone without changing gameplay or locked fields.", "Version 1.0.3 switches Home and Discover to the non-destructive art-directed -v2 cover set, reducing template-like neon, plastic materials, structural inconsistencies, and visual clutter while preserving each game concept.", "No external release or commercial claims are authorized by this draft config."]
+  }
+}

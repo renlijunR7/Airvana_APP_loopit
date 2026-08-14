@@ -1,0 +1,164 @@
+{
+  "schema_version": "1.0.0",
+  "campaign_id": "cmp_category_expansion_demo_20260814",
+  "version": "2.0.0",
+  "status": "draft",
+  "owners": {
+    "business_owner": "Airvana local demo owner",
+    "operations_owner": "Airvana local demo owner",
+    "approval_owner": "User-approved prototype scope; external release still requires human approval",
+    "kill_switch_owner": "Airvana local demo owner"
+  },
+  "objective": {
+    "primary": "engagement",
+    "primary_success_event": "play_complete",
+    "primary_kpi": "local completion and replay rate across the six depth-upgraded games while preserving completion across all eleven DEMOS",
+    "secondary": ["valid interaction rate", "replay rate", "category discovery"],
+    "target_value": null,
+    "target_window": null,
+    "funnel_boundary": "Each of the eleven local DEMOS ends at success/failure/replay. They have no external CTA, reward, wallet, commercial attribution, or settlement."
+  },
+  "audience": {
+    "included_regions": ["HK", "SG"],
+    "excluded_regions": [],
+    "languages": ["zh-CN"],
+    "minimum_age": 18,
+    "lifecycle_stages": ["mixed"],
+    "interests": ["short interactive mobile games", "casual games"],
+    "accessibility_requirements": ["tap-only controls", "non-color-only feedback", "reduced motion", "mute control"]
+  },
+  "channels": [
+    {
+      "channel_id": "airvana_category_expansion_local_demo",
+      "channel_type": "in_app",
+      "kol_id": null,
+      "placement": "Airvana home feed, Discover category gallery, and packaged Android WebView"
+    }
+  ],
+  "brand": {
+    "legal_entity": "Airvana local prototype - no commercial offer",
+    "asset_manifest": [
+      {
+        "asset_id": "asset_category_expansion_original_covers",
+        "asset_type": "background",
+        "location": "public/assets/game-covers/category-expansion/",
+        "locale": null,
+        "checksum": null,
+        "authorization_status": "approved",
+        "usage_restrictions": ["Airvana local DEMO only", "No third-party IP association", "App Store pages are composition references only"]
+      },
+      {
+        "asset_id": "asset_deep_gameplay_scenes_v2",
+        "asset_type": "background",
+        "location": "public/assets/deep-games/v2/",
+        "locale": null,
+        "checksum": null,
+        "authorization_status": "approved",
+        "usage_restrictions": ["Airvana local DEMO only", "Original generated art", "No external commercial claim"]
+      }
+    ],
+    "approved_claims": ["Eleven original category game concepts", "Eleven complete local interactive demos", "Six games upgraded to three-stage depth play with local progression and replay"],
+    "prohibited_claims": ["guaranteed reward", "guaranteed return", "official commercial-game partnership", "real online multiplayer"],
+    "required_disclosures": ["LOCAL DEMO - no reward, wallet, settlement, or verified commercial conversion", "The IO game uses local bots and is not live multiplayer"],
+    "authorization_status": "approved"
+  },
+  "gameplay": {
+    "mechanic": "other",
+    "template_id": "tpl_category_expansion_deep_v2",
+    "target_duration_seconds": 240,
+    "rounds": 3,
+    "required_states": ["intro", "playing", "paused", "success", "failure", "retry", "replay", "exit"],
+    "input_modes": ["tap", "drag", "swipe", "keyboard"],
+    "difficulty_bounds": {"minimum": 2, "maximum": 8, "default": 4}
+  },
+  "cta": {
+    "cta_id": "cta_none",
+    "type": "none",
+    "label": "",
+    "destination": "NOT_APPLICABLE",
+    "allowed_states": []
+  },
+  "reward": {
+    "reward_id": "reward_none",
+    "type": "none",
+    "value_description": "NOT_APPLICABLE",
+    "eligibility": "NOT_APPLICABLE",
+    "inventory_cap": null,
+    "expiry": null,
+    "fulfillment_owner": "NOT_APPLICABLE",
+    "material_terms": "No reward is offered in this local DEMO contract."
+  },
+  "compliance": {
+    "legal_entity": "Airvana local prototype - no commercial offer",
+    "promoted_activity": "Local entertainment interaction only",
+    "target_regions_reviewed": ["HK", "SG"],
+    "manual_review_required": true,
+    "legal_approval_status": "not_required",
+    "prohibited_claims": ["guaranteed reward", "guaranteed return", "official commercial-game partnership", "real online multiplayer"],
+    "required_disclosures": ["LOCAL DEMO - no reward, wallet, settlement, or verified commercial conversion", "IO opponents are local bots"],
+    "evidence_sources": ["Official store reference URLs and original asset prompts recorded in project docs"]
+  },
+  "data_policy": {
+    "collected_fields": ["local_session_id", "campaign_id", "playable_id", "score", "mute_preference"],
+    "prohibited_fields": ["seed_phrase", "private_key", "raw_kyc_document", "password"],
+    "consent_requirements": ["No network analytics in this local DEMO"],
+    "retention_days": 0,
+    "privacy_owner": "Airvana local demo owner"
+  },
+  "measurement": {
+    "primary_kpi": "local completion and replay rate across the six depth-upgraded games while preserving completion across all eleven DEMOS",
+    "primary_success_event": "play_complete",
+    "required_events": ["impression", "play_start", "valid_interaction", "level_complete", "play_complete", "play_fail", "replay", "error"],
+    "dimensions": ["campaign_id", "creative_id", "channel_id", "playable_id", "playable_config_version", "region", "locale", "device_class"],
+    "deduplication_rule": "Generate a unique local event ID per state transition.",
+    "bot_fraud_rule": "All events are labeled local demo and are never eligible for settlement; IO bot outcomes are excluded from multiplayer claims.",
+    "source_of_truth": "Device-local event log only; not a server-confirmed analytics source"
+  },
+  "attribution": {
+    "model": "none",
+    "window_days": 0,
+    "success_event": "play_complete",
+    "kol_priority": "not_applicable",
+    "cross_device_policy": "Not applicable; device-local only.",
+    "deduplication_key": "local_event_id",
+    "exclusion_rules": ["all local demo traffic is excluded from commercial reporting"],
+    "settlement_status": "not_applicable",
+    "payable_event": null,
+    "terms_reference": null
+  },
+  "commercial": {
+    "currency": "USD",
+    "build_budget_cap": null,
+    "media_budget_cap": null,
+    "reward_budget_cap": 0,
+    "kol_settlement_budget_cap": 0
+  },
+  "governance": {
+    "locked_fields": ["commercial", "audience.included_regions", "audience.excluded_regions", "audience.minimum_age", "cta.destination", "reward", "compliance", "data_policy", "attribution.model", "attribution.window_days", "attribution.kol_priority", "measurement.primary_success_event", "approval", "release.kill_switch"],
+    "editable_fields": ["playable.presentation.theme"],
+    "agentic_fields": [],
+    "runtime_fields": ["runtime.session_id", "runtime.locale", "runtime.device_class", "runtime.experiment_assignment"],
+    "allowed_experiment_fields": []
+  },
+  "approval": {
+    "status": "draft",
+    "approved_by": [],
+    "approved_at": null,
+    "evidence": ["User approved the recommended local prototype scope on 2026-08-14"]
+  },
+  "release": {
+    "targets": ["web_h5", "in_app_webview"],
+    "release_owner": "Airvana local demo owner",
+    "rollback_target": "Airvana-v1.0.12-debug.apk and previous verified web bundle",
+    "kill_switch": {
+      "owner": "Airvana local demo owner",
+      "mechanism": "Remove content IDs 34-44 or restore the previous packaged web bundle"
+    }
+  },
+  "metadata": {
+    "created_at": "2026-08-14T12:00:00+08:00",
+    "updated_at": "2026-08-14T19:00:00+08:00",
+    "source_brief": "docs/playable-demos/category-expansion/campaign-brief.yaml",
+    "notes": ["Version 2.0 upgrades star mower, star deck, adventurer journal, idiom detective, hex frontier, and garden renewal to three-stage depth play.", "The other five complete local demos remain unchanged.", "External release, real multiplayer, rewards, wallets, commercial attribution, settlement, and third-party IP claims remain unauthorized."]
+  }
+}

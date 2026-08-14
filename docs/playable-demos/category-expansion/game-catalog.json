@@ -1,0 +1,17 @@
+{
+  "catalog_version": "1.1.0",
+  "campaign_id": "cmp_category_expansion_demo_20260814",
+  "games": [
+    {"id": 34, "playable_id": "plb_orchard_merge", "slug": "orchard-merge", "category": "休闲益智", "title": "果园合合塔", "english_title": "Orchard Merge", "delivery": "complete_playable", "mechanic": "merge match"},
+    {"id": 35, "playable_id": "plb_star_mower", "slug": "star-mower", "category": "超休闲动作 / 跑酷", "title": "星尘割草", "english_title": "Star Mower", "delivery": "complete_playable", "mechanic": "survivor action"},
+    {"id": 36, "playable_id": "plb_moonlight_tea_shop", "slug": "moonlight-tea-shop", "category": "模拟经营", "title": "月光奶茶铺", "english_title": "Moonlight Tea Shop", "delivery": "complete_playable", "mechanic": "order management"},
+    {"id": 37, "playable_id": "plb_microbe_arena", "slug": "microbe-arena", "category": "IO 竞技", "title": "微粒竞技场", "english_title": "Microbe Arena", "delivery": "complete_playable", "mechanic": "local bot arena"},
+    {"id": 38, "playable_id": "plb_star_deck", "slug": "star-deck", "category": "卡牌回合", "title": "星轨牌阵", "english_title": "Star Deck Tactics", "delivery": "complete_playable", "mechanic": "turn-based card formation"},
+    {"id": 39, "playable_id": "plb_crystal_bastion", "slug": "crystal-bastion", "category": "射击塔防", "title": "晶核防线", "english_title": "Crystal Bastion", "delivery": "complete_playable", "mechanic": "three-lane tower defense"},
+    {"id": 40, "playable_id": "plb_adventurer_journal", "slug": "adventurer-journal", "category": "角色扮演 RPG", "title": "冒险者日志", "english_title": "Adventurer Journal", "delivery": "complete_playable", "mechanic": "text route-choice RPG"},
+    {"id": 41, "playable_id": "plb_idiom_detective", "slug": "idiom-detective", "category": "答题知识", "title": "成语侦探", "english_title": "Idiom Detective", "delivery": "complete_playable", "mechanic": "visual word quiz"},
+    {"id": 42, "playable_id": "plb_hex_frontier", "slug": "hex-frontier", "category": "策略", "title": "六角前线", "english_title": "Hex Frontier", "delivery": "complete_playable", "mechanic": "light territory strategy"},
+    {"id": 43, "playable_id": "plb_studio_wardrobe", "slug": "studio-wardrobe", "category": "女性向小游戏", "title": "今日造型师", "english_title": "Studio Wardrobe", "delivery": "complete_playable", "mechanic": "occasion styling"},
+    {"id": 44, "playable_id": "plb_garden_renewal", "slug": "garden-renewal", "category": "混合融合玩法", "title": "花园焕新", "english_title": "Garden Renewal", "delivery": "complete_playable", "mechanic": "match plus renovation"}
+  ]
+}

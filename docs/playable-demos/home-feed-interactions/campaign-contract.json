@@ -1,0 +1,93 @@
+{
+  "schema_version": "1.0.0",
+  "campaign_id": "cmp_home_feed_interactions_demo",
+  "version": "1.0.0",
+  "status": "draft",
+  "owners": {
+    "business_owner": "PENDING_USER_CONFIRMATION",
+    "operations_owner": "Airvana local demo",
+    "approval_owner": "PENDING_USER_CONFIRMATION",
+    "kill_switch_owner": "Airvana local demo"
+  },
+  "objective": {
+    "primary": "engagement",
+    "primary_success_event": "play_complete",
+    "primary_kpi": "Local demo play completions",
+    "secondary": ["product education", "replay intent"],
+    "target_value": null,
+    "target_window": null,
+    "funnel_boundary": "The flow ends inside the Home feed; there is no external conversion."
+  },
+  "audience": {
+    "included_regions": ["HK"],
+    "excluded_regions": [],
+    "languages": ["zh-CN"],
+    "minimum_age": 0,
+    "lifecycle_stages": ["mixed"],
+    "interests": ["lightweight interactive games", "Agentic Playables"],
+    "accessibility_requirements": ["one-handed tap", "keyboard controls", "non-color-only feedback", "reduced motion"]
+  },
+  "channels": [
+    {"channel_id": "airvana_home_local_demo", "channel_type": "in_app", "kol_id": null, "placement": "immersive Home feed media area"}
+  ],
+  "brand": {
+    "legal_entity": "PENDING_USER_CONFIRMATION",
+    "asset_manifest": [
+      {"asset_id": "asset_local_airvana_logo", "asset_type": "logo", "location": "public/logo.png", "locale": null, "checksum": null, "authorization_status": "pending", "usage_restrictions": ["local preview only"]},
+      {"asset_id": "asset_builtin_game_shapes", "asset_type": "other", "location": "CSS and inline SVG shapes", "locale": null, "checksum": null, "authorization_status": "not_required", "usage_restrictions": ["local preview only"]}
+    ],
+    "approved_claims": ["Local interactive DEMO"],
+    "prohibited_claims": ["guaranteed reward", "guaranteed return", "verified commercial conversion", "production release"],
+    "required_disclosures": ["Local interactive DEMO", "No AIP, AIT, cash, crypto, or other reward is issued"],
+    "authorization_status": "pending"
+  },
+  "gameplay": {
+    "mechanic": "other",
+    "template_id": "tpl_home_feed_interaction_gallery_v1",
+    "target_duration_seconds": 25,
+    "rounds": 3,
+    "required_states": ["intro", "playing", "success", "failure", "retry", "exit"],
+    "input_modes": ["tap", "keyboard"],
+    "difficulty_bounds": {"minimum": 1, "maximum": 5, "default": 2}
+  },
+  "cta": {"cta_id": "cta_none", "type": "none", "label": "", "destination": "", "allowed_states": []},
+  "reward": {"reward_id": "reward_none", "type": "none", "value_description": "No reward", "eligibility": "NOT_APPLICABLE", "inventory_cap": 0, "expiry": null, "fulfillment_owner": "NOT_APPLICABLE", "material_terms": "Local score only; not a reward or commercial conversion."},
+  "compliance": {
+    "legal_entity": "PENDING_USER_CONFIRMATION",
+    "promoted_activity": "Local interactive UI prototype without wallet, KYC, purchase, or financial promotion",
+    "target_regions_reviewed": ["HK"],
+    "manual_review_required": true,
+    "legal_approval_status": "pending",
+    "prohibited_claims": ["guaranteed reward", "guaranteed return", "verified conversion"],
+    "required_disclosures": ["Local interactive DEMO", "No reward is issued"],
+    "evidence_sources": ["User-provided Home screenshot", "Local Airvana feed implementation"]
+  },
+  "data_policy": {
+    "collected_fields": ["local_session_id", "playable_id", "round", "score", "state_transition"],
+    "prohibited_fields": ["seed_phrase", "private_key", "raw_kyc_document", "password"],
+    "consent_requirements": [],
+    "retention_days": 0,
+    "privacy_owner": "Airvana local demo"
+  },
+  "measurement": {
+    "primary_kpi": "Local demo play completions",
+    "primary_success_event": "play_complete",
+    "required_events": ["impression", "play_start", "valid_interaction", "level_complete", "play_complete", "play_fail", "replay", "error"],
+    "dimensions": ["campaign_id", "playable_id", "playable_config_version", "session_id", "locale", "device_class"],
+    "deduplication_rule": "One event_id per accepted state transition; ignore rapid repeat actions after a terminal state.",
+    "bot_fraud_rule": "Exclude interactions from hidden buffered slides and repeated submissions after a result.",
+    "source_of_truth": "Local browser event log only; not production analytics."
+  },
+  "attribution": {"model": "none", "window_days": 0, "success_event": "play_complete", "kol_priority": "not_applicable", "cross_device_policy": "No cross-device attribution", "deduplication_key": "event_id", "exclusion_rules": ["buffered slide events", "duplicate terminal transitions"], "settlement_status": "not_applicable", "payable_event": null, "terms_reference": null},
+  "commercial": {"currency": "USD", "build_budget_cap": null, "media_budget_cap": null, "reward_budget_cap": 0, "kol_settlement_budget_cap": 0},
+  "governance": {
+    "locked_fields": ["commercial", "audience.included_regions", "audience.excluded_regions", "audience.minimum_age", "cta.destination", "reward", "compliance", "data_policy", "attribution.model", "attribution.window_days", "attribution.kol_priority", "measurement.primary_success_event", "approval", "release.kill_switch"],
+    "editable_fields": ["brand.asset_manifest", "gameplay.template_id"],
+    "agentic_fields": [],
+    "runtime_fields": ["session_id", "locale", "device_class"],
+    "allowed_experiment_fields": []
+  },
+  "approval": {"status": "draft", "approved_by": [], "approved_at": null, "evidence": []},
+  "release": {"targets": ["in_app_webview"], "release_owner": "PENDING_USER_CONFIRMATION", "rollback_target": "Previous local public/index.html and public/airvana-v4.css", "kill_switch": {"owner": "Airvana local demo", "mechanism": "Remove mini-game definitions or restore the previous local build"}},
+  "metadata": {"created_at": "2026-08-13T15:30:00+08:00", "updated_at": "2026-08-13T15:30:00+08:00", "source_brief": "docs/playable-demos/home-feed-interactions/campaign-brief.yaml", "notes": ["Prototype only", "HK is an explicit local-testing assumption, not launch approval", "Three PlayableConfigs share this draft gallery contract"]}
+}

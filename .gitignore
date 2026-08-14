@@ -7,6 +7,9 @@ data/*.db-*
 .idea/
 coverage/
 android-demo/build/
+ios-demo/build/
+ios-demo/ios-demo/build/
+**/xcuserdata/
 *.apk
 *.aab
 *.idsig

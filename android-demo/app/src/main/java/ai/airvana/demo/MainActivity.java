@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Insets;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ public final class MainActivity extends Activity {
     private static final int FILE_CHOOSER_REQUEST = 2408;
     private WebView webView;
     private LocalAssetServer localServer;
+    private int localServerPort;
     private ValueCallback<Uri[]> fileCallback;
     private int nativeTopInsetPx;
     private int nativeBottomInsetPx;
@@ -45,8 +47,9 @@ public final class MainActivity extends Activity {
         );
 
         try {
-            localServer = new LocalAssetServer(getAssets(), 8082);
+            localServer = new LocalAssetServer(getAssets(), 0);
             localServer.start();
+            localServerPort = localServer.getPort();
         } catch (IOException error) {
             Toast.makeText(this, "无法启动本地演示服务", Toast.LENGTH_LONG).show();
         }
@@ -56,8 +59,22 @@ public final class MainActivity extends Activity {
         webView.setOnApplyWindowInsetsListener(new View.OnApplyWindowInsetsListener() {
             @Override
             public WindowInsets onApplyWindowInsets(View view, WindowInsets insets) {
-                nativeTopInsetPx = insets.getSystemWindowInsetTop();
-                nativeBottomInsetPx = insets.getSystemWindowInsetBottom();
+                int topInset = Math.max(insets.getSystemWindowInsetTop(), insets.getStableInsetTop());
+                int bottomInset = Math.max(insets.getSystemWindowInsetBottom(), insets.getStableInsetBottom());
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                    Insets statusBars = insets.getInsetsIgnoringVisibility(
+                            WindowInsets.Type.statusBars() | WindowInsets.Type.displayCutout());
+                    Insets navigationBars = insets.getInsetsIgnoringVisibility(WindowInsets.Type.navigationBars());
+                    Insets systemGestures = insets.getInsets(
+                            WindowInsets.Type.systemGestures() | WindowInsets.Type.mandatorySystemGestures());
+                    topInset = Math.max(topInset, statusBars.top);
+                    bottomInset = Math.max(bottomInset, Math.max(navigationBars.bottom, systemGestures.bottom));
+                } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    bottomInset = Math.max(bottomInset, insets.getSystemGestureInsets().bottom);
+                    bottomInset = Math.max(bottomInset, insets.getMandatorySystemGestureInsets().bottom);
+                }
+                nativeTopInsetPx = topInset;
+                nativeBottomInsetPx = bottomInset;
                 injectNativeSafeArea();
                 return insets;
             }
@@ -67,6 +84,7 @@ public final class MainActivity extends Activity {
         settings.setDomStorageEnabled(true);
         settings.setDatabaseEnabled(true);
         settings.setMediaPlaybackRequiresUserGesture(false);
+        settings.setCacheMode(WebSettings.LOAD_NO_CACHE);
         settings.setAllowFileAccess(false);
         settings.setAllowContentAccess(true);
         settings.setBuiltInZoomControls(false);
@@ -82,7 +100,7 @@ public final class MainActivity extends Activity {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 Uri uri = request.getUrl();
-                if ("127.0.0.1".equals(uri.getHost()) && uri.getPort() == 8082) {
+                if ("127.0.0.1".equals(uri.getHost()) && uri.getPort() == localServerPort) {
                     return false;
                 }
                 try {
@@ -120,9 +138,14 @@ public final class MainActivity extends Activity {
             }
         });
 
+        webView.clearCache(true);
         setContentView(webView);
         webView.requestApplyInsets();
-        webView.loadUrl("http://127.0.0.1:8082/?native-shell=1");
+        if (localServerPort > 0) {
+            webView.loadUrl("http://127.0.0.1:" + localServerPort + "/?native-shell=1&app-version=14");
+        } else {
+            webView.loadData("<h2>Airvana 本地资源启动失败</h2><p>请完全退出应用后重试。</p>", "text/html; charset=utf-8", "UTF-8");
+        }
     }
 
     private void injectNativeSafeArea() {
@@ -131,7 +154,8 @@ public final class MainActivity extends Activity {
         }
         float density = getResources().getDisplayMetrics().density;
         float topCssPx = density > 0 ? nativeTopInsetPx / density : nativeTopInsetPx;
-        float bottomCssPx = density > 0 ? nativeBottomInsetPx / density : nativeBottomInsetPx;
+        float reportedBottomCssPx = density > 0 ? nativeBottomInsetPx / density : nativeBottomInsetPx;
+        float bottomCssPx = Math.max(48.0f, reportedBottomCssPx);
         String topValue = Float.toString(topCssPx) + "px";
         String bottomValue = Float.toString(bottomCssPx) + "px";
         String script = "(function(){"

@@ -1,0 +1,108 @@
+brief_version: "2.0.0"
+campaign:
+  campaign_id: "cmp_category_expansion_demo_20260814"
+  working_name: "Airvana 六款深度游戏升级与十一品类原创游戏扩展"
+  brand_legal_entity: "Airvana local prototype - no commercial offer"
+  market_timezone: "Asia/Hong_Kong"
+  target_launch_at: "2026-08-14T12:00:00+08:00"
+  target_end_at: null
+owners:
+  business_owner: "Airvana local demo owner"
+  operations_owner: "Airvana local demo owner"
+  approval_owner: "User approved the recommended local prototype scope on 2026-08-14"
+  kill_switch_owner: "Airvana local demo owner"
+objective:
+  primary: "engagement"
+  primary_success_event: "play_complete"
+  secondary: ["valid_interaction", "replay", "category discovery"]
+  target_value: null
+  target_window: "local depth-play usability verification only"
+  funnel_boundary: "Ends at a local success/failure/replay screen for each of the eleven games; no CTA, wallet, reward, attribution, or settlement."
+audience:
+  included_regions: ["HK", "SG"]
+  excluded_regions: []
+  languages: ["zh-CN"]
+  minimum_age: 18
+  interests: ["short mobile games", "casual games", "interactive content"]
+  lifecycle_stages: ["mixed"]
+  accessibility_requirements: ["44px touch targets", "tap-only operation", "reduced motion", "sound mute control", "non-color-only feedback"]
+  device_network_assumptions: ["portrait mobile", "360px minimum width", "fully offline after Android packaging"]
+channels:
+  distribution: ["Airvana home feed", "Airvana Discover category gallery", "Android in-app WebView"]
+  kol_ids: []
+  landing_context: "Existing Airvana vertical home feed and Discover gallery"
+  attribution_window_days: 0
+brand_assets:
+  source_folder_or_url: "public/assets/game-covers/category-expansion/ and public/assets/deep-games/v2/"
+  logo: []
+  product_images: []
+  colors: ["game-specific restrained palettes", "#FF3B4A", "#FFFFFF"]
+  typography: ["system-ui"]
+  approved_copy: ["ORIGINAL DEMO", "完整试玩", "本地互动 DEMO", "不发放 AIP / AIT 或其他奖励"]
+  prohibited_copy: ["保证奖励", "保证收益", "真实多人在线", "官方商业游戏合作"]
+  audio_video: ["Procedural Web Audio tones generated on-device after first interaction"]
+  authorization_status: "Original generated assets approved for Airvana local DEMO use only"
+gameplay:
+  category_count: 11
+  complete_playable_count: 11
+  preview_only_count: 0
+  complete_playables: ["果园合合塔", "星尘割草", "月光奶茶铺", "微粒竞技场", "星轨牌阵", "晶核防线", "冒险者日志", "成语侦探", "六角前线", "今日造型师", "花园焕新"]
+  deep_upgrade_playables: ["星尘割草", "星轨牌阵", "冒险者日志", "成语侦探", "六角前线", "花园焕新"]
+  preview_only_games: []
+  prohibited_mechanics: ["real-money wagering", "wallet signing", "paid loot boxes", "real leaderboard claims", "unlabeled fake online multiplayer"]
+  target_duration_seconds: "180-300 for six deep upgrades; 30-60 for the other five demos"
+  rounds: "3 progressive stages for deep upgrades; 4-8 rounds for the other five demos"
+  input_modes: ["tap", "drag", "swipe", "keyboard accessibility"]
+  required_states: ["intro", "playing", "paused", "stage_complete", "success", "failure", "retry", "replay", "exit"]
+  tone_theme: "Original editorial mobile-game key art with grounded materials, coherent geometry, readable focal action, and restrained effects"
+  kol_personalization: "None in this platform-local DEMO"
+cta:
+  type: "none"
+  label: ""
+  destination: "NOT_APPLICABLE"
+  display_states: []
+  approval_status: "not_applicable"
+reward:
+  type: "none"
+  value_description: "NOT_APPLICABLE"
+  eligibility: "NOT_APPLICABLE"
+  inventory_cap: null
+  expiry: null
+  fulfillment_owner: "NOT_APPLICABLE"
+  material_terms: "No reward is offered. Scores and best scores remain local."
+compliance_privacy:
+  legal_entity: "Airvana local prototype - no commercial offer"
+  regulated_activity: "none"
+  prohibited_claims: ["guaranteed reward", "guaranteed return", "official commercial-game partnership", "real online multiplayer"]
+  required_disclosures: ["LOCAL DEMO - no reward, wallet, settlement, or verified commercial conversion", "IO game uses local bots and is not live multiplayer"]
+  consent_requirements: ["No network analytics in this local DEMO"]
+  data_collected: ["device-local score", "device-local best score", "device-local mute preference"]
+  data_retention: "Device local storage until app data is cleared"
+  manual_review_required: true
+  approval_evidence: "User confirmed the recommended prototype scope in this task"
+measurement:
+  primary_kpi: "local completion and replay rate across the six depth-upgraded games, while preserving completion across all eleven DEMOS"
+  required_events: ["impression", "play_start", "valid_interaction", "level_complete", "play_complete", "play_fail", "replay", "error"]
+  attribution_model: "none"
+  dimensions: ["playable_id", "category", "round", "score", "device_class"]
+  exclusion_rules: ["all local demo traffic excluded from commercial reporting and settlement"]
+  reporting_cadence: "manual QA only"
+commercial_delivery:
+  build_budget: null
+  media_budget: null
+  reward_budget: 0
+  kol_settlement_budget: 0
+  supported_targets: ["web_h5", "in_app_webview"]
+  hosting_owner: "local device"
+  release_owner: "Airvana local demo owner"
+  rollback_target: "Airvana-v1.0.12-debug.apk and the previous verified local web bundle"
+assumptions:
+  - "Each of the eleven top-level categories receives one original game concept."
+  - "The IO experience uses deterministic local bots, not a real-time network service."
+  - "Official App Store pages are composition and gameplay references only; no third-party screenshot, logo, character, UI, name, or copy is used as an asset."
+  - "The six depth upgrades use versioned generated gameplay scenes plus local Canvas 2D mechanics, procedural audio, deterministic local state, and no backend."
+open_questions: []
+evidence_sources:
+  - "Official Apple App Store product pages listed in reference-research.md."
+  - "Original image prompts, generated output paths, and checksums recorded in the asset manifest."
+  - "Automated tests and 360/390/430 mobile viewport browser checks."

@@ -62,6 +62,10 @@ final class LocalAssetServer {
         workers.shutdownNow();
     }
 
+    int getPort() {
+        return serverSocket != null ? serverSocket.getLocalPort() : port;
+    }
+
     private void handle(Socket socket) {
         try (Socket client = socket;
              BufferedReader reader = new BufferedReader(new InputStreamReader(client.getInputStream(), StandardCharsets.UTF_8));
@@ -129,7 +133,9 @@ final class LocalAssetServer {
     private static void writeHeaders(OutputStream output, int status, String reason, String type) throws IOException {
         String headers = "HTTP/1.1 " + status + " " + reason + "\r\n"
                 + "Content-Type: " + type + "\r\n"
-                + "Cache-Control: no-cache\r\n"
+                + "Cache-Control: no-store, max-age=0\r\n"
+                + "Pragma: no-cache\r\n"
+                + "Expires: 0\r\n"
                 + "Connection: close\r\n\r\n";
         output.write(headers.getBytes(StandardCharsets.US_ASCII));
     }
