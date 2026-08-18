@@ -60,7 +60,7 @@ test('frontend-only phases expose truthful evidence, progressive creation and a 
 test('visible divider lines use the shared 0.7px thickness without changing component borders', () => {
   assert.match(mobileCss, /--divider-height:\s*0\.7px;/);
   assert.match(css, /--divider-height:\s*\.7px;/);
-  assert.match(mobileEntry, /airvana-v4\.css\?v=5\.5\.79/);
+  assert.match(mobileEntry, /airvana-v4\.css\?v=5\.5\.80/);
   assert.doesNotMatch(mobileEntry, /border-(?:top|bottom):\s*1px\s+solid/);
   assert.doesNotMatch(mobileCss, /border-(?:top|bottom):\s*1px\s+solid/);
   assert.doesNotMatch(css, /border-(?:top|bottom):\s*1px\s+solid/);
@@ -607,7 +607,7 @@ test('My screen follows a Douyin-inspired profile layout with ordered shortcuts 
   assert.match(mobileEntry, /hasEditAction:effectiveMeTab==='drafts'\|\|effectiveMeTab==='history'/);
   assert.match(mobileEntry, /editAria:effectiveMeTab==='history'\?'管理 '\+item\.game\+' 的体验记录':'编辑草稿 '\+item\.game/);
   assert.match(mobileCss, /\.me-content-card__edit \{[^}]*width:40px;[^}]*height:40px;/);
-  assert.match(mobileCss, /\.me-content-card__edit::before \{[^}]*width:28px;[^}]*height:28px;/);
+  assert.doesNotMatch(mobileCss, /\.me-content-card__edit::before/);
   assert.match(mobileCss, /\.me-content-card__more \{[^}]*color:#fff;[^}]*font-size:12px;/);
   assert.match(mobileEntry, /profileLikeCount:fmt\(profileLikeSource\.reduce/);
   assert.match(mobileEntry, /profileFollowerCount:fmt\(profileFollowerOwners\.length\)/);
@@ -863,7 +863,7 @@ test('creator center closes the governed Brief-to-settlement loop without claimi
   assert.match(mobileEntry, /campaignSettlementBasis:'【待人工录入】'/);
   assert.match(mobileCss, /\.creator-center-page\s*\{/);
   assert.match(mobileCss, /\.creator-center-tabs\s*\{/);
-  assert.match(mobileEntry, /airvana-v4\.css\?v=5\.5\.79/);
+  assert.match(mobileEntry, /airvana-v4\.css\?v=5\.5\.80/);
   assert.match(mobileEntry, /class="creator-center-tab \{\{ tab\.className \}\}"[^>]*><span>\{\{ tab\.label \}\}<\/span><\/div>/);
   assert.doesNotMatch(mobileEntry, /<em>\{\{ tab\.meta \}\}<\/em>/);
   assert.match(mobileCss, /\.creator-center-tab\.is-active\s*\{\s*color:\s*var\(--creator-ink\);\s*\}/);
@@ -1601,7 +1601,7 @@ test('prompt-first composer closes inspiration, asset, goal and preflight loops 
   assert.doesNotMatch(mobileCss, /\.composer-sheet-dialog\s*\{[^}]*max-height:\s*calc\(100dvh/);
   assert.match(mobileCss, /\.inspiration-mode-option\s*\{[\s\S]*?min-height:\s*44px/);
   assert.match(mobileCss, /@media \(max-width: 360px\)/);
-  assert.match(mobileEntry, /airvana-v4\.css\?v=5\.5\.79/);
+  assert.match(mobileEntry, /airvana-v4\.css\?v=5\.5\.80/);
   assert.match(mobileEntry, /indexedDB\.open\('airvana\.local-composer-assets\.v1',1\)/);
   assert.match(mobileEntry, /composerAssetManifest\(assets\)/);
   assert.doesNotMatch(mobileEntry, /素材授权待确认|授权状态默认为待确认|授权状态已重置为待确认|切换授权|深度模式必须全部确认授权|pending-assets|blocked-assets/);

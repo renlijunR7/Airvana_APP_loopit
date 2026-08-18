@@ -3648,10 +3648,9 @@ html[data-airvana-theme="dark"] body {
 .me-content-card__actions { display:flex; margin-left:auto; align-items:center; justify-content:flex-end; gap:2px; }
 .me-content-card__status { border-radius:999px; padding:3px 5px; background:rgba(0,0,0,.48); font-size:7px; font-weight:800; white-space:nowrap; }
 .me-content-card__edit { position:relative; z-index:3; display:flex; width:40px; height:40px; margin:-8px -8px -8px 0; align-items:center; justify-content:center; border:0; background:transparent; color:#fff; cursor:pointer; pointer-events:auto; }
-.me-content-card__edit::before { position:absolute; width:28px; height:28px; border:1px solid rgba(255,255,255,.24); border-radius:50%; background:rgba(0,0,0,.34); box-shadow:0 2px 7px rgba(0,0,0,.16); backdrop-filter:blur(4px); content:""; }
 .me-content-card__more { position:relative; z-index:1; display:block; margin-top:-5px; color:#fff; font-size:12px; font-weight:950; letter-spacing:1px; line-height:1; text-shadow:0 1px 2px rgba(0,0,0,.42); }
 .me-content-card__edit:focus-visible { outline:3px solid rgba(255,59,74,.72); outline-offset:-3px; border-radius:50%; }
-.me-content-card__edit:active::before { transform:scale(.94); background:rgba(0,0,0,.48); }
+.me-content-card__edit:active .me-content-card__more { transform:scale(.92); opacity:.76; }
 .me-content-card__copy { position:relative; z-index:2; text-shadow:0 1px 4px rgba(0,0,0,.55); pointer-events:none; }
 .profile-subscription-icon { display:flex; width:38px; height:38px; flex:none; align-items:center; justify-content:center; border:1px solid #ffd9dd; border-radius:12px; background:#fff1f2; color:#ff3b4a; }
 .profile-subscription-copy { min-width:0; flex:1; }
