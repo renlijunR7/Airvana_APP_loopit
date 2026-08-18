@@ -1,8 +1,10 @@
 package ai.airvana.demo;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Insets;
 import android.net.Uri;
@@ -12,6 +14,7 @@ import android.provider.Settings;
 import android.view.View;
 import android.view.WindowInsets;
 import android.webkit.ValueCallback;
+import android.webkit.PermissionRequest;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
@@ -23,10 +26,12 @@ import java.io.IOException;
 
 public final class MainActivity extends Activity {
     private static final int FILE_CHOOSER_REQUEST = 2408;
+    private static final int MICROPHONE_PERMISSION_REQUEST = 2409;
     private WebView webView;
     private LocalAssetServer localServer;
     private int localServerPort;
     private ValueCallback<Uri[]> fileCallback;
+    private PermissionRequest pendingPermissionRequest;
     private int nativeTopInsetPx;
     private int nativeBottomInsetPx;
 
@@ -114,6 +119,45 @@ public final class MainActivity extends Activity {
 
         webView.setWebChromeClient(new WebChromeClient() {
             @Override
+            public void onPermissionRequest(PermissionRequest request) {
+                runOnUiThread(() -> {
+                    Uri origin = request.getOrigin();
+                    boolean trustedLocalOrigin = origin != null
+                        && "127.0.0.1".equals(origin.getHost())
+                        && origin.getPort() == localServerPort;
+                    boolean requestsAudioOnly = false;
+                    for (String resource : request.getResources()) {
+                        if (PermissionRequest.RESOURCE_AUDIO_CAPTURE.equals(resource)) {
+                            requestsAudioOnly = true;
+                        } else {
+                            requestsAudioOnly = false;
+                            break;
+                        }
+                    }
+                    if (!trustedLocalOrigin || !requestsAudioOnly) {
+                        request.deny();
+                        return;
+                    }
+                    if (checkSelfPermission(Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED) {
+                        request.grant(new String[]{PermissionRequest.RESOURCE_AUDIO_CAPTURE});
+                        return;
+                    }
+                    if (pendingPermissionRequest != null) {
+                        pendingPermissionRequest.deny();
+                    }
+                    pendingPermissionRequest = request;
+                    requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO}, MICROPHONE_PERMISSION_REQUEST);
+                });
+            }
+
+            @Override
+            public void onPermissionRequestCanceled(PermissionRequest request) {
+                if (pendingPermissionRequest == request) {
+                    pendingPermissionRequest = null;
+                }
+            }
+
+            @Override
             public boolean onShowFileChooser(WebView view, ValueCallback<Uri[]> callback, FileChooserParams params) {
                 if (fileCallback != null) {
                     fileCallback.onReceiveValue(null);
@@ -142,10 +186,25 @@ public final class MainActivity extends Activity {
         setContentView(webView);
         webView.requestApplyInsets();
         if (localServerPort > 0) {
-            webView.loadUrl("http://127.0.0.1:" + localServerPort + "/?native-shell=1&app-version=14");
+            webView.loadUrl("http://127.0.0.1:" + localServerPort + "/?native-shell=1&app-version=18");
         } else {
             webView.loadData("<h2>Airvana 本地资源启动失败</h2><p>请完全退出应用后重试。</p>", "text/html; charset=utf-8", "UTF-8");
         }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode != MICROPHONE_PERMISSION_REQUEST || pendingPermissionRequest == null) {
+            return;
+        }
+        boolean granted = grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED;
+        if (granted) {
+            pendingPermissionRequest.grant(new String[]{PermissionRequest.RESOURCE_AUDIO_CAPTURE});
+        } else {
+            pendingPermissionRequest.deny();
+        }
+        pendingPermissionRequest = null;
     }
 
     private void injectNativeSafeArea() {
@@ -191,6 +250,10 @@ public final class MainActivity extends Activity {
 
     @Override
     protected void onDestroy() {
+        if (pendingPermissionRequest != null) {
+            pendingPermissionRequest.deny();
+            pendingPermissionRequest = null;
+        }
         if (fileCallback != null) {
             fileCallback.onReceiveValue(null);
             fileCallback = null;

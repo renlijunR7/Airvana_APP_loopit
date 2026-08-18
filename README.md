@@ -18,6 +18,14 @@ npm test
 npm run verify
 ```
 
+## Project source-of-truth documents
+
+- [Project memory](PROJECT_MEMORY.md)
+- [Airvana economy model v1.0](docs/Airvana-经济模型-v1.0.md)
+- [Airvana full-project structured requirements v1.0](docs/Airvana-全项目结构化需求清单-v1.0.md)
+
+The economy model document is the implemented local full-stack V1 baseline. Legacy AIT withdrawal endpoints are retired with HTTP 410; AIT is recorded as a Contract-bound entitlement and any cash or USDT payment is a separate reviewed settlement record.
+
 ## Product logic
 
 - Wallet sign-in uses a 10-minute one-time challenge, EVM `personal_sign`, server-side signature recovery, a one-use nonce, and an HttpOnly session cookie.
@@ -31,12 +39,12 @@ npm run verify
 - Creator participation moves through application or brand invitation. Invitations require creator acceptance; applications require brand approval before delivery eligibility.
 - Campaign tracking links record `impression → playable_start → playable_complete` only when the referenced creator owns the content and has active Campaign eligibility.
 - Deliverables move through `submitted → changes_requested → resubmitted → approved/rejected`; direct artifact preview, content type/version/moderation/build evidence, Campaign requirement checks, and review history are visible before approval.
-- AIT settlements move through `approved → payment_pending → platform_approved → issued`. Brand confirmation and platform approval are separate, with an approval timeline, budget reconciliation, filters, and CSV export.
+- Legacy settlement issuance is retired for new economic events. AIT now moves through `pending → available/frozen/reversed → settlement_pending → settled/expired`, while benefit claims and payment settlements have separate review and evidence records.
 - Content reporting, takedown, risk resolution, point adjustment, point freeze/restore/revoke, filtered/deep-linked notifications, Agent run records, session revocation, account export, cancellable deletion requests, and agreement acceptance are available in the product.
 - Mobile workspaces expose four primary actions plus an accessible More sheet; dialogs support Escape, focus trapping, and focus restoration.
 - A labelled, idempotent local demo workflow is available for product-state acceptance testing and is never presented as a real commercial Campaign.
 - AIP can be consumed for a concrete platform utility: a 20 AIP content boost that raises a published item in discovery for 24 hours. The debit is a server-side ledger event and cannot be detached from its benefit.
-- AIP remains a non-withdrawable internal behavior-point ledger. AIT is a separate activity-rights Token ledger: a verified creator can bind an EVM wallet and submit an AIT withdrawal through `submitted → approved → paid`, with balance reservation, compliance review, an audit trail, and a required on-chain transaction hash. AIT does not promise cash, USDT, investment returns, or a fixed exchange value. The current application records and governs the complete withdrawal lifecycle; production chain broadcasting and custody/provider integration remain deployment infrastructure work.
+- AIP remains a non-withdrawable internal behavior-point ledger. AIT is a separate, centralized Campaign entitlement ledger and is not freely transferable or tradable. AIT cannot be withdrawn directly. When an approved Contract permits a cash or USDT settlement, the application creates a separate payment record with human approval and payment/receipt evidence; no global AIT exchange rate exists.
 
 ## Deferred final phase: production infrastructure
 

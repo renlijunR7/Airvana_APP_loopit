@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 1280" role="img" aria-labelledby="title desc">
+ <title id="title">Nova Runner game cover</title>
+ <desc id="desc">Airvana original cover built from the same canonical master used inside the playable.</desc>
+ <metadata>Airvana character-consistency-v1; canonical-master:/assets/characters/v1/chr_nova_runner/master.svg; no third-party IP.</metadata>
+ <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#745CF4"/><stop offset=".48" stop-color="#121522"/><stop offset="1" stop-color="#07090F"/></linearGradient><radialGradient id="glow"><stop stop-color="#22C7D6" stop-opacity=".65"/><stop offset="1" stop-color="#22C7D6" stop-opacity="0"/></radialGradient><linearGradient id="shade" x1="0" y1="0" x2="0" y2="1"><stop offset=".62" stop-color="#05070B" stop-opacity="0"/><stop offset="1" stop-color="#05070B" stop-opacity=".9"/></linearGradient></defs>
+ <defs>
+    <linearGradient id="primary" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#745CF4"/><stop offset="1" stop-color="#121522"/></linearGradient>
+    <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#F7F0D7"/><stop offset=".46" stop-color="#22C7D6"/><stop offset="1" stop-color="#1B2530"/></linearGradient>
+    <linearGradient id="skin" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#8F573F"/><stop offset="1" stop-color="#15182A" stop-opacity=".38"/></linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%"><feDropShadow dx="0" dy="12" stdDeviation="10" flood-color="#06080D" flood-opacity=".34"/></filter>
+  </defs>
+ <rect width="720" height="1280" fill="url(#bg)"/><circle cx="360" cy="440" r="360" fill="url(#glow)"/><path d="M95 245 625 245 718 1040H2Z" fill="#111827" stroke="#22C7D6" stroke-width="6"/><path d="m260 245-90 795m290-795 91 795" stroke="#FFFFFF" stroke-opacity=".16" stroke-width="8" stroke-dasharray="25 25"/><path d="m70 720 86-30 42 84-91 31Zm484-146 83-28 38 77-86 29Z" fill="#745CF4" stroke="#F4C35A" stroke-width="7"/>
+ <g data-canonical-master="/assets/characters/v1/chr_nova_runner/master.svg" transform="translate(112 220) scale(1.55)"><g id="character" filter="url(#shadow)">
+  <path d="M95 120Q102 45 160 32q58 13 65 88l-24 30H119Z" fill="#15182A"/>
+  <ellipse cx="160" cy="116" rx="48" ry="55" fill="url(#skin)"/>
+  <path d="M109 113q51-31 102 0l-8 29q-43 24-86 0Z" fill="#121522" stroke="#22C7D6" stroke-width="7"/>
+  <path d="M125 123h70" stroke="#22C7D6" stroke-width="11" stroke-linecap="round"/><circle cx="180" cy="123" r="6" fill="#E8FFFF"/>
+  <path d="M117 164q43 25 86 0l27 113-70 29-70-29Z" fill="url(#primary)" stroke="#22C7D6" stroke-width="5"/>
+  <path d="M103 183 61 255l34 18 46-61M217 181l47 63-30 22-52-57" fill="none" stroke="#8F573F" stroke-width="25" stroke-linecap="round"/>
+  <path d="M94 278 75 375M201 282l44 80" stroke="#121522" stroke-width="34" stroke-linecap="round"/>
+  <path d="m53 367 59-7-4 25-60 8ZM218 356l58 25-14 22-58-28Z" fill="#22C7D6" stroke="#EEF9FF" stroke-width="4"/>
+  <path d="M101 254h118l-7 27H108Z" fill="#F4C35A"/><circle cx="160" cy="267" r="11" fill="#FFF5B7"/>
+  <path d="m100 61-25 70 31 13 16-74ZM220 62l24 70-31 13-15-73Z" fill="#745CF4"/>
+ </g></g>
+ <path d="M0 810q180-65 360 0t360 0v470H0Z" fill="url(#shade)"/>
+ <g fill="none" stroke="#FFFFFF" stroke-opacity=".14"><path d="M55 96h610"/><path d="M55 1120h610"/></g>
+</svg>

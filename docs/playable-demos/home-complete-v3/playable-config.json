@@ -1,0 +1,315 @@
+{
+  "schema_version": "1.0.0",
+  "playable_id": "plb_home_complete_games_collection",
+  "campaign_id": "cmp_home_complete_games_v3_20260815",
+  "contract_version": "3.2.0",
+  "version": "3.2.0",
+  "status": "draft",
+  "template_id": "tpl_home_complete_games_v3",
+  "locales": {
+    "default": "zh-CN",
+    "supported": [
+      "zh-CN"
+    ]
+  },
+  "presentation": {
+    "title": "Airvana Home Complete Games v3 - 38 Original Playables",
+    "tone": "polished, tactile, coherent, non-generative, responsive, and clearly labeled as a local demo",
+    "theme": "Original code-native vector cover system and deterministic Canvas gameplay",
+    "logo_asset_id": "asset_code_art_covers_v3",
+    "color_tokens": {
+      "primary": "#FF3B4A",
+      "secondary": "#80D7C2",
+      "background": "#101216",
+      "text": "#FFFFFF"
+    },
+    "copy_pack": {
+      "intro_headline": "38 款原创游戏 · 全部可玩可互动",
+      "intro_body": "Every home game includes a three-stage loop, live interaction, scoring, pause, success/failure, and replay. All game art is code-native.",
+      "start_button": "开始试玩",
+      "success_title": "挑战完成",
+      "failure_title": "再试一次",
+      "retry_button": "再玩一次",
+      "cta_label": "",
+      "share_copy": "LOCAL DEMO only",
+      "reward_eligibility": "No reward is offered.",
+      "reward_terms": "NOT_APPLICABLE"
+    }
+  },
+  "gameplay": {
+    "mechanic": "other",
+    "core_loop": "Choose a home game, learn its distinct mechanic, complete three progressively harder stages with live feedback, reach success or failure, and replay for a better local score.",
+    "rounds": 3,
+    "target_duration_seconds": 180,
+    "difficulty": {
+      "minimum": 2,
+      "maximum": 8,
+      "default": 4
+    },
+    "input_modes": [
+      "tap",
+      "drag",
+      "swipe",
+      "keyboard",
+      "motion",
+      "microphone"
+    ],
+    "state_transitions": [
+      {
+        "from": "intro",
+        "event": "start",
+        "to": "playing",
+        "guard": "selected content ID is governed by campaign cmp_home_complete_games_v3_20260815"
+      },
+      {
+        "from": "playing",
+        "event": "pause",
+        "to": "paused",
+        "guard": null
+      },
+      {
+        "from": "paused",
+        "event": "resume",
+        "to": "playing",
+        "guard": null
+      },
+      {
+        "from": "playing",
+        "event": "stage_complete",
+        "to": "playing",
+        "guard": "stage is below three"
+      },
+      {
+        "from": "playing",
+        "event": "complete_success",
+        "to": "success",
+        "guard": "third-stage objective is complete"
+      },
+      {
+        "from": "playing",
+        "event": "complete_failure",
+        "to": "failure",
+        "guard": "score below threshold"
+      },
+      {
+        "from": "failure",
+        "event": "retry",
+        "to": "playing",
+        "guard": null
+      },
+      {
+        "from": "success",
+        "event": "replay",
+        "to": "playing",
+        "guard": null
+      },
+      {
+        "from": "success",
+        "event": "exit",
+        "to": "exit",
+        "guard": null
+      }
+    ],
+    "scoring": {
+      "enabled": true,
+      "rule": "Each game applies a mechanic-specific local score for correct actions, efficiency, survival, objectives, combos, and remaining resources; only local best scores are retained.",
+      "minimum": 0,
+      "maximum": 10000
+    }
+  },
+  "screens": [
+    {
+      "screen_id": "screen_intro",
+      "state": "intro",
+      "copy_keys": [
+        "intro_headline",
+        "intro_body",
+        "start_button"
+      ],
+      "asset_ids": [
+        "asset_code_art_covers_v3"
+      ],
+      "actions": [
+        "start",
+        "toggle_sound",
+        "exit"
+      ]
+    },
+    {
+      "screen_id": "screen_playing",
+      "state": "playing",
+      "copy_keys": [],
+      "asset_ids": [
+        "asset_code_art_covers_v3",
+        "asset_complete_games_runtime_v3",
+        "asset_sensor_interactions_runtime_v1",
+        "asset_deep_games_runtime_v2"
+      ],
+      "actions": [
+        "interact",
+        "pause",
+        "resume",
+        "toggle_sound",
+        "exit"
+      ]
+    },
+    {
+      "screen_id": "screen_success",
+      "state": "success",
+      "copy_keys": [
+        "success_title",
+        "retry_button"
+      ],
+      "asset_ids": [
+        "asset_code_art_covers_v3"
+      ],
+      "actions": [
+        "replay",
+        "exit"
+      ]
+    },
+    {
+      "screen_id": "screen_failure",
+      "state": "failure",
+      "copy_keys": [
+        "failure_title",
+        "retry_button"
+      ],
+      "asset_ids": [
+        "asset_code_art_covers_v3"
+      ],
+      "actions": [
+        "retry",
+        "exit"
+      ]
+    }
+  ],
+  "cta": {
+    "cta_id": "cta_none",
+    "type": "none",
+    "label_key": "cta_label",
+    "destination_id": "NOT_APPLICABLE",
+    "allowed_states": [],
+    "open_mode": "same_context"
+  },
+  "reward_presentation": {
+    "reward_id": "reward_none",
+    "type": "none",
+    "eligibility_copy_key": "reward_eligibility",
+    "terms_copy_key": "reward_terms",
+    "claim_action": "NOT_APPLICABLE"
+  },
+  "field_authority": {
+    "locked_fields": [
+      "cta",
+      "reward_presentation",
+      "constraints",
+      "build.environment",
+      "telemetry",
+      "gameplay.scoring"
+    ],
+    "editable_fields": [
+      "presentation.theme"
+    ],
+    "agentic_fields": [],
+    "runtime_fields": [
+      "runtime.session_id",
+      "runtime.locale",
+      "runtime.device_class",
+      "runtime.experiment_assignment"
+    ]
+  },
+  "runtime_policy": {
+    "segmentation_inputs": [
+      "locale",
+      "device_class",
+      "approved_region_bucket"
+    ],
+    "agentic_bounds": [],
+    "experiment_id": null,
+    "variant_id": null,
+    "fallback_behavior": "Use default approved copy, visuals, and fixed difficulty."
+  },
+  "telemetry": {
+    "required_events": [
+      "impression",
+      "play_start",
+      "valid_interaction",
+      "level_complete",
+      "play_complete",
+      "play_fail",
+      "replay",
+      "error"
+    ],
+    "common_properties": [
+      "event_id",
+      "event_time",
+      "campaign_id",
+      "contract_version",
+      "playable_id",
+      "playable_config_version",
+      "build_id",
+      "creative_id",
+      "channel_id",
+      "kol_id",
+      "link_id",
+      "session_id",
+      "locale",
+      "region",
+      "device_class",
+      "consent_state"
+    ],
+    "deduplication_strategy": "Generate a unique event_id per transition and ignore retries with the same event_id.",
+    "consent_behavior": "Keep events in the device-local demo log only; do not send network analytics."
+  },
+  "build": {
+    "target": "in_app_webview",
+    "entry": "public/index.html",
+    "asset_base": "public/assets/",
+    "minimum_viewport_width": 360,
+    "supported_orientations": [
+      "portrait"
+    ],
+    "dependency_lock": "package-lock.json and packaged Android assets",
+    "environment": "preview"
+  },
+  "constraints": {
+    "approved_asset_ids": [
+      "asset_code_art_covers_v3",
+      "asset_complete_games_runtime_v3",
+      "asset_sensor_interactions_runtime_v1",
+      "asset_deep_games_runtime_v2"
+    ],
+    "prohibited_phrases": [
+      "guaranteed reward",
+      "guaranteed return",
+      "official commercial-game partnership",
+      "real online multiplayer"
+    ],
+    "required_disclosures": [
+      "LOCAL DEMO - no reward, wallet, settlement, verified commercial conversion, or live multiplayer",
+      "Microbe Arena opponents are deterministic local bots"
+    ],
+    "privacy_prohibited_fields": [
+      "seed_phrase",
+      "private_key",
+      "raw_kyc_document",
+      "password",
+      "raw_microphone_audio",
+      "continuous_motion_samples"
+    ],
+    "manual_review_required": true
+  },
+  "metadata": {
+    "created_at": "2026-08-15T16:00:00+08:00",
+    "updated_at": "2026-08-17T12:22:53+08:00",
+    "created_by": "airvana-interactive-marketing-game local DEMO workflow",
+    "notes": [
+      "Playable content IDs: 1, 2, 5, 6, 9, 10, 12, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44.",
+      "All 38 game covers are SVG files generated from version-controlled code.",
+      "No AI raster or third-party game artwork is referenced by the v3 home runtime.",
+      "Sensor v1.1 maps lane tilt to Pixel Quest and Neon Dash, steering tilt to City Rush and Nova Drift, two-axis tilt to Rift Strike and Void Squadron, shake to Red Cup Shuffle and Star Cups, and local blow detection to Magic Choir; every mapping retains touch fallback.",
+      "Rewards, wallets, real multiplayer, commercial attribution, and settlement are disabled."
+    ]
+  }
+}

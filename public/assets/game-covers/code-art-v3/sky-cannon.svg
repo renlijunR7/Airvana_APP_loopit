@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1600" role="img" aria-labelledby="title description">
+  <title id="title">sky-cannon original cover art</title>
+  <desc id="description">Airvana code-native vector game artwork. No generative image or third-party asset.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#191410"/><stop offset=".58" stop-color="#D76543" stop-opacity=".42"/><stop offset="1" stop-color="#070A0D"/></linearGradient>
+    <radialGradient id="light"><stop stop-color="#5DA2C8" stop-opacity=".48"/><stop offset="1" stop-color="#5DA2C8" stop-opacity="0"/></radialGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%"><feDropShadow dx="0" dy="24" stdDeviation="24" flood-color="#05070A" flood-opacity=".44"/></filter>
+    <filter id="glow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="8" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="900" height="1600" fill="url(#background)"/>
+  <circle cx="485" cy="330" r="380" fill="url(#light)"/>
+  <path d="M0 220 Q180 130 350 220 T900 180" fill="none" stroke="#FFFFFF" stroke-opacity=".08" stroke-width="3"/>
+  
+    <path d="M0 980 Q190 850 360 930 T900 900 V1600 H0Z" fill="#D76543" opacity=".3"/>
+    <path d="M90 1330 C260 1070 500 1150 820 820" fill="none" stroke="#E9DCC3" stroke-opacity=".72" stroke-width="76"/>
+    <g filter="url(#shadow)"><rect x="108" y="850" width="124" height="210" rx="18" fill="#252A2E"/><path d="M96 870 L170 802 L244 870Z" fill="#D76543"/><circle cx="170" cy="935" r="25" fill="#5DA2C8"/></g><g filter="url(#shadow)"><rect x="368" y="760" width="124" height="210" rx="18" fill="#252A2E"/><path d="M356 780 L430 712 L504 780Z" fill="#5DA2C8"/><circle cx="430" cy="845" r="25" fill="#5DA2C8"/></g><g filter="url(#shadow)"><rect x="628" y="670" width="124" height="210" rx="18" fill="#252A2E"/><path d="M616 690 L690 622 L764 690Z" fill="#D76543"/><circle cx="690" cy="755" r="25" fill="#5DA2C8"/></g>
+    <circle cx="720" cy="690" r="100" fill="#5DA2C8" opacity=".85" filter="url(#glow)"/>
+  <rect x="34" y="34" width="832" height="1532" rx="64" fill="none" stroke="#FFFFFF" stroke-opacity=".12" stroke-width="4"/>
+</svg>

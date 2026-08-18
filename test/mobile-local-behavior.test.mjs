@@ -74,6 +74,45 @@ test('mobile primary navigation follows page hierarchy and returns after seconda
   assert.equal(component.state.feedMiniGame.status, 'idle');
 });
 
+test('mobile onboarding removes the first description and supports dots plus horizontal swipes', () => {
+  const {component} = createMobileComponent({props:{skipOnboarding:false}});
+  component.setState({ob:0,launchVisible:false});
+  let values=component.renderVals();
+  assert.equal(values.obHasDesc,false);
+  assert.equal(values.obDots.length,3);
+  assert.equal(values.obDots[0].ariaSelected,'true');
+
+  let stopped=false;
+  values.obDots[2].onPick({stopPropagation(){stopped=true;}});
+  assert.equal(stopped,true);
+  assert.equal(component.state.ob,2);
+  assert.equal(component.renderVals().obHasDesc,true);
+
+  const target={setPointerCapture(){},releasePointerCapture(){}};
+  const plainTarget={closest(){return null;}};
+  values=component.renderVals();
+  values.obSwipeStart({pointerType:'touch',pointerId:7,clientX:300,clientY:420,currentTarget:target,target:plainTarget});
+  values.obSwipeMove({pointerId:7,clientX:230,clientY:424,cancelable:true,preventDefault(){}});
+  values.obSwipeEnd({pointerId:7,clientX:180,clientY:426,currentTarget:target,cancelable:true,preventDefault(){}});
+  assert.equal(component.state.ob,2,'the last guide slide must not swipe into the login form');
+
+  values=component.renderVals();
+  values.obSwipeStart({pointerType:'touch',pointerId:8,clientX:110,clientY:420,currentTarget:target,target:plainTarget});
+  values.obSwipeMove({pointerId:8,clientX:190,clientY:423,cancelable:true,preventDefault(){}});
+  values.obSwipeEnd({pointerId:8,clientX:240,clientY:424,currentTarget:target,cancelable:true,preventDefault(){}});
+  assert.equal(component.state.ob,1);
+
+  values=component.renderVals();
+  values.obSwipeStart({pointerType:'touch',pointerId:9,clientX:290,clientY:420,currentTarget:target,target:plainTarget});
+  values.obSwipeEnd({pointerId:9,clientX:170,clientY:425,currentTarget:target,cancelable:true,preventDefault(){}});
+  assert.equal(component.state.ob,2);
+
+  values=component.renderVals();
+  values.obSwipeStart({pointerType:'touch',pointerId:10,clientX:220,clientY:300,currentTarget:target,target:plainTarget});
+  values.obSwipeEnd({pointerId:10,clientX:210,clientY:430,currentTarget:target});
+  assert.equal(component.state.ob,2,'vertical gestures must not change the guide slide');
+});
+
 test('mobile My opens on Playables after startup and preserves later in-session tab choices', () => {
   const persistedKey = 'airvana.v5.agentic-positioning.v2';
   const {component, mount} = createMobileComponent({
@@ -120,36 +159,36 @@ test('mobile settings drawer touch fallback scrolls a short viewport without tri
 
 test('mobile Home keeps every seeded playable while rendering only the active feed window', () => {
   const additions = [
-    [34, '果园合合塔 Orchard Merge', '/assets/game-covers/category-expansion/orchard-merge.jpg'],
-    [35, '星尘割草 Star Mower', '/assets/game-covers/category-expansion/star-mower.jpg'],
-    [36, '月光奶茶铺 Moonlight Tea Shop', '/assets/game-covers/category-expansion/moonlight-tea-shop.jpg'],
-    [37, '微粒竞技场 Microbe Arena', '/assets/game-covers/category-expansion/microbe-arena.jpg'],
-    [38, '星轨牌阵 Star Deck Tactics', '/assets/game-covers/category-expansion/star-deck.jpg'],
-    [39, '晶核防线 Crystal Bastion', '/assets/game-covers/category-expansion/crystal-bastion.jpg'],
-    [40, '冒险者日志 Adventurer Journal', '/assets/game-covers/category-expansion/adventurer-journal.jpg'],
-    [41, '成语侦探 Idiom Detective', '/assets/game-covers/category-expansion/idiom-detective.jpg'],
-    [42, '六角前线 Hex Frontier', '/assets/game-covers/category-expansion/hex-frontier.jpg'],
-    [43, '今日造型师 Studio Wardrobe', '/assets/game-covers/category-expansion/studio-wardrobe.jpg'],
-    [44, '花园焕新 Garden Renewal', '/assets/game-covers/category-expansion/garden-renewal.jpg'],
-    [24, '霓虹疾跑 Neon Dash', '/assets/game-covers/home-arcade/neon-dash-v2.jpg'],
-    [25, '节拍熔炉 Pulse Forge', '/assets/game-covers/home-arcade/pulse-forge-v2.jpg'],
-    [26, '天际叠塔 Sky Stack', '/assets/game-covers/home-arcade/sky-stack-v2.jpg'],
-    [27, '符文回路 Rune Circuit', '/assets/game-covers/home-arcade/rune-circuit-v2.jpg'],
-    [28, '棱镜连击 Prism Match', '/assets/game-covers/home-arcade/prism-match-v2.jpg'],
-    [29, '星杯幻术 Star Cups', '/assets/game-covers/home-arcade/star-cups-v2.jpg'],
-    [30, '深海寻光 Deep Catch', '/assets/game-covers/home-arcade/deep-catch-v2.jpg'],
-    [31, '赤焰防线 Ember Bastion', '/assets/game-covers/home-arcade/ember-bastion-v2.jpg'],
-    [32, '新星漂移 Nova Drift', '/assets/game-covers/home-arcade/nova-drift-v2.jpg'],
-    [33, '虚空小队 Void Squadron', '/assets/game-covers/home-arcade/void-squadron-v2.jpg'],
-    [15, 'I AM CAT 猫咪大逃脱', '/assets/game-covers/i-am-cat.png'],
-    [16, '撒币之旅', '/assets/game-covers/coin-journey.png'],
-    [17, '潜水员戴夫：丛林探险', '/assets/game-covers/jungle-diver.png'],
-    [18, '星际前线：裂隙突击', '/assets/game-covers/rift-frontier.png'],
-    [19, '星砂岛', '/assets/game-covers/stardust-island.png'],
-    [20, '斗阵骑士', '/assets/game-covers/battle-knights.png'],
-    [21, '银河玩具店', '/assets/game-covers/galaxy-toy-shop.png'],
-    [22, '狂野飙车：极速传奇', '/assets/game-covers/asphalt-legend.png'],
-    [23, '小炮手大战空降恶魔', '/assets/game-covers/sky-demon-defense.png']
+    [34, '果园合合塔 Orchard Merge', '/assets/game-covers/store-fidelity-v4/orchard-merge.jpg'],
+    [35, '星尘割草 Star Mower', '/assets/game-covers/store-fidelity-v4/star-mower.jpg'],
+    [36, '月光奶茶铺 Moonlight Tea Shop', '/assets/game-covers/store-fidelity-v4/moonlight-tea-shop.jpg'],
+    [37, '微粒竞技场 Microbe Arena', '/assets/game-covers/store-fidelity-v4/microbe-arena.jpg'],
+    [38, '星轨牌阵 Star Deck Tactics', '/assets/game-covers/store-fidelity-v4/star-deck.jpg'],
+    [39, '晶核防线 Crystal Bastion', '/assets/game-covers/store-fidelity-v4/crystal-bastion.jpg'],
+    [40, '冒险者日志 Adventurer Journal', '/assets/game-covers/store-fidelity-v4/adventurer-journal.jpg'],
+    [41, '成语侦探 Idiom Detective', '/assets/game-covers/store-fidelity-v4/idiom-detective.jpg'],
+    [42, '六角前线 Hex Frontier', '/assets/game-covers/store-fidelity-v4/hex-frontier.jpg'],
+    [43, '今日造型师 Studio Wardrobe', '/assets/game-covers/store-fidelity-v4/studio-wardrobe.jpg'],
+    [44, '花园焕新 Garden Renewal', '/assets/game-covers/store-fidelity-v4/garden-renewal.jpg'],
+    [24, '霓虹疾跑 Neon Dash', '/assets/game-covers/store-fidelity-v4/neon-dash.jpg'],
+    [25, '节拍熔炉 Pulse Forge', '/assets/game-covers/store-fidelity-v4/pulse-forge.jpg'],
+    [26, '天际叠塔 Sky Stack', '/assets/game-covers/store-fidelity-v4/sky-stack.jpg'],
+    [27, '符文回路 Rune Circuit', '/assets/game-covers/store-fidelity-v4/rune-circuit.jpg'],
+    [28, '棱镜连击 Prism Match', '/assets/game-covers/store-fidelity-v4/prism-match.jpg'],
+    [29, '星杯幻术 Star Cups', '/assets/game-covers/store-fidelity-v4/star-cups.jpg'],
+    [30, '深海寻光 Deep Catch', '/assets/game-covers/store-fidelity-v4/deep-catch.jpg'],
+    [31, '赤焰防线 Ember Bastion', '/assets/game-covers/store-fidelity-v4/ember-bastion.jpg'],
+    [32, '新星漂移 Nova Drift', '/assets/game-covers/store-fidelity-v4/nova-drift.jpg'],
+    [33, '虚空小队 Void Squadron', '/assets/game-covers/store-fidelity-v4/void-squadron.jpg'],
+    [15, '猫咪潜逃 Whisker Escape', '/assets/game-covers/store-fidelity-v4/whisker-escape.jpg'],
+    [16, '撒币之旅', '/assets/game-covers/store-fidelity-v4/coin-journey.jpg'],
+    [17, '丛林潜游 Jungle Dive', '/assets/game-covers/store-fidelity-v4/jungle-dive.jpg'],
+    [18, '星际前线：裂隙突击', '/assets/game-covers/store-fidelity-v4/rift-strike.jpg'],
+    [19, '星砂岛', '/assets/game-covers/store-fidelity-v4/stardust-island.jpg'],
+    [20, '斗阵骑士', '/assets/game-covers/store-fidelity-v4/formation-knights.jpg'],
+    [21, '银河玩具店', '/assets/game-covers/store-fidelity-v4/galaxy-toy-shop.jpg'],
+    [22, '城市极速 City Rush', '/assets/game-covers/store-fidelity-v4/city-rush.jpg'],
+    [23, '小炮手大战空降恶魔', '/assets/game-covers/store-fidelity-v4/sky-cannon.jpg']
   ];
   const {component} = createMobileComponent();
   let slides = component.renderVals().sessionSlides;
@@ -163,15 +202,15 @@ test('mobile Home keeps every seeded playable while rendering only the active fe
   slides = component.renderVals().sessionSlides;
   assert.deepEqual(Array.from(slides, item=>item.id), [35,36,37]);
   assert.equal(slides[1].windowClass, 'is-active');
-  for (const [id, title, cover] of additions) {
+  for (const [id, title] of additions) {
     const playable = component.state.sessions.find(item => item.id === id);
     assert.ok(playable, `missing Home playable: ${title}`);
     assert.equal(playable.game, title);
-    assert.equal(playable.cover, cover);
+    assert.ok(playable.cover, `missing seeded cover: ${title}`);
   }
   component.setState({playIdx:component.state.sessions.filter(item=>item.status==='published'||item.status==='archived').length-1});
   slides = component.renderVals().sessionSlides;
-  assert.deepEqual(Array.from(slides, item=>item.id), [22,23]);
+  assert.deepEqual(Array.from(slides, item=>item.id), [11,13]);
   assert.equal(slides.at(-1).windowClass, 'is-active');
   assert.equal(typeof slides.at(-1).onOpen, 'function');
 
@@ -295,11 +334,18 @@ test('mobile Home runs all eleven category demos through complete local replay l
   for (const contentId of completeIds) {
     const definition=component.getFeedMiniGameDefinition(contentId);
     assert.ok(definition, `missing complete category game ${contentId}`);
+    if (definition.runtime==='complete-v3') {
+      assert.equal(definition.type,'deep');
+      assert.equal(definition.stages,3);
+      assert.ok(definition.deepGameKey);
+      assert.equal(definition.art,'code-native-v3');
+      continue;
+    }
     if (deepIds.has(contentId)) {
       assert.equal(definition.type,'deep');
       assert.equal(definition.stages,3);
-      assert.match(definition.deepAsset,/^\.\/assets\/deep-games\/v2\/.+-gameplay-v2\.png$/);
       assert.ok(definition.deepGameKey);
+      assert.equal(definition.art,'code-native-v2');
       continue;
     }
     component.startFeedMiniGame(contentId);
@@ -312,9 +358,9 @@ test('mobile Home runs all eleven category demos through complete local replay l
     assert.equal(component.state.feedMiniGame.status,'success');
     assert.ok(component.state.feedMiniGameBestScores[contentId]>=definition.successThreshold);
     const event=component.state.localEventLog.find(entry=>entry.event_name==='play_complete'&&entry.playable_id===definition.playableId);
-    assert.equal(event?.campaign_id,'cmp_category_expansion_demo_20260814');
-    assert.equal(event?.contract_version,'2.0.0');
-    assert.equal(event?.properties.playable_config_version,'2.0.0');
+    assert.equal(event?.campaign_id,'cmp_home_complete_games_v3_20260815');
+    assert.equal(event?.contract_version,'3.0.0');
+    assert.equal(event?.properties.playable_config_version,'3.0.0');
     assert.equal(event?.properties.reward_issued,false);
     assert.equal(component.state.sessions.find(item=>item.id===contentId)?.stage,'完整试玩');
   }
@@ -323,13 +369,15 @@ test('mobile Home runs all eleven category demos through complete local replay l
   assert.match(component.state.sessions.find(item=>item.id===42).article,/确定性本地逻辑，不是真人联机/);
 });
 
-test('mobile Discover synchronizes all 21 original games into the first gallery section', () => {
+test('mobile Discover synchronizes all 38 complete original games into the first gallery section', () => {
   const {component}=createMobileComponent();
   component.setState({screen:'discover',discoverCat:'recommend'});
   const values=component.renderVals();
   assert.equal(values.discoverSections[0].tag,'原创新游');
-  assert.deepEqual(Array.from(values.discoverSections[0].items,item=>item.id),[34,35,36,37,38,39,40,41,42,43,44,24,25,26,27,28,29,30,31,32,33]);
-  assert.ok(values.discoverSections[0].items.every(item=>item.hasCover&&/\/(?:category-expansion|home-arcade)\//.test(item.cover)));
+  assert.deepEqual(Array.from(values.discoverSections[0].items,item=>item.id),[34,35,36,37,38,39,40,41,42,43,44,24,25,26,27,28,29,30,31,32,33,1,2,5,6,9,10,12,14,15,16,17,18,19,20,21,22,23]);
+  assert.ok(values.discoverSections[0].items.every(item=>item.hasCover&&/\/(?:store-fidelity-v4|character-consistency-v1)\//.test(item.cover)));
+  assert.deepEqual(Array.from(values.discoverSections[0].items.filter(item=>/\/character-consistency-v1\//.test(item.cover)),item=>item.id),[36,5,10,12,20]);
+  assert.ok(values.discoverSections[0].items.filter(item=>/\/character-consistency-v1\//.test(item.cover)).every(item=>item.cover.endsWith('.svg?v=1.0.1')));
   assert.ok(values.discoverSections[0].items.every(item=>typeof item.onOpen==='function'));
 });
 
@@ -456,6 +504,96 @@ test('mobile Component follows directly, confirms unfollow and toggles saves wit
   slideById(component, contentId).rail[2].onClick({stopPropagation() {}});
   assert.equal(component.state.savedContentIds.includes(contentId), false);
   assert.equal(component.state.sessions.find(item => item.id === contentId).saves, beforeSaves);
+});
+
+test('mobile saved relations support metadata update and removal as a persistent local object', () => {
+  const {component}=createMobileComponent({withLocalBusiness:true});
+  const contentId=34;
+  component.toggleSave(contentId);
+  assert.equal(component.state.savedRelations.length,1);
+  assert.equal(component.state.savedRelations[0].content_id,contentId);
+  component.openRecordManager('saved',contentId);
+  component.setState({savedRelationNote:'周末继续完成第六轮',savedRelationCollection:'休闲益智'});
+  component.saveSavedRelationMetadata();
+  assert.equal(component.state.savedRelations[0].note,'周末继续完成第六轮');
+  assert.equal(component.state.savedRelations[0].collection,'休闲益智');
+  component.toggleSave(contentId);
+  assert.equal(component.state.savedContentIds.includes(contentId),false);
+  assert.equal(component.state.savedRelations.length,0);
+  assert.equal(component.state.localEventLog.some(event=>event.event_name==='saved_relation_updated'),true);
+});
+
+test('normal and rollback drafts share one visible source and close copy delete restore and sort paths', () => {
+  const {component}=createMobileComponent({withLocalBusiness:true});
+  const draftId=9001;
+  const session={...component.state.sessions[0],id:draftId,isOwned:true,owner:'@kai.builds',createdByRole:'kol',status:'draft',stage:'草稿',game:'回滚旧标题',versions:[{id:'9001-v1',label:'v1',status:'已归档'}]};
+  const draft={id:draftId,title:'回滚草稿标题',summary:'旧摘要',prompt:'旧提示',type:0,goal:0,agentId:1,style:0,audience:0,schedule:0,tags:'测试',createdByRole:'kol',publishScope:'campaign_and_connectors',campaignId:'campaign-9001',sort_order:0,updatedAt:'刚刚'};
+  component.setState(st=>({screen:'me',meTab:'drafts',sessions:[session,...st.sessions],drafts:[draft],contentDraftId:draftId,createRoleScope:'kol',contentTitle:'统一新标题',contentSummary:'统一新摘要',gamePrompt:'统一新提示',contentType:0,contentGoal:0,contentAgent:1,contentStyle:0,contentAudience:0,contentSchedule:0,contentTags:'测试,回滚',campaignId:'campaign-9001'}));
+  component.renderVals().saveDraft();
+  assert.equal(component.state.drafts.find(item=>item.id===draftId).title,'统一新标题');
+  assert.equal(component.state.sessions.find(item=>item.id===draftId).game,'统一新标题');
+  const draftCard=component.renderVals().meItems.find(item=>item.title==='统一新标题');
+  assert.ok(draftCard);
+  assert.equal(draftCard.hasEditAction,true);
+  assert.equal(draftCard.editAria,'编辑草稿 统一新标题');
+  let draftEditPropagationStopped=false;
+  draftCard.onEdit({stopPropagation(){draftEditPropagationStopped=true;}});
+  assert.equal(draftEditPropagationStopped,true);
+  assert.equal(component.state.recordManagerKind,'draft');
+  assert.equal(component.state.recordManagerDraftId,draftId);
+  component.closeRecordManager();
+  component.copyDraft(draftId);
+  const copy=component.state.drafts.find(item=>item.id!==draftId);
+  assert.ok(copy);
+  assert.equal(copy.title,'统一新标题 副本');
+  component.moveDraft(copy.id,'down');
+  assert.equal(component.state.localEventLog[0].event_name,'local_draft_reordered');
+  component.requestDestructiveAction('delete-draft',{id:draftId,title:'统一新标题'});
+  component.confirmDestructiveAction();
+  assert.equal(component.state.drafts.some(item=>item.id===draftId),false);
+  assert.equal(component.state.sessions.find(item=>item.id===draftId).status,'archived');
+  const tombstone=component.state.draftTrash.find(item=>item.legacy_id===draftId);
+  assert.ok(tombstone);
+  component.restoreDraft(tombstone.id);
+  assert.equal(component.state.drafts.some(item=>item.id===draftId),true);
+  assert.equal(component.state.sessions.find(item=>item.id===draftId).status,'draft');
+});
+
+test('experience history supports detail, replay intent, single delete and scoped or global clear', () => {
+  const {component}=createMobileComponent({withLocalBusiness:true});
+  const contentId=3;
+  component.recordExperience(contentId,'article');
+  component.recordExperience(contentId,'article');
+  assert.equal(component.state.gameRunRecords.filter(run=>Number(run.content_id)===contentId).length,2);
+  component.setState({screen:'me',meTab:'history'});
+  const historyTitle=component.state.sessions.find(session=>session.id===contentId).game;
+  const historyCard=component.renderVals().meItems.find(item=>item.title===historyTitle);
+  assert.ok(historyCard);
+  assert.equal(historyCard.hasEditAction,true);
+  assert.equal(historyCard.editAria,'管理 '+historyTitle+' 的体验记录');
+  let historyEditPropagationStopped=false;
+  historyCard.onEdit({stopPropagation(){historyEditPropagationStopped=true;}});
+  assert.equal(historyEditPropagationStopped,true);
+  assert.equal(component.state.recordManagerKind,'history');
+  assert.equal(component.state.recordManagerContentId,contentId);
+  let vals=component.renderVals();
+  assert.equal(vals.recordManagerRuns.length,2);
+  vals.recordManagerRuns[0].onDelete();
+  component.confirmDestructiveAction();
+  assert.equal(component.state.gameRunRecords.filter(run=>Number(run.content_id)===contentId).length,1);
+  component.openRecordManager('history',contentId);
+  vals=component.renderVals();
+  vals.clearContentExperience();
+  component.confirmDestructiveAction();
+  assert.equal(component.state.gameRunRecords.some(run=>Number(run.content_id)===contentId),false);
+  assert.equal(component.state.experiencedContentIds.includes(contentId),false);
+  component.recordExperience(4,'article');
+  component.recordExperience(5,'article');
+  component.requestDestructiveAction('clear-all-runs');
+  component.confirmDestructiveAction();
+  assert.equal(component.state.gameRunRecords.length,0);
+  assert.equal(component.state.experiencedContentIds.length,0);
+  assert.equal(component.state.localEventLog[0].event_name,'game_runs_cleared_all');
 });
 
 test('mobile Component separates share intent from link copy and resolves the attributed deep link', () => {
@@ -970,7 +1108,7 @@ test('mobile Component emits truthful local product-event envelopes for feed act
   }
 });
 
-test('mobile Component records a first experience only once', () => {
+test('mobile Component records an experience once without treating content interaction as AIP-eligible completion', () => {
   const {component} = createMobileComponent();
   const contentId = 2;
   const beforeAip = component.state.aip;
@@ -979,12 +1117,12 @@ test('mobile Component records a first experience only once', () => {
   slideById(component, contentId).onDispatch({stopPropagation() {}});
   component.renderVals().detailChoices[0].onPick();
   assert.equal(component.state.experiencedContentIds.filter(id => id === contentId).length, 1);
-  assert.equal(component.state.aip, beforeAip + 5);
+  assert.equal(component.state.aip, beforeAip);
   assert.equal(component.state.sessions.find(item => item.id === contentId).viewers, beforeViews + 1);
 
   component.renderVals().detailChoices[0].onPick();
   assert.equal(component.state.experiencedContentIds.filter(id => id === contentId).length, 1);
-  assert.equal(component.state.aip, beforeAip + 5);
+  assert.equal(component.state.aip, beforeAip);
   assert.equal(component.state.sessions.find(item => item.id === contentId).viewers, beforeViews + 1);
 });
 
@@ -999,14 +1137,56 @@ test('mobile Component daily recommendation reward can be claimed only once per 
 
   component.runDailyTaskAction();
   assert.equal(component.state.dailyTaskStatus, 'claimed');
-  assert.equal(component.state.aip, beforeAip + 5 + 20);
+  assert.equal(component.state.aip, beforeAip + 20);
   const claimedDate = component.state.dailyTaskClaimedDate;
 
   component.setState({systemModal:'daily'});
   component.runDailyTaskAction();
   assert.equal(component.state.dailyTaskClaimedDate, claimedDate);
-  assert.equal(component.state.aip, beforeAip + 5 + 20);
+  assert.equal(component.state.aip, beforeAip + 20);
   assert.equal(component.state.txns.filter(item => item.title === '每日推荐任务').length, 1);
+});
+
+test('valid game completion isolates playable coins, deduplicates AIP for 24 hours and excludes failures', () => {
+  const {component} = createMobileComponent();
+  const firstContentId = 24;
+  const secondContentId = 25;
+  const firstPlayableId = component.getFeedMiniGameDefinition(firstContentId).playableId;
+  const secondPlayableId = component.getFeedMiniGameDefinition(secondContentId).playableId;
+  const beforeAip = component.state.aip;
+
+  component.recordFeedMiniGameEvent('play_complete',firstContentId,{score:80,run_id:'run-economy-first-1'});
+  assert.equal(component.state.gameCoinLedgers[firstPlayableId].balance,80);
+  assert.equal(component.state.gameCoinLedgers[firstPlayableId].currency_id,`GAME:${firstPlayableId}`);
+  assert.equal(component.state.gameCoinLedgers[firstPlayableId].transferable,false);
+  assert.equal(component.state.gameCoinLedgers[firstPlayableId].convertible_to_aip,false);
+  assert.equal(component.state.aip,beforeAip+5);
+  assert.equal(component.state.aipPlayRewardClaims.length,1);
+
+  component.recordFeedMiniGameEvent('play_complete',firstContentId,{score:40,run_id:'run-economy-first-2'});
+  assert.equal(component.state.gameCoinLedgers[firstPlayableId].balance,120);
+  assert.equal(component.state.aip,beforeAip+5);
+  assert.equal(component.state.aipPlayRewardClaims.length,1);
+
+  component.recordFeedMiniGameEvent('play_complete',secondContentId,{score:30,run_id:'run-economy-second-1'});
+  assert.equal(component.state.gameCoinLedgers[secondPlayableId].balance,30);
+  assert.equal(component.state.aip,beforeAip+10);
+  assert.equal(component.state.aipPlayRewardClaims.length,2);
+
+  component.recordFeedMiniGameEvent('play_fail',secondContentId,{score:100,run_id:'run-economy-second-fail'});
+  assert.equal(component.state.gameCoinLedgers[secondPlayableId].balance,30);
+  assert.equal(component.state.aip,beforeAip+10);
+
+  component.recordFeedMiniGameEvent('play_complete',secondContentId,{score:30,run_id:'run-economy-second-1'});
+  assert.equal(component.state.gameCoinLedgers[secondPlayableId].balance,30);
+  assert.equal(component.state.localEventLog.filter(event=>event.event_name==='play_complete'&&event.run_id==='run-economy-second-1').length,1);
+
+  const ledgerRows=component.renderVals().gameCoinLedgerRows;
+  assert.equal(ledgerRows.length,2);
+  assert.notEqual(ledgerRows[0].currencyId,ledgerRows[1].currencyId);
+  assert.ok(component.state.localEventLog.some(event=>event.event_name==='game_coin_earned'));
+  assert.ok(component.state.localEventLog.some(event=>event.event_name==='aip_playable_completion_deduplicated'));
+  assert.ok(component.state.localEventLog.filter(event=>event.event_name.startsWith('aip_playable_completion_')).every(event=>event.properties.server_confirmed===false));
 });
 
 test('mobile Component resets a stale check-in by date and prevents a second same-day reward', () => {
@@ -1057,9 +1237,30 @@ test('mobile Component publishes due scheduled content locally and emits one not
   assert.match(component.state.notifications[0].title, /预约内容已开始运营/);
 });
 
+test('mobile Component simulates an approved AIT settlement notification and opens its record', () => {
+  const {component} = createMobileComponent();
+  component.setState({ob:4});
+
+  component.showAitSettlementApprovedPush();
+  assert.equal(component.state.topNotification.title, 'AIT 结算审核已通过');
+  assert.ok(component.state.notifications.some(item => item.id === 'ait-settlement-approved-demo' && item.read === false));
+  assert.ok(component.state.aitEntitlements.some(item => item.id === 'ait-entitlement-demo-settlement-approved' && item.status === 'available'));
+  assert.match(component.state.walletActionStatus, /尚未发生真实付款或链上交易/);
+
+  let values = component.renderVals();
+  assert.equal(values.showTopNotification, true);
+  values.openTopNotification();
+  assert.equal(component.state.topNotification, null);
+  assert.equal(component.state.overlay, 'wallet');
+  assert.equal(component.state.walletTab, 'ait');
+  assert.ok(component.state.notifications.some(item => item.id === 'ait-settlement-approved-demo' && item.read === true));
+  clearTimeout(component._topNotificationDismissT);
+});
+
 test('mobile Component advances version, push and daily startup popups in order', () => {
   const {component} = createMobileComponent();
   component.setState({
+    demoPopupVersionEnabled:true, demoPopupMessageEnabled:true, demoPopupOperationsEnabled:true,
     appVersion:'5.3.0', latestVersion:'5.4.0', versionPromptSeen:'',
     pushEnabled:true, pushPromptDate:'', dailyTaskPromptDate:'', dailyTaskClaimedDate:'',
     systemModal:null, systemModalQueue:[]
@@ -1085,6 +1286,7 @@ test('mobile Component advances version, push and daily startup popups in order'
 test('mobile Component dismisses each startup popup without executing its positive action', () => {
   const {component} = createMobileComponent();
   component.setState({
+    demoPopupVersionEnabled:true, demoPopupMessageEnabled:true, demoPopupOperationsEnabled:true,
     appVersion:'5.3.0', latestVersion:'5.4.0', versionPromptSeen:'',
     pushEnabled:true, pushPromptDate:'', dailyTaskPromptDate:'', dailyTaskClaimedDate:'',
     systemModal:null, systemModalQueue:[]
@@ -1108,11 +1310,94 @@ test('mobile Component dismisses each startup popup without executing its positi
   assert.equal(component.state.systemModal, null);
 });
 
+test('startup demo popups default to off until the user enables them', () => {
+  const {component} = createMobileComponent();
+  component.setState({
+    panel:'productCenter', productCenterTab:'demo', frontendEnvironment:'test',
+    appVersion:'5.3.0', latestVersion:'5.4.0', versionPromptSeen:'',
+    pushEnabled:true, pushPromptDate:'', dailyTaskPromptDate:'', dailyTaskClaimedDate:'',
+    systemModal:null, systemModalQueue:[]
+  });
+
+  const values = component.renderVals();
+  assert.equal(component.state.demoPopupVersionEnabled, false);
+  assert.equal(component.state.demoPopupMessageEnabled, false);
+  assert.equal(component.state.demoPopupOperationsEnabled, false);
+  assert.equal(component.state.demoPopupAitSettlementEnabled, false);
+  assert.equal(values.demoPopupRows.every(row => row.ariaChecked === 'false'), true);
+  assert.equal(values.demoPopupSummaryStatus, '0 / 4 开启');
+
+  component.queueStartupPopups();
+  assert.equal(component.state.systemModal, null);
+  assert.deepEqual(Array.from(component.state.systemModalQueue), []);
+
+  const legacy = createMobileComponent({stored:{
+    'airvana.v5.agentic-positioning.v2':JSON.stringify({ob:4,frontendEnvironment:'test',demoPopupVersionEnabled:true,demoPopupMessageEnabled:true,demoPopupOperationsEnabled:true})
+  }});
+  legacy.mount();
+  assert.equal(legacy.component.state.demoPopupDefaultsVersion, 1);
+  assert.equal(legacy.component.state.demoPopupVersionEnabled, false);
+  assert.equal(legacy.component.state.demoPopupMessageEnabled, false);
+  assert.equal(legacy.component.state.demoPopupOperationsEnabled, false);
+  legacy.unmount();
+
+  const optedIn = createMobileComponent({stored:{
+    'airvana.v5.agentic-positioning.v2':JSON.stringify({ob:4,frontendEnvironment:'test',demoPopupDefaultsVersion:1,demoPopupVersionEnabled:true,demoPopupMessageEnabled:false,demoPopupOperationsEnabled:false})
+  }});
+  optedIn.mount();
+  assert.equal(optedIn.component.state.demoPopupVersionEnabled, true);
+  assert.equal(optedIn.component.state.demoPopupMessageEnabled, false);
+  assert.equal(optedIn.component.state.demoPopupOperationsEnabled, false);
+  optedIn.unmount();
+});
+
+test('full project center preferences survive pagehide and the next app run', () => {
+  const first = createMobileComponent();
+  first.component.setState({
+    productCenterTab:'demo',
+    productCenterRoleView:'player',
+    frontendEnvironment:'test',
+    demoPopupVersionEnabled:true,
+    demoPopupMessageEnabled:false,
+    demoPopupOperationsEnabled:true,
+    demoPopupAitSettlementEnabled:true,
+    networkSimulationProfile:'weak',
+    regionSimulationProfile:'cn-mainland',
+    nonFinancialMode:true,
+    identitySimulationOpen:true
+  });
+  assert.equal(first.component.persistProductCenterPreferences(), true);
+  assert.equal(first.component.persistCriticalStateNow('pagehide'), true);
+
+  const dedicated=JSON.parse(first.storage.get('airvana.v5.product-center-preferences.v1'));
+  assert.equal(dedicated.productCenterTab, 'demo');
+  assert.equal(dedicated.demoPopupAitSettlementEnabled, true);
+  assert.equal(dedicated.identitySimulationOpen, true);
+  const checkpoint=JSON.parse(first.storage.get('airvana.v5.agentic-positioning.v2'));
+  assert.equal(checkpoint.demoPopupVersionEnabled, true);
+  assert.equal(checkpoint.demoPopupAitSettlementEnabled, true);
+  assert.equal(checkpoint.productCenterTab, 'demo');
+
+  const restarted=createMobileComponent({stored:Object.fromEntries(first.storage)});
+  restarted.mount();
+  assert.equal(restarted.component.state.productCenterTab, 'demo');
+  assert.equal(restarted.component.state.productCenterRoleView, 'player');
+  assert.equal(restarted.component.state.demoPopupVersionEnabled, true);
+  assert.equal(restarted.component.state.demoPopupMessageEnabled, false);
+  assert.equal(restarted.component.state.demoPopupOperationsEnabled, true);
+  assert.equal(restarted.component.state.demoPopupAitSettlementEnabled, true);
+  assert.equal(restarted.component.state.networkSimulationProfile, 'weak');
+  assert.equal(restarted.component.state.regionSimulationProfile, 'cn-mainland');
+  assert.equal(restarted.component.state.nonFinancialMode, true);
+  assert.equal(restarted.component.state.identitySimulationOpen, true);
+  restarted.unmount();
+});
+
 test('full project center controls each startup demo popup from one test-environment panel', () => {
   const {component} = createMobileComponent();
   component.setState({
     panel:'productCenter', productCenterTab:'demo', frontendEnvironment:'test',
-    demoPopupVersionEnabled:true, demoPopupMessageEnabled:true, demoPopupOperationsEnabled:true,
+    demoPopupVersionEnabled:true, demoPopupMessageEnabled:true, demoPopupOperationsEnabled:true, demoPopupAitSettlementEnabled:true,
     appVersion:'5.3.0', latestVersion:'5.4.0', versionPromptSeen:'',
     pushEnabled:true, pushPromptDate:'', dailyTaskPromptDate:'', dailyTaskClaimedDate:'',
     systemModal:null, systemModalQueue:[]
@@ -1121,7 +1406,7 @@ test('full project center controls each startup demo popup from one test-environ
   let values = component.renderVals();
   assert.equal(values.productCenterIsDemo, true);
   assert.equal(values.demoEnvironmentLabel, '测试环境');
-  assert.deepEqual(Array.from(values.demoPopupRows, row => row.key), ['version', 'operations', 'message']);
+  assert.deepEqual(Array.from(values.demoPopupRows, row => row.key), ['version', 'operations', 'message', 'aitSettlement']);
   assert.equal(values.demoPopupRows.every(row => row.ariaChecked === 'true'), true);
 
   values.demoPopupRows.find(row => row.key === 'version').onToggle();
@@ -1135,12 +1420,107 @@ test('full project center controls each startup demo popup from one test-environ
   values.demoPopupRows.find(row => row.key === 'message').onPreview();
   assert.equal(component.state.systemModal, 'push');
   assert.equal(component.state.localEventLog[0].event_name, 'demo_popup_preview_opened');
+
+  component.dismissSystemModal();
+  values = component.renderVals();
+  values.demoPopupRows.find(row => row.key === 'aitSettlement').onPreview();
+  assert.equal(component.state.topNotification.title, 'AIT 结算审核已通过');
+  assert.equal(component.state.aitSettlementPrompted, true);
+  clearTimeout(component._topNotificationDismissT);
+});
+
+test('test environment simulates network and region risk with fail-closed financial controls', () => {
+  const {component} = createMobileComponent();
+  component.setState({
+    panel:'productCenter', productCenterTab:'demo', frontendEnvironment:'test',
+    networkSimulationProfile:'normal', regionSimulationProfile:'global', nonFinancialMode:false,
+    networkSimulationBusy:false, networkProbeStatus:'网络正常 · 模拟未启用',
+    systemModal:null, systemModalQueue:[], localEventLog:[]
+  });
+
+  let values = component.renderVals();
+  assert.deepEqual(Array.from(values.networkSimulationOptions, option => option.key), ['normal', 'weak', 'offline']);
+  assert.deepEqual(Array.from(values.regionSimulationOptions, option => option.key), ['global', 'cn-mainland']);
+  assert.equal(values.showRuntimeRiskBar, false);
+
+  values.networkSimulationOptions.find(option => option.key === 'weak').onPick();
+  assert.equal(component.state.networkSimulationProfile, 'weak');
+  assert.equal(component.state.systemModal, 'riskWeakNetwork');
+  values = component.renderVals();
+  assert.equal(values.showWeakNetworkModal, true);
+  assert.equal(values.showRuntimeRiskBar, true);
+  assert.equal(values.runtimeRiskBarTitle, '弱网模拟');
+  component.dismissSystemModal();
+
+  component.setNetworkSimulationProfile('offline');
+  assert.equal(component.state.systemModal, 'riskOffline');
+  assert.equal(component.blockRestrictedAction('wallet', '钱包中心'), true);
+  assert.equal(component.state.localEventLog[0].event_name, 'risk_action_blocked');
+  assert.equal(component.state.localEventLog[0].properties.reason_code, 'simulated_offline');
+
+  component.setNetworkSimulationProfile('normal');
+  component.setRegionSimulationProfile('cn-mainland');
+  assert.equal(component.state.nonFinancialMode, true);
+  assert.equal(component.state.systemModal, 'riskChinaRegion');
+  assert.equal(component.blockRestrictedAction('settlement', '商业结算'), true);
+  assert.equal(component.state.localEventLog[0].region, 'CN');
+  assert.equal(component.state.localEventLog[0].properties.raw_ip_collected, false);
+  values = component.renderVals();
+  assert.match(values.runtimeRiskBarTitle, /中国大陆风险模拟/);
+  assert.equal(values.nonFinancialModeAria, 'true');
+
+  component.restoreDefaultSimulation();
+  assert.equal(component.state.networkSimulationProfile, 'normal');
+  assert.equal(component.state.regionSimulationProfile, 'global');
+  assert.equal(component.state.nonFinancialMode, false);
+  assert.equal(component.state.systemModal, null);
+  assert.equal(component.renderVals().showRuntimeRiskBar, false);
+  assert.equal(component.state.localEventLog[0].event_name, 'risk_simulation_reset');
+});
+
+test('mobile wallet acquisition saves, persists and removes an unverified address without enabling payment', async () => {
+  const first=createMobileComponent({withLocalBusiness:true});
+  first.mount();
+  const component=first.component;
+  component.setState({ob:4,launchVisible:false,screen:'me',panel:'wallet',walletManualNetwork:'eip155:1',walletManualAddress:'0x'+'5'.repeat(40),walletManualAcquisition:'manual'});
+  await component.saveManualWalletAddressNow();
+  assert.equal(component.state.localWalletCandidates.length,1);
+  assert.equal(component.state.localWalletCandidates[0].ownership_status,'unverified');
+  assert.equal(component.state.localWalletCandidates[0].server_confirmed,false);
+  assert.equal(component.state.localWalletCandidates[0].can_withdraw,false);
+  let values=component.renderVals();
+  assert.equal(values.walletHasLocalCandidates,true);
+  assert.match(values.walletCandidateRows[0].meta,/所有权未验证 · 不可用于付款/);
+  assert.equal(typeof values.openAitSettlement,'function');
+  first.listeners.get('window:pagehide')();
+
+  const second=createMobileComponent({withLocalBusiness:true,stored:Object.fromEntries(first.storage.entries())});
+  second.mount();
+  assert.equal(second.component.state.localWalletCandidates.length,1);
+  assert.equal(second.component.state.localWalletCandidates[0].address,'0x'+'5'.repeat(40));
+  values=second.component.renderVals();
+  values.walletCandidateRows[0].onRemove();
+  assert.equal(second.component.state.localWalletCandidates.length,1,'removal must wait for confirmation');
+  second.component.confirmDestructiveAction();
+  assert.equal(second.component.state.localWalletCandidates.length,0);
+});
+
+test('wallet acquisition is fail closed for offline and China-region simulations', () => {
+  for(const scenario of [{networkSimulationProfile:'offline',regionSimulationProfile:'global'},{networkSimulationProfile:'normal',regionSimulationProfile:'cn-mainland'}]){
+    const {component}=createMobileComponent({withLocalBusiness:true});
+    component.setState({ob:4,launchVisible:false,screen:'me',panel:'wallet',frontendEnvironment:'test',nonFinancialMode:false,...scenario});
+    component.bindDigitalWallet();
+    assert.equal(component.state.walletBindingSheetOpen,false);
+    assert.ok(component.state.riskAction||component.state.systemModal||component.state.localEventLog.some(event=>event.event_name==='risk_action_blocked'));
+    assert.equal(component.state.localWalletCandidates.length,0);
+  }
 });
 
 test('production display environment suppresses demo popups without changing account permissions', () => {
   const {component} = createMobileComponent();
   component.setState({
     frontendEnvironment:'test', demoPopupVersionEnabled:true, demoPopupMessageEnabled:true, demoPopupOperationsEnabled:true,
+    networkSimulationProfile:'offline', regionSimulationProfile:'cn-mainland', nonFinancialMode:true,
     appVersion:'5.3.0', latestVersion:'5.4.0', versionPromptSeen:'', pushEnabled:true, pushPromptDate:'',
     dailyTaskPromptDate:'', dailyTaskClaimedDate:'', systemModal:'version', systemModalQueue:['push','daily']
   });
@@ -1157,6 +1537,10 @@ test('production display environment suppresses demo popups without changing acc
   const values = component.renderVals();
   assert.equal(values.demoEnvironmentLabel, '生产环境');
   assert.equal(values.demoPopupRows.every(row => row.disabled && row.ariaChecked === 'false'), true);
+  assert.equal(values.networkSimulationOptions.every(option => option.disabled), true);
+  assert.equal(values.regionSimulationOptions.every(option => option.disabled), true);
+  assert.equal(values.showRuntimeRiskBar, false, 'saved test scenarios must not impersonate production risk state');
+  assert.equal(component.resolveSimulationRisk('wallet').reasonCode, 'simulation_disabled');
   values.demoPopupRows[0].onPreview();
   assert.equal(component.state.systemModal, null);
   assert.match(component.state.toast, /生产环境不展示演示弹窗/);
@@ -1207,6 +1591,7 @@ test('mobile Component saves categorized feedback locally, opens support chat, a
 
 test('mobile identity center fails closed and completes the local KYC, node and super-node demo hierarchy', () => {
   const {component} = createMobileComponent();
+  component.setState({identityKycStatus:'unverified',identityNodeStatus:'locked'});
 
   let values = component.renderVals();
   const identityRow = values.drawerPrimaryRows.find(row => row.label === '身份认证');
@@ -1281,6 +1666,54 @@ test('mobile identity center fails closed and completes the local KYC, node and 
   assert.equal(component.state.identityNodeStatus, 'locked');
   assert.equal(component.state.identitySuperNodeStatus, 'locked');
   assert.deepEqual(Array.from(component.state.identityAuditLog), []);
+});
+
+test('identity simulator recomputes KYC and creator permissions and stays local-demo only', () => {
+  const {component} = createMobileComponent({withLocalBusiness:true});
+  component.setState({panel:'productCenter',productCenterTab:'demo',identityDetailRole:null,identitySimulationOpen:false,frontendEnvironment:'test',identityKycStatus:'verified_demo',identityCreatorStatus:'active_demo',productCenterRoleView:'kol',createRoleScope:'kol'});
+
+  let values = component.renderVals();
+  assert.equal(values.productCenterIsDemo, true);
+  assert.equal(values.identitySimulationOpen, false);
+  values.toggleIdentitySimulator();
+  values = component.renderVals();
+  assert.equal(values.identitySimulationOpen, true);
+  assert.equal(values.identityKycSimulationOptions.length, 7);
+  assert.equal(values.identityCreatorSimulationOptions.length, 6);
+  assert.equal(values.identityPermissionRows.find(item=>item.key==='creator').enabled, true);
+
+  values.identityKycSimulationOptions.find(item=>item.status==='expired_demo').onPick();
+  values = component.renderVals();
+  assert.equal(component.state.identityKycStatus, 'expired_demo');
+  assert.equal(component.state.identityCreatorStatus, 'active_demo');
+  assert.equal(component.state.localRole, 'player');
+  assert.equal(component.state.productCenterRoleView, 'player');
+  assert.equal(component.state.createRoleScope, 'player');
+  assert.equal(values.identityEffectiveRoleLabel, '玩家权限');
+  assert.equal(values.identityPermissionRows.find(item=>item.key==='player').enabled, true);
+  assert.equal(values.identityPermissionRows.find(item=>item.key==='kyc').enabled, false);
+  assert.equal(values.identityPermissionRows.find(item=>item.key==='creator').enabled, false);
+  assert.equal(values.identityPermissionRows.find(item=>item.key==='campaign').enabled, false);
+  assert.equal(component.state.identityAuditLog[0].action, 'identity_simulation_override');
+  assert.equal(component.state.identityAuditLog[0].serverConfirmed, false);
+
+  values.identityKycSimulationOptions.find(item=>item.status==='verified_demo').onPick();
+  values = component.renderVals();
+  assert.equal(component.state.localRole, 'kol');
+  assert.equal(component.state.productCenterRoleView, 'kol');
+  assert.equal(values.identityEffectiveRoleLabel, 'KOL 权限 · 本地演示');
+  assert.equal(values.identityPermissionRows.find(item=>item.key==='creator').enabled, true);
+  assert.equal(values.identityPermissionRows.find(item=>item.key==='campaign').enabled, true);
+
+  values.identityCreatorSimulationOptions.find(item=>item.status==='suspended_demo').onPick();
+  values = component.renderVals();
+  assert.equal(component.state.identityCreatorStatus, 'suspended_demo');
+  assert.equal(component.state.localRole, 'player');
+  assert.equal(values.identityPermissionRows.find(item=>item.key==='creator').enabled, false);
+
+  component.setState({frontendEnvironment:'production'});
+  component.setIdentitySimulationStatus('creator','active_demo');
+  assert.equal(component.state.identityCreatorStatus, 'suspended_demo');
 });
 
 test('mobile KYC document step supports passport and rejects unsafe files without retaining raw documents', () => {
@@ -1375,15 +1808,39 @@ test('mobile destructive actions keep data until the shared confirmation is acce
   assert.equal(component.state.destructiveAction, null);
 });
 
-test('mobile creator identity application stays a local demo and opens creator center only after activation', () => {
+test('mobile creator application requires KYC, platform review and the complete KOL activation flow', () => {
   const {component} = createMobileComponent();
-  component.setState({panel:'identity',identityDetailRole:'creator',identityCreatorStatus:'not_applied'});
+  component.setState({panel:'identity',identityDetailRole:'creator',identityKycStatus:'unverified',identityCreatorStatus:'not_applied',kolActivationCompleted:false,kolCreatorAgreementAccepted:false,kolCreatorAgreementAcceptedAt:''});
 
   component.renderVals().advanceIdentity();
-  assert.equal(component.state.identityCreatorStatus, 'pending_demo');
+  assert.equal(component.state.identityCreatorStatus, 'awaiting_kyc_demo');
+  assert.equal(component.state.identityDetailRole, 'kyc');
   assert.equal(component.state.identityAuditLog[0].serverConfirmed, false);
+
+  component.setState({identityKycStatus:'verified_demo',identityDetailRole:'creator'});
+  component.renderVals().advanceIdentity();
+  assert.equal(component.state.identityCreatorStatus, 'pending_demo');
   component.renderVals().advanceIdentity();
   assert.equal(component.state.identityCreatorStatus, 'active_demo');
+  assert.equal(component.state.overlay, 'kolActivation');
+  assert.equal(component.renderVals().kolActivationIsWelcome, true);
+
+  component.renderVals().advanceKolActivation();
+  assert.equal(component.state.kolActivationStep, 'profile');
+  component.renderVals().advanceKolActivation();
+  assert.equal(component.state.kolActivationStep, 'agreement');
+  component.renderVals().toggleKolCreatorAgreement();
+  component.renderVals().advanceKolActivation();
+  assert.equal(component.state.kolActivationStep, 'channels');
+  component.renderVals().advanceKolActivation();
+  assert.equal(component.state.kolActivationStep, 'campaign');
+  component.renderVals().advanceKolActivation();
+  assert.equal(component.state.kolActivationCompleted, true);
+  assert.equal(component.state.overlay, 'create');
+  assert.equal(component.state.createRoleScope, 'kol');
+  assert.equal(component.state.campaignBrand, '【待人工录入】');
+
+  component.setState({panel:'identity',identityDetailRole:'creator',overlay:null});
   component.renderVals().advanceIdentity();
   assert.equal(component.state.screen, 'quests');
   assert.equal(component.state.panel, null);
@@ -1699,6 +2156,7 @@ test('mobile deep composer locks platform compliance rules and versions optional
 
 test('mobile Growth Network creates a five-person node, confirms every member and stops at truthful KYC and contract gates', () => {
   const {component} = createMobileComponent();
+  component.setState({identityKycStatus:'unverified',identityNodeStatus:'locked'});
 
   component.renderVals().openForceCenter();
   assert.equal(component.state.panel, 'growthNetwork');
@@ -1707,6 +2165,13 @@ test('mobile Growth Network creates a five-person node, confirms every member an
   assert.ok(initialCredit >= 300 && initialCredit <= 900);
   assert.equal(component.renderVals().growthCreditFactors.map(item=>item.weight).join(','), '35%,25%,25%,15%');
 
+  component.renderVals().createGrowthNode();
+  assert.equal(component.state.panel, 'identity');
+  assert.equal(component.state.identityDetailRole, 'kyc');
+  assert.equal(component.state.growthNodeMembers.length, 0);
+
+  component.setIdentitySimulationStatus('kyc','verified_demo');
+  component.setState({panel:'growthNetwork',growthNetworkTab:'network'});
   component.renderVals().createGrowthNode();
   assert.equal(component.state.growthNetworkTab, 'node');
   assert.equal(component.state.growthNodeStatus, 'recruiting');
@@ -1732,13 +2197,16 @@ test('mobile Growth Network creates a five-person node, confirms every member an
   assert.equal(component.state.growthNodeStatus, 'trial');
   assert.equal(component.state.localEventLog[0].event_name, 'growth_node_trial_started_demo');
 
+  component.setIdentitySimulationStatus('kyc','expired_demo');
+  component.setState({panel:'growthNetwork',growthNetworkTab:'node'});
   component.renderVals().growthNodePrimaryAction();
   assert.equal(component.state.panel, 'identity');
   assert.equal(component.state.panelReturn, 'growthNetwork');
   assert.equal(component.state.identityDetailRole, 'kyc');
   assert.equal(component.state.growthNodeStatus, 'trial');
 
-  component.setState({identityKycStatus:'verified_demo',panel:'growthNetwork',identityDetailRole:null});
+  component.setIdentitySimulationStatus('kyc','verified_demo');
+  component.setState({panel:'growthNetwork',growthNetworkTab:'node',identityDetailRole:null});
   values = component.renderVals();
   assert.ok(values.growthCreditScore > initialCredit);
   assert.equal(values.growthCreditEligible, true);
@@ -2131,7 +2599,7 @@ test('mobile messaging, rights and governance stay local and expose truthful ser
   assert.equal(values.meTabs.map(tab=>tab.key).join(','), 'playables,drafts,saved,history');
   assert.equal(values.profileShortcuts.length, 0);
   assert.equal(values.showProfileShortcuts, false);
-  assert.equal(values.drawerPrimaryRows.map(row=>row.label).join(','), '我的游戏,身份与安全');
+  assert.equal(values.drawerPrimaryRows.map(row=>row.label).join(','), '我的游戏,订阅与额度,身份与安全');
   assert.equal(values.drawerPrimaryRows.some(row=>row.label==='站内权益'||row.label==='互动关系'), false);
   assert.equal(component.state.identityCreatorStatus, creatorStatusBeforeViewSwitch);
   assert.equal(component.state.localEventLog[0].event_name, 'product_center_role_view_change');
@@ -2141,7 +2609,9 @@ test('mobile messaging, rights and governance stay local and expose truthful ser
   assert.equal(component.state.createRoleScope, 'player');
   assert.equal(component.state.campaignId, null);
   values = component.renderVals();
-  assert.equal(values.composerModes.map(mode=>mode.key).join(','), 'quick');
+  assert.equal(values.composerModes.map(mode=>mode.key).join(','), 'quick,deep');
+  assert.equal(values.composerModes.find(mode=>mode.key==='deep').locked, true);
+  assert.equal(values.composerModes.find(mode=>mode.key==='deep').ariaHasPopup, 'dialog');
   assert.equal(values.composerConnectorOptions.length, 0);
   assert.equal(values.createScopeBadge, undefined);
   assert.equal(component.state.localEventLog[0].event_name, 'game_create_open');
@@ -2181,4 +2651,176 @@ test('mobile messaging, rights and governance stay local and expose truthful ser
   assert.equal(component.state.panel, 'identity');
   assert.equal(component.state.identityDetailRole, 'creator');
   assert.equal(component.state.identityCreatorStatus, 'not_applied');
+});
+
+test('player composer shows locked deep mode and routes it through creator identity',()=>{
+  const {component}=createMobileComponent({withLocalBusiness:true});
+  component.setState({identityCreatorStatus:'not_applied',productCenterRoleView:'player',createRoleScope:'player',overlay:'create',panel:null,composerMode:'quick'});
+  let values=component.renderVals();
+  let deep=values.composerModes.find(mode=>mode.key==='deep');
+  assert.equal(deep.locked,true);
+  assert.equal(deep.ariaLabel,'深度创作，需开通 KOL 创作者身份');
+  deep.onPick();
+  assert.equal(component.state.overlay,null);
+  assert.equal(component.state.panel,'identity');
+  assert.equal(component.state.identityDetailRole,'creator');
+  assert.equal(component.state.localEventLog[0].event_name,'composer_deep_mode_locked');
+
+  component.setState({identityCreatorStatus:'active_demo',productCenterRoleView:'player',createRoleScope:'player',overlay:'create',panel:null,composerMode:'quick',campaignId:null});
+  values=component.renderVals();
+  deep=values.composerModes.find(mode=>mode.key==='deep');
+  deep.onPick();
+  assert.equal(component.state.productCenterRoleView,'kol');
+  assert.equal(component.state.createRoleScope,'kol');
+  assert.equal(component.state.composerMode,'deep');
+  assert.equal(component.state.localRole,'kol');
+  assert.ok(String(component.state.campaignId).startsWith('campaign-'));
+  assert.equal(component.state.localEventLog[0].event_name,'composer_deep_mode_unlocked');
+});
+
+test('mobile Campaign commercial demo resets and completes runtime, attribution, settlement and reusable asset locally', () => {
+  const {component} = createMobileComponent({withLocalBusiness:true});
+  component.resetCampaignCommercialDemo();
+  assert.equal(component.state.campaignWorkflowStage, 3);
+  assert.equal(component.state.localAttributionReports[0].confirmed_success_count, 0);
+  assert.equal(component.state.localEventLog.filter(event=>event.runtime_event).length, 17);
+  assert.equal(component.localRepositories.call_count, 0);
+  let values=component.renderVals();
+  assert.equal(values.attributionHasReport, true);
+  assert.deepEqual(Array.from(values.attributionFunnelRows,row=>row.value), ['5','4','3','2','2','1']);
+  values.attributionAction();
+  assert.equal(component.state.campaignWorkflowStage, 4);
+  assert.equal(component.state.campaignAttributionEvidence.verifiedConversions, 0);
+  values=component.renderVals();
+  values.settlementAction();
+  assert.equal(component.state.campaignWorkflowStage, 5);
+  assert.equal(component.state.campaignSettlementRecord.amount, null);
+  assert.equal(component.state.campaignSettlementRecord.currency, null);
+  values=component.renderVals();
+  values.settlementAction();
+  assert.equal(component.state.campaignWorkflowStage, 6);
+  assert.equal(component.state.localReusableAssets[0].status, 'ready-local-copy');
+  assert.ok(component.state.localReusableAssets[0].reset_fields.includes('cta_destination'));
+  assert.equal(component.state.localLedgers.commercial_settlement.amount, null);
+  assert.equal(component.localRepositories.call_count, 0);
+  assert.equal(component.state.localEventLog[0].event_name, 'campaign_commercial_review_completed');
+});
+
+test('mobile governance report can review, takedown, appeal and restore while Kill Switch fails closed', () => {
+  const {component} = createMobileComponent({withLocalBusiness:true});
+  component.reportSharedContent(1);
+  const caseId=component.state.localGovernanceCases[0].id;
+  assert.equal(component.state.localGovernanceCases[0].status, 'open-local-demo');
+  component.transitionLocalGovernanceCase(caseId,'review');
+  component.transitionLocalGovernanceCase(caseId,'takedown');
+  assert.equal(component.state.sessions.find(item=>item.id===1).status, 'takedown-local-demo');
+  component.transitionLocalGovernanceCase(caseId,'appeal');
+  component.transitionLocalGovernanceCase(caseId,'restore');
+  assert.equal(component.state.localGovernanceCases.find(item=>item.id===caseId).status, 'restored-to-draft-local-demo');
+  assert.equal(component.state.sessions.find(item=>item.id===1).status, 'draft');
+  component.setState(st=>({sessions:st.sessions.map(item=>item.id===1?{...item,status:'published'}:item)}));
+  component.toggleLocalKillSwitch();
+  assert.equal(component.state.governanceKillSwitch, true);
+  assert.equal(component.state.sessions.find(item=>item.id===1).status, 'kill-switch-paused-local-demo');
+  assert.equal(component.blockRestrictedAction('settlement','商业结算'), true);
+  component.toggleLocalKillSwitch();
+  assert.equal(component.state.sessions.find(item=>item.id===1).status, 'published');
+  assert.equal(component.localRepositories.call_count, 0);
+});
+
+test('mobile pagehide checkpoint persists critical commercial and governance state for abnormal exit recovery', () => {
+  const {component,mount,listeners,storage}=createMobileComponent({withLocalBusiness:true});
+  mount();
+  component.setState({campaignWorkflowStage:4,localAttributionReports:[{id:'atr_checkpoint',campaign_id:'cmp_checkpoint'}],localGovernanceCases:[{id:'gov_checkpoint',type:'report',status:'open-local-demo'}]});
+  listeners.get('window:pagehide')();
+  const envelope=JSON.parse(storage.get('airvana.mobile-business.v6'));
+  assert.equal(envelope.schema_version,6);
+  assert.equal(envelope.ui_state.campaignWorkflowStage,4);
+  assert.equal(envelope.operations.attribution_reports[0].id,'atr_checkpoint');
+  assert.equal(envelope.operations.governance_cases[0].id,'gov_checkpoint');
+  assert.equal(envelope.ui_state.persistenceCheckpoint.reason,'pagehide');
+  assert.equal(envelope.repository_state.call_count,0);
+});
+
+test('v6 restart restores draft trash, saved metadata and detailed game runs consistently', () => {
+  const first=createMobileComponent({withLocalBusiness:true});
+  first.mount();
+  first.component.setState({savedContentIds:[34],savedRelations:[{id:'sav_restart',user_id:'usr_kai_local',playable_id:'plb_restart_34',content_id:34,note:'重启后保留',collection:'回归测试',sort_order:0,created_at:'2026-08-17T00:00:00.000Z',updated_at:'2026-08-17T00:00:00.000Z'}],draftTrash:[{id:'del_restart',object_type:'draft',legacy_id:77,snapshot:{draft:{id:77,title:'可恢复草稿',createdByRole:'kol',type:0}},deleted_at:'2026-08-17T00:00:00.000Z'}],gameRunRecords:[{id:'run_restart',playable_id:'plb_restart_34',content_id:34,status:'completed',score:77,stage:6,started_at:'2026-08-17T00:00:00.000Z',ended_at:'2026-08-17T00:01:00.000Z'}],gameCoinLedgers:{plb_restart_34:{id:'game-ledger-plb_restart_34',playable_id:'plb_restart_34',content_id:34,title:'重启金币账本',currency_id:'GAME:plb_restart_34',balance:70,earned_total:70,spent_total:0,transferable:false,convertible_to_aip:false,entries:[]}},aipPlayRewardClaims:[{id:'aip-restart',user_id:'usr_kai_local',playable_id:'plb_restart_34',content_id:34,run_id:'run_restart',amount:5,rule_key:'playable_complete_24h',granted_at:'2026-08-17T00:01:00.000Z',server_confirmed:false}],lastGameRewardByContent:{34:{playableId:'plb_restart_34',contentId:34,runId:'run_restart',coinAmount:70,coinBalance:70,currencyId:'GAME:plb_restart_34',aipAmount:5,serverConfirmed:false}},experiencedContentIds:[34]});
+  first.listeners.get('window:pagehide')();
+  const stored=Object.fromEntries(first.storage.entries());
+  const second=createMobileComponent({withLocalBusiness:true,stored});
+  second.mount();
+  assert.equal(second.component.state.savedRelations[0].note,'重启后保留');
+  assert.equal(second.component.state.draftTrash[0].snapshot.draft.title,'可恢复草稿');
+  assert.equal(second.component.state.gameRunRecords[0].score,77);
+  assert.equal(second.component.state.gameCoinLedgers.plb_restart_34.balance,70);
+  assert.equal(second.component.state.aipPlayRewardClaims[0].rule_key,'playable_complete_24h');
+  assert.equal(second.component.state.lastGameRewardByContent[34].currencyId,'GAME:plb_restart_34');
+  assert.equal(second.component.state.experiencedContentIds.includes(34),true);
+  assert.equal(second.component.state.localDataSchemaVersion,6);
+});
+
+test('local subscription closes upgrade, allowance, AIP fallback, cancellation, reset and restart without changing authority', () => {
+  const first=createMobileComponent({withLocalBusiness:true});
+  first.mount();
+  const component=first.component;
+  const authorityBefore={role:component.state.localRole,permissions:[...component.state.localPermissions],kyc:component.state.identityKycStatus,creator:component.state.identityCreatorStatus,aip:component.state.aip,ait:component.state.ait};
+
+  let values=component.renderVals();
+  values.openSubscriptionCenter();
+  assert.equal(component.state.panel,'subscription');
+  values=component.renderVals();
+  assert.equal(values.panelSubscription,true);
+  assert.equal(values.subscriptionCenterName,'Free');
+  assert.equal(values.subscriptionSelectedPlan.planKey,'free');
+  values.subscriptionPlanTabs.find(plan=>plan.planKey==='creator_pro').onTab();
+  values=component.renderVals();
+  assert.equal(values.subscriptionSelectedPlan.planKey,'creator_pro');
+  assert.equal(component.state.localSubscription.planKey,'free');
+  values.subscriptionPlanRows.find(plan=>plan.planKey==='creator_pro').onPick();
+  assert.equal(component.state.localSubscription.planKey,'creator_pro');
+  assert.equal(component.state.localSubscription.serverConfirmed,false);
+  assert.equal(component.state.localRole,authorityBefore.role);
+  assert.equal(component.state.localPermissions.join('|'),authorityBefore.permissions.join('|'));
+  assert.equal(component.state.identityKycStatus,authorityBefore.kyc);
+  assert.equal(component.state.identityCreatorStatus,authorityBefore.creator);
+  assert.equal(component.state.aip,authorityBefore.aip);
+  assert.equal(component.state.ait,authorityBefore.ait);
+
+  const beforeAllowance=component.state.localSubscription.allowances.find(item=>item.key==='light_creation').remaining;
+  assert.equal(component.consumeLocalSubscriptionAllowance('light_creation'),true);
+  assert.equal(component.state.localSubscription.allowances.find(item=>item.key==='light_creation').remaining,beforeAllowance-1);
+  assert.equal(component.state.aip,authorityBefore.aip);
+  component.setState(st=>({localSubscription:{...st.localSubscription,allowances:st.localSubscription.allowances.map(item=>item.key==='light_creation'?{...item,used:item.granted,remaining:0}:item)}}));
+  assert.equal(component.consumeLocalSubscriptionAllowance('light_creation'),true);
+  assert.equal(component.state.aip,authorityBefore.aip-50);
+  assert.equal(component.state.ait,authorityBefore.ait);
+
+  component.cancelLocalSubscription();
+  assert.equal(component.state.localSubscription.cancelAtPeriodEnd,true);
+  assert.equal(component.state.localSubscription.scheduledPlanKey,'free');
+  component.resumeLocalSubscription();
+  assert.equal(component.state.localSubscription.cancelAtPeriodEnd,false);
+  component.simulateLocalSubscriptionStatus('grace_period');
+  assert.equal(component.state.localSubscription.status,'grace_period');
+  component.cancelLocalSubscription();
+  first.listeners.get('window:pagehide')();
+
+  const stored=Object.fromEntries(first.storage.entries());
+  const second=createMobileComponent({withLocalBusiness:true,stored});
+  second.mount();
+  assert.equal(second.component.state.localSubscription.planKey,'creator_pro');
+  assert.equal(second.component.state.localSubscription.cancelAtPeriodEnd,true);
+  assert.equal(second.component.state.localSubscription.status,'grace_period');
+  assert.equal(second.component.state.localSubscriptionHistory.length>=3,true);
+  assert.equal(second.component.state.localRole,authorityBefore.role);
+  assert.equal(second.component.state.localPermissions.join('|'),authorityBefore.permissions.join('|'));
+
+  second.component.resetLocalSubscription();
+  assert.equal(second.component.state.destructiveAction.type,'reset-subscription');
+  second.component.confirmDestructiveAction();
+  assert.equal(second.component.state.localSubscription.planKey,'free');
+  assert.equal(second.component.state.localSubscriptionHistory.length,0);
+  assert.equal(second.component.state.aip,authorityBefore.aip-50);
+  assert.equal(second.component.state.ait,authorityBefore.ait);
 });

@@ -1,0 +1,35 @@
+brief_version: "4.0.0"
+campaign:
+  campaign_id: "cmp_home_store_fidelity_v4_20260815"
+  working_name: "Airvana 首页 38 款应用市场级风格化游戏封面"
+  brand_legal_entity: "Airvana local prototype - no commercial offer"
+  market_timezone: "Asia/Hong_Kong"
+owners:
+  business_owner: "Airvana local demo owner"
+  operations_owner: "Airvana local demo owner"
+  approval_owner: "Human approval required before external release"
+objective:
+  primary: "engagement"
+  primary_success_event: "impression"
+  secondary: ["cover-to-mechanic readability", "visual consistency", "home-feed performance"]
+  funnel_boundary: "Local Home and Discover display only; no CTA, reward, wallet, attribution, or settlement change."
+audience:
+  included_regions: ["HK", "SG"]
+  languages: ["zh-CN"]
+  minimum_age: 18
+channels:
+  distribution: ["Airvana home feed", "Airvana Discover", "iOS WebView", "Android WebView"]
+brand_assets:
+  source_folder_or_url: "public/assets/game-covers/store-fidelity-v4/"
+  authorization_status: "Original generated prototype art; no third-party marketplace asset copied"
+creative:
+  count: 38
+  format: "720x1280 JPEG"
+  art_direction: "Stylized 3D mobile-game key art; non-photoreal; clear mechanic; lower title-safe zone"
+  prohibited: ["third-party character", "third-party logo", "store screenshot", "fake UI", "pseudo text", "wallet or reward claim"]
+cta:
+  type: "none"
+reward:
+  type: "none"
+open_questions:
+  - "External commercial release license and final human art review remain pending."

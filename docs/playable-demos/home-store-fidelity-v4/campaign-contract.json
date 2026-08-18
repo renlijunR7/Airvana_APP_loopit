@@ -1,0 +1,314 @@
+{
+  "schema_version": "1.0.0",
+  "campaign_id": "cmp_home_store_fidelity_v4_20260815",
+  "version": "4.0.0",
+  "status": "draft",
+  "owners": {
+    "business_owner": "Airvana local demo owner",
+    "operations_owner": "Airvana local demo owner",
+    "approval_owner": "User-approved prototype scope; external release still requires human approval",
+    "kill_switch_owner": "Airvana local demo owner"
+  },
+  "objective": {
+    "primary": "engagement",
+    "primary_success_event": "impression",
+    "primary_kpi": "38/38 homepage covers load, preserve readable crop, and communicate their mechanic without third-party IP",
+    "secondary": [
+      "cover-to-mechanic readability",
+      "visual consistency",
+      "home-feed performance"
+    ],
+    "target_value": null,
+    "target_window": null,
+    "funnel_boundary": "Visual asset revision only. Gameplay, CTA, reward, attribution, settlement, and data policy remain unchanged."
+  },
+  "audience": {
+    "included_regions": [
+      "HK",
+      "SG"
+    ],
+    "excluded_regions": [],
+    "languages": [
+      "zh-CN"
+    ],
+    "minimum_age": 18,
+    "lifecycle_stages": [
+      "mixed"
+    ],
+    "interests": [
+      "short interactive mobile games",
+      "casual games"
+    ],
+    "accessibility_requirements": [
+      "tap-only controls",
+      "non-color-only feedback",
+      "reduced motion",
+      "mute control"
+    ]
+  },
+  "channels": [
+    {
+      "channel_id": "airvana_home_store_fidelity_v4_local_demo",
+      "channel_type": "in_app",
+      "kol_id": null,
+      "placement": "Airvana home vertical feed and packaged iOS/Android WebView"
+    }
+  ],
+  "brand": {
+    "legal_entity": "Airvana local prototype - no commercial offer",
+    "asset_manifest": [
+      {
+        "asset_id": "asset_store_fidelity_covers_v4",
+        "asset_type": "background",
+        "location": "public/assets/game-covers/store-fidelity-v4/",
+        "locale": null,
+        "checksum": "5625af528086212a7848ab6e2176c1c66b246c36dd6763e3499b73b7ddc69ccd",
+        "authorization_status": "approved",
+        "usage_restrictions": [
+          "Airvana local DEMO and internal review only until human release approval",
+          "No third-party game screenshot, logo, UI, character or branded visual was used as source material",
+          "Do not claim association with any referenced application-market product"
+        ]
+      },
+      {
+        "asset_id": "asset_complete_games_runtime_v3",
+        "asset_type": "other",
+        "location": "public/complete-games-v3.js",
+        "locale": null,
+        "checksum": null,
+        "authorization_status": "approved",
+        "usage_restrictions": [
+          "Airvana local DEMO only",
+          "Deterministic Canvas 2D rendering",
+          "No external asset loading"
+        ]
+      },
+      {
+        "asset_id": "asset_deep_games_runtime_v2",
+        "asset_type": "other",
+        "location": "public/deep-games-v2.js",
+        "locale": null,
+        "checksum": null,
+        "authorization_status": "approved",
+        "usage_restrictions": [
+          "Airvana local DEMO only",
+          "Code-native fallback rendering only",
+          "Generated gameplay backdrops disabled"
+        ]
+      }
+    ],
+    "approved_claims": [
+      "38 original stylized mobile-game cover images",
+      "Each cover is mapped to one governed local game and depicts its core mechanic",
+      "No third-party application-market asset is bundled"
+    ],
+    "prohibited_claims": [
+      "guaranteed reward",
+      "guaranteed return",
+      "official commercial-game partnership",
+      "real online multiplayer"
+    ],
+    "required_disclosures": [
+      "LOCAL DEMO - cover art is original prototype artwork and does not indicate a third-party game partnership",
+      "No reward, wallet, settlement, verified commercial conversion, or live multiplayer is enabled"
+    ],
+    "authorization_status": "approved"
+  },
+  "gameplay": {
+    "mechanic": "other",
+    "template_id": "tpl_home_complete_games_v3",
+    "target_duration_seconds": 180,
+    "rounds": 3,
+    "required_states": [
+      "intro",
+      "playing",
+      "paused",
+      "success",
+      "failure",
+      "retry",
+      "replay",
+      "exit"
+    ],
+    "input_modes": [
+      "tap",
+      "drag",
+      "swipe",
+      "keyboard"
+    ],
+    "difficulty_bounds": {
+      "minimum": 2,
+      "maximum": 8,
+      "default": 4
+    }
+  },
+  "cta": {
+    "cta_id": "cta_none",
+    "type": "none",
+    "label": "",
+    "destination": "NOT_APPLICABLE",
+    "allowed_states": []
+  },
+  "reward": {
+    "reward_id": "reward_none",
+    "type": "none",
+    "value_description": "NOT_APPLICABLE",
+    "eligibility": "NOT_APPLICABLE",
+    "inventory_cap": null,
+    "expiry": null,
+    "fulfillment_owner": "NOT_APPLICABLE",
+    "material_terms": "No reward is offered in this local DEMO contract."
+  },
+  "compliance": {
+    "legal_entity": "Airvana local prototype - no commercial offer",
+    "promoted_activity": "Local entertainment interaction only",
+    "target_regions_reviewed": [
+      "HK",
+      "SG"
+    ],
+    "manual_review_required": true,
+    "legal_approval_status": "not_required",
+    "prohibited_claims": [
+      "guaranteed reward",
+      "guaranteed return",
+      "official commercial-game partnership",
+      "real online multiplayer"
+    ],
+    "required_disclosures": [
+      "LOCAL DEMO - no reward, wallet, settlement, or verified commercial conversion",
+      "IO opponents are local bots"
+    ],
+    "evidence_sources": [
+      "docs/playable-demos/home-store-fidelity-v4/prompt-set.md",
+      "docs/playable-demos/home-store-fidelity-v4/asset-manifest.json"
+    ]
+  },
+  "data_policy": {
+    "collected_fields": [
+      "local_session_id",
+      "campaign_id",
+      "playable_id",
+      "score",
+      "mute_preference"
+    ],
+    "prohibited_fields": [
+      "seed_phrase",
+      "private_key",
+      "raw_kyc_document",
+      "password"
+    ],
+    "consent_requirements": [
+      "No network analytics in this local DEMO"
+    ],
+    "retention_days": 0,
+    "privacy_owner": "Airvana local demo owner"
+  },
+  "measurement": {
+    "primary_kpi": "38/38 homepage covers load, preserve readable crop, and communicate their mechanic without third-party IP",
+    "primary_success_event": "impression",
+    "required_events": [
+      "impression",
+      "play_start",
+      "valid_interaction",
+      "level_complete",
+      "play_complete",
+      "play_fail",
+      "replay",
+      "error"
+    ],
+    "dimensions": [
+      "campaign_id",
+      "creative_id",
+      "channel_id",
+      "playable_id",
+      "playable_config_version",
+      "region",
+      "locale",
+      "device_class"
+    ],
+    "deduplication_rule": "Generate a unique local event ID per state transition.",
+    "bot_fraud_rule": "All events are labeled local demo and are never eligible for settlement; IO bot outcomes are excluded from multiplayer claims.",
+    "source_of_truth": "Device-local event log only; not a server-confirmed analytics source"
+  },
+  "attribution": {
+    "model": "none",
+    "window_days": 0,
+    "success_event": "impression",
+    "kol_priority": "not_applicable",
+    "cross_device_policy": "Not applicable; device-local only.",
+    "deduplication_key": "local_event_id",
+    "exclusion_rules": [
+      "all local demo traffic is excluded from commercial reporting"
+    ],
+    "settlement_status": "not_applicable",
+    "payable_event": null,
+    "terms_reference": null
+  },
+  "commercial": {
+    "currency": "USD",
+    "build_budget_cap": null,
+    "media_budget_cap": null,
+    "reward_budget_cap": 0,
+    "kol_settlement_budget_cap": 0
+  },
+  "governance": {
+    "locked_fields": [
+      "commercial",
+      "audience.included_regions",
+      "audience.excluded_regions",
+      "audience.minimum_age",
+      "cta.destination",
+      "reward",
+      "compliance",
+      "data_policy",
+      "attribution.model",
+      "attribution.window_days",
+      "attribution.kol_priority",
+      "measurement.primary_success_event",
+      "approval",
+      "release.kill_switch"
+    ],
+    "editable_fields": [
+      "playable.presentation.cover_image",
+      "playable.presentation.cover_position"
+    ],
+    "agentic_fields": [],
+    "runtime_fields": [
+      "runtime.session_id",
+      "runtime.locale",
+      "runtime.device_class",
+      "runtime.experiment_assignment"
+    ],
+    "allowed_experiment_fields": []
+  },
+  "approval": {
+    "status": "draft",
+    "approved_by": [],
+    "approved_at": null,
+    "evidence": [
+      "User requested application-market fidelity and corrected the direction from photorealistic to game-like on 2026-08-15"
+    ]
+  },
+  "release": {
+    "targets": [
+      "web_h5",
+      "in_app_webview"
+    ],
+    "release_owner": "Airvana local demo owner",
+    "rollback_target": "public/assets/game-covers/code-art-v3/",
+    "kill_switch": {
+      "owner": "Airvana local demo owner",
+      "mechanism": "Restore the v3 code-art cover mapping or disable campaign cmp_home_store_fidelity_v4_20260815"
+    }
+  },
+  "metadata": {
+    "created_at": "2026-08-15T16:00:00+08:00",
+    "updated_at": "2026-08-15T01:30:00+08:00",
+    "source_brief": "docs/playable-demos/home-store-fidelity-v4/campaign-brief.yaml",
+    "notes": [
+      "All 38 governed home games use one 720x1280 v4 JPEG cover.",
+      "The v4 cover revision changes presentation only; complete-games-v3.js and deep-games-v2.js remain the gameplay runtimes.",
+      "The application market informed genre conventions only; no third-party screenshot, character, logo, UI or copy was imported.",
+      "External release remains subject to human approval."
+    ]
+  }
+}

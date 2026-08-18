@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1600" role="img" aria-labelledby="title description">
+  <title id="title">coin-journey original cover art</title>
+  <desc id="description">Airvana code-native vector game artwork. No generative image or third-party asset.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#19160C"/><stop offset=".58" stop-color="#E8B43E" stop-opacity=".42"/><stop offset="1" stop-color="#070A0D"/></linearGradient>
+    <radialGradient id="light"><stop stop-color="#4F9ACC" stop-opacity=".48"/><stop offset="1" stop-color="#4F9ACC" stop-opacity="0"/></radialGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%"><feDropShadow dx="0" dy="24" stdDeviation="24" flood-color="#05070A" flood-opacity=".44"/></filter>
+    <filter id="glow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="8" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="900" height="1600" fill="url(#background)"/>
+  <circle cx="360" cy="330" r="380" fill="url(#light)"/>
+  <path d="M0 220 Q180 130 350 220 T900 180" fill="none" stroke="#FFFFFF" stroke-opacity=".08" stroke-width="3"/>
+  <circle cx="450" cy="820" r="300" fill="#E8B43E" opacity=".7"/><circle cx="450" cy="820" r="180" fill="#4F9ACC"/>
+  <rect x="34" y="34" width="832" height="1532" rx="64" fill="none" stroke="#FFFFFF" stroke-opacity=".12" stroke-width="4"/>
+</svg>

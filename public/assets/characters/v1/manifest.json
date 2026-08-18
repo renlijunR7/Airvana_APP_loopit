@@ -1,0 +1,67 @@
+{
+  "version": "1.0.1",
+  "generatedBy": "scripts/generate-character-consistency-v1.mjs",
+  "license": "Airvana original local prototype vector artwork",
+  "generativeAI": false,
+  "thirdPartyAssets": false,
+  "canonicalSourceRule": "Each pilot cover and Canvas runtime resolve the same master.svg.",
+  "pilotGameIds": [
+    5,
+    10,
+    12,
+    20,
+    36
+  ],
+  "files": [
+    {
+      "game_id": 5,
+      "game_key": "pixel-quest",
+      "character_id": "chr_nova_runner",
+      "name": "Nova Runner",
+      "master": "chr_nova_runner/master.svg",
+      "cover": "/assets/game-covers/character-consistency-v1/pixel-quest.svg",
+      "master_sha256": "7fc8cd351f90db2278980e881951d5ff8342c9062595db901e9509e14fa2fb18",
+      "cover_sha256": "2c2b3fd42b1d79caf34a9ae74c5db4a72b21d2121510fbabe722ee0c7de51e8e"
+    },
+    {
+      "game_id": 10,
+      "game_key": "paws-stage",
+      "character_id": "chr_mochi_beat",
+      "name": "Mochi Beat",
+      "master": "chr_mochi_beat/master.svg",
+      "cover": "/assets/game-covers/character-consistency-v1/paws-stage.svg",
+      "master_sha256": "4e8a38fc056125a25b4898a88080152812bdfd0d8495e7d63fbba7a5fc5c0f81",
+      "cover_sha256": "e4850fd07440882c328c3a02677bcb8d6e44ebc87e72c8a614d7d15f14ee19da"
+    },
+    {
+      "game_id": 12,
+      "game_key": "puppet-studio",
+      "character_id": "chr_lumi_doll",
+      "name": "Lumi Doll",
+      "master": "chr_lumi_doll/master.svg",
+      "cover": "/assets/game-covers/character-consistency-v1/puppet-studio.svg",
+      "master_sha256": "ea1b5f6980e6be2b0b4d8d5e75e12fd5d705894029cf942e620c3eb9c348d1e0",
+      "cover_sha256": "9a16a4c1967407d5067bccf0d2cfc7d6b7ffd203d08657c47da553b33663d85f"
+    },
+    {
+      "game_id": 20,
+      "game_key": "formation-knights",
+      "character_id": "chr_aegis_rowan",
+      "name": "Aegis Rowan",
+      "master": "chr_aegis_rowan/master.svg",
+      "cover": "/assets/game-covers/character-consistency-v1/formation-knights.svg",
+      "master_sha256": "73e41b3f91eae0c2d974d44966c468dc27da8c873070a5b096cf6f72a8353880",
+      "cover_sha256": "249398800a3b5704f111261acba0fc3175dd87d896596d8d923f10fbb1a08a26"
+    },
+    {
+      "game_id": 36,
+      "game_key": "moonlight-tea-shop",
+      "character_id": "chr_mina_vale",
+      "name": "Mina Vale",
+      "master": "chr_mina_vale/master.svg",
+      "cover": "/assets/game-covers/character-consistency-v1/moonlight-tea-shop.svg",
+      "master_sha256": "edbc3618449430a1d0e1b3c778fc9c2bc12618e951e89c80abf213c0bda23059",
+      "cover_sha256": "8717ecc3d8aeb77f7bca62aa165cb893fb8c3b98f9b273155441f51d179cc413"
+    }
+  ]
+}

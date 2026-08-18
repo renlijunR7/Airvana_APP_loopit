@@ -11,9 +11,10 @@ CLASSES_DIR="${BUILD_DIR}/classes"
 DEX_DIR="${BUILD_DIR}/dex"
 OUTPUT_DIR="${BUILD_DIR}/outputs"
 CLASSES_JAR="${BUILD_DIR}/classes.jar"
-APK_PATH="${OUTPUT_DIR}/Airvana-v1.0.14-debug.apk"
+APK_PATH="${OUTPUT_DIR}/Airvana-v1.0.18-debug.apk"
 EMBEDDED_INDEX="${BUILD_DIR}/embedded-index.html"
 EMBEDDED_CSS="${BUILD_DIR}/embedded-airvana-v4.css"
+EMBEDDED_SENSOR="${BUILD_DIR}/embedded-sensor-interactions-v1.js"
 APK_LISTING="${BUILD_DIR}/apk-file-list.txt"
 SDK_DIR="${ANDROID_SDK_ROOT:-${HOME}/Library/Android/sdk}"
 BUILD_TOOLS_DIR="${SDK_DIR}/build-tools/35.0.0"
@@ -55,8 +56,8 @@ rsync -a "${PROJECT_DIR}/public/" "${ASSETS_DIR}/www/"
   --java "${GEN_DIR}" \
   --min-sdk-version 26 \
   --target-sdk-version 35 \
-  --version-code 15 \
-  --version-name 1.0.14 \
+  --version-code 19 \
+  --version-name 1.0.18 \
   --auto-add-overlay \
   -A "${ASSETS_DIR}" \
   "${BUILD_DIR}/compiled-resources.zip"
@@ -101,6 +102,7 @@ cp "${BUILD_DIR}/base-unsigned.apk" "${BUILD_DIR}/app-unaligned.apk"
 
 unzip -p "${APK_PATH}" assets/www/index.html > "${EMBEDDED_INDEX}"
 unzip -p "${APK_PATH}" assets/www/airvana-v4.css > "${EMBEDDED_CSS}"
+unzip -p "${APK_PATH}" assets/www/sensor-interactions-v1.js > "${EMBEDDED_SENSOR}"
 unzip -Z1 "${APK_PATH}" > "${APK_LISTING}"
 if ! rg -q 'data-message-tabs="通知|互动|私信"' "${EMBEDDED_INDEX}"; then
   print -u2 "APK verification failed: fixed message tab bar is missing"
@@ -119,6 +121,13 @@ fi
 if ! rg -q 'class="messages-page"' "${EMBEDDED_INDEX}" \
   || ! rg -q 'data-message-list' "${EMBEDDED_INDEX}"; then
   print -u2 "APK verification failed: fixed tab bar is not separated from the scrolling message list"
+  exit 1
+fi
+if ! rg -q 'data-me-page-scroll' "${EMBEDDED_INDEX}" \
+  || ! rg -q 'min-height:0;flex:1 0 auto' "${EMBEDDED_INDEX}" \
+  || ! rg -q '\.me-page\[data-me-page-scroll\]' "${EMBEDDED_CSS}" \
+  || ! rg -q -- '-webkit-overflow-scrolling: touch' "${EMBEDDED_CSS}"; then
+  print -u2 "APK verification failed: scrollable My page is missing"
   exit 1
 fi
 if ! rg -q 'native-app-shell \.system-modal' "${EMBEDDED_CSS}" \
@@ -158,7 +167,7 @@ for playable_id in plb_star_mower plb_star_deck plb_adventurer_journal plb_idiom
     exit 1
   fi
 done
-if ! rg -q 'const homeArcadeDiscoverIds = \[34,35,36,37,38,39,40,41,42,43,44,24,25,26,27,28,29,30,31,32,33\]' "${EMBEDDED_INDEX}" \
+if ! rg -q 'const homeArcadeDiscoverIds = \[34,35,36,37,38,39,40,41,42,43,44,24,25,26,27,28,29,30,31,32,33,1,2,5,6,9,10,12,14,15,16,17,18,19,20,21,22,23\]' "${EMBEDDED_INDEX}" \
   || ! rg -q "tag:'原创新游'" "${EMBEDDED_INDEX}"; then
   print -u2 "APK verification failed: original arcade Discover gallery is missing"
   exit 1
@@ -187,6 +196,17 @@ if ! rg -q 'assets/www/deep-games-v2\.js' "${APK_LISTING}" \
   print -u2 "APK verification failed: depth-game runtime is missing"
   exit 1
 fi
+if ! rg -q 'assets/www/sensor-interactions-v1\.js' "${APK_LISTING}" \
+  || ! rg -q 'sensor-interactions-v1\.js\?v=1\.1\.0' "${EMBEDDED_INDEX}"; then
+  print -u2 "APK verification failed: sensor interaction runtime is missing"
+  exit 1
+fi
+for game in pixel-quest red-cup-shuffle magic-choir neon-dash city-rush nova-drift rift-strike void-squadron star-cups; do
+  if ! rg -q "'${game}': Object\.freeze" "${EMBEDDED_SENSOR}"; then
+    print -u2 "APK verification failed: sensor mapping ${game} is missing"
+    exit 1
+  fi
+done
 if ! rg -q 'ensureFeedAudio\(\)' "${EMBEDDED_INDEX}" \
   || ! rg -q 'feedMiniGameBestScores' "${EMBEDDED_INDEX}" \
   || ! rg -q 'class="feed-mini-game__sound"' "${EMBEDDED_INDEX}"; then
@@ -199,7 +219,7 @@ if ! rg -q 'class="play-feed__cover"' "${EMBEDDED_INDEX}" \
   print -u2 "APK verification failed: Home arcade cover visibility fix is missing"
   exit 1
 fi
-print "APK embedded UI verified: 通知 / 互动 / 私信 / 发现 21 款原创新游 / 11 张品类封面 / 11 款品类完整试玩 / 6 款三阶段深度玩法 / 音效 / 本地最高分"
+print "APK embedded UI verified: 通知 / 互动 / 私信 / 38 款完整试玩 / 9 款传感器游戏 / 陀螺仪 / 摇晃 / 吹气 / 触控降级"
 
 shasum -a 256 "${APK_PATH}"
 ls -lh "${APK_PATH}"

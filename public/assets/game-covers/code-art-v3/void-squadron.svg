@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1600" role="img" aria-labelledby="title description">
+  <title id="title">void-squadron original cover art</title>
+  <desc id="description">Airvana code-native vector game artwork. No generative image or third-party asset.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0A0E1D"/><stop offset=".58" stop-color="#5C76D9" stop-opacity=".42"/><stop offset="1" stop-color="#070A0D"/></linearGradient>
+    <radialGradient id="light"><stop stop-color="#D45A8C" stop-opacity=".48"/><stop offset="1" stop-color="#D45A8C" stop-opacity="0"/></radialGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%"><feDropShadow dx="0" dy="24" stdDeviation="24" flood-color="#05070A" flood-opacity=".44"/></filter>
+    <filter id="glow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="8" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="900" height="1600" fill="url(#background)"/>
+  <circle cx="401" cy="330" r="380" fill="url(#light)"/>
+  <path d="M0 220 Q180 130 350 220 T900 180" fill="none" stroke="#FFFFFF" stroke-opacity=".08" stroke-width="3"/>
+  
+    <circle cx="494" cy="1259" r="47" fill="#5C76D9" fill-opacity="0.70"/><circle cx="473" cy="1232" r="20" fill="#D45A8C" fill-opacity="0.69"/><circle cx="683" cy="1206" r="18" fill="#5C76D9" fill-opacity="0.67"/><circle cx="662" cy="489" r="17" fill="#D45A8C" fill-opacity="0.29"/><circle cx="92" cy="463" r="28" fill="#5C76D9" fill-opacity="0.80"/><circle cx="71" cy="727" r="27" fill="#D45A8C" fill-opacity="0.78"/><circle cx="830" cy="700" r="37" fill="#5C76D9" fill-opacity="0.40"/><circle cx="260" cy="674" r="36" fill="#D45A8C" fill-opacity="0.39"/><circle cx="239" cy="937" r="35" fill="#5C76D9" fill-opacity="0.53"/><circle cx="218" cy="911" r="45" fill="#D45A8C" fill-opacity="0.52"/><circle cx="427" cy="884" r="44" fill="#5C76D9" fill-opacity="0.50"/><circle cx="406" cy="1148" r="43" fill="#D45A8C" fill-opacity="0.64"/><circle cx="616" cy="1121" r="15" fill="#5C76D9" fill-opacity="0.63"/><circle cx="595" cy="1095" r="14" fill="#D45A8C" fill-opacity="0.61"/><circle cx="574" cy="379" r="13" fill="#5C76D9" fill-opacity="0.75"/><circle cx="784" cy="1332" r="23" fill="#D45A8C" fill-opacity="0.74"/><circle cx="763" cy="616" r="22" fill="#5C76D9" fill-opacity="0.36"/><circle cx="742" cy="589" r="33" fill="#D45A8C" fill-opacity="0.35"/>
+    <path d="M150 1220 Q450 980 750 1220 L690 1390 Q450 1290 210 1390Z" fill="#EDF0E7" fill-opacity=".9" filter="url(#shadow)"/>
+    <circle cx="450" cy="1070" r="120" fill="#5C76D9"/><path d="M390 1070 L450 970 L510 1070 L450 1170Z" fill="#F5E6B2"/>
+    <path d="M450 900 V590" stroke="#D45A8C" stroke-width="22" stroke-linecap="round"/><circle cx="450" cy="520" r="58" fill="#D45A8C" filter="url(#glow)"/>
+  <rect x="34" y="34" width="832" height="1532" rx="64" fill="none" stroke="#FFFFFF" stroke-opacity=".12" stroke-width="4"/>
+</svg>

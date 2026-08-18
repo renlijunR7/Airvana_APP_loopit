@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 1280" role="img" aria-labelledby="title desc">
+ <title id="title">Mina Vale game cover</title>
+ <desc id="desc">Airvana original cover built from the same canonical master used inside the playable.</desc>
+ <metadata>Airvana character-consistency-v1; canonical-master:/assets/characters/v1/chr_mina_vale/master.svg; no third-party IP.</metadata>
+ <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#3E8F86"/><stop offset=".48" stop-color="#182927"/><stop offset="1" stop-color="#07090F"/></linearGradient><radialGradient id="glow"><stop stop-color="#E4A36C" stop-opacity=".65"/><stop offset="1" stop-color="#E4A36C" stop-opacity="0"/></radialGradient><linearGradient id="shade" x1="0" y1="0" x2="0" y2="1"><stop offset=".62" stop-color="#05070B" stop-opacity="0"/><stop offset="1" stop-color="#05070B" stop-opacity=".9"/></linearGradient></defs>
+ <defs>
+    <linearGradient id="primary" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#3E8F86"/><stop offset="1" stop-color="#182927"/></linearGradient>
+    <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#F7F0D7"/><stop offset=".46" stop-color="#E4A36C"/><stop offset="1" stop-color="#1B2530"/></linearGradient>
+    <linearGradient id="skin" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#B97958"/><stop offset="1" stop-color="#3B2426" stop-opacity=".38"/></linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%"><feDropShadow dx="0" dy="12" stdDeviation="10" flood-color="#06080D" flood-opacity=".34"/></filter>
+  </defs>
+ <rect width="720" height="1280" fill="url(#bg)"/><circle cx="360" cy="440" r="360" fill="url(#glow)"/><path d="M0 745h720v295H0Z" fill="#5A3C2B"/><path d="M38 795h644M80 900h560" stroke="#E2B578" stroke-opacity=".25" stroke-width="8"/><circle cx="580" cy="220" r="104" fill="#E9D17D" opacity=".86"/><circle cx="614" cy="187" r="104" fill="#17322F"/><g fill="#F1E8D3"><rect x="80" y="690" width="78" height="125" rx="18"/><rect x="180" y="650" width="88" height="165" rx="18"/><rect x="292" y="710" width="72" height="105" rx="18"/></g>
+ <g data-canonical-master="/assets/characters/v1/chr_mina_vale/master.svg" transform="translate(112 220) scale(1.55)"><g id="character" filter="url(#shadow)">
+  <path d="M117 88q7-55 51-56 47 2 48 59l-10 42h-92Z" fill="#3B2426"/><circle cx="191" cy="45" r="29" fill="#3B2426"/>
+  <ellipse cx="160" cy="120" rx="51" ry="60" fill="url(#skin)"/><path d="M119 99q40-28 84-3" fill="none" stroke="#3B2426" stroke-width="15"/>
+  <circle cx="141" cy="121" r="6" fill="#182927"/><circle cx="180" cy="121" r="6" fill="#182927"/><path d="m115 74 10-17 10 17-10 17Z" fill="#E9D17D" stroke="#FFF3B4" stroke-width="3"/>
+  <path d="M109 176q51 23 102 0l29 121-80 39-80-39Z" fill="#F1E8D3" stroke="#E4A36C" stroke-width="5"/><path d="M121 190h78l20 113-59 25-59-25Z" fill="#3E8F86"/><path d="M160 196v112M121 190l39 32 39-32" fill="none" stroke="#E9D17D" stroke-width="6"/>
+  <path d="M102 197 61 274M218 197l42 77" stroke="#B97958" stroke-width="24" stroke-linecap="round"/><path d="M125 327 111 392M195 327l15 65" stroke="#182927" stroke-width="29" stroke-linecap="round"/>
+  <path d="M219 222h52l-6 75h-40Z" fill="#E4A36C" stroke="#E9D17D" stroke-width="5"/><path d="M226 236h38" stroke="#FFF0D7" stroke-width="7"/>
+  <circle cx="160" cy="253" r="15" fill="#E9D17D"/><path d="M153 253h14M160 246v14" stroke="#182927" stroke-width="3"/>
+ </g></g>
+ <path d="M0 810q180-65 360 0t360 0v470H0Z" fill="url(#shade)"/>
+ <g fill="none" stroke="#FFFFFF" stroke-opacity=".14"><path d="M55 96h610"/><path d="M55 1120h610"/></g>
+</svg>

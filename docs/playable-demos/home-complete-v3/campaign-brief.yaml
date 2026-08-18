@@ -1,0 +1,51 @@
+brief_version: "3.2.0"
+campaign:
+  campaign_id: "cmp_home_complete_games_v3_20260815"
+  working_name: "Airvana 首页 38 款完整原创游戏重构"
+  brand_legal_entity: "Airvana local prototype - no commercial offer"
+  market_timezone: "Asia/Hong_Kong"
+  target_launch_at: "2026-08-15T16:00:00+08:00"
+owners:
+  business_owner: "Airvana local demo owner"
+  operations_owner: "Airvana local demo owner"
+  approval_owner: "User-approved rebuild scope; external release still requires human approval"
+  kill_switch_owner: "Airvana local demo owner"
+objective:
+  primary: "engagement"
+  primary_success_event: "play_complete"
+  secondary: ["valid_interaction", "stage_complete", "replay", "error-free session"]
+  funnel_boundary: "Ends at local success/failure/replay; no CTA, wallet, reward, attribution, or settlement."
+audience:
+  included_regions: ["HK", "SG"]
+  languages: ["zh-CN"]
+  minimum_age: 18
+  accessibility_requirements: ["touch fallback for sensors", "keyboard input", "reduced motion", "mute control", "non-color-only feedback", "point-of-use microphone and motion permission"]
+channels:
+  distribution: ["Airvana home feed", "iOS WebView", "Android WebView"]
+brand_assets:
+  source_folder_or_url: "public/assets/game-covers/code-art-v3/"
+  authorization_status: "Airvana original code-native art; no generated raster and no third-party asset"
+gameplay:
+  complete_playable_count: 38
+  preview_only_count: 0
+  stages_per_game: 3
+  target_duration_seconds: "90-300"
+  required_states: ["intro", "playing", "paused", "success", "failure", "retry", "replay", "exit"]
+  prohibited_mechanics: ["real-money wagering", "wallet signing", "paid loot boxes", "unlabeled fake multiplayer"]
+cta:
+  type: "none"
+reward:
+  type: "none"
+measurement:
+  primary_kpi: "completion, replay, interaction validity, and runtime stability across all 38 games"
+  required_events: ["impression", "play_start", "valid_interaction", "level_complete", "play_complete", "play_fail", "replay", "error"]
+commercial_delivery:
+  reward_budget: 0
+  kol_settlement_budget: 0
+  supported_targets: ["web_h5", "in_app_webview"]
+assumptions:
+  - "Application-market products inform mechanic readability only; no screenshot, logo, name, character, UI, or copy is copied."
+  - "All covers are deterministic SVG and all gameplay scenes are deterministic Canvas 2D or code-native deep-game rendering."
+  - "Microbe Arena uses local bots and never claims live multiplayer."
+  - "Nine governed games use point-of-use sensors: Pixel Quest and Neon Dash use lane tilt; City Rush and Nova Drift use tilt steering; Rift Strike and Void Squadron use two-axis tilt; Red Cup Shuffle and Star Cups use shake; Magic Choir analyzes microphone level locally for blow detection. Every game keeps touch fallback and no raw sensor stream is retained."
+open_questions: []

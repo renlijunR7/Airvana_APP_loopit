@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0.0",
+  "asset_version": "1.0.1",
+  "character_id": "chr_lumi_doll",
+  "game_id": 12,
+  "game_key": "puppet-studio",
+  "name": "Lumi Doll",
+  "archetype": "articulated maker doll",
+  "art_direction": "Airvana original premium stylized 2D vector; readable at mobile scale; deterministic and editable",
+  "locked_identity_features": [
+    "blue bob-cut cap",
+    "visible brass joint rings",
+    "apricot work apron",
+    "painted cheek dots",
+    "wooden articulated limbs"
+  ],
+  "editable_features": [
+    "pose",
+    "expression",
+    "camera angle",
+    "stage lighting",
+    "non-identity particle effects"
+  ],
+  "prohibited_transformations": [
+    "third-party character likeness",
+    "logo or branded costume",
+    "identity color replacement",
+    "silhouette replacement",
+    "photoreal face synthesis"
+  ],
+  "canonical_master": "public/assets/characters/v1/chr_lumi_doll/master.svg",
+  "cover_asset": "public/assets/game-covers/character-consistency-v1/puppet-studio.svg",
+  "runtime_asset": "public/assets/characters/v1/chr_lumi_doll/master.svg",
+  "cover_scene": "tailor workbench with three costume silhouettes",
+  "authorization_status": "approved_local_prototype",
+  "external_release_status": "pending_human_review"
+}

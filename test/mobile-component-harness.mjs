@@ -23,7 +23,7 @@ class TestDCLogic {
   }
 }
 
-export function createMobileComponent({props = {skipOnboarding:true}, stored = {}} = {}) {
+export function createMobileComponent({props = {skipOnboarding:true}, stored = {}, withLocalBusiness = false} = {}) {
   const values = new Map(Object.entries(stored).map(([key, value]) => [key, String(value)]));
   const clipboardWrites = [];
   const openedUrls = [];
@@ -79,6 +79,12 @@ export function createMobileComponent({props = {skipOnboarding:true}, stored = {
   };
   context.FileReader = TestFileReader;
   vm.createContext(context);
+  const walletBindingSource=fs.readFileSync(path.join(root,'public/wallet-binding-v1.js'),'utf8');
+  vm.runInContext(walletBindingSource,context,{filename:'public/wallet-binding-v1.js'});
+  if (withLocalBusiness) {
+    const localBusinessSource=fs.readFileSync(path.join(root,'public/mobile-local-business-v1.js'),'utf8');
+    vm.runInContext(localBusinessSource,context,{filename:'public/mobile-local-business-v1.js'});
+  }
   vm.runInContext(`${readComponentSource()}\n;globalThis.Component = Component;`, context, {filename:'public/index.html'});
   const component = new context.Component(props);
   return {

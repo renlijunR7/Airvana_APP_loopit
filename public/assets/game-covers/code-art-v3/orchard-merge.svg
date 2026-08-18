@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1600" role="img" aria-labelledby="title description">
+  <title id="title">orchard-merge original cover art</title>
+  <desc id="description">Airvana code-native vector game artwork. No generative image or third-party asset.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#161E10"/><stop offset=".58" stop-color="#7EA84E" stop-opacity=".42"/><stop offset="1" stop-color="#070A0D"/></linearGradient>
+    <radialGradient id="light"><stop stop-color="#D99A4D" stop-opacity=".48"/><stop offset="1" stop-color="#D99A4D" stop-opacity="0"/></radialGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%"><feDropShadow dx="0" dy="24" stdDeviation="24" flood-color="#05070A" flood-opacity=".44"/></filter>
+    <filter id="glow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="8" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="900" height="1600" fill="url(#background)"/>
+  <circle cx="442" cy="330" r="380" fill="url(#light)"/>
+  <path d="M0 220 Q180 130 350 220 T900 180" fill="none" stroke="#FFFFFF" stroke-opacity=".08" stroke-width="3"/>
+  
+    <rect x="90" y="470" width="720" height="910" rx="76" fill="#F2EEE4" fill-opacity=".08" stroke="#FFFFFF" stroke-opacity=".16" stroke-width="6"/>
+    <rect x="116" y="536" width="128" height="128" rx="42" fill="#7EA84E" fill-opacity="0.641" transform="rotate(2 180 600)" filter="url(#shadow)"/><rect x="381" y="531" width="138" height="138" rx="42" fill="#D99A4D" fill-opacity="0.6329" transform="rotate(1 450 600)" filter="url(#shadow)"/><rect x="651" y="531" width="138" height="138" rx="42" fill="#E7E1D4" fill-opacity="0.6248" transform="rotate(6 720 600)" filter="url(#shadow)"/><rect x="112" y="742" width="136" height="136" rx="42" fill="#7EA84E" fill-opacity="0.7055" transform="rotate(6 180 810)" filter="url(#shadow)"/><rect x="377" y="737" width="146" height="146" rx="42" fill="#D99A4D" fill-opacity="0.6974" transform="rotate(5 450 810)" filter="url(#shadow)"/><rect x="647" y="737" width="146" height="146" rx="42" fill="#E7E1D4" fill-opacity="0.7781" transform="rotate(-8 720 810)" filter="url(#shadow)"/><rect x="103" y="943" width="154" height="154" rx="42" fill="#7EA84E" fill-opacity="0.77" transform="rotate(-8 180 1020)" filter="url(#shadow)"/><rect x="373" y="943" width="154" height="154" rx="42" fill="#D99A4D" fill-opacity="0.7619" transform="rotate(-4 450 1020)" filter="url(#shadow)"/><rect x="644" y="944" width="152" height="152" rx="42" fill="#E7E1D4" fill-opacity="0.8426" transform="rotate(-4 720 1020)" filter="url(#shadow)"/><rect x="117" y="1167" width="126" height="126" rx="42" fill="#7EA84E" fill-opacity="0.8345" transform="rotate(-5 180 1230)" filter="url(#shadow)"/><rect x="387" y="1167" width="126" height="126" rx="42" fill="#D99A4D" fill-opacity="0.8264" transform="rotate(0 450 1230)" filter="url(#shadow)"/><rect x="658" y="1168" width="124" height="124" rx="42" fill="#E7E1D4" fill-opacity="0.9071" transform="rotate(0 720 1230)" filter="url(#shadow)"/>
+    <circle cx="450" cy="385" r="92" fill="#D99A4D" filter="url(#glow)"/><path d="M410 385 L438 416 L500 345" fill="none" stroke="#17202A" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="34" y="34" width="832" height="1532" rx="64" fill="none" stroke="#FFFFFF" stroke-opacity=".12" stroke-width="4"/>
+</svg>

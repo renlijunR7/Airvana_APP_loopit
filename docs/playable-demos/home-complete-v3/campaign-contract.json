@@ -1,0 +1,333 @@
+{
+  "schema_version": "1.0.0",
+  "campaign_id": "cmp_home_complete_games_v3_20260815",
+  "version": "3.2.0",
+  "status": "draft",
+  "owners": {
+    "business_owner": "Airvana local demo owner",
+    "operations_owner": "Airvana local demo owner",
+    "approval_owner": "User-approved prototype scope; external release still requires human approval",
+    "kill_switch_owner": "Airvana local demo owner"
+  },
+  "objective": {
+    "primary": "engagement",
+    "primary_success_event": "play_complete",
+    "primary_kpi": "completion, replay, interaction validity, and runtime stability across all 38 home games",
+    "secondary": [
+      "valid interaction rate",
+      "replay rate",
+      "category discovery"
+    ],
+    "target_value": null,
+    "target_window": null,
+    "funnel_boundary": "All 38 local games end at success/failure/replay. No external CTA, reward, wallet, commercial attribution, or settlement is enabled."
+  },
+  "audience": {
+    "included_regions": [
+      "HK",
+      "SG"
+    ],
+    "excluded_regions": [],
+    "languages": [
+      "zh-CN"
+    ],
+    "minimum_age": 18,
+    "lifecycle_stages": [
+      "mixed"
+    ],
+    "interests": [
+      "short interactive mobile games",
+      "casual games"
+    ],
+    "accessibility_requirements": [
+      "touch fallback for every sensor interaction",
+      "non-color-only feedback",
+      "reduced motion",
+      "mute control",
+      "microphone and motion permission requested only at the point of use"
+    ]
+  },
+  "channels": [
+    {
+      "channel_id": "airvana_home_complete_v3_local_demo",
+      "channel_type": "in_app",
+      "kol_id": null,
+      "placement": "Airvana home vertical feed and packaged iOS/Android WebView"
+    }
+  ],
+  "brand": {
+    "legal_entity": "Airvana local prototype - no commercial offer",
+    "asset_manifest": [
+      {
+        "asset_id": "asset_code_art_covers_v3",
+        "asset_type": "background",
+        "location": "public/assets/game-covers/code-art-v3/",
+        "locale": null,
+        "checksum": null,
+        "authorization_status": "approved",
+        "usage_restrictions": [
+          "Airvana original code-native vector artwork",
+          "No generative image",
+          "No third-party asset or IP association"
+        ]
+      },
+      {
+        "asset_id": "asset_complete_games_runtime_v3",
+        "asset_type": "other",
+        "location": "public/complete-games-v3.js",
+        "locale": null,
+        "checksum": null,
+        "authorization_status": "approved",
+        "usage_restrictions": [
+          "Airvana local DEMO only",
+          "Deterministic Canvas 2D rendering",
+          "No external asset loading"
+        ]
+      },
+      {
+        "asset_id": "asset_sensor_interactions_runtime_v1",
+        "asset_type": "other",
+        "location": "public/sensor-interactions-v1.js",
+        "locale": null,
+        "checksum": null,
+        "authorization_status": "approved",
+        "usage_restrictions": [
+          "Airvana local DEMO only",
+          "Permission required at the point of use",
+          "No raw microphone audio or continuous motion samples are retained"
+        ]
+      },
+      {
+        "asset_id": "asset_deep_games_runtime_v2",
+        "asset_type": "other",
+        "location": "public/deep-games-v2.js",
+        "locale": null,
+        "checksum": null,
+        "authorization_status": "approved",
+        "usage_restrictions": [
+          "Airvana local DEMO only",
+          "Code-native fallback rendering only",
+          "Generated gameplay backdrops disabled"
+        ]
+      }
+    ],
+    "approved_claims": [
+      "38 original local game concepts",
+      "38 complete playable and replayable local demos",
+      "Original code-native SVG covers and Canvas gameplay scenes"
+    ],
+    "prohibited_claims": [
+      "guaranteed reward",
+      "guaranteed return",
+      "official commercial-game partnership",
+      "real online multiplayer"
+    ],
+    "required_disclosures": [
+      "LOCAL DEMO - no reward, wallet, settlement, verified commercial conversion, or live multiplayer",
+      "Microbe Arena opponents are deterministic local bots"
+    ],
+    "authorization_status": "approved"
+  },
+  "gameplay": {
+    "mechanic": "other",
+    "template_id": "tpl_home_complete_games_v3",
+    "target_duration_seconds": 180,
+    "rounds": 3,
+    "required_states": [
+      "intro",
+      "playing",
+      "paused",
+      "success",
+      "failure",
+      "retry",
+      "replay",
+      "exit"
+    ],
+    "input_modes": [
+      "tap",
+      "drag",
+      "swipe",
+      "keyboard",
+      "motion",
+      "microphone"
+    ],
+    "difficulty_bounds": {
+      "minimum": 2,
+      "maximum": 8,
+      "default": 4
+    }
+  },
+  "cta": {
+    "cta_id": "cta_none",
+    "type": "none",
+    "label": "",
+    "destination": "NOT_APPLICABLE",
+    "allowed_states": []
+  },
+  "reward": {
+    "reward_id": "reward_none",
+    "type": "none",
+    "value_description": "NOT_APPLICABLE",
+    "eligibility": "NOT_APPLICABLE",
+    "inventory_cap": null,
+    "expiry": null,
+    "fulfillment_owner": "NOT_APPLICABLE",
+    "material_terms": "No reward is offered in this local DEMO contract."
+  },
+  "compliance": {
+    "legal_entity": "Airvana local prototype - no commercial offer",
+    "promoted_activity": "Local entertainment interaction only",
+    "target_regions_reviewed": [
+      "HK",
+      "SG"
+    ],
+    "manual_review_required": true,
+    "legal_approval_status": "not_required",
+    "prohibited_claims": [
+      "guaranteed reward",
+      "guaranteed return",
+      "official commercial-game partnership",
+      "real online multiplayer"
+    ],
+    "required_disclosures": [
+      "LOCAL DEMO - no reward, wallet, settlement, or verified commercial conversion",
+      "IO opponents are local bots"
+    ],
+    "evidence_sources": [
+      "Official store reference URLs and original asset prompts recorded in project docs"
+    ]
+  },
+  "data_policy": {
+    "collected_fields": [
+      "local_session_id",
+      "campaign_id",
+      "playable_id",
+      "score",
+      "mute_preference",
+      "sensor_permission_state",
+      "normalized_sensor_interaction_type"
+    ],
+    "prohibited_fields": [
+      "seed_phrase",
+      "private_key",
+      "raw_kyc_document",
+      "password",
+      "raw_microphone_audio",
+      "continuous_motion_samples"
+    ],
+    "consent_requirements": [
+      "No network analytics in this local DEMO",
+      "Microphone and motion access require an explicit in-game action and system permission where applicable"
+    ],
+    "retention_days": 0,
+    "privacy_owner": "Airvana local demo owner"
+  },
+  "measurement": {
+    "primary_kpi": "completion, replay, interaction validity, and runtime stability across all 38 home games",
+    "primary_success_event": "play_complete",
+    "required_events": [
+      "impression",
+      "play_start",
+      "valid_interaction",
+      "level_complete",
+      "play_complete",
+      "play_fail",
+      "replay",
+      "error"
+    ],
+    "dimensions": [
+      "campaign_id",
+      "creative_id",
+      "channel_id",
+      "playable_id",
+      "playable_config_version",
+      "region",
+      "locale",
+      "device_class"
+    ],
+    "deduplication_rule": "Generate a unique local event ID per state transition.",
+    "bot_fraud_rule": "All events are labeled local demo and are never eligible for settlement; IO bot outcomes are excluded from multiplayer claims.",
+    "source_of_truth": "Device-local event log only; not a server-confirmed analytics source"
+  },
+  "attribution": {
+    "model": "none",
+    "window_days": 0,
+    "success_event": "play_complete",
+    "kol_priority": "not_applicable",
+    "cross_device_policy": "Not applicable; device-local only.",
+    "deduplication_key": "local_event_id",
+    "exclusion_rules": [
+      "all local demo traffic is excluded from commercial reporting"
+    ],
+    "settlement_status": "not_applicable",
+    "payable_event": null,
+    "terms_reference": null
+  },
+  "commercial": {
+    "currency": "USD",
+    "build_budget_cap": null,
+    "media_budget_cap": null,
+    "reward_budget_cap": 0,
+    "kol_settlement_budget_cap": 0
+  },
+  "governance": {
+    "locked_fields": [
+      "commercial",
+      "audience.included_regions",
+      "audience.excluded_regions",
+      "audience.minimum_age",
+      "cta.destination",
+      "reward",
+      "compliance",
+      "data_policy",
+      "attribution.model",
+      "attribution.window_days",
+      "attribution.kol_priority",
+      "measurement.primary_success_event",
+      "approval",
+      "release.kill_switch"
+    ],
+    "editable_fields": [
+      "playable.presentation.theme"
+    ],
+    "agentic_fields": [],
+    "runtime_fields": [
+      "runtime.session_id",
+      "runtime.locale",
+      "runtime.device_class",
+      "runtime.experiment_assignment"
+    ],
+    "allowed_experiment_fields": []
+  },
+  "approval": {
+    "status": "draft",
+    "approved_by": [],
+    "approved_at": null,
+    "evidence": [
+      "User approved the recommended local prototype scope on 2026-08-14"
+    ]
+  },
+  "release": {
+    "targets": [
+      "web_h5",
+      "in_app_webview"
+    ],
+    "release_owner": "Airvana local demo owner",
+    "rollback_target": "Previous verified Airvana local web bundle",
+    "kill_switch": {
+      "owner": "Airvana local demo owner",
+      "mechanism": "Disable campaign cmp_home_complete_games_v3_20260815 or restore the previous verified web bundle"
+    }
+  },
+  "metadata": {
+    "created_at": "2026-08-15T16:00:00+08:00",
+    "updated_at": "2026-08-17T12:22:53+08:00",
+    "source_brief": "docs/playable-demos/home-complete-v3/campaign-brief.yaml",
+    "notes": [
+      "Content IDs 1, 2, 5, 6, 9, 10, 12, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44 are governed by this package.",
+      "32 games use complete-games-v3.js and six depth games use deep-games-v2.js without generated background assets.",
+      "Nine games use governed sensor input: Pixel Quest and Neon Dash use lane tilt; City Rush and Nova Drift use tilt steering; Rift Strike and Void Squadron use two-axis tilt aiming; Red Cup Shuffle and Star Cups use shake; Magic Choir uses local microphone blow detection. All nine retain touch fallback.",
+      "All runtime art and covers are code-native. External release remains subject to human approval."
+    ]
+  }
+}

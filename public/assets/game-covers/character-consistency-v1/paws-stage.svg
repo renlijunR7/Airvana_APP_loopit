@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 1280" role="img" aria-labelledby="title desc">
+ <title id="title">Mochi Beat game cover</title>
+ <desc id="desc">Airvana original cover built from the same canonical master used inside the playable.</desc>
+ <metadata>Airvana character-consistency-v1; canonical-master:/assets/characters/v1/chr_mochi_beat/master.svg; no third-party IP.</metadata>
+ <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#F2777F"/><stop offset=".48" stop-color="#2C2430"/><stop offset="1" stop-color="#07090F"/></linearGradient><radialGradient id="glow"><stop stop-color="#48B9B0" stop-opacity=".65"/><stop offset="1" stop-color="#48B9B0" stop-opacity="0"/></radialGradient><linearGradient id="shade" x1="0" y1="0" x2="0" y2="1"><stop offset=".62" stop-color="#05070B" stop-opacity="0"/><stop offset="1" stop-color="#05070B" stop-opacity=".9"/></linearGradient></defs>
+ <defs>
+    <linearGradient id="primary" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#F2777F"/><stop offset="1" stop-color="#2C2430"/></linearGradient>
+    <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#F7F0D7"/><stop offset=".46" stop-color="#48B9B0"/><stop offset="1" stop-color="#1B2530"/></linearGradient>
+    <linearGradient id="skin" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#F1D4B4"/><stop offset="1" stop-color="#6B493D" stop-opacity=".38"/></linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%"><feDropShadow dx="0" dy="12" stdDeviation="10" flood-color="#06080D" flood-opacity=".34"/></filter>
+  </defs>
+ <rect width="720" height="1280" fill="url(#bg)"/><circle cx="360" cy="440" r="360" fill="url(#glow)"/><path d="M50 650q310-210 620 0v390H50Z" fill="#322837"/><circle cx="120" cy="330" r="72" fill="#F2777F" opacity=".32"/><circle cx="600" cy="350" r="86" fill="#48B9B0" opacity=".28"/><g fill="#F2C85B"><circle cx="130" cy="910" r="54"/><circle cx="285" cy="910" r="54"/><circle cx="440" cy="910" r="54"/><circle cx="595" cy="910" r="54"/></g>
+ <g data-canonical-master="/assets/characters/v1/chr_mochi_beat/master.svg" transform="translate(112 220) scale(1.55)"><g id="character" filter="url(#shadow)">
+  <path d="m97 107 6-62 43 35M223 107l-7-62-42 35" fill="#F1D4B4" stroke="#6B493D" stroke-width="8" stroke-linejoin="round"/>
+  <ellipse cx="160" cy="126" rx="68" ry="65" fill="#F1D4B4" stroke="#6B493D" stroke-width="7"/>
+  <path d="M94 112q66-36 132 0" fill="none" stroke="#F2777F" stroke-width="18" stroke-linecap="round"/>
+  <circle cx="93" cy="124" r="23" fill="#F2777F" stroke="#F2C85B" stroke-width="5"/><circle cx="227" cy="124" r="23" fill="#F2777F" stroke="#F2C85B" stroke-width="5"/>
+  <ellipse cx="137" cy="126" rx="8" ry="12" fill="#2C2430"/><ellipse cx="183" cy="126" rx="8" ry="12" fill="#2C2430"/><path d="m154 146 6 5 6-5" fill="none" stroke="#6B493D" stroke-width="6" stroke-linecap="round"/>
+  <path d="M108 185q52 24 104 0l25 111-77 36-77-36Z" fill="#48B9B0" stroke="#DBFFF6" stroke-width="5"/>
+  <path d="M97 203 61 270M223 203l35 67M126 312l-14 78M194 312l16 78" stroke="#F1D4B4" stroke-width="27" stroke-linecap="round"/>
+  <path d="M115 389H80M205 389h35" stroke="#6B493D" stroke-width="18" stroke-linecap="round"/>
+  <path d="M217 296q82 12 45 82q-13 23-34 12" fill="none" stroke="#F1D4B4" stroke-width="21" stroke-linecap="round"/><path d="M256 374q-13 18-28 16" fill="none" stroke="#6B493D" stroke-width="21" stroke-linecap="round"/>
+  <path d="m160 219 8 18 20 2-15 13 5 20-18-11-18 11 5-20-15-13 20-2Z" fill="#F2C85B"/>
+ </g></g>
+ <path d="M0 810q180-65 360 0t360 0v470H0Z" fill="url(#shade)"/>
+ <g fill="none" stroke="#FFFFFF" stroke-opacity=".14"><path d="M55 96h610"/><path d="M55 1120h610"/></g>
+</svg>

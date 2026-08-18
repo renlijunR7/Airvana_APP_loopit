@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0.0",
+  "asset_version": "1.0.1",
+  "character_id": "chr_mochi_beat",
+  "game_id": 10,
+  "game_key": "paws-stage",
+  "name": "Mochi Beat",
+  "archetype": "music cat",
+  "art_direction": "Airvana original premium stylized 2D vector; readable at mobile scale; deterministic and editable",
+  "locked_identity_features": [
+    "cream cat face",
+    "coral round headphones",
+    "teal short stage jacket",
+    "gold star chest badge",
+    "dark-tipped tail"
+  ],
+  "editable_features": [
+    "pose",
+    "expression",
+    "camera angle",
+    "stage lighting",
+    "non-identity particle effects"
+  ],
+  "prohibited_transformations": [
+    "third-party character likeness",
+    "logo or branded costume",
+    "identity color replacement",
+    "silhouette replacement",
+    "photoreal face synthesis"
+  ],
+  "canonical_master": "public/assets/characters/v1/chr_mochi_beat/master.svg",
+  "cover_asset": "public/assets/game-covers/character-consistency-v1/paws-stage.svg",
+  "runtime_asset": "public/assets/characters/v1/chr_mochi_beat/master.svg",
+  "cover_scene": "four-pad theatre stage with warm practical lights",
+  "authorization_status": "approved_local_prototype",
+  "external_release_status": "pending_human_review"
+}

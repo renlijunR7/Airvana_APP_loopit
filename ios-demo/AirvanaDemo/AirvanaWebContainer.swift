@@ -26,14 +26,14 @@ struct AirvanaWebContainer: UIViewRepresentable {
         webView.inputAssistantItem.trailingBarButtonGroups = []
         webView.isOpaque = false
         webView.backgroundColor = .systemGroupedBackground
-        webView.customUserAgent = "AirvanaLoopit/1.0.11 (iOS; WKWebView)"
+        webView.customUserAgent = "AirvanaLoopit/1.0.13 (iOS; WKWebView)"
         webView.safeAreaDidChange = { [weak webView, weak coordinator = context.coordinator] in
             guard let webView else { return }
             coordinator?.injectNativeSafeArea(into: webView)
         }
 
         context.coordinator.webView = webView
-        let url = URL(string: "airvana://app/?native-shell=1&native-platform=ios&native-version=1.0.11&native-build=13")!
+        let url = URL(string: "airvana://app/?native-shell=1&native-platform=ios&native-version=1.0.13&native-build=15")!
         webView.load(URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData))
         return webView
     }
@@ -56,7 +56,7 @@ struct AirvanaWebContainer: UIViewRepresentable {
             (() => {
               const root = document.documentElement;
               if (!root) return;
-              root.classList.add('native-app-shell');
+              root.classList.add('native-app-shell', 'native-ios-shell');
               root.style.setProperty('--native-safe-top', '\(top)px');
               root.style.setProperty('--safe-top', 'var(--native-safe-top)');
               root.style.setProperty('--native-safe-bottom', '\(bottom)px');
@@ -101,6 +101,22 @@ struct AirvanaWebContainer: UIViewRepresentable {
                 }
             }
             return nil
+        }
+
+        @available(iOS 15.0, *)
+        func webView(
+            _ webView: WKWebView,
+            requestMediaCapturePermissionFor origin: WKSecurityOrigin,
+            initiatedByFrame frame: WKFrameInfo,
+            type: WKMediaCaptureType,
+            decisionHandler: @escaping (WKPermissionDecision) -> Void
+        ) {
+            let trustedLocalOrigin = origin.protocol == "airvana" && origin.host == "app"
+            guard trustedLocalOrigin, type == .microphone else {
+                decisionHandler(.deny)
+                return
+            }
+            decisionHandler(.prompt)
         }
 
         func webView(

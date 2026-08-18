@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1600" role="img" aria-labelledby="title description">
+  <title id="title">neon-dash original cover art</title>
+  <desc id="description">Airvana code-native vector game artwork. No generative image or third-party asset.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0E131C"/><stop offset=".58" stop-color="#E84D6B" stop-opacity=".42"/><stop offset="1" stop-color="#070A0D"/></linearGradient>
+    <radialGradient id="light"><stop stop-color="#45B9C6" stop-opacity=".48"/><stop offset="1" stop-color="#45B9C6" stop-opacity="0"/></radialGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%"><feDropShadow dx="0" dy="24" stdDeviation="24" flood-color="#05070A" flood-opacity=".44"/></filter>
+    <filter id="glow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="8" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="900" height="1600" fill="url(#background)"/>
+  <circle cx="614" cy="330" r="380" fill="url(#light)"/>
+  <path d="M0 220 Q180 130 350 220 T900 180" fill="none" stroke="#FFFFFF" stroke-opacity=".08" stroke-width="3"/>
+  
+    <path d="M110 1470 L360 500 L540 500 L790 1470Z" fill="#111823" stroke="#45B9C6" stroke-opacity=".34" stroke-width="10"/>
+    <path d="M450 1440 L450 560" stroke="#F7F2E8" stroke-opacity=".75" stroke-width="22" stroke-dasharray="64 54"/>
+    <path d="M230 1420 L390 1040 L510 1040 L670 1420Z" fill="#E84D6B" filter="url(#shadow)"/>
+    <rect x="350" y="1110" width="200" height="170" rx="48" fill="#F7F2E8" opacity=".92"/><circle cx="300" cy="1360" r="46" fill="#111"/><circle cx="600" cy="1360" r="46" fill="#111"/>
+  <rect x="34" y="34" width="832" height="1532" rx="64" fill="none" stroke="#FFFFFF" stroke-opacity=".12" stroke-width="4"/>
+</svg>

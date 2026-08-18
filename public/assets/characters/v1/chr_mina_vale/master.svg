@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 420" role="img" aria-labelledby="title desc">
+ <title id="title">Mina Vale canonical character master</title>
+ <desc id="desc">Airvana original code-native character master shared by cover and runtime.</desc>
+ <metadata>Airvana character-consistency-v1; original vector artwork; no third-party IP; no generative runtime asset.</metadata>
+ <defs>
+    <linearGradient id="primary" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#3E8F86"/><stop offset="1" stop-color="#182927"/></linearGradient>
+    <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#F7F0D7"/><stop offset=".46" stop-color="#E4A36C"/><stop offset="1" stop-color="#1B2530"/></linearGradient>
+    <linearGradient id="skin" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#B97958"/><stop offset="1" stop-color="#3B2426" stop-opacity=".38"/></linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%"><feDropShadow dx="0" dy="12" stdDeviation="10" flood-color="#06080D" flood-opacity=".34"/></filter>
+  </defs>
+ <g id="character" filter="url(#shadow)">
+  <path d="M117 88q7-55 51-56 47 2 48 59l-10 42h-92Z" fill="#3B2426"/><circle cx="191" cy="45" r="29" fill="#3B2426"/>
+  <ellipse cx="160" cy="120" rx="51" ry="60" fill="url(#skin)"/><path d="M119 99q40-28 84-3" fill="none" stroke="#3B2426" stroke-width="15"/>
+  <circle cx="141" cy="121" r="6" fill="#182927"/><circle cx="180" cy="121" r="6" fill="#182927"/><path d="m115 74 10-17 10 17-10 17Z" fill="#E9D17D" stroke="#FFF3B4" stroke-width="3"/>
+  <path d="M109 176q51 23 102 0l29 121-80 39-80-39Z" fill="#F1E8D3" stroke="#E4A36C" stroke-width="5"/><path d="M121 190h78l20 113-59 25-59-25Z" fill="#3E8F86"/><path d="M160 196v112M121 190l39 32 39-32" fill="none" stroke="#E9D17D" stroke-width="6"/>
+  <path d="M102 197 61 274M218 197l42 77" stroke="#B97958" stroke-width="24" stroke-linecap="round"/><path d="M125 327 111 392M195 327l15 65" stroke="#182927" stroke-width="29" stroke-linecap="round"/>
+  <path d="M219 222h52l-6 75h-40Z" fill="#E4A36C" stroke="#E9D17D" stroke-width="5"/><path d="M226 236h38" stroke="#FFF0D7" stroke-width="7"/>
+  <circle cx="160" cy="253" r="15" fill="#E9D17D"/><path d="M153 253h14M160 246v14" stroke="#182927" stroke-width="3"/>
+ </g>
+</svg>

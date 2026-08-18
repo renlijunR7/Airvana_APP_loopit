@@ -1,0 +1,395 @@
+{
+  "version": "4.0.0",
+  "generatedBy": "OpenAI built-in image generation; resized and JPEG-encoded with macOS sips",
+  "license": "Airvana original local prototype artwork",
+  "generativeAI": true,
+  "thirdPartyAssets": false,
+  "assetMode": "original stylized mobile-game key art",
+  "restrictions": [
+    "Airvana local DEMO and internal review only until human release approval",
+    "No third-party game screenshot, logo, UI, character or branded visual was used as source material",
+    "Do not claim association with any referenced application-market product"
+  ],
+  "files": [
+    {
+      "id": 1,
+      "key": "safety-workshop",
+      "kind": "quiz",
+      "file": "safety-workshop.jpg",
+      "width": 720,
+      "height": 1280,
+      "bytes": 177104,
+      "sha256": "0eccc0810acf62596f135d6773b8b9ce063c8f39ad6c46a71b463be1bc3b920b"
+    },
+    {
+      "id": 2,
+      "key": "stellar-farm",
+      "kind": "builder",
+      "file": "stellar-farm.jpg",
+      "width": 720,
+      "height": 1280,
+      "bytes": 249840,
+      "sha256": "ea447c27fba8681d2a71c3e6f93cd68bc84f501bb2678b6f285583f36d2f1159"
+    },
+    {
+      "id": 5,
+      "key": "pixel-quest",
+      "kind": "runner",
+      "file": "pixel-quest.jpg",
+      "width": 720,
+      "height": 1280,
+      "bytes": 181961,
+      "sha256": "4410d375c567d703ad213fcdbd01ada007b359020d55fc215de8701de103358c"
+    },
+    {
+      "id": 6,
+      "key": "red-cup-shuffle",
+      "kind": "cups",
+      "file": "red-cup-shuffle.jpg",
+      "width": 720,
+      "height": 1280,
+      "bytes": 176111,
+      "sha256": "e58ec7137ed12d01ef99228fa3e47ea239553e2bc12a773cbbc2e5ca00612913"
+    },
+    {
+      "id": 9,
+      "key": "magic-choir",
+      "kind": "rhythm",
+      "file": "magic-choir.jpg",
+      "width": 720,
+      "height": 1280,
+      "bytes": 190941,
+      "sha256": "60665bff4d147d5a18d014d7f2897bac84a59a36a0bd8dc2a1a8b39b6f617777"
+    },
+    {
+      "id": 10,
+      "key": "paws-stage",
+      "kind": "sequence",
+      "file": "paws-stage.jpg",
+      "width": 720,
+      "height": 1280,
+      "bytes": 203164,
+      "sha256": "93a84ff9b3c453aaf8f6795c76450eb0e6e6add67e139a16298a8c2ae6e38e04"
+    },
+    {
+      "id": 12,
+      "key": "puppet-studio",
+      "kind": "wardrobe",
+      "file": "puppet-studio.jpg",
+      "width": 720,
+      "height": 1280,
+      "bytes": 180174,
+      "sha256": "a35fa12ba789f0902daed7a2565f37d42c0f7d09ad5c0ffc041b3f2d5632a85b"
+    },
+    {
+      "id": 14,
+      "key": "firefly-mail",
+      "kind": "sort",
+      "file": "firefly-mail.jpg",
+      "width": 720,
+      "height": 1280,
+      "bytes": 191244,
+      "sha256": "116c6b1f3b5a63bd0ad72c0ffed8f1946999c145e6e6bbc207b7ed4aae472220"
+    },
+    {
+      "id": 15,
+      "key": "whisker-escape",
+      "kind": "maze",
+      "file": "whisker-escape.jpg",
+      "width": 720,
+      "height": 1280,
+      "bytes": 141791,
+      "sha256": "e05411fb057d0a98f8dea0ff700f352cb6141c68d20338575f4cd427bf3c4fb0"
+    },
+    {
+      "id": 16,
+      "key": "coin-journey",
+      "kind": "coin",
+      "file": "coin-journey.jpg",
+      "width": 720,
+      "height": 1280,
+      "bytes": 219676,
+      "sha256": "b6d47bdc868b6e572b7dd7cc1faf735a2166b35737bd311eebc7298e4c5d81fd"
+    },
+    {
+      "id": 17,
+      "key": "jungle-dive",
+      "kind": "fishing",
+      "file": "jungle-dive.jpg",
+      "width": 720,
+      "height": 1280,
+      "bytes": 187728,
+      "sha256": "6860378a1fba933b2afe3c1b80e3223125799c47372622be1e0dc3c0900a558c"
+    },
+    {
+      "id": 18,
+      "key": "rift-strike",
+      "kind": "shooter",
+      "file": "rift-strike.jpg",
+      "width": 720,
+      "height": 1280,
+      "bytes": 192851,
+      "sha256": "4812bea639aa57ec7bd954b1bee61898a9c96f5cda5a9466a1cb83bbe2caf8df"
+    },
+    {
+      "id": 19,
+      "key": "stardust-island",
+      "kind": "builder",
+      "file": "stardust-island.jpg",
+      "width": 720,
+      "height": 1280,
+      "bytes": 208435,
+      "sha256": "c6cb067dc3fd0e5bc02c08700daccb50f43725066d48d74c9b7b03b26505a44d"
+    },
+    {
+      "id": 20,
+      "key": "formation-knights",
+      "kind": "battle",
+      "file": "formation-knights.jpg",
+      "width": 720,
+      "height": 1280,
+      "bytes": 160305,
+      "sha256": "0183a2ae8dc750b4e5b5d62b03bdd2c75749682c470e93c618dff87b9e5f6e10"
+    },
+    {
+      "id": 21,
+      "key": "galaxy-toy-shop",
+      "kind": "shop",
+      "file": "galaxy-toy-shop.jpg",
+      "width": 720,
+      "height": 1280,
+      "bytes": 221395,
+      "sha256": "71f6427e4525d9202dd832a1e4590c3e07fc5b5aea78fcb30a40f9b821632ea7"
+    },
+    {
+      "id": 22,
+      "key": "city-rush",
+      "kind": "drift",
+      "file": "city-rush.jpg",
+      "width": 720,
+      "height": 1280,
+      "bytes": 215223,
+      "sha256": "c62ccf0496e417cc3a26bb541102508fc6ac1c2473f54af0fc4eaee5486785ef"
+    },
+    {
+      "id": 23,
+      "key": "sky-cannon",
+      "kind": "defense",
+      "file": "sky-cannon.jpg",
+      "width": 720,
+      "height": 1280,
+      "bytes": 202690,
+      "sha256": "21352bcbb5e3c9535689ca1495e8fc3825487d453eda2591dcea904775d90cee"
+    },
+    {
+      "id": 24,
+      "key": "neon-dash",
+      "kind": "runner",
+      "file": "neon-dash.jpg",
+      "width": 720,
+      "height": 1280,
+      "bytes": 192688,
+      "sha256": "8beda2e415c1e3e24dab1a1c1d0a4e954d5fc91c8e12f825371eadc7f0b95336"
+    },
+    {
+      "id": 25,
+      "key": "pulse-forge",
+      "kind": "rhythm",
+      "file": "pulse-forge.jpg",
+      "width": 720,
+      "height": 1280,
+      "bytes": 205003,
+      "sha256": "0ab21ab8a1fe6846a92c984db640d6319c8372ecea1d9e6229c4358a79a00a9c"
+    },
+    {
+      "id": 26,
+      "key": "sky-stack",
+      "kind": "stack",
+      "file": "sky-stack.jpg",
+      "width": 720,
+      "height": 1280,
+      "bytes": 181788,
+      "sha256": "3b2d5ffb6bc74aeece1df6eafd2482ea3ee0ab30b9c5991f1ac5e8b87a62bd70"
+    },
+    {
+      "id": 27,
+      "key": "rune-circuit",
+      "kind": "circuit",
+      "file": "rune-circuit.jpg",
+      "width": 720,
+      "height": 1280,
+      "bytes": 198903,
+      "sha256": "c3004c42f31f7216a3837ee6549a29b4b60219d37ae26fe1f9d742b5a0150fcb"
+    },
+    {
+      "id": 28,
+      "key": "prism-match",
+      "kind": "match",
+      "file": "prism-match.jpg",
+      "width": 720,
+      "height": 1280,
+      "bytes": 181707,
+      "sha256": "924129e5d725d1c4cc884ce40d2620c2c55dc2cde1a742fd52dfbffa540a74b6"
+    },
+    {
+      "id": 29,
+      "key": "star-cups",
+      "kind": "cups",
+      "file": "star-cups.jpg",
+      "width": 720,
+      "height": 1280,
+      "bytes": 139433,
+      "sha256": "3842f633ff6d65ff7bb0998d0a15df759d9b77d0de789f36080120cc24f3b202"
+    },
+    {
+      "id": 30,
+      "key": "deep-catch",
+      "kind": "fishing",
+      "file": "deep-catch.jpg",
+      "width": 720,
+      "height": 1280,
+      "bytes": 134423,
+      "sha256": "ee087765058702e6cf0dcb1491103a0fa095fae9a09026f8368294ed6158c6b3"
+    },
+    {
+      "id": 31,
+      "key": "ember-bastion",
+      "kind": "defense",
+      "file": "ember-bastion.jpg",
+      "width": 720,
+      "height": 1280,
+      "bytes": 204081,
+      "sha256": "86ebae466acd24f5f654b99c0c8b541b15cdac04417b26206b0bad7532f548bd"
+    },
+    {
+      "id": 32,
+      "key": "nova-drift",
+      "kind": "drift",
+      "file": "nova-drift.jpg",
+      "width": 720,
+      "height": 1280,
+      "bytes": 226458,
+      "sha256": "80532305c8f710c850bcba2b14b65ade60f458d47d1f2e1096f14be7c6df74d5"
+    },
+    {
+      "id": 33,
+      "key": "void-squadron",
+      "kind": "shooter",
+      "file": "void-squadron.jpg",
+      "width": 720,
+      "height": 1280,
+      "bytes": 145628,
+      "sha256": "54da6921e10f5f3b0298102af7d3b16ec64d54f3cf386b2370b42059e746562e"
+    },
+    {
+      "id": 34,
+      "key": "orchard-merge",
+      "kind": "match",
+      "file": "orchard-merge.jpg",
+      "width": 720,
+      "height": 1280,
+      "bytes": 212034,
+      "sha256": "811ad2af71b5c69dbb6660705844fb7f5811424029ff3e4e913b23e917a20e3e"
+    },
+    {
+      "id": 35,
+      "key": "star-mower",
+      "kind": "survival",
+      "file": "star-mower.jpg",
+      "width": 720,
+      "height": 1280,
+      "bytes": 364346,
+      "sha256": "7439f366d6a5320070a9656124facd00cc49e7c01713bc5a1c09f8d1c87a6a7c"
+    },
+    {
+      "id": 36,
+      "key": "moonlight-tea-shop",
+      "kind": "shop",
+      "file": "moonlight-tea-shop.jpg",
+      "width": 720,
+      "height": 1280,
+      "bytes": 177005,
+      "sha256": "d68958d0aa36e82004db18a3353a1e59b0a8723ecba5fdb515c4bde5e9916e54"
+    },
+    {
+      "id": 37,
+      "key": "microbe-arena",
+      "kind": "survival",
+      "file": "microbe-arena.jpg",
+      "width": 720,
+      "height": 1280,
+      "bytes": 128004,
+      "sha256": "572f5af51786254102f402a9cf17fc9020b9e849554205698bef3938fd660719"
+    },
+    {
+      "id": 38,
+      "key": "star-deck",
+      "kind": "cards",
+      "file": "star-deck.jpg",
+      "width": 720,
+      "height": 1280,
+      "bytes": 162072,
+      "sha256": "a823db79bd1272df87f38ca0226ecc0dc7d289fd4c5a7fd86893a8244d7126f2"
+    },
+    {
+      "id": 39,
+      "key": "crystal-bastion",
+      "kind": "defense",
+      "file": "crystal-bastion.jpg",
+      "width": 720,
+      "height": 1280,
+      "bytes": 289159,
+      "sha256": "c15af19c2d5fd451a25c97412e8c9a9616232be75def24b9b3f0ce8685a6cdf5"
+    },
+    {
+      "id": 40,
+      "key": "adventurer-journal",
+      "kind": "maze",
+      "file": "adventurer-journal.jpg",
+      "width": 720,
+      "height": 1280,
+      "bytes": 222679,
+      "sha256": "5c728718334a4f6cd950661b93da993f801cc7563c5e994d11217de309c8bb79"
+    },
+    {
+      "id": 41,
+      "key": "idiom-detective",
+      "kind": "cards",
+      "file": "idiom-detective.jpg",
+      "width": 720,
+      "height": 1280,
+      "bytes": 180402,
+      "sha256": "865262177420a1115e0cb904e8c86762f83338078adb052c77d2070f90151a7f"
+    },
+    {
+      "id": 42,
+      "key": "hex-frontier",
+      "kind": "battle",
+      "file": "hex-frontier.jpg",
+      "width": 720,
+      "height": 1280,
+      "bytes": 196742,
+      "sha256": "6a8965f7256c76ff95523db8203b0fb212df29ae4dfb5ea0345df14d94b510a0"
+    },
+    {
+      "id": 43,
+      "key": "studio-wardrobe",
+      "kind": "wardrobe",
+      "file": "studio-wardrobe.jpg",
+      "width": 720,
+      "height": 1280,
+      "bytes": 179842,
+      "sha256": "57f4c8c72f813bee5ad49a59af2eedbf0b9a77eaa2c5d0b7d6ecd4c64e2a9417"
+    },
+    {
+      "id": 44,
+      "key": "garden-renewal",
+      "kind": "match",
+      "file": "garden-renewal.jpg",
+      "width": 720,
+      "height": 1280,
+      "bytes": 240179,
+      "sha256": "12154cf144de55fe8568847fa0ba90a30066071f20787561ab2b8fa1b66bfed5"
+    }
+  ]
+}

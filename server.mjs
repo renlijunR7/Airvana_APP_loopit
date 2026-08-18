@@ -7,7 +7,7 @@ const app = createApp();
 const server = http.createServer(app.handler);
 
 server.listen(port, host, () => {
-  console.log(`Airvana v5.3 P0/P1/P2 complete running at http://${host}:${port}`);
+  console.log(`Airvana v5.3 Economy V1 running at http://${host}:${port}`);
   console.log(`AI provider: ${app.ai.info.provider} (${app.ai.info.model})`);
 });
 

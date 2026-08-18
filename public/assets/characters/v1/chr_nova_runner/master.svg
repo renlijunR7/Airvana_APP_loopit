@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 420" role="img" aria-labelledby="title desc">
+ <title id="title">Nova Runner canonical character master</title>
+ <desc id="desc">Airvana original code-native character master shared by cover and runtime.</desc>
+ <metadata>Airvana character-consistency-v1; original vector artwork; no third-party IP; no generative runtime asset.</metadata>
+ <defs>
+    <linearGradient id="primary" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#745CF4"/><stop offset="1" stop-color="#121522"/></linearGradient>
+    <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#F7F0D7"/><stop offset=".46" stop-color="#22C7D6"/><stop offset="1" stop-color="#1B2530"/></linearGradient>
+    <linearGradient id="skin" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#8F573F"/><stop offset="1" stop-color="#15182A" stop-opacity=".38"/></linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%"><feDropShadow dx="0" dy="12" stdDeviation="10" flood-color="#06080D" flood-opacity=".34"/></filter>
+  </defs>
+ <g id="character" filter="url(#shadow)">
+  <path d="M95 120Q102 45 160 32q58 13 65 88l-24 30H119Z" fill="#15182A"/>
+  <ellipse cx="160" cy="116" rx="48" ry="55" fill="url(#skin)"/>
+  <path d="M109 113q51-31 102 0l-8 29q-43 24-86 0Z" fill="#121522" stroke="#22C7D6" stroke-width="7"/>
+  <path d="M125 123h70" stroke="#22C7D6" stroke-width="11" stroke-linecap="round"/><circle cx="180" cy="123" r="6" fill="#E8FFFF"/>
+  <path d="M117 164q43 25 86 0l27 113-70 29-70-29Z" fill="url(#primary)" stroke="#22C7D6" stroke-width="5"/>
+  <path d="M103 183 61 255l34 18 46-61M217 181l47 63-30 22-52-57" fill="none" stroke="#8F573F" stroke-width="25" stroke-linecap="round"/>
+  <path d="M94 278 75 375M201 282l44 80" stroke="#121522" stroke-width="34" stroke-linecap="round"/>
+  <path d="m53 367 59-7-4 25-60 8ZM218 356l58 25-14 22-58-28Z" fill="#22C7D6" stroke="#EEF9FF" stroke-width="4"/>
+  <path d="M101 254h118l-7 27H108Z" fill="#F4C35A"/><circle cx="160" cy="267" r="11" fill="#FFF5B7"/>
+  <path d="m100 61-25 70 31 13 16-74ZM220 62l24 70-31 13-15-73Z" fill="#745CF4"/>
+ </g>
+</svg>

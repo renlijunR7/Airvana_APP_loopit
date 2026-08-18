@@ -1,0 +1,237 @@
+{
+  "version": "3.0.0",
+  "generatedBy": "scripts/generate-code-art-covers.mjs",
+  "license": "Airvana original",
+  "generativeAI": false,
+  "thirdPartyAssets": false,
+  "files": [
+    {
+      "id": 1,
+      "key": "safety-workshop",
+      "kind": "quiz",
+      "file": "safety-workshop.svg"
+    },
+    {
+      "id": 2,
+      "key": "stellar-farm",
+      "kind": "builder",
+      "file": "stellar-farm.svg"
+    },
+    {
+      "id": 5,
+      "key": "pixel-quest",
+      "kind": "runner",
+      "file": "pixel-quest.svg"
+    },
+    {
+      "id": 6,
+      "key": "red-cup-shuffle",
+      "kind": "cups",
+      "file": "red-cup-shuffle.svg"
+    },
+    {
+      "id": 9,
+      "key": "magic-choir",
+      "kind": "rhythm",
+      "file": "magic-choir.svg"
+    },
+    {
+      "id": 10,
+      "key": "paws-stage",
+      "kind": "sequence",
+      "file": "paws-stage.svg"
+    },
+    {
+      "id": 12,
+      "key": "puppet-studio",
+      "kind": "wardrobe",
+      "file": "puppet-studio.svg"
+    },
+    {
+      "id": 14,
+      "key": "firefly-mail",
+      "kind": "sort",
+      "file": "firefly-mail.svg"
+    },
+    {
+      "id": 15,
+      "key": "whisker-escape",
+      "kind": "maze",
+      "file": "whisker-escape.svg"
+    },
+    {
+      "id": 16,
+      "key": "coin-journey",
+      "kind": "coin",
+      "file": "coin-journey.svg"
+    },
+    {
+      "id": 17,
+      "key": "jungle-dive",
+      "kind": "fishing",
+      "file": "jungle-dive.svg"
+    },
+    {
+      "id": 18,
+      "key": "rift-strike",
+      "kind": "shooter",
+      "file": "rift-strike.svg"
+    },
+    {
+      "id": 19,
+      "key": "stardust-island",
+      "kind": "builder",
+      "file": "stardust-island.svg"
+    },
+    {
+      "id": 20,
+      "key": "formation-knights",
+      "kind": "battle",
+      "file": "formation-knights.svg"
+    },
+    {
+      "id": 21,
+      "key": "galaxy-toy-shop",
+      "kind": "shop",
+      "file": "galaxy-toy-shop.svg"
+    },
+    {
+      "id": 22,
+      "key": "city-rush",
+      "kind": "drift",
+      "file": "city-rush.svg"
+    },
+    {
+      "id": 23,
+      "key": "sky-cannon",
+      "kind": "defense",
+      "file": "sky-cannon.svg"
+    },
+    {
+      "id": 24,
+      "key": "neon-dash",
+      "kind": "runner",
+      "file": "neon-dash.svg"
+    },
+    {
+      "id": 25,
+      "key": "pulse-forge",
+      "kind": "rhythm",
+      "file": "pulse-forge.svg"
+    },
+    {
+      "id": 26,
+      "key": "sky-stack",
+      "kind": "stack",
+      "file": "sky-stack.svg"
+    },
+    {
+      "id": 27,
+      "key": "rune-circuit",
+      "kind": "circuit",
+      "file": "rune-circuit.svg"
+    },
+    {
+      "id": 28,
+      "key": "prism-match",
+      "kind": "match",
+      "file": "prism-match.svg"
+    },
+    {
+      "id": 29,
+      "key": "star-cups",
+      "kind": "cups",
+      "file": "star-cups.svg"
+    },
+    {
+      "id": 30,
+      "key": "deep-catch",
+      "kind": "fishing",
+      "file": "deep-catch.svg"
+    },
+    {
+      "id": 31,
+      "key": "ember-bastion",
+      "kind": "defense",
+      "file": "ember-bastion.svg"
+    },
+    {
+      "id": 32,
+      "key": "nova-drift",
+      "kind": "drift",
+      "file": "nova-drift.svg"
+    },
+    {
+      "id": 33,
+      "key": "void-squadron",
+      "kind": "shooter",
+      "file": "void-squadron.svg"
+    },
+    {
+      "id": 34,
+      "key": "orchard-merge",
+      "kind": "match",
+      "file": "orchard-merge.svg"
+    },
+    {
+      "id": 35,
+      "key": "star-mower",
+      "kind": "survival",
+      "file": "star-mower.svg"
+    },
+    {
+      "id": 36,
+      "key": "moonlight-tea-shop",
+      "kind": "shop",
+      "file": "moonlight-tea-shop.svg"
+    },
+    {
+      "id": 37,
+      "key": "microbe-arena",
+      "kind": "survival",
+      "file": "microbe-arena.svg"
+    },
+    {
+      "id": 38,
+      "key": "star-deck",
+      "kind": "cards",
+      "file": "star-deck.svg"
+    },
+    {
+      "id": 39,
+      "key": "crystal-bastion",
+      "kind": "defense",
+      "file": "crystal-bastion.svg"
+    },
+    {
+      "id": 40,
+      "key": "adventurer-journal",
+      "kind": "maze",
+      "file": "adventurer-journal.svg"
+    },
+    {
+      "id": 41,
+      "key": "idiom-detective",
+      "kind": "cards",
+      "file": "idiom-detective.svg"
+    },
+    {
+      "id": 42,
+      "key": "hex-frontier",
+      "kind": "battle",
+      "file": "hex-frontier.svg"
+    },
+    {
+      "id": 43,
+      "key": "studio-wardrobe",
+      "kind": "wardrobe",
+      "file": "studio-wardrobe.svg"
+    },
+    {
+      "id": 44,
+      "key": "garden-renewal",
+      "kind": "match",
+      "file": "garden-renewal.svg"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 1280" role="img" aria-labelledby="title desc">
+ <title id="title">Aegis Rowan game cover</title>
+ <desc id="desc">Airvana original cover built from the same canonical master used inside the playable.</desc>
+ <metadata>Airvana character-consistency-v1; canonical-master:/assets/characters/v1/chr_aegis_rowan/master.svg; no third-party IP.</metadata>
+ <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#B84246"/><stop offset=".48" stop-color="#1E2024"/><stop offset="1" stop-color="#07090F"/></linearGradient><radialGradient id="glow"><stop stop-color="#516D78" stop-opacity=".65"/><stop offset="1" stop-color="#516D78" stop-opacity="0"/></radialGradient><linearGradient id="shade" x1="0" y1="0" x2="0" y2="1"><stop offset=".62" stop-color="#05070B" stop-opacity="0"/><stop offset="1" stop-color="#05070B" stop-opacity=".9"/></linearGradient></defs>
+ <defs>
+    <linearGradient id="primary" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#B84246"/><stop offset="1" stop-color="#1E2024"/></linearGradient>
+    <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#F7F0D7"/><stop offset=".46" stop-color="#516D78"/><stop offset="1" stop-color="#1B2530"/></linearGradient>
+    <linearGradient id="skin" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#9A654A"/><stop offset="1" stop-color="#3B2B2B" stop-opacity=".38"/></linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%"><feDropShadow dx="0" dy="12" stdDeviation="10" flood-color="#06080D" flood-opacity=".34"/></filter>
+  </defs>
+ <rect width="720" height="1280" fill="url(#bg)"/><circle cx="360" cy="440" r="360" fill="url(#glow)"/><path d="M0 695 180 520l160 120 140-165 240 220v345H0Z" fill="#202730"/><path d="M0 860h720v180H0Z" fill="#111318"/><path d="M510 340q120 40 155 190-113-45-217 10 11-146 62-200Z" fill="#0A0B10" stroke="#B84246" stroke-width="8"/><circle cx="545" cy="430" r="12" fill="#B84246"/><circle cx="617" cy="443" r="12" fill="#B84246"/>
+ <g data-canonical-master="/assets/characters/v1/chr_aegis_rowan/master.svg" transform="translate(112 220) scale(1.55)"><g id="character" filter="url(#shadow)">
+  <path d="M134 44q25-38 52 0l23 47H112Z" fill="url(#metal)" stroke="#D7B35D" stroke-width="6"/><path d="m159 39-32-28 12 54M163 39l42-23-21 52" fill="none" stroke="#F4E8C7" stroke-width="14" stroke-linecap="round"/>
+  <path d="M112 90q48-33 96 0l-9 72h-78Z" fill="url(#metal)" stroke="#1E2024" stroke-width="7"/><path d="M125 112h70" stroke="#1E2024" stroke-width="13"/><path d="M136 112v12m24-12v12m24-12v12" stroke="#D7B35D" stroke-width="6"/>
+  <path d="M104 166h112l26 135-82 38-82-38Z" fill="url(#metal)" stroke="#D7B35D" stroke-width="7"/><path d="M99 174 54 260M221 174l42 88" stroke="url(#metal)" stroke-width="30" stroke-linecap="round"/>
+  <path d="M124 325 102 396M196 325l25 71" stroke="#1E2024" stroke-width="31" stroke-linecap="round"/>
+  <path d="M79 222q-40 28-30 112l49 28 43-41-16-91Z" fill="#B84246" stroke="#D7B35D" stroke-width="7"/><path d="m83 261 13 20 23 4-17 16 5 23-24-12-22 12 5-23-18-16 24-4Z" fill="#D7B35D"/>
+  <path d="M206 171q30 52 12 145l49-40-24-105Z" fill="#B84246"/><path d="M202 166l17-22 18 13-11 20M226 177l15-19 17 14-10 21M248 193l15-15 15 15-13 19" fill="#D7B35D"/>
+ </g></g>
+ <path d="M0 810q180-65 360 0t360 0v470H0Z" fill="url(#shade)"/>
+ <g fill="none" stroke="#FFFFFF" stroke-opacity=".14"><path d="M55 96h610"/><path d="M55 1120h610"/></g>
+</svg>

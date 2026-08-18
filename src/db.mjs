@@ -214,6 +214,231 @@ function migrate(db) {
       UNIQUE(currency, event_key)
     );
 
+    CREATE TABLE IF NOT EXISTS economy_profiles (
+      user_id TEXT PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
+      base_role TEXT NOT NULL DEFAULT 'player',
+      creator_status TEXT NOT NULL DEFAULT 'not_applied',
+      kyc_status TEXT NOT NULL DEFAULT 'not_started',
+      region_status TEXT NOT NULL DEFAULT 'unknown',
+      account_verified_at TEXT,
+      created_at TEXT NOT NULL,
+      updated_at TEXT NOT NULL
+    );
+
+    CREATE TABLE IF NOT EXISTS user_role_memberships (
+      id TEXT PRIMARY KEY,
+      user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      role_key TEXT NOT NULL,
+      status TEXT NOT NULL,
+      granted_by TEXT,
+      granted_at TEXT NOT NULL,
+      expires_at TEXT,
+      suspended_at TEXT,
+      reason_code TEXT,
+      UNIQUE(user_id, role_key)
+    );
+
+    CREATE TABLE IF NOT EXISTS user_entitlements (
+      id TEXT PRIMARY KEY,
+      user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      entitlement_key TEXT NOT NULL,
+      status TEXT NOT NULL,
+      source_type TEXT NOT NULL,
+      source_id TEXT,
+      starts_at TEXT NOT NULL,
+      expires_at TEXT,
+      metadata_json TEXT NOT NULL DEFAULT '{}',
+      UNIQUE(user_id, entitlement_key, source_type, source_id)
+    );
+
+    CREATE TABLE IF NOT EXISTS creator_applications (
+      id TEXT PRIMARY KEY,
+      user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      status TEXT NOT NULL CHECK(status IN ('submitted','kyc_pending','under_review','approved','rejected','suspended')),
+      application_note TEXT NOT NULL,
+      region_code TEXT NOT NULL,
+      kyc_consent_at TEXT NOT NULL,
+      kyc_reference TEXT,
+      kyc_verified_at TEXT,
+      review_note TEXT,
+      reviewed_by TEXT REFERENCES users(id),
+      reviewed_at TEXT,
+      created_at TEXT NOT NULL,
+      updated_at TEXT NOT NULL
+    );
+
+    CREATE TABLE IF NOT EXISTS ledger_batches (
+      id TEXT PRIMARY KEY,
+      user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      asset_type TEXT NOT NULL CHECK(asset_type IN ('AIP','AIT')),
+      source_type TEXT NOT NULL,
+      original_amount INTEGER NOT NULL CHECK(original_amount > 0),
+      remaining_amount INTEGER NOT NULL CHECK(remaining_amount >= 0),
+      status TEXT NOT NULL CHECK(status IN ('pending','available','frozen','spent','expired','reversed')),
+      campaign_id TEXT,
+      contract_version TEXT,
+      earned_at TEXT NOT NULL,
+      available_at TEXT,
+      expires_at TEXT,
+      frozen_at TEXT,
+      spent_at TEXT,
+      reversed_at TEXT,
+      risk_decision TEXT,
+      reason_code TEXT,
+      idempotency_key TEXT NOT NULL,
+      metadata_json TEXT NOT NULL DEFAULT '{}',
+      UNIQUE(asset_type, idempotency_key)
+    );
+
+    CREATE TABLE IF NOT EXISTS subscription_plans (
+      id TEXT PRIMARY KEY,
+      plan_key TEXT NOT NULL UNIQUE,
+      name TEXT NOT NULL,
+      audience TEXT NOT NULL,
+      status TEXT NOT NULL,
+      allowance_json TEXT NOT NULL,
+      feature_json TEXT NOT NULL,
+      price_status TEXT NOT NULL DEFAULT 'pending_approval',
+      created_at TEXT NOT NULL,
+      updated_at TEXT NOT NULL
+    );
+
+    CREATE TABLE IF NOT EXISTS subscriptions (
+      id TEXT PRIMARY KEY,
+      user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      plan_id TEXT NOT NULL REFERENCES subscription_plans(id),
+      status TEXT NOT NULL CHECK(status IN ('active','past_due','cancelled','expired')),
+      source_type TEXT NOT NULL,
+      payment_reference TEXT,
+      starts_at TEXT NOT NULL,
+      ends_at TEXT NOT NULL,
+      cancel_at_period_end INTEGER NOT NULL DEFAULT 0,
+      created_at TEXT NOT NULL,
+      updated_at TEXT NOT NULL
+    );
+
+    CREATE TABLE IF NOT EXISTS subscription_allowances (
+      id TEXT PRIMARY KEY,
+      subscription_id TEXT NOT NULL REFERENCES subscriptions(id) ON DELETE CASCADE,
+      user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      cycle_key TEXT NOT NULL,
+      allowance_key TEXT NOT NULL,
+      granted_units INTEGER NOT NULL,
+      used_units INTEGER NOT NULL DEFAULT 0,
+      starts_at TEXT NOT NULL,
+      expires_at TEXT NOT NULL,
+      UNIQUE(subscription_id, cycle_key, allowance_key)
+    );
+
+    CREATE TABLE IF NOT EXISTS economy_usage_events (
+      id TEXT PRIMARY KEY,
+      user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      usage_type TEXT NOT NULL,
+      units INTEGER NOT NULL,
+      aip_cost INTEGER NOT NULL DEFAULT 0,
+      subscription_allowance_id TEXT REFERENCES subscription_allowances(id),
+      subject_type TEXT NOT NULL,
+      subject_id TEXT NOT NULL,
+      idempotency_key TEXT NOT NULL,
+      metadata_json TEXT NOT NULL DEFAULT '{}',
+      created_at TEXT NOT NULL,
+      UNIQUE(user_id, idempotency_key)
+    );
+
+    CREATE TABLE IF NOT EXISTS campaign_economy_rules (
+      id TEXT PRIMARY KEY,
+      campaign_id TEXT NOT NULL REFERENCES campaigns(id) ON DELETE CASCADE,
+      contract_version TEXT NOT NULL,
+      status TEXT NOT NULL CHECK(status IN ('draft','pending_review','approved','rejected','expired')),
+      primary_success_event TEXT NOT NULL,
+      player_rule_json TEXT NOT NULL,
+      creator_rule_json TEXT NOT NULL,
+      attribution_json TEXT NOT NULL,
+      eligibility_json TEXT NOT NULL,
+      budget_json TEXT NOT NULL,
+      settlement_json TEXT NOT NULL,
+      locked_fields_json TEXT NOT NULL,
+      approved_by TEXT REFERENCES users(id),
+      approved_at TEXT,
+      expires_at TEXT,
+      created_at TEXT NOT NULL,
+      updated_at TEXT NOT NULL,
+      UNIQUE(campaign_id, contract_version)
+    );
+
+    CREATE TABLE IF NOT EXISTS ait_entitlements (
+      id TEXT PRIMARY KEY,
+      user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      campaign_id TEXT NOT NULL REFERENCES campaigns(id) ON DELETE CASCADE,
+      contract_version TEXT NOT NULL,
+      source_type TEXT NOT NULL CHECK(source_type IN ('player_campaign','creator_delivery','creator_operation','creator_performance','campaign_allocation')),
+      source_event_type TEXT NOT NULL,
+      source_event_id TEXT NOT NULL,
+      amount INTEGER NOT NULL CHECK(amount > 0),
+      status TEXT NOT NULL CHECK(status IN ('estimated','pending','available','frozen','settlement_pending','settled','reversed','expired')),
+      attribution_reference TEXT NOT NULL,
+      risk_decision TEXT NOT NULL,
+      reason_code TEXT,
+      available_at TEXT,
+      expires_at TEXT,
+      frozen_at TEXT,
+      settled_at TEXT,
+      reversed_at TEXT,
+      created_at TEXT NOT NULL,
+      updated_at TEXT NOT NULL,
+      UNIQUE(campaign_id, contract_version, source_type, source_event_id, user_id)
+    );
+
+    CREATE TABLE IF NOT EXISTS benefit_claims (
+      id TEXT PRIMARY KEY,
+      entitlement_id TEXT NOT NULL REFERENCES ait_entitlements(id) ON DELETE CASCADE,
+      user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      benefit_type TEXT NOT NULL,
+      status TEXT NOT NULL CHECK(status IN ('submitted','approved','fulfilled','rejected','cancelled')),
+      fulfillment_reference TEXT,
+      review_note TEXT,
+      reviewed_by TEXT REFERENCES users(id),
+      created_at TEXT NOT NULL,
+      updated_at TEXT NOT NULL,
+      UNIQUE(entitlement_id, user_id)
+    );
+
+    CREATE TABLE IF NOT EXISTS payment_settlements (
+      id TEXT PRIMARY KEY,
+      entitlement_id TEXT NOT NULL REFERENCES ait_entitlements(id),
+      user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      payer_subject TEXT NOT NULL,
+      payee_subject TEXT NOT NULL,
+      currency TEXT NOT NULL,
+      gross_amount TEXT NOT NULL,
+      fee_amount TEXT NOT NULL DEFAULT '0',
+      fx_source TEXT,
+      fx_rate TEXT,
+      fx_time TEXT,
+      status TEXT NOT NULL CHECK(status IN ('draft','submitted','approved','processing','paid','rejected','cancelled')),
+      payment_reference TEXT,
+      receipt_reference TEXT,
+      review_note TEXT,
+      reviewed_by TEXT REFERENCES users(id),
+      paid_at TEXT,
+      created_at TEXT NOT NULL,
+      updated_at TEXT NOT NULL,
+      UNIQUE(entitlement_id)
+    );
+
+    CREATE TABLE IF NOT EXISTS ledger_appeals (
+      id TEXT PRIMARY KEY,
+      user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      subject_type TEXT NOT NULL,
+      subject_id TEXT NOT NULL,
+      reason TEXT NOT NULL,
+      status TEXT NOT NULL CHECK(status IN ('submitted','reviewing','approved','rejected')),
+      resolution_note TEXT,
+      resolved_by TEXT REFERENCES users(id),
+      created_at TEXT NOT NULL,
+      updated_at TEXT NOT NULL
+    );
+
     CREATE TABLE IF NOT EXISTS ait_withdrawal_requests (
       id TEXT PRIMARY KEY,
       user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
@@ -477,6 +702,14 @@ function migrate(db) {
     CREATE INDEX IF NOT EXISTS idx_contents_owner ON contents(owner_user_id, updated_at);
     CREATE INDEX IF NOT EXISTS idx_contents_status ON contents(status, published_at);
     CREATE INDEX IF NOT EXISTS idx_point_user ON point_events(user_id, currency, created_at);
+    CREATE INDEX IF NOT EXISTS idx_ledger_batches_user ON ledger_batches(user_id, asset_type, status, expires_at);
+    CREATE INDEX IF NOT EXISTS idx_role_membership_user ON user_role_memberships(user_id, role_key, status);
+    CREATE INDEX IF NOT EXISTS idx_creator_applications_user ON creator_applications(user_id, status, created_at);
+    CREATE INDEX IF NOT EXISTS idx_subscription_user ON subscriptions(user_id, status, ends_at);
+    CREATE INDEX IF NOT EXISTS idx_allowance_user ON subscription_allowances(user_id, allowance_key, expires_at);
+    CREATE INDEX IF NOT EXISTS idx_ait_entitlements_user ON ait_entitlements(user_id, status, created_at);
+    CREATE INDEX IF NOT EXISTS idx_ait_entitlements_campaign ON ait_entitlements(campaign_id, contract_version, source_type, status);
+    CREATE INDEX IF NOT EXISTS idx_payment_settlements_user ON payment_settlements(user_id, status, created_at);
     CREATE INDEX IF NOT EXISTS idx_wallet_bindings_user ON wallet_bindings(user_id, status, is_primary);
     CREATE INDEX IF NOT EXISTS idx_wallet_binding_challenges_user ON wallet_binding_challenges(user_id, expires_at);
     CREATE INDEX IF NOT EXISTS idx_ait_withdrawals_user ON ait_withdrawal_requests(user_id, status, created_at);
@@ -497,10 +730,36 @@ function migrate(db) {
   const memoryColumns = db.prepare('PRAGMA table_info(agent_memory)').all().map(column => column.name);
   if (!memoryColumns.includes('priority')) db.exec('ALTER TABLE agent_memory ADD COLUMN priority INTEGER NOT NULL DEFAULT 2');
 
+  const pointColumns = new Set(db.prepare('PRAGMA table_info(point_events)').all().map(column => column.name));
+  const pointColumnMigrations = [
+    ['batch_id', 'TEXT'],
+    ['available_at', 'TEXT'],
+    ['expires_at', 'TEXT'],
+    ['frozen_at', 'TEXT'],
+    ['spent_at', 'TEXT'],
+    ['reversed_at', 'TEXT'],
+    ['campaign_id', 'TEXT'],
+    ['contract_version', 'TEXT'],
+    ['risk_decision', 'TEXT'],
+    ['reason_code', 'TEXT'],
+  ];
+  for (const [name, definition] of pointColumnMigrations) {
+    if (!pointColumns.has(name)) db.exec(`ALTER TABLE point_events ADD COLUMN ${name} ${definition}`);
+  }
+  const usageColumns = new Set(db.prepare('PRAGMA table_info(economy_usage_events)').all().map(column => column.name));
+  if (!usageColumns.has('metadata_json')) db.exec(`ALTER TABLE economy_usage_events ADD COLUMN metadata_json TEXT NOT NULL DEFAULT '{}'`);
+  const aitEntitlementColumns = new Set(db.prepare('PRAGMA table_info(ait_entitlements)').all().map(column => column.name));
+  if (!aitEntitlementColumns.has('source_event_type')) db.exec(`ALTER TABLE ait_entitlements ADD COLUMN source_event_type TEXT NOT NULL DEFAULT 'legacy_event'`);
+  db.exec(`
+    CREATE INDEX IF NOT EXISTS idx_point_expiry ON point_events(user_id, currency, status, expires_at);
+    CREATE INDEX IF NOT EXISTS idx_point_campaign ON point_events(campaign_id, contract_version, currency);
+  `);
+
   db.prepare(`INSERT OR IGNORE INTO app_settings (setting_key,value_json,updated_at) VALUES ('agent_runtime_enabled','true',?)`).run(new Date().toISOString());
 }
 
 export function transaction(db, fn) {
+  if (db.isTransaction) return fn();
   db.exec('BEGIN IMMEDIATE');
   try {
     const result = fn();

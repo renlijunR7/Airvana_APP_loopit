@@ -1,0 +1,704 @@
+{
+  "version": "3.2.0",
+  "campaign_id": "cmp_home_complete_games_v3_20260815",
+  "total_games": 38,
+  "complete_games": 38,
+  "preview_only_games": 0,
+  "sensor_playables": [
+    {"content_id": 5, "slug": "pixel-quest", "input": "device_orientation", "control": "lane", "fallback": "tap"},
+    {"content_id": 6, "slug": "red-cup-shuffle", "input": "device_motion_shake", "control": "shuffle", "fallback": "tap"},
+    {"content_id": 9, "slug": "magic-choir", "input": "local_microphone_blow_detection", "control": "sequence", "fallback": "tap"},
+    {"content_id": 18, "slug": "rift-strike", "input": "device_orientation_2d", "control": "aim", "fallback": "drag"},
+    {"content_id": 22, "slug": "city-rush", "input": "device_orientation", "control": "steer", "fallback": "touch_hold"},
+    {"content_id": 24, "slug": "neon-dash", "input": "device_orientation", "control": "lane", "fallback": "tap"},
+    {"content_id": 29, "slug": "star-cups", "input": "device_motion_shake", "control": "shuffle", "fallback": "tap"},
+    {"content_id": 32, "slug": "nova-drift", "input": "device_orientation", "control": "steer", "fallback": "touch_hold"},
+    {"content_id": 33, "slug": "void-squadron", "input": "device_orientation_2d", "control": "aim", "fallback": "drag"}
+  ],
+  "games": [
+    {
+      "content_id": 1,
+      "slug": "safety-workshop",
+      "title": "Crypto City 安全挑战",
+      "mechanic": "quiz",
+      "runtime": "complete-games-v3",
+      "stages": 3,
+      "states": [
+        "intro",
+        "playing",
+        "paused",
+        "success",
+        "failure",
+        "replay"
+      ],
+      "art": "code-native",
+      "external_asset_dependencies": []
+    },
+    {
+      "content_id": 2,
+      "slug": "stellar-farm",
+      "title": "星际农场",
+      "mechanic": "builder",
+      "runtime": "complete-games-v3",
+      "stages": 3,
+      "states": [
+        "intro",
+        "playing",
+        "paused",
+        "success",
+        "failure",
+        "replay"
+      ],
+      "art": "code-native",
+      "external_asset_dependencies": []
+    },
+    {
+      "content_id": 5,
+      "slug": "pixel-quest",
+      "title": "像素冒险",
+      "mechanic": "runner",
+      "runtime": "complete-games-v3",
+      "stages": 3,
+      "states": [
+        "intro",
+        "playing",
+        "paused",
+        "success",
+        "failure",
+        "replay"
+      ],
+      "art": "code-native",
+      "external_asset_dependencies": []
+    },
+    {
+      "content_id": 6,
+      "slug": "red-cup-shuffle",
+      "title": "红杯速配",
+      "mechanic": "cups",
+      "runtime": "complete-games-v3",
+      "stages": 3,
+      "states": [
+        "intro",
+        "playing",
+        "paused",
+        "success",
+        "failure",
+        "replay"
+      ],
+      "art": "code-native",
+      "external_asset_dependencies": []
+    },
+    {
+      "content_id": 9,
+      "slug": "magic-choir",
+      "title": "魔法合唱团",
+      "mechanic": "rhythm",
+      "runtime": "complete-games-v3",
+      "stages": 3,
+      "states": [
+        "intro",
+        "playing",
+        "paused",
+        "success",
+        "failure",
+        "replay"
+      ],
+      "art": "code-native",
+      "external_asset_dependencies": []
+    },
+    {
+      "content_id": 10,
+      "slug": "paws-stage",
+      "title": "萌宠音乐盒",
+      "mechanic": "sequence",
+      "runtime": "complete-games-v3",
+      "stages": 3,
+      "states": [
+        "intro",
+        "playing",
+        "paused",
+        "success",
+        "failure",
+        "replay"
+      ],
+      "art": "code-native",
+      "external_asset_dependencies": []
+    },
+    {
+      "content_id": 12,
+      "slug": "puppet-studio",
+      "title": "玩偶造型工坊",
+      "mechanic": "wardrobe",
+      "runtime": "complete-games-v3",
+      "stages": 3,
+      "states": [
+        "intro",
+        "playing",
+        "paused",
+        "success",
+        "failure",
+        "replay"
+      ],
+      "art": "code-native",
+      "external_asset_dependencies": []
+    },
+    {
+      "content_id": 14,
+      "slug": "firefly-mail",
+      "title": "萤火信箱",
+      "mechanic": "sort",
+      "runtime": "complete-games-v3",
+      "stages": 3,
+      "states": [
+        "intro",
+        "playing",
+        "paused",
+        "success",
+        "failure",
+        "replay"
+      ],
+      "art": "code-native",
+      "external_asset_dependencies": []
+    },
+    {
+      "content_id": 15,
+      "slug": "whisker-escape",
+      "title": "猫咪潜逃",
+      "mechanic": "maze",
+      "runtime": "complete-games-v3",
+      "stages": 3,
+      "states": [
+        "intro",
+        "playing",
+        "paused",
+        "success",
+        "failure",
+        "replay"
+      ],
+      "art": "code-native",
+      "external_asset_dependencies": []
+    },
+    {
+      "content_id": 16,
+      "slug": "coin-journey",
+      "title": "金币环游记",
+      "mechanic": "coin",
+      "runtime": "complete-games-v3",
+      "stages": 3,
+      "states": [
+        "intro",
+        "playing",
+        "paused",
+        "success",
+        "failure",
+        "replay"
+      ],
+      "art": "code-native",
+      "external_asset_dependencies": []
+    },
+    {
+      "content_id": 17,
+      "slug": "jungle-dive",
+      "title": "丛林潜游",
+      "mechanic": "fishing",
+      "runtime": "complete-games-v3",
+      "stages": 3,
+      "states": [
+        "intro",
+        "playing",
+        "paused",
+        "success",
+        "failure",
+        "replay"
+      ],
+      "art": "code-native",
+      "external_asset_dependencies": []
+    },
+    {
+      "content_id": 18,
+      "slug": "rift-strike",
+      "title": "裂隙突击",
+      "mechanic": "shooter",
+      "runtime": "complete-games-v3",
+      "stages": 3,
+      "states": [
+        "intro",
+        "playing",
+        "paused",
+        "success",
+        "failure",
+        "replay"
+      ],
+      "art": "code-native",
+      "external_asset_dependencies": []
+    },
+    {
+      "content_id": 19,
+      "slug": "stardust-island",
+      "title": "星砂岛",
+      "mechanic": "builder",
+      "runtime": "complete-games-v3",
+      "stages": 3,
+      "states": [
+        "intro",
+        "playing",
+        "paused",
+        "success",
+        "failure",
+        "replay"
+      ],
+      "art": "code-native",
+      "external_asset_dependencies": []
+    },
+    {
+      "content_id": 20,
+      "slug": "formation-knights",
+      "title": "阵线骑士",
+      "mechanic": "battle",
+      "runtime": "complete-games-v3",
+      "stages": 3,
+      "states": [
+        "intro",
+        "playing",
+        "paused",
+        "success",
+        "failure",
+        "replay"
+      ],
+      "art": "code-native",
+      "external_asset_dependencies": []
+    },
+    {
+      "content_id": 21,
+      "slug": "galaxy-toy-shop",
+      "title": "银河玩具店",
+      "mechanic": "shop",
+      "runtime": "complete-games-v3",
+      "stages": 3,
+      "states": [
+        "intro",
+        "playing",
+        "paused",
+        "success",
+        "failure",
+        "replay"
+      ],
+      "art": "code-native",
+      "external_asset_dependencies": []
+    },
+    {
+      "content_id": 22,
+      "slug": "city-rush",
+      "title": "城市极速",
+      "mechanic": "drift",
+      "runtime": "complete-games-v3",
+      "stages": 3,
+      "states": [
+        "intro",
+        "playing",
+        "paused",
+        "success",
+        "failure",
+        "replay"
+      ],
+      "art": "code-native",
+      "external_asset_dependencies": []
+    },
+    {
+      "content_id": 23,
+      "slug": "sky-cannon",
+      "title": "云端炮手",
+      "mechanic": "defense",
+      "runtime": "complete-games-v3",
+      "stages": 3,
+      "states": [
+        "intro",
+        "playing",
+        "paused",
+        "success",
+        "failure",
+        "replay"
+      ],
+      "art": "code-native",
+      "external_asset_dependencies": []
+    },
+    {
+      "content_id": 24,
+      "slug": "neon-dash",
+      "title": "霓虹疾跑",
+      "mechanic": "runner",
+      "runtime": "complete-games-v3",
+      "stages": 3,
+      "states": [
+        "intro",
+        "playing",
+        "paused",
+        "success",
+        "failure",
+        "replay"
+      ],
+      "art": "code-native",
+      "external_asset_dependencies": []
+    },
+    {
+      "content_id": 25,
+      "slug": "pulse-forge",
+      "title": "节拍熔炉",
+      "mechanic": "rhythm",
+      "runtime": "complete-games-v3",
+      "stages": 3,
+      "states": [
+        "intro",
+        "playing",
+        "paused",
+        "success",
+        "failure",
+        "replay"
+      ],
+      "art": "code-native",
+      "external_asset_dependencies": []
+    },
+    {
+      "content_id": 26,
+      "slug": "sky-stack",
+      "title": "天际叠塔",
+      "mechanic": "stack",
+      "runtime": "complete-games-v3",
+      "stages": 3,
+      "states": [
+        "intro",
+        "playing",
+        "paused",
+        "success",
+        "failure",
+        "replay"
+      ],
+      "art": "code-native",
+      "external_asset_dependencies": []
+    },
+    {
+      "content_id": 27,
+      "slug": "rune-circuit",
+      "title": "符文回路",
+      "mechanic": "circuit",
+      "runtime": "complete-games-v3",
+      "stages": 3,
+      "states": [
+        "intro",
+        "playing",
+        "paused",
+        "success",
+        "failure",
+        "replay"
+      ],
+      "art": "code-native",
+      "external_asset_dependencies": []
+    },
+    {
+      "content_id": 28,
+      "slug": "prism-match",
+      "title": "棱镜连击",
+      "mechanic": "match",
+      "runtime": "complete-games-v3",
+      "stages": 3,
+      "states": [
+        "intro",
+        "playing",
+        "paused",
+        "success",
+        "failure",
+        "replay"
+      ],
+      "art": "code-native",
+      "external_asset_dependencies": []
+    },
+    {
+      "content_id": 29,
+      "slug": "star-cups",
+      "title": "星杯幻术",
+      "mechanic": "cups",
+      "runtime": "complete-games-v3",
+      "stages": 3,
+      "states": [
+        "intro",
+        "playing",
+        "paused",
+        "success",
+        "failure",
+        "replay"
+      ],
+      "art": "code-native",
+      "external_asset_dependencies": []
+    },
+    {
+      "content_id": 30,
+      "slug": "deep-catch",
+      "title": "深海寻光",
+      "mechanic": "fishing",
+      "runtime": "complete-games-v3",
+      "stages": 3,
+      "states": [
+        "intro",
+        "playing",
+        "paused",
+        "success",
+        "failure",
+        "replay"
+      ],
+      "art": "code-native",
+      "external_asset_dependencies": []
+    },
+    {
+      "content_id": 31,
+      "slug": "ember-bastion",
+      "title": "赤焰防线",
+      "mechanic": "defense",
+      "runtime": "complete-games-v3",
+      "stages": 3,
+      "states": [
+        "intro",
+        "playing",
+        "paused",
+        "success",
+        "failure",
+        "replay"
+      ],
+      "art": "code-native",
+      "external_asset_dependencies": []
+    },
+    {
+      "content_id": 32,
+      "slug": "nova-drift",
+      "title": "新星漂移",
+      "mechanic": "drift",
+      "runtime": "complete-games-v3",
+      "stages": 3,
+      "states": [
+        "intro",
+        "playing",
+        "paused",
+        "success",
+        "failure",
+        "replay"
+      ],
+      "art": "code-native",
+      "external_asset_dependencies": []
+    },
+    {
+      "content_id": 33,
+      "slug": "void-squadron",
+      "title": "虚空小队",
+      "mechanic": "shooter",
+      "runtime": "complete-games-v3",
+      "stages": 3,
+      "states": [
+        "intro",
+        "playing",
+        "paused",
+        "success",
+        "failure",
+        "replay"
+      ],
+      "art": "code-native",
+      "external_asset_dependencies": []
+    },
+    {
+      "content_id": 34,
+      "slug": "orchard-merge",
+      "title": "果园合合塔",
+      "mechanic": "match",
+      "runtime": "complete-games-v3",
+      "stages": 3,
+      "states": [
+        "intro",
+        "playing",
+        "paused",
+        "success",
+        "failure",
+        "replay"
+      ],
+      "art": "code-native",
+      "external_asset_dependencies": []
+    },
+    {
+      "content_id": 35,
+      "slug": "star-mower",
+      "title": "星尘割草",
+      "mechanic": "survival",
+      "runtime": "deep-games-v2",
+      "stages": 3,
+      "states": [
+        "intro",
+        "playing",
+        "paused",
+        "success",
+        "failure",
+        "replay"
+      ],
+      "art": "code-native",
+      "external_asset_dependencies": []
+    },
+    {
+      "content_id": 36,
+      "slug": "moonlight-tea-shop",
+      "title": "月光奶茶铺",
+      "mechanic": "shop",
+      "runtime": "complete-games-v3",
+      "stages": 3,
+      "states": [
+        "intro",
+        "playing",
+        "paused",
+        "success",
+        "failure",
+        "replay"
+      ],
+      "art": "code-native",
+      "external_asset_dependencies": []
+    },
+    {
+      "content_id": 37,
+      "slug": "microbe-arena",
+      "title": "微粒竞技场",
+      "mechanic": "survival",
+      "runtime": "complete-games-v3",
+      "stages": 3,
+      "states": [
+        "intro",
+        "playing",
+        "paused",
+        "success",
+        "failure",
+        "replay"
+      ],
+      "art": "code-native",
+      "external_asset_dependencies": []
+    },
+    {
+      "content_id": 38,
+      "slug": "star-deck",
+      "title": "星轨牌阵",
+      "mechanic": "cards",
+      "runtime": "deep-games-v2",
+      "stages": 3,
+      "states": [
+        "intro",
+        "playing",
+        "paused",
+        "success",
+        "failure",
+        "replay"
+      ],
+      "art": "code-native",
+      "external_asset_dependencies": []
+    },
+    {
+      "content_id": 39,
+      "slug": "crystal-bastion",
+      "title": "晶核防线",
+      "mechanic": "defense",
+      "runtime": "complete-games-v3",
+      "stages": 3,
+      "states": [
+        "intro",
+        "playing",
+        "paused",
+        "success",
+        "failure",
+        "replay"
+      ],
+      "art": "code-native",
+      "external_asset_dependencies": []
+    },
+    {
+      "content_id": 40,
+      "slug": "adventurer-journal",
+      "title": "冒险者日志",
+      "mechanic": "maze",
+      "runtime": "deep-games-v2",
+      "stages": 3,
+      "states": [
+        "intro",
+        "playing",
+        "paused",
+        "success",
+        "failure",
+        "replay"
+      ],
+      "art": "code-native",
+      "external_asset_dependencies": []
+    },
+    {
+      "content_id": 41,
+      "slug": "idiom-detective",
+      "title": "成语侦探",
+      "mechanic": "cards",
+      "runtime": "deep-games-v2",
+      "stages": 3,
+      "states": [
+        "intro",
+        "playing",
+        "paused",
+        "success",
+        "failure",
+        "replay"
+      ],
+      "art": "code-native",
+      "external_asset_dependencies": []
+    },
+    {
+      "content_id": 42,
+      "slug": "hex-frontier",
+      "title": "六角前线",
+      "mechanic": "battle",
+      "runtime": "deep-games-v2",
+      "stages": 3,
+      "states": [
+        "intro",
+        "playing",
+        "paused",
+        "success",
+        "failure",
+        "replay"
+      ],
+      "art": "code-native",
+      "external_asset_dependencies": []
+    },
+    {
+      "content_id": 43,
+      "slug": "studio-wardrobe",
+      "title": "今日造型师",
+      "mechanic": "wardrobe",
+      "runtime": "complete-games-v3",
+      "stages": 3,
+      "states": [
+        "intro",
+        "playing",
+        "paused",
+        "success",
+        "failure",
+        "replay"
+      ],
+      "art": "code-native",
+      "external_asset_dependencies": []
+    },
+    {
+      "content_id": 44,
+      "slug": "garden-renewal",
+      "title": "花园焕新",
+      "mechanic": "match",
+      "runtime": "deep-games-v2",
+      "stages": 3,
+      "states": [
+        "intro",
+        "playing",
+        "paused",
+        "success",
+        "failure",
+        "replay"
+      ],
+      "art": "code-native",
+      "external_asset_dependencies": []
+    }
+  ]
+}

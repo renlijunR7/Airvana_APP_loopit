@@ -1,0 +1,173 @@
+{
+  "schema_version": "1.0.0",
+  "campaign_id": "cmp_character_consistency_v1_20260815",
+  "version": "1.0.1",
+  "status": "draft",
+  "owners": {
+    "business_owner": "Airvana local demo owner",
+    "operations_owner": "Airvana local demo owner",
+    "approval_owner": "User-approved prototype scope; external release requires separate human approval",
+    "kill_switch_owner": "Airvana local demo owner"
+  },
+  "objective": {
+    "primary": "engagement",
+    "primary_success_event": "valid_interaction",
+    "primary_kpi": "5/5 pilot covers and runtime sprites resolve the same canonical character master",
+    "secondary": ["cover-to-runtime character recognition", "visual consistency", "mobile game readability"],
+    "target_value": 5,
+    "target_window": "local QA before wider migration",
+    "funnel_boundary": "Character presentation revision only. Gameplay, CTA, reward, wallet, attribution, settlement and data policy remain unchanged."
+  },
+  "audience": {
+    "included_regions": ["HK", "SG"],
+    "excluded_regions": [],
+    "languages": ["zh-CN"],
+    "minimum_age": 18,
+    "lifecycle_stages": ["mixed"],
+    "interests": ["short interactive mobile games", "casual games"],
+    "accessibility_requirements": ["tap-only primary controls", "non-color-only feedback", "reduced motion", "mute control"]
+  },
+  "channels": [
+    {
+      "channel_id": "airvana_character_consistency_v1_local_demo",
+      "channel_type": "in_app",
+      "kol_id": null,
+      "placement": "Airvana Home, Discover and packaged iOS/Android WebView"
+    }
+  ],
+  "brand": {
+    "legal_entity": "Airvana local prototype - no commercial offer",
+    "asset_manifest": [
+      {
+        "asset_id": "asset_character_masters_v1",
+        "asset_type": "character",
+        "location": "public/assets/characters/v1/",
+        "locale": null,
+        "checksum": null,
+        "authorization_status": "approved",
+        "usage_restrictions": ["Airvana local DEMO and internal review", "No third-party character likeness", "External release requires human rights and art review"]
+      },
+      {
+        "asset_id": "asset_character_covers_v1",
+        "asset_type": "background",
+        "location": "public/assets/game-covers/character-consistency-v1/",
+        "locale": null,
+        "checksum": null,
+        "authorization_status": "approved",
+        "usage_restrictions": ["Each cover must reference its canonical master.svg", "No third-party application-market asset or UI"]
+      },
+      {
+        "asset_id": "asset_character_runtime_v1",
+        "asset_type": "other",
+        "location": "public/character-runtime-v1.js",
+        "locale": null,
+        "checksum": null,
+        "authorization_status": "approved",
+        "usage_restrictions": ["Deterministic local rendering", "No runtime generation", "Fallback must preserve playability"]
+      }
+    ],
+    "approved_claims": ["Five original Airvana character masters", "The pilot cover and runtime use the same canonical source asset", "No third-party application-market character asset is bundled"],
+    "prohibited_claims": ["official third-party game partnership", "copied application-market character", "guaranteed reward", "real online multiplayer"],
+    "required_disclosures": ["LOCAL DEMO", "Original Airvana prototype character artwork"],
+    "authorization_status": "approved"
+  },
+  "gameplay": {
+    "mechanic": "other",
+    "template_id": "tpl_character_consistency_pilot_v1",
+    "target_duration_seconds": 180,
+    "rounds": 3,
+    "required_states": ["intro", "playing", "paused", "success", "failure", "retry", "replay", "exit"],
+    "input_modes": ["tap", "drag", "swipe", "keyboard"],
+    "difficulty_bounds": {"minimum": 2, "maximum": 8, "default": 4}
+  },
+  "cta": {
+    "cta_id": "cta_none",
+    "type": "none",
+    "label": "",
+    "destination": "NOT_APPLICABLE",
+    "allowed_states": []
+  },
+  "reward": {
+    "reward_id": "reward_none",
+    "type": "none",
+    "value_description": "NOT_APPLICABLE",
+    "eligibility": "NOT_APPLICABLE",
+    "inventory_cap": null,
+    "expiry": null,
+    "fulfillment_owner": "NOT_APPLICABLE",
+    "material_terms": "No reward is offered in this local DEMO contract."
+  },
+  "compliance": {
+    "legal_entity": "Airvana local prototype - no commercial offer",
+    "promoted_activity": "Local entertainment interaction only",
+    "target_regions_reviewed": ["HK", "SG"],
+    "manual_review_required": true,
+    "legal_approval_status": "not_required",
+    "prohibited_claims": ["third-party partnership", "real reward", "real online multiplayer"],
+    "required_disclosures": ["LOCAL DEMO", "Original Airvana prototype character artwork"],
+    "evidence_sources": ["docs/playable-demos/character-consistency-v1/character-contract.json", "public/assets/characters/v1/manifest.json"]
+  },
+  "data_policy": {
+    "collected_fields": ["local_session_id", "campaign_id", "playable_id", "score", "mute_preference"],
+    "prohibited_fields": ["seed_phrase", "private_key", "raw_kyc_document", "password"],
+    "consent_requirements": ["No network analytics in this local DEMO"],
+    "retention_days": 0,
+    "privacy_owner": "Airvana local demo owner"
+  },
+  "measurement": {
+    "primary_kpi": "5/5 pilot covers and runtime sprites resolve the same canonical character master",
+    "primary_success_event": "valid_interaction",
+    "required_events": ["impression", "play_start", "valid_interaction", "level_complete", "play_complete", "play_fail", "replay", "error"],
+    "dimensions": ["campaign_id", "creative_id", "channel_id", "playable_id", "character_id", "asset_version", "locale", "device_class"],
+    "deduplication_rule": "Generate one local event ID per state transition.",
+    "bot_fraud_rule": "All events are local demo events and are never eligible for settlement.",
+    "source_of_truth": "Device-local event log and deterministic asset contract tests"
+  },
+  "attribution": {
+    "model": "none",
+    "window_days": 0,
+    "success_event": "valid_interaction",
+    "kol_priority": "not_applicable",
+    "cross_device_policy": "Not applicable; device-local only.",
+    "deduplication_key": "local_event_id",
+    "exclusion_rules": ["all local demo traffic is excluded from commercial reporting"],
+    "settlement_status": "not_applicable",
+    "payable_event": null,
+    "terms_reference": null
+  },
+  "commercial": {
+    "currency": "USD",
+    "build_budget_cap": null,
+    "media_budget_cap": null,
+    "reward_budget_cap": 0,
+    "kol_settlement_budget_cap": 0
+  },
+  "governance": {
+    "locked_fields": ["approval", "commercial", "cta", "cta.destination", "reward", "attribution", "attribution.kol_priority", "attribution.model", "attribution.window_days", "audience.excluded_regions", "audience.included_regions", "audience.minimum_age", "compliance", "data_policy", "measurement.primary_success_event", "release.kill_switch", "brand.asset_manifest[].location", "character.locked_identity_features", "character.character_id"],
+    "editable_fields": ["character.pose", "character.expression", "character.camera_angle", "character.stage_lighting", "character.non_identity_effects"],
+    "agentic_fields": [],
+    "runtime_fields": ["session_id", "playable_id", "game_key", "character_id", "asset_version", "score", "stage", "mute_preference"],
+    "allowed_experiment_fields": []
+  },
+  "approval": {
+    "status": "draft",
+    "approved_by": ["User confirmation in current Codex task"],
+    "approved_at": "2026-08-15T00:00:00+08:00",
+    "evidence": ["User replied 好的 after receiving the complete recommended five-game pilot plan"]
+  },
+  "release": {
+    "targets": ["web_h5", "in_app_webview"],
+    "release_owner": "Human approval required before external release",
+    "rollback_target": "public/assets/game-covers/store-fidelity-v4/ plus complete-games-v3 v3.0 character fallback",
+    "kill_switch": {
+      "owner": "Airvana local demo owner",
+      "mechanism": "Remove characterConsistencyPilotCoverKeys and character-runtime-v1.js, then restore complete-games-v3 v3.0 mappings"
+    }
+  },
+  "metadata": {
+    "created_at": "2026-08-15T00:00:00+08:00",
+    "updated_at": "2026-08-15T00:00:00+08:00",
+    "source_brief": "docs/playable-demos/character-consistency-v1/campaign-brief.yaml",
+    "notes": ["Prototype approval does not authorize external commercial release.", "Five pilot games precede migration of the remaining 33 games.", "No gameplay state, CTA, reward, wallet, attribution, settlement or data-policy change is authorized."]
+  }
+}

@@ -1,0 +1,32 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import vm from 'node:vm';
+
+const root = path.resolve(import.meta.dirname, '..');
+const source = fs.readFileSync(path.join(root, 'docs/legal/terms-of-service-2026-08-11.md'), 'utf8')
+  .replace(/\r/g, '')
+  .trimEnd();
+const runtime = fs.readFileSync(path.join(root, 'public/legal-terms-v1.js'), 'utf8');
+
+test('service agreement runtime preserves the approved source verbatim', () => {
+  const sandbox = {window: {}};
+  vm.runInNewContext(runtime, sandbox);
+  const document = sandbox.window.AirvanaTermsOfServiceV1;
+
+  assert.equal(document.title, 'Terms of Service / 服务协议');
+  assert.equal(document.effectiveDate, 'Aug 11th, 2026');
+  assert.equal(document.sections.length, 16);
+
+  const rebuilt = [
+    'Terms of Service',
+    `Last Updated: ${document.effectiveDate}`,
+    document.preamble,
+    ...document.sections.map(([title, body], index) => `${index + 1}. ${title}\n${body}`)
+  ].join('\n');
+
+  assert.equal(rebuilt, source);
+  assert.match(document.draftNote, /\[AIRVANA DOMAIN\].*\[AIRVANA CONTACT EMAIL\]/);
+});
+

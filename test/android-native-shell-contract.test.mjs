@@ -18,21 +18,25 @@ const adaptiveLauncherIcon = read('android-demo/app/src/main/res/drawable-v26/ic
 const buildScript = read('android-demo/build-apk.sh');
 
 test('Android package version advances for an unambiguous in-place update', () => {
-  assert.match(buildScript, /--version-code 15/);
-  assert.match(buildScript, /--version-name 1\.0\.14/);
-  assert.match(buildScript, /Airvana-v1\.0\.14-debug\.apk/);
+  assert.match(buildScript, /--version-code 19/);
+  assert.match(buildScript, /--version-name 1\.0\.18/);
+  assert.match(buildScript, /Airvana-v1\.0\.18-debug\.apk/);
   assert.doesNotMatch(buildScript, /Airvana-Demo-v1\.0\.0-debug\.apk/);
 });
 
 test('Android wrapper always reloads packaged UI and verifies all three message tabs', () => {
   assert.match(mainActivity, /setCacheMode\(WebSettings\.LOAD_NO_CACHE\)/);
   assert.match(mainActivity, /clearCache\(true\)/);
-  assert.match(mainActivity, /native-shell=1&app-version=14/);
+  assert.match(mainActivity, /native-shell=1&app-version=18/);
   assert.match(mainActivity, /new LocalAssetServer\(getAssets\(\), 0\)/);
   assert.match(mainActivity, /localServerPort = localServer\.getPort\(\)/);
   assert.match(localAssetServer, /int getPort\(\)/);
   assert.match(localAssetServer, /Cache-Control: no-store, max-age=0/);
   assert.match(buildScript, /APK embedded UI verified: 通知 \/ 互动 \/ 私信/);
+  assert.match(buildScript, /9 款传感器游戏/);
+  for (const game of ['pixel-quest','red-cup-shuffle','magic-choir','neon-dash','city-rush','nova-drift','rift-strike','void-squadron','star-cups']) {
+    assert.match(buildScript, new RegExp(game));
+  }
   assert.match(buildScript, /data-message-tabs=/);
   for (const label of ['通知', '互动', '私信']) assert.match(buildScript, new RegExp(label));
   assert.match(buildScript, /airvana-v4\\\.css\\\?v=\[0-9\]\+/);
@@ -45,10 +49,20 @@ test('Android wrapper always reloads packaged UI and verifies all three message 
   assert.match(mobileEntry, /if \(!this\.nativeShellMode && this\.state\.demoPopupVersionEnabled/);
 });
 
+test('Android wrapper grants microphone capture only to its trusted local game origin', () => {
+  assert.match(androidManifest, /android\.permission\.RECORD_AUDIO/);
+  assert.match(mainActivity, /onPermissionRequest\(PermissionRequest request\)/);
+  assert.match(mainActivity, /"127\.0\.0\.1"\.equals\(origin\.getHost\(\)\)/);
+  assert.match(mainActivity, /PermissionRequest\.RESOURCE_AUDIO_CAPTURE/);
+  assert.match(mainActivity, /requestPermissions\(new String\[\]\{Manifest\.permission\.RECORD_AUDIO\}/);
+  assert.match(mainActivity, /onRequestPermissionsResult/);
+});
+
 test('native shell hides the simulated web status bar without changing browser preview', () => {
-  assert.match(mobileEntry, /new URLSearchParams\(location\.search\)\.get\('native-shell'\) === '1'/);
+  assert.match(mobileEntry, /const nativeParams = new URLSearchParams\(location\.search\)/);
+  assert.match(mobileEntry, /nativeParams\.get\('native-shell'\) === '1'/);
   assert.match(mobileEntry, /document\.documentElement\.classList\.add\('native-app-shell'\)/);
-  assert.match(mobileEntry, /class="app-shell \{\{ themeClass \}\} \{\{ nativeShellClass \}\}"/);
+  assert.match(mobileEntry, /class="app-shell \{\{ themeClass \}\} \{\{ nativeShellClass \}\} \{\{ shellScreenClass \}\}"/);
   assert.match(mobileEntry, /nativeShellClass:this\.nativeShellMode\?'native-app-shell':''/);
   assert.match(mobileCss, /\.native-app-shell \.app-header\s*\{[^}]*display:\s*none\s*!important;/);
 });
@@ -96,7 +110,7 @@ test('home feed reserves the floating navigation height above the native safe ar
   assert.match(mobileEntry, /class="play-feed"/);
   assert.match(mobileEntry, /class="play-feed__actions"/);
   assert.match(mobileCss, /--bottom-nav-reserve:\s*65px;/);
-  assert.match(mobileCss, /\.play-feed__actions\s*\{[^}]*padding-bottom:\s*calc\(14px \+ var\(--bottom-nav-reserve\) \+ var\(--safe-bottom\)\)\s*!important;/);
+  assert.match(mobileCss, /\.play-feed__actions\s*\{[^}]*padding-bottom:\s*calc\(11px \+ var\(--bottom-nav-reserve\) \+ var\(--safe-bottom\)\)\s*!important;/);
   assert.doesNotMatch(mobileEntry, /class="play-feed__actions"[^>]*env\(safe-area-inset-bottom/);
 });
 
@@ -105,10 +119,22 @@ test('discover, world, messages, and me keep their final content above the float
   assert.match(mobileEntry, /isDiscover[\s\S]*?class="main-tab-scroll"/);
   assert.match(mobileEntry, /isWorld[\s\S]*?class="main-tab-scroll"/);
   assert.match(mobileEntry, /isMessages[\s\S]*?class="messages-screen main-tab-scroll"/);
-  assert.match(mobileEntry, /isMe[\s\S]*?class="main-tab-scroll"/);
+  assert.match(mobileEntry, /isMe[\s\S]*?class="me-page main-tab-scroll"/);
   assert.doesNotMatch(mobileEntry, /class="play-feed main-tab-scroll"/);
   assert.match(mobileCss, /\.main-tab-scroll\s*\{[^}]*scroll-padding-bottom:\s*calc\(var\(--bottom-nav-reserve\) \+ var\(--safe-bottom\)\);/);
+  assert.match(mobileCss, /\.main-tab-scroll\s*\{[^}]*min-height:\s*0;[^}]*overflow-y:\s*auto;[^}]*-webkit-overflow-scrolling:\s*touch;[^}]*touch-action:\s*pan-y;/);
   assert.match(mobileCss, /\.main-tab-scroll::after\s*\{[^}]*height:\s*calc\(var\(--bottom-nav-reserve\) \+ var\(--safe-bottom\)\);[^}]*flex:\s*0 0 calc\(var\(--bottom-nav-reserve\) \+ var\(--safe-bottom\)\);/);
+});
+
+test('My screen scrolls only when real content exceeds its viewport', () => {
+  assert.match(mobileEntry, /shellScreenClass:s\.screen==='play'\?'is-home-screen':s\.screen==='me'\?'is-secondary-screen is-me-screen':'is-secondary-screen'/);
+  assert.match(mobileEntry, /class="me-page main-tab-scroll" data-me-page-scroll role="region" aria-label="我的页面内容" tabindex="0"[^>]*min-height:0;overflow-y:auto/);
+  assert.match(mobileEntry, /class="my-content-surface"[^>]*min-height:0;flex:1 0 auto/);
+  assert.match(mobileCss, /\.me-page\[data-me-page-scroll\]\s*\{[^}]*overflow-x:\s*hidden;[^}]*overflow-y:\s*auto;[^}]*overscroll-behavior-y:\s*none;/);
+  assert.match(mobileCss, /\.me-page\[data-me-page-scroll\] > \.my-content-surface\s*\{[^}]*flex:\s*1 0 auto;[^}]*padding-bottom:\s*calc\(var\(--bottom-nav-reserve\) \+ var\(--safe-bottom\) \+ 12px\);/);
+  assert.match(mobileCss, /\.me-page\[data-me-page-scroll\]::after\s*\{[^}]*display:\s*none;/);
+  assert.match(mobileCss, /html:not\(\.native-app-shell\) \.app-shell\.is-me-screen::before\s*\{[^}]*background:\s*#fff;/);
+  assert.match(mobileCss, /html\.native-app-shell \.app-shell\.is-me-screen:not\(\.theme-dark\)::before\s*\{[^}]*height:\s*var\(--safe-bottom\);[^}]*background:\s*#fff;/);
 });
 
 test('home feed actions are compact while keeping Remix visually unchanged', () => {
@@ -123,7 +149,7 @@ test('Android activity draws behind a transparent navigation bar and passes its 
   assert.match(mainActivity, /setNavigationBarColor\(Color\.TRANSPARENT\)/);
   assert.match(mainActivity, /View\.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION/);
   assert.match(mainActivity, /View\.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN/);
-  assert.match(mainActivity, /loadUrl\("http:\/\/127\.0\.0\.1:" \+ localServerPort \+ "\/\?native-shell=1&app-version=14"\)/);
+  assert.match(mainActivity, /loadUrl\("http:\/\/127\.0\.0\.1:" \+ localServerPort \+ "\/\?native-shell=1&app-version=18"\)/);
   assert.match(mainActivity, /getSystemWindowInsetBottom\(\)/);
   assert.match(mainActivity, /getSystemWindowInsetTop\(\)/);
   assert.match(mainActivity, /getInsetsIgnoringVisibility\(WindowInsets\.Type\.navigationBars\(\)\)/);

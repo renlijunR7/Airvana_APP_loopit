@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1600" role="img" aria-labelledby="title description">
+  <title id="title">magic-choir original cover art</title>
+  <desc id="description">Airvana code-native vector game artwork. No generative image or third-party asset.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#120F1E"/><stop offset=".58" stop-color="#9B6CE7" stop-opacity=".42"/><stop offset="1" stop-color="#070A0D"/></linearGradient>
+    <radialGradient id="light"><stop stop-color="#62CFCA" stop-opacity=".48"/><stop offset="1" stop-color="#62CFCA" stop-opacity="0"/></radialGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%"><feDropShadow dx="0" dy="24" stdDeviation="24" flood-color="#05070A" flood-opacity=".44"/></filter>
+    <filter id="glow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="8" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="900" height="1600" fill="url(#background)"/>
+  <circle cx="635" cy="330" r="380" fill="url(#light)"/>
+  <path d="M0 220 Q180 130 350 220 T900 180" fill="none" stroke="#FFFFFF" stroke-opacity=".08" stroke-width="3"/>
+  
+    <path d="M80 1350 V560 Q80 470 170 470 H730 Q820 470 820 560 V1350Z" fill="#F4EFE5" fill-opacity=".07" stroke="#FFFFFF" stroke-opacity=".16" stroke-width="6"/>
+    <g filter="url(#shadow)"><rect x="55" y="545" width="240" height="230" rx="48" fill="#9B6CE7"/><circle cx="175" cy="640" r="54" fill="#F4EFE5" fill-opacity=".84"/><path d="M113 728 Q175 674 237 728" fill="none" stroke="#1A2026" stroke-width="22" stroke-linecap="round"/></g><g filter="url(#shadow)"><rect x="425" y="545" width="240" height="230" rx="48" fill="#62CFCA"/><circle cx="545" cy="640" r="54" fill="#F4EFE5" fill-opacity=".84"/><path d="M483 728 Q545 674 607 728" fill="none" stroke="#1A2026" stroke-width="22" stroke-linecap="round"/></g><g filter="url(#shadow)"><rect x="55" y="875" width="240" height="230" rx="48" fill="#9B6CE7"/><circle cx="175" cy="970" r="54" fill="#F4EFE5" fill-opacity=".84"/><path d="M113 1058 Q175 1004 237 1058" fill="none" stroke="#1A2026" stroke-width="22" stroke-linecap="round"/></g><g filter="url(#shadow)"><rect x="425" y="875" width="240" height="230" rx="48" fill="#62CFCA"/><circle cx="545" cy="970" r="54" fill="#F4EFE5" fill-opacity=".84"/><path d="M483 1058 Q545 1004 607 1058" fill="none" stroke="#1A2026" stroke-width="22" stroke-linecap="round"/></g>
+    <path d="M140 420 C280 250 590 250 760 420" fill="none" stroke="#62CFCA" stroke-width="28" stroke-linecap="round"/>
+  <rect x="34" y="34" width="832" height="1532" rx="64" fill="none" stroke="#FFFFFF" stroke-opacity=".12" stroke-width="4"/>
+</svg>

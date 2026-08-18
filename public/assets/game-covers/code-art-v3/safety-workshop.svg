@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1600" role="img" aria-labelledby="title description">
+  <title id="title">safety-workshop original cover art</title>
+  <desc id="description">Airvana code-native vector game artwork. No generative image or third-party asset.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#09111C"/><stop offset=".58" stop-color="#EE4D5F" stop-opacity=".42"/><stop offset="1" stop-color="#070A0D"/></linearGradient>
+    <radialGradient id="light"><stop stop-color="#F4B54B" stop-opacity=".48"/><stop offset="1" stop-color="#F4B54B" stop-opacity="0"/></radialGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%"><feDropShadow dx="0" dy="24" stdDeviation="24" flood-color="#05070A" flood-opacity=".44"/></filter>
+    <filter id="glow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="8" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="900" height="1600" fill="url(#background)"/>
+  <circle cx="262" cy="330" r="380" fill="url(#light)"/>
+  <path d="M0 220 Q180 130 350 220 T900 180" fill="none" stroke="#FFFFFF" stroke-opacity=".08" stroke-width="3"/>
+  
+    <rect x="90" y="470" width="720" height="910" rx="76" fill="#F2EEE4" fill-opacity=".08" stroke="#FFFFFF" stroke-opacity=".16" stroke-width="6"/>
+    <rect x="116" y="536" width="128" height="128" rx="42" fill="#EE4D5F" fill-opacity="0.851" transform="rotate(-4 180 600)" filter="url(#shadow)"/><rect x="386" y="536" width="128" height="128" rx="42" fill="#F4B54B" fill-opacity="0.8429" transform="rotate(1 450 600)" filter="url(#shadow)"/><rect x="657" y="537" width="126" height="126" rx="42" fill="#E7E1D4" fill-opacity="0.6236" transform="rotate(1 720 600)" filter="url(#shadow)"/><rect x="112" y="742" width="136" height="136" rx="42" fill="#EE4D5F" fill-opacity="0.9155" transform="rotate(0 180 810)" filter="url(#shadow)"/><rect x="382" y="742" width="136" height="136" rx="42" fill="#F4B54B" fill-opacity="0.9074" transform="rotate(5 450 810)" filter="url(#shadow)"/><rect x="653" y="743" width="134" height="134" rx="42" fill="#E7E1D4" fill-opacity="0.6880999999999999" transform="rotate(5 720 810)" filter="url(#shadow)"/><rect x="108" y="948" width="144" height="144" rx="42" fill="#EE4D5F" fill-opacity="0.6799999999999999" transform="rotate(4 180 1020)" filter="url(#shadow)"/><rect x="378" y="948" width="144" height="144" rx="42" fill="#F4B54B" fill-opacity="0.6718999999999999" transform="rotate(-9 450 1020)" filter="url(#shadow)"/><rect x="644" y="944" width="152" height="152" rx="42" fill="#E7E1D4" fill-opacity="0.7525999999999999" transform="rotate(9 720 1020)" filter="url(#shadow)"/><rect x="104" y="1154" width="152" height="152" rx="42" fill="#EE4D5F" fill-opacity="0.7444999999999999" transform="rotate(8 180 1230)" filter="url(#shadow)"/><rect x="375" y="1155" width="150" height="150" rx="42" fill="#F4B54B" fill-opacity="0.8252" transform="rotate(-5 450 1230)" filter="url(#shadow)"/><rect x="658" y="1168" width="124" height="124" rx="42" fill="#E7E1D4" fill-opacity="0.8170999999999999" transform="rotate(-6 720 1230)" filter="url(#shadow)"/>
+    <circle cx="450" cy="385" r="92" fill="#F4B54B" filter="url(#glow)"/><path d="M410 385 L438 416 L500 345" fill="none" stroke="#17202A" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="34" y="34" width="832" height="1532" rx="64" fill="none" stroke="#FFFFFF" stroke-opacity=".12" stroke-width="4"/>
+</svg>

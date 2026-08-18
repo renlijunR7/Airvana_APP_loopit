@@ -1,0 +1,113 @@
+brief_version: "1.0.0"
+campaign:
+  campaign_id: "cmp_character_consistency_v1_20260815"
+  working_name: "Airvana 首页角色封面与游戏内一致性试点"
+  brand_legal_entity: "Airvana local prototype - no commercial offer"
+  market_timezone: "Asia/Hong_Kong"
+  target_launch_at: "NOT_APPLICABLE - local prototype"
+  target_end_at: "NOT_APPLICABLE - local prototype"
+owners:
+  business_owner: "Airvana local demo owner"
+  operations_owner: "Airvana local demo owner"
+  approval_owner: "User approved the recommended five-game prototype scope on 2026-08-15; external release requires separate human approval"
+  kill_switch_owner: "Airvana local demo owner"
+objective:
+  primary: "engagement"
+  primary_success_event: "valid_interaction"
+  secondary:
+    - "cover-to-runtime character recognition"
+    - "visual consistency"
+    - "mobile game readability"
+  target_value: "ASSUMPTION - 5/5 pilot games use one canonical character master for cover and runtime"
+  target_window: "local QA before wider migration"
+  funnel_boundary: "Local Home/Discover cover and in-game character rendering only; no CTA, reward, wallet, attribution, settlement, gameplay-state or commercial change."
+audience:
+  included_regions: ["HK", "SG"]
+  excluded_regions: []
+  languages: ["zh-CN"]
+  minimum_age: 18
+  interests: ["short interactive mobile games", "casual games"]
+  lifecycle_stages: ["mixed"]
+  accessibility_requirements:
+    - "tap-only primary controls"
+    - "non-color-only feedback"
+    - "reduced-motion compatibility"
+    - "mute control"
+  device_network_assumptions:
+    - "iOS WKWebView and Android WebView"
+    - "portrait mobile layout"
+channels:
+  distribution: ["Airvana Home", "Airvana Discover", "in-app WebView"]
+  kol_ids: []
+  landing_context: "Local Airvana application prototype"
+  attribution_window_days: 0
+brand_assets:
+  source_folder_or_url: "public/assets/characters/v1/"
+  logo: []
+  product_images: []
+  colors: ["per-character locked palette in character.json"]
+  typography: ["NOT_APPLICABLE - no typography inside character masters or covers"]
+  approved_copy: ["AIRVANA ORIGINAL", "LOCAL DEMO"]
+  prohibited_copy: ["official third-party partnership", "copied application-market character", "guaranteed reward"]
+  audio_video: []
+  authorization_status: "Original code-native local prototype assets; external commercial release review pending"
+gameplay:
+  preferred_mechanics: ["runner", "sequence", "wardrobe", "turn battle", "shop order"]
+  prohibited_mechanics: ["real-money reward", "wallet action", "real online multiplayer claim"]
+  target_duration_seconds: 180
+  rounds: 3
+  input_modes: ["tap", "drag", "swipe", "keyboard"]
+  required_states: ["intro", "playing", "paused", "success", "failure", "retry", "replay", "exit"]
+  tone_theme: "ASSUMPTION - original premium stylized 2D Airvana universe with game-specific costumes"
+  kol_personalization: "NOT_APPLICABLE - no KOL identity asset in this pilot"
+cta:
+  type: "none"
+  label: ""
+  destination: "NOT_APPLICABLE"
+  display_states: []
+  approval_status: "not applicable"
+reward:
+  type: "none"
+  value_description: "NOT_APPLICABLE"
+  eligibility: "NOT_APPLICABLE"
+  inventory_cap: 0
+  expiry: "NOT_APPLICABLE"
+  fulfillment_owner: "NOT_APPLICABLE"
+  material_terms: "No reward is offered."
+compliance_privacy:
+  legal_entity: "Airvana local prototype - no commercial offer"
+  regulated_activity: "Local entertainment interaction only"
+  prohibited_claims: ["third-party partnership", "real reward", "real online multiplayer"]
+  required_disclosures: ["LOCAL DEMO", "Original Airvana prototype character artwork"]
+  consent_requirements: ["No network analytics in this local prototype"]
+  data_collected: ["device-local game state only"]
+  data_retention: "0 days outside local device"
+  manual_review_required: true
+  approval_evidence: "User confirmed the recommended five-game prototype plan in this task; commercial rights review remains pending."
+measurement:
+  primary_kpi: "5/5 pilot covers and runtime sprites resolve the same canonical master"
+  required_events: ["impression", "play_start", "valid_interaction", "play_complete", "play_fail", "replay", "error"]
+  attribution_model: "none"
+  dimensions: ["campaign_id", "playable_id", "game_key", "character_id", "asset_version", "device_class"]
+  exclusion_rules: ["all local demo traffic excluded from commercial reporting"]
+  reporting_cadence: "per local QA build"
+commercial_delivery:
+  build_budget: "【待人工录入】"
+  media_budget: "NOT_APPLICABLE"
+  reward_budget: "0 USD"
+  kol_settlement_budget: "0 USD"
+  supported_targets: ["web_h5", "in_app_webview"]
+  hosting_owner: "Airvana local demo owner"
+  release_owner: "Human approval required before external release"
+  rollback_target: "store-fidelity-v4 covers plus complete-games-v3 v3.0 behavior"
+assumptions:
+  - "Five-game pilot precedes migration of the remaining 33 games."
+  - "Original code-native vector art is preferred for exact source reuse and deterministic packaging."
+open_questions:
+  - "External commercial release licence and final human art review remain pending."
+  - "Wider migration schedule and final production art budget remain pending."
+evidence_sources:
+  - "public/assets/characters/v1/manifest.json"
+  - "public/character-runtime-v1.js"
+  - "public/complete-games-v3.js"
+  - "public/assets/game-covers/character-consistency-v1/"

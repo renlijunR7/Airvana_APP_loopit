@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0.0",
+  "contract_id": "character_consistency_v1",
+  "status": "approved_local_prototype",
+  "art_direction": "Airvana original premium stylized 2D vector with readable silhouettes, authored color blocks and restrained highlights",
+  "shared_source_rule": "For every pilot game, the Home/Discover cover and Canvas runtime must resolve the same canonical master.svg listed in the character manifest.",
+  "identity_lock": ["character_id", "silhouette", "face or species", "signature hair or head feature", "signature costume", "primary palette", "signature prop"],
+  "editable_fields": ["pose", "expression", "camera angle", "stage lighting", "non-identity particles"],
+  "prohibited": ["third-party character likeness", "application-market screenshot", "third-party logo", "identity palette replacement", "photoreal face synthesis", "runtime generative asset"],
+  "pilots": [
+    {"game_id": 5, "game_key": "pixel-quest", "character_id": "chr_nova_runner", "canonical_master": "public/assets/characters/v1/chr_nova_runner/master.svg", "runtime_placement": "player avatar on the three-lane runner", "locked_signature": ["violet hood", "cyan visor", "gold belt", "asymmetric boots"]},
+    {"game_id": 10, "game_key": "paws-stage", "character_id": "chr_mochi_beat", "canonical_master": "public/assets/characters/v1/chr_mochi_beat/master.svg", "runtime_placement": "lead performer above the four sequence pads", "locked_signature": ["cream cat", "coral headphones", "teal jacket", "gold star"]},
+    {"game_id": 12, "game_key": "puppet-studio", "character_id": "chr_lumi_doll", "canonical_master": "public/assets/characters/v1/chr_lumi_doll/master.svg", "runtime_placement": "central wardrobe model", "locked_signature": ["blue bob cap", "brass joints", "apricot apron", "painted cheek dots"]},
+    {"game_id": 20, "game_key": "formation-knights", "character_id": "chr_aegis_rowan", "canonical_master": "public/assets/characters/v1/chr_aegis_rowan/master.svg", "runtime_placement": "player-side formation knight", "locked_signature": ["ivory plume", "oxblood cape", "gold-rimmed shield", "steel scale cuirass"]},
+    {"game_id": 36, "game_key": "moonlight-tea-shop", "character_id": "chr_mina_vale", "canonical_master": "public/assets/characters/v1/chr_mina_vale/master.svg", "runtime_placement": "tea keeper beside the live order station", "locked_signature": ["auburn bun", "moon pin", "teal apron", "copper shaker"]}
+  ],
+  "acceptance": {
+    "canonical_reference_rate": "5/5",
+    "missing_asset_fallback": "Game remains playable with the previous deterministic Canvas fallback.",
+    "runtime_generation": false,
+    "third_party_assets": false,
+    "external_release": "pending separate human rights and art review"
+  }
+}

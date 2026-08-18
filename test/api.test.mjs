@@ -16,9 +16,9 @@ before(async () => {
 });
 
 after(async () => {
+  server.closeAllConnections?.();
   await new Promise(resolve => {
     server.close(resolve);
-    server.closeAllConnections?.();
   });
   app.close();
 });
@@ -55,6 +55,12 @@ async function bootstrap(cookie) {
   return result.data;
 }
 
+const economyLockedFields = [
+  'commercial', 'audience.included_regions', 'audience.excluded_regions', 'audience.minimum_age',
+  'cta.destination', 'reward', 'compliance', 'data_policy', 'attribution.model',
+  'attribution.window_days', 'measurement.primary_success_event', 'approval', 'release.kill_switch',
+];
+
 async function createPublishedContent(cookie, title = 'Wallet Safety Quest') {
   const first = await bootstrap(cookie);
   const agent = first.agents[0];
@@ -81,12 +87,35 @@ test('wallet login verifies signatures and prevents challenge replay', async () 
   assert.equal(replay.response.status, 401);
 });
 
-test('creator binds a wallet and AIT withdrawal reserves, reviews and completes on-chain', async () => {
-  const creator = await demoLogin('creator', 'wallet-binding-withdrawal');
-  const admin = await demoLogin('admin', 'wallet-binding-withdrawal-admin');
+test('wallet address validation confirms checksum and network without claiming ownership', async () => {
+  const wallet = Wallet.createRandom();
+  const valid = await req('/api/wallet-bindings/validate-address', { method: 'POST', body: { address: wallet.address, chainId: 8453 } });
+  assert.equal(valid.response.status, 200);
+  assert.equal(valid.data.valid, true);
+  assert.equal(valid.data.address, wallet.address);
+  assert.equal(valid.data.normalized, wallet.address.toLowerCase());
+  assert.equal(valid.data.network.label, 'Base');
+  assert.equal(valid.data.checksumVerified, true);
+  assert.equal(valid.data.ownershipVerified, false);
+  assert.equal(valid.data.withdrawalEnabled, false);
+
+  const zero = await req('/api/wallet-bindings/validate-address', { method: 'POST', body: { address: '0x'+'0'.repeat(40), chainId: 1 } });
+  assert.equal(zero.response.status, 400);
+  assert.equal(zero.data.error.code, 'blocked_wallet_address');
+
+  const unsupported = await req('/api/wallet-bindings/validate-address', { method: 'POST', body: { address: wallet.address, chainId: 10 } });
+  assert.equal(unsupported.response.status, 400);
+  assert.equal(unsupported.data.error.code, 'unsupported_wallet_network');
+});
+
+test('creator binds an optional settlement wallet and Contract-bound AIT completes through a separate payment record', async () => {
+  const creator = await demoLogin('creator', 'wallet-binding-entitlement');
+  const brand = await demoLogin('brand', 'wallet-binding-entitlement-brand');
+  const admin = await demoLogin('admin', 'wallet-binding-entitlement-admin');
   const creatorData = await bootstrap(creator);
-  const grant = await req('/api/admin/points/adjust', { method: 'POST', cookie: admin, body: { userId: creatorData.me.id, currency: 'AIT', amount: 250, reason: '测试 AIT 提现闭环' } });
-  assert.equal(grant.data.balance.AIT, 250);
+  const brandData = await bootstrap(brand);
+  const retiredAdjustment = await req('/api/admin/points/adjust', { method: 'POST', cookie: admin, body: { userId: creatorData.me.id, currency: 'AIT', amount: 250, reason: '旧 AIT 调整入口必须拒绝' } });
+  assert.equal(retiredAdjustment.response.status, 410);
 
   const wallet = Wallet.createRandom();
   const challenge = await req('/api/wallet-bindings/challenge', { method: 'POST', cookie: creator, body: { address: wallet.address, chainId: 1 } });
@@ -99,39 +128,39 @@ test('creator binds a wallet and AIT withdrawal reserves, reviews and completes 
   const replayBinding = await req('/api/wallet-bindings/verify', { method: 'POST', cookie: creator, body: { address: wallet.address, message: challenge.data.message, signature } });
   assert.equal(replayBinding.response.status, 401);
 
-  const anotherCreator = await demoLogin('creator', 'wallet-binding-other-account');
+  const anotherCreator = await demoLogin('creator', 'wallet-binding-other-account-v1');
   const occupied = await req('/api/wallet-bindings/challenge', { method: 'POST', cookie: anotherCreator, body: { address: wallet.address, chainId: 1 } });
   assert.equal(occupied.response.status, 409);
 
-  const requestBody = { amount: 80, walletBindingId: verified.data.binding.id, idempotencyKey: 'withdrawal-test-0001', confirmOwnership: true, confirmCompliance: true };
-  const submitted = await req('/api/ait-withdrawals', { method: 'POST', cookie: creator, body: requestBody });
-  assert.equal(submitted.response.status, 201);
-  assert.equal(submitted.data.withdrawal.status, 'submitted');
-  assert.deepEqual(submitted.data.summary, { ledgerBalance: 250, reserved: 80, available: 170 });
-  const replay = await req('/api/ait-withdrawals', { method: 'POST', cookie: creator, body: requestBody });
-  assert.equal(replay.data.idempotent, true);
-  assert.equal(replay.data.withdrawal.id, submitted.data.withdrawal.id);
-  const overdrawn = await req('/api/ait-withdrawals', { method: 'POST', cookie: creator, body: { ...requestBody, amount: 180, idempotencyKey: 'withdrawal-test-0002' } });
-  assert.equal(overdrawn.response.status, 409);
-
-  const approved = await req(`/api/admin/ait-withdrawals/${submitted.data.withdrawal.id}/review`, { method: 'POST', cookie: admin, body: { decision: 'approve', note: '钱包、余额与地区规则已复核' } });
-  assert.equal(approved.data.withdrawal.status, 'approved');
-  const txHash = `0x${'a'.repeat(64)}`;
-  const completed = await req(`/api/admin/ait-withdrawals/${submitted.data.withdrawal.id}/complete`, { method: 'POST', cookie: admin, body: { txHash } });
-  assert.equal(completed.data.withdrawal.status, 'paid');
-  assert.equal(completed.data.withdrawal.txHash, txHash);
-  assert.equal(completed.data.balance.AIT, 170);
-  assert.deepEqual(completed.data.summary, { ledgerBalance: 170, reserved: 0, available: 170 });
-  const completeReplay = await req(`/api/admin/ait-withdrawals/${submitted.data.withdrawal.id}/complete`, { method: 'POST', cookie: admin, body: { txHash } });
-  assert.equal(completeReplay.data.idempotent, true);
-
-  const cancellable = await req('/api/ait-withdrawals', { method: 'POST', cookie: creator, body: { ...requestBody, amount: 20, idempotencyKey: 'withdrawal-test-0003' } });
-  const cancelled = await req(`/api/ait-withdrawals/${cancellable.data.withdrawal.id}/cancel`, { method: 'POST', cookie: creator });
-  assert.equal(cancelled.data.withdrawal.status, 'cancelled');
-  assert.deepEqual(cancelled.data.summary, { ledgerBalance: 170, reserved: 0, available: 170 });
+  const now = new Date().toISOString();
+  const campaignId = 'campaign-ait-payment-api';
+  app.db.prepare(`INSERT INTO campaigns(id,brand_user_id,title,objective,status,brief_json,budget_ait,reward_ait,starts_at,ends_at,created_at,updated_at)
+    VALUES (?,?,?,?, 'active','{}',1000,80,?,?,?,?)`).run(campaignId, brandData.me.id, 'AIT Payment', '验证独立结算', now, new Date(Date.now() + 86_400_000).toISOString(), now, now);
+  const contract = await req(`/api/campaigns/${campaignId}/economy-contract`, { method: 'POST', cookie: brand, body: {
+    contractVersion: 'contract-v1', primarySuccessEvent: 'delivery_approved',
+    playerRule: { perUserCapAit: 80, amountAit: 80 }, creatorRule: { perUserCapAit: 80, amountAit: 80, eventTypes: ['delivery_approved'] },
+    attribution: { model: 'authoritative_delivery' }, eligibility: { kyc: true }, budget: { totalAit: 1000 },
+    settlement: { cashEnabled: true, currencies: ['USDT'], benefitTypes: ['membership'] }, lockedFields: economyLockedFields,
+  } });
+  assert.equal(contract.response.status, 201);
+  assert.equal((await req(`/api/admin/campaigns/${campaignId}/economy-contract/approve`, { method: 'POST', cookie: admin, body: { contractVersion: 'contract-v1' } })).response.status, 200);
+  const entitlement = await req(`/api/admin/campaigns/${campaignId}/ait-entitlements`, { method: 'POST', cookie: admin, body: {
+    userId: creatorData.me.id, contractVersion: 'contract-v1', sourceType: 'creator_delivery', sourceEventType: 'delivery_approved', sourceEventId: 'delivery-api-1', amount: 80, attributionReference: 'delivery-evidence:api-1', riskDecision: 'clear',
+  } });
+  assert.equal(entitlement.response.status, 201);
+  const entitlementId = entitlement.data.entitlement.id;
+  assert.equal((await req(`/api/admin/ait-entitlements/${entitlementId}/review`, { method: 'POST', cookie: admin, body: { decision: 'approve' } })).data.entitlement.status, 'available');
+  const payment = await req(`/api/ait-entitlements/${entitlementId}/settlements`, { method: 'POST', cookie: creator, body: { settlementType: 'payment', currency: 'USDT', grossAmount: '8.00', payerSubject: `brand:${brandData.me.id}`, payeeSubject: `user:${creatorData.me.id}` } });
+  assert.equal(payment.response.status, 201);
+  assert.equal((await req(`/api/admin/payment-settlements/${payment.data.record.id}/review`, { method: 'POST', cookie: admin, body: { decision: 'approve', note: 'Contract 与收款主体已复核' } })).data.settlement.status, 'approved');
+  const completed = await req(`/api/admin/payment-settlements/${payment.data.record.id}/complete`, { method: 'POST', cookie: admin, body: { paymentReference: 'provider:payment-api-1', receiptReference: 'receipt:payment-api-1' } });
+  assert.equal(completed.data.record.status, 'paid');
+  const retiredWithdrawal = await req('/api/ait-withdrawals', { method: 'POST', cookie: creator, body: { amount: 1 } });
+  assert.equal(retiredWithdrawal.response.status, 410);
   const finalData = await bootstrap(creator);
   assert.equal(finalData.walletBindings[0].address, wallet.address.toLowerCase());
-  assert.equal(finalData.aitWithdrawals.filter(item => item.status === 'paid').length, 1);
+  assert.equal(finalData.economy.ait.settled, 80);
+  assert.equal(finalData.paymentSettlements.find(item => item.id === payment.data.record.id).status, 'paid');
 });
 
 test('agent permissions and content type are enforced by the server', async () => {
@@ -214,7 +243,7 @@ test('signed runtime proof rejects direct claims and posts AIP only after ordere
   assert.equal(completed.data.rewardStatus, 'posted');
   const replay = await sendRuntime(3, 'playable_complete');
   assert.equal(replay.response.status, 409);
-  assert.equal((await bootstrap(visitor)).points.AIP, 5);
+  assert.equal((await bootstrap(visitor)).points.AIP, 105);
 });
 
 test('campaign contract, platform review, delivery approval and AIT settlement complete end to end', async () => {
@@ -280,13 +309,34 @@ test('campaign contract, platform review, delivery approval and AIT settlement c
   assert.equal(platformApproval.data.status, 'platform_approved');
   const approvalTrail = (await bootstrap(brand.cookie)).settlements.find(item => item.id === settlement.id).approvals;
   assert.deepEqual(approvalTrail.map(item => item.decision), ['brand_confirmed', 'approved']);
-  const issued = await req(`/api/settlements/${settlement.id}/issue`, { method: 'POST', cookie: brand.cookie });
-  assert.equal(issued.data.status, 'issued');
-  const replay = await req(`/api/settlements/${settlement.id}/issue`, { method: 'POST', cookie: brand.cookie });
-  assert.equal(replay.data.idempotent, true);
-  assert.equal((await bootstrap(creator)).points.AIT, 500);
+  const retiredIssue = await req(`/api/settlements/${settlement.id}/issue`, { method: 'POST', cookie: brand.cookie });
+  assert.equal(retiredIssue.response.status, 410);
+  const contract = await req(`/api/campaigns/${campaign.id}/economy-contract`, { method: 'POST', cookie: brand.cookie, body: {
+    contractVersion: 'economy-contract-v1', primarySuccessEvent: 'wallet_safety_complete',
+    playerRule: { perUserCapAit: 50, amountAit: 50 }, creatorRule: { perUserCapAit: 500, amountAit: 500, eventTypes: ['delivery_approved'] },
+    attribution: { model: 'last_eligible_touch', windowDays: 7 }, eligibility: { kyc: true, regions: ['Global', 'Hong Kong'] }, budget: { totalAit: 2500 },
+    settlement: { cashEnabled: true, currencies: ['USDT'], benefitTypes: ['campaign_access'] }, lockedFields: economyLockedFields,
+  } });
+  assert.equal(contract.response.status, 201);
+  assert.equal((await req(`/api/admin/campaigns/${campaign.id}/economy-contract/approve`, { method: 'POST', cookie: admin, body: { contractVersion: 'economy-contract-v1' } })).response.status, 200);
+  const entitlement = await req(`/api/admin/campaigns/${campaign.id}/ait-entitlements`, { method: 'POST', cookie: admin, body: {
+    userId: creatorId, contractVersion: 'economy-contract-v1', sourceType: 'creator_delivery', sourceEventType: 'delivery_approved', sourceEventId: delivery.data.id,
+    amount: 500, attributionReference: `deliverable:${delivery.data.id}`, riskDecision: 'clear',
+  } });
+  assert.equal(entitlement.response.status, 201);
+  const entitlementId = entitlement.data.entitlement.id;
+  assert.equal((await req(`/api/admin/ait-entitlements/${entitlementId}/review`, { method: 'POST', cookie: admin, body: { decision: 'approve' } })).data.entitlement.status, 'available');
+  const payment = await req(`/api/ait-entitlements/${entitlementId}/settlements`, { method: 'POST', cookie: creator, body: {
+    settlementType: 'payment', currency: 'USDT', grossAmount: '50.00', payerSubject: `brand:${brandData.me.id}`, payeeSubject: `user:${creatorId}`,
+  } });
+  assert.equal(payment.response.status, 201);
+  assert.equal((await req(`/api/admin/payment-settlements/${payment.data.record.id}/review`, { method: 'POST', cookie: admin, body: { decision: 'approve', note: '预算、归因与交付一致' } })).data.settlement.status, 'approved');
+  assert.equal((await req(`/api/admin/payment-settlements/${payment.data.record.id}/complete`, { method: 'POST', cookie: admin, body: { paymentReference: 'provider:campaign-payment-1', receiptReference: 'receipt:campaign-payment-1' } })).data.record.status, 'paid');
+  const creatorEconomy = await bootstrap(creator);
+  assert.equal(creatorEconomy.points.AIT, 0);
+  assert.equal(creatorEconomy.economy.ait.settled, 500);
   brandData = await bootstrap(brand.cookie);
-  assert.deepEqual(brandData.campaigns.find(item => item.id === campaign.id).budgetSummary, { total: 2500, committed: 500, issued: 500, remaining: 2000 });
+  assert.deepEqual(brandData.campaigns.find(item => item.id === campaign.id).budgetSummary, { total: 2500, committed: 500, issued: 0, remaining: 2000 });
 });
 
 test('admin kill switch stops and resumes Agent task pickup', async () => {
@@ -373,12 +423,12 @@ test('content version restore rebuilds artifacts and AIP utilities use governed 
   await req(`/api/contents/${content.id}/publish`, { method: 'POST', cookie: creator });
 
   const adjustment = await req('/api/admin/points/adjust', { method: 'POST', cookie: admin, body: { userId: creatorData.me.id, currency: 'AIP', amount: 50, reason: '测试 AIP 平台功能' } });
-  assert.equal(adjustment.data.balance.AIP, 50);
-  assert.equal((await req(`/api/admin/point-events/${adjustment.data.id}/status`, { method: 'POST', cookie: admin, body: { status: 'frozen', reason: '临时风控复核' } })).data.balance.AIP, 0);
-  assert.equal((await req(`/api/admin/point-events/${adjustment.data.id}/status`, { method: 'POST', cookie: admin, body: { status: 'posted', reason: '复核通过恢复' } })).data.balance.AIP, 50);
+  assert.equal(adjustment.data.balance.AIP, 100);
+  assert.equal((await req(`/api/admin/point-events/${adjustment.data.id}/status`, { method: 'POST', cookie: admin, body: { status: 'frozen', reason: '临时风控复核' } })).data.balance.AIP, 50);
+  assert.equal((await req(`/api/admin/point-events/${adjustment.data.id}/status`, { method: 'POST', cookie: admin, body: { status: 'posted', reason: '复核通过恢复' } })).data.balance.AIP, 100);
   const boost = await req(`/api/contents/${content.id}/boost`, { method: 'POST', cookie: creator });
   assert.equal(boost.response.status, 201);
-  assert.equal(boost.data.balance.AIP, 30);
+  assert.equal(boost.data.balance.AIP, 80);
   const discovery = await req('/api/discover?q=可恢复版本内容', { cookie: visitor });
   assert.equal(discovery.data.results[0].id, content.id);
   assert.ok(discovery.data.results[0].boostedUntil);

@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0.0",
+  "asset_version": "1.0.1",
+  "character_id": "chr_aegis_rowan",
+  "game_id": 20,
+  "game_key": "formation-knights",
+  "name": "Aegis Rowan",
+  "archetype": "formation knight",
+  "art_direction": "Airvana original premium stylized 2D vector; readable at mobile scale; deterministic and editable",
+  "locked_identity_features": [
+    "ivory split plume",
+    "oxblood half cape",
+    "gold-rimmed kite shield",
+    "steel scale cuirass",
+    "three-notch shoulder guard"
+  ],
+  "editable_features": [
+    "pose",
+    "expression",
+    "camera angle",
+    "stage lighting",
+    "non-identity particle effects"
+  ],
+  "prohibited_transformations": [
+    "third-party character likeness",
+    "logo or branded costume",
+    "identity color replacement",
+    "silhouette replacement",
+    "photoreal face synthesis"
+  ],
+  "canonical_master": "public/assets/characters/v1/chr_aegis_rowan/master.svg",
+  "cover_asset": "public/assets/game-covers/character-consistency-v1/formation-knights.svg",
+  "runtime_asset": "public/assets/characters/v1/chr_aegis_rowan/master.svg",
+  "cover_scene": "stone formation line facing one shadow beast",
+  "authorization_status": "approved_local_prototype",
+  "external_release_status": "pending_human_review"
+}
