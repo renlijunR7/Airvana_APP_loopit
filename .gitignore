@@ -21,3 +21,6 @@ local.properties
 captures/
 .cxx/
 externalNativeBuild/
+
+# 图片重压前的原始资产备份（体积大，不入库；重压脚本可从此回滚）
+assets-original/

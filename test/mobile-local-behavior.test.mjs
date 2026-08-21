@@ -22,6 +22,63 @@ const collectCreationPowers = component => {
   return powers;
 };
 
+const finishCreatorGeneration = (component, runTimers) => {
+  for (let index=0; index<10 && component.state.createStep==='generating'; index+=1) runTimers(0);
+  assert.equal(component.state.createStep, 'preview');
+  assert.equal(component.state.generating, false);
+  const task=component.state.localGenerationTasks.find(item=>item.status==='preview_ready');
+  assert.ok(task, 'a preview_ready generation task must exist');
+  assert.equal(task.progress, 100);
+  assert.ok(task.artifacts.plan);
+  assert.ok(task.artifacts.asset_manifest);
+  assert.ok(task.artifacts.playable_config);
+  assert.equal(task.artifacts.validation_report.passed, true);
+  assert.equal(task.artifacts.preview_bundle.interactive, true);
+  return task;
+};
+
+const coverCreatorPreviewPaths = component => {
+  let values=component.renderVals();
+  values.previewPrimaryAction();
+  for (let landing=0; landing<6; landing+=1) {
+    component.renderVals().previewPrimaryAction();
+    component.renderVals().previewSecondaryAction();
+  }
+  assert.equal(component.state.previewRuntime.status, 'success');
+  component.renderVals().previewPrimaryAction();
+  component.renderVals().previewSecondaryAction();
+  assert.equal(component.state.previewRuntime.status, 'failure');
+  component.renderVals().previewPrimaryAction();
+  component.renderVals().previewControlButtons[0].onPick();
+  assert.equal(component.state.previewRuntime.status, 'paused');
+  component.renderVals().previewControlButtons[0].onPick();
+  component.renderVals().previewControlButtons[2].onPick();
+  component.renderVals().previewControlButtons[3].onPick();
+  component.renderVals().previewControlButtons[4].onPick();
+  values=component.renderVals();
+  assert.equal(values.previewCoverageLabel, '4/4 路径已验证');
+  assert.deepEqual([...component.state.previewRuntime.coveredPaths].sort(), ['exit','failure','retry','success']);
+};
+
+const submitAndApproveCreatorReview = component => {
+  component.renderVals().submitReview();
+  assert.equal(component.state.createStep, 'review');
+  assert.equal(component.state.reviewStatus, 'pending_review');
+  assert.equal(component.state.reviewPassed, false);
+  const reviewId=component.state.reviewActiveId;
+  const pending=component.state.localReviewRecords.find(item=>item.id===reviewId);
+  assert.equal(pending.status, 'pending_review');
+  assert.ok(pending.checks.every(item=>item.passed));
+  component.renderVals().approveReview();
+  assert.equal(component.state.reviewStatus, 'approved');
+  assert.equal(component.state.reviewPassed, true);
+  const approved=component.state.localReviewRecords.find(item=>item.id===reviewId);
+  assert.equal(approved.status, 'approved');
+  assert.equal(approved.reviewed_by, 'local-human-reviewer-demo');
+  assert.notEqual(approved.reviewed_by, approved.submitted_by);
+  return approved;
+};
+
 test('mobile primary navigation follows page hierarchy and returns after secondary work', () => {
   const {component} = createMobileComponent();
   const primaryState = {
@@ -665,7 +722,7 @@ test('mobile Component preserves a complete attributed playable deep link on sta
 
 test('creation capability catalog exposes recommendation plus seven atomic categories and 47/44 role filtering', () => {
   const {component} = createMobileComponent();
-  component.setState({overlay:'create',createStep:'home',createHomeTab:'create',createRoleScope:'kol',createPowerCat:'popular',powerSearchQuery:''});
+  component.setState({overlay:'create',createStep:'home',createHomeTab:'create',createRoleScope:'kol',composerMode:'deep',createPowerCat:'popular',powerSearchQuery:''});
 
   let values = component.renderVals();
   assert.equal(values.powerCategories.map(item=>item.key).join(','), ['popular',...creationCategoryKeys].join(','));
@@ -741,7 +798,7 @@ test('other capability category filters shared experimental powers and selection
 test('creation recommendations combine prompt goals, missing categories and truthful status metadata', () => {
   const {component} = createMobileComponent();
   component.setState({
-    overlay:'create',createStep:'home',createHomeTab:'create',createRoleScope:'kol',createPowerCat:'popular',
+    overlay:'create',createStep:'home',createHomeTab:'create',createRoleScope:'kol',composerMode:'deep',createPowerCat:'popular',
     gamePrompt:'创建一个摄像头 AR 互动挑战，并通过 Telegram 外部渠道发布。',
     composerGoalObjective:'记录归因转化',recentPowerIds:[],selectedPowerIds:[],powerSearchQuery:''
   });
@@ -763,7 +820,7 @@ test('creation recommendations combine prompt goals, missing categories and trut
 test('creation recommendations disclose four relevant capabilities before the full catalog', () => {
   const {component} = createMobileComponent();
   component.setState({
-    overlay:'create',createStep:'home',createHomeTab:'create',createRoleScope:'kol',createPowerCat:'popular',
+    overlay:'create',createStep:'home',createHomeTab:'create',createRoleScope:'kol',composerMode:'deep',createPowerCat:'popular',
     gamePrompt:'创建一个摄像头 AR 互动挑战，并通过 Telegram 外部渠道发布。',
     composerGoalObjective:'记录归因转化',recentPowerIds:[],selectedPowerIds:[],powerSearchQuery:'',powerCatalogExpanded:false
   });
@@ -957,13 +1014,14 @@ test('mobile Component share sheet channel and content actions remain truthful l
   assert.equal(component.state.localEventLog[0].event_name, 'replay_intent');
 });
 
-test('mobile Component unlocks approved distribution connectors and preserves channel attribution', () => {
+test('mobile Component advances an approved connector through explicit frontend states without claiming external delivery', () => {
   const {component, openedUrls} = createMobileComponent();
   const contentId = 1;
-  component.setState({sessions:component.state.sessions.map(item=>item.id===contentId?{
+  component.setState({localReviewRecords:[{id:'review-connector',review_id:'review-connector',status:'approved',submitted_by:'creator',reviewed_by:'human-reviewer',checks:[]}],sessions:component.state.sessions.map(item=>item.id===contentId?{
     ...item,
     status:'published',
-    contract:{version:'local-connector-contract',status:'reviewed-local-demo',distributionConnectors:['telegram','facebook','x','discord']}
+    versions:[{id:'version-connector',label:'v1',review_record_id:'review-connector'}],
+    contract:{version:'local-connector-contract',status:'reviewed-local-demo',assets:'已授权项目素材',region:'Hong Kong',distributionConnectors:['telegram','facebook','x','discord']}
   }:item)});
 
   component.openConnectorPublisher(contentId);
@@ -971,30 +1029,32 @@ test('mobile Component unlocks approved distribution connectors and preserves ch
   const values = component.renderVals();
   assert.deepEqual(Array.from(values.connectorPublishRows, row=>row.key), ['telegram','facebook','x','discord']);
 
-  values.connectorPublishRows.find(row=>row.key==='telegram').onPublish();
-  assert.match(openedUrls.at(-1).url, /^https:\/\/t\.me\/share\/url\?/);
-  assert.match(decodeURIComponent(openedUrls.at(-1).url), /channel_id=telegram/);
-  assert.match(decodeURIComponent(openedUrls.at(-1).url), /link_id=connector-telegram-/);
-  assert.equal(component.state.distributionEvents[0].kind, 'connector-publish-intent');
-  assert.equal(component.state.distributionEvents[0].channel, 'telegram');
-  assert.equal(component.state.distributionEvents[0].serverConfirmed, false);
-  assert.equal(component.state.localEventLog[0].event_name, 'connector_publish_intent');
+  for (let step=0; step<5; step+=1) component.renderVals().connectorPublishRows.find(row=>row.key==='telegram').onAdvance();
+  component.renderVals().connectorPublishRows.find(row=>row.key==='telegram').resultActions.find(item=>item.status==='succeeded').onPick();
+  const state=component.state.connectorPublishStates[contentId+':telegram'];
+  assert.equal(state.status, 'succeeded');
+  assert.equal(state.server_confirmed, false);
+  assert.equal(state.result.server_confirmed, false);
+  assert.equal(openedUrls.length, 0, 'frontend simulation must not open an external channel');
+  assert.equal(component.state.localEventLog[0].event_name, 'connector_state_changed');
   assert.equal(component.state.localEventLog[0].properties.channel, 'telegram');
 });
 
-test('mobile Component copies before Discord handoff and blocks unapproved connector scope', () => {
+test('mobile Component keeps connector channels independent and blocks channels outside the approved Contract', () => {
   const {component, openedUrls, clipboardWrites} = createMobileComponent();
   const contentId = 1;
-  component.setState({sessions:component.state.sessions.map(item=>item.id===contentId?{
+  component.setState({localReviewRecords:[{id:'review-discord',review_id:'review-discord',status:'approved',submitted_by:'creator',reviewed_by:'human-reviewer',checks:[]}],sessions:component.state.sessions.map(item=>item.id===contentId?{
     ...item,
     status:'published',
-    contract:{version:'local-discord-contract',status:'reviewed-local-demo',distributionConnectors:['discord']}
+    versions:[{id:'version-discord',label:'v1',review_record_id:'review-discord'}],
+    contract:{version:'local-discord-contract',status:'reviewed-local-demo',assets:'已授权项目素材',region:'Hong Kong',distributionConnectors:['discord']}
   }:item)});
 
   component.openConnectorPublisher(contentId);
-  component.renderVals().connectorPublishRows[0].onPublish();
-  assert.match(clipboardWrites.at(-1), /channel_id=discord/);
-  assert.equal(openedUrls.at(-1).url, 'https://discord.com/channels/@me');
+  component.renderVals().connectorPublishRows[0].onAdvance();
+  assert.equal(component.state.connectorPublishStates[contentId+':discord'].status, 'connected_unapproved');
+  assert.equal(openedUrls.length, 0);
+  assert.equal(clipboardWrites.length, 0);
 
   const eventCount = component.state.distributionEvents.length;
   component.publishToConnector('telegram', contentId);
@@ -1898,13 +1958,13 @@ test('mobile composer previews and atomically applies selected inspiration witho
   component.setState({overlay:'create',createStep:'home',createHomeTab:'create',gamePrompt:original,composerPromptHistory:[],composerSuggestionBatch:0,composerInspirationSelectedIds:[],composerInspirationMode:'merge',composerInspirationPreviewOpen:false,...locked});
 
   let values = component.renderVals();
-  assert.equal(values.composerTools.map(item=>item.label).join(','), 'AI 灵感,项目素材,目标');
+  assert.equal(values.composerTools.map(item=>item.label).join(','), '语音转文字,AI 灵感,项目素材,创作问答');
   assert.equal(values.composerTools.find(item=>item.label==='AI 灵感').meta, '可选');
   assert.equal(values.composerTools.find(item=>item.label==='AI 灵感').showBadge, false);
   assert.equal(values.composerTools.find(item=>item.label==='项目素材').meta, '待添加');
   assert.equal(values.composerTools.find(item=>item.label==='项目素材').showBadge, false);
-  assert.equal(values.composerTools.find(item=>item.label==='目标').meta, '0/4');
-  assert.equal(values.composerTools.find(item=>item.label==='目标').showBadge, false);
+  assert.equal(values.composerTools.find(item=>item.label==='创作问答').meta, '0/4');
+  assert.equal(values.composerTools.find(item=>item.label==='创作问答').showBadge, false);
   values.composerTools.find(item=>item.label==='AI 灵感').onPick();
   values = component.renderVals();
   assert.equal(component.state.composerSheet, 'inspiration');
@@ -2031,8 +2091,22 @@ test('mobile composer manages a local Asset Manifest without a separate authoriz
   assert.equal(values.composerAssetRows[0].onNextAuthorization, undefined);
   assert.doesNotMatch(component.state.campaignAssets, /授权/);
   assert.equal(values.composerPreflightIssues.some(issue => issue.id === 'pending-assets' || issue.id === 'blocked-assets'), false);
-  assert.equal(values.composerSendLabel, '生成预览');
   values.composerSend();
+  assert.equal(component.state.createStep, 'workspace');
+  const selectedPowerIds=[...component.state.selectedPowerIds];
+  values=component.renderVals();
+  values.creatorWorkspaceOpenPowers();
+  assert.equal(component.state.createStep, 'workspace');
+  assert.equal(component.state.powerDrawerOpen, true);
+  assert.equal(component.state.selectedPowerIds.join('|'), selectedPowerIds.join('|'));
+  values=component.renderVals();
+  values.closePowerDrawer();
+  assert.equal(component.state.powerDrawerOpen, false);
+  for (let question=0; question<4; question+=1) component.renderVals().skipCreatorQuestion();
+  component.setState({composerSheet:null});
+  values=component.renderVals();
+  assert.equal(values.composerSendLabel, '进入创作');
+  values.creatorWorkspaceReview();
   assert.equal(component.state.composerSheet, 'confirm');
 
   component.setState({composerSheet:'assets'});
@@ -2061,14 +2135,15 @@ test('mobile quick composer saves four goals, confirms the scheme and only start
   component.setState({overlay:'create',createStep:'home',createHomeTab:'create',composerMode:'quick',gamePrompt:'创建一个帮助新用户理解品牌核心价值的三步互动挑战',composerAssets:[],composerGoalObjective:'',composerGoalAudience:'',composerGoalSuccessEvent:'',composerGoalCTAType:'',composerGoalSaved:false});
 
   let values = component.renderVals();
-  assert.equal(values.composerSendLabel, '完善 2 项');
-  values.composerTools.find(item=>item.label==='目标').onPick();
-  values = component.renderVals();
-  values.composerObjectiveOptions[0].onPick();
-  component.renderVals().composerAudienceOptions[0].onPick();
-  component.renderVals().composerSuccessOptions[0].onPick();
-  component.renderVals().composerCTAOptions[0].onPick();
-  values = component.renderVals();
+  assert.equal(values.composerSendLabel, '进入创作');
+  values.composerSend();
+  assert.equal(component.state.createStep, 'workspace');
+  for (let question=0; question<4; question+=1) {
+    const questionValues=component.renderVals();
+    if (question===1) questionValues.skipCreatorQuestion();
+    else questionValues.creatorQuestionOptions[0].onPick();
+  }
+  values=component.renderVals();
   assert.equal(values.composerGoalCompleteCount, 4);
   values.saveComposerGoals();
   assert.equal(component.state.composerGoalSaved, true);
@@ -2076,18 +2151,232 @@ test('mobile quick composer saves four goals, confirms the scheme and only start
   values = component.renderVals();
   values.composerAssetLibrary[0].onPick();
   values = component.renderVals();
-  assert.equal(values.composerSendLabel, '生成预览');
+  assert.equal(values.composerSendLabel, '进入创作');
   assert.equal(values.composerSendClass, 'is-ready');
-  values.composerSend();
+  values.creatorWorkspaceReview();
   assert.equal(component.state.composerSheet, 'confirm');
   values = component.renderVals();
-  assert.ok(values.composerSchemeRows.some(row => row.label === '成功事件'));
+  assert.ok(values.composerSchemeRows.some(row => row.label === '成功 / 失败 / 重试'));
+  assert.ok(values.creatorDefaultRows.length > 0);
   assert.equal(values.composerHasAssumptions, true);
   values.confirmComposerGeneration();
   assert.equal(component.state.composerSheet, null);
   assert.equal(component.state.createStep, 'generating');
   assert.equal(component.state.generating, true);
   assert.equal(component.state.lastPublishedId, null);
+  component.componentWillUnmount();
+});
+
+test('mobile P0 quick creation closes description, questions, Power, recoverable generation, preview, review and APP publish', () => {
+  const {component, runTimers, storage} = createMobileComponent({withLocalBusiness:true});
+  component.setState({
+    overlay:'create',createStep:'home',createHomeTab:'create',createRoleScope:'player',composerMode:'quick',
+    gamePrompt:'帮我创作一个可爱卡通风格的跳一跳游戏，长按蓄力，适合单手操作。',
+    creatorIntakeDraft:null,creatorIntent:null,creatorAnswers:{},creatorInputSources:{text:false,voice:false,reference_image:false,authorized_assets:false,template_history:false},
+    composerGoalObjective:'',composerGoalAudience:'',composerGoalSuccessEvent:'',composerGoalCTAType:'',composerGoalSaved:false,
+    composerAssets:[],campaignAssets:'',composerConnectors:[],contentTitle:'',contentSummary:'',contentDraftId:null,
+    selectedPowerIds:[],previewDemoScore:0,previewDemoComplete:false,reviewPassed:false,reviewStatus:'not_submitted',reviewChecksState:[]
+  });
+
+  let values = component.renderVals();
+  values.composerSend();
+  assert.equal(component.state.createStep, 'workspace');
+  assert.equal(component.state.previewView, 'chat');
+  assert.equal(component.state.composerSheet, null);
+  assert.ok(component.state.creatorIntakeDraft);
+  assert.equal(component.state.creatorInputSources.text, true);
+  assert.equal(component.state.creatorIntent.core_mechanic, '蓄力跳跃并落到连续平台');
+  assert.ok(storage.size > 0, 'the initial intake must be persisted immediately');
+
+  for (let question=0; question<4; question+=1) {
+    values=component.renderVals();
+    assert.equal(values.creatorQuestionNumber, question+1);
+    if (question===2) values.skipCreatorQuestion();
+    else values.creatorQuestionOptions[0].onPick();
+  }
+  values=component.renderVals();
+  assert.equal(values.creatorQuestionsComplete, true);
+  assert.equal(values.hasCreatorDefaults, true);
+  assert.equal(component.state.composerGoalSaved, true);
+
+  component.setState({composerSheet:null});
+  values=component.renderVals();
+  values.createPowers[0].onUse();
+  values = component.renderVals();
+  assert.equal(values.createWorkspace, true);
+  assert.equal(values.creatorWorkspaceIsChat, true);
+  assert.equal(values.creatorWorkspacePowerCount > 0, true);
+  values.creatorWorkspaceTabs.find(tab=>tab.key==='preview').onPick();
+  assert.equal(component.renderVals().creatorWorkspaceIsPreview, true);
+  component.renderVals().creatorWorkspaceOpenPreview();
+  assert.equal(component.renderVals().creatorWorkspaceIsChat, true);
+  values=component.renderVals();
+  values.creatorWorkspaceReview();
+  assert.equal(component.state.composerSheet, 'confirm');
+
+  values = component.renderVals();
+  assert.equal(values.composerSheetTitle, 'Review your answers');
+  assert.equal(values.composerConfirmLabel, '确认并开始创作');
+  assert.equal(values.composerFlowSteps.map(step=>step.label).join(' → '), '描述 → 问答 → Power → Review → 生成 → 预览 → 审核 → 发布');
+  for (const label of ['标题与创意摘要','目标玩家','Power 能力','核心玩法','操作方式','视觉风格','成功 / 失败 / 重试','站内可见性','Remix']) {
+    assert.ok(values.composerSchemeRows.some(row=>row.label===label), `${label} must be reviewable`);
+  }
+  assert.ok(values.selectedPowerCount > 0);
+  values.composerSchemeRows.find(row=>row.label==='操作方式').onEdit();
+  assert.equal(component.state.composerSheet, 'goals');
+
+  component.setState({composerSheet:'confirm'});
+  component.renderVals().confirmComposerGeneration();
+  assert.equal(component.state.createStep, 'generating');
+  assert.equal(component.state.generating, true);
+  const cancelledTaskId = component.state.localGenerationTasks[0].id;
+  component.renderVals().cancelGeneration();
+  assert.equal(component.state.createStep, 'workspace');
+  assert.equal(component.state.previewView, 'chat');
+  assert.equal(component.state.generating, false);
+  assert.equal(component.state.localGenerationTasks.find(task=>task.id===cancelledTaskId).status, 'cancelled');
+  assert.match(component.state.gamePrompt, /跳一跳/);
+
+  component.setState({composerSheet:'confirm'});
+  component.renderVals().confirmComposerGeneration();
+  assert.equal(component.state.localGenerationTasks[0].id, cancelledTaskId, 'same input must not create a duplicate task id');
+  const task=finishCreatorGeneration(component, runTimers);
+  assert.equal(task.server_confirmed, false);
+  coverCreatorPreviewPaths(component);
+  const approved=submitAndApproveCreatorReview(component);
+
+  component.renderVals().publishContent();
+  const release = component.state.localReleaseRecords[0];
+  const published = component.state.sessions.find(item=>item.id===component.state.lastPublishedId);
+  assert.equal(release.action, 'publish_home');
+  assert.equal(release.server_confirmed, false);
+  assert.equal(release.review_id, approved.review_id);
+  for (const field of ['release_id','playable_id','version_id','build_id','review_id','published_at','visibility','remix_policy']) assert.ok(release[field], field+' is required');
+  assert.equal(release.message, '已发布到本机 Airvana 首页 · 本地演示');
+  assert.equal(component.state.lastPublishMessage, '已发布到本机 Airvana 首页 · 本地演示');
+  assert.equal(published.status, 'published');
+  assert.equal(published.playable_id, release.playable_id);
+  assert.equal(published.publishScope, 'app_only');
+  assert.equal(published.createdByRole, 'player');
+  assert.equal(component.state.overlay, null);
+  component.componentWillUnmount();
+});
+
+test('mobile P1 deep Campaign closes Brief, Contract, Asset Manifest, locked-field review and two-version governance', () => {
+  const {component, runTimers} = createMobileComponent({withLocalBusiness:true});
+  component.setState({
+    overlay:'create',createStep:'home',createHomeTab:'create',createRoleScope:'kol',composerMode:'deep',
+    campaignId:'campaign-p1-frontend',gamePrompt:'为 Airvana 新用户创建三步互动挑战，完成后展示品牌指南与明确结果反馈',
+    composerGoalObjective:'品牌认知',composerGoalAudience:'18+ 新用户（本地演示）',
+    composerGoalSuccessEvent:'playable_complete（需服务器确认）',composerGoalCTAType:'查看指南',composerGoalSaved:true,
+    campaignBrand:'Airvana',campaignAudience:'18+ 新用户（本地演示）',campaignRegion:'Hong Kong',campaignChannel:'Airvana APP',
+    campaignSuccessEvent:'playable_complete（需服务器确认）',campaignCTA:'查看指南',campaignCTAUrl:'airvana://brand-guide',
+    campaignRewardRule:'无现金奖励，仅展示站内体验结果',campaignAttributionWindow:'7 days',campaignAttributionModel:'last valid interaction',
+    campaignSettlementBasis:'仅依据经批准的成功事件，本地演示不结算',campaignBrandRestrictions:'不得使用未授权品牌素材',
+    composerAssets:[],campaignAssets:'',composerConnectors:['telegram','x'],contentTitle:'Campaign 跳跃挑战',contentSummary:'通过六次有效落点完成品牌互动挑战，并提供失败、重试与退出路径。',contentDraftId:null,
+    previewDemoScore:0,previewDemoComplete:false,reviewPassed:false,reviewStatus:'not_submitted',reviewChecksState:[]
+  });
+
+  let values = component.renderVals();
+  values.composerAssetLibrary[0].onPick();
+  values = component.renderVals();
+  assert.equal(values.composerSendLabel, '进入创作');
+  const firstContractVersion = values.campaignContractVersion;
+  values.composerSend();
+  assert.equal(component.state.createStep, 'workspace');
+  component.renderVals().creatorWorkspaceReview();
+  assert.equal(component.renderVals().composerConfirmLabel, '确认 Brief 并生成 Contract 草案');
+  component.renderVals().confirmComposerGeneration();
+  finishCreatorGeneration(component, runTimers);
+
+  assert.equal(component.state.createStep, 'preview');
+  assert.equal(component.state.localBriefVersions.length, 1);
+  assert.equal(component.state.localContractVersions.length, 1);
+  assert.equal(component.state.localAssetManifests.length, 1);
+  const firstContract = component.state.localContractVersions[0];
+  assert.equal(firstContract.version, firstContractVersion);
+  assert.ok(firstContract.locked_fields.includes('cta_destination'));
+  assert.ok(firstContract.locked_fields.includes('settlement_basis'));
+  assert.equal(component.state.localAssetManifests[0].asset_count, 1);
+  values = component.renderVals();
+  assert.equal(values.campaignArtifactRows.slice(0,3).map(row=>row.label).join(' → '), 'Campaign Brief → Campaign Contract → Asset Manifest');
+
+  coverCreatorPreviewPaths(component);
+  values=component.renderVals();
+  values.saveDraft();
+  const stableContentId = component.state.contentDraftId;
+  submitAndApproveCreatorReview(component);
+  assert.equal(component.state.localBriefVersions[0].status, 'approved-local-demo');
+  assert.equal(component.state.localContractVersions[0].approval_status, 'approved-local-demo');
+  assert.equal(component.state.localAssetManifests[0].status, 'frozen-local-demo');
+  component.renderVals().publishContent();
+
+  let published = component.state.sessions.find(item=>item.id===stableContentId);
+  assert.equal(published.status, 'published');
+  assert.equal(published.versions.length, 1);
+  assert.equal(published.campaignId, 'campaign-p1-frontend');
+  assert.equal(component.state.localReleaseRecords[0].server_confirmed, false);
+  assert.ok(component.state.localReleaseRecords[0].contract_artifact_id);
+  assert.ok(component.state.localReleaseRecords[0].asset_manifest_id);
+  assert.equal(component.state.overlay, 'connectorPublish');
+
+  let connectorRows=component.renderVals().connectorPublishRows;
+  const driveChannel=(channel,steps)=>{
+    for (let index=0; index<steps; index+=1) {
+      const row=component.renderVals().connectorPublishRows.find(item=>item.key===channel);
+      assert.ok(row.canAdvance, `${channel} must advance at step ${index}`);
+      row.onAdvance();
+    }
+  };
+  driveChannel('telegram', 5);
+  connectorRows=component.renderVals().connectorPublishRows;
+  connectorRows.find(item=>item.key==='telegram').resultActions.find(item=>item.status==='partial').onPick();
+  connectorRows=component.renderVals().connectorPublishRows;
+  assert.equal(connectorRows.find(item=>item.key==='telegram').statusLabel, '部分成功 · 本地模拟');
+  assert.equal(connectorRows.find(item=>item.key==='x').statusLabel, '未连接');
+  assert.equal(component.state.connectorPublishStates[stableContentId+':telegram'].server_confirmed, false);
+
+  component.setState({overlay:'create',createStep:'home',contentDraftId:stableContentId,reviewPassed:false,reviewStatus:'not_submitted',reviewChecksState:[],composerSheet:null});
+  values = component.renderVals();
+  values.setCampaignRegion({target:{value:'Singapore'}});
+  values = component.renderVals();
+  const secondContractVersion = values.campaignContractVersion;
+  assert.notEqual(secondContractVersion, firstContractVersion);
+  assert.equal(component.state.reviewPassed, false);
+  assert.equal(values.campaignArtifactRows.find(row=>row.label==='Campaign Contract').status, '待生成');
+
+  component.setState({composerSheet:'confirm'});
+  component.renderVals().confirmComposerGeneration();
+  finishCreatorGeneration(component, runTimers);
+  coverCreatorPreviewPaths(component);
+  submitAndApproveCreatorReview(component);
+  component.renderVals().publishContent();
+
+  published = component.state.sessions.find(item=>item.id===stableContentId);
+  assert.equal(published.versions.length, 2);
+  assert.equal(component.state.localContractVersions.length, 2);
+  assert.ok(component.state.localContractVersions.some(item=>item.version===firstContractVersion&&item.approval_status==='approved-local-demo'));
+  assert.ok(component.state.localContractVersions.some(item=>item.version===secondContractVersion&&item.approval_status==='approved-local-demo'));
+  component.setState({overlay:'create'});
+  values = component.renderVals();
+  assert.equal(values.campaignVersionHistoryLabel, '2 个 Contract 版本');
+
+  values.toggleCampaignVersionPause();
+  published = component.state.sessions.find(item=>item.id===stableContentId);
+  assert.equal(published.status, 'paused');
+  assert.equal(component.state.localReleaseRecords[0].action, 'pause');
+  component.renderVals().toggleCampaignVersionPause();
+  published = component.state.sessions.find(item=>item.id===stableContentId);
+  assert.equal(published.status, 'published');
+  assert.equal(component.state.localReleaseRecords[0].action, 'resume');
+
+  component.renderVals().rollbackCampaignVersion();
+  published = component.state.sessions.find(item=>item.id===stableContentId);
+  assert.equal(component.state.localReleaseRecords[0].action, 'rollback');
+  assert.equal(component.state.campaignActiveVersionId, published.versions[0].id);
+  assert.equal(published.versions[0].status, '运行中');
+  assert.equal(published.versions[1].status, '已回滚');
+  assert.ok(component.state.localReleaseRecords.slice(0,3).every(record=>record.server_confirmed===false));
   component.componentWillUnmount();
 });
 
@@ -2099,9 +2388,12 @@ test('new creation starts with an isolated empty project asset manifest', () => 
 
   assert.equal(component.state.composerAssets.length, 0);
   assert.equal(component.state.campaignAssets, '');
-  const values = component.renderVals();
+  let values = component.renderVals();
   assert.equal(values.composerTools.find(item=>item.label==='项目素材').meta, '待添加');
-  assert.ok(values.composerPreflightIssues.some(issue=>issue.id==='assets'));
+  assert.equal(values.composerPreflightIssues.some(issue=>issue.id==='assets'), false, 'quick mode may generate without an asset');
+  component.setState({composerMode:'deep',createRoleScope:'kol'});
+  values=component.renderVals();
+  assert.ok(values.composerPreflightIssues.some(issue=>issue.id==='assets'), 'deep Campaign mode requires an authorized asset');
 });
 
 test('mobile composer blocks risky promises before local preview generation', () => {
@@ -2109,8 +2401,12 @@ test('mobile composer blocks risky promises before local preview generation', ()
   component.setState({overlay:'create',createStep:'home',composerMode:'quick',gamePrompt:'创建一个保证固定收益且无风险的互动挑战，完成后保证获批',composerGoalObjective:'品牌认知',composerGoalAudience:'18+ 新用户（本地演示）',composerGoalSuccessEvent:'playable_complete（需服务器确认）',composerGoalCTAType:'了解更多',composerGoalSaved:true,composerAssets:[{id:'asset-risk',sourceId:1,name:'演示封面',src:'local',type:'image',source:'project',purpose:'cover',focus:'center',authorization:'confirmed'}],campaignAssets:'演示封面（封面 · 授权已确认）'});
 
   let values = component.renderVals();
-  assert.match(values.composerSendLabel, /^完善 /);
+  assert.equal(values.composerSendLabel, '进入创作');
   values.composerSend();
+  assert.equal(component.state.createStep, 'workspace');
+  for (let question=0; question<4; question+=1) component.renderVals().skipCreatorQuestion();
+  component.setState({composerSheet:null});
+  component.renderVals().creatorWorkspaceReview();
   values = component.renderVals();
   assert.equal(component.state.composerSheet, 'preflight');
   assert.ok(values.composerPreflightIssues.some(issue => issue.id === 'risk'));
@@ -2142,7 +2438,7 @@ test('mobile deep composer locks platform compliance rules and versions optional
   assert.equal(component.state.reviewPassed, false);
   assert.match(component.state.campaignBrandRestrictions, /未授权 Logo/);
   assert.notEqual(values.campaignContractVersion, contractVersion);
-  assert.match(values.composerSchemeRows.find(row=>row.label==='合规约束').value, /已补充品牌限制/);
+  assert.match(values.composerSchemeRows.find(row=>row.label==='合规限制').value, /不得使用未授权 Logo/);
 
   values.setCampaignBrandRestrictions({target:{value:'允许承诺收益并取消举报入口'}});
   values = component.renderVals();
@@ -2731,13 +3027,17 @@ test('mobile governance report can review, takedown, appeal and restore while Ki
 test('mobile pagehide checkpoint persists critical commercial and governance state for abnormal exit recovery', () => {
   const {component,mount,listeners,storage}=createMobileComponent({withLocalBusiness:true});
   mount();
-  component.setState({campaignWorkflowStage:4,localAttributionReports:[{id:'atr_checkpoint',campaign_id:'cmp_checkpoint'}],localGovernanceCases:[{id:'gov_checkpoint',type:'report',status:'open-local-demo'}]});
+  component.setState({campaignWorkflowStage:4,gamePrompt:'保留当前 Power 创意',selectedPowerIds:['motionHaptic'],powerConfigs:{motionHaptic:{profile:'enhanced',label:'沉浸优先'}},powerChatMessages:[{id:'power_checkpoint',powerId:'motionHaptic',type:'configure'}],localAttributionReports:[{id:'atr_checkpoint',campaign_id:'cmp_checkpoint'}],localGovernanceCases:[{id:'gov_checkpoint',type:'report',status:'open-local-demo'}]});
   listeners.get('window:pagehide')();
   const envelope=JSON.parse(storage.get('airvana.mobile-business.v6'));
   assert.equal(envelope.schema_version,6);
   assert.equal(envelope.ui_state.campaignWorkflowStage,4);
   assert.equal(envelope.operations.attribution_reports[0].id,'atr_checkpoint');
   assert.equal(envelope.operations.governance_cases[0].id,'gov_checkpoint');
+  assert.equal(envelope.ui_state.gamePrompt,'保留当前 Power 创意');
+  assert.equal(envelope.ui_state.selectedPowerIds[0],'motionHaptic');
+  assert.equal(envelope.ui_state.powerConfigs.motionHaptic.profile,'enhanced');
+  assert.equal(envelope.ui_state.powerChatMessages[0].id,'power_checkpoint');
   assert.equal(envelope.ui_state.persistenceCheckpoint.reason,'pagehide');
   assert.equal(envelope.repository_state.call_count,0);
 });
@@ -2823,4 +3123,122 @@ test('local subscription closes upgrade, allowance, AIP fallback, cancellation, 
   assert.equal(second.component.state.localSubscriptionHistory.length,0);
   assert.equal(second.component.state.aip,authorityBefore.aip-50);
   assert.equal(second.component.state.ait,authorityBefore.ait);
+});
+
+test('creator Chat model execution summary follows real workspace state and expands without starting generation', () => {
+  const {component}=createMobileComponent();
+  component.setState({
+    overlay:'create',createStep:'workspace',previewView:'chat',createRoleScope:'kol',composerMode:'quick',
+    gamePrompt:'为移动端用户创建一个 60 秒的点击躲避挑战，包含成功、失败、重试和退出。',
+    creatorAnswers:{},composerGoalSaved:false,selectedPowerIds:['challenge'],creatorModelExecutionExpanded:false,
+    generating:false,lastPublishedId:null
+  });
+  const generationBefore=component.state.localGenerationTasks.length;
+
+  let values=component.renderVals();
+  assert.equal(values.creatorModelExecutionTitle,'正在组织创作策略');
+  assert.equal(values.creatorModelExecutionRows.length,4);
+  assert.ok(values.creatorModelExecutionRows.some(row=>row.id==='strategy'&&row.state==='active'));
+  assert.equal(values.creatorModelExecutionExpanded,'false');
+  values.toggleCreatorModelExecution();
+  values=component.renderVals();
+  assert.equal(values.creatorModelExecutionExpanded,'true');
+  assert.equal(values.creatorModelExecutionRows.length,8);
+  assert.equal(values.creatorModelExecutionToggleLabel,'收起执行链路');
+
+  for(let index=0;index<4;index+=1) component.renderVals().skipCreatorQuestion();
+  values=component.renderVals();
+  assert.equal(values.creatorModelExecutionTitle,'等待 Review 确认');
+  assert.equal(values.creatorModelExecutionRows.find(row=>row.id==='constraints').state,'active');
+  assert.match(values.creatorModelExecutionRows.find(row=>row.id==='power').output,/1 项 Power/);
+  assert.equal(component.state.localGenerationTasks.length,generationBefore);
+  assert.equal(component.state.generating,false);
+  assert.equal(component.state.lastPublishedId,null);
+});
+
+test('workspace Power drawer closes add configure undo conflict preview and Review without auto generation or publish', () => {
+  const {component}=createMobileComponent();
+  component.setState({
+    overlay:'create',createStep:'workspace',previewView:'chat',createRoleScope:'kol',composerMode:'quick',
+    gamePrompt:'为移动端用户创建一个带体感反馈和角色引导的互动挑战',selectedPowerIds:[],powerConfigs:{},powerChatMessages:[],
+    generating:false,lastPublishedId:null,composerGoalSaved:true
+  });
+  const generationBefore=component.state.localGenerationTasks.length;
+
+  let values=component.renderVals();
+  assert.equal(values.creatorPowerButtonHasBadge,false);
+  assert.match(values.creatorPowerButtonAria,/添加 Power/);
+  component.setState({previewView:'preview'});
+  values=component.renderVals();
+  values.creatorWorkspaceAdjustPowers();
+  assert.equal(component.state.previewView,'chat');
+  assert.equal(component.state.powerDrawerOpen,true);
+  component.renderVals().closePowerDrawer();
+  values=component.renderVals();
+  values.creatorWorkspaceOpenPowers();
+  assert.equal(component.state.powerDrawerOpen,true);
+  values=component.renderVals();
+  assert.match(values.powerDrawerResultMeta,/动态推荐/);
+  const challenge=values.powerDrawerCards.find(power=>power.id==='challenge');
+  assert.ok(challenge);
+  challenge.onPrimary();
+  assert.ok(component.state.selectedPowerIds.includes('challenge'));
+  assert.equal(component.state.powerChatMessages[0].type,'add');
+  assert.equal(component.state.generating,false);
+  assert.equal(component.state.localGenerationTasks.length,generationBefore);
+  assert.equal(component.state.lastPublishedId,null);
+  values=component.renderVals();
+  assert.equal(values.creatorPowerButtonHasBadge,true);
+  assert.equal(values.creatorPowerButtonBadge,'1');
+
+  component.setState({powerDrawerCategory:'all',powerSearchOpen:true,powerSearchQuery:'体感'});
+  values=component.renderVals();
+  assert.match(values.powerDrawerResultMeta,/搜索结果/);
+  assert.ok(values.powerDrawerCards.some(power=>power.id==='motionHaptic'));
+  component.setState({powerSearchOpen:false,powerSearchQuery:'',powerDrawerCategory:'selected'});
+
+  values=component.renderVals();
+  values.powerDrawerCards.find(power=>power.id==='challenge').onPrimary();
+  values=component.renderVals();
+  values.powerConfigOptions.find(option=>option.id==='enhanced').onPick();
+  component.renderVals().savePowerConfig();
+  assert.equal(component.state.powerConfigs.challenge.profile,'enhanced');
+  assert.equal(component.state.powerChatMessages[0].type,'configure');
+  component.renderVals().creatorWorkspacePowerMessages[0].onUndo();
+  assert.equal(component.state.powerConfigs.challenge.profile,'balanced');
+
+  values=component.renderVals();
+  values.creatorWorkspaceOpenPowers();
+  values=component.renderVals();
+  values.powerDrawerTabs.find(tab=>tab.key==='sensing').onPick();
+  values=component.renderVals();
+  values.powerDrawerCards.find(power=>power.id==='cameraAr').onPrimary();
+  values=component.renderVals();
+  values.powerDrawerTabs.find(tab=>tab.key==='other').onPick();
+  values=component.renderVals();
+  values.powerDrawerCards.find(power=>power.id==='vrExperience').onPrimary();
+  values=component.renderVals();
+  assert.equal(values.powerConflictOpen,true);
+  assert.ok(component.state.selectedPowerIds.includes('cameraAr'));
+  assert.equal(component.state.selectedPowerIds.includes('vrExperience'),false);
+  values.replaceConflictingPower();
+  assert.equal(component.state.selectedPowerIds.includes('cameraAr'),false);
+  assert.ok(component.state.selectedPowerIds.includes('vrExperience'));
+
+  for(let index=0;index<4;index+=1) component.renderVals().skipCreatorQuestion();
+  values=component.renderVals();
+  const powerReview=values.composerSchemeRows.find(row=>row.label==='Power 能力');
+  assert.ok(powerReview);
+  assert.match(powerReview.value,/互动挑战（均衡）/);
+  assert.match(powerReview.value,/VR 体验（均衡）/);
+  values.creatorWorkspaceReview();
+  assert.equal(component.state.composerSheet,'confirm');
+  assert.equal(component.state.generating,false);
+  assert.equal(component.state.localGenerationTasks.length,generationBefore);
+  assert.equal(component.state.lastPublishedId,null);
+
+  component.renderVals().openPowerTemplateManager();
+  assert.equal(component.state.powerDrawerOpen,false);
+  assert.equal(component.state.createStep,'home');
+  assert.equal(component.state.createHomeTab,'templates');
 });

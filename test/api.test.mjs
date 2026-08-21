@@ -145,7 +145,7 @@ test('creator binds an optional settlement wallet and Contract-bound AIT complet
   assert.equal(contract.response.status, 201);
   assert.equal((await req(`/api/admin/campaigns/${campaignId}/economy-contract/approve`, { method: 'POST', cookie: admin, body: { contractVersion: 'contract-v1' } })).response.status, 200);
   const entitlement = await req(`/api/admin/campaigns/${campaignId}/ait-entitlements`, { method: 'POST', cookie: admin, body: {
-    userId: creatorData.me.id, contractVersion: 'contract-v1', sourceType: 'creator_delivery', sourceEventType: 'delivery_approved', sourceEventId: 'delivery-api-1', amount: 80, attributionReference: 'delivery-evidence:api-1', riskDecision: 'clear',
+    userId: creatorData.me.id, contractVersion: 'contract-v1', sourceType: 'creator_delivery', sourceEventType: 'delivery_approved', sourceEventId: 'delivery-api-1', amount: 80, attributionReference: 'partner:delivery-evidence-api-1', riskDecision: 'clear',
   } });
   assert.equal(entitlement.response.status, 201);
   const entitlementId = entitlement.data.entitlement.id;

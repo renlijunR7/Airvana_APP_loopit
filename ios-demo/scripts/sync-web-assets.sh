@@ -13,7 +13,8 @@ if [[ ! -f "${SOURCE_DIR}/index.html" ]]; then
 fi
 
 mkdir -p "${DESTINATION_DIR}"
-rsync -a --delete --exclude '.DS_Store' "${SOURCE_DIR}/" "${DESTINATION_DIR}/"
+# 可选媒体（HeyGen 样片）不进原生包：Web 端按需加载，壳内自动回退静态身份卡
+rsync -a --delete --exclude '.DS_Store' --exclude 'ai-twin/heygen/**' "${SOURCE_DIR}/" "${DESTINATION_DIR}/"
 
 # This checkout lives under Documents/iCloud, which can attach Finder metadata
 # to the generated bundle. Apple code signing rejects those extended attributes.

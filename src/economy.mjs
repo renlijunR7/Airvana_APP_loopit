@@ -391,6 +391,28 @@ export function upsertCampaignEconomyRule(db, { campaignId, contractVersion, pri
   return db.prepare('SELECT * FROM campaign_economy_rules WHERE campaign_id=? AND contract_version=?').get(campaignId, contractVersion);
 }
 
+export function resolveAttributionEvidence(db, { campaignId, reference }) {
+  const ref = String(reference || '').trim();
+  if (!ref) throw new HttpError(400, 'AIT 必须关联权威归因或交付证据', 'attribution_reference_required');
+  const separator = ref.indexOf(':');
+  const prefix = separator > 0 ? ref.slice(0, separator) : '';
+  const evidenceId = separator > 0 ? ref.slice(separator + 1) : ref;
+  if (prefix === 'partner') return { kind: 'partner_declared', verified: false };
+  const deliverable = db.prepare('SELECT id,campaign_id FROM campaign_deliverables WHERE id=?').get(evidenceId);
+  if (deliverable) {
+    if (deliverable.campaign_id !== campaignId) throw new HttpError(409, '交付证据不属于该 Campaign', 'attribution_campaign_mismatch');
+    return { kind: 'deliverable', verified: true };
+  }
+  const session = db.prepare('SELECT id FROM runtime_sessions WHERE id=?').get(evidenceId);
+  if (session) return { kind: 'runtime_session', verified: true };
+  const touch = db.prepare('SELECT id,campaign_id FROM attribution_touches WHERE id=?').get(evidenceId);
+  if (touch) {
+    if (touch.campaign_id && touch.campaign_id !== campaignId) throw new HttpError(409, '归因触点不属于该 Campaign', 'attribution_campaign_mismatch');
+    return { kind: 'attribution_touch', verified: true };
+  }
+  throw new HttpError(409, '归因证据无法在服务端解析；请引用真实 deliverable/runtime/touch ID，或使用 partner: 声明外部证据', 'attribution_reference_unresolved');
+}
+
 export function createAitEntitlement(db, { userId, campaignId, contractVersion, sourceType, sourceEventType, sourceEventId, amount, attributionReference, riskDecision = 'clear', reasonCode = null }) {
   const allowedSources = new Set(['player_campaign', 'creator_delivery', 'creator_operation', 'creator_performance', 'campaign_allocation']);
   if (!allowedSources.has(sourceType)) throw new HttpError(400, 'AIT 来源类型无效', 'invalid_ait_source');
@@ -399,7 +421,7 @@ export function createAitEntitlement(db, { userId, campaignId, contractVersion, 
   if (!rule) throw new HttpError(409, 'Campaign Contract 经济规则尚未获批或已失效', 'campaign_rule_not_approved');
   if (!String(sourceEventType || '').trim()) throw new HttpError(400, 'AIT 必须声明来源事件类型', 'source_event_type_required');
   if (sourceType === 'player_campaign' && sourceEventType !== rule.primary_success_event) throw new HttpError(409, '玩家 AIT 只认可 Contract 锁定的主要成功事件', 'primary_success_event_mismatch');
-  if (!attributionReference) throw new HttpError(400, 'AIT 必须关联权威归因或交付证据', 'attribution_reference_required');
+  const evidence = resolveAttributionEvidence(db, { campaignId, reference: attributionReference });
   if (riskDecision !== 'clear') throw new HttpError(409, 'AIT 风控尚未通过', 'risk_not_clear');
   const numericAmount = Number(amount);
   if (!Number.isInteger(numericAmount) || numericAmount <= 0) throw new HttpError(400, 'AIT 数量无效', 'invalid_ait_amount');
@@ -427,7 +449,7 @@ export function createAitEntitlement(db, { userId, campaignId, contractVersion, 
   db.prepare(`INSERT INTO ledger_batches
     (id,user_id,asset_type,source_type,original_amount,remaining_amount,status,campaign_id,contract_version,earned_at,expires_at,risk_decision,reason_code,idempotency_key,metadata_json)
     VALUES (?,?,'AIT',?,?,?,'pending',?,?,?,?,?,?,?,?)`)
-    .run(`batch_${id}`, userId, sourceType, numericAmount, numericAmount, campaignId, contractVersion, now, rule.expires_at, riskDecision, reasonCode, `ait:${campaignId}:${contractVersion}:${sourceType}:${sourceEventId}:${userId}`, jsonString({ entitlementId: id, sourceEventType, attributionReference }));
+    .run(`batch_${id}`, userId, sourceType, numericAmount, numericAmount, campaignId, contractVersion, now, rule.expires_at, riskDecision, reasonCode, `ait:${campaignId}:${contractVersion}:${sourceType}:${sourceEventId}:${userId}`, jsonString({ entitlementId: id, sourceEventType, attributionReference, evidenceKind: evidence.kind, evidenceVerified: evidence.verified }));
   return { entitlement: db.prepare('SELECT * FROM ait_entitlements WHERE id=?').get(id), idempotent: false };
 }
 

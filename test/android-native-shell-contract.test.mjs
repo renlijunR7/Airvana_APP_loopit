@@ -6,7 +6,7 @@ import path from 'node:path';
 const root = path.resolve(import.meta.dirname, '..');
 const read = file => fs.readFileSync(path.join(root, file), 'utf8');
 
-const mobileEntry = read('public/index.html');
+const mobileEntry = read('public/index.html') + read('public/boot.js');
 const mobileCss = read('public/airvana-v4.css');
 const mainActivity = read('android-demo/app/src/main/java/ai/airvana/demo/MainActivity.java');
 const localAssetServer = read('android-demo/app/src/main/java/ai/airvana/demo/LocalAssetServer.java');
@@ -18,16 +18,19 @@ const adaptiveLauncherIcon = read('android-demo/app/src/main/res/drawable-v26/ic
 const buildScript = read('android-demo/build-apk.sh');
 
 test('Android package version advances for an unambiguous in-place update', () => {
-  assert.match(buildScript, /--version-code 19/);
-  assert.match(buildScript, /--version-name 1\.0\.18/);
-  assert.match(buildScript, /Airvana-v1\.0\.18-debug\.apk/);
+  // 版本必须单调递增且三处一致（versionCode / versionName / 产物文件名），不锁死具体数字
+  const code = Number(/--version-code (\d+)/.exec(buildScript)?.[1]);
+  const name = /--version-name (\d+\.\d+\.\d+)/.exec(buildScript)?.[1];
+  const artifact = /Airvana-v(\d+\.\d+\.\d+)-debug\.apk/.exec(buildScript)?.[1];
+  assert.ok(code >= 20, `versionCode 必须 >= 20（当前 ${code}），不得回退`);
+  assert.equal(artifact, name, '产物文件名与 versionName 必须一致');
   assert.doesNotMatch(buildScript, /Airvana-Demo-v1\.0\.0-debug\.apk/);
 });
 
 test('Android wrapper always reloads packaged UI and verifies all three message tabs', () => {
   assert.match(mainActivity, /setCacheMode\(WebSettings\.LOAD_NO_CACHE\)/);
   assert.match(mainActivity, /clearCache\(true\)/);
-  assert.match(mainActivity, /native-shell=1&app-version=18/);
+  assert.match(mainActivity, /native-shell=1&app-version=20/);
   assert.match(mainActivity, /new LocalAssetServer\(getAssets\(\), 0\)/);
   assert.match(mainActivity, /localServerPort = localServer\.getPort\(\)/);
   assert.match(localAssetServer, /int getPort\(\)/);
@@ -133,7 +136,8 @@ test('My screen scrolls only when real content exceeds its viewport', () => {
   assert.match(mobileCss, /\.me-page\[data-me-page-scroll\]\s*\{[^}]*overflow-x:\s*hidden;[^}]*overflow-y:\s*auto;[^}]*overscroll-behavior-y:\s*none;/);
   assert.match(mobileCss, /\.me-page\[data-me-page-scroll\] > \.my-content-surface\s*\{[^}]*flex:\s*1 0 auto;[^}]*padding-bottom:\s*calc\(var\(--bottom-nav-reserve\) \+ var\(--safe-bottom\) \+ 12px\);/);
   assert.match(mobileCss, /\.me-page\[data-me-page-scroll\]::after\s*\{[^}]*display:\s*none;/);
-  assert.match(mobileCss, /html:not\(\.native-app-shell\) \.app-shell\.is-me-screen::before\s*\{[^}]*background:\s*#fff;/);
+  assert.match(mobileCss, /html:not\(\.native-app-shell\) \.app-shell\.is-me-screen:not\(\.theme-dark\)::before\s*\{[^}]*background:\s*#fff;/);
+  assert.doesNotMatch(mobileCss, /html:not\(\.native-app-shell\) \.app-shell\.is-me-screen::before\s*\{[^}]*background:\s*#fff;/);
   assert.match(mobileCss, /html\.native-app-shell \.app-shell\.is-me-screen:not\(\.theme-dark\)::before\s*\{[^}]*height:\s*var\(--safe-bottom\);[^}]*background:\s*#fff;/);
 });
 
@@ -149,7 +153,7 @@ test('Android activity draws behind a transparent navigation bar and passes its 
   assert.match(mainActivity, /setNavigationBarColor\(Color\.TRANSPARENT\)/);
   assert.match(mainActivity, /View\.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION/);
   assert.match(mainActivity, /View\.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN/);
-  assert.match(mainActivity, /loadUrl\("http:\/\/127\.0\.0\.1:" \+ localServerPort \+ "\/\?native-shell=1&app-version=18"\)/);
+  assert.match(mainActivity, /loadUrl\("http:\/\/127\.0\.0\.1:" \+ localServerPort \+ "\/\?native-shell=1&app-version=20"\)/);
   assert.match(mainActivity, /getSystemWindowInsetBottom\(\)/);
   assert.match(mainActivity, /getSystemWindowInsetTop\(\)/);
   assert.match(mainActivity, /getInsetsIgnoringVisibility\(WindowInsets\.Type\.navigationBars\(\)\)/);
@@ -181,5 +185,5 @@ test('creation overlay consumes native top and bottom safe areas without changin
   assert.match(mobileCss, /\.create-home-dock\s*\{[^}]*bottom:\s*calc\(17px \+ var\(--safe-bottom\)\);/);
   assert.match(mobileCss, /\.composer-sheet-scroll\s*\{[^}]*padding:\s*14px 18px calc\(22px \+ var\(--safe-bottom\)\);/);
   assert.match(mobileCss, /\.native-app-shell \.secondary-page-header\s*\{[^}]*padding-top:\s*max\(18px, calc\(12px \+ var\(--safe-top\)\)\)\s*!important;/);
-  assert.match(mobileEntry, /createBodyPadding:s\.createStep==='home'\?'0':'12px 20px calc\(30px \+ var\(--safe-bottom\)\)'/);
+  assert.match(mobileEntry, /createBodyPadding:\['home','workspace'\]\.includes\(s\.createStep\)\?'0':'12px 20px calc\(30px \+ var\(--safe-bottom\)\)'/);
 });

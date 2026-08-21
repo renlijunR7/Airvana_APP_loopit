@@ -7,7 +7,8 @@ const root = path.resolve(import.meta.dirname, '..');
 const webContainer = fs.readFileSync(path.join(root, 'ios-demo/AirvanaDemo/AirvanaWebContainer.swift'), 'utf8');
 const projectConfig = fs.readFileSync(path.join(root, 'ios-demo/project.yml'), 'utf8');
 const installScript = fs.readFileSync(path.join(root, 'ios-demo/install-on-device.sh'), 'utf8');
-const mobileEntry = fs.readFileSync(path.join(root, 'public/index.html'), 'utf8');
+const mobileEntry = fs.readFileSync(path.join(root, 'public/index.html'), 'utf8')
+  + fs.readFileSync(path.join(root, 'public/boot.js'), 'utf8');
 const mobileCss = fs.readFileSync(path.join(root, 'public/airvana-v4.css'), 'utf8');
 const infoPlist = fs.readFileSync(path.join(root, 'ios-demo/AirvanaDemo/Info.plist'), 'utf8');
 

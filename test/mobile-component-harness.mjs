@@ -79,6 +79,8 @@ export function createMobileComponent({props = {skipOnboarding:true}, stored = {
   };
   context.FileReader = TestFileReader;
   vm.createContext(context);
+  const creatorWorkflowSource=fs.readFileSync(path.join(root,'public/creator-workflow-v2.js'),'utf8');
+  vm.runInContext(creatorWorkflowSource,context,{filename:'public/creator-workflow-v2.js'});
   const walletBindingSource=fs.readFileSync(path.join(root,'public/wallet-binding-v1.js'),'utf8');
   vm.runInContext(walletBindingSource,context,{filename:'public/wallet-binding-v1.js'});
   if (withLocalBusiness) {

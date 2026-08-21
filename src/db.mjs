@@ -23,6 +23,217 @@ function migrate(db) {
       updated_at TEXT NOT NULL
     );
 
+    CREATE TABLE IF NOT EXISTS assets (
+      id TEXT PRIMARY KEY,
+      owner_user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      name TEXT NOT NULL,
+      kind TEXT NOT NULL CHECK(kind IN ('image','video','audio','font','other')),
+      checksum TEXT NOT NULL,
+      source TEXT,
+      license_type TEXT NOT NULL CHECK(license_type IN ('original','licensed','brand_supplied','cc0')),
+      license_ref TEXT,
+      status TEXT NOT NULL DEFAULT 'authorized' CHECK(status IN ('authorized','pending','revoked')),
+      expires_at TEXT,
+      created_at TEXT NOT NULL,
+      updated_at TEXT NOT NULL
+    );
+
+    CREATE TABLE IF NOT EXISTS content_asset_links (
+      id TEXT PRIMARY KEY,
+      content_id TEXT NOT NULL REFERENCES contents(id) ON DELETE CASCADE,
+      asset_id TEXT NOT NULL REFERENCES assets(id) ON DELETE CASCADE,
+      usage TEXT NOT NULL DEFAULT 'general',
+      created_at TEXT NOT NULL,
+      UNIQUE(content_id, asset_id)
+    );
+
+    CREATE TABLE IF NOT EXISTS ai_twins (
+      id TEXT PRIMARY KEY,
+      owner_user_id TEXT NOT NULL UNIQUE REFERENCES users(id) ON DELETE CASCADE,
+      display_name TEXT NOT NULL,
+      persona_json TEXT NOT NULL DEFAULT '{}',
+      voice_consent_at TEXT,
+      likeness_consent_at TEXT,
+      status TEXT NOT NULL DEFAULT 'draft' CHECK(status IN ('draft','active','paused')),
+      version INTEGER NOT NULL DEFAULT 1,
+      created_at TEXT NOT NULL,
+      updated_at TEXT NOT NULL
+    );
+
+    CREATE TABLE IF NOT EXISTS ai_twin_scenes (
+      id TEXT PRIMARY KEY,
+      twin_id TEXT NOT NULL REFERENCES ai_twins(id) ON DELETE CASCADE,
+      name TEXT NOT NULL,
+      kind TEXT NOT NULL DEFAULT 'general' CHECK(kind IN ('general','campaign')),
+      campaign_id TEXT REFERENCES campaigns(id) ON DELETE SET NULL,
+      contract_version TEXT,
+      locale TEXT NOT NULL DEFAULT 'zh-CN',
+      knowledge_json TEXT NOT NULL DEFAULT '{}',
+      status TEXT NOT NULL DEFAULT 'active' CHECK(status IN ('active','paused')),
+      version INTEGER NOT NULL DEFAULT 1,
+      created_at TEXT NOT NULL,
+      updated_at TEXT NOT NULL,
+      UNIQUE(twin_id, name)
+    );
+
+    CREATE TABLE IF NOT EXISTS contract_signatures (
+      id TEXT PRIMARY KEY,
+      campaign_id TEXT NOT NULL REFERENCES campaigns(id) ON DELETE CASCADE,
+      contract_version TEXT NOT NULL,
+      signer_user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      signer_role TEXT NOT NULL CHECK(signer_role IN ('brand','creator','platform')),
+      statement TEXT NOT NULL,
+      signed_at TEXT NOT NULL,
+      UNIQUE(campaign_id, contract_version, signer_user_id)
+    );
+
+    CREATE TABLE IF NOT EXISTS contract_change_orders (
+      id TEXT PRIMARY KEY,
+      campaign_id TEXT NOT NULL REFERENCES campaigns(id) ON DELETE CASCADE,
+      from_version TEXT NOT NULL,
+      to_version TEXT NOT NULL,
+      requested_by TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      changed_fields_json TEXT NOT NULL DEFAULT '[]',
+      reason TEXT NOT NULL,
+      status TEXT NOT NULL DEFAULT 'pending' CHECK(status IN ('pending','approved','rejected')),
+      review_note TEXT,
+      reviewed_by TEXT REFERENCES users(id),
+      created_at TEXT NOT NULL,
+      updated_at TEXT NOT NULL
+    );
+
+    CREATE TABLE IF NOT EXISTS experiments (
+      id TEXT PRIMARY KEY,
+      content_id TEXT NOT NULL REFERENCES contents(id) ON DELETE CASCADE,
+      name TEXT NOT NULL,
+      hypothesis TEXT NOT NULL,
+      variant_field TEXT NOT NULL,
+      control_value TEXT NOT NULL,
+      variant_value TEXT NOT NULL,
+      rollout_percent INTEGER NOT NULL DEFAULT 10 CHECK(rollout_percent BETWEEN 0 AND 100),
+      status TEXT NOT NULL DEFAULT 'draft' CHECK(status IN ('draft','running','paused','rolled_back','completed')),
+      created_by TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      created_at TEXT NOT NULL,
+      updated_at TEXT NOT NULL
+    );
+
+    CREATE TABLE IF NOT EXISTS experiment_assignments (
+      id TEXT PRIMARY KEY,
+      experiment_id TEXT NOT NULL REFERENCES experiments(id) ON DELETE CASCADE,
+      user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      variant TEXT NOT NULL CHECK(variant IN ('control','variant')),
+      assigned_at TEXT NOT NULL,
+      UNIQUE(experiment_id, user_id)
+    );
+
+    CREATE TABLE IF NOT EXISTS dm_conversations (
+      id TEXT PRIMARY KEY,
+      user_low TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      user_high TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      low_read_at TEXT,
+      high_read_at TEXT,
+      created_at TEXT NOT NULL,
+      updated_at TEXT NOT NULL,
+      UNIQUE(user_low, user_high),
+      CHECK(user_low < user_high)
+    );
+
+    CREATE TABLE IF NOT EXISTS dm_messages (
+      id TEXT PRIMARY KEY,
+      conversation_id TEXT NOT NULL REFERENCES dm_conversations(id) ON DELETE CASCADE,
+      sender_user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      body TEXT NOT NULL,
+      status TEXT NOT NULL DEFAULT 'visible' CHECK(status IN ('visible','recalled')),
+      created_at TEXT NOT NULL
+    );
+
+    CREATE TABLE IF NOT EXISTS support_tickets (
+      id TEXT PRIMARY KEY,
+      user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      category TEXT NOT NULL,
+      subject TEXT NOT NULL,
+      body TEXT NOT NULL,
+      status TEXT NOT NULL DEFAULT 'open' CHECK(status IN ('open','replied','closed')),
+      reply_body TEXT,
+      replied_by TEXT REFERENCES users(id),
+      created_at TEXT NOT NULL,
+      updated_at TEXT NOT NULL
+    );
+
+    CREATE TABLE IF NOT EXISTS tracking_links (
+      id TEXT PRIMARY KEY,
+      campaign_id TEXT NOT NULL REFERENCES campaigns(id) ON DELETE CASCADE,
+      content_id TEXT NOT NULL REFERENCES contents(id) ON DELETE CASCADE,
+      kol_user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      channel_code TEXT NOT NULL,
+      visits INTEGER NOT NULL DEFAULT 0,
+      created_at TEXT NOT NULL,
+      UNIQUE(campaign_id, content_id, kol_user_id, channel_code)
+    );
+
+    CREATE TABLE IF NOT EXISTS growth_nodes (
+      id TEXT PRIMARY KEY,
+      owner_user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      name TEXT NOT NULL,
+      invite_code TEXT NOT NULL UNIQUE,
+      status TEXT NOT NULL DEFAULT 'forming' CHECK(status IN ('forming','active','paused')),
+      created_at TEXT NOT NULL,
+      updated_at TEXT NOT NULL
+    );
+
+    CREATE TABLE IF NOT EXISTS growth_node_members (
+      id TEXT PRIMARY KEY,
+      node_id TEXT NOT NULL REFERENCES growth_nodes(id) ON DELETE CASCADE,
+      user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      seat INTEGER NOT NULL CHECK(seat BETWEEN 1 AND 5),
+      role TEXT NOT NULL DEFAULT 'member' CHECK(role IN ('primary','member')),
+      created_at TEXT NOT NULL,
+      UNIQUE(node_id, seat),
+      UNIQUE(node_id, user_id)
+    );
+
+    CREATE TABLE IF NOT EXISTS content_comments (
+      id TEXT PRIMARY KEY,
+      content_id TEXT NOT NULL REFERENCES contents(id) ON DELETE CASCADE,
+      user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      body TEXT NOT NULL,
+      status TEXT NOT NULL DEFAULT 'visible' CHECK(status IN ('visible','deleted')),
+      created_at TEXT NOT NULL,
+      updated_at TEXT NOT NULL
+    );
+
+    CREATE TABLE IF NOT EXISTS user_follows (
+      id TEXT PRIMARY KEY,
+      follower_user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      followee_user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      created_at TEXT NOT NULL,
+      UNIQUE(follower_user_id, followee_user_id),
+      CHECK(follower_user_id <> followee_user_id)
+    );
+
+    CREATE TABLE IF NOT EXISTS login_identities (
+      id TEXT PRIMARY KEY,
+      user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      provider TEXT NOT NULL CHECK(provider IN ('email','google')),
+      identifier TEXT NOT NULL,
+      verified_at TEXT NOT NULL,
+      created_at TEXT NOT NULL,
+      UNIQUE(provider, identifier)
+    );
+
+    CREATE TABLE IF NOT EXISTS login_challenges (
+      id TEXT PRIMARY KEY,
+      provider TEXT NOT NULL CHECK(provider IN ('email')),
+      identifier TEXT NOT NULL,
+      code_hash TEXT NOT NULL,
+      purpose TEXT NOT NULL CHECK(purpose IN ('login','bind')),
+      user_id TEXT REFERENCES users(id) ON DELETE CASCADE,
+      attempts INTEGER NOT NULL DEFAULT 0,
+      expires_at TEXT NOT NULL,
+      used_at TEXT,
+      created_at TEXT NOT NULL
+    );
+
     CREATE TABLE IF NOT EXISTS auth_challenges (
       id TEXT PRIMARY KEY,
       address TEXT NOT NULL,
@@ -725,6 +936,20 @@ function migrate(db) {
   `);
 
   const reportColumns = db.prepare('PRAGMA table_info(content_reports)').all().map(column => column.name);
+  const touchColumns = db.prepare("PRAGMA table_info('attribution_touches')").all().map(column => column.name);
+  if (!touchColumns.includes('link_id')) db.exec('ALTER TABLE attribution_touches ADD COLUMN link_id TEXT');
+  const contractStamp = [
+    ['contents', ['campaign_id', 'contract_version', 'remix_of_content_id', 'remix_of_version']],
+    ['agent_tasks', ['campaign_id', 'contract_version']],
+    ['content_versions', ['campaign_id', 'contract_version']],
+    ['content_artifacts', ['checksum', 'campaign_id', 'contract_version']],
+    ['campaign_deliverables', ['contract_version']],
+    ['runtime_sessions', ['campaign_id', 'contract_version']],
+  ];
+  for (const [table, columns] of contractStamp) {
+    const existing = new Set(db.prepare(`PRAGMA table_info('${table}')`).all().map(column => column.name));
+    for (const column of columns) if (!existing.has(column)) db.exec(`ALTER TABLE ${table} ADD COLUMN ${column} TEXT`);
+  }
   if (!reportColumns.includes('resolution_action')) db.exec('ALTER TABLE content_reports ADD COLUMN resolution_action TEXT');
 
   const memoryColumns = db.prepare('PRAGMA table_info(agent_memory)').all().map(column => column.name);

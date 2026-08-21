@@ -45,7 +45,9 @@ test('deep game registry exposes six distinct three-stage mechanics and versione
   assert.equal(new Set(definitions.map(item => item.mechanic)).size, 6);
   assert.ok(definitions.every(item => item.stages === 3 && item.targetDurationSeconds >= 165 && item.targetDurationSeconds <= 300));
   for (const key of definitions.map(item => item.key)) {
-    assert.equal(fs.existsSync(path.join(root, `public/assets/deep-games/v2/${key}-gameplay-v2.png`)), true, `missing gameplay asset for ${key}`);
+    // 玩法图允许 png/jpg（大图已重压为 JPEG 以控制包体积）
+    const gameplayAsset = ['png', 'jpg'].some(ext => fs.existsSync(path.join(root, `public/assets/deep-games/v2/${key}-gameplay-v2.${ext}`)));
+    assert.equal(gameplayAsset, true, `missing gameplay asset for ${key}`);
   }
 });
 

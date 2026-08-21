@@ -11,7 +11,7 @@ CLASSES_DIR="${BUILD_DIR}/classes"
 DEX_DIR="${BUILD_DIR}/dex"
 OUTPUT_DIR="${BUILD_DIR}/outputs"
 CLASSES_JAR="${BUILD_DIR}/classes.jar"
-APK_PATH="${OUTPUT_DIR}/Airvana-v1.0.18-debug.apk"
+APK_PATH="${OUTPUT_DIR}/Airvana-v1.1.0-debug.apk"
 EMBEDDED_INDEX="${BUILD_DIR}/embedded-index.html"
 EMBEDDED_CSS="${BUILD_DIR}/embedded-airvana-v4.css"
 EMBEDDED_SENSOR="${BUILD_DIR}/embedded-sensor-interactions-v1.js"
@@ -43,7 +43,8 @@ fi
 rm -rf "${BUILD_DIR}"
 mkdir -p "${ASSETS_DIR}/www" "${GEN_DIR}" "${CLASSES_DIR}" "${DEX_DIR}" "${OUTPUT_DIR}"
 
-rsync -a "${PROJECT_DIR}/public/" "${ASSETS_DIR}/www/"
+# 可选媒体（HeyGen 样片）不进 APK：Web 端按需加载，壳内自动回退静态身份卡
+rsync -a --exclude 'ai-twin/heygen/**' "${PROJECT_DIR}/public/" "${ASSETS_DIR}/www/"
 
 "${BUILD_TOOLS_DIR}/aapt2" compile \
   --dir "${WRAPPER_DIR}/app/src/main/res" \
@@ -56,8 +57,8 @@ rsync -a "${PROJECT_DIR}/public/" "${ASSETS_DIR}/www/"
   --java "${GEN_DIR}" \
   --min-sdk-version 26 \
   --target-sdk-version 35 \
-  --version-code 19 \
-  --version-name 1.0.18 \
+  --version-code 20 \
+  --version-name 1.1.0 \
   --auto-add-overlay \
   -A "${ASSETS_DIR}" \
   "${BUILD_DIR}/compiled-resources.zip"
@@ -184,8 +185,9 @@ for cover in orchard-merge star-mower moonlight-tea-shop microbe-arena star-deck
     exit 1
   fi
 done
+# 玩法图允许 png/jpg（大图已重压为 JPEG 以控制 APK 体积）
 for asset in star-mower star-deck adventurer-journal idiom-detective hex-frontier garden-renewal; do
-  if ! rg -q "assets/www/assets/deep-games/v2/${asset}-gameplay-v2\.png" "${APK_LISTING}"; then
+  if ! rg -q "assets/www/assets/deep-games/v2/${asset}-gameplay-v2\.(png|jpg)" "${APK_LISTING}"; then
     print -u2 "APK verification failed: depth-gameplay asset ${asset} is missing"
     exit 1
   fi

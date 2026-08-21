@@ -1,4 +1,4 @@
-import { isoNow, jsonString, uid } from './utils.mjs';
+import { isoNow, jsonString, sha256, uid } from './utils.mjs';
 
 const escapeHtml = value => String(value ?? '').replace(/[&<>'"]/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[ch]));
 const safeData = value => JSON.stringify(value).replaceAll('<', '\\u003c').replaceAll('>', '\\u003e').replaceAll('&', '\\u0026');
@@ -62,10 +62,14 @@ export function buildArtifact({ content, payload, version }) {
 
 export function saveArtifact(db, { content, payload, version }) {
   const artifact = buildArtifact({ content, payload, version });
+  const checksum = sha256(artifact.html);
+  artifact.manifest.checksum = checksum;
+  artifact.manifest.campaignId = content.campaign_id || null;
+  artifact.manifest.contractVersion = content.contract_version || null;
   db.prepare(`INSERT INTO content_artifacts
-    (id,content_id,version,artifact_type,status,html_text,manifest_json,validation_json,created_at)
-    VALUES (?,?,?,?,?,?,?,?,?)
-    ON CONFLICT(content_id,version) DO UPDATE SET artifact_type=excluded.artifact_type,status=excluded.status,html_text=excluded.html_text,manifest_json=excluded.manifest_json,validation_json=excluded.validation_json,created_at=excluded.created_at`)
-    .run(uid('artifact'), content.id, version, content.content_type, artifact.validation.passed ? 'ready' : 'failed', artifact.html, jsonString(artifact.manifest), jsonString(artifact.validation), isoNow());
+    (id,content_id,version,artifact_type,status,html_text,manifest_json,validation_json,checksum,campaign_id,contract_version,created_at)
+    VALUES (?,?,?,?,?,?,?,?,?,?,?,?)
+    ON CONFLICT(content_id,version) DO UPDATE SET artifact_type=excluded.artifact_type,status=excluded.status,html_text=excluded.html_text,manifest_json=excluded.manifest_json,checksum=excluded.checksum,campaign_id=excluded.campaign_id,contract_version=excluded.contract_version,validation_json=excluded.validation_json,created_at=excluded.created_at`)
+    .run(uid('artifact'), content.id, version, content.content_type, artifact.validation.passed ? 'ready' : 'failed', artifact.html, jsonString(artifact.manifest), jsonString(artifact.validation), checksum, content.campaign_id || null, content.contract_version || null, isoNow());
   return artifact;
 }
