@@ -9,8 +9,9 @@ const frontend = read('public/app.js');
 const ui = read('public/ui.js');
 const css = read('public/app.css');
 const mobileCss = read('public/airvana-v4.css');
+const creatorWorkspaceCss = read('public/creator-language-workspace.css');
 const artifact = read('src/artifact.mjs');
-const mobileEntry = read('public/index.html');
+const mobileEntry = read('public/index.html') + read('public/boot.js');
 const workspaceEntry = read('public/workspace.html');
 const server = read('src/app.mjs');
 const mobileRuntime = read('public/support.js');
@@ -60,13 +61,63 @@ test('frontend-only phases expose truthful evidence, progressive creation and a 
 test('visible divider lines use the shared 0.7px thickness without changing component borders', () => {
   assert.match(mobileCss, /--divider-height:\s*0\.7px;/);
   assert.match(css, /--divider-height:\s*\.7px;/);
-  assert.match(mobileEntry, /airvana-v4\.css\?v=5\.5\.80/);
+  assert.match(mobileEntry, /airvana-v4\.css\?v=5\.5\.85/);
+  assert.match(mobileEntry, /creator-language-workspace\.css\?v=1\.0\.\d+/);
   assert.doesNotMatch(mobileEntry, /border-(?:top|bottom):\s*1px\s+solid/);
   assert.doesNotMatch(mobileCss, /border-(?:top|bottom):\s*1px\s+solid/);
   assert.doesNotMatch(css, /border-(?:top|bottom):\s*1px\s+solid/);
   assert.match(mobileEntry, /height:var\(--divider-height\);background:#F3D7DA/);
   assert.match(mobileCss, /\.kyc-upload-divider\s*\{[^}]*height:\s*var\(--divider-height\)/);
   assert.match(mobileCss, /\.create-power-card\s*\{[^}]*border:\s*1px solid #303034/);
+});
+
+test('language creator workspace uses the light Airvana surface system', () => {
+  for (const token of [
+    '--creator-canvas: #f2f2f7',
+    '--creator-card: #ffffff',
+    '--creator-text: #1c1c1e',
+    '--creator-border: #e5e5ea',
+    '--creator-accent: #ff3b4a'
+  ]) assert.ok(creatorWorkspaceCss.includes(token), `missing creator workspace token: ${token}`);
+
+  assert.match(creatorWorkspaceCss, /\.creator-language-workspace\s*\{[\s\S]*?background:\s*var\(--creator-canvas\);[\s\S]*?color:\s*var\(--creator-text\);/);
+  assert.match(creatorWorkspaceCss, /\.creator-workspace-question\s*\{[\s\S]*?background:\s*linear-gradient\(145deg, #ffffff, #fff8f9\);/);
+  assert.match(creatorWorkspaceCss, /\.creator-workspace-input\s*\{[\s\S]*?background:\s*var\(--creator-card\);/);
+  assert.match(creatorWorkspaceCss, /\.creator-workspace-input textarea:focus,[\s\S]*?\.creator-workspace-input textarea:focus-visible\s*\{[\s\S]*?outline:\s*0 !important;[\s\S]*?box-shadow:\s*none !important;/);
+  assert.match(creatorWorkspaceCss, /\.creator-power-drawer\s*\{[\s\S]*?background:\s*#0e0e10;[\s\S]*?color:\s*#ffffff;/);
+  assert.match(mobileEntry, /createShellBg:s\.createStep==='home'\?'#0E0E10':'var\(--surface-canvas,#F2F2F7\)'/);
+});
+
+test('language creator workspace exposes a state-driven creation flow', () => {
+  for (const label of ['读取需求', '梳理方案', '创作问答', 'Power', 'Review', '生成作品', '测试中', '可预览']) {
+    assert.ok(read('public/creator-workflow-v2.js').includes(label), `missing creation stage: ${label}`);
+  }
+  assert.match(mobileEntry, /class="creator-workspace-progress" role="status" aria-live="polite" aria-label="创作流程"/);
+  assert.match(mobileEntry, /creatorWorkspaceProgressTitle:creatorWorkspaceProgress\.title/);
+  assert.match(mobileEntry, /generation_task:workspaceGenerationTask/);
+  assert.match(creatorWorkspaceCss, /\.creator-workspace-progress__steps\s*\{[\s\S]*?grid-template-columns:\s*repeat\(4, minmax\(0, 1fr\)\);/);
+  assert.match(creatorWorkspaceCss, /\.creator-workspace-progress__steps \.is-active i\s*\{[\s\S]*?background:\s*var\(--creator-accent\);/);
+  assert.match(creatorWorkspaceCss, /\.creator-workspace-progress__steps \.is-blocked i\s*\{[\s\S]*?background:\s*#fff1d6;/);
+  assert.doesNotMatch(mobileEntry, /creatorWorkspaceProgress.*set(?:Timeout|Interval)/);
+});
+
+test('language creator workspace exposes a safe expandable model execution summary', () => {
+  assert.match(mobileEntry, /class="creator-model-execution" aria-label="模型处理摘要与执行链路"/);
+  assert.match(mobileEntry, /MODEL EXECUTION/);
+  assert.match(mobileEntry, /处理摘要/);
+  assert.match(mobileEntry, /不是模型内部逐字思维/);
+  assert.match(mobileEntry, /creatorModelExecutionRows/);
+  assert.match(mobileEntry, /toggleCreatorModelExecution/);
+  assert.match(mobileEntry, /creatorModelExecutionExpanded:String/);
+  assert.match(mobileEntry, /creator-model-execution__thinking/);
+  assert.match(mobileEntry, /creatorModelThinkingLabel/);
+  assert.match(mobileEntry, /creatorModelElapsedLabel/);
+  assert.match(mobileEntry, /creatorModelResultsReady/);
+  assert.match(mobileEntry, /startCreatorModelProcessing\(\)/);
+  assert.match(mobileEntry, /AI 链路演示/);
+  assert.match(creatorWorkspaceCss, /@keyframes creator-model-thinking-dot/);
+  assert.match(creatorWorkspaceCss, /\.creator-model-execution__step\.is-active > i\s*\{[\s\S]*?animation:\s*creator-model-execution-pulse/);
+  assert.match(creatorWorkspaceCss, /@media \(prefers-reduced-motion: reduce\)/);
 });
 
 test('dark composer sheets use semantic dark surfaces and compact close controls', () => {
@@ -342,7 +393,7 @@ test('desktop phone preview renders a theme-matched iPhone home indicator withou
   assert.match(mobileEntry, /shellScreenClass:s\.screen==='play'\?'is-home-screen':s\.screen==='me'\?'is-secondary-screen is-me-screen':'is-secondary-screen'/);
   assert.match(mobileCss, /html:not\(\.native-app-shell\) \.app-shell\.is-home-screen::before\s*\{[^}]*background:\s*#000;/);
   assert.match(mobileCss, /html:not\(\.native-app-shell\) \.app-shell\.is-home-screen::after\s*\{[^}]*background:\s*#fff;/);
-  assert.match(mobileCss, /html:not\(\.native-app-shell\) \.app-shell\.is-me-screen::before\s*\{[^}]*background:\s*#fff;/);
+  assert.match(mobileCss, /html:not\(\.native-app-shell\) \.app-shell\.is-me-screen:not\(\.theme-dark\)::before\s*\{[^}]*background:\s*#fff;/);
 });
 
 test('primary tab switching uses one animated iOS-style glass lens across five accessible targets', () => {
@@ -606,11 +657,11 @@ test('My screen follows a Douyin-inspired profile layout with ordered shortcuts 
   assert.match(mobileEntry, /class="me-content-card__more" aria-hidden="true">•••<\/span>/);
   assert.match(mobileEntry, /hasEditAction:effectiveMeTab==='drafts'\|\|effectiveMeTab==='history'/);
   assert.match(mobileEntry, /editAria:effectiveMeTab==='history'\?'管理 '\+item\.game\+' 的体验记录':'编辑草稿 '\+item\.game/);
-  assert.match(mobileCss, /\.me-content-card__edit \{[^}]*width:40px;[^}]*height:40px;/);
+  assert.match(mobileCss, /\.me-content-card__edit \{[^}]*position:absolute;[^}]*right:0;[^}]*bottom:0;[^}]*width:40px;[^}]*height:40px;/);
   assert.doesNotMatch(mobileCss, /\.me-content-card__edit::before/);
   assert.match(mobileCss, /\.me-content-card__more \{[^}]*color:#fff;[^}]*font-size:12px;/);
-  assert.match(mobileEntry, /profileLikeCount:fmt\(profileLikeSource\.reduce/);
-  assert.match(mobileEntry, /profileFollowerCount:fmt\(profileFollowerOwners\.length\)/);
+  assert.match(mobileEntry, /profileLikeCount:s\.serverSocial\?fmt\(s\.serverSocial\.likesReceived\):fmt\(profileLikeSource\.reduce/);
+  assert.match(mobileEntry, /profileFollowerCount:s\.serverSocial\?fmt\(s\.serverSocial\.followerCount\):fmt\(profileFollowerOwners\.length\)/);
   assert.match(mobileEntry, /class="profile-stats-page" aria-label="互动关系内容"/);
   assert.match(mobileEntry, /class="profile-stats-surface"/);
   assert.match(mobileEntry, /class="profile-stats-tabs" role="tablist" aria-label="互动关系分类"/);
@@ -717,6 +768,11 @@ test('Node screen follows the global data, discovery filters, growing Playables 
   assert.match(mobileEntry, /aria-label="节点" onClick="\{\{ navWorld\.onClick \}\}"[\s\S]{0,500}<ellipse cx="12" cy="12" rx="3\.8" ry="8\.5"/);
   assert.doesNotMatch(mobileEntry, /aria-label="节点" aria-description=/);
   assert.match(mobileEntry, /openForceCenter:\(\) => this\.setState\(\{panel:'growthNetwork',growthNetworkTab:'network'\},\(\)=>this\.scrollPanelTop\(\)\)/);
+  for (const metric of ['有效贡献', '运营节点', '价值转化']) assert.ok(mobileEntry.includes(metric), `missing economic network metric: ${metric}`);
+  assert.match(mobileEntry, /演示网络数据 · 不代表真实 AIP、AIT 或商业结算/);
+  assert.match(mobileEntry, /scheduleWorldMetricsGrowth\(\)/);
+  assert.match(mobileEntry, /pageVisible&&this\.state\.screen==='world'/);
+  assert.match(mobileCss, /@keyframes worldMetricGrowthPulse/);
 });
 
 test('Growth Network explains the personal AI twin network and preserves governed collaboration', () => {
@@ -863,7 +919,7 @@ test('creator center closes the governed Brief-to-settlement loop without claimi
   assert.match(mobileEntry, /campaignSettlementBasis:'【待人工录入】'/);
   assert.match(mobileCss, /\.creator-center-page\s*\{/);
   assert.match(mobileCss, /\.creator-center-tabs\s*\{/);
-  assert.match(mobileEntry, /airvana-v4\.css\?v=5\.5\.80/);
+  assert.match(mobileEntry, /airvana-v4\.css\?v=5\.5\.85/);
   assert.match(mobileEntry, /class="creator-center-tab \{\{ tab\.className \}\}"[^>]*><span>\{\{ tab\.label \}\}<\/span><\/div>/);
   assert.doesNotMatch(mobileEntry, /<em>\{\{ tab\.meta \}\}<\/em>/);
   assert.match(mobileCss, /\.creator-center-tab\.is-active\s*\{\s*color:\s*var\(--creator-ink\);\s*\}/);
@@ -1089,7 +1145,7 @@ test('top headers route messages explicitly and My keeps the settings drawer wit
   }
   assert.match(mobileEntry, /openSettings:\(\)=>this\.setState\(\{drawerOpen:true\},\(\)=>requestAnimationFrame/);
   assert.match(mobileEntry, /label:'切换语言',meta:s\.uiLanguage==='en'\?'English':'简体中文'/);
-  assert.match(mobileEntry, /label:'设置',meta:'',onPick:\(\)=>this\.setState\(\{drawerOpen:false,panel:'settings'\}\)/);
+  assert.match(mobileEntry, /label:'设置',meta:'',onPick:\(\)=>\{this\.setState\(\{drawerOpen:false,panel:'settings'\}\);this\.loadServerSessions\(\);\}/);
   assert.match(mobileEntry, /panelLanguage:s\.panel==='language',languageOptions/);
   assert.match(mobileEntry, /document\.documentElement\.lang=language\.code/);
   assert.match(mobileEntry, /showSettingsDrawer:!!s\.drawerOpen/);
@@ -1135,9 +1191,10 @@ test('Settings exposes legal, product information, appearance and governed accou
   assert.match(mobileEntry, /openTermsFromSettings:\(\)=>this\.setState\(\{panel:'terms',panelReturn:'settings'\}\)/);
   assert.match(mobileEntry, /openPrivacyFromSettings:\(\)=>this\.setState\(\{panel:'privacy',panelReturn:'settings'\}\)/);
   assert.match(mobileEntry, /openAbout:\(\)=>this\.setState\(\{panel:'about',panelReturn:'settings'\}\)/);
-  for (const legalTerm of ['Airvana 隐私政策', '长期记忆与知识授权', 'AIP、AIT与钱包', '我们不会出售你的个人信息', '运营主体：【上线前补充】']) {
+  for (const legalTerm of ['Airvana 隐私政策', '长期记忆与知识授权', 'AIP、AIT与钱包', '我们不会出售你的个人信息', '运营主体：Cerdar Ai Limited']) {
     assert.ok(mobileEntry.includes(legalTerm), `missing legal document term: ${legalTerm}`);
   }
+  assert.ok(!mobileEntry.includes('【上线前补充】'), '法律文本不得保留上线前占位符');
   assert.match(mobileEntry, /legal-terms-v1\.js\?v=1\.0\.0/);
   for (const legalTerm of ['Terms of Service / 服务协议', 'Cerdar Ai Limited', 'Last Updated', 'Aug 11th, 2026', 'Airvana Points', 'Campaign Conversion', 'Governing Law and Disputes', '[AIRVANA CONTACT EMAIL]']) {
     assert.ok(termsOfService.includes(legalTerm), `missing service agreement term: ${legalTerm}`);
@@ -1339,7 +1396,7 @@ test('center publish action uses a prompt-first quick/deep creator with governed
   assert.match(mobileEntry, /class="composer-tool-button \{\{ t\.stateClass \}\}"/);
   assert.match(mobileEntry, /class="composer-tool-badge"/);
   assert.match(mobileEntry, /width="22\.5" height="22\.5"/);
-  for (const label of ['AI 灵感','项目素材','目标']) assert.ok(mobileEntry.includes(`label:'${label}'`));
+  for (const label of ['AI 灵感','项目素材','创作问答']) assert.ok(mobileEntry.includes(`label:'${label}'`));
   assert.match(mobileEntry, /class="create-power-search" role="button" tabindex="0" aria-label="搜索能力编排"/);
   assert.match(mobileCss, /\.create-power-search svg\s*\{[^}]*width:\s*20px;[^}]*height:\s*20px;/);
   assert.match(mobileEntry, /createToolColor:s\.composerMode==='deep'\?'#07191B':'#FFFFFF'/);
@@ -1351,7 +1408,7 @@ test('center publish action uses a prompt-first quick/deep creator with governed
   assert.match(mobileCss, /\.create-idea-input\.mode-deep::placeholder/);
   assert.match(mobileEntry, /createTemplateHome:s\.createStep==='home'&&s\.createHomeTab==='templates'/);
   assert.match(mobileEntry, /aria-label="选用模板 \{\{ t\.title \}\}"/);
-  assert.match(mobileEntry, /const capabilityIds=this\.sanitizeCapabilityIds\(t\.capabilityIds,createRoleScope\);this\.setState\(\{createHomeTab:'create',createPowerCat:t\.powerCat,selectedPowerIds:capabilityIds,recentPowerIds:capabilityIds,composerPromptHistory:\[\],[\s\S]*?gamePrompt:t\.prompt/);
+  assert.match(mobileEntry, /const capabilityIds=this\.sanitizeCapabilityIds\(t\.capabilityIds,createRoleScope\);this\.setState\(st=>\(\{createHomeTab:'create',createPowerCat:t\.powerCat,selectedPowerIds:capabilityIds,recentPowerIds:capabilityIds,composerPromptHistory:\[\],[\s\S]*?gamePrompt:t\.prompt/);
   assert.match(mobileEntry, /const templateCatalog = s\.sessions\.map/);
   assert.match(mobileEntry, /badge:'首页内容'/);
   assert.match(mobileEntry, /不复制原 Campaign 的品牌声明、CTA、地区、归因或结算规则/);
@@ -1366,7 +1423,7 @@ test('center publish action uses a prompt-first quick/deep creator with governed
   assert.match(mobileEntry, /createStep:'brief'/);
   assert.match(mobileEntry, /生成 Agentic Playable 预览/);
   assert.match(mobileEntry, /提交发布检查/);
-  assert.match(mobileEntry, /发布到本地演示/);
+  assert.match(mobileEntry, /发布到 Airvana APP/);
   assert.match(mobileEntry, /品牌声明、地区、预算、归因、结算及发布必须锁定或人工确认/);
 });
 
@@ -1476,7 +1533,7 @@ test('mobile P0 closes the local Campaign, Agent task and capability disclosure 
   assert.match(mobileEntry, /const hasOperationalPermission = !!/);
   assert.doesNotMatch(mobileEntry, /\{title:'运营权限', ok:true/);
   assert.match(mobileEntry, /status:s\.reviewPassed\?'reviewed-local-demo':'draft-local-demo'/);
-  assert.match(mobileEntry, /campaignActiveVersionId:createIsKolScope&&s\.campaignId&&!scheduled\?nextVersionId:null/);
+  assert.match(mobileEntry, /campaignActiveVersionId:createIsDeepCampaign&&s\.campaignId&&!scheduled\?releaseRecord\.version_id:null/);
   assert.match(mobileEntry, /normalizeCampaignState\(data\)/);
   assert.match(mobileEntry, /serverConfirmed:false/);
   assert.match(mobileEntry, /contentVersionId:s\.campaignActiveVersionId/);
@@ -1567,14 +1624,15 @@ test('prompt-first composer closes inspiration, asset, goal and preflight loops 
   for (const label of [
     '预览改动（', '差异预览', '整合优化', '追加补充', '应用前检查', '确认应用', '返回调整', '撤销最近修改',
     '从设备选择', '支持图片、视频文件，单个文件不超过 20MB', '项目素材库', 'Asset Manifest', '用途 ·', '焦点 ·',
-    '主要目标', '目标用户', '成功事件', 'CTA 类型', '保存目标',
-    '生成前检查未通过', 'SCHEME CONFIRMATION · LOCAL DEMO', '确认并生成本地预览'
+    '这次创作最重要的目标是什么？', '谁会体验这个 Playable？', '什么事件代表一次有效完成？', '体验完成后希望用户做什么？', '保存回答',
+    '生成前检查未通过', 'REVIEW YOUR ANSWERS · LOCAL ONLY', '确认并开始创作'
   ]) assert.ok(mobileEntry.includes(label), `missing composer closure affordance: ${label}`);
 
   assert.doesNotMatch(mobileEntry, /替换原文|追加到原文|撤销上次应用/);
   assert.match(mobileEntry, /cardClass:'inspiration-suggestion-card'/);
   assert.match(mobileEntry, /aria-pressed="\{\{ suggestion\.ariaPressed \}\}"/);
   assert.match(mobileEntry, /id="create-idea-input"/);
+  assert.doesNotMatch(mobileEntry, /hasCreatorIntent|creatorIntentChips/);
   assert.match(mobileEntry, /composerInspirationPrimaryLabel=\s*composerInspirationNeedsPrompt\?'先填写创意主题'/);
   assert.match(mobileEntry, /composerInspirationPrimaryAction=composerInspirationNeedsPrompt\?guideComposerInspirationPrompt:previewComposerInspiration/);
   assert.match(mobileEntry, /document\.getElementById\('create-idea-input'\)/);
@@ -1594,25 +1652,50 @@ test('prompt-first composer closes inspiration, asset, goal and preflight loops 
   assert.doesNotMatch(mobileCss, /\.inspiration-suggestion-card\.is-selected\s*\{[^}]*box-shadow\s*:\s*inset/i);
   assert.match(mobileCss, /\.composer-sheet-scroll\s*\{[\s\S]*?min-height:\s*0;[\s\S]*?overscroll-behavior-y:\s*contain/);
   assert.match(mobileEntry, /const resetComposerSheetScroll=\(\)=>requestAnimationFrame\([\s\S]*?scroller\.scrollTop=0/);
-  assert.match(mobileEntry, /ariaLabel:'目标完成度 '\+composerGoalCompleteCount\+'\/4'[\s\S]*?onPick:\(\)=>openComposerSheetAtTop\('goals'\)/);
+  assert.match(mobileEntry, /ariaLabel:'创作问答完成度 '\+composerGoalCompleteCount\+'\/4'[\s\S]*?onPick:\(\)=>openComposerSheetAtTop\('goals'\)/);
   assert.match(mobileEntry, /class="composer-sheet-footer"[\s\S]*?class="composer-goal-save"/);
   assert.match(mobileCss, /\.composer-sheet-footer\s*\{[^}]*flex:\s*none;[^}]*border-top:\s*var\(--divider-height\) solid #efeff4;/);
   assert.match(mobileCss, /\.composer-sheet-dialog\s*\{[^}]*max-height:\s*min\(82%, calc\(100% - 8px\)\) !important;[^}]*padding-bottom:\s*0 !important;/);
   assert.doesNotMatch(mobileCss, /\.composer-sheet-dialog\s*\{[^}]*max-height:\s*calc\(100dvh/);
   assert.match(mobileCss, /\.inspiration-mode-option\s*\{[\s\S]*?min-height:\s*44px/);
   assert.match(mobileCss, /@media \(max-width: 360px\)/);
-  assert.match(mobileEntry, /airvana-v4\.css\?v=5\.5\.80/);
+  assert.match(mobileEntry, /airvana-v4\.css\?v=5\.5\.85/);
   assert.match(mobileEntry, /indexedDB\.open\('airvana\.local-composer-assets\.v1',1\)/);
   assert.match(mobileEntry, /composerAssetManifest\(assets\)/);
   assert.doesNotMatch(mobileEntry, /素材授权待确认|授权状态默认为待确认|授权状态已重置为待确认|切换授权|深度模式必须全部确认授权|pending-assets|blocked-assets/);
   assert.doesNotMatch(mobileEntry, /图片 \/ 视频 ≤ 20MB/);
-  assert.match(mobileEntry, /const composerActionLabel=s\.generating\?'生成中…':!composerPrompt\?'填写创意':composerPrompt\.length<12\?'继续完善':composerMissingCount\?'完善 '\+composerMissingCount\+' 项':'生成预览'/);
-  assert.match(mobileEntry, /const composerActionClass=s\.generating\?'is-loading action-disabled':composerPrompt\.length<12\?'is-incomplete':composerMissingCount\?'is-progress':'is-ready'/);
+  assert.match(mobileEntry, /const composerActionLabel=s\.generating\?'生成中…':!composerPrompt\?'填写创意':composerPrompt\.length<12\?'继续完善':'进入创作'/);
+  assert.match(mobileEntry, /const composerActionClass=s\.generating\?'is-loading action-disabled':composerPrompt\.length<12\?'is-incomplete':'is-ready'/);
   assert.match(mobileEntry, /composerSendDisabled:s\.generating/);
-  assert.match(mobileEntry, /composerSheet:composerBlockingIssues\.length\?'preflight':'confirm'/);
+  assert.match(mobileEntry, /createStep:'workspace',previewView:'chat',composerSheet:null/);
+  assert.match(mobileEntry, /aria-label="AI 语言创作工作台"/);
+  assert.match(mobileEntry, /aria-label="Chat 与 Preview"/);
+  assert.match(mobileEntry, /class="creator-workspace-input__power \{\{ creatorPowerButtonClass \}\}" aria-label="\{\{ creatorPowerButtonAria \}\}" onClick="\{\{ creatorWorkspaceOpenPowers \}\}"/);
+  assert.match(mobileEntry, /class="creator-power-drawer" role="dialog" aria-modal="true" aria-label="Power 能力编排"/);
+  assert.match(mobileEntry, /<h2>Power 能力编排<\/h2>/);
+  assert.match(mobileEntry, /class="creator-power-drawer__dock" role="group" aria-label="能力编排导航"/);
+  assert.match(mobileEntry, /class="creator-workspace-preview-power" onClick="\{\{ creatorWorkspaceAdjustPowers \}\}"/);
+  assert.doesNotMatch(mobileEntry, /creator-workspace-power-rail__entry/);
+  assert.match(mobileEntry, /class="creator-workspace-power-message"/);
+  assert.match(mobileEntry, /class="creator-chat-avatar creator-chat-avatar--user" aria-hidden="true"/);
+  assert.match(mobileEntry, /class="creator-workspace-card-icon creator-workspace-card-icon--intent" aria-hidden="true"/);
+  assert.match(mobileEntry, /class="creator-workspace-card-icon creator-workspace-card-icon--question" aria-hidden="true"/);
+  assert.match(mobileEntry, /creatorWorkspaceOpenPowers:\(\)=>this\.setState\(\{powerDrawerOpen:true,powerDrawerCategory:selectedPowers\.length\?'selected':'recommended'/);
+  assert.match(mobileEntry, /power_configs:\{\.\.\.\(s\.powerConfigs\|\|\{\}\)\}/);
+  assert.match(mobileEntry, /power_review_opened/);
+  assert.match(creatorWorkspaceCss, /\.creator-workspace-input > button\.creator-workspace-input__power\s*\{[\s\S]*?left:\s*6px;[\s\S]*?right:\s*auto;/);
+  assert.match(creatorWorkspaceCss, /\.creator-power-drawer\s*\{/);
+  assert.match(creatorWorkspaceCss, /\.creator-power-drawer__list\s*\{[\s\S]*?grid-template-columns:\s*minmax\(0, 1fr\) minmax\(0, 1fr\);/);
+  assert.match(creatorWorkspaceCss, /\.creator-workspace-card-icon\s*\{[\s\S]*?left:\s*-40px;[\s\S]*?width:\s*30px;[\s\S]*?height:\s*30px;/);
+  assert.match(creatorWorkspaceCss, /\.creator-chat-row--assistant\s*\{[\s\S]*?padding-right:\s*20px;/);
+  assert.match(creatorWorkspaceCss, /\.creator-workspace-summary\s*\{[\s\S]*?width:\s*calc\(86% - 20px\);/);
+  assert.match(creatorWorkspaceCss, /\.creator-workspace-question\s*\{[\s\S]*?width:\s*calc\(86% - 20px\);/);
+  assert.match(creatorWorkspaceCss, /\.creator-language-workspace__header\s*\{[\s\S]*?padding:\s*calc\(12px \+ var\(--safe-top, 0px\)\) 12px 10px;/);
+  assert.match(creatorWorkspaceCss, /\.creator-workspace-summary,[\s\S]*?width:\s*86%;[\s\S]*?max-width:\s*420px;[\s\S]*?margin:\s*0 auto 14px 40px;[\s\S]*?border-top-left-radius:\s*7px;/);
+  assert.match(mobileEntry, /creatorWorkspaceReview:openCreatorWorkspaceReview/);
   assert.match(mobileEntry, /if \(composerBlockingIssues\.length\) \{ this\.setState\(\{composerSheet:'preflight'\}\); return; \}/);
-  assert.match(mobileEntry, /不会直接发布、花费预算、发送消息或产生真实归因与结算/);
-  assert.match(mobileEntry, /确认后仅生成本地预览/);
+  assert.match(mobileEntry, /发布只写入本机 Airvana APP 首页和版本记录/);
+  assert.match(mobileEntry, /不会调用服务端、OAuth、渠道 API、真实归因或结算/);
   assert.doesNotMatch(mobileEntry, /confirmComposerGeneration[\s\S]{0,220}publishAction\(/);
 });
 
@@ -1694,4 +1777,70 @@ test('My, wallet and drawer expose one governed local subscription center', () =
   assert.match(mobileEntry, /subscription_plan_activated_demo/);
   assert.match(mobileEntry, /creation_aip_fallback_consumed/);
   assert.match(mobileEntry, /kyc_changed:false,creator_role_changed:false,commercial_permission_changed:false/);
+});
+
+test('workspace wires the P2 admin surfaces: twin scenes, contract signatures, change orders and experiments', () => {
+  // AI 分身与场景（F-01 ~ F-04）
+  for (const marker of [
+    "data-action=\"twin-load\"", "data-action=\"twin-save\"", "data-action=\"twin-toggle\"",
+    "data-action=\"twin-scene-create\"", "data-action=\"twin-scene-knowledge\"",
+    "'/api/ai-twin'", '`/api/ai-twin/${next}`', "'/api/ai-twin/scenes'", '`/api/ai-twin/scenes/${el.dataset.id}/knowledge`',
+  ]) assert.ok(frontend.includes(marker), `missing ai twin wiring: ${marker}`);
+  assert.match(frontend, /aiTwinSection\(\)/);
+  assert.match(frontend, /不提供实时语音视频分身/);
+
+  // Contract 签署与变更单（D-02 / P2-2）
+  for (const marker of [
+    "data-action=\"contract-governance-load\"", "data-action=\"contract-sign\"",
+    "data-action=\"contract-change-order\"", "data-action=\"change-order-review\"",
+    '`/api/campaigns/${el.dataset.campaign}/contract-signatures`',
+    '`/api/campaigns/${el.dataset.campaign}/contract-change-orders`',
+    '`/api/admin/contract-change-orders/${el.dataset.id}/review`',
+  ]) assert.ok(frontend.includes(marker), `missing contract governance wiring: ${marker}`);
+  assert.match(frontend, /contractGovernanceSection\(role\)/);
+  assert.match(frontend, /contractGovernanceSection\('creator'\)/);
+  assert.match(frontend, /旧版本只读保留/);
+
+  // 受控实验与灰度（P2-3）
+  for (const marker of [
+    "data-action=\"content-experiments\"", "data-action=\"experiment-create\"", "data-action=\"experiment-status\"",
+    '`/api/contents/${contentId}/experiments`', '`/api/contents/${el.dataset.content}/experiments`',
+    '`/api/experiments/${el.dataset.id}/status`', "data-action=\"experiment-assignment\"",
+    '`/api/experiments/${el.dataset.id}/assignment`',
+  ]) assert.ok(frontend.includes(marker), `missing experiment wiring: ${marker}`);
+  assert.match(frontend, /成品运行时尚未按分支切换渲染/);
+  assert.match(frontend, /experimentSection\(\)/);
+  assert.match(frontend, /EXPERIMENT_OPTIMIZABLE/);
+  // 锁定字段不得出现在实验可选字段里
+  for (const locked of ['reward', 'compliance', 'attribution.model', 'release.kill_switch']) {
+    assert.ok(!/EXPERIMENT_OPTIMIZABLE=\[[^\]]*\]/.exec(frontend)[0].includes(`'${locked}'`), `locked field leaked into experiments: ${locked}`);
+  }
+
+  // 按需拉取的面板不得伪造成功：载入失败回落为空并提示未载入
+  assert.match(frontend, /catch\{ aiTwinCache=\{loaded:true,twin:null,scenes:\[\]\}; \}/);
+  assert.match(frontend, /failed:true/);
+
+  // 平台策略与创作扣费预估（E-08 / C-03）
+  for (const marker of [
+    "data-action=\"minor-policy-load\"", "data-action=\"minor-policy-edit\"", "data-action=\"creation-quote\"",
+    "'/api/policies/minor-mode'", "'/api/admin/policies/minor-mode'", '`/api/economy/creation/quote?usageType=',
+  ]) assert.ok(frontend.includes(marker), `missing platform policy wiring: ${marker}`);
+  assert.match(frontend, /这是预估，不产生任何记账/);
+});
+
+test('brand logo is unified: workspace, mobile shell and favicons all use the airvana wordmark', () => {
+  const brandMark = read('public/brand-mark.svg');
+  // 工作台不再使用占位字母标
+  assert.doesNotMatch(frontend, /class="logo-mark"/);
+  assert.doesNotMatch(frontend, /logo-mark">A</);
+  assert.equal((frontend.match(/class="logo-img" src="\/logo\.png" alt="airvana\.ai"/g) || []).length, 2);
+  assert.match(css, /\.logo-img\{/);
+  assert.match(css, /\.logo--plate\{/);
+  // 移动端与工作台使用同一份 logo 与同一品牌标
+  assert.match(mobileEntry, /src="logo\.png" alt="airvana\.ai"/);
+  assert.match(workspaceEntry, /rel="icon" type="image\/svg\+xml" href="\/brand-mark\.svg"/);
+  assert.match(mobileEntry, /rel="icon" type="image\/svg\+xml" href="\.\/brand-mark\.svg"/);
+  // 品牌标三色与 App 图标一致
+  for (const color of ['#ff3b4a', '#101115', '#2f7df6']) assert.ok(brandMark.includes(color), `brand mark missing color: ${color}`);
+  assert.match(read('ios-demo/AirvanaDemo/Icons/AppIcon-master.svg'), /#ff3b4a/);
 });

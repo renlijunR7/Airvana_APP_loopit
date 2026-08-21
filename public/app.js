@@ -12,8 +12,12 @@ const LABELS = {
   rejected: '已拒绝', failed: '失败', cancelled: '已取消', generating: '生成中', generation_failed: '生成失败', draft: '草稿', scheduled: '定时发布', published: '已发布',
   not_run: '未审核', passed: '审核通过', blocked: '审核阻止', pending_review: '平台审核中', submitted: '已提交', changes_requested: '需要修改', eligible: '已获得资格',
   pending_application: '申请审核中', invited: '待接受邀请', pending: '待处理', payment_pending: '平台复核中', platform_approved: '平台已批准', issued: '已发放', completed: '已完成', verified: '已验证', open: '待处理', resolved: '已处理', confirmed: '风险确认', dismissed: '已排除', frozen: '已冻结', revoked: '已撤销', expired: '已过期', AIP: 'AIP 行为积分', AIT: 'AIT Campaign 积分',
+  kyc_pending: '待 KYC 核验', under_review: '平台审核中', suspended: '已暂停',
+  available: '可用', settlement_pending: '结算处理中', settled: '已结清', reversed: '已冲正', fulfilled: '已履约', paid: '已支付', processing: '支付处理中', estimated: '预估中', reviewing: '复核中',
+  player_campaign: '玩家 Campaign 权益', creator_delivery: '创作者交付', creator_operation: '创作者运营', creator_performance: '创作者表现', campaign_allocation: 'Campaign 定向分配',
   ready: '已就绪', local: '本地生成服务', openai: '外部 AI 生成服务', restored: '已恢复为草稿', upheld: '维持下架', brand_confirmed: '品牌已确认',
   campaign: 'Campaign', deliverable: '交付', settlement: '结算', organization: '组织', account: '账户', brand_voice: '品牌语气', audience: '受众偏好', constraint: '约束', learning: '历史学习',
+  platform: '平台', general: '通用场景', rolled_back: '已回滚', variant: '实验组', control: '对照组',
 };
 const label = value => LABELS[value] || value || '—';
 const esc = value => String(value ?? '').replace(/[&<>'"]/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[ch]));
@@ -32,6 +36,12 @@ function toast(message, type = '') {
 }
 
 const { openDialog } = createDialogManager(modalRoot);
+
+const ECONOMY_LOCKED_FIELDS = [
+  'commercial', 'audience.included_regions', 'audience.excluded_regions', 'audience.minimum_age',
+  'cta.destination', 'reward', 'compliance', 'data_policy', 'attribution.model',
+  'attribution.window_days', 'measurement.primary_success_event', 'approval', 'release.kill_switch',
+];
 
 function stopPolling() {
   clearTimeout(state.poller);
@@ -66,6 +76,65 @@ function schedulePolling(hasActiveTasks) {
 async function copyCurrentLoginLink() {
   await navigator.clipboard.writeText(location.href);
   toast('登录链接已复制');
+}
+
+let supportTicketsCache=[];
+async function loadSupportTickets(){
+  try{ const result=await api('/api/support-tickets'); supportTicketsCache=result.tickets||[]; }catch{ supportTicketsCache=[]; }
+}
+
+let minorPolicyCache={loaded:false,policy:null};
+async function loadMinorPolicy(){
+  try{ const result=await api('/api/policies/minor-mode'); minorPolicyCache={loaded:true,policy:result.policy||null}; }
+  catch{ minorPolicyCache={loaded:true,policy:null}; }
+}
+
+let contractGovernanceCache={loaded:false,campaigns:[]};
+async function loadContractGovernance(){
+  const contracts=state.data?.economyContracts||[];
+  const campaignIds=[...new Set(contracts.map(r=>r.campaignId))].slice(0,10);
+  const campaigns=[];
+  for(const campaignId of campaignIds){
+    const campaignTitle=contracts.find(r=>r.campaignId===campaignId)?.campaignTitle||campaignId;
+    try{
+      const [signed,changed]=await Promise.all([
+        api(`/api/campaigns/${campaignId}/contract-signatures`),
+        api(`/api/campaigns/${campaignId}/contract-change-orders`),
+      ]);
+      campaigns.push({campaignId,campaignTitle,signatures:signed.signatures||[],changeOrders:changed.changeOrders||[]});
+    }catch{ campaigns.push({campaignId,campaignTitle,signatures:[],changeOrders:[],failed:true}); }
+  }
+  contractGovernanceCache={loaded:true,campaigns};
+}
+
+let aiTwinCache={loaded:false,twin:null,scenes:[]};
+async function loadAiTwin(){
+  try{
+    const twinResult=await api('/api/ai-twin');
+    const sceneResult=twinResult.twin?await api('/api/ai-twin/scenes'):{scenes:[]};
+    aiTwinCache={loaded:true,twin:twinResult.twin||null,scenes:sceneResult.scenes||[]};
+  }catch{ aiTwinCache={loaded:true,twin:null,scenes:[]}; }
+}
+
+let experimentCache={contentId:'',contentTitle:'',experiments:[]};
+async function loadExperiments(contentId,contentTitle){
+  const result=await api(`/api/contents/${contentId}/experiments`);
+  experimentCache={contentId,contentTitle,experiments:result.experiments||[]};
+}
+const EXPERIMENT_OPTIMIZABLE=[['title','标题'],['hook','开场 Hook'],['coverStyle','封面风格'],['interactionOrder','互动顺序'],['difficulty','难度']];
+function parseKnowledgeLines(text){
+  const knowledge={};
+  for(const line of String(text||'').split('\n')){
+    const index=line.indexOf('=');
+    if(index<=0)continue;
+    const key=line.slice(0,index).trim();
+    const value=line.slice(index+1).trim();
+    if(key)knowledge[key]=value;
+  }
+  return knowledge;
+}
+function knowledgeToLines(knowledge){
+  return Object.entries(knowledge||{}).map(([key,value])=>`${key}=${typeof value==='string'?value:JSON.stringify(value)}`).join('\n');
 }
 
 async function api(url, options = {}) {
@@ -115,7 +184,7 @@ function loginView() {
   state.refreshError = '';
   app.innerHTML = `<main class="login">
     <section class="login-hero">
-      <div class="logo"><span class="logo-mark">A</span>airvana.ai</div>
+      <div class="logo logo--plate"><img class="logo-img" src="/logo.png" alt="airvana.ai" width="150" height="46"></div>
       <div class="hero-copy">
         <div class="eyebrow">Agentic Playable 工作台</div>
         <h1>让每一位 KOL<br><em>运营自己的 Playable</em></h1>
@@ -164,7 +233,7 @@ function shell() {
   const moreNav = nav.slice(4);
   app.innerHTML = `<div class="shell">
     <aside class="sidebar">
-      <div class="logo"><span class="logo-mark">A</span>airvana.ai</div>
+      <div class="logo"><img class="logo-img" src="/logo.png" alt="airvana.ai" width="140" height="43"></div>
       <div class="role-pill">当前工作区：<strong>${esc(label(me.role))}</strong></div>
       <nav class="nav desktop-nav" aria-label="工作区主导航">${nav.map(([id,icon,text]) => `<button data-action="nav" data-view="${id}" class="${state.view === id ? 'active' : ''}"><span class="icon">${icon}</span>${esc(text)}</button>`).join('')}</nav>
       <div class="side-bottom">
@@ -217,7 +286,7 @@ function factoryView() {
   return `<div class="grid cols-2">
     <form class="form-card" data-form="create-task"><div class="eyebrow">Agent 运行管线</div><h2>创建内容任务</h2><p>提交后由服务端队列运行，生成结果先通过安全审核，再根据 Agent 设置进入人工审核或草稿。</p>
       <div class="form-grid"><div class="field"><label for="task-agent">执行 Agent</label><select id="task-agent" name="agentId" required>${active.map(a=>`<option value="${a.id}">${esc(a.name)} · ${esc(label(a.contentType))}</option>`).join('')}</select></div><div class="field"><label for="task-type">内容类型</label><select id="task-type" name="contentType"><option value="game">互动游戏</option><option value="video">互动故事</option><option value="article">文章</option></select></div><div class="field full"><label for="task-title">内容标题</label><input id="task-title" name="title" maxlength="80" required placeholder="例如：60 秒保护数字钱包挑战"></div><div class="field full"><label for="task-prompt">创作目标与约束</label><textarea id="task-prompt" name="prompt" required maxlength="3000" placeholder="目标受众、核心信息、互动方式、必须遵守的品牌边界……"></textarea></div></div>
-      <div class="form-actions"><button class="btn primary" ${active.length?'':'disabled'}>${active.length?'提交到运行队列':'没有可用 Agent'}</button></div></form>
+      <div class="form-actions"><button type="button" class="btn soft" data-action="creation-quote">查询创作扣费</button><button class="btn primary" ${active.length?'':'disabled'}>${active.length?'提交到运行队列':'没有可用 Agent'}</button></div></form>
     <div><div class="section-head"><h2>实时任务</h2><span>自动刷新</span></div><div class="list">${state.data.tasks.slice(0,6).map(taskRow).join('') || empty('还没有任务','创建内容任务后会显示运行进度')}</div></div>
   </div>`;
 }
@@ -230,14 +299,14 @@ function taskRow(t) {
 function agentsView() {
   return `<div class="grid cols-3">${state.data.agents.map(a=>{const memories=(state.data.agentMemories||[]).filter(m=>m.agentId===a.id);return `<div class="card agent-card"><div class="agent-head"><div class="agent-icon">✦</div><div><h3>${esc(a.name)}</h3><p>${esc(label(a.contentType))} · ${esc(label(a.reviewMode==='human'?'review_pending':'approved'))}</p></div><div style="margin-left:auto">${status(a.status)}</div></div><p class="muted" style="font-size:12px;line-height:1.6">${esc(a.description||'暂无说明')}</p><div class="chips">${Object.entries(a.permissions).filter(([,v])=>v).map(([k])=>`<span class="chip">${esc({draft:'生成草稿',readAnalytics:'读取数据',useBrandAssets:'品牌素材',publish:'自动发布'}[k]||k)}</span>`).join('')||'<span class="chip">无执行权限</span>'}</div><div class="memory-list">${memories.map(m=>`<div class="memory-item"><div><strong>${esc(label(m.memoryType))} · P${m.priority}</strong><p>${esc(m.content)}</p><span>${esc(m.source)} · ${fmtDate(m.updatedAt)}</span></div><div class="row-actions"><button class="btn small soft" data-action="agent-memory-edit" data-id="${m.id}">编辑</button><button class="btn small danger" data-action="agent-memory-delete" data-id="${m.id}">删除</button></div></div>`).join('')||'<p class="muted">尚未添加品牌语气、受众或约束记忆。</p>'}</div><div class="row-actions"><button class="btn small soft" data-action="agent-memory" data-id="${a.id}">添加记忆</button><button class="btn small ${a.status==='active'?'danger':'soft'}" data-action="agent-status" data-id="${a.id}" data-status="${a.status==='active'?'paused':'active'}">${a.status==='active'?'暂停':'恢复'}</button></div></div>`}).join('')}
     <form class="form-card" data-form="create-agent"><div class="eyebrow">Agent 权限注册表</div><h2>新建 Agent</h2><p>自动发布在 MVP 中始终关闭；内容必须经过明确发布动作。</p><div class="form-grid"><div class="field"><label for="agent-name">名称</label><input id="agent-name" name="name" required maxlength="40"></div><div class="field"><label for="agent-type">内容类型</label><select id="agent-type" name="contentType"><option value="all">全部</option><option value="game">互动游戏</option><option value="video">互动故事</option><option value="article">文章</option></select></div><div class="field full"><label for="agent-desc">职责说明</label><input id="agent-desc" name="description" maxlength="160"></div><div class="field full"><label for="agent-prompt">系统约束</label><textarea id="agent-prompt" name="systemPrompt" maxlength="1200"></textarea></div><div class="field"><label for="review-mode">审核模式</label><select id="review-mode" name="reviewMode"><option value="human">人工审核</option><option value="auto">规则通过后进入草稿</option></select></div><div class="field"><label>权限</label><div class="checks"><label class="check"><input name="draft" type="checkbox" checked>生成草稿</label><label class="check"><input name="readAnalytics" type="checkbox" checked>读取数据</label><label class="check"><input name="useBrandAssets" type="checkbox">品牌素材</label></div></div></div><div class="form-actions"><button class="btn primary">创建 Agent</button></div></form>
-  </div>`;
+  </div>${aiTwinSection()}`;
 }
 
 function contentsView() {
   const rows = state.data.contents.map(contentRow).join('');
   const feed = state.searchResults || state.data.feed || [];
   return `<section><div class="section-head"><h2>我的内容生命周期</h2><span>生成 → 审核 → 成品构建 → 定时/发布 → 归档</span></div><div class="list">${rows || empty('还没有内容','前往内容工厂创建第一条任务')}</div></section>
-    <section class="section"><div class="section-head"><h2>内容广场 · 运行时证明</h2><span>完整体验事件顺序验证后才产生 AIP</span></div><form class="card" data-form="discover" style="display:grid;grid-template-columns:1fr 150px auto;gap:8px;margin-bottom:12px"><input name="q" placeholder="搜索内容或创作者"><select name="type"><option value="">全部类型</option><option value="game">互动游戏</option><option value="video">互动故事</option><option value="article">文章</option></select><button class="btn">搜索</button></form><div class="grid cols-3">${feed.map(c=>`<div class="card"><div class="eyebrow">${esc(label(c.contentType))}${c.boostedUntil?' · AIP 推广中':''}</div><h3>${esc(c.title)}</h3><p class="muted" style="font-size:12px">创作者：${esc(c.authorName)}</p><div class="row-actions"><a class="btn small" href="/content/${c.id}" target="_blank" rel="noopener">打开成品</a><button class="btn small danger" data-action="report-content" data-id="${c.id}">举报</button></div></div>`).join('') || empty('暂无匹配内容','调整搜索条件或等待其他创作者发布')}</div></section>`;
+    <section class="section"><div class="section-head"><h2>内容广场 · 运行时证明</h2><span>完整体验事件顺序验证后才产生 AIP</span></div><form class="card" data-form="discover" style="display:grid;grid-template-columns:1fr 150px auto;gap:8px;margin-bottom:12px"><input name="q" placeholder="搜索内容或创作者"><select name="type"><option value="">全部类型</option><option value="game">互动游戏</option><option value="video">互动故事</option><option value="article">文章</option></select><button class="btn">搜索</button></form><div class="grid cols-3">${feed.map(c=>`<div class="card"><div class="eyebrow">${esc(label(c.contentType))}${c.boostedUntil?' · AIP 推广中':''}</div><h3>${esc(c.title)}</h3><p class="muted" style="font-size:12px">创作者：${esc(c.authorName)}</p><div class="row-actions"><a class="btn small" href="/content/${c.id}" target="_blank" rel="noopener">打开成品</a><button class="btn small danger" data-action="report-content" data-id="${c.id}">举报</button></div></div>`).join('') || empty('暂无匹配内容','调整搜索条件或等待其他创作者发布')}</div></section>${experimentSection()}`;
 }
 
 function contentRow(c) {
@@ -247,7 +316,7 @@ function contentRow(c) {
   const appeal = (state.data.contentAppeals||[]).find(x=>x.contentId===c.id&&x.status==='open');
   const appealable = (state.data.appealableContentIds||[]).includes(c.id);
   const canBoost = Number(state.data.points.AIP) >= 20;
-  return `<div class="list-row"><div><h3>${esc(c.title)}</h3><p>${esc(label(c.contentType))} · v${c.currentVersion} · ${artifact?`成品 ${label(artifact.status)}`:'尚未构建'}${boost?` · 推广至 ${fmtDate(boost.expiresAt)}`:''}${moderation.length?` · ${moderation.map(x=>esc(x.label||x)).join('、')}`:''}</p></div><div>${status(c.status)}</div><div>${appeal?status('open'):status(c.moderationStatus)}<p>${appeal?'申诉待平台复核':fmtDate(c.updatedAt)}</p></div><div class="row-actions">${artifact?`<a class="btn small soft" href="${c.status==='published'?'/content':'/preview'}/${c.id}" target="_blank" rel="noopener">预览成品</a>`:''}${c.currentVersion>0?`<button class="btn small soft" data-action="content-versions" data-id="${c.id}">版本</button>`:''}${['draft','rejected'].includes(c.status)?`<button class="btn small soft" data-action="content-edit" data-id="${c.id}">编辑</button>`:''}${c.status==='draft'?`<button class="btn small primary" data-action="publish" data-id="${c.id}">立即发布</button><button class="btn small soft" data-action="schedule" data-id="${c.id}">定时</button>`:''}${c.status==='published'&&!boost?`<button class="btn small" data-action="content-boost" data-id="${c.id}" ${canBoost?'':'disabled'}>${canBoost?'推广 24h · 20 AIP':'AIP 不足（需 20）'}</button>`:''}${appealable&&!appeal?`<button class="btn small" data-action="content-appeal" data-id="${c.id}">提交下架申诉</button>`:''}${['published','scheduled'].includes(c.status)?`<button class="btn small danger" data-action="archive" data-id="${c.id}">归档</button>`:''}</div></div>`;
+  return `<div class="list-row"><div><h3>${esc(c.title)}</h3><p>${esc(label(c.contentType))} · v${c.currentVersion} · ${artifact?`成品 ${label(artifact.status)}`:'尚未构建'}${boost?` · 推广至 ${fmtDate(boost.expiresAt)}`:''}${moderation.length?` · ${moderation.map(x=>esc(x.label||x)).join('、')}`:''}</p></div><div>${status(c.status)}</div><div>${appeal?status('open'):status(c.moderationStatus)}<p>${appeal?'申诉待平台复核':fmtDate(c.updatedAt)}</p></div><div class="row-actions">${artifact?`<a class="btn small soft" href="${c.status==='published'?'/content':'/preview'}/${c.id}" target="_blank" rel="noopener">预览成品</a>`:''}${c.currentVersion>0?`<button class="btn small soft" data-action="content-versions" data-id="${c.id}">版本</button>`:''}${c.currentVersion>0?`<button class="btn small soft" data-action="content-experiments" data-id="${c.id}">灰度实验</button>`:''}${['draft','rejected'].includes(c.status)?`<button class="btn small soft" data-action="content-edit" data-id="${c.id}">编辑</button>`:''}${c.status==='draft'?`<button class="btn small primary" data-action="publish" data-id="${c.id}">立即发布</button><button class="btn small soft" data-action="schedule" data-id="${c.id}">定时</button>`:''}${c.status==='published'&&!boost?`<button class="btn small" data-action="content-boost" data-id="${c.id}" ${canBoost?'':'disabled'}>${canBoost?'推广 24h · 20 AIP':'AIP 不足（需 20）'}</button>`:''}${appealable&&!appeal?`<button class="btn small" data-action="content-appeal" data-id="${c.id}">提交下架申诉</button>`:''}${['published','scheduled'].includes(c.status)?`<button class="btn small danger" data-action="archive" data-id="${c.id}">归档</button>`:''}</div></div>`;
 }
 
 function tasksView() {
@@ -307,21 +376,99 @@ function settlementsView() {
   const committed=state.data.campaigns.reduce((sum,c)=>sum+Number(c.budgetSummary?.committed||0),0);
   const issued=state.data.campaigns.reduce((sum,c)=>sum+Number(c.budgetSummary?.issued||0),0);
   const filters=['all','approved','payment_pending','platform_approved','issued','rejected'];
-  return `<div class="grid cols-3"><div class="card stat"><div class="label">Campaign 总预算</div><div class="value">${totalBudget.toLocaleString()}</div><div class="hint">AIT</div></div><div class="card stat"><div class="label">已承诺</div><div class="value">${committed.toLocaleString()}</div><div class="hint">已批准及后续状态</div></div><div class="card stat"><div class="label">已发放</div><div class="value">${issued.toLocaleString()}</div><div class="hint">服务端账本已写入</div></div></div><div class="toolbar"><div class="filter-tabs" role="group" aria-label="结算状态筛选">${filters.map(value=>`<button class="btn small ${state.settlementFilter===value?'primary':'soft'}" data-action="settlement-filter" data-filter="${value}">${value==='all'?'全部':label(value)}</button>`).join('')}</div><button class="btn small" data-action="settlement-export">导出 CSV</button></div><div class="list">${records.map(s=>`<div class="list-row"><div><h3>${esc(s.campaignTitle)}</h3><p>${esc(s.creatorName)} · 交付 ${esc(s.deliverableId.slice(-8))}</p></div><div>${status(s.status)}</div><div><strong>${Number(s.amount).toLocaleString()} ${esc(s.currency)}</strong><p>${fmtDate(s.updatedAt)}</p></div><div class="row-actions"><button class="btn small soft" data-action="settlement-details" data-id="${s.id}">审批轨迹</button>${role==='brand'&&s.status==='approved'?`<button class="btn small" data-action="settlement-pending" data-id="${s.id}">提交平台复核</button>`:''}${role==='admin'&&s.status==='payment_pending'?`<button class="btn small primary" data-action="settlement-platform" data-id="${s.id}" data-decision="approve">批准</button><button class="btn small danger" data-action="settlement-platform" data-id="${s.id}" data-decision="reject">拒绝</button>`:''}${role==='brand'&&s.status==='platform_approved'?`<button class="btn small primary" data-action="settlement-issue" data-id="${s.id}">确认发放 AIT</button>`:''}</div></div>`).join('') || empty('没有匹配的结算记录','切换筛选条件查看其他状态')}</div><div class="card" style="margin-top:18px"><strong>结算边界</strong><p class="muted" style="font-size:12px;line-height:1.7">AIT 记录 Campaign 贡献与活动资格，不代表现金、USDT、证券或可自由交易资产。品牌确认与平台复核分离，发放动作由服务端幂等记账。</p></div>`;
+  return `<div class="grid cols-3"><div class="card stat"><div class="label">Campaign 总预算</div><div class="value">${totalBudget.toLocaleString()}</div><div class="hint">AIT</div></div><div class="card stat"><div class="label">已承诺</div><div class="value">${committed.toLocaleString()}</div><div class="hint">已批准及后续状态</div></div><div class="card stat"><div class="label">已发放</div><div class="value">${issued.toLocaleString()}</div><div class="hint">服务端账本已写入</div></div></div><div class="toolbar"><div class="filter-tabs" role="group" aria-label="结算状态筛选">${filters.map(value=>`<button class="btn small ${state.settlementFilter===value?'primary':'soft'}" data-action="settlement-filter" data-filter="${value}">${value==='all'?'全部':label(value)}</button>`).join('')}</div><button class="btn small" data-action="settlement-export">导出 CSV</button></div><div class="list">${records.map(s=>`<div class="list-row"><div><h3>${esc(s.campaignTitle)}</h3><p>${esc(s.creatorName)} · 交付 ${esc(s.deliverableId.slice(-8))}</p></div><div>${status(s.status)}</div><div><strong>${Number(s.amount).toLocaleString()} ${esc(s.currency)}</strong><p>${fmtDate(s.updatedAt)}</p></div><div class="row-actions"><button class="btn small soft" data-action="settlement-details" data-id="${s.id}">审批轨迹</button>${role==='brand'&&s.status==='approved'?`<button class="btn small" data-action="settlement-pending" data-id="${s.id}">提交平台复核</button>`:''}${role==='admin'&&s.status==='payment_pending'?`<button class="btn small primary" data-action="settlement-platform" data-id="${s.id}" data-decision="approve">批准</button><button class="btn small danger" data-action="settlement-platform" data-id="${s.id}" data-decision="reject">拒绝</button>`:''}${s.status==='platform_approved'?`<span class="muted" style="font-size:11px">旧发放通道已下线（410）· 请走 AIT 权益路径</span>`:''}</div></div>`).join('') || empty('没有匹配的结算记录','切换筛选条件查看其他状态')}</div><div class="card" style="margin-top:18px"><strong>结算边界</strong><p class="muted" style="font-size:12px;line-height:1.7">AIT 记录 Campaign 贡献与活动资格，不代表现金、USDT、证券或可自由交易资产。品牌确认与平台复核分离，发放动作由服务端幂等记账。</p></div>${economyWorkbenchSections(role)}`;
+}
+
+function economyWorkbenchSections(role){
+  const d=state.data;
+  const contracts=d.economyContracts||[];
+  const contractRows=contracts.map(r=>{const budget=r.budget||{};const creatorRule=r.creatorRule||{};const playerRule=r.playerRule||{};const st=r.settlement||{};
+    return `<div class="list-row"><div><h3>${esc(r.campaignTitle)} · ${esc(r.contractVersion)}</h3><p>成功事件 ${esc(r.primarySuccessEvent)} · 权益池 ${Number(budget.totalAit||0).toLocaleString()} AIT · 创作者单笔 ${Number(creatorRule.amountAit||0)} · 玩家单笔 ${Number(playerRule.amountAit||0)}</p></div><div>${status(r.status)}</div><div><p style="font-size:12px">${st.cashEnabled?`可现金结算 · ${esc((st.currencies||[]).join(' / '))}`:'仅非金融权益'}</p><p class="muted" style="font-size:10px">${fmtDate(r.updatedAt)}</p></div><div class="row-actions">${role==='admin'&&r.status==='pending_review'?`<button class="btn small primary" data-action="economy-contract-approve" data-campaign="${r.campaignId}" data-version="${esc(r.contractVersion)}">批准 Contract</button>`:''}</div></div>`;}).join('')||empty('还没有 Campaign Contract 经济规则','品牌方提交锁定字段与预算后进入平台审批；获批前不能产生任何 AIT 权益');
+  let html=`<section class="section"><div class="section-head"><h2>Campaign Contract 经济规则</h2><span>AIT 权益只能在获批 Contract 下产生</span>${role==='brand'?`<button class="btn small primary" data-action="economy-contract-submit">提交 Contract</button>`:''}</div><div class="list">${contractRows}</div></section>`;
+  if(role!=='admin')return html+contractGovernanceSection(role);
+  const entRows=(d.managedAitEntitlements||[]).map(e=>`<div class="list-row"><div><h3>${esc(e.userName)} · ${Number(e.amount).toLocaleString()} AIT</h3><p>${esc(e.campaignTitle)} · ${esc(e.contractVersion)} · ${esc(label(e.sourceType))} · 证据 ${esc(e.attributionReference||'—')}</p></div><div>${status(e.status)}</div><div><p class="muted" style="font-size:10px">${fmtDate(e.createdAt)}</p></div><div class="row-actions">${e.status==='pending'?`<button class="btn small primary" data-action="entitlement-review" data-id="${e.id}" data-decision="approve">批准</button><button class="btn small soft" data-action="entitlement-review" data-id="${e.id}" data-decision="freeze">冻结</button><button class="btn small danger" data-action="entitlement-review" data-id="${e.id}" data-decision="reject">撤销</button>`:''}${e.status==='frozen'?`<button class="btn small primary" data-action="entitlement-review" data-id="${e.id}" data-decision="approve">解冻为可用</button>`:''}</div></div>`).join('')||empty('还没有 AIT 权益记录','基于获批 Contract 与归因/交付证据创建');
+  html+=`<section class="section"><div class="section-head"><h2>AIT 权益复核</h2><span>pending → available/frozen/reversed</span><button class="btn small primary" data-action="entitlement-create">创建 AIT 权益</button></div><div class="list">${entRows}</div></section>`;
+  const claimRows=(d.managedBenefitClaims||[]).map(c=>`<div class="list-row"><div><h3>${esc(c.userName)} · ${esc(c.benefitType)}</h3><p>权益 ${esc(c.entitlementId.slice(-8))}${c.fulfillmentReference?` · 履约凭证 ${esc(c.fulfillmentReference)}`:''}</p></div><div>${status(c.status)}</div><div><p class="muted" style="font-size:10px">${fmtDate(c.updatedAt)}</p></div><div class="row-actions">${c.status==='submitted'?`<button class="btn small primary" data-action="benefit-review" data-id="${c.id}" data-decision="approve">批准</button><button class="btn small danger" data-action="benefit-review" data-id="${c.id}" data-decision="reject">拒绝</button>`:''}${c.status==='approved'?`<button class="btn small primary" data-action="benefit-review" data-id="${c.id}" data-decision="fulfill">履约完成</button>`:''}</div></div>`).join('')||empty('没有待处理的权益申领','创作者从可用 AIT 发起申领后出现在这里');
+  html+=`<section class="section"><div class="section-head"><h2>权益申领复核</h2><span>submitted → approved → fulfilled</span></div><div class="list">${claimRows}</div></section>`;
+  const payRows=(d.managedPaymentSettlements||[]).map(x=>`<div class="list-row"><div><h3>${esc(x.userName)} · ${esc(x.grossAmount)} ${esc(x.currency)}</h3><p>${esc(x.payerSubject)} → ${esc(x.payeeSubject)}${x.paymentReference?` · 付款 ${esc(x.paymentReference)}`:''}${x.receiptReference?` · 回执 ${esc(x.receiptReference)}`:''}</p></div><div>${status(x.status)}</div><div><p class="muted" style="font-size:10px">${fmtDate(x.updatedAt)}</p></div><div class="row-actions">${x.status==='submitted'?`<button class="btn small primary" data-action="payment-review" data-id="${x.id}" data-decision="approve">批准</button><button class="btn small danger" data-action="payment-review" data-id="${x.id}" data-decision="reject">拒绝</button>`:''}${['approved','processing'].includes(x.status)?`<button class="btn small primary" data-action="payment-complete" data-id="${x.id}">登记支付与回执</button>`:''}</div></div>`).join('')||empty('没有独立付款结算','创作者从可用 AIT 发起付款结算后出现在这里');
+  html+=`<section class="section"><div class="section-head"><h2>独立付款结算</h2><span>与 AIT 分账 · 需付款与回执双证据</span></div><div class="list">${payRows}</div></section>`;
+  const appealRows=(d.managedLedgerAppeals||[]).map(x=>`<div class="list-row"><div><h3>${esc(x.userName)} · ${esc(label(x.subjectType))}</h3><p>${esc(x.reason)}</p></div><div>${status(x.status)}</div><div><p class="muted" style="font-size:10px">${fmtDate(x.createdAt)}</p></div><div class="row-actions">${['submitted','reviewing'].includes(x.status)?`<button class="btn small primary" data-action="economy-appeal-review" data-id="${x.id}" data-decision="approve">通过</button><button class="btn small danger" data-action="economy-appeal-review" data-id="${x.id}" data-decision="reject">驳回</button>`:''}</div></div>`).join('')||empty('没有账本申诉','用户对 AIP 批次、AIT 权益或付款记录的申诉会出现在这里');
+  html+=`<section class="section"><div class="section-head"><h2>经济账本申诉</h2><span>submitted → approved/rejected</span></div><div class="list">${appealRows}</div></section>`;
+  const applicationRows=(d.creatorApplications||[]).map(x=>`<div class="list-row"><div><h3>${esc(x.user_name||x.user_id)}</h3><p>${esc((x.application_note||'').slice(0,80))} · 地区 ${esc(x.region_code)}${x.kyc_reference?` · KYC 凭证 ${esc(x.kyc_reference)}`:''}</p></div><div>${status(x.status)}</div><div><p class="muted" style="font-size:10px">${fmtDate(x.created_at)}</p></div><div class="row-actions">${x.status==='kyc_pending'?`<button class="btn small primary" data-action="creator-app-review" data-id="${x.id}" data-decision="verify_kyc">KYC 核验通过</button><button class="btn small danger" data-action="creator-app-review" data-id="${x.id}" data-decision="reject">拒绝</button>`:''}${x.status==='under_review'?`<button class="btn small primary" data-action="creator-app-review" data-id="${x.id}" data-decision="approve">批准 KOL 资格</button><button class="btn small danger" data-action="creator-app-review" data-id="${x.id}" data-decision="reject">拒绝</button>`:''}</div></div>`).join('')||empty('没有创作者申请','移动端提交申请后进入 KYC 核验与平台审核');
+  html+=`<section class="section"><div class="section-head"><h2>创作者资格审核</h2><span>kyc_pending → under_review → approved</span></div><div class="list">${applicationRows}</div></section>`;
+  html+=`<section class="section"><div class="section-head"><h2>经济工具</h2><span>订阅授予、规则奖励、AIP 调整与批次治理</span></div><div class="row-actions" style="padding:4px 2px 10px;flex-wrap:wrap;gap:8px;display:flex"><button class="btn small" data-action="admin-grant-subscription">授予订阅</button><button class="btn small" data-action="admin-grant-reward">发放规则奖励</button><button class="btn small" data-action="admin-adjust-aip">AIP 调整</button><button class="btn small" data-action="admin-batch-status">AIP 批次状态</button></div></section>`;
+  html+=contractGovernanceSection(role);
+  return html;
+}
+
+function contractGovernanceSection(role){
+  const contracts=state.data.economyContracts||[];
+  const cache=contractGovernanceCache;
+  const head=`<section class="section"><div class="section-head"><h2>Contract 签署与变更单</h2><span>签署幂等 · 变更单审批后旧版本只读保留</span><button class="btn small soft" data-action="contract-governance-load">${cache.loaded?'刷新签署与变更':'载入签署与变更'}</button></div>`;
+  if(!contracts.length)return `${head}<div class="list">${empty('还没有 Campaign Contract','品牌提交并由平台批准 Contract 后才能签署或发起变更单')}</div></section>`;
+  const campaignIds=[...new Set(contracts.map(r=>r.campaignId))];
+  const body=campaignIds.map(campaignId=>{
+    const versions=contracts.filter(r=>r.campaignId===campaignId);
+    const loaded=cache.campaigns.find(x=>x.campaignId===campaignId);
+    const versionRows=versions.map(r=>{
+      const signatures=(loaded?.signatures||[]).filter(x=>x.contractVersion===r.contractVersion);
+      const signedByMe=signatures.some(x=>x.signerName===state.data.me.displayName);
+      return `<div class="list-row"><div><h3>Contract ${esc(r.contractVersion)}</h3><p>${signatures.length?esc(signatures.map(x=>`${x.signerName}（${label(x.signerRole)}）`).join(' · ')):cache.loaded?'尚无签署记录':'签署记录未载入'}</p></div><div>${status(r.status)}</div><div><p style="font-size:12px">${cache.loaded?`${signatures.length} 份签署`:'—'}</p><p class="muted" style="font-size:10px">${fmtDate(r.updatedAt)}</p></div><div class="row-actions">${signedByMe?`<span class="muted" style="font-size:11px">我已签署</span>`:`<button class="btn small primary" data-action="contract-sign" data-campaign="${esc(r.campaignId)}" data-version="${esc(r.contractVersion)}">签署 Contract</button>`}${role==='brand'&&r.status==='approved'?`<button class="btn small soft" data-action="contract-change-order" data-campaign="${esc(r.campaignId)}" data-version="${esc(r.contractVersion)}">发起变更单</button>`:''}</div></div>`;
+    }).join('');
+    const orderRows=(loaded?.changeOrders||[]).map(o=>`<div class="list-row"><div><h3>${esc(o.fromVersion)} → ${esc(o.toVersion)}</h3><p>${esc(o.requesterName)} · 变更字段 ${esc((o.changedFields||[]).join('、')||'—')} · ${esc(o.reason)}${o.reviewNote?` · 复核：${esc(o.reviewNote)}`:''}</p></div><div>${status(o.status)}</div><div><p class="muted" style="font-size:10px">${fmtDate(o.createdAt)}</p></div><div class="row-actions">${role==='admin'&&o.status==='pending'?`<button class="btn small primary" data-action="change-order-review" data-id="${esc(o.id)}" data-decision="approve">批准变更</button><button class="btn small danger" data-action="change-order-review" data-id="${esc(o.id)}" data-decision="reject">拒绝</button>`:''}</div></div>`).join('');
+    return `<div class="card" style="margin-bottom:14px"><div class="eyebrow">Campaign</div><h3>${esc(versions[0].campaignTitle)}</h3><div class="list">${versionRows}</div>${cache.loaded?`<div class="section-head" style="margin-top:12px"><h2 style="font-size:15px">变更单</h2><span>pending → approved/rejected · 批准不改写旧版本</span></div><div class="list">${orderRows||empty('没有变更单','品牌方对已获批版本发起变更后进入平台审批')}</div>`:''}</div>`;
+  }).join('');
+  return `${head}${cache.loaded?'':'<p class="muted" style="font-size:12px;margin:0 0 12px">签署与变更单按需拉取；点击「载入签署与变更」后显示服务端记录。</p>'}${body}</section>`;
+}
+
+function aiTwinSection(){
+  const cache=aiTwinCache;
+  const head=`<section class="section"><div class="section-head"><h2>AI 分身与场景知识隔离</h2><span>场景知识互不可见 · Campaign 场景须绑定获批 Contract</span><button class="btn small soft" data-action="twin-load">${cache.loaded?'刷新分身':'载入分身'}</button></div>`;
+  const boundary='<div class="card" style="margin-top:12px"><strong>分身边界</strong><p class="muted" style="font-size:12px;line-height:1.7">当前为预生成样片与结构化人设，不提供实时语音视频分身；外部渠道自动运营仅生成建议，需本人确认后执行。</p></div>';
+  if(!cache.loaded)return `${head}<div class="list">${empty('尚未载入 AI 分身','点击「载入分身」按需拉取服务端分身与场景')}</div></section>`;
+  if(!cache.twin)return `${head}<div class="list">${empty('还没有 AI 分身','创建分身后才能建立场景与知识隔离')}</div><div class="row-actions" style="justify-content:flex-start;padding:8px 2px"><button class="btn small primary" data-action="twin-save">创建 AI 分身</button></div>${boundary}</section>`;
+  const t=cache.twin;
+  const sceneRows=cache.scenes.map(x=>`<div class="list-row"><div><h3>${esc(x.name)}</h3><p>${esc(label(x.kind))}${x.campaignId?` · Campaign ${esc(x.campaignId.slice(-8))} · Contract ${esc(x.contractVersion||'—')}`:''} · ${esc(x.locale)} · v${x.version} · ${Object.keys(x.knowledge||{}).length} 条知识</p></div><div>${status(x.status)}</div><div><p class="muted" style="font-size:10px">${fmtDate(x.updatedAt)}</p></div><div class="row-actions"><button class="btn small soft" data-action="twin-scene-knowledge" data-id="${esc(x.id)}">查看隔离知识</button><button class="btn small soft" data-action="twin-scene-create" data-name="${esc(x.name)}">更新场景知识</button></div></div>`).join('')||empty('还没有场景','通用场景与 Campaign 场景的知识严格隔离，互不串用');
+  return `${head}<div class="card" style="margin-bottom:14px"><div class="eyebrow">分身注册表</div><h3>${esc(t.displayName)} · v${t.version}</h3><div class="chips"><span class="chip">${esc(label(t.status))}</span><span class="chip">声音授权 ${t.voiceConsentAt?fmtDate(t.voiceConsentAt):'未授权'}</span><span class="chip">肖像授权 ${t.likenessConsentAt?fmtDate(t.likenessConsentAt):'未授权'}</span></div><div class="row-actions" style="justify-content:flex-start;margin-top:12px"><button class="btn small soft" data-action="twin-save">更新人设与授权</button><button class="btn small ${t.status==='active'?'danger':'primary'}" data-action="twin-toggle" data-next="${t.status==='active'?'pause':'resume'}">${t.status==='active'?'暂停分身':'恢复分身'}</button><button class="btn small primary" data-action="twin-scene-create">新建场景</button></div></div><div class="list">${sceneRows}</div>${boundary}</section>`;
+}
+
+function experimentSection(){
+  const cache=experimentCache;
+  if(!cache.contentId)return '';
+  const rows=cache.experiments.map(x=>`<div class="list-row"><div><h3>${esc(x.name)}</h3><p>字段 ${esc(x.variantField)} · 对照 ${esc(x.controlValue||'—')} → 实验 ${esc(x.variantValue||'—')} · 灰度 ${x.rolloutPercent}% · 已分桶 ${x.assignments}${x.hypothesis?` · ${esc(x.hypothesis)}`:''}</p></div><div>${status(x.status)}</div><div><p class="muted" style="font-size:10px">${fmtDate(x.createdAt)}</p></div><div class="row-actions">${x.status==='draft'?`<button class="btn small primary" data-action="experiment-status" data-id="${esc(x.id)}" data-status="running">开始灰度</button>`:''}${x.status==='running'?`<button class="btn small soft" data-action="experiment-assignment" data-id="${esc(x.id)}">我的分桶</button><button class="btn small soft" data-action="experiment-status" data-id="${esc(x.id)}" data-status="paused">暂停</button><button class="btn small primary" data-action="experiment-status" data-id="${esc(x.id)}" data-status="completed">完成</button><button class="btn small danger" data-action="experiment-status" data-id="${esc(x.id)}" data-status="rolled_back">回滚</button>`:''}${x.status==='paused'?`<button class="btn small primary" data-action="experiment-status" data-id="${esc(x.id)}" data-status="running">恢复</button><button class="btn small danger" data-action="experiment-status" data-id="${esc(x.id)}" data-status="rolled_back">回滚</button>`:''}</div></div>`).join('')||empty('该内容还没有实验','只有 Agent 可优化字段能进入灰度；Campaign 锁定字段不可做实验');
+  return `<section class="section"><div class="section-head"><h2>受控实验 · ${esc(cache.contentTitle)}</h2><span>稳定分桶 · 仅可优化字段 · 可回滚</span><button class="btn small primary" data-action="experiment-create" data-content="${esc(cache.contentId)}">新建实验</button></div><div class="list">${rows}</div></section>`;
 }
 
 function ledgerView() {
-  return `<div class="grid cols-2"><div class="card stat accent"><div class="label">当前可用 AIP</div><div class="value">${Number(state.data.points.AIP).toLocaleString()}</div><div class="hint">已验证互动行为</div></div><div class="card stat"><div class="label">已发放 AIT</div><div class="value">${Number(state.data.points.AIT).toLocaleString()}</div><div class="hint">已批准 Campaign 交付</div></div></div><section class="section"><div class="section-head"><h2>服务端账本</h2><span>按事件 ID 幂等写入</span></div><div class="list">${state.data.ledger.map(x=>`<div class="list-row"><div><h3>${esc(label(x.currency))}</h3><p>${esc(label(x.eventType))} · <span class="code">${esc(x.id.slice(-10))}</span></p></div><div>${status(x.status)}</div><div class="ledger-amount ${x.amount>0?'plus':''}">${x.amount>0?'+':''}${x.amount} ${esc(x.currency)}</div><div><span class="muted" style="font-size:10px">${fmtDate(x.createdAt)}</span></div></div>`).join('') || empty('账本为空','通过有效互动或 Campaign 交付获得积分记录')}</div></section>`;
+  return `<div class="grid cols-2"><div class="card stat accent"><div class="label">当前可用 AIP</div><div class="value">${Number(state.data.points.AIP).toLocaleString()}</div><div class="hint">已验证互动行为</div></div><div class="card stat"><div class="label">已发放 AIT</div><div class="value">${Number(state.data.points.AIT).toLocaleString()}</div><div class="hint">已批准 Campaign 交付</div></div></div><section class="section"><div class="section-head"><h2>服务端账本</h2><span>按事件 ID 幂等写入</span></div><div class="list">${state.data.ledger.map(x=>`<div class="list-row"><div><h3>${esc(label(x.currency))}</h3><p>${esc(label(x.eventType))} · <span class="code">${esc(x.id.slice(-10))}</span></p></div><div>${status(x.status)}</div><div class="ledger-amount ${x.amount>0?'plus':''}">${x.amount>0?'+':''}${x.amount} ${esc(x.currency)}</div><div><span class="muted" style="font-size:10px">${fmtDate(x.createdAt)}</span></div></div>`).join('') || empty('账本为空','通过有效互动或 Campaign 交付获得积分记录')}</div></section>${creatorEconomySections()}`;
+}
+
+function creatorEconomySections(){
+  const d=state.data;
+  const contractOf=(campaignId,version)=>(d.economyContracts||[]).find(r=>r.campaignId===campaignId&&r.contractVersion===version);
+  const entRows=(d.aitEntitlements||[]).map(e=>{const rule=contractOf(e.campaignId,e.contractVersion);const st=rule?.settlement||{};
+    return `<div class="list-row"><div><h3>${Number(e.amount).toLocaleString()} AIT · ${esc(label(e.sourceType))}</h3><p>Contract ${esc(e.contractVersion)} · 证据 ${esc(e.attributionReference||'—')}</p></div><div>${status(e.status)}</div><div><p class="muted" style="font-size:10px">${fmtDate(e.createdAt)}</p></div><div class="row-actions">${e.status==='available'?`<button class="btn small primary" data-action="entitlement-benefit" data-id="${e.id}" data-campaign="${e.campaignId}" data-version="${esc(e.contractVersion)}">申领权益</button>${st.cashEnabled?`<button class="btn small" data-action="entitlement-payment" data-id="${e.id}" data-campaign="${e.campaignId}" data-version="${esc(e.contractVersion)}" data-amount="${e.amount}">申请付款结算</button>`:''}`:''}<button class="btn small soft" data-action="ledger-appeal" data-id="${e.id}">申诉</button></div></div>`;}).join('')||empty('还没有 AIT 权益','完成获批 Campaign 的核心事件或交付，由平台复核后生成');
+  let html=`<section class="section"><div class="section-head"><h2>AIT Campaign 权益</h2><span>不可转让 · 不可直接提现 · 按 Contract 申领或结算</span></div><div class="list">${entRows}</div></section>`;
+  const claimRows=(d.benefitClaims||[]).map(c=>`<div class="list-row"><div><h3>${esc(c.benefitType)}</h3><p>权益 ${esc(c.entitlementId.slice(-8))}${c.reviewNote?` · ${esc(c.reviewNote)}`:''}</p></div><div>${status(c.status)}</div><div><p class="muted" style="font-size:10px">${fmtDate(c.updatedAt)}</p></div><div></div></div>`).join('');
+  if(claimRows)html+=`<section class="section"><div class="section-head"><h2>权益申领记录</h2><span>平台复核后履约</span></div><div class="list">${claimRows}</div></section>`;
+  const payRows=(d.paymentSettlements||[]).map(x=>`<div class="list-row"><div><h3>${esc(x.grossAmount)} ${esc(x.currency)}</h3><p>${x.paymentReference?`付款 ${esc(x.paymentReference)} · 回执 ${esc(x.receiptReference||'—')}`:'等待平台复核与支付'}</p></div><div>${status(x.status)}</div><div><p class="muted" style="font-size:10px">${fmtDate(x.updatedAt)}</p></div><div></div></div>`).join('');
+  if(payRows)html+=`<section class="section"><div class="section-head"><h2>付款结算记录</h2><span>独立于 AIT 的现金/数字资产结算</span></div><div class="list">${payRows}</div></section>`;
+  const appealRows=(d.ledgerAppeals||[]).map(x=>`<div class="list-row"><div><h3>${esc(label(x.subjectType))}</h3><p>${esc(x.reason)}${x.resolutionNote?` · 处理：${esc(x.resolutionNote)}`:''}</p></div><div>${status(x.status)}</div><div><p class="muted" style="font-size:10px">${fmtDate(x.createdAt)}</p></div><div></div></div>`).join('');
+  if(appealRows)html+=`<section class="section"><div class="section-head"><h2>我的账本申诉</h2><span>处理结果保留记录</span></div><div class="list">${appealRows}</div></section>`;
+  html+=contractGovernanceSection('creator');
+  return html;
 }
 
 function governanceView(){
   const d=state.data;
   return `<div class="grid cols-3"><div class="card stat ${d.runtimeEnabled?'':'accent'}"><div class="label">Agent 运行管线</div><div class="value" style="font-size:22px">${d.runtimeEnabled?'运行中':'已停止'}</div><div class="hint">平台全局紧急开关</div><div class="row-actions" style="margin-top:12px"><button class="btn small ${d.runtimeEnabled?'danger':'primary'}" data-action="runtime-toggle" data-enabled="${d.runtimeEnabled?'false':'true'}">${d.runtimeEnabled?'紧急停止':'恢复运行'}</button></div></div><div class="card stat"><div class="label">开放风险案件</div><div class="value">${d.riskCases.filter(x=>x.status==='open').length}</div><div class="hint">按风险分数排序</div></div><div class="card stat"><div class="label">开放内容举报</div><div class="value">${d.reports.filter(x=>x.status==='open').length}</div><div class="hint">需要平台处理</div></div></div>
+  <section class="section"><div class="section-head"><h2>未成年人模式策略</h2><span>平台配置 · 客户端强制执行支付/对外分发/宵禁限制</span><button class="btn small soft" data-action="minor-policy-load">${minorPolicyCache.loaded?'刷新策略':'载入策略'}</button>${minorPolicyCache.loaded?'<button class="btn small primary" data-action="minor-policy-edit">配置策略</button>':''}</div><div class="list">${minorPolicyCache.loaded?`<div class="list-row"><div><h3>${minorPolicyCache.policy?.enabled?'已启用':'未启用'}</h3><p>${esc(minorPolicyCache.policy?.enabled?`每日 ${minorPolicyCache.policy.dailyMinutes} 分钟 · 宵禁 ${minorPolicyCache.policy.curfew} · 支付${minorPolicyCache.policy.paymentsBlocked?'拦截':'放行'} · 社交${minorPolicyCache.policy.socialRestricted?'受限':'不限'}`:minorPolicyCache.policy?.note||'未成年人模式策略未配置')}</p></div><div>${status(minorPolicyCache.policy?.enabled?'active':'paused')}</div><div><p class="muted" style="font-size:10px">${fmtDate(minorPolicyCache.policy?.updatedAt)}</p></div><div></div></div>`:empty('策略未载入','点击「载入策略」读取当前平台配置')}</div></section>
   <section class="section"><div class="section-head"><h2>品牌组织验证</h2><span>品牌方提交 Campaign 前必须通过</span></div><div class="list">${(d.organizations||[]).map(o=>`<div class="list-row"><div><h3>${esc(o.name)}</h3><p>${esc(o.ownerName)}</p></div><div>${status(o.verificationStatus)}</div><div><p>${fmtDate(o.createdAt)}</p></div><div class="row-actions">${o.verificationStatus==='pending'?`<button class="btn small primary" data-action="org-review" data-id="${o.id}" data-decision="approve">批准</button><button class="btn small danger" data-action="org-review" data-id="${o.id}" data-decision="reject">拒绝</button>`:''}</div></div>`).join('')||empty('没有组织申请','品牌钱包首次登录后会创建组织验证申请')}</div></section>
   <section class="section"><div class="section-head"><h2>风险案件</h2><span>运行证据与异常速度</span></div><div class="list">${d.riskCases.map(r=>`<div class="list-row"><div><h3>${esc(label(r.riskType))}</h3><p>${esc(r.subjectType)} · ${esc(r.subjectId.slice(-10))}</p></div><div>${status(r.status)}</div><div><strong>风险 ${r.score}</strong><p>${fmtDate(r.createdAt)}</p></div><div class="row-actions">${r.status==='open'?`<button class="btn small danger" data-action="risk-resolve" data-id="${r.id}" data-decision="confirm">确认风险</button><button class="btn small soft" data-action="risk-resolve" data-id="${r.id}" data-decision="dismiss">排除</button>`:''}</div></div>`).join('')||empty('没有风险案件','异常运行事件会自动进入这里')}</div></section>
   <section class="section"><div class="section-head"><h2>内容举报</h2><span>举报、下架与申诉治理</span></div><div class="list">${d.reports.map(r=>`<div class="list-row"><div><h3>${esc(r.contentTitle)}</h3><p>${esc(label(r.reason))} · ${esc(r.reporterName)}</p></div><div>${status(r.status)}</div><div><p>${fmtDate(r.createdAt)}</p></div><div class="row-actions">${r.status==='open'?`<button class="btn small danger" data-action="report-resolve" data-id="${r.id}" data-resolution="takedown">下架</button><button class="btn small soft" data-action="report-resolve" data-id="${r.id}" data-resolution="dismiss">驳回</button>`:''}</div></div>`).join('')||empty('没有内容举报','用户举报后会进入平台复核')}</div></section>
   <section class="section"><div class="section-head"><h2>内容下架申诉</h2><span>恢复后回到草稿，需创作者重新确认发布</span></div><div class="list">${(d.contentAppeals||[]).map(a=>`<div class="list-row"><div><h3>${esc(a.contentTitle)}</h3><p>${esc(a.appellantName)} · ${esc(a.reason)}</p></div><div>${status(a.status)}</div><div><p>${fmtDate(a.createdAt)}</p></div><div class="row-actions">${a.status==='open'?`<button class="btn small primary" data-action="appeal-resolve" data-id="${a.id}" data-decision="restore">恢复为草稿</button><button class="btn small danger" data-action="appeal-resolve" data-id="${a.id}" data-decision="uphold">维持下架</button>`:''}</div></div>`).join('')||empty('没有待处理申诉','创作者对平台下架提出申诉后会显示在这里')}</div></section>
   <section class="section"><div class="section-head"><h2>积分账本治理</h2><span>冻结、恢复与撤销均记录原因</span></div><div class="list">${(d.managedPointEvents||[]).map(x=>`<div class="list-row"><div><h3>${esc(x.userName)} · ${esc(label(x.currency))}</h3><p>${esc(label(x.eventType))} · <span class="code">${esc(x.id.slice(-10))}</span></p></div><div>${status(x.status)}</div><div class="ledger-amount ${x.amount>0?'plus':''}">${x.amount>0?'+':''}${x.amount} ${esc(x.currency)}</div><div class="row-actions">${x.amount>0&&x.status==='posted'?`<button class="btn small soft" data-action="point-status" data-id="${x.id}" data-status="frozen">冻结</button><button class="btn small danger" data-action="point-status" data-id="${x.id}" data-status="revoked">撤销</button>`:''}${x.amount>0&&x.status==='frozen'?`<button class="btn small" data-action="point-status" data-id="${x.id}" data-status="posted">恢复</button><button class="btn small danger" data-action="point-status" data-id="${x.id}" data-status="revoked">撤销</button>`:''}</div></div>`).join('')||empty('没有积分事件','有效互动或 AIT 发放后会进入治理账本')}</div></section>
+  <section class="section"><div class="section-head"><h2>客服工单</h2><span>open → replied/closed · 回复推送到用户消息中心</span><button class="btn small soft" data-action="support-refresh">刷新工单</button></div><div class="list">${supportTicketsCache.map(t=>`<div class="list-row"><div><h3>${esc(t.userName||'用户')} · ${esc(t.subject)}</h3><p>${esc((t.body||'').slice(0,90))}${t.replyBody?` · 回复：${esc(t.replyBody.slice(0,50))}`:''}</p></div><div>${status(t.status)}</div><div><p class="muted" style="font-size:10px">${fmtDate(t.createdAt)}</p></div><div class="row-actions">${t.status!=='closed'?`<button class="btn small primary" data-action="support-reply" data-id="${t.id}">回复</button><button class="btn small soft" data-action="support-reply" data-id="${t.id}" data-close="1">回复并关闭</button>`:''}</div></div>`).join('')||empty('暂无工单','点击"刷新工单"拉取；移动端意见反馈会进入此队列')}</div></section>
   <section class="section"><div class="section-head"><h2>最近审计日志</h2><span>关键动作不可省略</span></div><div class="list">${d.auditLogs.slice(0,30).map(a=>`<div class="list-row"><div><h3>${esc(a.action)}</h3><p>${esc(a.subjectType)} · ${esc(a.subjectId.slice(-12))}</p></div><div><span class="code">${esc(a.actorUserId?.slice(-8)||'system')}</span></div><div><p>${fmtDate(a.createdAt)}</p></div><div></div></div>`).join('')}</div></section>`;
 }
 
@@ -332,6 +479,10 @@ function accountView(){
   const notices=(d.notifications||[]).filter(n=>state.notificationFilter==='all'||(state.notificationFilter==='unread'&&!n.readAt)||n.category===state.notificationFilter);
   const noticeFilters=['all','unread',...new Set((d.notifications||[]).map(n=>n.category))];
   return `<div class="grid cols-2"><form class="form-card" data-form="profile"><div class="eyebrow">资料与身份</div><h2>账户资料</h2><p>钱包地址仅用于身份验证。修改显示名称不会改变钱包所有权。</p><div class="field"><label for="profile-name">显示名称</label><input id="profile-name" name="displayName" value="${esc(d.me.displayName)}" required maxlength="60"></div><div class="field" style="margin-top:12px"><label>钱包 / 账户</label><input value="${esc(d.me.walletAddress||d.me.email||'—')}" disabled></div><div class="form-actions"><button type="button" class="btn ghost" data-action="logout">退出登录</button><button class="btn primary">保存资料</button></div></form><div class="card"><div class="eyebrow">隐私与数据</div><h3>数据权利</h3><p class="muted" style="font-size:12px;line-height:1.7">可导出当前账户数据，或提交 30 天冷静期账户删除申请。</p><div class="row-actions" style="justify-content:flex-start"><a class="btn small" href="/api/account/export" target="_blank">导出数据</a>${deletion?.status==='pending'?`<button class="btn small" data-action="cancel-deletion" data-id="${deletion.id}">取消删除申请（${fmtDate(deletion.scheduledFor)}）</button>`:'<button class="btn small danger" data-action="delete-account">申请删除账户</button>'}</div><hr style="border:0;border-top:1px solid var(--line);margin:18px 0"><strong>协议记录</strong><div class="row-actions" style="justify-content:flex-start;margin-top:10px"><button class="btn small soft" data-action="accept-terms" data-type="terms" ${accepted('terms')?'disabled':''}>${accepted('terms')?'服务条款已接受':'接受服务条款 v1.0'}</button><button class="btn small soft" data-action="accept-terms" data-type="privacy" ${accepted('privacy')?'disabled':''}>${accepted('privacy')?'隐私政策已接受':'接受隐私政策 v1.0'}</button>${d.me.role==='creator'?`<button class="btn small soft" data-action="accept-terms" data-type="campaign_rules" ${accepted('campaign_rules')?'disabled':''}>${accepted('campaign_rules')?'Campaign 规则已接受':'接受 Campaign 规则 v1.0'}</button>`:''}</div></div></div>
+  <section class="section"><div class="section-head"><h2>登录方式</h2><span>同一账号可绑定邮箱、Google 与钱包；绑定后任一方式登录都回到本账号</span><button class="btn small primary" data-action="identity-bind-email">绑定邮箱</button></div><div class="list">${[
+    ...(d.loginIdentities||[]).map(x=>`<div class="list-row"><div><h3>${esc(x.provider==='email'?'邮箱':'Google')}</h3><p>${esc(x.identifier)}</p></div><div>${status('verified')}</div><div><p class="muted" style="font-size:10px">${fmtDate(x.verifiedAt)}</p></div><div></div></div>`),
+    ...(d.walletBindings||[]).map(w=>`<div class="list-row"><div><h3>钱包</h3><p class="code">${esc(w.address)}</p></div><div>${status(w.status||'verified')}</div><div><p class="muted" style="font-size:10px">${fmtDate(w.verifiedAt||w.createdAt)}</p></div><div></div></div>`),
+  ].join('')||empty('还没有绑定的登录方式','当前会话由开发入口建立；绑定邮箱后可用验证码登录回到本账号')}</div></section>
   <section class="section"><div class="section-head"><h2>登录会话</h2><span>可撤销不再使用的设备会话</span></div><div class="list">${(d.sessions||[]).map(s=>`<div class="list-row"><div><h3>会话 ${esc(s.id.slice(-8))}</h3><p>创建于 ${fmtDate(s.createdAt)}</p></div><div>${status(new Date(s.expiresAt)>new Date()?'active':'expired')}</div><div><p>${fmtDate(s.expiresAt)} 到期</p></div><div><button class="btn small danger" data-action="session-revoke" data-id="${s.id}">撤销</button></div></div>`).join('')||empty('没有有效会话','重新登录后会显示设备会话')}</div></section>
   <section class="section"><div class="section-head"><h2>通知中心</h2><span>${d.notifications.filter(n=>!n.readAt).length} 条未读</span></div><div class="toolbar"><div class="filter-tabs" role="group" aria-label="通知筛选">${noticeFilters.map(value=>`<button class="btn small ${state.notificationFilter===value?'primary':'soft'}" data-action="notification-filter" data-filter="${esc(value)}">${value==='all'?'全部':value==='unread'?'未读':label(value)}</button>`).join('')}</div>${d.notifications.some(n=>!n.readAt)?'<button class="btn small" data-action="notification-read-all">全部标为已读</button>':''}</div><div class="list">${notices.map(n=>`<div class="list-row"><div><h3>${esc(n.title)}</h3><p>${esc(n.body)}</p></div><div>${n.readAt?status('resolved'):status('open')}</div><div><p>${fmtDate(n.createdAt)}</p></div><div class="row-actions"><button class="btn small soft" data-action="notification-open" data-id="${n.id}">查看相关模块</button>${!n.readAt?`<button class="btn small soft" data-action="notification-read" data-id="${n.id}">标为已读</button>`:''}</div></div>`).join('')||empty('暂无匹配通知','切换筛选条件查看其他通知')}</div></section>`;
 }
@@ -487,7 +638,7 @@ app.addEventListener('click', async event => {
     else if (action === 'campaign-apply') { await api(`/api/campaigns/${el.dataset.id}/apply`,{method:'POST'}); toast('参加申请已提交，等待品牌审核'); await refresh({silent:true}); }
     else if (action === 'campaign-invite') { const search=await openDialog({title:'搜索并邀请创作者',message:'邀请需要创作者本人接受后才获得交付资格。',fields:[{name:'q',label:'创作者名称',required:true}],confirmText:'搜索'}); if(!search)return; const result=await api(`/api/creators?q=${encodeURIComponent(search.q)}`); if(!result.creators.length)throw new Error('没有找到匹配的创作者'); const answer=await openDialog({title:'选择创作者',fields:[{name:'creatorUserId',label:'创作者',type:'select',options:result.creators.map(c=>({value:c.id,label:`${c.displayName}${c.walletAddress?` · ${c.walletAddress.slice(0,8)}…`:''}`}))}],confirmText:'发送邀请'}); if(!answer)return; await api(`/api/campaigns/${el.dataset.id}/invites`,{method:'POST',body:JSON.stringify(answer)}); toast('Campaign 邀请已发送'); await refresh({silent:true}); }
     else if (action === 'campaign-invite-response') { await api(`/api/campaigns/${el.dataset.id}/invite-response`,{method:'POST',body:JSON.stringify({decision:el.dataset.decision})}); toast(el.dataset.decision==='accept'?'已接受 Campaign 邀请':'已拒绝 Campaign 邀请'); await refresh({silent:true}); }
-    else if (action === 'campaign-tracking-link') { const campaign=state.data.campaigns.find(c=>c.id===el.dataset.id); const allowed=campaign?.brief?.contentTypes||[]; const published=state.data.contents.filter(c=>c.status==='published'&&allowed.includes(c.contentType)); if(!published.length)throw new Error('请先发布一条符合 Campaign 内容类型的内容'); const answer=await openDialog({title:'生成 Campaign 归因链接',message:'访问、开始体验和完成体验会分别进入 Campaign 漏斗。',fields:[{name:'contentId',label:'选择符合类型的已发布内容',type:'select',options:published.map(c=>({value:c.id,label:`${c.title} · ${label(c.contentType)}`}))}],confirmText:'生成链接'}); if(!answer)return; const link=`${location.origin}/content/${answer.contentId}?campaign=${encodeURIComponent(el.dataset.id)}&ref=${encodeURIComponent(state.data.me.id)}`; try{await navigator.clipboard.writeText(link);toast('归因链接已复制');}catch{await openDialog({title:'Campaign 归因链接',fields:[{name:'link',label:'复制链接',type:'textarea',value:link}],confirmText:'关闭'});} }
+    else if (action === 'campaign-tracking-link') { const campaign=state.data.campaigns.find(c=>c.id===el.dataset.id); const allowed=campaign?.brief?.contentTypes||[]; const published=state.data.contents.filter(c=>c.status==='published'&&allowed.includes(c.contentType)); if(!published.length)throw new Error('请先发布一条符合 Campaign 内容类型的内容'); const answer=await openDialog({title:'生成 Campaign 归因链接',message:'访问、开始体验和完成体验会分别进入 Campaign 漏斗。',fields:[{name:'contentId',label:'选择符合类型的已发布内容',type:'select',options:published.map(c=>({value:c.id,label:`${c.title} · ${label(c.contentType)}`}))}],confirmText:'生成链接'}); if(!answer)return; const created=await api(`/api/campaigns/${el.dataset.id}/tracking-links`,{method:'POST',body:JSON.stringify({contentId:answer.contentId,channelCode:'creator-link'})}); const link=`${location.origin}${created.link.url}`; try{await navigator.clipboard.writeText(link);toast('归因链接已复制');}catch{await openDialog({title:'Campaign 归因链接',fields:[{name:'link',label:'复制链接',type:'textarea',value:link}],confirmText:'关闭'});} }
     else if (action === 'participant-review') { await api(`/api/campaigns/${el.dataset.campaign}/participants/${el.dataset.creator}/review`,{method:'POST',body:JSON.stringify({decision:el.dataset.decision})}); toast('创作者资格已更新'); await refresh({silent:true}); }
     else if (action === 'deliverable-submit') { const campaign=state.data.campaigns.find(c=>c.id===el.dataset.id); const allowed=campaign?.brief?.contentTypes||[]; const published=state.data.contents.filter(c=>c.status==='published'&&allowed.includes(c.contentType)); if(!published.length)throw new Error('请先发布一条符合 Campaign 类型要求的内容'); const answer=await openDialog({title:'提交 Campaign 交付',message:`允许类型：${allowed.map(label).join('、')}。仅可提交审核通过且成品就绪的已发布内容。`,fields:[{name:'contentId',label:'选择符合类型的内容',type:'select',required:true,options:published.map(c=>({value:c.id,label:`${c.title} · ${label(c.contentType)} · v${c.currentVersion}`}))},{name:'note',label:'交付说明',type:'textarea',required:true,value:'内容已按 Campaign 要求完成并发布。'}],confirmText:'提交交付'}); if(!answer)return; await api(`/api/campaigns/${el.dataset.id}/deliverables`,{method:'POST',body:JSON.stringify(answer)}); toast('交付已提交'); await refresh({silent:true}); }
     else if (action === 'deliverable-evidence') { const delivery=state.data.deliverables.find(item=>item.id===el.dataset.id); if(!delivery)throw new Error('交付不存在'); const campaign=state.data.campaigns.find(item=>item.id===delivery.campaignId); const brief=campaign?.brief||{}; const checks=[['内容类型',`${label(delivery.contentType)} · ${(brief.contentTypes||[]).includes(delivery.contentType)?'符合':'不符合'} Campaign`],['内容审核',label(delivery.moderationStatus)],['正式版本',`v${Number(delivery.contentVersion||0)}`],['成品构建',label(delivery.artifactStatus)],['提交时间',fmtDate(delivery.submittedAt)],['审核时间',fmtDate(delivery.reviewedAt)]]; const validation=delivery.artifactValidation||{}; const failedChecks=(validation.checks||[]).filter(item=>!item.passed).map(item=>item.id); await openDialog({title:'Campaign 交付证据',message:'审批前核对合同要求、内容状态与成品构建证据。',contentHtml:`<div class="evidence-grid">${checks.map(([name,value])=>`<div><span>${esc(name)}</span><strong>${esc(value)}</strong></div>`).join('')}</div><div class="campaign-contract"><div><strong>交付要求：</strong>${esc(brief.deliverableRequirements||'—')}</div><div><strong>允许类型：</strong>${esc((brief.contentTypes||[]).map(label).join('、'))}</div><div><strong>成功指标：</strong>${esc(brief.successMetric||'—')}</div><div><strong>成品校验：</strong>${esc(validation.passed===false?'未通过':validation.passed===true?'通过':'无结构化结果')}</div>${failedChecks.length?`<div><strong>未通过项：</strong>${esc(failedChecks.join('、'))}</div>`:''}</div><div class="approval-history"><strong>审核记录</strong><p>${delivery.reviewNote?`${fmtDate(delivery.reviewedAt)} · ${esc(delivery.reviewNote)}`:'尚无品牌审核记录'}</p></div>`,confirmText:'关闭',cancelText:null,wide:true}); }
@@ -498,7 +649,282 @@ app.addEventListener('click', async event => {
     else if (action === 'settlement-details') { const settlement=state.data.settlements.find(item=>item.id===el.dataset.id); if(!settlement)throw new Error('结算记录不存在'); const history=(settlement.approvals||[]).map(a=>`<article class="approval-step"><span>${fmtDate(a.createdAt)}</span><strong>${esc(label(a.decision))}</strong><p>${esc(a.approverName)} · ${esc(a.note||'无备注')}</p></article>`).join('')||'<p>尚未产生独立审批记录。</p>'; await openDialog({title:'AIT 结算审批轨迹',message:`${settlement.campaignTitle} · ${Number(settlement.amount).toLocaleString()} ${settlement.currency}`,contentHtml:`<div class="trace-timeline">${history}</div><div class="evidence-grid"><div><span>品牌交付批准</span><strong>${fmtDate(settlement.approvedAt)}</strong></div><div><span>当前状态</span><strong>${esc(label(settlement.status))}</strong></div><div><span>账本发放</span><strong>${fmtDate(settlement.issuedAt)}</strong></div></div>`,confirmText:'关闭',cancelText:null}); }
     else if (action === 'settlement-pending') { await api(`/api/settlements/${el.dataset.id}/mark-pending`,{method:'POST'}); toast('结算已进入待发放'); await refresh({silent:true}); }
     else if (action === 'settlement-platform') { const answer=await openDialog({title:el.dataset.decision==='approve'?'批准 AIT 结算':'拒绝 AIT 结算',fields:[{name:'note',label:'复核意见',type:'textarea',required:el.dataset.decision==='reject'}],confirmText:el.dataset.decision==='approve'?'批准':'拒绝',danger:el.dataset.decision==='reject'}); if(!answer)return; await api(`/api/settlements/${el.dataset.id}/platform-approve`,{method:'POST',body:JSON.stringify({decision:el.dataset.decision,note:answer.note})}); toast('平台结算复核已完成'); await refresh({silent:true}); }
-    else if (action === 'settlement-issue') { const answer=await openDialog({title:'确认发放 AIT',message:'此操作会生成不可重复的服务端账本事件。AIT 不代表现金、USDT 或固定兑换价值。',confirmText:'确认发放'}); if(!answer)return; await api(`/api/settlements/${el.dataset.id}/issue`,{method:'POST'}); toast('AIT 已发放'); await refresh({silent:true}); }
+    else if (action === 'economy-contract-submit') {
+      const campaigns=state.data.campaigns.filter(c=>!['cancelled','rejected'].includes(c.status));
+      if(!campaigns.length)throw new Error('请先在 Campaign 工作台创建 Campaign');
+      const answer=await openDialog({title:'提交 Campaign Contract 经济规则',message:'预算、奖励、地区、归因与结算字段提交后锁定；平台批准且 Campaign Brief 上线后才能产生 AIT 权益。',fields:[
+        {name:'campaignId',label:'Campaign',type:'select',options:campaigns.map(c=>({value:c.id,label:`${c.title}（预算 ${Number(c.budgetSummary?.total||c.budgetAit||0).toLocaleString()} AIT）`}))},
+        {name:'contractVersion',label:'Contract 版本',value:'v1',required:true},
+        {name:'primarySuccessEvent',label:'主要成功事件',value:'playable_complete',required:true,hint:'玩家型 AIT 只认可该事件'},
+        {name:'totalAit',label:'AIT 权益池（不超过 Campaign 预算）',type:'number',value:'500',required:true},
+        {name:'creatorAmount',label:'创作者单笔 AIT',type:'number',value:'500',required:true},
+        {name:'playerAmount',label:'玩家单笔 AIT（0 为不发）',type:'number',value:'5'},
+        {name:'perUserCap',label:'单用户上限 AIT（0 为不限）',type:'number',value:'0'},
+        {name:'cashEnabled',label:'现金 / USDT 独立结算',type:'select',value:'yes',options:[{value:'yes',label:'允许（独立付款记录 + 人工审批）'},{value:'no',label:'不允许（仅非金融权益）'}]},
+        {name:'currencies',label:'允许币种（逗号分隔）',value:'USDT'},
+      ],confirmText:'提交平台审批',wide:true});
+      if(!answer)return;
+      await api(`/api/campaigns/${answer.campaignId}/economy-contract`,{method:'POST',body:JSON.stringify({
+        contractVersion:answer.contractVersion.trim(),primarySuccessEvent:answer.primarySuccessEvent.trim(),
+        playerRule:{amountAit:Number(answer.playerAmount||0)},creatorRule:{amountAit:Number(answer.creatorAmount||0)},
+        attribution:{model:'last_touch',windowDays:7},eligibility:{requiresEligibleParticipant:true},
+        budget:{totalAit:Number(answer.totalAit),perUserCapAit:Number(answer.perUserCap||0)},
+        settlement:{benefitTypes:['contract_defined_non_financial'],cashEnabled:answer.cashEnabled==='yes',currencies:splitList(answer.currencies)},
+        lockedFields:ECONOMY_LOCKED_FIELDS,
+      })});
+      toast('Campaign Contract 已提交平台审批'); await refresh({silent:true});
+    }
+    else if (action === 'economy-contract-approve') {
+      const answer=await openDialog({title:'批准 Campaign Contract',message:'批准后该版本的预算、奖励、归因与结算规则生效，AIT 权益可以在此 Contract 下创建。Campaign Brief 必须已上线。',confirmText:'批准 Contract'});
+      if(!answer)return;
+      await api(`/api/admin/campaigns/${el.dataset.campaign}/economy-contract/approve`,{method:'POST',body:JSON.stringify({contractVersion:el.dataset.version})});
+      toast('Campaign Contract 已批准'); await refresh({silent:true});
+    }
+    else if (action === 'entitlement-create') {
+      const approved=(state.data.economyContracts||[]).filter(r=>r.status==='approved');
+      if(!approved.length)throw new Error('还没有获批的 Campaign Contract');
+      const eligible=(state.data.participants||[]).filter(x=>x.status==='eligible');
+      const answer=await openDialog({title:'创建 AIT 权益记录',message:'必须引用获批 Contract 与权威归因或交付证据；创建后进入 pending，平台复核通过才变为可用。',fields:[
+        {name:'contract',label:'Campaign Contract',type:'select',options:approved.map(r=>({value:`${r.campaignId}|${r.contractVersion}`,label:`${r.campaignTitle} · ${r.contractVersion}（创作者单笔 ${Number(r.creatorRule?.amountAit||0)}）`}))},
+        {name:'userId',label:'接收用户 ID',value:eligible[0]?.creatorUserId||'',required:true,hint:eligible.length?`已获资格：${eligible.slice(0,3).map(x=>`${x.creatorName} = ${x.creatorUserId}`).join('；')}`:'填入用户 ID'},
+        {name:'sourceType',label:'权益来源',type:'select',value:'creator_delivery',options:[{value:'creator_delivery',label:'创作者交付'},{value:'creator_operation',label:'创作者运营'},{value:'creator_performance',label:'创作者表现'},{value:'player_campaign',label:'玩家 Campaign 核心事件'},{value:'campaign_allocation',label:'Campaign 定向分配'}]},
+        {name:'sourceEventType',label:'来源事件类型',value:'creator_delivery_approved',required:true,hint:'玩家型必须等于 Contract 的主要成功事件'},
+        {name:'sourceEventId',label:'来源事件 ID（幂等键）',value:`evt_${Date.now().toString(36)}`,required:true},
+        {name:'amount',label:'AIT 数量',type:'number',value:String(approved[0]?.creatorRule?.amountAit||500),required:true},
+        {name:'attributionReference',label:'归因 / 交付证据引用',required:true,hint:'必须可解析：真实 deliverable/runtime/touch ID；外部证据用 partner: 前缀声明'},
+      ],confirmText:'创建权益',wide:true});
+      if(!answer)return;
+      const [campaignId,contractVersion]=answer.contract.split('|');
+      await api(`/api/admin/campaigns/${campaignId}/ait-entitlements`,{method:'POST',body:JSON.stringify({userId:answer.userId.trim(),contractVersion,sourceType:answer.sourceType,sourceEventType:answer.sourceEventType.trim(),sourceEventId:answer.sourceEventId.trim(),amount:Number(answer.amount),attributionReference:answer.attributionReference.trim()})});
+      toast('AIT 权益已创建，等待平台复核'); await refresh({silent:true});
+    }
+    else if (action === 'entitlement-review') {
+      const decision=el.dataset.decision;
+      const needReason=decision!=='approve';
+      const answer=await openDialog({title:decision==='approve'?'批准 AIT 权益':decision==='freeze'?'冻结 AIT 权益':'撤销 AIT 权益',message:decision==='approve'?'批准后权益变为可用，创作者可申领权益或发起付款结算。':'该操作会写入原因并保留完整账本轨迹。',fields:needReason?[{name:'reasonCode',label:'原因代码',required:true,hint:'如 risk_review / duplicate_evidence'}]:[],confirmText:'确认',danger:decision==='reject'});
+      if(!answer)return;
+      await api(`/api/admin/ait-entitlements/${el.dataset.id}/review`,{method:'POST',body:JSON.stringify({decision,reasonCode:answer.reasonCode||null})});
+      toast('AIT 权益状态已更新'); await refresh({silent:true});
+    }
+    else if (action === 'entitlement-benefit') {
+      const answer=await openDialog({title:'申领非金融权益',message:'权益类型必须写入获批 Contract；提交后 AIT 进入结算处理，由平台复核并履约。',fields:[{name:'benefitType',label:'权益类型',value:'contract_defined_non_financial',required:true}],confirmText:'提交申领'});
+      if(!answer)return;
+      await api(`/api/ait-entitlements/${el.dataset.id}/settlements`,{method:'POST',body:JSON.stringify({settlementType:'benefit',currency:answer.benefitType.trim()})});
+      toast('权益申领已提交，等待平台复核'); await refresh({silent:true});
+    }
+    else if (action === 'entitlement-payment') {
+      const rule=(state.data.economyContracts||[]).find(r=>r.campaignId===el.dataset.campaign&&r.contractVersion===el.dataset.version);
+      const currencies=rule?.settlement?.currencies||['USDT'];
+      const answer=await openDialog({title:'申请独立付款结算',message:'付款记录独立于 AIT 账本；AIT 没有全局兑换率，金额由 Contract 与人工审批决定。',fields:[
+        {name:'currency',label:'结算币种',type:'select',value:currencies[0],options:currencies.map(value=>({value,label:value}))},
+        {name:'grossAmount',label:'申请金额',value:el.dataset.amount||'',required:true},
+        {name:'payerSubject',label:'付款主体',value:'品牌方（Campaign 预算）',required:true},
+        {name:'payeeSubject',label:'收款主体',value:state.data.me.displayName,required:true},
+      ],confirmText:'提交结算申请'});
+      if(!answer)return;
+      await api(`/api/ait-entitlements/${el.dataset.id}/settlements`,{method:'POST',body:JSON.stringify({settlementType:'payment',currency:answer.currency,grossAmount:answer.grossAmount.trim(),payerSubject:answer.payerSubject.trim(),payeeSubject:answer.payeeSubject.trim()})});
+      toast('付款结算申请已提交，等待平台复核'); await refresh({silent:true});
+    }
+    else if (action === 'benefit-review') {
+      const decision=el.dataset.decision;
+      const fields=decision==='fulfill'?[{name:'fulfillmentReference',label:'履约凭证引用',required:true,hint:'如兑换记录、开通凭证或工单 ID'},{name:'note',label:'处理说明',type:'textarea'}]:[{name:'note',label:'处理说明',type:'textarea',required:decision==='reject'}];
+      const answer=await openDialog({title:decision==='approve'?'批准权益申领':decision==='fulfill'?'登记履约完成':'拒绝权益申领',message:decision==='fulfill'?'履约完成后对应 AIT 变为已结清并从可用余额扣减。':'拒绝后 AIT 恢复为可用。',fields,confirmText:'确认',danger:decision==='reject'});
+      if(!answer)return;
+      await api(`/api/admin/benefit-claims/${el.dataset.id}/review`,{method:'POST',body:JSON.stringify({decision,fulfillmentReference:answer.fulfillmentReference||null,note:answer.note||''})});
+      toast('权益申领已处理'); await refresh({silent:true});
+    }
+    else if (action === 'payment-review') {
+      const decision=el.dataset.decision;
+      const answer=await openDialog({title:decision==='approve'?'批准付款结算':'拒绝付款结算',message:decision==='approve'?'批准后进入支付执行，完成时必须登记付款与回执双证据。':'拒绝后对应 AIT 恢复为可用。',fields:[{name:'note',label:'复核意见',type:'textarea',required:decision==='reject'}],confirmText:'保存复核',danger:decision==='reject'});
+      if(!answer)return;
+      await api(`/api/admin/payment-settlements/${el.dataset.id}/review`,{method:'POST',body:JSON.stringify({decision,note:answer.note||''})});
+      toast('付款结算复核已保存'); await refresh({silent:true});
+    }
+    else if (action === 'payment-complete') {
+      const answer=await openDialog({title:'登记支付完成',message:'付款引用与回执引用是结算完成的必备证据；登记后对应 AIT 变为已结清。',fields:[
+        {name:'paymentReference',label:'付款引用',required:true,hint:'如银行流水号或链上交易哈希'},
+        {name:'receiptReference',label:'回执引用',required:true},
+        {name:'feeAmount',label:'手续费',value:'0'},
+      ],confirmText:'确认支付完成'});
+      if(!answer)return;
+      await api(`/api/admin/payment-settlements/${el.dataset.id}/complete`,{method:'POST',body:JSON.stringify({paymentReference:answer.paymentReference.trim(),receiptReference:answer.receiptReference.trim(),feeAmount:answer.feeAmount||'0'})});
+      toast('付款结算已完成并写入账本'); await refresh({silent:true});
+    }
+    else if (action === 'creator-app-review') {
+      const decision=el.dataset.decision;
+      const fields=decision==='verify_kyc'?[{name:'evidenceReference',label:'KYC 核验凭证引用',required:true,hint:'如第三方核验单号；平台不保存证件原件'},{name:'note',label:'备注',type:'textarea'}]:[{name:'note',label:decision==='reject'?'拒绝原因':'审核备注',type:'textarea',required:decision==='reject'}];
+      const answer=await openDialog({title:decision==='verify_kyc'?'确认 KYC 核验通过':decision==='approve'?'批准 KOL 资格':'拒绝创作者申请',message:decision==='approve'?'批准后该账号获得创作者商业资格（entitlement 由服务端记录）。':'',fields,confirmText:'保存审核',danger:decision==='reject'});
+      if(!answer)return;
+      await api(`/api/admin/creator-applications/${el.dataset.id}/review`,{method:'POST',body:JSON.stringify({decision,evidenceReference:answer.evidenceReference||null,note:answer.note||''})});
+      toast('创作者申请已处理'); await refresh({silent:true});
+    }
+    else if (action === 'admin-grant-subscription') {
+      const answer=await openDialog({title:'授予订阅计划',message:'管理员授予（admin_grant）；订阅直接提供额度，不赠送 AIP、不产生 AIT。',fields:[{name:'userId',label:'用户 ID',required:true},{name:'planKey',label:'计划',type:'select',value:'pro',options:[{value:'basic',label:'Basic'},{value:'pro',label:'Pro'},{value:'studio',label:'Studio'}]}],confirmText:'授予'});
+      if(!answer)return;
+      await api('/api/admin/subscriptions/grant',{method:'POST',body:JSON.stringify({userId:answer.userId.trim(),planKey:answer.planKey})});
+      toast('订阅已授予'); await refresh({silent:true});
+    }
+    else if (action === 'admin-grant-reward') {
+      const answer=await openDialog({title:'发放规则奖励（AIP）',message:'仅允许白名单规则；事件 ID 为幂等键，须对应真实证据。',fields:[{name:'userId',label:'用户 ID',required:true},{name:'ruleKey',label:'奖励规则',type:'select',value:'operation_task_low',options:['daily_recommendation','qualified_invitation','first_publish','version_optimization','operation_task_low','operation_task_medium','operation_task_high'].map(value=>({value,label:value}))},{name:'eventKey',label:'事件 ID（幂等，≥8 字符）',required:true},{name:'subjectId',label:'证据对象 ID',required:true}],confirmText:'发放',wide:true});
+      if(!answer)return;
+      await api('/api/admin/economy/rewards',{method:'POST',body:JSON.stringify({userId:answer.userId.trim(),ruleKey:answer.ruleKey,eventKey:answer.eventKey.trim(),subjectType:'operation',subjectId:answer.subjectId.trim()})});
+      toast('规则奖励已发放'); await refresh({silent:true});
+    }
+    else if (action === 'admin-adjust-aip') {
+      const answer=await openDialog({title:'AIP 人工调整',message:'正数补偿、负数扣减；AIT 不可调整（410）。操作写入审计日志。',fields:[{name:'userId',label:'用户 ID',required:true},{name:'amount',label:'调整数量（可为负）',type:'number',required:true},{name:'reason',label:'调整原因',type:'textarea',required:true}],confirmText:'确认调整',danger:true});
+      if(!answer)return;
+      await api('/api/admin/points/adjust',{method:'POST',body:JSON.stringify({userId:answer.userId.trim(),currency:'AIP',amount:Number(answer.amount),reason:answer.reason})});
+      toast('AIP 调整已入账'); await refresh({silent:true});
+    }
+    else if (action === 'admin-batch-status') {
+      const answer=await openDialog({title:'变更 AIP 批次状态',message:'available ↔ frozen，或冲正为 reversed；原因写入账本。',fields:[{name:'batchId',label:'批次 ID',required:true},{name:'status',label:'目标状态',type:'select',value:'frozen',options:[{value:'frozen',label:'冻结'},{value:'available',label:'恢复可用'},{value:'reversed',label:'冲正撤销'}]},{name:'reason',label:'处理原因',type:'textarea',required:true}],confirmText:'确认变更',danger:true});
+      if(!answer)return;
+      await api(`/api/admin/aip-batches/${answer.batchId.trim()}/status`,{method:'POST',body:JSON.stringify({status:answer.status,reason:answer.reason})});
+      toast('AIP 批次状态已变更'); await refresh({silent:true});
+    }
+    else if (action === 'creation-quote') {
+      const answer=await openDialog({title:'查询创作扣费',message:'扣费优先使用订阅额度，额度不足时补充扣减 AIP；实际扣费在任务创建时以幂等键落库，不会重复扣减。',fields:[
+        {name:'usageType',label:'创作类型',type:'select',options:[{value:'light_creation',label:'轻量创作（50 AIP/次）'},{value:'deep_creation',label:'深度创作（300 AIP/次）'},{value:'remix',label:'Remix（30 AIP/次）'},{value:'regenerate_small',label:'小幅重生成（20 AIP/次）'},{value:'regenerate_large',label:'大幅重生成（100 AIP/次）'},{value:'image_generation',label:'图像生成（20 AIP/次）'},{value:'audio_generation',label:'音频生成（30 AIP/次）'}]},
+        {name:'units',label:'次数',type:'number',value:'1',required:true},
+      ],confirmText:'查询扣费'});
+      if(!answer)return;
+      const result=await api(`/api/economy/creation/quote?usageType=${encodeURIComponent(answer.usageType)}&units=${encodeURIComponent(answer.units)}`);
+      const q=result.quote;
+      await openDialog({title:'创作扣费预估',contentHtml:`<div class="evidence-grid"><div><span>创作类型</span><strong>${esc(q.usageType)}</strong></div><div><span>次数</span><strong>${q.units}</strong></div><div><span>订阅额度覆盖</span><strong>${q.subscriptionUnits} 次${q.planKey?` · ${esc(q.planKey)}`:''}</strong></div><div><span>需扣 AIP 的次数</span><strong>${q.aipUnits}</strong></div><div><span>AIP 扣费</span><strong>${q.aipCost}</strong></div><div><span>单次 AIP 成本</span><strong>${q.unitAipCost}</strong></div><div><span>额度到期</span><strong>${q.expiresAt?fmtDate(q.expiresAt):'—'}</strong></div><div><span>AIT 扣费</span><strong>${q.aitCost}（AIT 不用于创作扣费）</strong></div></div><p class="field-hint">当前可用 AIP：${Number(state.data.points.AIP).toLocaleString()}。这是预估，不产生任何记账。</p>`,confirmText:'关闭',cancelText:null});
+    }
+    else if (action === 'minor-policy-load') { await loadMinorPolicy(); shell(); toast('未成年人模式策略已载入'); }
+    else if (action === 'minor-policy-edit') {
+      const policy=minorPolicyCache.policy||{};
+      const answer=await openDialog({title:'配置未成年人模式策略',message:'策略由平台下发，客户端在支付、对外分发与宵禁时段强制拦截。关闭后不提供未成年人专属限制。',wide:true,fields:[
+        {name:'enabled',label:'启用策略',type:'select',value:policy.enabled?'yes':'no',options:[{value:'no',label:'不启用'},{value:'yes',label:'启用'}]},
+        {name:'dailyMinutes',label:'每日时长上限（分钟，0-240）',type:'number',value:String(policy.dailyMinutes??60),required:true},
+        {name:'curfew',label:'宵禁时段',value:policy.curfew||'22:00-08:00',required:true},
+        {name:'paymentsBlocked',label:'支付拦截',type:'select',value:policy.paymentsBlocked===false?'no':'yes',options:[{value:'yes',label:'拦截支付'},{value:'no',label:'允许支付'}]},
+        {name:'socialRestricted',label:'社交限制',type:'select',value:policy.socialRestricted===false?'no':'yes',options:[{value:'yes',label:'限制社交'},{value:'no',label:'不限制'}]},
+      ],confirmText:'保存策略'});
+      if(!answer)return;
+      await api('/api/admin/policies/minor-mode',{method:'POST',body:JSON.stringify({enabled:answer.enabled==='yes',dailyMinutes:Number(answer.dailyMinutes),curfew:answer.curfew.trim(),paymentsBlocked:answer.paymentsBlocked==='yes',socialRestricted:answer.socialRestricted==='yes'})});
+      await loadMinorPolicy(); shell(); toast('未成年人模式策略已更新');
+    }
+    else if (action === 'contract-governance-load') { await loadContractGovernance(); shell(); toast('Contract 签署与变更单已载入'); }
+    else if (action === 'contract-sign') {
+      const version=el.dataset.version;
+      const answer=await openDialog({title:`签署 Contract ${version}`,message:'签署表示接受该版本的锁定字段与结算规则。同一版本重复签署为幂等，不会产生第二条记录。',fields:[{name:'statement',label:'签署声明',type:'textarea',value:`本人确认接受 Contract ${version} 的锁定字段、归因口径与结算规则。`,required:true}],confirmText:'确认签署'});
+      if(!answer)return;
+      await api(`/api/campaigns/${el.dataset.campaign}/contract-signatures`,{method:'POST',body:JSON.stringify({contractVersion:version,statement:answer.statement})});
+      await loadContractGovernance(); shell(); toast('Contract 签署已记录');
+    }
+    else if (action === 'contract-change-order') {
+      const fromVersion=el.dataset.version;
+      const answer=await openDialog({title:`发起 Contract 变更单`,message:`只能对已获批版本发起变更。批准后旧版本只读保留，新版本仍需另行提交并经平台审批。`,wide:true,fields:[
+        {name:'fromVersion',label:'来源版本（只读）',value:fromVersion,readonly:true},
+        {name:'toVersion',label:'目标版本号',value:'',required:true,hint:'例如 v2'},
+        {name:'changedFields',label:'变更字段（每行一个）',type:'textarea',required:true,hint:`锁定字段：${ECONOMY_LOCKED_FIELDS.join('、')}`},
+        {name:'reason',label:'变更原因（至少 8 个字符）',type:'textarea',required:true},
+      ],confirmText:'提交变更单'});
+      if(!answer)return;
+      await api(`/api/campaigns/${el.dataset.campaign}/contract-change-orders`,{method:'POST',body:JSON.stringify({fromVersion,toVersion:answer.toVersion.trim(),changedFields:splitList(answer.changedFields),reason:answer.reason})});
+      await loadContractGovernance(); shell(); toast('变更单已提交，等待平台审批');
+    }
+    else if (action === 'change-order-review') {
+      const decision=el.dataset.decision;
+      const answer=await openDialog({title:decision==='approve'?'批准 Contract 变更单':'拒绝 Contract 变更单',message:'批准不会自动改写旧版本；旧版本只读保留，品牌需另行提交新版本 Contract 并审批。',fields:[{name:'note',label:'复核意见',type:'textarea',required:decision==='reject'}],confirmText:decision==='approve'?'批准变更':'拒绝变更',danger:decision==='reject'});
+      if(!answer)return;
+      await api(`/api/admin/contract-change-orders/${el.dataset.id}/review`,{method:'POST',body:JSON.stringify({decision,note:answer.note})});
+      await loadContractGovernance(); shell(); toast('变更单已处理');
+    }
+    else if (action === 'twin-load') { await loadAiTwin(); shell(); toast(aiTwinCache.twin?'AI 分身已载入':'当前账号还没有 AI 分身'); }
+    else if (action === 'twin-save') {
+      const twin=aiTwinCache.twin;
+      const persona=twin?.persona||{};
+      const answer=await openDialog({title:twin?'更新 AI 分身人设与授权':'创建 AI 分身',message:'人设变更会递增版本；声音与肖像授权分别记录时间戳，撤回后不再补记。',wide:true,fields:[
+        {name:'displayName',label:'分身名称',value:twin?.displayName||`${state.data.me.displayName} 的 AI 分身`,required:true},
+        {name:'tone',label:'语气与风格',value:persona.tone||'',required:true},
+        {name:'boundary',label:'表达边界（禁止内容）',type:'textarea',value:persona.boundary||''},
+        {name:'voiceConsent',label:'声音授权',type:'select',value:twin?.voiceConsentAt?'yes':'no',options:[{value:'no',label:'不授权'},{value:'yes',label:'授权使用我的声音'}]},
+        {name:'likenessConsent',label:'肖像授权',type:'select',value:twin?.likenessConsentAt?'yes':'no',options:[{value:'no',label:'不授权'},{value:'yes',label:'授权使用我的肖像'}]},
+      ],confirmText:twin?'保存并递增版本':'创建分身'});
+      if(!answer)return;
+      await api('/api/ai-twin',{method:'POST',body:JSON.stringify({displayName:answer.displayName.trim(),persona:{tone:answer.tone.trim(),boundary:answer.boundary.trim()},voiceConsent:answer.voiceConsent==='yes',likenessConsent:answer.likenessConsent==='yes'})});
+      await loadAiTwin(); shell(); toast('AI 分身已保存');
+    }
+    else if (action === 'twin-toggle') {
+      const next=el.dataset.next;
+      const answer=await openDialog({title:next==='pause'?'暂停 AI 分身':'恢复 AI 分身',message:next==='pause'?'暂停后分身不再对外输出，历史记录保留。':'恢复后分身可继续按人设输出。',confirmText:'确认',danger:next==='pause'});
+      if(!answer)return;
+      await api(`/api/ai-twin/${next}`,{method:'POST'});
+      await loadAiTwin(); shell(); toast('AI 分身状态已更新');
+    }
+    else if (action === 'twin-scene-create') {
+      const existing=el.dataset.name?aiTwinCache.scenes.find(x=>x.name===el.dataset.name):null;
+      const approved=(state.data.economyContracts||[]).filter(r=>r.status==='approved');
+      const answer=await openDialog({title:existing?`更新场景「${existing.name}」`:'新建 AI 分身场景',message:'同名场景保存即递增版本。Campaign 场景必须绑定获批 Contract 且已获得该 Campaign 参与资格；场景知识严格隔离，不会跨场景合并。',wide:true,fields:[
+        {name:'name',label:'场景名称',value:existing?.name||'',required:true,readonly:Boolean(existing)},
+        {name:'contract',label:'场景类型',type:'select',value:existing?.campaignId?`${existing.campaignId}|${existing.contractVersion}`:'',options:[{value:'',label:'通用场景（不绑定 Campaign）'},...approved.map(r=>({value:`${r.campaignId}|${r.contractVersion}`,label:`Campaign 场景 · ${r.campaignTitle} · ${r.contractVersion}`}))]},
+        {name:'locale',label:'语言',value:existing?.locale||'zh-CN',required:true},
+        {name:'knowledge',label:'场景知识（每行 key=value）',type:'textarea',value:knowledgeToLines(existing?.knowledge),hint:'仅本场景可见；不会与其他场景共享'},
+      ],confirmText:existing?'保存并递增版本':'创建场景'});
+      if(!answer)return;
+      const [campaignId,contractVersion]=(answer.contract||'').split('|');
+      await api('/api/ai-twin/scenes',{method:'POST',body:JSON.stringify({name:answer.name.trim(),locale:answer.locale.trim(),knowledge:parseKnowledgeLines(answer.knowledge),...(campaignId?{campaignId,contractVersion}:{})})});
+      await loadAiTwin(); shell(); toast('场景已保存');
+    }
+    else if (action === 'twin-scene-knowledge') {
+      const result=await api(`/api/ai-twin/scenes/${el.dataset.id}/knowledge`);
+      const entries=Object.entries(result.knowledge||{});
+      await openDialog({title:'场景隔离知识',message:'服务端只返回该场景自身的知识，绝不跨场景合并。',contentHtml:`<div class="evidence-grid"><div><span>场景类型</span><strong>${esc(label(result.kind))}</strong></div><div><span>Campaign</span><strong>${esc(result.campaignId||'—')}</strong></div><div><span>Contract</span><strong>${esc(result.contractVersion||'—')}</strong></div><div><span>语言</span><strong>${esc(result.locale)}</strong></div></div><pre style="white-space:pre-wrap;font-size:12px">${esc(entries.length?entries.map(([key,value])=>`${key}=${typeof value==='string'?value:JSON.stringify(value)}`).join('\n'):'该场景还没有知识条目')}</pre>`,confirmText:'关闭',cancelText:null});
+    }
+    else if (action === 'content-experiments') {
+      const content=state.data.contents.find(c=>c.id===el.dataset.id);
+      await loadExperiments(el.dataset.id,content?.title||'内容');
+      state.view='contents'; shell(); toast(`已载入 ${experimentCache.experiments.length} 个实验`);
+    }
+    else if (action === 'experiment-create') {
+      const answer=await openDialog({title:'新建受控实验',message:'只有 Agent 可优化字段可以进入灰度；Campaign 锁定字段不能做实验。分桶按 实验+用户 稳定哈希，同一用户始终同一分支。',wide:true,fields:[
+        {name:'name',label:'实验名称',required:true},
+        {name:'hypothesis',label:'实验假设',type:'textarea',required:true},
+        {name:'variantField',label:'可优化字段',type:'select',options:EXPERIMENT_OPTIMIZABLE.map(([value,text])=>({value,label:text}))},
+        {name:'controlValue',label:'对照值',required:true},
+        {name:'variantValue',label:'实验值',required:true},
+        {name:'rolloutPercent',label:'灰度比例（0-100）',type:'number',value:'10',required:true},
+      ],confirmText:'创建实验（草稿）'});
+      if(!answer)return;
+      await api(`/api/contents/${el.dataset.content}/experiments`,{method:'POST',body:JSON.stringify({...answer,rolloutPercent:Number(answer.rolloutPercent)})});
+      await loadExperiments(el.dataset.content,experimentCache.contentTitle); shell(); toast('实验已创建为草稿');
+    }
+    else if (action === 'experiment-assignment') {
+      const result=await api(`/api/experiments/${el.dataset.id}/assignment`);
+      await openDialog({title:'我的实验分桶',message:'分桶按 实验 + 用户 稳定哈希，同一用户始终落在同一分支；未运行的实验一律返回对照组。',contentHtml:`<div class="evidence-grid"><div><span>分支</span><strong>${esc(label(result.variant))}</strong></div><div><span>是否已有记录</span><strong>${result.sticky?'已存在稳定分桶':'本次新建分桶'}</strong></div><div><span>哈希桶位</span><strong>${result.bucket==null?'—':result.bucket}</strong></div><div><span>未运行原因</span><strong>${esc(result.reason||'—')}</strong></div></div><p class="field-hint">分桶记录为服务端权威；成品运行时尚未按分支切换渲染，属待接能力，不在此处伪造效果。</p>`,confirmText:'关闭',cancelText:null});
+      await loadExperiments(experimentCache.contentId,experimentCache.contentTitle); shell();
+    }
+    else if (action === 'experiment-status') {
+      const next=el.dataset.status;
+      const answer=await openDialog({title:`确认${label(next)}实验`,message:next==='rolled_back'?'回滚后该实验不可再启动，所有用户回到对照组。':next==='completed'?'完成后实验不可再启动，分桶记录保留。':'状态变更会写入审计日志。',confirmText:'确认变更',danger:['rolled_back'].includes(next)});
+      if(!answer)return;
+      await api(`/api/experiments/${el.dataset.id}/status`,{method:'POST',body:JSON.stringify({status:next})});
+      await loadExperiments(experimentCache.contentId,experimentCache.contentTitle); shell(); toast('实验状态已更新');
+    }
+    else if (action === 'support-refresh') { await loadSupportTickets(); shell(); toast('工单列表已刷新'); }
+    else if (action === 'support-reply') {
+      const close=el.dataset.close==='1';
+      const answer=await openDialog({title:close?'回复并关闭工单':'回复工单',fields:[{name:'reply',label:'回复内容',type:'textarea',required:true}],confirmText:close?'回复并关闭':'发送回复'});
+      if(!answer)return;
+      await api(`/api/admin/support-tickets/${el.dataset.id}/reply`,{method:'POST',body:JSON.stringify({reply:answer.reply,close})});
+      await loadSupportTickets(); shell(); toast('工单已回复，用户将收到通知');
+    }
+    else if (action === 'economy-appeal-review') {
+      const decision=el.dataset.decision;
+      const answer=await openDialog({title:decision==='approve'?'通过账本申诉':'驳回账本申诉',fields:[{name:'resolutionNote',label:'处理说明',type:'textarea',required:true}],confirmText:'保存处理',danger:decision==='reject'});
+      if(!answer)return;
+      await api(`/api/admin/economy/appeals/${el.dataset.id}/review`,{method:'POST',body:JSON.stringify({decision,resolutionNote:answer.resolutionNote})});
+      toast('申诉已处理'); await refresh({silent:true});
+    }
+    else if (action === 'ledger-appeal') {
+      const answer=await openDialog({title:'对 AIT 权益发起申诉',message:'申诉会提交给平台复核，处理期间原记录保持不变。',fields:[{name:'reason',label:'申诉说明（至少 8 个字符）',type:'textarea',required:true}],confirmText:'提交申诉'});
+      if(!answer)return;
+      await api('/api/economy/appeals',{method:'POST',body:JSON.stringify({subjectType:'ait_entitlement',subjectId:el.dataset.id,reason:answer.reason})});
+      toast('申诉已提交'); await refresh({silent:true});
+    }
     else if (action === 'runtime-toggle') { const enabled=el.dataset.enabled==='true'; const answer=await openDialog({title:enabled?'恢复 Agent 运行管线':'紧急停止 Agent 运行管线',message:enabled?'新任务将恢复执行。':'所有新任务停止领取；已落库记录保留。',confirmText:enabled?'确认恢复':'确认停止',danger:!enabled}); if(!answer)return; await api('/api/admin/agent-runtime',{method:'POST',body:JSON.stringify({enabled})}); toast('Agent 运行管线状态已更新'); await refresh({silent:true}); }
     else if (action === 'org-review') { const answer=await openDialog({title:el.dataset.decision==='approve'?'批准品牌组织':'拒绝品牌组织',fields:[{name:'note',label:'审核意见',type:'textarea',required:el.dataset.decision==='reject'}],confirmText:'保存审核'}); if(!answer)return; await api(`/api/organizations/${el.dataset.id}/review`,{method:'POST',body:JSON.stringify({decision:el.dataset.decision,note:answer.note})}); toast('组织审核已完成'); await refresh({silent:true}); }
     else if (action === 'risk-resolve') { const answer=await openDialog({title:el.dataset.decision==='confirm'?'确认风险':'排除风险',fields:[{name:'note',label:'处理说明',type:'textarea',required:true}],confirmText:'保存处理'}); if(!answer)return; await api(`/api/admin/risk-cases/${el.dataset.id}/resolve`,{method:'POST',body:JSON.stringify({decision:el.dataset.decision,note:answer.note})}); toast('风险案件已处理'); await refresh({silent:true}); }
@@ -509,6 +935,15 @@ app.addEventListener('click', async event => {
     else if (action === 'notification-read-all') { const result=await api('/api/notifications/read-all',{method:'POST'}); toast(`已将 ${result.updated} 条通知标为已读`); await refresh({silent:true}); }
     else if (action === 'notification-open') { const notice=state.data.notifications.find(item=>item.id===el.dataset.id); if(!notice)return; if(!notice.readAt)await api(`/api/notifications/${notice.id}/read`,{method:'POST'}); state.view=notificationTarget(notice); await refresh({silent:true}); }
     else if (action === 'notification-read') { await api(`/api/notifications/${el.dataset.id}/read`,{method:'POST'}); await refresh({silent:true}); }
+    else if (action === 'identity-bind-email') {
+      const ask=await openDialog({title:'绑定邮箱',message:'验证码由本地账号服务签发；绑定后该邮箱验证码登录将回到当前账号。',fields:[{name:'email',label:'邮箱地址',type:'email',required:true}],confirmText:'发送验证码'});
+      if(!ask)return;
+      const challenge=await api('/api/account/identities/email/challenge',{method:'POST',body:JSON.stringify({email:ask.email.trim()})});
+      const confirm=await openDialog({title:'输入验证码',message:challenge.demoCode?`本地适配器验证码：${challenge.demoCode}（10 分钟内有效；接入邮件服务后将改为邮件送达）`:'验证码已生成，10 分钟内有效。',fields:[{name:'code',label:'6 位验证码',required:true}],confirmText:'确认绑定'});
+      if(!confirm)return;
+      await api('/api/account/identities/email/verify',{method:'POST',body:JSON.stringify({email:ask.email.trim(),code:confirm.code.trim()})});
+      toast('邮箱已绑定到当前账号'); await refresh({silent:true});
+    }
     else if (action === 'session-revoke') { const answer=await openDialog({title:'撤销登录会话',message:'如果撤销的是当前会话，页面会返回登录页。',confirmText:'确认撤销',danger:true}); if(!answer)return; await api(`/api/account/sessions/${el.dataset.id}/revoke`,{method:'POST'}); toast('会话已撤销'); await refresh({silent:true}); }
     else if (action === 'accept-terms') { await api('/api/terms/accept',{method:'POST',body:JSON.stringify({documentType:el.dataset.type,documentVersion:'1.0'})}); toast('协议接受记录已保存'); await refresh({silent:true}); }
     else if (action === 'delete-account') { const answer=await openDialog({title:'申请删除账户',message:'提交后进入 30 天冷静期，期间可在此页面取消。',fields:[{name:'reason',label:'删除原因（可选）',type:'textarea'}],confirmText:'提交删除申请',danger:true}); if(!answer)return; const result=await api('/api/account/deletion-request',{method:'POST',body:JSON.stringify(answer)}); toast(`删除申请已提交，计划时间 ${fmtDate(result.scheduledFor)}`); await refresh({silent:true}); }
