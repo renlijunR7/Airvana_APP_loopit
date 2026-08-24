@@ -59,6 +59,8 @@
       this.canvas = canvas;
       this.options = options || {};
       this.context = canvas.getContext('2d');
+      this.gameKey = this.constructor.gameKey || this.options.gameKey || '';
+      this.artProfile = root.AirvanaGameArtV1 && root.AirvanaGameArtV1.get ? root.AirvanaGameArtV1.get(this.gameKey) : null;
       this.stage = 1;
       this.score = 0;
       this.finished = false;
@@ -69,6 +71,9 @@
       this.raf = 0;
       this.pointer = {x: WIDTH / 2, y: HEIGHT / 2, down: false};
       this.background = null;
+      this.emblemAtlas = null;
+      this.materialAtlas = null;
+      this.spriteAtlas = null;
       this.audioContext = null;
       this.reducedMotion = !!this.options.reducedMotion;
       this.resize = this.resize.bind(this);
@@ -84,7 +89,12 @@
       this.canvas.addEventListener('pointercancel', this.onPointerUp);
       this.canvas.addEventListener('keydown', this.onKeyDown);
       if (root.addEventListener) root.addEventListener('resize', this.resize);
-      this.loadBackground(this.options.asset);
+      this.loadBackground(this.artProfile ? this.artProfile.background : this.options.asset);
+      if (this.artProfile) {
+        this.loadArtAsset('emblemAtlas', this.artProfile.emblem.src);
+        this.loadArtAsset('materialAtlas', this.artProfile.material.src);
+        this.loadArtAsset('spriteAtlas', this.artProfile.sprite && this.artProfile.sprite.src);
+      }
       this.resize();
       this.emit('level_start', {stage: 1});
       this.status('第 1 / 3 阶段');
@@ -97,6 +107,90 @@
       image.decoding = 'async';
       image.onload = () => { this.background = image; };
       image.src = source;
+    }
+
+    loadArtAsset(key, source) {
+      if (!source || typeof root.Image !== 'function') return;
+      const image = new root.Image();
+      image.decoding = 'async';
+      image.onload = () => { this[key] = image; };
+      image.onerror = () => { this[key] = null; };
+      image.src = source;
+      this[key] = image;
+    }
+
+    imageReady(image) {
+      return !!(image && image.complete && image.naturalWidth > 0);
+    }
+
+    drawAtlasTile(image, spec, rect, alpha) {
+      if (!this.imageReady(image) || !spec) return false;
+      const columns = spec.columns || 1;
+      const rows = spec.rows || 1;
+      const index = clamp(spec.index || 0, 0, columns * rows - 1);
+      const sw = image.naturalWidth / columns;
+      const sh = image.naturalHeight / rows;
+      const sx = (index % columns) * sw;
+      const sy = Math.floor(index / columns) * sh;
+      this.context.save();
+      this.context.globalAlpha = alpha == null ? 1 : alpha;
+      this.context.drawImage(image, sx, sy, sw, sh, rect.x, rect.y, rect.w, rect.h);
+      this.context.restore();
+      return true;
+    }
+
+    drawImmersiveSprite(index, rect, options) {
+      const image = this.spriteAtlas;
+      const spec = this.artProfile && this.artProfile.sprite;
+      if (!this.imageReady(image) || !spec) return false;
+      const settings = options || {};
+      const columns = spec.columns || 3;
+      const rows = spec.rows || 2;
+      const safeIndex = clamp(index || 0, 0, columns * rows - 1);
+      const sw = image.naturalWidth / columns;
+      const sh = image.naturalHeight / rows;
+      const sx = (safeIndex % columns) * sw;
+      const sy = Math.floor(safeIndex / columns) * sh;
+      this.context.save();
+      this.context.globalAlpha = settings.alpha == null ? 1 : settings.alpha;
+      this.context.globalCompositeOperation = settings.blendMode || spec.blendMode || 'screen';
+      this.context.shadowColor = 'rgba(0,0,0,.74)';
+      this.context.shadowBlur = settings.shadowBlur == null ? 10 : settings.shadowBlur;
+      this.context.shadowOffsetY = 5;
+      this.context.drawImage(image, sx, sy, sw, sh, rect.x, rect.y, rect.w, rect.h);
+      this.context.restore();
+      return true;
+    }
+
+    drawImmersiveAccent() {
+      if (!this.artProfile || !this.imageReady(this.spriteAtlas)) return;
+      const family = this.artProfile.familyKey;
+      const bob = this.reducedMotion ? 0 : Math.sin(this.elapsed * 3) * 2;
+      if (family === 'space') {
+        const player = this.player || {x: 180, y: 390};
+        this.drawImmersiveSprite(0, {x: player.x - 38, y: player.y - 38, w: 76, h: 74}, {alpha: .96});
+        (this.enemies || []).slice(0, 8).forEach((enemy, index) => {
+          this.drawImmersiveSprite(index % 2 ? 2 : 1, {x: enemy.x - 24, y: enemy.y - 24, w: 48, h: 46}, {alpha: .9});
+        });
+        return;
+      }
+      if (family === 'strategy') {
+        this.drawImmersiveSprite(0, {x: 24, y: 338 + bob, w: 96, h: 112}, {alpha: .82});
+        this.drawImmersiveSprite(2, {x: 246, y: 335 - bob, w: 88, h: 96}, {alpha: .82});
+        this.drawImmersiveSprite(4, {x: 132, y: 376, w: 96, h: 100}, {alpha: .46});
+        return;
+      }
+      if (family === 'story') {
+        this.drawImmersiveSprite(0, {x: 18, y: 366 + bob, w: 104, h: 116}, {alpha: .84});
+        this.drawImmersiveSprite(2, {x: 244, y: 118, w: 88, h: 94}, {alpha: .76});
+        this.drawImmersiveSprite(5, {x: 220, y: 374, w: 108, h: 96}, {alpha: .32});
+        return;
+      }
+      if (family === 'nature') {
+        this.drawImmersiveSprite(0, {x: 16, y: 344 + bob, w: 112, h: 132}, {alpha: .82});
+        this.drawImmersiveSprite(1, {x: 232, y: 364 - bob, w: 106, h: 96}, {alpha: .82});
+        this.drawImmersiveSprite(5, {x: 123, y: 250, w: 116, h: 108}, {alpha: .28});
+      }
     }
 
     resize() {
@@ -189,14 +283,17 @@
         context.fillStyle = gradient;
         context.fillRect(0, 0, WIDTH, HEIGHT);
       }
-      context.fillStyle = `rgba(5,8,13,${overlay == null ? 0.42 : overlay})`;
+      context.fillStyle = `rgba(5,8,13,${overlay == null ? 0.25 : overlay})`;
       context.fillRect(0, 0, WIDTH, HEIGHT);
+      this.drawAtlasTile(this.materialAtlas, this.artProfile && this.artProfile.material, {x: 0, y: 0, w: WIDTH, h: HEIGHT}, .08);
     }
 
     drawHud(title, subtitle, accent) {
       fillPanel(this.context, {x: 12, y: 10, w: 336, h: 52, r: 16}, 'rgba(7,10,16,.78)', 'rgba(255,255,255,.16)');
-      text(this.context, title, 26, 29, {size: 15, weight: 800});
-      text(this.context, subtitle, 26, 48, {size: 10, weight: 600, color: 'rgba(255,255,255,.72)'});
+      const emblemDrawn = this.drawAtlasTile(this.emblemAtlas, this.artProfile && this.artProfile.emblem, {x: 20, y: 18, w: 34, h: 34}, 1);
+      const copyX = emblemDrawn ? 64 : 26;
+      text(this.context, title, copyX, 29, {size: 15, weight: 800});
+      text(this.context, subtitle, copyX, 48, {size: 10, weight: 600, color: 'rgba(255,255,255,.72)', maxWidth: emblemDrawn ? 205 : undefined});
       fillPanel(this.context, {x: 281, y: 21, w: 54, h: 30, r: 15}, accent || '#FF4658');
       text(this.context, `S${this.stage}/3`, 308, 36, {size: 12, weight: 900, align: 'center'});
     }
@@ -219,6 +316,7 @@
     draw() {
       this.drawBackdrop();
       this.render(this.context);
+      this.drawImmersiveAccent();
       this.drawPause();
     }
 
@@ -1143,7 +1241,7 @@
   };
 
   root.AirvanaDeepGames = Object.freeze({
-    version: '2.0.0',
+    version: '2.2.0',
     width: WIDTH,
     height: HEIGHT,
     list: () => Object.keys(registry).map(key => ({key, ...metadata[key]})),

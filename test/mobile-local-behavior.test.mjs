@@ -395,7 +395,7 @@ test('mobile Home runs all eleven category demos through complete local replay l
       assert.equal(definition.type,'deep');
       assert.equal(definition.stages,3);
       assert.ok(definition.deepGameKey);
-      assert.equal(definition.art,'code-native-v3');
+      assert.equal(definition.art,contentId===34?'imagegen-atlas-v2':'code-native-v3');
       continue;
     }
     if (deepIds.has(contentId)) {

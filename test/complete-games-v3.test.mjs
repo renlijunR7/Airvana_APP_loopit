@@ -37,16 +37,17 @@ function loadRuntime(sensorOverride){
   return window.AirvanaCompleteGames;
 }
 
-test('complete v3 runtime publishes 32 code-native game engines with unique IDs',()=>{
+test('complete v3 runtime publishes 32 complete game engines with unique IDs',()=>{
   const runtime=loadRuntime();
   const catalog=runtime.list();
-  assert.equal(runtime.version,'3.3.0');
+  assert.equal(runtime.version,'3.6.0');
   assert.equal(catalog.length,32);
   assert.equal(new Set(catalog.map(item=>item.id)).size,32);
   const pilots=catalog.filter(item=>item.art==='character-consistency-v1');
   assert.deepEqual(pilots.map(item=>item.id),[5,10,12,20,36]);
   assert.ok(pilots.every(item=>item.characterId));
-  assert.equal(catalog.filter(item=>item.art==='code-native-v3').length,27);
+  assert.equal(catalog.filter(item=>item.art==='code-native-v3').length,26);
+  assert.equal(catalog.find(item=>item.key==='orchard-merge').art,'imagegen-atlas-v2');
   assert.ok(catalog.every(item=>item.instruction&&item.playableId.startsWith('plb_')));
   assert.deepEqual(catalog.filter(item=>item.sensor).map(item=>item.key),[
     'pixel-quest','red-cup-shuffle','magic-choir','rift-strike','city-rush','neon-dash','star-cups','nova-drift','void-squadron'

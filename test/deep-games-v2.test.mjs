@@ -34,12 +34,12 @@ globalThis.requestAnimationFrame = () => 1;
 globalThis.cancelAnimationFrame = () => {};
 globalThis.addEventListener = () => {};
 globalThis.removeEventListener = () => {};
-await import(`${pathToFileURL(path.join(root, 'public/deep-games-v2.js')).href}?test=2.0.0`);
+await import(`${pathToFileURL(path.join(root, 'public/deep-games-v2.js')).href}?test=2.2.0`);
 
 const games = globalThis.AirvanaDeepGames;
 
 test('deep game registry exposes six distinct three-stage mechanics and versioned assets exist', () => {
-  assert.equal(games.version, '2.0.0');
+  assert.equal(games.version, '2.2.0');
   const definitions = games.list();
   assert.deepEqual(definitions.map(item => item.key), ['star-mower', 'star-deck', 'adventurer-journal', 'idiom-detective', 'hex-frontier', 'garden-renewal']);
   assert.equal(new Set(definitions.map(item => item.mechanic)).size, 6);

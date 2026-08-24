@@ -47,11 +47,11 @@ test('character runtime exposes the five canonical profiles and has a no-Image f
 
 test('complete runtime and Home load the character layer before using pilot covers',()=>{
   const scriptIndex=indexSource.indexOf('character-runtime-v1.js?v=1.0.1');
-  const completeIndex=indexSource.indexOf('complete-games-v3.js?v=3.3.0');
+  const completeIndex=indexSource.indexOf('complete-games-v3.js?v=3.6.0');
   assert.ok(scriptIndex>=0&&completeIndex>scriptIndex);
   assert.match(indexSource,/const characterConsistencyPilotCoverKeys=\{5:'pixel-quest',10:'paws-stage',12:'puppet-studio',20:'formation-knights',36:'moonlight-tea-shop'\}/);
   assert.match(indexSource,/game-covers\/character-consistency-v1\/['"]?\+key\+'\.svg\?v=1\.0\.1/);
   for(const characterId of manifest.files.map(item=>item.character_id)) assert.ok(completeSource.includes(`heroCharacterId: '${characterId}'`),characterId);
-  assert.match(completeSource,/version: '3\.3\.0'/);
+  assert.match(completeSource,/version: '3\.6\.0'/);
   assert.match(completeSource,/drawCanonicalCharacter/);
 });

@@ -1,0 +1,29 @@
+{
+  "schema": "airvana.asset-release-gate.v1",
+  "asset_pack": "dedicated-scenes-v1",
+  "version": "1.0.0",
+  "technical_review": "passed",
+  "commercial_release_status": "blocked_pending_human_approval",
+  "approved_by": [],
+  "approved_at": null,
+  "required_approvals": [
+    "art_director",
+    "brand_or_ip_owner",
+    "channel_or_store_owner",
+    "legal_and_compliance",
+    "release_owner"
+  ],
+  "permitted_environments": [
+    "LOCAL_DEMO",
+    "INTERNAL_REVIEW"
+  ],
+  "blocked_environments": [
+    "EXTERNAL",
+    "PROD",
+    "PAID_MEDIA"
+  ],
+  "rollback": {
+    "registry_version": "2.0.0",
+    "strategy": "Restore the previous background override map; generated source files remain retained for audit."
+  }
+}

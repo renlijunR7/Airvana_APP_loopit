@@ -225,9 +225,9 @@ test('Home and Discover keep all eleven category games on the governed v3 packag
   }
   assert.match(mobileEntry,/contract_version:'3\.0\.0'/);
   assert.match(mobileEntry,/playable_config_version:'3\.0\.0'/);
-  assert.match(mobileEntry,/deep-games-v2\.js\?v=2\.0\.0/);
+  assert.match(mobileEntry,/deep-games-v2\.js\?v=2\.2\.0/);
   assert.match(mobileEntry,/sensor-interactions-v1\.js\?v=1\.1\.0/);
-  assert.match(mobileEntry,/complete-games-v3\.js\?v=3\.3\.0/);
+  assert.match(mobileEntry,/complete-games-v3\.js\?v=3\.6\.0/);
   assert.match(mobileEntry,/runtime:'complete-v3'/);
   assert.match(mobileEntry,/miniGameDeepVisible/);
   assert.match(mobileEntry,/对手均为确定性本地机器人，不是真人联机/);
@@ -325,7 +325,7 @@ test('Home media area exposes all 38 governed complete local games', () => {
   assert.match(mobileEntry, /const featuredInteractiveIds=\[34,35,36,37,38,39,40,41,42,43,44,24,25,26,27,28,29,30,31,32,33,1,2,5,6,9,10,12,14,15,16,17,18,19,20,21,22,23\]/);
   assert.match(mobileEntry, /character-runtime-v1\.js\?v=1\.0\.1/);
   assert.match(mobileEntry, /sensor-interactions-v1\.js\?v=1\.1\.0/);
-  assert.match(mobileEntry, /complete-games-v3\.js\?v=3\.3\.0/);
+  assert.match(mobileEntry, /complete-games-v3\.js\?v=3\.6\.0/);
   assert.match(mobileEntry, /runtime=definition\.runtime==='complete-v3'\?window\.AirvanaCompleteGames:window\.AirvanaDeepGames/);
   assert.match(mobileCss, /\.feed-mini-game\s*\{[^}]*touch-action:manipulation/);
   assert.match(mobileCss, /\.feed-mini-game-launcher\s*\{[^}]*min-height:44px/);

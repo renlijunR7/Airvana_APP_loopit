@@ -1,0 +1,141 @@
+{
+  "schema": "airvana.game-art-manifest.v1",
+  "version": "1.1.0",
+  "status": "LOCAL_DEMO",
+  "scope": "38 local playable interiors",
+  "generated_by": "OpenAI built-in ImageGen",
+  "figma": {
+    "status": "components_complete_capture_rate_limited",
+    "file_key": "WA3MynAwQekRNIY1s7cWX3",
+    "url": "https://www.figma.com/design/WA3MynAwQekRNIY1s7cWX3",
+    "page_id": "5:2",
+    "root_node_id": "5:3",
+    "component_count": 12,
+    "instance_count": 38,
+    "pixel_capture_status": "blocked_by_starter_plan_mcp_limit"
+  },
+  "assets": [
+    {
+      "asset_id": "art_global_family_emblems_v1",
+      "type": "sprite_atlas",
+      "source": "source/game-family-emblems-v1.png",
+      "runtime": "runtime/game-family-emblems-v1.png",
+      "dimensions": "1448x1086",
+      "grid": "4x3",
+      "alpha": true,
+      "owner": "Airvana local demo workspace",
+      "authorization_status": "pending_human_release_approval",
+      "review_status": "technical_review_passed",
+      "usage_restrictions": [
+        "not approved brand art",
+        "not approved for external distribution"
+      ],
+      "source_sha256": "73f7c264c92c0b542e29b168e50f8052411f03f31a40a367ef4e0867df04570c",
+      "runtime_sha256": "73f7c264c92c0b542e29b168e50f8052411f03f31a40a367ef4e0867df04570c",
+      "locale": "zxx",
+      "expires_at": null,
+      "release_approved": false
+    },
+    {
+      "asset_id": "art_global_material_atlas_v1",
+      "type": "material_atlas",
+      "source": "source/game-material-atlas-v1.png",
+      "runtime": "runtime/game-material-atlas-v1.jpg",
+      "dimensions": "1448x1086",
+      "grid": "4x3",
+      "alpha": false,
+      "owner": "Airvana local demo workspace",
+      "authorization_status": "pending_human_release_approval",
+      "review_status": "technical_review_passed",
+      "usage_restrictions": [
+        "not approved brand art",
+        "not approved for external distribution"
+      ],
+      "source_sha256": "ef88b8a5a456102e664fd20860cf03842f65e8d16dce71096f906f7ebc7fb0ed",
+      "runtime_sha256": "ac53450560851a7e6b38ffb165a2f5db3bfd1c970552dc0d83c79fd66bda4b89",
+      "locale": "zxx",
+      "expires_at": null,
+      "release_approved": false
+    }
+  ],
+  "family_coverage": {
+    "safety": [
+      "safety-workshop"
+    ],
+    "nature": [
+      "stellar-farm",
+      "stardust-island",
+      "orchard-merge",
+      "garden-renewal"
+    ],
+    "motion": [
+      "pixel-quest",
+      "city-rush",
+      "neon-dash",
+      "nova-drift",
+      "sky-stack"
+    ],
+    "collection": [
+      "red-cup-shuffle",
+      "galaxy-toy-shop",
+      "star-cups",
+      "moonlight-tea-shop"
+    ],
+    "rhythm": [
+      "magic-choir",
+      "paws-stage",
+      "pulse-forge"
+    ],
+    "creation": [
+      "puppet-studio",
+      "studio-wardrobe"
+    ],
+    "story": [
+      "firefly-mail",
+      "adventurer-journal",
+      "idiom-detective"
+    ],
+    "stealth": [
+      "whisker-escape"
+    ],
+    "economy": [
+      "coin-journey",
+      "prism-match"
+    ],
+    "ocean": [
+      "jungle-dive",
+      "deep-catch",
+      "microbe-arena"
+    ],
+    "space": [
+      "rift-strike",
+      "void-squadron",
+      "star-mower"
+    ],
+    "strategy": [
+      "formation-knights",
+      "sky-cannon",
+      "ember-bastion",
+      "crystal-bastion",
+      "star-deck",
+      "hex-frontier",
+      "rune-circuit"
+    ]
+  },
+  "background_policy": {
+    "dedicated_gameplay_art_count": 38,
+    "store_cover_fallback_count": 0,
+    "fallback_root": null,
+    "runtime_registry": "/game-art-system-v1.js",
+    "dedicated_scene_manifest": "/assets/games/dedicated-scenes-v1/manifest.json"
+  },
+  "restrictions": {
+    "commercial_campaign_approved": false,
+    "external_distribution_approved": false,
+    "claims_or_rewards_added": false,
+    "requires_human_art_review_before_release": true
+  },
+  "authorization_status": "pending_human_release_approval",
+  "locale": "zxx",
+  "expires_at": null
+}

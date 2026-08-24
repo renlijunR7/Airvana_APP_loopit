@@ -140,7 +140,7 @@
     'ember-bastion': {id: 31, title: '赤焰防线', mechanic: 'defense', accent: '#D96045', secondary: '#D5B05B', surface: '#3D2D29', background: '#1A100E', instruction: '选择塔位部署守卫，自动攻击并阻止六波敌军'},
     'nova-drift': {id: 32, title: '新星漂移', mechanic: 'drift', accent: '#D24F49', secondary: '#4C9CB5', surface: '#28343C', background: '#0D151A', instruction: '按住左右完成连续弯道，保持在赛道安全区'},
     'void-squadron': {id: 33, title: '虚空小队', mechanic: 'shooter', accent: '#5C76D9', secondary: '#D45A8C', surface: '#242C4A', background: '#0A0E1D', instruction: '拖动编队自动射击，击破敌舰并收集护盾芯片'},
-    'orchard-merge': {id: 34, title: '果园合合塔', mechanic: 'merge', accent: '#7EA84E', secondary: '#D99A4D', surface: '#34402A', background: '#161E10', instruction: '移动相邻同级水果进行合成，培育最高级果实'},
+    'orchard-merge': {id: 34, title: '果园合合塔', mechanic: 'merge', artKey: 'imagegen-atlas-v2', accent: '#7EA84E', secondary: '#FF6B55', surface: '#315A35', background: '#F7EED8', instruction: '移动相邻同级水果进行合成，培育黄金果王'},
     'moonlight-tea-shop': {id: 36, title: '月光奶茶铺', mechanic: 'shop', heroCharacterId: 'chr_mina_vale', accent: '#4C9389', secondary: '#D9A46A', surface: '#2C403D', background: '#111E1C', instruction: '读取订单并依次完成茶底、奶量、配料和封杯'},
     'microbe-arena': {id: 37, title: '微粒竞技场', mechanic: 'io', accent: '#4CA29C', secondary: '#D97962', surface: '#25413F', background: '#0F2322', instruction: '拖动微粒吞噬更小目标，避开体型更大的本地机器人'},
     'crystal-bastion': {id: 39, title: '晶核防线', mechanic: 'defense', accent: '#4C9EA1', secondary: '#D2A754', surface: '#2B3E40', background: '#111E20', instruction: '在路径节点部署晶塔，管理能量守住三阶段石门'},
@@ -155,6 +155,7 @@
       this.gameKey = gameKey;
       this.config = GAME_CATALOG[gameKey];
       if (!this.config) throw new Error(`Unknown complete game: ${gameKey}`);
+      this.artProfile = root.AirvanaGameArtV1 && root.AirvanaGameArtV1.get ? root.AirvanaGameArtV1.get(gameKey) : null;
       this.options = options || {};
       this.characterRuntime = root.AirvanaCharacterRuntime || null;
       this.stage = 1;
@@ -176,6 +177,7 @@
       this.sensorProfile = this.sensorRuntime && this.sensorRuntime.profile ? this.sensorRuntime.profile(gameKey) : null;
       this.sensorState = this.sensorProfile ? {status: 'prompt', ...this.sensorProfile} : null;
       this.sensorSession = null;
+      this.art = {};
       this.onPointerDown = this.onPointerDown.bind(this);
       this.onPointerMove = this.onPointerMove.bind(this);
       this.onPointerUp = this.onPointerUp.bind(this);
@@ -190,6 +192,7 @@
       this.canvas.addEventListener('keydown', this.onKeyDown);
       if (root.addEventListener) root.addEventListener('resize', this.resize);
       this.resize();
+      this.preloadGameArt();
       if (this.characterRuntime && this.characterRuntime.has(gameKey)) this.characterRuntime.preload(gameKey);
       this.initStage();
       this.mountSensorInteractions();
@@ -203,6 +206,208 @@
       this.canvas.width = Math.round(WIDTH * ratio);
       this.canvas.height = Math.round(HEIGHT * ratio);
       this.context.setTransform(ratio, 0, 0, ratio, 0, 0);
+    }
+
+    preloadGameArt() {
+      if (typeof root.Image !== 'function') return;
+      const assets = {};
+      if (this.artProfile) {
+        assets.background = this.artProfile.background;
+        assets.emblemAtlas = this.artProfile.emblem.src;
+        assets.materialAtlas = this.artProfile.material.src;
+        assets.spriteAtlas = this.artProfile.sprite && this.artProfile.sprite.src;
+      }
+      if (this.gameKey === 'orchard-merge') assets.fruitAtlas = '/assets/games/orchard-merge-v2/runtime/orchard-fruit-atlas-v2.png';
+      Object.entries(assets).forEach(([key, src]) => {
+        const image = new root.Image();
+        image.decoding = 'async';
+        image.onload = () => { this.art[key] = image; };
+        image.onerror = () => { this.art[key] = null; };
+        image.src = src;
+        this.art[key] = image;
+      });
+    }
+
+    imageReady(image) {
+      return !!(image && image.complete && image.naturalWidth > 0);
+    }
+
+    drawImageCover(image, rect) {
+      if (!this.imageReady(image)) return false;
+      const sourceRatio = image.naturalWidth / image.naturalHeight;
+      const targetRatio = rect.w / rect.h;
+      let sx = 0; let sy = 0; let sw = image.naturalWidth; let sh = image.naturalHeight;
+      if (sourceRatio > targetRatio) {
+        sw = image.naturalHeight * targetRatio;
+        sx = (image.naturalWidth - sw) / 2;
+      } else {
+        sh = image.naturalWidth / targetRatio;
+        sy = (image.naturalHeight - sh) / 2;
+      }
+      this.context.drawImage(image, sx, sy, sw, sh, rect.x, rect.y, rect.w, rect.h);
+      return true;
+    }
+
+    drawAtlasTile(image, spec, rect, alpha) {
+      if (!this.imageReady(image) || !spec) return false;
+      const columns = spec.columns || 1;
+      const rows = spec.rows || 1;
+      const index = clamp(spec.index || 0, 0, columns * rows - 1);
+      const sw = image.naturalWidth / columns;
+      const sh = image.naturalHeight / rows;
+      const sx = (index % columns) * sw;
+      const sy = Math.floor(index / columns) * sh;
+      this.context.save();
+      this.context.globalAlpha = alpha == null ? 1 : alpha;
+      this.context.drawImage(image, sx, sy, sw, sh, rect.x, rect.y, rect.w, rect.h);
+      this.context.restore();
+      return true;
+    }
+
+    drawImmersiveSprite(index, rect, options) {
+      const image = this.art.spriteAtlas;
+      const spec = this.artProfile && this.artProfile.sprite;
+      if (!this.imageReady(image) || !spec) return false;
+      const settings = options || {};
+      const columns = spec.columns || 3;
+      const rows = spec.rows || 2;
+      const safeIndex = clamp(index || 0, 0, columns * rows - 1);
+      const sw = image.naturalWidth / columns;
+      const sh = image.naturalHeight / rows;
+      const sx = (safeIndex % columns) * sw;
+      const sy = Math.floor(safeIndex / columns) * sh;
+      const context = this.context;
+      context.save();
+      context.globalAlpha = settings.alpha == null ? 1 : settings.alpha;
+      context.globalCompositeOperation = settings.blendMode || spec.blendMode || 'screen';
+      context.shadowColor = settings.shadowColor || 'rgba(0,0,0,.72)';
+      context.shadowBlur = settings.shadowBlur == null ? 10 : settings.shadowBlur;
+      context.shadowOffsetY = settings.shadowOffsetY == null ? 5 : settings.shadowOffsetY;
+      if (settings.rotation) {
+        context.translate(rect.x + rect.w / 2, rect.y + rect.h / 2);
+        context.rotate(settings.rotation);
+        context.drawImage(image, sx, sy, sw, sh, -rect.w / 2, -rect.h / 2, rect.w, rect.h);
+      } else {
+        context.drawImage(image, sx, sy, sw, sh, rect.x, rect.y, rect.w, rect.h);
+      }
+      context.restore();
+      return true;
+    }
+
+    drawImmersiveLayer() {
+      if (!this.artProfile || !this.imageReady(this.art.spriteAtlas)) return;
+      const family = this.artProfile.familyKey;
+      const world = this.world || {};
+      const bob = this.reducedMotion ? 0 : Math.sin(this.elapsed * 3.2) * 2;
+      if (family === 'safety') {
+        this.drawImmersiveSprite(0, {x: 18, y: 360 + bob, w: 92, h: 105}, {alpha: .9});
+        this.drawImmersiveSprite(1, {x: 246, y: 116, w: 82, h: 74}, {alpha: .88});
+        this.drawImmersiveSprite(3, {x: 256, y: 392, w: 70, h: 78}, {alpha: .9});
+        return;
+      }
+      if (family === 'nature') {
+        if (this.gameKey === 'orchard-merge') {
+          if ((world.combo || 0) > 1) this.drawImmersiveSprite(5, {x: 118, y: 207, w: 124, h: 116}, {alpha: .38});
+          return;
+        }
+        this.drawImmersiveSprite(0, {x: 14, y: 345 + bob, w: 112, h: 130}, {alpha: .84});
+        this.drawImmersiveSprite(1, {x: 234, y: 365 - bob, w: 105, h: 94}, {alpha: .82});
+        if (this.config.mechanic === 'builder') this.drawImmersiveSprite(4, {x: 128, y: 300, w: 104, h: 92}, {alpha: .76});
+        return;
+      }
+      if (family === 'motion') {
+        if (this.config.mechanic === 'drift') {
+          (world.barriers || []).forEach(barrier => this.drawImmersiveSprite(2, {x: barrier.x - 30, y: barrier.y - 25, w: 60, h: 52}, {alpha: .96}));
+          this.drawImmersiveSprite(0, {x: (world.carX || 180) - 36, y: 430 + bob, w: 72, h: 76}, {alpha: 1, rotation: (world.steer || 0) * .08});
+          this.drawImmersiveSprite(5, {x: (world.carX || 180) - 45, y: 474, w: 90, h: 68}, {alpha: .42, rotation: Math.PI});
+        } else if (this.config.mechanic === 'runner') {
+          (world.obstacles || []).filter(item => item.kind !== 'chip').forEach(item => {
+            const x = 71 + item.lane * 109;
+            this.drawImmersiveSprite(2, {x: x - 28, y: item.y - 24, w: 56, h: 48}, {alpha: .94});
+          });
+          this.drawImmersiveSprite(3, {x: 122, y: 111, w: 116, h: 92}, {alpha: .46});
+        } else {
+          this.drawImmersiveSprite(4, {x: 118, y: 390 + bob, w: 124, h: 96}, {alpha: .72});
+        }
+        return;
+      }
+      if (family === 'collection') {
+        if (this.config.mechanic === 'cups') {
+          [0, 1, 2].forEach(position => this.drawImmersiveSprite(position === 1 ? 1 : 0, {x: 38 + position * 102, y: 290 + bob, w: 80, h: 92}, {alpha: .92}));
+          this.drawImmersiveSprite(2, {x: 137, y: 225, w: 86, h: 82}, {alpha: world.reveal > 0 ? 1 : .18});
+        } else {
+          this.drawImmersiveSprite(this.gameKey === 'moonlight-tea-shop' ? 4 : 3, {x: 225, y: 285 + bob, w: 106, h: 118}, {alpha: .94});
+          this.drawImmersiveSprite(5, {x: 92, y: 330, w: 110, h: 100}, {alpha: .34});
+        }
+        return;
+      }
+      if (family === 'rhythm') {
+        [0, 1, 0, 1].forEach((sprite, pad) => this.drawImmersiveSprite(sprite, {x: 28 + pad * 77, y: 430, w: 68, h: 63}, {alpha: .86}));
+        (world.notes || []).forEach(note => this.drawImmersiveSprite(2, {x: 50 + note.pad * 76, y: note.y - 18, w: 34, h: 36}, {alpha: .9}));
+        if ((world.combo || 0) > 2) this.drawImmersiveSprite(5, {x: 120, y: 238, w: 120, h: 105}, {alpha: .38});
+        return;
+      }
+      if (family === 'creation') {
+        this.drawImmersiveSprite(0, {x: 113, y: 140 + bob, w: 134, h: 152}, {alpha: .92});
+        this.drawImmersiveSprite(1, {x: 33, y: 292, w: 92, h: 108}, {alpha: .72});
+        this.drawImmersiveSprite(4, {x: 230, y: 277, w: 96, h: 112}, {alpha: .7});
+        return;
+      }
+      if (family === 'story') {
+        this.drawImmersiveSprite(0, {x: 26, y: 350 + bob, w: 100, h: 112}, {alpha: .86});
+        this.drawImmersiveSprite(2, {x: 236, y: 122, w: 92, h: 96}, {alpha: .78, rotation: -.12});
+        this.drawImmersiveSprite(5, {x: 215, y: 362, w: 112, h: 98}, {alpha: .35});
+        return;
+      }
+      if (family === 'stealth') {
+        const position = Number.isFinite(world.position) ? world.position : 42;
+        const col = position % 7; const row = Math.floor(position / 7);
+        this.drawImmersiveSprite(0, {x: 16 + col * 42.57, y: 94 + row * 42.57, w: 68, h: 72}, {alpha: .96});
+        this.drawImmersiveSprite(3, {x: 246, y: 116, w: 84, h: 94}, {alpha: .74});
+        return;
+      }
+      if (family === 'economy') {
+        if (this.config.mechanic === 'coin' && world.coin) {
+          this.drawImmersiveSprite(0, {x: world.coin.x - 26, y: world.coin.y - 25, w: 52, h: 52}, {alpha: .96, rotation: this.elapsed * 1.8});
+          (world.rings || []).filter(ring => !ring.hit).forEach(ring => this.drawImmersiveSprite(2, {x: ring.x - ring.r, y: ring.y - ring.r, w: ring.r * 2, h: ring.r * 2}, {alpha: .68}));
+        } else {
+          this.drawImmersiveSprite(1, {x: 125, y: 210 + bob, w: 110, h: 108}, {alpha: .82});
+          this.drawImmersiveSprite(4, {x: 113, y: 348, w: 134, h: 118}, {alpha: .54});
+        }
+        return;
+      }
+      if (family === 'ocean') {
+        if (this.config.mechanic === 'fishing' && world.fish) {
+          this.drawImmersiveSprite(0, {x: world.fish.x - 38, y: world.fish.y - 34, w: 76, h: 68}, {alpha: .95, rotation: world.fish.vx < 0 ? 0 : Math.PI});
+          this.drawImmersiveSprite(3, {x: 151, y: 78 + (world.hook || 0), w: 58, h: 74}, {alpha: .86});
+        } else {
+          this.drawImmersiveSprite(0, {x: (world.player && world.player.x || 180) - 40, y: (world.player && world.player.y || 360) - 38, w: 80, h: 76}, {alpha: .9});
+          this.drawImmersiveSprite(1, {x: 245, y: 180 + bob, w: 68, h: 76}, {alpha: .78});
+        }
+        return;
+      }
+      if (family === 'space') {
+        if (world.ship) this.drawImmersiveSprite(0, {x: world.ship.x - 40, y: world.ship.y - 40, w: 80, h: 78}, {alpha: 1});
+        (world.enemies || []).forEach((enemy, index) => this.drawImmersiveSprite(index % 2 ? 2 : 1, {x: enemy.x - 28, y: enemy.y - 27, w: 56, h: 54}, {alpha: .94}));
+        return;
+      }
+      if (family === 'strategy') {
+        if (this.config.mechanic === 'defense') {
+          (world.towers || []).forEach((level, index) => {
+            if (!level) return;
+            const x = 72 + (index % 3) * 108; const y = Math.floor(index / 3) ? 375 : 220;
+            this.drawImmersiveSprite(index % 2, {x: x - 32, y: y - 38, w: 64, h: 76}, {alpha: .94});
+          });
+          (world.enemies || []).forEach(enemy => {
+            const x = 72 + enemy.lane * 108;
+            this.drawImmersiveSprite(enemy.lane % 2 ? 3 : 2, {x: x - 27, y: enemy.y - 26, w: 54, h: 52}, {alpha: .94});
+          });
+          this.drawImmersiveSprite(4, {x: 135, y: 430, w: 90, h: 92}, {alpha: .56});
+        } else {
+          this.drawImmersiveSprite(0, {x: 26, y: 330 + bob, w: 100, h: 116}, {alpha: .82});
+          this.drawImmersiveSprite(2, {x: 236, y: 330 - bob, w: 90, h: 96}, {alpha: .82});
+        }
+      }
     }
 
     coordinates(event) {
@@ -314,7 +519,7 @@
     initMerge() {
       const size = 5;
       const grid = Array.from({length: size * size}, (_, index) => (index + Math.floor(index / size)) % 3 + 1);
-      this.world = {size, grid, selected: -1, moves: 18, bestLevel: 3, goal: 4 + Math.min(this.stage, 2)};
+      this.world = {size, grid, selected: -1, moves: 18, bestLevel: 3, goal: 4 + Math.min(this.stage, 2), combo: 0, mergedCell: -1, mergeAt: -10};
     }
 
     initShop() {
@@ -840,15 +1045,17 @@
 
     selectMerge(point) {
       const world = this.world;
-      const cell = this.boardCell(point, world.size, {x: 35, y: 126, w: 290, h: 290});
+      const cell = this.boardCell(point, world.size, {x: 28, y: 148, w: 305, h: 300});
       if (cell < 0 || world.moves <= 0) return;
       if (world.selected < 0) { world.selected = cell; this.tone('tap'); return; }
       const first = world.selected;
-      world.selected = -1;
+      if (first === cell) { world.selected = -1; this.tone('tap'); return; }
       const adjacent = Math.abs(first - cell) === 1 && Math.floor(first / world.size) === Math.floor(cell / world.size) || Math.abs(first - cell) === world.size;
-      if (!adjacent || world.grid[first] !== world.grid[cell]) { this.tone('hit'); return; }
+      if (!adjacent || world.grid[first] !== world.grid[cell]) { world.selected = cell; world.combo = 0; this.tone('hit'); return; }
+      world.selected = -1;
       const next = Math.min(6, world.grid[first] + 1);
       world.grid[cell] = next; world.grid[first] = 1 + Math.floor(this.random() * 2); world.moves -= 1; world.bestLevel = Math.max(world.bestLevel, next); this.score += next * 55; this.tone('score');
+      world.combo += 1; world.mergedCell = cell; world.mergeAt = this.stageElapsed;
       this.emitInteraction('fruit_merge', {level: next, moves: world.moves});
       if (world.bestLevel >= world.goal) this.completeStage(`培育出 ${world.goal} 级果实`);
       else if (world.moves <= 0) this.fail('移动次数耗尽');
@@ -1050,11 +1257,30 @@
         case 'battle': this.drawBattle(); break;
         default: break;
       }
+      this.drawImmersiveLayer();
       if (this.paused) this.drawPause();
     }
 
     drawBackdrop() {
       const context = this.context;
+      if (this.gameKey === 'orchard-merge' && this.drawImageCover(this.art.background, {x:0,y:0,w:WIDTH,h:HEIGHT})) {
+        const wash = context.createLinearGradient(0, 0, 0, HEIGHT);
+        wash.addColorStop(0, 'rgba(28,69,37,.12)');
+        wash.addColorStop(.62, 'rgba(255,247,225,.06)');
+        wash.addColorStop(1, 'rgba(32,58,29,.2)');
+        context.fillStyle = wash; context.fillRect(0,0,WIDTH,HEIGHT);
+        this.drawAtlasTile(this.art.materialAtlas, this.artProfile && this.artProfile.material, {x:0,y:0,w:WIDTH,h:HEIGHT}, .08);
+        return;
+      }
+      if (this.drawImageCover(this.art.background, {x:0,y:0,w:WIDTH,h:HEIGHT})) {
+        const wash = context.createLinearGradient(0, 0, 0, HEIGHT);
+        wash.addColorStop(0, 'rgba(5,8,13,.18)');
+        wash.addColorStop(.56, 'rgba(5,8,13,.30)');
+        wash.addColorStop(1, 'rgba(5,8,13,.62)');
+        context.fillStyle = wash; context.fillRect(0,0,WIDTH,HEIGHT);
+        this.drawAtlasTile(this.art.materialAtlas, this.artProfile && this.artProfile.material, {x:0,y:0,w:WIDTH,h:HEIGHT}, .08);
+        return;
+      }
       const gradient = context.createLinearGradient(0, 0, 0, HEIGHT);
       gradient.addColorStop(0, this.config.surface);
       gradient.addColorStop(.58, this.config.background);
@@ -1069,16 +1295,39 @@
         context.beginPath(); context.moveTo(0, y); context.lineTo(WIDTH, y); context.stroke();
       }
       context.restore();
+      this.drawAtlasTile(this.art.materialAtlas, this.artProfile && this.artProfile.material, {x:0,y:0,w:WIDTH,h:HEIGHT}, .06);
     }
 
     drawHud() {
+      if (this.gameKey === 'orchard-merge') { this.drawMergeHud(); return; }
       panel(this.context, {x: 12, y: 10, w: 336, h: 58, r: 18}, 'rgba(9, 13, 19, .86)', 'rgba(255,255,255,.14)', 8);
-      label(this.context, this.config.title, 27, 29, {size: 15, weight: 850});
-      label(this.context, this.config.instruction, 27, 50, {size: 9, weight: 650, color: 'rgba(255,255,255,.68)', maxWidth: 235});
+      const emblemDrawn = this.drawAtlasTile(this.art.emblemAtlas, this.artProfile && this.artProfile.emblem, {x:20,y:19,w:38,h:38}, 1);
+      const copyX = emblemDrawn ? 68 : 27;
+      label(this.context, this.config.title, copyX, 29, {size: 15, weight: 850});
+      label(this.context, this.config.instruction, copyX, 50, {size: 9, weight: 650, color: 'rgba(255,255,255,.68)', maxWidth: emblemDrawn ? 194 : 235});
       panel(this.context, {x: 277, y: 21, w: 58, h: 34, r: 17}, this.config.accent);
       label(this.context, `${this.stage}/3`, 306, 38, {size: 12, weight: 900, align: 'center'});
       label(this.context, `SCORE ${Math.round(this.score)}`, 336, 82, {size: 9, weight: 800, align: 'right', color: 'rgba(255,255,255,.68)'});
       this.drawSensorControl();
+    }
+
+    drawMergeHud() {
+      const context = this.context; const world = this.world;
+      panel(context, {x:12,y:10,w:336,h:58,r:18}, 'rgba(28,70,39,.92)', 'rgba(255,255,255,.28)', 8);
+      label(context, this.config.title, 28, 29, {size:16,weight:900});
+      label(context, '合成相邻同级果实，培育黄金果王', 28, 50, {size:9,weight:700,color:'rgba(241,248,232,.8)'});
+      panel(context, {x:286,y:20,w:48,h:36,r:18}, '#F7FAED');
+      label(context, `${this.stage}/3`, 310, 38, {size:12,weight:900,align:'center',color:'#47752D'});
+      const cards = [
+        {x:12,label:'本局得分',value:Math.round(this.score),color:'#253A24'},
+        {x:126,label:'目标等级',value:world.goal,color:'#DF7546'},
+        {x:240,label:'剩余步数',value:world.moves,color:'#253A24'}
+      ];
+      cards.forEach(item => {
+        panel(context, {x:item.x,y:76,w:108,h:48,r:15}, 'rgba(255,251,237,.94)', 'rgba(108,135,77,.26)', 5);
+        label(context, item.label, item.x+14, 89, {size:8,weight:800,color:'#68745E'});
+        label(context, item.value, item.x+14, 108, {size:19,weight:900,color:item.color});
+      });
     }
 
     drawSensorControl() {
@@ -1247,12 +1496,14 @@
 
     drawDrift() {
       const context = this.context; const world = this.world; const roadCenter = 180 + Math.sin((world.distance + this.stage * 17) * .055) * (45 + this.stage * 8);
-      panel(context, {x: 18, y: 97, w: 324, h: 420, r: 24}, '#203139', 'rgba(255,255,255,.14)', 8);
-      context.beginPath(); context.moveTo(94, 107); context.bezierCurveTo(48,240,312,345,70,507); context.lineTo(290,507); context.bezierCurveTo(112,350,326,220,266,107); context.closePath(); context.fillStyle = '#30363B'; context.fill(); context.strokeStyle = '#D7D2BA'; context.lineWidth = 4; context.stroke();
+      panel(context, {x: 18, y: 97, w: 324, h: 420, r: 24}, 'rgba(12,20,28,.18)', 'rgba(119,221,255,.26)', 8);
+      context.beginPath(); context.moveTo(94, 107); context.bezierCurveTo(48,240,312,345,70,507); context.lineTo(290,507); context.bezierCurveTo(112,350,326,220,266,107); context.closePath(); context.fillStyle = 'rgba(19,27,35,.28)'; context.fill(); context.shadowColor='rgba(68,206,255,.5)'; context.shadowBlur=10; context.strokeStyle = 'rgba(129,224,255,.72)'; context.lineWidth = 3; context.stroke(); context.shadowBlur=0;
       context.setLineDash([14, 16]); context.strokeStyle = 'rgba(255,255,255,.45)'; context.lineWidth = 2; context.beginPath(); context.moveTo(180, 110); context.bezierCurveTo(120,240,248,345,180,505); context.stroke(); context.setLineDash([]);
-      world.barriers.forEach(barrier => panel(context, {x: barrier.x - 17, y: barrier.y - 8, w: 34, h: 16, r: 5}, '#D66A55', '#F4C0AA'));
-      panel(context, {x: world.carX - 17, y: 444, w: 34, h: 54, r: 11}, this.config.accent, '#FFFFFF', 7);
-      context.fillStyle = '#D8EEF0'; context.fillRect(world.carX - 9, 452, 18, 13);
+      if (!this.imageReady(this.art.spriteAtlas)) {
+        world.barriers.forEach(barrier => panel(context, {x: barrier.x - 17, y: barrier.y - 8, w: 34, h: 16, r: 5}, '#D66A55', '#F4C0AA'));
+        panel(context, {x: world.carX - 17, y: 444, w: 34, h: 54, r: 11}, this.config.accent, '#FFFFFF', 7);
+        context.fillStyle = '#D8EEF0'; context.fillRect(world.carX - 9, 452, 18, 13);
+      }
       label(context, `${Math.round(world.distance/world.goal*100)}%`, roadCenter, 124, {size: 10, weight: 850, align: 'center'});
       this.drawMeter({x: 42, y: 529, w: 276, h: 8}, world.grip / 100, '#57B8C8');
       label(context, this.sensorProfile && this.sensorProfile.control === 'steer' ? '倾斜转向 · 也可按住左右' : '按住左右控制方向', 180, 548, {size: 9, weight: 700, align: 'center', color: 'rgba(255,255,255,.64)'});
@@ -1271,17 +1522,59 @@
     }
 
     drawMerge() {
-      const context = this.context; const world = this.world; const colors = ['#90B75B','#D1A34C','#D96B58','#A85B7B','#6A77B5','#B89C5D'];
-      panel(context, {x: 24, y: 105, w: 312, h: 354, r: 24}, '#332E23', 'rgba(255,255,255,.14)', 8);
-      const cell = 58;
+      const context = this.context; const world = this.world;
+      panel(context, {x:14,y:134,w:332,h:322,r:24}, 'rgba(250,242,217,.96)', 'rgba(255,255,255,.78)', 10);
+      panel(context, {x:24,y:144,w:312,h:302,r:20}, 'rgba(102,76,43,.22)', 'rgba(92,67,38,.2)');
+      const cell = 61;
       for (let index = 0; index < world.grid.length; index += 1) {
         const col = index % 5; const row = Math.floor(index / 5); const x = 35 + col * cell; const y = 126 + row * cell;
-        panel(context, {x, y, w: 52, h: 52, r: 13}, '#EEE4C9', index === world.selected ? '#FFFFFF' : '#B7A77E');
-        circle(context, x + 26, y + 28, 13 + world.grid[index] * 1.8, colors[world.grid[index]-1], 'rgba(72,52,30,.38)');
-        label(context, world.grid[index], x + 26, y + 28, {size: 10, weight: 900, align: 'center', color: '#FFFFFF'});
+        const tileX = 28 + col * cell; const tileY = 148 + row * 59;
+        const selected = index === world.selected;
+        panel(context, {x:tileX,y:tileY,w:52,h:52,r:15,lineWidth:selected?3:1}, '#FFFCF2', selected ? '#FF6B55' : 'rgba(174,151,104,.48)', selected ? 10 : 4);
+        this.drawMergeFruit(world.grid[index], {x:tileX+3,y:tileY+1,w:46,h:49});
+        if (selected) {
+          context.save(); context.strokeStyle='rgba(255,107,85,.42)'; context.lineWidth=2;
+          circle(context,tileX+26,tileY+26,30,'rgba(255,107,85,.06)','rgba(255,107,85,.42)',2); context.restore();
+        }
+        if (world.mergedCell === index) this.drawMergeBurst(tileX + 26, tileY + 25, this.stageElapsed - world.mergeAt);
       }
-      label(context, `最高等级 ${world.bestLevel}/${world.goal}`, 42, 486, {size: 11, weight: 850});
-      label(context, `剩余 ${world.moves} 步`, 318, 486, {size: 11, weight: 850, align: 'right'});
+      panel(context, {x:14,y:464,w:332,h:54,r:18}, 'rgba(255,251,237,.92)', 'rgba(255,255,255,.7)', 6);
+      label(context, '果实图鉴', 28, 476, {size:9,weight:850,color:'#526446'});
+      this.drawMeter({x:28,y:489,w:304,h:8}, world.bestLevel / world.goal, '#7CA64B');
+      label(context, `当前最高 ${world.bestLevel} / ${world.goal}`, 28, 508, {size:10,weight:900,color:'#31442A'});
+      const comboText = world.combo > 1 ? `连续合成 ×${world.combo}` : '选择相邻同级果实';
+      label(context, comboText, 332, 508, {size:9,weight:850,align:'right',color:world.combo>1?'#E36C47':'#6C7565'});
+    }
+
+    drawMergeFruit(level, rect) {
+      const context = this.context; const atlas = this.art.fruitAtlas;
+      if (this.imageReady(atlas)) {
+        const count = 6; const sourceW = atlas.naturalWidth / count; const safeLevel = clamp(level, 1, count);
+        const sx = (safeLevel - 1) * sourceW + sourceW * .045;
+        const sy = atlas.naturalHeight * .075;
+        const sw = sourceW * .91;
+        const sh = atlas.naturalHeight * .7;
+        context.save();
+        context.shadowColor = 'rgba(72,50,25,.22)'; context.shadowBlur = 4; context.shadowOffsetY = 3;
+        context.drawImage(atlas, sx, sy, sw, sh, rect.x, rect.y, rect.w, rect.h);
+        context.restore();
+        return;
+      }
+      const colors = ['#86B94E','#E6B74C','#E2644D','#F08B70','#875998','#F0C64B'];
+      circle(context, rect.x + rect.w / 2, rect.y + rect.h / 2 + 2, 17, colors[clamp(level-1,0,5)], 'rgba(72,52,30,.3)');
+      context.fillStyle='#5A4728';context.fillRect(rect.x+rect.w/2-1,rect.y+4,3,8);
+      circle(context, rect.x+rect.w/2-7, rect.y+14, 5, 'rgba(255,255,255,.35)');
+    }
+
+    drawMergeBurst(x, y, elapsed) {
+      if (elapsed < 0 || elapsed > .55 || this.reducedMotion) return;
+      const context = this.context; const progress = elapsed / .55;
+      context.save(); context.globalAlpha = 1 - progress;
+      for (let index=0; index<8; index+=1) {
+        const angle = TAU * index / 8; const radius = 12 + progress * 22;
+        circle(context, x + Math.cos(angle)*radius, y + Math.sin(angle)*radius, 2.4-progress, index%2 ? '#FFE8A3' : '#FF765C');
+      }
+      context.restore();
     }
 
     drawShop() {
@@ -1481,7 +1774,7 @@
   }
 
   root.AirvanaCompleteGames = Object.freeze({
-    version: '3.3.0',
+    version: '3.6.0',
     width: WIDTH,
     height: HEIGHT,
     has: key => !!GAME_CATALOG[key],
@@ -1495,7 +1788,8 @@
       sensor: root.AirvanaSensorInteractions && root.AirvanaSensorInteractions.profile ? root.AirvanaSensorInteractions.profile(key) : null,
       playableId: `plb_${key.replace(/-/g, '_')}`,
       palette: {accent: value.accent, secondary: value.secondary, surface: value.surface, background: value.background},
-      art: value.heroCharacterId ? 'character-consistency-v1' : 'code-native-v3'
+      art: value.artKey || (value.heroCharacterId ? 'character-consistency-v1' : 'code-native-v3'),
+      artSystem: 'global-art-v1'
     })),
     mount(canvas, key, options) { return new CompleteGame(canvas, key, options || {}); }
   });

@@ -1,0 +1,23 @@
+:root { font-family: Inter,-apple-system,BlinkMacSystemFont,"SF Pro Text","PingFang SC",sans-serif; color:#1c1c1e; background:#f2f2f7; }
+* { box-sizing:border-box; }
+body { margin:0; min-height:100vh; background:radial-gradient(circle at 90% 0,#ffe8eb 0,transparent 32%),#f2f2f7; }
+main { width:min(1180px,100%); margin:auto; padding:48px 24px; }
+header p { color:#ff3b4a; font-size:11px; font-weight:900; letter-spacing:.16em; }
+h1 { margin:8px 0 16px; font-size:clamp(32px,5vw,56px); letter-spacing:-.05em; }
+.summary { display:inline-flex; min-height:40px; align-items:center; border-radius:999px; background:#fff; border:1px solid #e5e5ea; padding:0 16px; color:#636366; font-size:12px; font-weight:850; }
+.summary[data-pass="true"] { background:#e8f8ef; color:#167747; border-color:#bfe8cf; }
+.summary[data-pass="false"] { background:#fff0f1; color:#a51c2b; border-color:#ffc2c7; }
+.samples { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:15px; margin-top:28px; }
+.sample { border-radius:24px; overflow:hidden; background:#080b0d; box-shadow:0 16px 36px rgba(28,28,30,.13); }
+.sample canvas { display:block; width:100%; aspect-ratio:360/640; background:#111; }
+.sample figcaption { padding:11px 13px 13px; color:#fff; }
+.sample strong,.sample span { display:block; }
+.sample strong { font-size:13px; }
+.sample span { margin-top:4px; color:#aeb4bb; font-size:9px; }
+.results { margin-top:30px; padding:20px; border-radius:22px; background:#fff; border:1px solid #e5e5ea; }
+.results h2 { margin:0 0 14px; font-size:18px; }
+.results ol { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:7px; margin:0; padding:0; list-style:none; }
+.results li { border-radius:12px; background:#f7f7fa; padding:9px 11px; font-size:10px; color:#636366; }
+.results li.is-pass { color:#167747; }
+.results li.is-fail { color:#a51c2b; background:#fff0f1; }
+@media(max-width:760px){ main{padding:28px 14px}.samples{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.results ol{grid-template-columns:1fr 1fr} }
