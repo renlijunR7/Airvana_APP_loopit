@@ -10,6 +10,7 @@ const ui = read('public/ui.js');
 const css = read('public/app.css');
 const mobileCss = read('public/airvana-v4.css');
 const creatorWorkspaceCss = read('public/creator-language-workspace.css');
+const globalAiCss = read('public/global-ai-workspace.css');
 const artifact = read('src/artifact.mjs');
 const mobileEntry = read('public/index.html') + read('public/boot.js');
 const workspaceEntry = read('public/workspace.html');
@@ -73,17 +74,17 @@ test('visible divider lines use the shared 0.7px thickness without changing comp
 
 test('language creator workspace uses the light Airvana surface system', () => {
   for (const token of [
-    '--creator-canvas: #f2f2f7',
+    '--creator-canvas: #f5f5f8',
     '--creator-card: #ffffff',
-    '--creator-text: #1c1c1e',
-    '--creator-border: #e5e5ea',
+    '--creator-text: #18181b',
+    '--creator-border: #e1e3e9',
     '--creator-accent: #ff3b4a'
   ]) assert.ok(creatorWorkspaceCss.includes(token), `missing creator workspace token: ${token}`);
 
   assert.match(creatorWorkspaceCss, /\.creator-language-workspace\s*\{[\s\S]*?background:\s*var\(--creator-canvas\);[\s\S]*?color:\s*var\(--creator-text\);/);
-  assert.match(creatorWorkspaceCss, /\.creator-workspace-question\s*\{[\s\S]*?background:\s*linear-gradient\(145deg, #ffffff, #fff8f9\);/);
+  assert.match(creatorWorkspaceCss, /\.creator-workspace-question\s*\{[\s\S]*?background:\s*linear-gradient\(145deg, #ffffff, #fffafb\);/);
   assert.match(creatorWorkspaceCss, /\.creator-workspace-input\s*\{[\s\S]*?background:\s*var\(--creator-card\);/);
-  assert.match(creatorWorkspaceCss, /\.creator-workspace-input textarea:focus,[\s\S]*?\.creator-workspace-input textarea:focus-visible\s*\{[\s\S]*?outline:\s*0 !important;[\s\S]*?box-shadow:\s*none !important;/);
+  assert.match(creatorWorkspaceCss, /\.creator-workspace-input input:focus,[\s\S]*?\.creator-workspace-input input:focus-visible\s*\{[\s\S]*?outline:\s*0 !important;[\s\S]*?box-shadow:\s*none !important;/);
   assert.match(creatorWorkspaceCss, /\.creator-power-drawer\s*\{[\s\S]*?background:\s*#0e0e10;[\s\S]*?color:\s*#ffffff;/);
   assert.match(mobileEntry, /createShellBg:s\.createStep==='home'\?'#0E0E10':'var\(--surface-canvas,#F2F2F7\)'/);
 });
@@ -102,13 +103,14 @@ test('language creator workspace exposes a state-driven creation flow', () => {
 });
 
 test('language creator workspace exposes a safe expandable model execution summary', () => {
-  assert.match(mobileEntry, /class="creator-model-execution" aria-label="模型处理摘要与执行链路"/);
+  assert.match(mobileEntry, /class="creator-model-execution \{\{ creatorModelExecutionPanelClass \}\}" aria-label="模型处理摘要与执行链路"/);
   assert.match(mobileEntry, /MODEL EXECUTION/);
   assert.match(mobileEntry, /处理摘要/);
   assert.match(mobileEntry, /不是模型内部逐字思维/);
   assert.match(mobileEntry, /creatorModelExecutionRows/);
   assert.match(mobileEntry, /toggleCreatorModelExecution/);
   assert.match(mobileEntry, /creatorModelExecutionExpanded:String/);
+  assert.match(mobileEntry, /creatorModelExecutionPanelClass:s\.creatorModelExecutionExpanded\?'is-expanded':'is-collapsed'/);
   assert.match(mobileEntry, /creator-model-execution__thinking/);
   assert.match(mobileEntry, /creatorModelThinkingLabel/);
   assert.match(mobileEntry, /creatorModelElapsedLabel/);
@@ -116,6 +118,7 @@ test('language creator workspace exposes a safe expandable model execution summa
   assert.match(mobileEntry, /startCreatorModelProcessing\(\)/);
   assert.match(mobileEntry, /AI 链路演示/);
   assert.match(creatorWorkspaceCss, /@keyframes creator-model-thinking-dot/);
+  assert.match(creatorWorkspaceCss, /\.creator-model-execution\.is-collapsed \.creator-model-execution__summary,[\s\S]*?display:\s*none;/);
   assert.match(creatorWorkspaceCss, /\.creator-model-execution__step\.is-active > i\s*\{[\s\S]*?animation:\s*creator-model-execution-pulse/);
   assert.match(creatorWorkspaceCss, /@media \(prefers-reduced-motion: reduce\)/);
 });
@@ -159,6 +162,21 @@ test('primary navigation is mounted only on first-level destinations', () => {
   assert.match(mobileEntry, /className:active\?'is-active':''[\s\S]{0,100}ariaCurrent:active\?'page':'false'/);
   assert.match(mobileCss, /\.app-shell\.theme-dark \.bottom-nav__capsule \[aria-current="page"\][\s\S]{0,180}color: #ffffff !important;/);
   assert.doesNotMatch(mobileEntry, /n\.key === 'me' && s\.screen === 'quests'/);
+});
+
+test('primary navigation keeps the create action and does not mount the global AI twin tab', () => {
+  assert.doesNotMatch(mobileEntry, /class="global-ai-entry"/);
+  assert.doesNotMatch(mobileEntry, /aria-label="打开全局 AI 分身工作台"/);
+  assert.match(mobileEntry, /aria-label="\{\{ roleMainActionLabel \}\}"/);
+  assert.match(mobileEntry, /panelGlobalAi:s\.panel==='globalAi'/);
+  assert.match(mobileEntry, /globalAi:'AI 分身工作台'/);
+  assert.match(mobileEntry, /不会直接发布作品、确认 Campaign、改变钱包或结算状态，也不会自动调用外部连接器/);
+  assert.match(mobileEntry, /recordLocalFeatureEvent\('global_ai_local_prompt',[\s\S]{0,360}server_confirmed:false,external_execution:false/);
+  assert.match(mobileEntry, /label:'开始创作',meta:'进入 Creator AI'/);
+  assert.match(mobileEntry, /label:'Campaign',meta:'Brief 与 Contract'/);
+  assert.match(mobileEntry, /label:'消息中心'/);
+  assert.match(globalAiCss, /\.global-ai-workspace\s*\{/);
+  assert.match(globalAiCss, /\.theme-dark \.global-ai-hero/);
 });
 
 test('Discover is a separate swipeable 2.5-card gallery while Home remains immersive', () => {
@@ -670,7 +688,7 @@ test('My screen follows a Douyin-inspired profile layout with ordered shortcuts 
   assert.match(mobileEntry, /list="\{\{ profileLikeItems \}\}"/);
   assert.match(mobileEntry, /const profileLikeSource=ownedPlayables/);
   assert.match(mobileEntry, /profileLikeItems = profileLikeSource\.filter\(item=>Number\(item\.likes\|\|0\)>0\)\.sort/);
-  assert.match(mobileEntry, /panelScrollClass:s\.panel==='profileStats'\?'secondary-panel-scroll secondary-panel-scroll--profile-stats':'secondary-panel-scroll'/);
+  assert.match(mobileEntry, /panelScrollClass:s\.panel==='profileStats'\?'secondary-panel-scroll secondary-panel-scroll--profile-stats':s\.panel==='globalAi'\?'secondary-panel-scroll global-ai-panel-scroll':'secondary-panel-scroll'/);
   assert.match(mobileCss, /\[role="dialog"\] > \.secondary-page-header \+ \.secondary-panel-scroll--profile-stats \{[\s\S]{0,120}padding: 12px 0 0 !important;/);
   assert.match(mobileCss, /\.profile-stats-surface \{[\s\S]{0,320}border-radius: 18px 18px 0 0;[\s\S]{0,100}background: var\(--surface-card, #fff\);/);
   assert.match(mobileCss, /\.profile-stats-tabs \{[\s\S]{0,180}grid-template-columns: repeat\(3, minmax\(0, 1fr\)\)/);
@@ -1671,6 +1689,9 @@ test('prompt-first composer closes inspiration, asset, goal and preflight loops 
   assert.match(mobileEntry, /aria-label="AI 语言创作工作台"/);
   assert.match(mobileEntry, /aria-label="Chat 与 Preview"/);
   assert.match(mobileEntry, /class="creator-workspace-input__power \{\{ creatorPowerButtonClass \}\}" aria-label="\{\{ creatorPowerButtonAria \}\}" onClick="\{\{ creatorWorkspaceOpenPowers \}\}"/);
+  assert.match(mobileEntry, /<input type="text" value="\{\{ creatorWorkspaceInput \}\}"[^>]*placeholder="补充要求，或直接回答当前问题…">/);
+  assert.doesNotMatch(mobileEntry, /<textarea value="\{\{ creatorWorkspaceInput \}\}"/);
+  assert.match(creatorWorkspaceCss, /\.creator-workspace-input input\s*\{[\s\S]*?height:\s*40px;[\s\S]*?white-space:\s*nowrap;[\s\S]*?text-overflow:\s*ellipsis;/);
   assert.match(mobileEntry, /class="creator-power-drawer" role="dialog" aria-modal="true" aria-label="Power 能力编排"/);
   assert.match(mobileEntry, /<h2>Power 能力编排<\/h2>/);
   assert.match(mobileEntry, /class="creator-power-drawer__dock" role="group" aria-label="能力编排导航"/);

@@ -131,6 +131,38 @@ test('mobile primary navigation follows page hierarchy and returns after seconda
   assert.equal(component.state.feedMiniGame.status, 'idle');
 });
 
+test('global AI twin summarizes local work and routes to existing governed modules', () => {
+  const {component} = createMobileComponent();
+  component.setState({ob:4,launchVisible:false,panel:null,overlay:null,drawerOpen:false,systemModal:null,pendingDeleteAgentId:null});
+
+  let values=component.renderVals();
+  values.openGlobalAi();
+  values=component.renderVals();
+  assert.equal(component.state.panel,'globalAi');
+  assert.equal(values.panelGlobalAi,true);
+  assert.equal(values.showPrimaryNavigation,false);
+  assert.equal(values.globalAiTabs.length,3);
+  assert.ok(values.globalAiTaskRows.some(item=>item.title==='Campaign 工作台'));
+  assert.ok(values.globalAiMemoryRows.some(item=>item.title==='外部执行权限'&&item.status==='未授权'));
+
+  const beforeMessages=component.state.globalAiMessages.length;
+  values.globalAiPromptRows.find(item=>item.label==='检查 Campaign').onPick();
+  assert.equal(component.state.globalAiMessages.length,beforeMessages+2);
+  assert.match(component.state.globalAiMessages.at(-1).text,/Campaign Brief/);
+  const audit=component.state.localEventLog.find(item=>item.event_name==='global_ai_local_prompt');
+  assert.ok(audit);
+  assert.equal(audit.properties.server_confirmed,false);
+  assert.equal(audit.properties.external_execution,false);
+
+  values=component.renderVals();
+  values.globalAiTabs.find(item=>item.key==='tasks').onPick();
+  assert.equal(component.state.globalAiTab,'tasks');
+  values=component.renderVals();
+  values.globalAiActionRows.find(item=>item.label==='消息中心').onPick();
+  assert.equal(component.state.screen,'messages');
+  assert.equal(component.state.panel,null);
+});
+
 test('mobile onboarding removes the first description and supports dots plus horizontal swipes', () => {
   const {component} = createMobileComponent({props:{skipOnboarding:false}});
   component.setState({ob:0,launchVisible:false});
@@ -3137,7 +3169,7 @@ test('creator Chat model execution summary follows real workspace state and expa
 
   let values=component.renderVals();
   assert.equal(values.creatorModelExecutionTitle,'正在组织创作策略');
-  assert.equal(values.creatorModelExecutionRows.length,4);
+  assert.equal(values.creatorModelExecutionRows.length,1);
   assert.ok(values.creatorModelExecutionRows.some(row=>row.id==='strategy'&&row.state==='active'));
   assert.equal(values.creatorModelExecutionExpanded,'false');
   values.toggleCreatorModelExecution();
