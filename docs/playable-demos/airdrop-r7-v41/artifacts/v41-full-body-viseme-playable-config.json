@@ -1,0 +1,116 @@
+{
+  "schema_version": "1.0.0",
+  "playable_id": "plb_htx_kol_lifecycle_v1",
+  "campaign_id": "cmp_htx_kol_lifecycle_v1",
+  "contract_version": "1.5.0",
+  "version": "1.5.3",
+  "status": "draft",
+  "template_id": "tpl_airdrop_game_visual_upgrade",
+  "locales": {"default": "en-US", "supported": ["en-US"]},
+  "presentation": {
+    "title": "HTX Airdrop Quest - Full Body Viseme Parity Demo",
+    "tone": "clear, energetic and explicitly simulated",
+    "theme": "international sci-fi game HUD",
+    "logo_asset_id": "asset_kol_avatar_pool",
+    "color_tokens": {
+      "primary": "#46E7FF",
+      "secondary": "#5BE49B",
+      "background": "#040910",
+      "text": "#FFFFFF"
+    },
+    "copy_pack": {
+      "intro_headline": "HTX Airdrop Quest",
+      "intro_body": "Catch tokens and ask your KOL guide.",
+      "start_button": "Enter",
+      "success_title": "Round complete",
+      "failure_title": "Try again",
+      "retry_button": "Retry",
+      "cta_label": "Mock only",
+      "share_copy": "Local demo only",
+      "reward_eligibility": "Demo points only.",
+      "reward_terms": "No real reward or transfer occurs."
+    }
+  },
+  "gameplay": {
+    "mechanic": "catch",
+    "core_loop": "Choose a KOL in Tweaks, catch simulated tokens, open the KOL chat, ask a question, and observe the selected local portrait or Kai presenter react to the response lifecycle.",
+    "rounds": 1,
+    "target_duration_seconds": 45,
+    "difficulty": {"minimum": 1, "maximum": 3, "default": 2},
+    "input_modes": ["tap", "keyboard", "microphone"],
+    "state_transitions": [
+      {"from": "intro", "event": "start", "to": "playing", "guard": null},
+      {"from": "playing", "event": "pause", "to": "paused", "guard": null},
+      {"from": "paused", "event": "resume", "to": "playing", "guard": null},
+      {"from": "playing", "event": "complete_success", "to": "success", "guard": "Demo completion condition is met"},
+      {"from": "playing", "event": "complete_failure", "to": "failure", "guard": "Demo completion condition is not met"},
+      {"from": "failure", "event": "retry", "to": "playing", "guard": null},
+      {"from": "success", "event": "finish", "to": "exit", "guard": null},
+      {"from": "failure", "event": "exit", "to": "exit", "guard": null}
+    ],
+    "scoring": {"enabled": true, "rule": "Existing local Demo scoring rules", "minimum": 0, "maximum": 999999}
+  },
+  "screens": [
+    {"screen_id": "screen_intro", "state": "intro", "copy_keys": ["intro_headline", "intro_body", "start_button"], "asset_ids": ["asset_kol_avatar_pool"], "actions": ["start"]},
+    {"screen_id": "screen_playing", "state": "playing", "copy_keys": [], "asset_ids": ["asset_kol_avatar_pool", "asset_wanzi_live2d_studio_sprite", "asset_six_kol_portrait_strip", "asset_kai_digital_human_sprite"], "actions": ["catch_token", "open_kol_chat", "switch_kol_in_tweaks"]},
+    {"screen_id": "screen_paused", "state": "paused", "copy_keys": [], "asset_ids": ["asset_kol_avatar_pool"], "actions": ["resume"]},
+    {"screen_id": "screen_success", "state": "success", "copy_keys": ["success_title"], "asset_ids": ["asset_kol_avatar_pool"], "actions": ["finish"]},
+    {"screen_id": "screen_failure", "state": "failure", "copy_keys": ["failure_title", "retry_button"], "asset_ids": ["asset_kol_avatar_pool"], "actions": ["retry", "exit"]}
+  ],
+  "cta": {
+    "cta_id": "cta_none_local_demo",
+    "type": "none",
+    "label_key": "cta_label",
+    "destination_id": "destination_none_local_demo",
+    "allowed_states": [],
+    "open_mode": "same_context"
+  },
+  "reward_presentation": {
+    "reward_id": "reward_demo_points",
+    "type": "points",
+    "eligibility_copy_key": "reward_eligibility",
+    "terms_copy_key": "reward_terms",
+    "claim_action": "NOT_APPLICABLE"
+  },
+  "field_authority": {
+    "locked_fields": ["cta.destination_id", "reward_presentation", "constraints", "build.environment", "telemetry"],
+    "editable_fields": ["presentation.theme", "presentation.copy_pack.share_copy"],
+    "agentic_fields": [],
+    "runtime_fields": ["runtime.session_id", "runtime.locale", "runtime.device_class", "runtime.avatar_index", "runtime.kol_id"]
+  },
+  "runtime_policy": {
+    "segmentation_inputs": ["locale", "device_class"],
+    "agentic_bounds": [],
+    "experiment_id": null,
+    "variant_id": null,
+    "fallback_behavior": "Use the selected local KOL portrait with typed chat; Kai and Wanzi keep simulated viseme motion when browser voice APIs are unavailable."
+  },
+  "telemetry": {
+    "required_events": ["impression", "play_start", "valid_interaction", "play_complete", "play_fail", "replay", "error"],
+    "common_properties": ["event_id", "event_time", "campaign_id", "contract_version", "playable_id", "playable_config_version", "build_id", "creative_id", "channel_id", "kol_id", "link_id", "session_id", "locale", "region", "device_class", "consent_state"],
+    "deduplication_strategy": "Generate one unique event_id per transition.",
+    "consent_behavior": "Microphone permission is requested only after explicit press-and-hold; no remote analytics are connected in this local prototype."
+  },
+  "build": {
+    "target": "web_h5",
+    "entry": "output/Airvana_Airdrop_Game_Offline.html",
+    "asset_base": "./assets/",
+    "minimum_viewport_width": 360,
+    "supported_orientations": ["portrait"],
+    "dependency_lock": "Bundled React, ReactDOM and Babel vendor files",
+    "environment": "preview"
+  },
+  "constraints": {
+    "approved_asset_ids": ["asset_kol_avatar_pool", "asset_wanzi_live2d_studio_sprite", "asset_six_kol_portrait_strip", "asset_kai_digital_human_sprite"],
+    "prohibited_phrases": ["Real Live2D", "Official digital human", "Guaranteed reward", "Guaranteed return"],
+    "required_disclosures": ["LIVE2D STUDIO · LOCAL", "Local demo; no real account or transfer"],
+    "privacy_prohibited_fields": ["seed_phrase", "private_key", "raw_kyc_document", "password", "otp"],
+    "manual_review_required": true
+  },
+  "metadata": {
+    "created_at": "2026-08-28T00:00:00+08:00",
+    "updated_at": "2026-08-30T00:00:00+08:00",
+    "created_by": "Airvana local prototype",
+    "notes": ["Kai Full Body uses the same local blink and viseme lifecycle as portrait mode", "Full Body preserves Kai identity with the matching local character strip", "Me combines player profile and available AIP", "Verified HTX account and UID collapse into one row", "Reward eligibility is shown inside Reward wallet", "Inventory defaults to four token types with View all", "AIP and task histories share one Activity section", "Tasks uses one compact title and status header", "Reward totals appear only in Reward Climb", "Six additional fictional Demo KOL profiles are selectable", "Kai uses a local presenter-viseme rig", "No Live2D Cubism SDK, real-person model, or remote digital-human provider is connected."]
+  }
+}

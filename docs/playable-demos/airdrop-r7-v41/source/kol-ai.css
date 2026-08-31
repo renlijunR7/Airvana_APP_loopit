@@ -1,0 +1,425 @@
+/* ============================================================
+   苏克 KOL 全息数字人 + AI 浮窗聊天 样式
+   ============================================================ */
+
+/* ---------- 全息数字人头像 ---------- */
+.suke-av{position:relative;width:var(--av,46px);height:var(--av,46px);flex:0 0 auto;}
+.suke-av .ring{position:absolute;inset:-5px;border-radius:50%;border:1.5px solid var(--accent,#22d3ee);
+  opacity:.6;animation:avSpin 6s linear infinite;}
+.suke-av .ring.r2{inset:-9px;border-style:dashed;border-color:var(--matcha);opacity:.4;animation-duration:9s;animation-direction:reverse;}
+@keyframes avSpin{to{transform:rotate(360deg)}}
+.suke-av .core{position:absolute;inset:0;border-radius:50%;overflow:hidden;
+  background:#06101f;box-shadow:0 0 18px var(--accent,#36e0ff)88, inset 0 0 18px #0008;border:1px solid #8fe9ff66;}
+.av-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 18%;}
+.kol-strip-photo{position:absolute;inset:0;background-image:url("assets/kol-avatars/kol-hosts-six-v1.png");
+  background-repeat:no-repeat;background-size:600% auto;background-position-y:0%;transform:scale(1.02);transform-origin:50% 18%;}
+.kol-strip-avatar.talk .kol-strip-photo{animation:kolPresenterTalk .7s ease-in-out infinite alternate;}
+@keyframes kolPresenterTalk{from{transform:scale(1.02) translateY(0)}to{transform:scale(1.045) translateY(-1.5%)}}
+.ape-svg{display:block;width:100%;height:100%;}
+.ape-visor{animation:visorGlow 2.4s ease-in-out infinite;}
+@keyframes visorGlow{0%,100%{opacity:.28}50%{opacity:.55}}
+/* 扫描线 */
+.suke-av .scan{position:absolute;inset:0;border-radius:50%;pointer-events:none;mix-blend-mode:overlay;
+  background:repeating-linear-gradient(180deg,transparent 0 3px,rgba(255,255,255,.18) 3px 4px);
+  animation:scanMove 2.6s linear infinite;}
+@keyframes scanMove{to{background-position:0 -40px}}
+.suke-av.talk .core{animation:talkPulse .35s ease-in-out infinite alternate;}
+@keyframes talkPulse{from{box-shadow:0 0 18px #36e0ff88,inset 0 0 18px #0008}to{box-shadow:0 0 30px #36e0ffcc,inset 0 0 18px #0008}}
+.suke-av.talk .ape-mouth{animation:apeTalk .25s ease-in-out infinite alternate;transform-origin:50% 75%;}
+@keyframes apeTalk{from{transform:scaleY(1)}to{transform:scaleY(1.7)}}
+/* 头像配色变体（Tweak: KOL 头像） */
+.suke-av[data-look="matcha"] .core{background:radial-gradient(circle at 50% 30%,#adffce 0%,#34c87f 40%,#10623f 78%,#04130b 100%);box-shadow:0 0 18px #5be49b99,inset 0 0 18px #0008;}
+.suke-av[data-look="magenta"] .core{background:radial-gradient(circle at 50% 30%,#ffd0f4 0%,#f03dd0 42%,#7a1264 78%,#1a041a 100%);box-shadow:0 0 18px #f03dd099,inset 0 0 18px #0008;}
+.suke-av[data-look="gold"] .core{background:radial-gradient(circle at 50% 30%,#fff0c0 0%,#ffcc4d 42%,#a9760a 78%,#1c1304 100%);box-shadow:0 0 18px #ffcc4d99,inset 0 0 18px #0008;}
+
+/* ---------- 喊话气泡（顶部，跟随头像）—— KOL 交互主体 ---------- */
+.suke-hail{display:flex;align-items:center;gap:11px;margin-top:12px;
+  background:linear-gradient(120deg,rgba(34,211,238,.18),rgba(155,108,255,.12));
+  border:1px solid rgba(54,224,255,.42);border-radius:18px;padding:10px 14px 10px 10px;position:relative;
+  box-shadow:0 6px 24px rgba(0,0,0,.35),0 0 22px rgba(34,211,238,.14);}
+.suke-hail .suke-av{--av:48px;}
+.suke-hail .say{flex:1;min-width:0;}
+.suke-hail .say .nm{font-size:10.5px;color:var(--cyan);font-weight:700;letter-spacing:.5px;display:flex;align-items:center;gap:5px;}
+.suke-hail .say .nm i{font-style:normal;font-size:8px;background:var(--cyan);color:#02121c;border-radius:4px;padding:1px 4px;font-weight:800;}
+.suke-hail .say .tx{font-size:13.5px;font-weight:700;line-height:1.4;margin-top:3px;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.suke-hail .live-tag{position:absolute;top:-7px;right:14px;font-size:8.5px;font-weight:800;letter-spacing:.8px;
+  color:#fff;background:linear-gradient(135deg,#ff3b6b,#ff5e7a);border-radius:6px;padding:2px 7px;
+  box-shadow:0 0 12px rgba(255,59,107,.6);animation:liveBlink 1.4s ease-in-out infinite;}
+@keyframes liveBlink{0%,100%{opacity:1}50%{opacity:.55}}
+.suke-hail .say .tx .moon{color:var(--gold);font-weight:800;}
+.suke-hail.flash{animation:hailFlash .5s ease;}
+@keyframes hailFlash{0%{transform:scale(1)}40%{transform:scale(1.015)}100%{transform:scale(1)}}
+
+/* ---------- 右下角 KOL 浮窗（喊话气泡 + 头像） ---------- */
+
+/* ---------- 右下角 KOL 浮窗模块（喊话气泡 + 头像，点击进对话） ---------- */
+.kol-dock{position:absolute;right:12px;top:16px;bottom:auto;z-index:40;display:flex;flex-direction:row;align-items:center;gap:8px;cursor:pointer;}
+.kol-dock.flash .kol-orb{animation:orbPop .5s ease;}
+@keyframes orbPop{0%{transform:scale(1)}40%{transform:scale(1.12)}100%{transform:scale(1)}}
+
+/* 喊话气泡 */
+.kol-bubble{position:relative;max-width:180px;background:linear-gradient(135deg,rgba(20,30,52,.97),rgba(14,22,40,.97));
+  border:1px solid rgba(54,224,255,.45);border-radius:16px 16px 4px 16px;padding:9px 12px 10px;
+  box-shadow:0 8px 26px #000a,0 0 20px rgba(34,211,238,.18);backdrop-filter:blur(6px);
+  opacity:1;transform-origin:right center;
+  transition:opacity .3s ease,transform .3s cubic-bezier(.3,.8,.3,1);}
+.kol-dock.flash .kol-bubble{animation:kbIn .35s cubic-bezier(.2,.9,.2,1);transform-origin:right center;}
+/* 收起：气泡淡出缩向头像（右侧） */
+.kol-dock.collapsed .kol-bubble{opacity:0;transform:translate(30px,0) scale(.4);pointer-events:none;}
+/* 收起：头像球吸附到右边缘 */
+.kol-dock.collapsed{transform:translateX(28px);}
+.kol-dock{transition:transform .35s cubic-bezier(.3,.8,.3,1);}
+.kol-dock.collapsed .kol-orb{opacity:.92;}
+.kol-dock.collapsed .kol-cta{background:linear-gradient(135deg,var(--magenta),var(--violet));color:#fff;}
+@keyframes kbIn{from{opacity:0;transform:translateY(8px) scale(.94)}to{opacity:1;transform:none}}
+.kol-bubble .kb-top{display:flex;align-items:center;gap:7px;margin-bottom:3px;}
+.kol-bubble .kb-name{font-size:11px;font-weight:800;color:var(--cyan);letter-spacing:.3px;}
+.kol-bubble .kb-live{font-size:8px;font-weight:800;letter-spacing:.6px;color:#fff;
+  background:linear-gradient(135deg,#ff3b6b,#ff5e7a);border-radius:5px;padding:1px 5px;
+  box-shadow:0 0 9px rgba(255,59,107,.6);animation:liveBlink 1.4s ease-in-out infinite;}
+.kol-bubble .kb-tx{font-size:12.5px;font-weight:700;line-height:1.45;color:var(--ink);
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+.kol-bubble .kb-tx .moon{color:var(--gold);font-weight:800;}
+.kol-bubble .kb-tail{position:absolute;right:-7px;top:50%;margin-top:-7px;width:14px;height:14px;
+  background:linear-gradient(135deg,rgba(20,30,52,.97),rgba(14,22,40,.97));
+  border-right:1px solid rgba(54,224,255,.45);border-top:1px solid rgba(54,224,255,.45);
+  transform:rotate(45deg);}
+
+/* KOL 头像球 */
+.kol-orb{position:relative;align-self:flex-end;width:62px;height:62px;padding:0;border:0;background:none;color:inherit;cursor:pointer;
+  animation:fabFloat 3.6s ease-in-out infinite;}
+@keyframes fabFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.kol-orb .suke-av{--av:62px;}
+.kol-orb .dot{position:absolute;top:-2px;right:-2px;width:18px;height:18px;border-radius:50%;z-index:3;
+  background:var(--magenta);color:#fff;font-size:10px;font-weight:800;display:grid;place-items:center;
+  box-shadow:0 0 10px var(--magenta);border:2px solid var(--bg-0);}
+.kol-orb .kol-cta{position:absolute;bottom:-7px;left:50%;transform:translateX(-50%);white-space:nowrap;
+  font-size:8.5px;font-weight:800;color:#02121c;background:linear-gradient(135deg,var(--cyan),var(--matcha));
+  border-radius:999px;padding:2px 8px;box-shadow:0 2px 8px #0007;opacity:0;transition:opacity .2s;}
+.kol-dock.collapsed .kol-orb .kol-cta{opacity:1;}
+
+/* ---------- AI 聊天面板 ---------- */
+/* ============================================================
+   AI 直播答疑（全屏数字人互动界面）
+   ============================================================ */
+.ai-live{position:absolute;top:0;right:0;bottom:0;left:0;z-index:85;overflow:hidden;
+  transform:translateY(100%);transition:transform .36s cubic-bezier(.2,.9,.2,1);
+  opacity:0;visibility:hidden;pointer-events:none;
+  display:flex;flex-direction:column;}
+.ai-live.open{transform:translateY(0);opacity:1;visibility:visible;pointer-events:auto;}
+/* 场景化背景，随 KOL 主色 */
+.ai-live[data-look="suke"]{background:radial-gradient(120% 80% at 50% 0%, #103a6e 0%, #0a1730 55%, #04070f 100%);}
+.ai-live[data-look="doge"]{background:radial-gradient(120% 80% at 50% 0%, #5a3f12 0%, #2a1d08 55%, #0c0904 100%);}
+.ai-live[data-look="neko"]{background:radial-gradient(120% 80% at 50% 0%, #5a1450 0%, #2a0a26 55%, #0c040c 100%);}
+.ai-live[data-look="zeta"]{background:radial-gradient(120% 80% at 50% 0%, #0d5a3a 0%, #082a1c 55%, #04100a 100%);}
+
+/* 聊天室主题：对应三张参考角色图 */
+.ai-live[data-chat-style="command"]{--chat-accent:#46e7ff;background:radial-gradient(120% 78% at 50% 0%,#153c61 0%,#081a31 56%,#040910 100%);}
+.ai-live[data-chat-style="neon"]{--chat-accent:#7cffbb;background:radial-gradient(120% 78% at 50% 0%,#164c3b 0%,#071c1a 56%,#030a0a 100%);}
+.ai-live[data-chat-style="armor"]{--chat-accent:#f8d77a;background:radial-gradient(120% 78% at 50% 0%,#385f82 0%,#102c45 58%,#07101c 100%);}
+
+/* 数字人立绘：填满中上区域 */
+.al-stage{position:absolute;left:0;right:0;top:62px;bottom:96px;display:flex;align-items:center;justify-content:center;z-index:1;}
+.chat-style-art{position:relative;width:100%;height:100%;display:flex;align-items:flex-start;justify-content:center;overflow:hidden;}
+.chat-style-art::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,transparent 45%,rgba(4,7,15,.08) 60%,rgba(4,7,15,.88) 100%);}
+.chat-style-art .chat-frame{position:absolute;inset:0;margin:auto;display:block;width:auto;height:100%;max-width:100%;object-fit:contain;object-position:center top;opacity:0;transform:scale(.9);transform-origin:center center;filter:drop-shadow(0 0 28px color-mix(in srgb,var(--chat-accent) 55%,transparent));transition:opacity .14s ease;}
+.chat-style-art .chat-frame.active{opacity:1;}
+.ai-live[data-chat-style="neon"] .chat-style-art .chat-frame{height:100%;object-position:center top;filter:drop-shadow(0 0 30px rgba(124,255,187,.58));}
+.ai-live[data-chat-style="armor"] .chat-style-art{align-items:center;}
+.ai-live[data-chat-style="armor"] .chat-style-art .chat-frame{width:100%;height:auto;max-height:100%;object-position:center center;filter:drop-shadow(0 0 30px rgba(248,215,122,.42));}
+
+/* 高保真本地 Live2D 模拟：同身份状态帧与语音生命周期联动；不冒充正式 Cubism 模型。 */
+.live2d-avatar-demo{position:relative;width:100%;height:100%;display:flex;flex-direction:column;
+  align-items:center;padding-top:92px;box-sizing:border-box;overflow:hidden;isolation:isolate;}
+.live2d-avatar-demo::before{content:"";position:absolute;inset:34px 10% 16%;z-index:-2;opacity:.48;
+  background:radial-gradient(circle at 50% 35%,color-mix(in srgb,var(--chat-accent) 28%,transparent),transparent 43%),
+    linear-gradient(color-mix(in srgb,var(--chat-accent) 12%,transparent) 1px,transparent 1px),
+    linear-gradient(90deg,color-mix(in srgb,var(--chat-accent) 10%,transparent) 1px,transparent 1px);
+  background-size:auto,24px 24px,24px 24px;mask-image:linear-gradient(180deg,#000,transparent 88%);}
+.l2d-demo-badge{display:flex;align-items:center;gap:6px;margin-bottom:20px;padding:5px 10px;border-radius:999px;
+  border:1px solid color-mix(in srgb,var(--chat-accent) 56%,transparent);background:rgba(5,13,27,.72);
+  color:#effcff;font-size:8px;font-weight:900;letter-spacing:1.1px;box-shadow:0 0 18px color-mix(in srgb,var(--chat-accent) 24%,transparent);}
+.l2d-demo-badge i{width:6px;height:6px;border-radius:50%;background:#ffcc4d;box-shadow:0 0 8px #ffcc4d;}
+.l2d-holo-field{position:relative;width:246px;height:246px;display:grid;place-items:center;perspective:700px;}
+.l2d-orbit{position:absolute;inset:8px;border-radius:50%;border:1px solid color-mix(in srgb,var(--chat-accent) 45%,transparent);
+  border-left-color:transparent;border-bottom-color:transparent;animation:l2dOrbit 9s linear infinite;}
+.l2d-orbit.orbit-b{inset:0;border-style:dashed;opacity:.48;animation-direction:reverse;animation-duration:13s;}
+@keyframes l2dOrbit{to{transform:rotate(360deg)}}
+.l2d-portrait{position:relative;width:206px;height:206px;display:grid;place-items:center;transform-style:preserve-3d;
+  filter:drop-shadow(0 0 26px color-mix(in srgb,var(--chat-accent) 60%,transparent));}
+.l2d-portrait-motion{animation:l2dIdle 4.2s ease-in-out infinite;transform-origin:center 64%;}
+.l2d-studio-stage{position:relative;width:196px;height:196px;border-radius:50%;overflow:hidden;
+  border:2px solid color-mix(in srgb,var(--chat-accent) 72%,white 18%);
+  box-shadow:0 0 34px color-mix(in srgb,var(--chat-accent) 48%,transparent),inset 0 0 24px rgba(0,0,0,.52);}
+.l2d-studio-sprite{position:absolute;inset:0;border-radius:inherit;
+  background-image:var(--studio-sprite,url("assets/kol-avatars/wanzi-live2d-studio-sprite-v2.png"));background-size:300% 200%;background-repeat:no-repeat;
+  background-position:0 0;will-change:opacity;}
+.l2d-studio-sprite.is-previous{z-index:1;}
+.l2d-studio-sprite.is-active{z-index:2;animation:l2dFrameBlend 82ms ease-out both;}
+@keyframes l2dFrameBlend{from{opacity:.28}to{opacity:1}}
+.l2d-studio-sprite.frame-idle{background-position:0 0;}
+.l2d-studio-sprite.frame-blink{background-position:50% 0;}
+.l2d-studio-sprite.frame-rest{background-position:100% 0;}
+.l2d-studio-sprite.frame-mouth-a{background-position:0 100%;}
+.l2d-studio-sprite.frame-mouth-o{background-position:50% 100%;}
+.l2d-studio-sprite.frame-mouth-e{background-position:100% 100%;}
+.l2d-studio-stage::after{content:"";position:absolute;z-index:3;inset:0;border-radius:inherit;pointer-events:none;
+  background:radial-gradient(circle at 50% 42%,transparent 48%,rgba(5,9,18,.24) 100%);
+  box-shadow:inset 0 0 18px rgba(0,0,0,.42);}
+.l2d-studio-stage>i{position:absolute;z-index:4;left:17%;right:17%;bottom:9%;height:4px;border-radius:99px;
+  background:linear-gradient(90deg,transparent,var(--chat-accent),transparent);opacity:.22;filter:blur(1px);}
+.state-speaking .l2d-studio-stage>i{opacity:.72;animation:l2dVoiceGlow .36s ease-in-out infinite alternate;}
+@keyframes l2dVoiceGlow{from{transform:scaleX(.55);filter:blur(1px)}to{transform:scaleX(1);filter:blur(2px)}}
+@keyframes l2dIdle{0%,100%{transform:translateY(1px) rotateZ(-.45deg) scale(1)}50%{transform:translateY(-7px) rotateZ(.45deg) scale(1.018)}}
+.state-listening .l2d-portrait-motion{animation:l2dListen 1.1s ease-in-out infinite;}
+@keyframes l2dListen{0%,100%{transform:translateY(0) rotateZ(-1deg) scale(1)}50%{transform:translateY(-5px) rotateZ(1deg) scale(1.025)}}
+.state-thinking .l2d-portrait-motion{animation:l2dThink 1.8s ease-in-out infinite;}
+@keyframes l2dThink{0%,100%{transform:translateX(-3px) rotateY(-4deg) scale(1)}50%{transform:translateX(3px) rotateY(4deg) scale(1.015)}}
+.state-speaking .l2d-portrait-motion{animation:l2dSpeak .9s ease-in-out infinite;}
+@keyframes l2dSpeak{0%,100%{transform:translateY(0) rotateZ(-.18deg) scale(1.006)}50%{transform:translateY(-2px) rotateZ(.18deg) scale(1.016)}}
+.state-speaking .l2d-portrait.beat-0{animation:l2dBeatA .22s ease-out;}
+.state-speaking .l2d-portrait.beat-1{animation:l2dBeatB .22s ease-out;}
+@keyframes l2dBeatA{0%{filter:drop-shadow(0 0 20px color-mix(in srgb,var(--chat-accent) 42%,transparent));transform:scale(.99)}55%{filter:drop-shadow(0 0 40px color-mix(in srgb,var(--chat-accent) 88%,transparent));transform:scale(1.025)}100%{transform:scale(1)}}
+@keyframes l2dBeatB{0%{filter:drop-shadow(0 0 22px color-mix(in srgb,var(--chat-accent) 48%,transparent));transform:scale(1)}55%{filter:drop-shadow(0 0 42px color-mix(in srgb,var(--chat-accent) 92%,transparent));transform:scale(1.028)}100%{transform:scale(1)}}
+.l2d-portrait .suke-av{filter:none;}
+.l2d-portrait .suke-av .ring{border-width:2px;opacity:.78;}
+.l2d-portrait .suke-av .ring.r2{opacity:.48;}
+.l2d-portrait .suke-av .core{border:2px solid color-mix(in srgb,var(--chat-accent) 72%,white 18%);box-shadow:0 0 34px color-mix(in srgb,var(--chat-accent) 48%,transparent),inset 0 0 22px #0009;}
+.l2d-scan-sweep{position:absolute;left:13px;right:13px;top:16px;height:2px;opacity:.65;pointer-events:none;
+  background:linear-gradient(90deg,transparent,var(--chat-accent),transparent);box-shadow:0 0 12px var(--chat-accent);animation:l2dScan 3s ease-in-out infinite;}
+@keyframes l2dScan{0%,100%{transform:translateY(18px);opacity:0}20%,80%{opacity:.7}50%{transform:translateY(168px)}}
+.l2d-state{display:flex;align-items:center;gap:7px;margin-top:13px;color:#fff;font-size:12px;font-weight:850;letter-spacing:.3px;text-shadow:0 0 12px #000;}
+.l2d-state i{width:7px;height:7px;border-radius:50%;background:#5be49b;box-shadow:0 0 10px #5be49b;}
+.state-listening .l2d-state i{background:#ffcc4d;box-shadow:0 0 10px #ffcc4d;animation:liveBlink .8s infinite;}
+.state-thinking .l2d-state i{background:#9b6cff;box-shadow:0 0 10px #9b6cff;animation:liveBlink 1s infinite;}
+.state-speaking .l2d-state i{background:var(--chat-accent);box-shadow:0 0 12px var(--chat-accent);animation:liveBlink .48s infinite;}
+.l2d-wave{height:20px;margin-top:8px;display:flex;align-items:center;justify-content:center;gap:3px;opacity:.34;}
+.l2d-wave i{display:block;width:3px;height:4px;border-radius:999px;background:var(--chat-accent);box-shadow:0 0 6px var(--chat-accent);transform-origin:center;}
+.state-speaking .l2d-wave{opacity:1;}
+.state-speaking .l2d-wave i{animation:l2dWave .5s ease-in-out infinite alternate;animation-delay:var(--delay);height:var(--bar);}
+.state-listening .l2d-wave{opacity:.72;}
+.state-listening .l2d-wave i{animation:l2dWave .9s ease-in-out infinite alternate;animation-delay:var(--delay);height:calc(var(--bar) * .68);}
+@keyframes l2dWave{from{transform:scaleY(.35)}to{transform:scaleY(1)}}
+.l2d-progress{width:160px;height:2px;margin-top:5px;border-radius:99px;overflow:hidden;background:rgba(255,255,255,.14);opacity:0;}
+.l2d-progress i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--chat-accent),#5be49b);transition:width .18s linear;}
+.state-speaking .l2d-progress{opacity:1;}
+.l2d-caption{margin-top:8px;color:rgba(255,255,255,.5);font-size:8.5px;letter-spacing:.25px;}
+.ai-live[data-avatar-mode="live2d"] .al-scrim{background:linear-gradient(180deg,rgba(4,7,15,.48) 0%,transparent 27%,transparent 48%,rgba(4,7,15,.9) 100%);}
+
+/* Full Body uses the same Kai identity and six-frame viseme rig as portrait mode. */
+.fullbody-avatar-demo{position:relative;width:100%;height:100%;display:flex;flex-direction:column;
+  align-items:center;padding-top:74px;box-sizing:border-box;overflow:hidden;isolation:isolate;}
+.fullbody-avatar-demo::before{content:"";position:absolute;inset:28px 8% 10%;z-index:-2;opacity:.6;
+  background:radial-gradient(circle at 50% 38%,color-mix(in srgb,var(--chat-accent) 32%,transparent),transparent 46%),
+    linear-gradient(color-mix(in srgb,var(--chat-accent) 11%,transparent) 1px,transparent 1px),
+    linear-gradient(90deg,color-mix(in srgb,var(--chat-accent) 9%,transparent) 1px,transparent 1px);
+  background-size:auto,26px 26px,26px 26px;mask-image:linear-gradient(180deg,#000,transparent 92%);}
+.fullbody-avatar-demo .l2d-demo-badge{margin-bottom:10px;}
+.l2d-full-holo-field{position:relative;width:304px;height:438px;display:grid;place-items:center;perspective:800px;
+  filter:drop-shadow(0 0 24px color-mix(in srgb,var(--chat-accent) 38%,transparent));}
+.l2d-full-orbit{position:absolute;z-index:0;inset:4px 18px 10px;border:1px solid color-mix(in srgb,var(--chat-accent) 34%,transparent);
+  border-radius:42% 42% 48% 48%;border-left-color:transparent;border-bottom-color:transparent;animation:l2dOrbit 11s linear infinite;}
+.l2d-full-orbit.orbit-b{inset:14px 8px 0;border-style:dashed;opacity:.38;animation-direction:reverse;animation-duration:15s;}
+.l2d-full-figure{position:relative;z-index:1;width:274px;height:420px;border-radius:28px 28px 36px 36px;overflow:hidden;
+  background-size:600% 100%;background-repeat:no-repeat;background-color:#5335b7;
+  border:1px solid color-mix(in srgb,var(--chat-accent) 62%,white 14%);
+  box-shadow:0 0 34px color-mix(in srgb,var(--chat-accent) 36%,transparent),inset 0 0 24px rgba(4,8,20,.38);
+  transform-origin:center 72%;animation:l2dFullIdle 4.2s ease-in-out infinite;}
+.l2d-full-figure::after{content:"";position:absolute;z-index:5;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,transparent 56%,rgba(4,7,15,.04) 70%,rgba(4,7,15,.72) 100%),
+    radial-gradient(circle at 50% 26%,transparent 44%,rgba(5,9,18,.18) 100%);}
+.l2d-full-viseme{position:absolute;z-index:3;left:0;right:0;top:0;width:100%;height:300px;
+  overflow:hidden;border-radius:27px 27px 0 0;background:transparent;box-shadow:none;
+  -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 78%,rgba(0,0,0,.8) 86%,transparent 100%);
+  mask-image:linear-gradient(180deg,#000 0%,#000 78%,rgba(0,0,0,.8) 86%,transparent 100%);}
+.l2d-full-viseme::after{content:"";position:absolute;z-index:4;left:0;right:0;bottom:0;height:48px;pointer-events:none;
+  background:linear-gradient(180deg,transparent,rgba(90,55,184,.34));}
+.l2d-full-viseme .l2d-studio-sprite{inset:0 auto auto 50%;width:274px;height:274px;transform:translateX(-50%);border-radius:0;}
+.l2d-full-scan{position:absolute;z-index:6;left:13%;right:13%;top:10px;height:2px;opacity:.62;pointer-events:none;
+  background:linear-gradient(90deg,transparent,var(--chat-accent),transparent);box-shadow:0 0 12px var(--chat-accent);
+  animation:l2dFullScan 3.4s ease-in-out infinite;}
+.l2d-full-platform{position:absolute;z-index:7;left:12%;right:12%;bottom:7px;height:18px;border-radius:50%;
+  border:1px solid color-mix(in srgb,var(--chat-accent) 62%,transparent);background:color-mix(in srgb,var(--chat-accent) 16%,transparent);
+  box-shadow:0 0 20px color-mix(in srgb,var(--chat-accent) 50%,transparent);}
+@keyframes l2dFullIdle{0%,100%{transform:translateY(2px) rotateZ(-.2deg) scale(1)}50%{transform:translateY(-7px) rotateZ(.2deg) scale(1.012)}}
+@keyframes l2dFullScan{0%,100%{transform:translateY(22px);opacity:0}18%,82%{opacity:.66}50%{transform:translateY(345px)}}
+.fullbody-avatar-demo.state-listening .l2d-full-figure{animation:l2dListen 1.1s ease-in-out infinite;}
+.fullbody-avatar-demo.state-thinking .l2d-full-figure{animation:l2dThink 1.8s ease-in-out infinite;}
+.fullbody-avatar-demo.state-speaking .l2d-full-figure{animation:l2dFullSpeak .82s ease-in-out infinite;}
+@keyframes l2dFullSpeak{0%,100%{transform:translateY(0) scale(1.004)}50%{transform:translateY(-3px) scale(1.014)}}
+.fullbody-avatar-demo.state-speaking .l2d-full-viseme{filter:drop-shadow(0 0 12px color-mix(in srgb,var(--chat-accent) 52%,transparent));}
+.fullbody-avatar-demo.state-speaking .l2d-full-platform{animation:l2dVoiceGlow .36s ease-in-out infinite alternate;}
+.l2d-full-holo-field.beat-0{--full-beat:.99;}.l2d-full-holo-field.beat-1{--full-beat:1.012;}
+.fullbody-avatar-demo.state-speaking .l2d-full-holo-field{transform:scale(var(--full-beat));transition:transform .18s ease-out;}
+.fullbody-avatar-demo .l2d-state{margin-top:3px;}
+.fullbody-avatar-demo .l2d-wave{margin-top:4px;}
+.fullbody-avatar-demo .l2d-caption{margin-top:5px;}
+.ai-live[data-avatar-mode="full"] .al-scrim{background:linear-gradient(180deg,rgba(4,7,15,.48) 0%,transparent 26%,transparent 51%,rgba(4,7,15,.91) 100%);}
+
+@media (max-width:380px){
+  .live2d-avatar-demo{padding-top:84px;}
+  .l2d-demo-badge{margin-bottom:14px;}
+  .l2d-holo-field{width:222px;height:222px;transform:scale(.92);margin-bottom:-12px;}
+  .fullbody-avatar-demo{padding-top:66px;}
+  .l2d-full-holo-field{width:286px;height:410px;transform:scale(.94);margin-bottom:-13px;}
+  .l2d-full-figure{width:258px;height:395px;}
+  .l2d-full-viseme{height:280px;}
+  .l2d-full-viseme .l2d-studio-sprite{width:258px;height:258px;}
+}
+@media (prefers-reduced-motion:reduce){
+  .l2d-orbit,.l2d-portrait-motion,.l2d-scan-sweep,.l2d-wave i,.state-speaking .l2d-portrait,
+  .l2d-full-orbit,.l2d-full-figure,.l2d-full-scan,.l2d-full-platform{animation:none!important;}
+  .l2d-portrait-motion{transform:none!important;}
+}
+.kol-figure{width:100%;height:100%;display:flex;align-items:center;justify-content:center;
+  filter:drop-shadow(0 0 26px var(--fac,#22d3ee));animation:figFloat 5s ease-in-out infinite;}
+@keyframes figFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.kf-svg{width:100%;height:100%;}
+/* 真人/视频立绘：图片填充 */
+.kol-figure.photo{position:relative;filter:drop-shadow(0 0 30px var(--fac,#caa46a));}
+.kf-photo-wrap{position:relative;height:100%;width:auto;max-width:100%;aspect-ratio:432 / 960;display:flex;align-items:stretch;justify-content:center;}
+.kf-photo{height:100%;width:100%;object-fit:contain;object-position:center bottom;
+  -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 80%,transparent 100%);
+  mask-image:linear-gradient(180deg,#000 0%,#000 80%,transparent 100%);}
+/* 说话状态不切换主立绘滤镜，避免带透明遮罩的图片被浏览器重绘成空层。 */
+/* 保持主立绘持续绘制；说话时只交给语音/口型层变化，避免图片动画层短暂消失。 */
+.kf-lipsync{position:absolute;z-index:2;left:55.5%;top:15.2%;width:12%;height:auto;overflow:visible;pointer-events:none;transform:translate(-50%,-50%);}
+.mouth-state{opacity:0;transform-origin:40px 27px;}
+.mouth-closed{opacity:1;}
+.kol-figure.photo.talking .mouth-closed{animation:lipClosed .92s steps(1,end) infinite;}
+.kol-figure.photo.talking .mouth-o{animation:lipO .92s steps(1,end) infinite;}
+.kol-figure.photo.talking .mouth-open{animation:lipOpen .92s steps(1,end) infinite;}
+.kol-figure.photo.talking .mouth-wide{animation:lipWide .92s steps(1,end) infinite;}
+@keyframes lipClosed{0%,20%,88%,100%{opacity:1}20.1%,88.1%{opacity:0}}
+@keyframes lipO{0%,20%,41%,88%,100%{opacity:0}20.1%,40.9%{opacity:1}}
+@keyframes lipOpen{0%,41%,57%,76%,100%{opacity:0}57.1%,75.9%{opacity:1}}
+@keyframes lipWide{0%,76%,88%,100%{opacity:0}76.1%,87.9%{opacity:1}}
+@media (prefers-reduced-motion: reduce){.kol-figure.photo.talking .mouth-state{animation:none}.kol-figure.photo.talking .mouth-open{opacity:1}.kol-figure.photo.talking .mouth-closed{opacity:0}}
+.kf-stage{animation:stagePulse 2.6s ease-in-out infinite;}
+@keyframes stagePulse{0%,100%{opacity:.18}50%{opacity:.4}}
+/* 立绘动作 */
+.fig-wave{animation:figWave 1.2s ease-in-out infinite;}
+@keyframes figWave{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-12deg)}}
+.fig-tail{animation:figTail 1.6s ease-in-out infinite;}
+@keyframes figTail{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(10deg)}}
+.fig-ant{animation:figAnt 1.8s ease-in-out infinite;}
+@keyframes figAnt{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(5deg)}}
+.kol-figure.talking .fig-mouth{animation:figTalk .28s ease-in-out infinite alternate;transform-origin:center;}
+@keyframes figTalk{from{transform:scaleY(.75)}to{transform:scaleY(1.18)}}
+.fig-tongue{transition:none;}
+
+/* 顶部+底部暗化层，保证文字可读 */
+.al-scrim{position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:linear-gradient(180deg,rgba(4,7,15,.55) 0%,transparent 22%,transparent 46%,rgba(4,7,15,.82) 100%);}
+
+/* 顶栏 */
+.al-top{position:relative;z-index:5;display:flex;align-items:center;gap:10px;padding:14px 14px 0;}
+.al-id{display:flex;align-items:center;gap:9px;background:rgba(8,12,24,.5);border:1px solid rgba(255,255,255,.12);
+  border-radius:40px;padding:5px 14px 5px 5px;backdrop-filter:blur(6px);}
+.al-id .al-name b{font-size:14px;display:block;line-height:1.1;}
+.al-id .al-name span{font-size:10px;color:#9fe8c4;display:flex;align-items:center;gap:5px;margin-top:2px;}
+.al-id .al-name span .dot{width:6px;height:6px;border-radius:50%;background:#3be07a;box-shadow:0 0 7px #3be07a;}
+.al-close{margin-left:auto;width:36px;height:36px;border-radius:50%;background:rgba(8,12,24,.5);
+  border:1px solid rgba(255,255,255,.14);font-size:17px;color:#fff;backdrop-filter:blur(6px);}
+.al-mode{font-size:8px;letter-spacing:.7px;font-weight:900;color:#06121c;background:linear-gradient(135deg,#5be49b,#22d3ee);
+  border-radius:999px;padding:4px 7px;box-shadow:0 0 12px rgba(91,228,155,.28);white-space:nowrap;}
+.al-style-tag{font-size:8px;letter-spacing:.3px;font-weight:800;color:#effcff;border:1px solid color-mix(in srgb,var(--chat-accent) 64%,transparent);
+  background:color-mix(in srgb,var(--chat-accent) 20%,rgba(7,13,27,.72));border-radius:999px;padding:3px 6px;white-space:nowrap;}
+
+/* 主题化对话控件 */
+.ai-live[data-chat-style="neon"] .al-id,
+.ai-live[data-chat-style="neon"] .al-status,
+.ai-live[data-chat-style="neon"] .al-field{border-color:rgba(124,255,187,.3);}
+.ai-live[data-chat-style="neon"] .al-msg.bot{background:rgba(3,23,20,.76);border-color:rgba(124,255,187,.32);}
+.ai-live[data-chat-style="neon"] .al-msg-nm{color:#7cffbb;}
+.ai-live[data-chat-style="neon"] .al-send{background:linear-gradient(135deg,#7cffbb,#159d73);color:#03160f;}
+.ai-live[data-chat-style="armor"] .al-id,
+.ai-live[data-chat-style="armor"] .al-status,
+.ai-live[data-chat-style="armor"] .al-field{border-color:rgba(248,215,122,.32);}
+.ai-live[data-chat-style="armor"] .al-msg.bot{background:rgba(11,28,47,.76);border-color:rgba(248,215,122,.35);}
+.ai-live[data-chat-style="armor"] .al-msg-nm{color:#f8d77a;}
+.ai-live[data-chat-style="armor"] .al-send{background:linear-gradient(135deg,#f8d77a,#d88d4c);color:#21150b;}
+
+/* 本地模拟账户状态条 */
+.al-status{position:relative;z-index:5;display:flex;align-items:center;gap:7px;margin:10px 14px 0;padding:7px 8px;
+  border:1px solid rgba(255,255,255,.13);border-radius:14px;background:rgba(7,13,27,.54);backdrop-filter:blur(8px);}
+.al-status div{min-width:0;flex:1;text-align:center;border-right:1px solid rgba(255,255,255,.12);}
+.al-status div:last-of-type{border-right:0;}
+.al-status b{display:block;font-size:12px;line-height:1.1;color:#fff;white-space:nowrap;}
+.al-status span{display:block;font-size:8.5px;color:rgba(255,255,255,.58);margin-top:3px;white-space:nowrap;}
+.al-voice-toggle{flex:0 0 auto;border:1px solid rgba(91,228,155,.4);border-radius:999px;padding:6px 8px;color:#c6ffe2;
+  background:rgba(23,103,76,.26);font-size:9px;font-weight:800;white-space:nowrap;}
+.al-voice-toggle:not(.on){border-color:rgba(255,255,255,.16);color:rgba(255,255,255,.65);background:rgba(255,255,255,.06);}
+
+/* 右侧竖排功能 */
+.al-rail{position:absolute;right:12px;top:96px;z-index:5;display:flex;flex-direction:column;gap:16px;}
+.al-action{display:flex;flex-direction:column;align-items:center;gap:4px;background:none;border:none;color:#fff;}
+.al-action .ai-ic{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-size:21px;
+  background:rgba(10,16,30,.5);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(6px);
+  box-shadow:0 4px 14px #0006;transition:transform .15s;}
+.al-action:active .ai-ic{transform:scale(.9);}
+.al-action span:last-child{font-size:10.5px;font-weight:700;text-shadow:0 1px 4px #000;}
+.al-action.hot .ai-ic{background:linear-gradient(135deg,var(--violet),var(--magenta));border-color:transparent;
+  box-shadow:0 0 16px rgba(240,61,208,.5);animation:hotPulse 1.6s ease-in-out infinite;}
+.al-action.hot .ai-ic.htx-ic{background:rgba(255,255,255,.96);border:2px solid rgba(32,163,230,.72);
+  box-shadow:0 0 16px rgba(18,144,217,.55);animation:htxPulse 1.6s ease-in-out infinite;}
+.htx-action-logo{width:32px;height:32px;display:block;object-fit:contain;}
+@keyframes hotPulse{0%,100%{box-shadow:0 0 16px rgba(240,61,208,.4)}50%{box-shadow:0 0 26px rgba(240,61,208,.7)}}
+@keyframes htxPulse{0%,100%{box-shadow:0 0 16px rgba(18,144,217,.42)}50%{box-shadow:0 0 25px rgba(18,144,217,.72)}}
+
+/* 对话浮层 */
+.al-convo{position:relative;z-index:5;margin-top:auto;display:flex;flex-direction:column;gap:8px;
+  padding:0 14px 8px;max-height:42%;overflow-y:auto;scrollbar-width:none;}
+.al-convo::-webkit-scrollbar{display:none;}
+.al-msg{max-width:86%;font-size:13px;line-height:1.5;padding:9px 13px;border-radius:14px;
+  backdrop-filter:blur(6px);animation:malIn .3s ease;}
+@keyframes malIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.al-msg.bot{align-self:flex-start;background:rgba(10,16,30,.72);border:1px solid rgba(255,255,255,.14);border-bottom-left-radius:4px;}
+.al-msg.bot .moon{color:var(--gold);font-weight:800;}
+.al-msg.me{align-self:flex-end;background:linear-gradient(135deg,rgba(91,228,155,.92),rgba(31,138,91,.92));color:#04120b;font-weight:600;border-bottom-right-radius:4px;}
+.al-msg-nm{display:block;font-size:9.5px;font-weight:800;color:var(--cyan);margin-bottom:2px;}
+.al-typing{display:inline-flex;gap:5px;align-items:center;padding:2px 0;}
+.al-typing i{width:7px;height:7px;border-radius:50%;background:#cfe0ff;animation:typedot 1s infinite;}
+.al-typing i:nth-child(2){animation-delay:.15s;} .al-typing i:nth-child(3){animation-delay:.3s;}
+@keyframes typedot{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
+
+/* 主动引导卡 */
+.al-guide{position:relative;z-index:5;margin:0 14px 8px;display:flex;align-items:center;gap:11px;cursor:pointer;
+  background:linear-gradient(120deg,rgba(155,108,255,.3),rgba(240,61,208,.2));
+  border:1px solid rgba(155,108,255,.5);border-radius:14px;padding:10px 13px;backdrop-filter:blur(8px);}
+.al-guide .gx{font-size:22px;}
+.al-guide .gt{flex:1;}
+.al-guide .gt b{font-size:12.5px;}
+.al-guide .gt p{margin:1px 0 0;font-size:10.5px;color:#d7c9f5;}
+.al-guide .go{font-size:12px;font-weight:800;color:#fff;white-space:nowrap;}
+
+/* 快捷问题 */
+.al-quick{position:relative;z-index:5;display:flex;gap:7px;padding:0 14px 10px;overflow-x:auto;scrollbar-width:none;}
+.al-quick::-webkit-scrollbar{display:none;}
+.al-quick button{flex:0 0 auto;font-size:11.5px;font-weight:600;color:#fff;white-space:nowrap;
+  background:rgba(10,16,30,.55);border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:7px 13px;backdrop-filter:blur(6px);}
+
+/* 底部输入栏 */
+.al-input{position:relative;z-index:5;display:flex;gap:10px;align-items:center;padding:6px 14px 4px;}
+.al-field{flex:1;display:flex;align-items:center;background:rgba(10,16,30,.6);border:1px solid rgba(255,255,255,.22);
+  border-radius:999px;padding:0 8px 0 16px;backdrop-filter:blur(8px);}
+.al-field input{flex:1;background:none;border:none;outline:none;color:#fff;font-size:13.5px;font-family:inherit;padding:13px 0;}
+.al-field input::placeholder{color:rgba(255,255,255,.5);}
+.al-voice{width:34px;height:34px;border-radius:50%;font-size:15px;background:none;
+  touch-action:none;cursor:pointer;transition:transform .15s ease,background .15s ease,box-shadow .15s ease;}
+.al-voice:active,.al-voice.listening{transform:scale(1.08);background:rgba(34,211,238,.2);
+  box-shadow:0 0 0 5px rgba(34,211,238,.11),0 0 18px rgba(34,211,238,.55);}
+.ai-live.listening .al-id .dot{background:#ffcc4d;box-shadow:0 0 9px #ffcc4d;}
+.al-send{width:48px;height:48px;border-radius:50%;flex:none;font-weight:800;font-size:16px;color:#fff;
+  background:linear-gradient(135deg,var(--cyan),var(--violet));box-shadow:0 4px 16px rgba(34,211,238,.4);
+  display:grid;place-items:center;border:1px solid rgba(255,255,255,.25);}
+.al-send:disabled{opacity:.85;}
+.al-foot{position:relative;z-index:5;text-align:center;font-size:10px;color:rgba(255,255,255,.55);min-height:18px;
+  padding:4px 0 calc(8px + env(safe-area-inset-bottom));}
+
+.ai-live button:focus-visible,.ai-live input:focus-visible{outline:2px solid var(--chat-accent);outline-offset:2px;}
+
+/* ---------- Tweaks 面板（自绘） ---------- */
+#tweaks-root{position:absolute;inset:0;z-index:120;pointer-events:none;}
