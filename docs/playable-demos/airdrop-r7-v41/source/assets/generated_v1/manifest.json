@@ -1,0 +1,17 @@
+{
+  "name": "Airvana Airdrop Game Asset Pack",
+  "version": "1.0.0",
+  "generated_with": "built-in image_gen",
+  "visual_direction": "premium 2.5D cyber-cosmic mobile game art",
+  "assets": [
+    {"file": "stage-space-v1.png", "role": "default stage background", "width": 877, "height": 1794, "alpha": false},
+    {"file": "wanzi-full-v2.png", "role": "full-body host sprite", "width": 432, "height": 960, "alpha": true},
+    {"file": "wanzi-face-v2.png", "role": "host avatar", "width": 493, "height": 512, "alpha": true},
+    {"file": "coin-rim-v1.png", "role": "reusable token frame", "width": 254, "height": 256, "alpha": true},
+    {"file": "parachute-v1.png", "role": "falling token parachute", "width": 313, "height": 320, "alpha": true},
+    {"file": "wallet-catcher-v1.png", "role": "basket mode catcher", "width": 384, "height": 184, "alpha": true},
+    {"file": "settlement-card-bg-v1.png", "role": "settlement and share card background", "width": 872, "height": 1804, "alpha": false},
+    {"file": "moon-medallion-v1.png", "role": "legendary MOON settlement emblem", "width": 366, "height": 384, "alpha": true},
+    {"file": "settlement-crystals-v1.png", "role": "settlement celebration corner decoration", "width": 384, "height": 345, "alpha": true}
+  ]
+}
