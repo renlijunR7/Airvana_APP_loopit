@@ -60,8 +60,12 @@ void main() {
     final harness = TestCreateWorkflowHarness();
     tester.view.physicalSize = const Size(430, 932);
     tester.view.devicePixelRatio = 1;
+    tester.view.padding = const FakeViewPadding(bottom: 34);
+    tester.view.viewPadding = const FakeViewPadding(bottom: 34);
     addTearDown(tester.view.resetPhysicalSize);
     addTearDown(tester.view.resetDevicePixelRatio);
+    addTearDown(tester.view.resetPadding);
+    addTearDown(tester.view.resetViewPadding);
 
     await tester.pumpWidget(
       ProviderScope(
@@ -123,6 +127,14 @@ void main() {
     expect(find.byType(BottomSheet), findsOneWidget);
     expect(find.text('AIP 余额'), findsOneWidget);
     expect(find.text('2480'), findsOneWidget);
+    expect(
+      tester
+          .widget<SingleChildScrollView>(
+            find.byKey(const ValueKey('earn-task-check-in-scroll')),
+          )
+          .padding,
+      const EdgeInsets.fromLTRB(18, 14, 18, 58),
+    );
 
     final activeCheckInButton = tester.widget<FilledButton>(
       find.byKey(const ValueKey('daily-check-in')),
@@ -155,8 +167,12 @@ void main() {
     final harness = TestCreateWorkflowHarness();
     tester.view.physicalSize = const Size(430, 932);
     tester.view.devicePixelRatio = 1;
+    tester.view.padding = const FakeViewPadding(bottom: 34);
+    tester.view.viewPadding = const FakeViewPadding(bottom: 34);
     addTearDown(tester.view.resetPhysicalSize);
     addTearDown(tester.view.resetDevicePixelRatio);
+    addTearDown(tester.view.resetPadding);
+    addTearDown(tester.view.resetViewPadding);
 
     await tester.pumpWidget(
       ProviderScope(
@@ -187,6 +203,31 @@ void main() {
       findsOneWidget,
     );
     expect(find.text('AIR-KAI-4821'), findsOneWidget);
+    expect(
+      tester
+          .widget<SliverPadding>(
+            find.byKey(const ValueKey('earn-task-invite-content')),
+          )
+          .padding,
+      const EdgeInsets.fromLTRB(18, 18, 18, 58),
+    );
+    final inviteHero = tester.widget<Container>(
+      find.byKey(const ValueKey('invite-hero')),
+    );
+    final inviteHeroDecoration = inviteHero.decoration! as BoxDecoration;
+    expect((inviteHeroDecoration.gradient! as LinearGradient).colors, const [
+      Color(0xFFFF3B4A),
+      Color(0xFFFF7180),
+    ]);
+    expect(find.text('1,000'), findsOneWidget);
+    expect(find.text('AIP'), findsWidgets);
+    expect(find.byKey(const ValueKey('invite-code-card')), findsOneWidget);
+    expect(find.byKey(const ValueKey('copy-invite-code')), findsOneWidget);
+    expect(find.byKey(const ValueKey('invite-stats')), findsOneWidget);
+    expect(find.byKey(const ValueKey('invite-step-1')), findsOneWidget);
+    expect(find.byKey(const ValueKey('invite-step-2')), findsOneWidget);
+    expect(find.byKey(const ValueKey('invite-step-3')), findsOneWidget);
+    expect(find.byKey(const ValueKey('invite-boundary-note')), findsOneWidget);
     expect(find.byKey(const ValueKey('copy-invite-link')), findsOneWidget);
     expect(
       find.byKey(const ValueKey('simulate-invite-complete')),
@@ -215,6 +256,10 @@ void main() {
       48,
     );
 
+    await tester.ensureVisible(
+      find.byKey(const ValueKey('simulate-invite-complete')),
+    );
+    await tester.pumpAndSettle();
     await tester.tap(find.byKey(const ValueKey('simulate-invite-complete')));
     await tester.pumpAndSettle();
     expect(find.text('邀请任务已完成'), findsOneWidget);

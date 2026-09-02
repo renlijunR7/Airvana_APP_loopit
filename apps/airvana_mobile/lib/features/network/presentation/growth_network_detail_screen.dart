@@ -427,13 +427,15 @@ class _GrowthNetworkOverview extends StatelessWidget {
     children: [
       const _GrowthAgentHero(),
       const _GrowthSectionTitle('从一次互动，到持续创作'),
-      GridView.count(
+      GridView(
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
-        crossAxisCount: MediaQuery.sizeOf(context).width < 375 ? 1 : 2,
-        crossAxisSpacing: 8,
-        mainAxisSpacing: 8,
-        childAspectRatio: MediaQuery.sizeOf(context).width < 375 ? 3.15 : 1.42,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: MediaQuery.sizeOf(context).width < 375 ? 1 : 2,
+          crossAxisSpacing: 8,
+          mainAxisSpacing: 8,
+          mainAxisExtent: 102,
+        ),
         children: const [
           _LoopCard('01', '理解你', '在用户授权范围内沉淀偏好、目标、内容与协作关系。'),
           _LoopCard('02', '连接玩家', '陪伴玩家体验产品，理解选择、反馈与未被满足的需求。'),
@@ -515,47 +517,100 @@ class _GrowthAgentHero extends StatelessWidget {
     key: const ValueKey('growth-network-hero'),
     padding: const EdgeInsets.all(20),
     decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(24),
+      borderRadius: BorderRadius.circular(26),
       gradient: const LinearGradient(
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-        colors: [Color(0xFF24252A), Color(0xFF17181D)],
+        begin: Alignment(-1, -1),
+        end: Alignment(1, 1),
+        colors: [Color(0xFF18191D), Color(0xFF22232A), Color(0xFF16171B)],
+        stops: [0, .55, 1],
       ),
-      border: Border.all(color: const Color(0xFF3C3D44)),
+      border: Border.all(color: const Color(0xFF34343A)),
+      boxShadow: const [
+        BoxShadow(
+          color: Color(0x241C1C20),
+          offset: Offset(0, 22),
+          blurRadius: 46,
+        ),
+      ],
     ),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    child: Stack(
       children: [
-        const Text(
-          'AIRVANA AGENT NETWORK · 产品规划',
-          style: TextStyle(
-            color: Color(0xFFFF9CA6),
-            fontSize: 9,
-            fontWeight: FontWeight.w900,
-            letterSpacing: .8,
+        const Positioned.fill(
+          child: IgnorePointer(
+            child: CustomPaint(
+              key: ValueKey('growth-hero-dots'),
+              painter: _GrowthHeroDotsPainter(),
+            ),
           ),
         ),
-        const SizedBox(height: 10),
-        const Text(
-          '每个人都有一个，\n持续成长的 AI 分身。',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 25,
-            height: 1.16,
-            fontWeight: FontWeight.w900,
+        Positioned(
+          right: -68,
+          top: -76,
+          child: IgnorePointer(
+            child: Container(
+              width: 210,
+              height: 210,
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: RadialGradient(
+                  colors: [Color(0x47FF5361), Color(0x00FF5361)],
+                ),
+              ),
+            ),
           ),
         ),
-        const SizedBox(height: 9),
-        const Text(
-          '它带着你的长期记忆、数字身份与钱包，在获得授权的边界内与玩家持续互动，把产品体验与真实反馈转化为新的创作方向，并自主运营你拥有的 Agentic Playable。',
-          style: TextStyle(
-            color: Color(0xFFB9BBC2),
-            fontSize: 11,
-            height: 1.72,
+        Positioned(
+          left: -72,
+          bottom: 72,
+          child: IgnorePointer(
+            child: Container(
+              width: 190,
+              height: 190,
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: RadialGradient(
+                  colors: [Color(0x337C5CFF), Color(0x007C5CFF)],
+                ),
+              ),
+            ),
           ),
         ),
-        const SizedBox(height: 14),
-        const _AgentCoreVisual(),
+        const Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'AIRVANA AGENT NETWORK · 产品规划',
+              style: TextStyle(
+                color: Color(0xFFFF8995),
+                fontSize: 8.5,
+                fontWeight: FontWeight.w900,
+                letterSpacing: .85,
+              ),
+            ),
+            SizedBox(height: 11),
+            Text(
+              '每个人都有一个，\n持续成长的 AI 分身。',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 26,
+                height: 1.15,
+                fontWeight: FontWeight.w900,
+                letterSpacing: -1.15,
+              ),
+            ),
+            SizedBox(height: 10),
+            Text(
+              '它带着你的长期记忆、数字身份与钱包，在获得授权的边界内与玩家持续互动，把产品体验与真实反馈转化为新的创作方向，并自主运营你拥有的 Agentic Playable。',
+              style: TextStyle(
+                color: Color(0xFFC7C8CF),
+                fontSize: 10.5,
+                height: 1.75,
+              ),
+            ),
+            SizedBox(height: 16),
+            _AgentCoreVisual(),
+          ],
+        ),
       ],
     ),
   );
@@ -566,14 +621,38 @@ class _AgentCoreVisual extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-    height: 270,
+    key: const ValueKey('growth-agent-visual'),
+    height: 282,
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(22),
-      color: const Color(0xFF1D1E24),
-      border: Border.all(color: const Color(0xFF3A3B42)),
+      gradient: LinearGradient(
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+        colors: [
+          Colors.white.withValues(alpha: .09),
+          Colors.white.withValues(alpha: .025),
+        ],
+      ),
+      border: Border.all(color: Colors.white.withValues(alpha: .12)),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.white.withValues(alpha: .08),
+          offset: const Offset(0, 1),
+        ),
+      ],
     ),
     child: Stack(
       children: [
+        const Positioned(
+          top: 0,
+          right: 0,
+          bottom: 38,
+          left: 0,
+          child: CustomPaint(
+            key: ValueKey('growth-hero-links'),
+            painter: _GrowthHeroLinksPainter(),
+          ),
+        ),
         const Positioned(
           left: 10,
           top: 24,
@@ -594,18 +673,31 @@ class _AgentCoreVisual extends StatelessWidget {
           bottom: 47,
           child: _Capability('玩', '玩家互动', '体验与反馈'),
         ),
-        Center(
+        Align(
+          alignment: const Alignment(0, -.08),
           child: Container(
             width: 116,
-            height: 132,
+            height: 126,
             padding: const EdgeInsets.all(6),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(30),
-              color: Colors.white.withValues(alpha: .08),
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  Colors.white.withValues(alpha: .16),
+                  AirvanaColors.accent.withValues(alpha: .08),
+                ],
+              ),
               border: Border.all(color: Colors.white.withValues(alpha: .18)),
               boxShadow: [
                 BoxShadow(
-                  color: AirvanaColors.accent.withValues(alpha: .08),
+                  color: Colors.black.withValues(alpha: .3),
+                  offset: const Offset(0, 18),
+                  blurRadius: 42,
+                ),
+                BoxShadow(
+                  color: AirvanaColors.accent.withValues(alpha: .035),
                   spreadRadius: 10,
                 ),
               ],
@@ -616,10 +708,19 @@ class _AgentCoreVisual extends StatelessWidget {
                 Stack(
                   clipBehavior: Clip.none,
                   children: [
-                    const CircleAvatar(
-                      radius: 30,
-                      backgroundImage: AssetImage(
-                        'assets/legacy/avatars/kai.png',
+                    Container(
+                      width: 62,
+                      height: 62,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: const Color(0xD6FF8995),
+                          width: 2,
+                        ),
+                        image: const DecorationImage(
+                          image: AssetImage('assets/legacy/avatars/kai.png'),
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                     Positioned(
@@ -655,9 +756,26 @@ class _AgentCoreVisual extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 4),
-                const Text(
-                  '● 持续学习中',
-                  style: TextStyle(color: Color(0xFFB9BBC2), fontSize: 7),
+                const Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    DecoratedBox(
+                      decoration: BoxDecoration(
+                        color: Color(0xFF48D789),
+                        shape: BoxShape.circle,
+                      ),
+                      child: SizedBox.square(dimension: 5),
+                    ),
+                    SizedBox(width: 4),
+                    Text(
+                      '持续学习中',
+                      style: TextStyle(
+                        color: Color(0xFFB9BBC2),
+                        fontSize: 6.5,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -696,50 +814,140 @@ class _Capability extends StatelessWidget {
   final String subtitle;
 
   @override
-  Widget build(BuildContext context) => SizedBox(
-    width: 76,
-    child: Row(
-      children: [
-        Container(
-          width: 27,
-          height: 27,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            color: Colors.white.withValues(alpha: .08),
-            borderRadius: BorderRadius.circular(9),
+  Widget build(BuildContext context) {
+    final compact = MediaQuery.sizeOf(context).width <= 374;
+    return Container(
+      width: compact ? 70 : 76,
+      constraints: const BoxConstraints(minHeight: 52),
+      padding: EdgeInsets.all(compact ? 6 : 7),
+      decoration: BoxDecoration(
+        color: const Color(0xB8131418),
+        borderRadius: BorderRadius.circular(15),
+        border: Border.all(color: Colors.white.withValues(alpha: .13)),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: .2),
+            offset: const Offset(0, 10),
+            blurRadius: 24,
           ),
-          child: Text(
-            icon,
-            style: const TextStyle(
-              color: Color(0xFFFF9CA6),
-              fontSize: 8,
-              fontWeight: FontWeight.w900,
+        ],
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 22,
+            height: 22,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: AirvanaColors.accent.withValues(alpha: .16),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Text(
+              icon,
+              style: const TextStyle(
+                color: Color(0xFFFF9CA6),
+                fontSize: 8,
+                fontWeight: FontWeight.w900,
+              ),
             ),
           ),
-        ),
-        const SizedBox(width: 5),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                title,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 7.5,
-                  fontWeight: FontWeight.w900,
+          const SizedBox(width: 5),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 7.5,
+                    fontWeight: FontWeight.w900,
+                  ),
                 ),
-              ),
-              Text(
-                subtitle,
-                style: const TextStyle(color: Color(0xFF92949D), fontSize: 6),
-              ),
-            ],
+                Text(
+                  subtitle,
+                  style: const TextStyle(color: Color(0xFF92949D), fontSize: 6),
+                ),
+              ],
+            ),
           ),
-        ),
-      ],
-    ),
-  );
+        ],
+      ),
+    );
+  }
+}
+
+class _GrowthHeroDotsPainter extends CustomPainter {
+  const _GrowthHeroDotsPainter();
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()..color = Colors.white.withValues(alpha: .11);
+    for (double y = 8; y < size.height; y += 28) {
+      for (double x = 8; x < size.width; x += 28) {
+        canvas.drawCircle(Offset(x, y), .8, paint);
+      }
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant _GrowthHeroDotsPainter oldDelegate) => false;
+}
+
+class _GrowthHeroLinksPainter extends CustomPainter {
+  const _GrowthHeroLinksPainter();
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final center = Offset(size.width * .5, size.height * (130 / 270));
+    final paint = Paint()
+      ..color = const Color(0x66FF8995)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1;
+    for (final point in [
+      Offset(size.width * (65 / 320), size.height * (62 / 270)),
+      Offset(size.width * (255 / 320), size.height * (62 / 270)),
+      Offset(size.width * (65 / 320), size.height * (208 / 270)),
+      Offset(size.width * (255 / 320), size.height * (208 / 270)),
+    ]) {
+      _drawDashedLine(canvas, center, point, paint);
+    }
+    canvas.drawOval(
+      Rect.fromCenter(
+        center: center,
+        width: size.width * (148 / 320),
+        height: size.height * (148 / 270),
+      ),
+      Paint()
+        ..color = Colors.white.withValues(alpha: .09)
+        ..style = PaintingStyle.stroke,
+    );
+  }
+
+  @override
+  bool shouldRepaint(covariant _GrowthHeroLinksPainter oldDelegate) => false;
+}
+
+void _drawDashedLine(
+  Canvas canvas,
+  Offset start,
+  Offset end,
+  Paint paint, {
+  double dash = 4,
+  double gap = 5,
+}) {
+  final delta = end - start;
+  final distance = delta.distance;
+  if (distance == 0) return;
+  final direction = delta / distance;
+  for (double offset = 0; offset < distance; offset += dash + gap) {
+    final segmentEnd = (offset + dash).clamp(0.0, distance).toDouble();
+    canvas.drawLine(
+      start + direction * offset,
+      start + direction * segmentEnd,
+      paint,
+    );
+  }
 }
 
 class _GrowthSectionTitle extends StatelessWidget {
@@ -764,6 +972,7 @@ class _LoopCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => _GrowthCard(
+    key: ValueKey('growth-loop-$number'),
     padding: const EdgeInsets.all(12),
     child: Row(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -822,69 +1031,77 @@ class _FoundationCard extends StatelessWidget {
   final String tag;
 
   @override
-  Widget build(BuildContext context) => _GrowthCard(
-    padding: const EdgeInsets.all(13),
-    child: Stack(
-      children: [
-        Row(
-          children: [
-            Container(
-              width: 42,
-              height: 42,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: const Color(0xFFFFE7E9),
-                borderRadius: BorderRadius.circular(14),
-              ),
-              child: Text(
-                icon,
-                style: const TextStyle(
-                  color: AirvanaColors.accent,
-                  fontSize: 11,
-                  fontWeight: FontWeight.w900,
+  Widget build(BuildContext context) => ConstrainedBox(
+    key: ValueKey('growth-foundation-$tag'),
+    constraints: const BoxConstraints(minHeight: 88),
+    child: _GrowthCard(
+      padding: const EdgeInsets.all(13),
+      child: Stack(
+        children: [
+          Row(
+            children: [
+              Container(
+                width: 42,
+                height: 42,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  gradient: const LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [Color(0xFFFFF1F2), Color(0xFFFFE3E6)],
+                  ),
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                child: Text(
+                  icon,
+                  style: const TextStyle(
+                    color: AirvanaColors.accent,
+                    fontSize: 11,
+                    fontWeight: FontWeight.w900,
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(width: 11),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: const TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w900,
+              const SizedBox(width: 11),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: const TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w900,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 5),
-                  Text(
-                    body,
-                    style: const TextStyle(
-                      color: Color(0xFF636366),
-                      fontSize: 8.5,
-                      height: 1.6,
+                    const SizedBox(height: 5),
+                    Text(
+                      body,
+                      style: const TextStyle(
+                        color: Color(0xFF636366),
+                        fontSize: 8.5,
+                        height: 1.6,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
+              ),
+            ],
+          ),
+          Positioned(
+            right: 0,
+            top: 0,
+            child: Text(
+              tag,
+              style: const TextStyle(
+                color: Color(0xFFC7C7CC),
+                fontSize: 5.5,
+                fontWeight: FontWeight.w900,
+                letterSpacing: .5,
               ),
             ),
-          ],
-        ),
-        Positioned(
-          right: 0,
-          top: 0,
-          child: Text(
-            tag,
-            style: const TextStyle(
-              color: Color(0xFFC7C7CC),
-              fontSize: 5.5,
-              fontWeight: FontWeight.w900,
-              letterSpacing: .5,
-            ),
           ),
-        ),
-      ],
+        ],
+      ),
     ),
   );
 }
@@ -894,6 +1111,7 @@ class _AgentNetworkCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
+    key: const ValueKey('growth-agent-network-card'),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(22),
       gradient: const LinearGradient(colors: [Colors.white, Color(0xFFFFF5F6)]),
@@ -905,20 +1123,44 @@ class _AgentNetworkCard extends StatelessWidget {
         SizedBox(
           height: 210,
           child: Stack(
-            children: const [
-              Positioned(left: 20, top: 30, child: _AgentNode('K', 'Kai AI')),
-              Positioned(right: 20, top: 30, child: _AgentNode('N', 'Nina AI')),
-              Positioned(
+            children: [
+              const Positioned.fill(
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    gradient: RadialGradient(
+                      colors: [Color(0x1AFF3B4A), Color(0x00FF3B4A)],
+                      stops: [0, .72],
+                    ),
+                  ),
+                ),
+              ),
+              const Positioned.fill(
+                child: CustomPaint(
+                  key: ValueKey('growth-network-links'),
+                  painter: _AgentNetworkLinksPainter(),
+                ),
+              ),
+              const Positioned(
+                left: 20,
+                top: 30,
+                child: _AgentNode('K', 'Kai AI'),
+              ),
+              const Positioned(
+                right: 20,
+                top: 30,
+                child: _AgentNode('N', 'Nina AI'),
+              ),
+              const Positioned(
                 left: 20,
                 bottom: 24,
                 child: _AgentNode('L', 'Leo AI'),
               ),
-              Positioned(
+              const Positioned(
                 right: 20,
                 bottom: 24,
                 child: _AgentNode('S', 'Sora AI'),
               ),
-              Center(child: _AgentNetworkCore()),
+              const Center(child: _AgentNetworkCore()),
             ],
           ),
         ),
@@ -969,7 +1211,16 @@ class _AgentNode extends StatelessWidget {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(15),
-            border: Border.all(color: const Color(0xFFFFD6DA)),
+            border: Border.all(
+              color: AirvanaColors.accent.withValues(alpha: .16),
+            ),
+            boxShadow: const [
+              BoxShadow(
+                color: Color(0x144F2229),
+                offset: Offset(0, 10),
+                blurRadius: 20,
+              ),
+            ],
           ),
           child: Text(
             initial,
@@ -991,6 +1242,36 @@ class _AgentNode extends StatelessWidget {
       ],
     ),
   );
+}
+
+class _AgentNetworkLinksPainter extends CustomPainter {
+  const _AgentNetworkLinksPainter();
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final a = Offset(size.width * .18, size.height * .26);
+    final b = Offset(size.width * .82, size.height * .26);
+    final c = Offset(size.width * .18, size.height * .74);
+    final d = Offset(size.width * .82, size.height * .74);
+    final center = Offset(size.width * .5, size.height * .5);
+    final paint = Paint()
+      ..color = AirvanaColors.accent.withValues(alpha: .24)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1.3;
+    for (final edge in [
+      (a, center),
+      (b, center),
+      (c, center),
+      (d, center),
+      (a, c),
+      (b, d),
+    ]) {
+      _drawDashedLine(canvas, edge.$1, edge.$2, paint);
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant _AgentNetworkLinksPainter oldDelegate) => false;
 }
 
 class _AgentNetworkCore extends StatelessWidget {
@@ -1065,7 +1346,8 @@ class _Flywheel extends StatelessWidget {
   const _Flywheel();
   @override
   Widget build(BuildContext context) => _GrowthCard(
-    padding: const EdgeInsets.all(12),
+    key: const ValueKey('growth-agent-flywheel'),
+    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 15),
     child: const Wrap(
       alignment: WrapAlignment.center,
       crossAxisAlignment: WrapCrossAlignment.center,

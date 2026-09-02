@@ -2363,7 +2363,10 @@ class _ServerCommentSheetState extends State<_ServerCommentSheet> {
 
   @override
   Widget build(BuildContext context) {
-    final bottom = MediaQuery.viewInsetsOf(context).bottom;
+    final media = MediaQuery.of(context);
+    final bottom = media.viewInsets.bottom > 0
+        ? media.viewInsets.bottom
+        : media.viewPadding.bottom;
     return Padding(
       padding: EdgeInsets.fromLTRB(20, 4, 20, 18 + bottom),
       child: Column(

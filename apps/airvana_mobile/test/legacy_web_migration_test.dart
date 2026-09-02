@@ -501,6 +501,38 @@ void main() {
     expect(find.text('我的连接'), findsOneWidget);
     expect(find.text('贡献'), findsOneWidget);
     expect(find.text('规则'), findsOneWidget);
+    final growthHero = tester.widget<Container>(
+      find.byKey(const ValueKey('growth-network-hero')),
+    );
+    final growthHeroDecoration = growthHero.decoration! as BoxDecoration;
+    expect(growthHeroDecoration.borderRadius, BorderRadius.circular(26));
+    expect((growthHeroDecoration.gradient! as LinearGradient).colors, const [
+      Color(0xFF18191D),
+      Color(0xFF22232A),
+      Color(0xFF16171B),
+    ]);
+    expect(find.byKey(const ValueKey('growth-hero-dots')), findsOneWidget);
+    expect(find.byKey(const ValueKey('growth-hero-links')), findsOneWidget);
+    expect(
+      tester.getSize(find.byKey(const ValueKey('growth-agent-visual'))).height,
+      282,
+    );
+    expect(
+      tester.getSize(find.byKey(const ValueKey('growth-loop-01'))).height,
+      102,
+    );
+    expect(
+      tester
+          .getSize(find.byKey(const ValueKey('growth-foundation-OPERATIONS')))
+          .height,
+      greaterThanOrEqualTo(88),
+    );
+    expect(
+      find.byKey(const ValueKey('growth-agent-network-card')),
+      findsOneWidget,
+    );
+    expect(find.byKey(const ValueKey('growth-network-links')), findsOneWidget);
+    expect(find.byKey(const ValueKey('growth-agent-flywheel')), findsOneWidget);
 
     await tester.tap(find.byKey(const ValueKey('growth-network-tab-1')));
     await tester.pump();

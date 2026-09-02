@@ -470,7 +470,11 @@ class _AirvanaLocalCommentSheetState extends State<AirvanaLocalCommentSheet> {
   Widget build(BuildContext context) {
     final media = MediaQuery.of(context);
     final height = math.min(media.size.height * .68, 570.0);
+    final bottomSafeArea = media.viewInsets.bottom > 0
+        ? 0.0
+        : media.viewPadding.bottom;
     return AnimatedPadding(
+      key: const ValueKey('comment-keyboard-inset'),
       duration: const Duration(milliseconds: 180),
       padding: EdgeInsets.only(bottom: media.viewInsets.bottom),
       child: SizedBox(
@@ -550,7 +554,7 @@ class _AirvanaLocalCommentSheetState extends State<AirvanaLocalCommentSheet> {
             ),
             Container(
               key: const ValueKey('comment-composer'),
-              padding: const EdgeInsets.fromLTRB(14, 10, 14, 12),
+              padding: EdgeInsets.fromLTRB(14, 10, 14, 12 + bottomSafeArea),
               decoration: const BoxDecoration(
                 color: Colors.white,
                 border: Border(
