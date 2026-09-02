@@ -1829,7 +1829,13 @@ test('workspace wires the P2 admin surfaces: twin scenes, contract signatures, c
     '`/api/experiments/${el.dataset.id}/status`', "data-action=\"experiment-assignment\"",
     '`/api/experiments/${el.dataset.id}/assignment`',
   ]) assert.ok(frontend.includes(marker), `missing experiment wiring: ${marker}`);
-  assert.match(frontend, /成品运行时尚未按分支切换渲染/);
+  // 分桶已作用于成品运行时：UI 必须按 runtimeVariantAware 如实二选一，且两种口径都不得伪造效果
+  assert.match(frontend, /runtimeVariantAware/);
+  assert.match(frontend, /该取值会真实作用于运行时渲染/);
+  assert.match(frontend, /当前成品版本尚不具备消费能力，渲染不会改变/);
+  assert.ok(!/成品运行时尚未按分支切换渲染/.test(frontend), '能力已落地，不得保留"待接"旧口径');
+  // 列表需展示真实的分支分配数，而不是只有总数
+  assert.match(frontend, /assignmentCounts/);
   assert.match(frontend, /experimentSection\(\)/);
   assert.match(frontend, /EXPERIMENT_OPTIMIZABLE/);
   // 锁定字段不得出现在实验可选字段里

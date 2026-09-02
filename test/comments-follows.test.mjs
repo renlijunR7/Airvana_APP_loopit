@@ -110,6 +110,8 @@ test('notifications feed and social summary expose server-authoritative numbers'
   const theirs = await req('/api/social/summary', { cookie: arcade.cookie });
   assert.ok(theirs.data.followerCount >= 1);
   assert.ok(theirs.data.likesReceived >= 1);
+  const arcadeBootstrap = await req('/api/bootstrap', { cookie: arcade.cookie });
+  assert.ok(arcadeBootstrap.data.stats.likesReceived >= 1);
 
   const inbox = await req('/api/notifications', { cookie: arcade.cookie });
   assert.equal(inbox.response.status, 200);
@@ -119,4 +121,33 @@ test('notifications feed and social summary expose server-authoritative numbers'
   const readAll = await req('/api/notifications/read-all', { method: 'POST', cookie: arcade.cookie });
   assert.ok(readAll.data.updated >= 1);
   assert.equal((await req('/api/notifications', { cookie: arcade.cookie })).data.unread, 0);
+});
+
+test('like and save state is returned in bootstrap and can be removed', async () => {
+  const login = await req('/api/auth/demo', { method: 'POST', body: { role: 'creator', persona: 'social-state-player' } });
+  const cookie = login.cookie;
+  const registered = await req('/api/demo/mobile-playables', { method: 'POST', cookie, body: { playables: [{ key: 'plb_social_state', title: '社交状态作品' }] } });
+  const contentId = registered.data.mapping.plb_social_state;
+
+  for (const eventType of ['like', 'save']) {
+    const response = await req('/api/engagements', {
+      method: 'POST', cookie,
+      body: { contentId, eventType, eventKey: `flutter:${eventType}:${contentId}` },
+    });
+    assert.equal(response.response.status, 201);
+  }
+  const before = await req('/api/bootstrap', { cookie });
+  assert.deepEqual(before.data.engagementState[contentId].sort(), ['like', 'save']);
+  const feedItem = before.data.feed.find(item => item.id === contentId);
+  assert.equal(feedItem.likes, 1);
+  assert.equal(feedItem.saves, 1);
+
+  const removed = await req('/api/engagements/remove', {
+    method: 'POST', cookie, body: { contentId, eventType: 'like' },
+  });
+  assert.equal(removed.response.status, 200);
+  assert.equal(removed.data.active, false);
+  const after = await req('/api/bootstrap', { cookie });
+  assert.deepEqual(after.data.engagementState[contentId], ['save']);
+  assert.equal(after.data.feed.find(item => item.id === contentId).likes, 0);
 });

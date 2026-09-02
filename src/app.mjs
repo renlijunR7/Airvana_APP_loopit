@@ -6,6 +6,7 @@ import { openDatabase, closeDatabase, transaction } from './db.mjs';
 import { createAiService } from './ai.mjs';
 import { createWorker } from './worker.mjs';
 import { saveArtifact } from './artifact.mjs';
+import { assertOptimizable, assignVariant, assignmentCounts, resolveContentVariant } from './experiments.mjs';
 import {
   AIP_REWARD_RULES, ECONOMY_VERSION, activateSubscription, awardAipRule, completePaymentSettlement,
   consumeAip, consumeCreation, createAitEntitlement, economySnapshot, ensureEconomyAccount,
@@ -141,6 +142,13 @@ function getSessionUser(db, req) {
   if (!token) return null;
   return db.prepare(`SELECT u.* FROM sessions s JOIN users u ON u.id=s.user_id
     WHERE s.token_hash=? AND s.expires_at > ?`).get(sha256(token), isoNow()) || null;
+}
+
+// 当前 ready 成品是否声明了 variantAware：旧成品无消费代码，投放层据此如实告知而不是假定生效
+function artifactVariantAware(db, contentId) {
+  const row = db.prepare(`SELECT a.manifest_json FROM content_artifacts a JOIN contents c ON c.id=a.content_id
+    WHERE a.content_id=? AND a.version=c.current_version AND a.status='ready'`).get(contentId);
+  return Boolean(row && safeJson(row.manifest_json)?.variantAware);
 }
 
 function requireUser(db, req, roles) {
@@ -290,6 +298,23 @@ function serializeDeliverable(row) {
   };
 }
 
+function serializeFeedContent(db, row) {
+  const counts = db.prepare(`SELECT
+    SUM(CASE WHEN event_type='like' AND status='eligible' THEN 1 ELSE 0 END) likes,
+    SUM(CASE WHEN event_type='save' AND status='eligible' THEN 1 ELSE 0 END) saves
+    FROM engagement_events WHERE content_id=?`).get(row.id) || {};
+  const comments = Number(db.prepare(`SELECT COUNT(*) n FROM content_comments WHERE content_id=? AND status='visible'`).get(row.id)?.n || 0);
+  return {
+    ...mapContent(row),
+    authorName: row.author_name,
+    boostedUntil: row.boost_expires_at,
+    likes: Number(counts.likes || 0),
+    saves: Number(counts.saves || 0),
+    comments,
+    publicUrl: `/content/${row.id}`,
+  };
+}
+
 function serializeSettlement(row, db = null) {
   const approvals = db ? db.prepare(`SELECT a.*,u.display_name approver_name FROM settlement_approvals a JOIN users u ON u.id=a.approver_user_id WHERE a.settlement_id=? ORDER BY a.created_at,a.rowid`).all(row.id).map(item => ({
     id: item.id, approverName: item.approver_name, decision: item.decision, note: item.note, createdAt: item.created_at,
@@ -341,9 +366,11 @@ function loadBootstrap(db, user, ai) {
   const settlements = (user.role === 'admin' ? db.prepare(settlementSql).all() : db.prepare(settlementSql).all(user.id)).map(row => serializeSettlement(row, db));
   const feed = user.role === 'creator' ? db.prepare(`SELECT c.*,u.display_name author_name,MAX(b.expires_at) boost_expires_at FROM contents c JOIN users u ON u.id=c.owner_user_id
     LEFT JOIN content_boosts b ON b.content_id=c.id AND b.status='active' AND b.expires_at>?
-    WHERE c.status='published' AND c.owner_user_id<>? GROUP BY c.id ORDER BY boost_expires_at IS NOT NULL DESC,c.published_at DESC LIMIT 30`).all(isoNow(), user.id).map(row => ({ ...mapContent(row), authorName: row.author_name, boostedUntil: row.boost_expires_at })) : [];
+    WHERE c.status='published' AND c.owner_user_id<>? GROUP BY c.id ORDER BY boost_expires_at IS NOT NULL DESC,c.published_at DESC LIMIT 60`).all(isoNow(), user.id).map(row => serializeFeedContent(db, row)) : [];
   const stats = {
     publishedContents: Number(db.prepare(`SELECT COUNT(*) n FROM contents WHERE owner_user_id=? AND status='published'`).get(user.id)?.n || 0),
+    likesReceived: Number(db.prepare(`SELECT COUNT(*) n FROM engagement_events e JOIN contents c ON c.id=e.content_id
+      WHERE c.owner_user_id=? AND e.event_type='like' AND e.status='eligible'`).get(user.id)?.n || 0),
     activeTasks: Number(db.prepare(`SELECT COUNT(*) n FROM agent_tasks WHERE owner_user_id=? AND status IN ('queued','running','review_pending')`).get(user.id)?.n || 0),
     pendingDeliverables: deliverables.filter(item => item.status === 'submitted').length,
   };
@@ -440,10 +467,17 @@ function loadBootstrap(db, user, ai) {
     : db.prepare(`SELECT * FROM creator_applications WHERE user_id=? ORDER BY created_at DESC LIMIT 20`).all(user.id);
   const following = db.prepare(`SELECT f.followee_user_id,u.display_name,f.created_at FROM user_follows f JOIN users u ON u.id=f.followee_user_id WHERE f.follower_user_id=? ORDER BY f.created_at DESC LIMIT 200`).all(user.id)
     .map(row => ({ userId: row.followee_user_id, displayName: row.display_name, followedAt: row.created_at }));
+  const engagementState = db.prepare(`SELECT content_id,event_type FROM engagement_events
+    WHERE user_id=? AND status='eligible' AND event_type IN ('like','save','share')
+    ORDER BY created_at`).all(user.id).reduce((state, row) => {
+      state[row.content_id] ||= [];
+      if (!state[row.content_id].includes(row.event_type)) state[row.content_id].push(row.event_type);
+      return state;
+    }, {});
   const followerCount = Number(db.prepare('SELECT COUNT(*) n FROM user_follows WHERE followee_user_id=?').get(user.id)?.n || 0);
   const loginIdentities = db.prepare('SELECT provider,identifier,verified_at FROM login_identities WHERE user_id=? ORDER BY created_at').all(user.id)
     .map(row => ({ provider: row.provider, identifier: row.identifier, verifiedAt: row.verified_at }));
-  return { me: publicEconomyUser(db, user), ai: ai.info, loginIdentities, following, followerCount, points: { AIP: economy.aip.available, AIT: economy.ait.available }, economy, creatorApplications, aitEntitlements, benefitClaims, paymentSettlements, ledgerAppeals, economyContracts, managedAitEntitlements, managedBenefitClaims, managedPaymentSettlements, managedLedgerAppeals, aitWithdrawal: { retired: true, available: 0, reason: 'AIT 是 Campaign 权益与收益凭证，不支持通用提现' }, walletBindings, aitWithdrawals: [], stats, organization: organization && { id: organization.id, name: organization.name, verificationStatus: organization.verification_status, verificationNote: organization.verification_note }, organizations, participants, attribution, runtimeEnabled, agents, agentMemories, contents, artifacts, activeBoosts, feed, tasks, taskSteps, ledger, managedPointEvents, campaigns, deliverables, settlements, notifications, sessions, termsAcceptances, deletionRequest, riskCases, reports, contentAppeals, appealableContentIds, auditLogs };
+  return { me: publicEconomyUser(db, user), ai: ai.info, loginIdentities, following, engagementState, followerCount, points: { AIP: economy.aip.available, AIT: economy.ait.available }, economy, creatorApplications, aitEntitlements, benefitClaims, paymentSettlements, ledgerAppeals, economyContracts, managedAitEntitlements, managedBenefitClaims, managedPaymentSettlements, managedLedgerAppeals, aitWithdrawal: { retired: true, available: 0, reason: 'AIT 是 Campaign 权益与收益凭证，不支持通用提现' }, walletBindings, aitWithdrawals: [], stats, organization: organization && { id: organization.id, name: organization.name, verificationStatus: organization.verification_status, verificationNote: organization.verification_note }, organizations, participants, attribution, runtimeEnabled, agents, agentMemories, contents, artifacts, activeBoosts, feed, tasks, taskSteps, ledger, managedPointEvents, campaigns, deliverables, settlements, notifications, sessions, termsAcceptances, deletionRequest, riskCases, reports, contentAppeals, appealableContentIds, auditLogs };
 }
 
 function requireOwnedAgent(db, id, user) {
@@ -503,6 +537,10 @@ export function createApp(options = {}) {
   if (env.NODE_ENV === 'production' && secret === 'airvana-development-secret-change-me') throw new Error('APP_SECRET must be configured in production');
   const allowDemo = options.allowDemo ?? (env.NODE_ENV !== 'production' && env.ALLOW_DEMO_AUTH !== 'false');
   const cookieSecure = env.COOKIE_SECURE === 'true';
+  const corsAllowedOrigins = new Set(String(env.CORS_ALLOWED_ORIGINS || (env.NODE_ENV === 'production'
+    ? ''
+    : 'http://127.0.0.1:8083,http://localhost:8083,http://127.0.0.1:8084,http://localhost:8084,http://127.0.0.1:8085,http://localhost:8085'))
+    .split(',').map(value => value.trim()).filter(Boolean));
   const runtimeMinDurationMs = Number(env.RUNTIME_MIN_DURATION_MS || 2_000);
   const rateBuckets = new Map();
   let lastCleanup = 0;
@@ -513,6 +551,21 @@ export function createApp(options = {}) {
     const pathname = url.pathname;
     const ctx = requestContext(req, secret);
     try {
+      const requestOrigin = String(req.headers.origin || '');
+      const corsAllowed = requestOrigin && corsAllowedOrigins.has(requestOrigin);
+      if (corsAllowed) {
+        res.setHeader('Access-Control-Allow-Origin', requestOrigin);
+        res.setHeader('Access-Control-Allow-Credentials', 'true');
+        res.setHeader('Access-Control-Allow-Headers', 'Content-Type, X-Airvana-Device');
+        res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, OPTIONS');
+        res.setHeader('Vary', 'Origin');
+      }
+      if (req.method === 'OPTIONS') {
+        if (!corsAllowed) throw new HttpError(403, '请求来源未在允许列表', 'origin_mismatch');
+        res.writeHead(204);
+        res.end();
+        return;
+      }
       res.setHeader('X-Content-Type-Options', 'nosniff');
       res.setHeader('Referrer-Policy', 'same-origin');
       // Sensor Playables may request the microphone from this same-origin shell
@@ -537,7 +590,7 @@ export function createApp(options = {}) {
       else if (++currentBucket.count > limit) throw new HttpError(429, '请求过于频繁，请稍后重试', 'rate_limited');
       if (!['GET', 'HEAD', 'OPTIONS'].includes(req.method) && req.headers.origin) {
         const expectedOrigin = `${req.socket.encrypted ? 'https' : 'http'}://${req.headers.host}`;
-        if (req.headers.origin !== expectedOrigin) throw new HttpError(403, '请求来源验证失败', 'origin_mismatch');
+        if (req.headers.origin !== expectedOrigin && !corsAllowed) throw new HttpError(403, '请求来源验证失败', 'origin_mismatch');
       }
       if (pathname === '/api/health' && req.method === 'GET') {
         return sendJson(res, 200, { ok: true, service: 'airvana-v5.3-economy-v1', economyVersion: 'airvana-economy-v1.0', ai: ai.info, deferred: ['external-kyc-provider', 'authoritative-attribution-provider', 'payment-provider', 'production-infrastructure', 'legal-approval'], time: isoNow() });
@@ -1238,6 +1291,30 @@ export function createApp(options = {}) {
         return sendJson(res, 200, { content: mapContent(db.prepare('SELECT * FROM contents WHERE id=?').get(content.id)) });
       }
 
+      if (pathname === '/api/runtime/history' && req.method === 'GET') {
+        const user = requireUser(db, req);
+        const limit = asInt(url.searchParams.get('limit') || 50, 1, 100, '体验记录数量');
+        const rows = db.prepare(`SELECT s.id,s.content_id,s.status,s.reward_eligible,s.started_at,s.completed_at,s.created_at,
+          c.title,c.content_type,c.current_version
+          FROM runtime_sessions s JOIN contents c ON c.id=s.content_id
+          WHERE s.user_id=?
+          ORDER BY COALESCE(s.completed_at,s.started_at,s.created_at) DESC,s.created_at DESC
+          LIMIT ?`).all(user.id, limit);
+        return sendJson(res, 200, { history: rows.map(row => ({
+          id: row.id,
+          contentId: row.content_id,
+          title: row.title,
+          contentType: row.content_type,
+          version: Number(row.current_version || 1),
+          status: row.status,
+          rewardEligible: Boolean(row.reward_eligible),
+          startedAt: row.started_at,
+          completedAt: row.completed_at,
+          createdAt: row.created_at,
+          publicUrl: `/content/${row.content_id}`,
+        })) });
+      }
+
       if (pathname === '/api/runtime/sessions' && req.method === 'POST') {
         const user = requireUser(db, req);
         const body = await readJson(req);
@@ -1678,17 +1755,16 @@ export function createApp(options = {}) {
           id: row.id, name: row.name, hypothesis: row.hypothesis, variantField: row.variant_field,
           controlValue: row.control_value, variantValue: row.variant_value, rolloutPercent: row.rollout_percent,
           status: row.status, createdAt: row.created_at,
+          assignmentCounts: assignmentCounts(db, row.id),
           assignments: Number(db.prepare('SELECT COUNT(*) n FROM experiment_assignments WHERE experiment_id=?').get(row.id)?.n || 0),
-        })) });
+        })), runtimeVariantAware: artifactVariantAware(db, params.id) });
       }
       if (params && req.method === 'POST') {
         const user = requireUser(db, req);
         const content = requireOwnedContent(db, params.id, user);
         const body = await readJson(req);
         // 只允许在 Agent 可优化字段内做实验：锁定字段不可进入灰度
-        const OPTIMIZABLE = ['title', 'hook', 'coverStyle', 'interactionOrder', 'difficulty'];
-        const field = String(body.variantField || '');
-        if (!OPTIMIZABLE.includes(field)) throw new HttpError(409, `字段「${field}」不在可优化范围内；锁定字段不能进入实验`, 'field_not_optimizable');
+        const field = assertOptimizable(String(body.variantField || ''));
         const rollout = Math.max(0, Math.min(100, Number(body.rolloutPercent ?? 10)));
         const id = uid('experiment');
         const now = isoNow();
@@ -1721,15 +1797,10 @@ export function createApp(options = {}) {
         const user = requireUser(db, req);
         const experiment = db.prepare('SELECT * FROM experiments WHERE id=?').get(params.id);
         if (!experiment) throw new HttpError(404, '实验不存在', 'not_found');
-        if (experiment.status !== 'running') return sendJson(res, 200, { variant: 'control', reason: 'experiment_not_running' });
-        const existing = db.prepare('SELECT variant FROM experiment_assignments WHERE experiment_id=? AND user_id=?').get(params.id, user.id);
-        if (existing) return sendJson(res, 200, { variant: existing.variant, sticky: true });
-        // 稳定分桶：按 experimentId+userId 哈希，同一用户始终同一分支
-        const bucket = Number.parseInt(sha256(`${params.id}:${user.id}`).slice(0, 8), 16) % 100;
-        const variant = bucket < experiment.rollout_percent ? 'variant' : 'control';
-        db.prepare('INSERT INTO experiment_assignments (id,experiment_id,user_id,variant,assigned_at) VALUES (?,?,?,?,?)')
-          .run(uid('assignment'), params.id, user.id, variant, isoNow());
-        return sendJson(res, 200, { variant, sticky: false, bucket });
+        const assignment = assignVariant(db, experiment, user.id);
+        return sendJson(res, 200, { ...assignment, appliedField: experiment.variant_field,
+          appliedValue: assignment.variant === 'variant' ? experiment.variant_value : experiment.control_value,
+          runtimeVariantAware: artifactVariantAware(db, experiment.content_id) });
       }
 
       if (pathname === '/api/dm/conversations' && req.method === 'GET') {
@@ -1948,6 +2019,23 @@ export function createApp(options = {}) {
           audit(db, { actorUserId: user.id, action: `engagement.${status}`, subjectType: 'content', subjectId: content.id, after: { eventType, points, reason }, ipHash: ctx.ipHash });
         });
         return sendJson(res, status === 'eligible' ? 201 : 200, { idempotent: false, status, points, reason, balance: pointSummary(db, user.id) });
+      }
+
+      if (pathname === '/api/engagements/remove' && req.method === 'POST') {
+        const user = requireUser(db, req);
+        const body = await readJson(req);
+        const eventType = String(body.eventType || '');
+        if (!['like', 'save'].includes(eventType)) throw new HttpError(400, '只能取消点赞或收藏', 'validation_error');
+        const contentId = String(body.contentId || '');
+        const content = db.prepare('SELECT id FROM contents WHERE id=?').get(contentId);
+        if (!content) throw new HttpError(404, '内容不存在', 'not_found');
+        const rows = db.prepare(`SELECT id,event_key FROM engagement_events
+          WHERE user_id=? AND content_id=? AND event_type=? AND status='eligible'`).all(user.id, contentId, eventType);
+        transaction(db, () => {
+          for (const row of rows) db.prepare('DELETE FROM engagement_events WHERE id=?').run(row.id);
+          if (rows.length) audit(db, { actorUserId: user.id, action: `engagement.${eventType}_removed`, subjectType: 'content', subjectId: contentId, after: { removed: rows.length }, ipHash: ctx.ipHash });
+        });
+        return sendJson(res, 200, { removed: rows.length, active: false });
       }
 
       if (pathname === '/api/demo/seed-workflow' && req.method === 'POST') {
@@ -2621,7 +2709,7 @@ export function createApp(options = {}) {
         if (query) { clauses.push('(c.title LIKE ? OR u.display_name LIKE ?)'); values.push(`%${query}%`, `%${query}%`); }
         if (CONTENT_TYPES.has(type)) { clauses.push('c.content_type=?'); values.push(type); }
         const rows = db.prepare(`SELECT c.*,u.display_name author_name,MAX(b.expires_at) boost_expires_at FROM contents c JOIN users u ON u.id=c.owner_user_id LEFT JOIN content_boosts b ON b.content_id=c.id AND b.status='active' AND b.expires_at>? WHERE ${clauses.join(' AND ')} GROUP BY c.id ORDER BY boost_expires_at IS NOT NULL DESC,c.published_at DESC LIMIT 60`).all(isoNow(), ...values);
-        return sendJson(res, 200, { results: rows.map(row => ({ ...mapContent(row), authorName: row.author_name, boostedUntil: row.boost_expires_at, publicUrl: `/content/${row.id}` })) });
+        return sendJson(res, 200, { results: rows.map(row => serializeFeedContent(db, row)) });
       }
 
       params = routeMatch(pathname, '/api/contents/:id/boost');
@@ -2703,8 +2791,20 @@ export function createApp(options = {}) {
         if (!content || content.status !== 'published') throw new HttpError(404, '公开内容不存在', 'not_found');
         const artifact = db.prepare(`SELECT * FROM content_artifacts WHERE content_id=? AND version=? AND status='ready'`).get(content.id, content.current_version);
         if (!artifact) throw new HttpError(404, '内容成品不存在', 'not_found');
-        res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=60', 'X-Frame-Options': 'SAMEORIGIN', 'X-Content-Type-Options': 'nosniff', 'Content-Security-Policy': "default-src 'self'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'self'; img-src 'self' data:; frame-ancestors 'self'" });
-        return res.end(req.method === 'HEAD' ? '' : artifact.html_text);
+        // 灰度投放：分桶在服务端解析并落真实分配记录，注入到投放副本，存量成品与 checksum 不变
+        const running = db.prepare(`SELECT id FROM experiments WHERE content_id=? AND status='running' LIMIT 1`).get(content.id);
+        const viewer = getSessionUser(db, req);
+        const variant = running ? resolveContentVariant(db, content.id, viewer?.id || null) : null;
+        let html = artifact.html_text;
+        if (variant && artifactVariantAware(db, content.id)) {
+          const payload = jsonString(variant).replaceAll('<', '\\u003c').replaceAll('>', '\\u003e').replaceAll('&', '\\u0026');
+          html = html.replace('<body>', `<body><script>globalThis.__AIRVANA_VARIANT__=${payload};</script>`);
+        }
+        res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8',
+          // 内容处于灰度时按人投放，禁止任何共享缓存复用他人分支
+          'Cache-Control': running ? 'private, no-store' : 'public, max-age=60', Vary: 'Cookie',
+          'X-Frame-Options': 'SAMEORIGIN', 'X-Content-Type-Options': 'nosniff', 'Content-Security-Policy': "default-src 'self'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'self'; img-src 'self' data:; frame-ancestors 'self'" });
+        return res.end(req.method === 'HEAD' ? '' : html);
       }
 
       params = routeMatch(pathname, '/preview/:id');

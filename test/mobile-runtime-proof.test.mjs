@@ -28,6 +28,7 @@ after(async () => {
 async function req(path, { method = 'GET', body, cookie, device = 'mobile-proof-device' } = {}) {
   const response = await fetch(base + path, {
     method,
+    signal: AbortSignal.timeout(5_000),
     headers: { 'Content-Type': 'application/json', 'X-Airvana-Device': device, ...(cookie ? { Cookie: cookie } : {}) },
     body: body == null ? undefined : JSON.stringify(body),
   });
@@ -78,6 +79,12 @@ test('mobile completion earns 5 AIP through the ordered server runtime proof and
 
   const posted = app.db.prepare("SELECT COALESCE(SUM(amount),0) total FROM point_events WHERE user_id=? AND currency='AIP' AND status='posted'").get(login.data.me.id).total;
   assert.ok(posted >= 5);
+
+  const history = await req('/api/runtime/history', { cookie });
+  assert.equal(history.response.status, 200);
+  assert.equal(history.data.history[0].contentId, contentId);
+  assert.equal(history.data.history[0].status, 'completed');
+  assert.equal(history.data.history[0].publicUrl, `/content/${contentId}`);
 
   // 24 小时内同一游戏第二次完成不重复奖励
   const second = await req('/api/runtime/sessions', { method: 'POST', cookie, body: { contentId } });

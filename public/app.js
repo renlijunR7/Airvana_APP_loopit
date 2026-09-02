@@ -116,10 +116,10 @@ async function loadAiTwin(){
   }catch{ aiTwinCache={loaded:true,twin:null,scenes:[]}; }
 }
 
-let experimentCache={contentId:'',contentTitle:'',experiments:[]};
+let experimentCache={contentId:'',contentTitle:'',experiments:[],runtimeVariantAware:false};
 async function loadExperiments(contentId,contentTitle){
   const result=await api(`/api/contents/${contentId}/experiments`);
-  experimentCache={contentId,contentTitle,experiments:result.experiments||[]};
+  experimentCache={contentId,contentTitle,experiments:result.experiments||[],runtimeVariantAware:!!result.runtimeVariantAware};
 }
 const EXPERIMENT_OPTIMIZABLE=[['title','标题'],['hook','开场 Hook'],['coverStyle','封面风格'],['interactionOrder','互动顺序'],['difficulty','难度']];
 function parseKnowledgeLines(text){
@@ -435,8 +435,8 @@ function aiTwinSection(){
 function experimentSection(){
   const cache=experimentCache;
   if(!cache.contentId)return '';
-  const rows=cache.experiments.map(x=>`<div class="list-row"><div><h3>${esc(x.name)}</h3><p>字段 ${esc(x.variantField)} · 对照 ${esc(x.controlValue||'—')} → 实验 ${esc(x.variantValue||'—')} · 灰度 ${x.rolloutPercent}% · 已分桶 ${x.assignments}${x.hypothesis?` · ${esc(x.hypothesis)}`:''}</p></div><div>${status(x.status)}</div><div><p class="muted" style="font-size:10px">${fmtDate(x.createdAt)}</p></div><div class="row-actions">${x.status==='draft'?`<button class="btn small primary" data-action="experiment-status" data-id="${esc(x.id)}" data-status="running">开始灰度</button>`:''}${x.status==='running'?`<button class="btn small soft" data-action="experiment-assignment" data-id="${esc(x.id)}">我的分桶</button><button class="btn small soft" data-action="experiment-status" data-id="${esc(x.id)}" data-status="paused">暂停</button><button class="btn small primary" data-action="experiment-status" data-id="${esc(x.id)}" data-status="completed">完成</button><button class="btn small danger" data-action="experiment-status" data-id="${esc(x.id)}" data-status="rolled_back">回滚</button>`:''}${x.status==='paused'?`<button class="btn small primary" data-action="experiment-status" data-id="${esc(x.id)}" data-status="running">恢复</button><button class="btn small danger" data-action="experiment-status" data-id="${esc(x.id)}" data-status="rolled_back">回滚</button>`:''}</div></div>`).join('')||empty('该内容还没有实验','只有 Agent 可优化字段能进入灰度；Campaign 锁定字段不可做实验');
-  return `<section class="section"><div class="section-head"><h2>受控实验 · ${esc(cache.contentTitle)}</h2><span>稳定分桶 · 仅可优化字段 · 可回滚</span><button class="btn small primary" data-action="experiment-create" data-content="${esc(cache.contentId)}">新建实验</button></div><div class="list">${rows}</div></section>`;
+  const rows=cache.experiments.map(x=>`<div class="list-row"><div><h3>${esc(x.name)}</h3><p>字段 ${esc(x.variantField)} · 对照 ${esc(x.controlValue||'—')} → 实验 ${esc(x.variantValue||'—')} · 灰度 ${x.rolloutPercent}% · 已分桶 ${x.assignments}（对照 ${(x.assignmentCounts||{}).control||0} / 实验 ${(x.assignmentCounts||{}).variant||0}）${x.hypothesis?` · ${esc(x.hypothesis)}`:''}</p></div><div>${status(x.status)}</div><div><p class="muted" style="font-size:10px">${fmtDate(x.createdAt)}</p></div><div class="row-actions">${x.status==='draft'?`<button class="btn small primary" data-action="experiment-status" data-id="${esc(x.id)}" data-status="running">开始灰度</button>`:''}${x.status==='running'?`<button class="btn small soft" data-action="experiment-assignment" data-id="${esc(x.id)}">我的分桶</button><button class="btn small soft" data-action="experiment-status" data-id="${esc(x.id)}" data-status="paused">暂停</button><button class="btn small primary" data-action="experiment-status" data-id="${esc(x.id)}" data-status="completed">完成</button><button class="btn small danger" data-action="experiment-status" data-id="${esc(x.id)}" data-status="rolled_back">回滚</button>`:''}${x.status==='paused'?`<button class="btn small primary" data-action="experiment-status" data-id="${esc(x.id)}" data-status="running">恢复</button><button class="btn small danger" data-action="experiment-status" data-id="${esc(x.id)}" data-status="rolled_back">回滚</button>`:''}</div></div>`).join('')||empty('该内容还没有实验','只有 Agent 可优化字段能进入灰度；Campaign 锁定字段不可做实验');
+  return `<section class="section"><div class="section-head"><h2>受控实验 · ${esc(cache.contentTitle)}</h2><span>稳定分桶 · 仅可优化字段 · 可回滚</span><button class="btn small primary" data-action="experiment-create" data-content="${esc(cache.contentId)}">新建实验</button></div><div class="list">${rows}</div><p class="field-hint">${cache.runtimeVariantAware?'运行中的实验会在投放 <code>/content/:id</code> 时由服务端解析分桶并注入成品运行时：分支取值真实生效，存量成品与 checksum 不变，灰度期间该地址禁用共享缓存。':'当前成品版本早于分桶能力（manifest 无 variantAware），分桶记录照常产生但不会改变渲染；重新生成成品后即可生效。'}</p></section>`;
 }
 
 function ledgerView() {
@@ -894,7 +894,7 @@ app.addEventListener('click', async event => {
     }
     else if (action === 'experiment-assignment') {
       const result=await api(`/api/experiments/${el.dataset.id}/assignment`);
-      await openDialog({title:'我的实验分桶',message:'分桶按 实验 + 用户 稳定哈希，同一用户始终落在同一分支；未运行的实验一律返回对照组。',contentHtml:`<div class="evidence-grid"><div><span>分支</span><strong>${esc(label(result.variant))}</strong></div><div><span>是否已有记录</span><strong>${result.sticky?'已存在稳定分桶':'本次新建分桶'}</strong></div><div><span>哈希桶位</span><strong>${result.bucket==null?'—':result.bucket}</strong></div><div><span>未运行原因</span><strong>${esc(result.reason||'—')}</strong></div></div><p class="field-hint">分桶记录为服务端权威；成品运行时尚未按分支切换渲染，属待接能力，不在此处伪造效果。</p>`,confirmText:'关闭',cancelText:null});
+      await openDialog({title:'我的实验分桶',message:'分桶按 实验 + 用户 稳定哈希，同一用户始终落在同一分支；未运行的实验一律返回对照组。',contentHtml:`<div class="evidence-grid"><div><span>分支</span><strong>${esc(label(result.variant))}</strong></div><div><span>是否已有记录</span><strong>${result.sticky?'已存在稳定分桶':'本次新建分桶'}</strong></div><div><span>哈希桶位</span><strong>${result.bucket==null?'—':result.bucket}</strong></div><div><span>未运行原因</span><strong>${esc(result.reason||'—')}</strong></div><div><span>生效字段</span><strong>${esc(result.appliedField||'—')}</strong></div><div><span>该分支取值</span><strong>${esc(result.appliedValue||'—')}</strong></div></div><p class="field-hint">${result.runtimeVariantAware?'分桶为服务端权威，并已在投放成品时生效：该取值会真实作用于运行时渲染。':'分桶为服务端权威，但当前成品版本尚不具备消费能力，渲染不会改变；重新生成成品后生效。'}</p>`,confirmText:'关闭',cancelText:null});
       await loadExperiments(experimentCache.contentId,experimentCache.contentTitle); shell();
     }
     else if (action === 'experiment-status') {

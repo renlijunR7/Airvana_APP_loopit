@@ -2247,7 +2247,7 @@ test('mobile P0 quick creation closes description, questions, Power, recoverable
   assert.equal(component.state.composerSheet, 'confirm');
 
   values = component.renderVals();
-  assert.equal(values.composerSheetTitle, 'Review your answers');
+  assert.equal(values.composerSheetTitle, '核对创作方案');
   assert.equal(values.composerConfirmLabel, '确认并开始创作');
   assert.equal(values.composerFlowSteps.map(step=>step.label).join(' → '), '描述 → 问答 → Power → Review → 生成 → 预览 → 审核 → 发布');
   for (const label of ['标题与创意摘要','目标玩家','Power 能力','核心玩法','操作方式','视觉风格','成功 / 失败 / 重试','站内可见性','Remix']) {

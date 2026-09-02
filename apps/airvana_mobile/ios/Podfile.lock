@@ -1,0 +1,43 @@
+PODS:
+  - Flutter (1.0.0)
+  - flutter_secure_storage_darwin (10.0.0):
+    - Flutter
+    - FlutterMacOS
+  - image_picker_ios (0.0.1):
+    - Flutter
+  - path_provider_foundation (0.0.1):
+    - Flutter
+    - FlutterMacOS
+  - webview_flutter_wkwebview (0.0.1):
+    - Flutter
+    - FlutterMacOS
+
+DEPENDENCIES:
+  - "Flutter (from `../../../../../../Airvana APP （参考loopit）/Airvana_APP_v1.0.0_loopit_hifi/airvana-v5-fullstack/apps/airvana_mobile/ios/Flutter`)"
+  - "flutter_secure_storage_darwin (from `../../../../../../Airvana APP （参考loopit）/Airvana_APP_v1.0.0_loopit_hifi/airvana-v5-fullstack/apps/airvana_mobile/ios/.symlinks/plugins/flutter_secure_storage_darwin/darwin`)"
+  - "image_picker_ios (from `../../../../../../Airvana APP （参考loopit）/Airvana_APP_v1.0.0_loopit_hifi/airvana-v5-fullstack/apps/airvana_mobile/ios/.symlinks/plugins/image_picker_ios/ios`)"
+  - "path_provider_foundation (from `../../../../../../Airvana APP （参考loopit）/Airvana_APP_v1.0.0_loopit_hifi/airvana-v5-fullstack/apps/airvana_mobile/ios/.symlinks/plugins/path_provider_foundation/darwin`)"
+  - "webview_flutter_wkwebview (from `../../../../../../Airvana APP （参考loopit）/Airvana_APP_v1.0.0_loopit_hifi/airvana-v5-fullstack/apps/airvana_mobile/ios/.symlinks/plugins/webview_flutter_wkwebview/darwin`)"
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: "../../../../../../Airvana APP （参考loopit）/Airvana_APP_v1.0.0_loopit_hifi/airvana-v5-fullstack/apps/airvana_mobile/ios/Flutter"
+  flutter_secure_storage_darwin:
+    :path: "../../../../../../Airvana APP （参考loopit）/Airvana_APP_v1.0.0_loopit_hifi/airvana-v5-fullstack/apps/airvana_mobile/ios/.symlinks/plugins/flutter_secure_storage_darwin/darwin"
+  image_picker_ios:
+    :path: "../../../../../../Airvana APP （参考loopit）/Airvana_APP_v1.0.0_loopit_hifi/airvana-v5-fullstack/apps/airvana_mobile/ios/.symlinks/plugins/image_picker_ios/ios"
+  path_provider_foundation:
+    :path: "../../../../../../Airvana APP （参考loopit）/Airvana_APP_v1.0.0_loopit_hifi/airvana-v5-fullstack/apps/airvana_mobile/ios/.symlinks/plugins/path_provider_foundation/darwin"
+  webview_flutter_wkwebview:
+    :path: "../../../../../../Airvana APP （参考loopit）/Airvana_APP_v1.0.0_loopit_hifi/airvana-v5-fullstack/apps/airvana_mobile/ios/.symlinks/plugins/webview_flutter_wkwebview/darwin"
+
+SPEC CHECKSUMS:
+  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  flutter_secure_storage_darwin: acdb3f316ed05a3e68f856e0353b133eec373a23
+  image_picker_ios: 7fe1ff8e34c1790d6fff70a32484959f563a928a
+  path_provider_foundation: 080d55be775b7414fd5a5ef3ac137b97b097e564
+  webview_flutter_wkwebview: 1821ceac936eba6f7984d89a9f3bcb4dea99ebb2
+
+PODFILE CHECKSUM: 3b699761a5cb9432aca9a3b37488e7daba5f31a7
+
+COCOAPODS: 1.16.2

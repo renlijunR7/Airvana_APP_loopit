@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Airvana Playable Runner</title>
+<style>
+  html, body {
+    margin: 0; padding: 0; width: 100%; height: 100%;
+    background: #0B0A10; overflow: hidden;
+    -webkit-user-select: none; user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: none;
+  }
+  #stage {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  canvas {
+    display: block;
+    background: #0B0A10;
+    border-radius: 0;
+  }
+  #boot-error {
+    position: absolute; inset: 0; display: none;
+    align-items: center; justify-content: center;
+    color: #C9C9D2; font: 13px/1.6 -apple-system, "PingFang SC", sans-serif;
+    text-align: center; padding: 32px;
+  }
+</style>
+</head>
+<body>
+<div id="stage"><canvas id="game" width="360" height="560"></canvas></div>
+<div id="boot-error"></div>
+<script src="sensor-interactions-v1.js"></script>
+<script src="game-art-system-v1.js"></script>
+<script src="character-runtime-v1.js"></script>
+<script src="complete-games-v3.js"></script>
+<script src="deep-games-v2.js"></script>
+<script>
+(function () {
+  'use strict';
+  // 复用旧版 Web 的完整游戏引擎（complete-v3 32 款 + deep-v2 6 款）。
+  // Flutter 通过 startAirvanaGame(key, muted) 启动，事件经 GameBridge JS channel 回传。
+  var DEEP_KEYS = ['star-mower', 'star-deck', 'adventurer-journal', 'idiom-detective', 'hex-frontier', 'garden-renewal'];
+  var session = null;
+  var currentKey = null;
+
+  function post(payload) {
+    try {
+      if (window.GameBridge && window.GameBridge.postMessage) {
+        window.GameBridge.postMessage(JSON.stringify(payload));
+      }
+    } catch (error) { /* bridge unavailable: ignore */ }
+  }
+
+  function fitCanvas() {
+    var canvas = document.getElementById('game');
+    var scale = Math.min(window.innerWidth / 360, window.innerHeight / 560);
+    canvas.style.width = Math.floor(360 * scale) + 'px';
+    canvas.style.height = Math.floor(560 * scale) + 'px';
+  }
+  window.addEventListener('resize', fitCanvas);
+  fitCanvas();
+
+  function engineFor(key) {
+    if (DEEP_KEYS.indexOf(key) >= 0) return window.AirvanaDeepGames;
+    return window.AirvanaCompleteGames;
+  }
+
+  window.startAirvanaGame = function (key, muted) {
+    var canvas = document.getElementById('game');
+    var engine = engineFor(key);
+    if (session && session.destroy) { try { session.destroy(); } catch (e) {} session = null; }
+    if (!engine || !(engine.has ? engine.has(key) : true)) {
+      var fallback = document.getElementById('boot-error');
+      fallback.style.display = 'flex';
+      fallback.textContent = '未找到游戏「' + key + '」的完整玩法定义。';
+      post({type: 'error', message: 'game_not_found', key: key});
+      return;
+    }
+    currentKey = key;
+    try {
+      session = engine.mount(canvas, key, {
+        muted: muted === true || muted === 'true',
+        reducedMotion: false,
+        onComplete: function (result) {
+          post({
+            type: 'complete',
+            key: currentKey,
+            success: !!(result && result.success),
+            score: result && typeof result.score === 'number' ? result.score : 0,
+            stage: result && result.stage != null ? String(result.stage) : '',
+            summary: result && result.summary ? String(result.summary) : ''
+          });
+        },
+        onEvent: function (name, properties) {
+          post({type: 'event', key: currentKey, name: String(name || ''), properties: properties || {}});
+        },
+        onStatus: function (status) {
+          post({
+            type: 'status',
+            key: currentKey,
+            paused: !!(status && status.paused),
+            stage: status && status.stage != null ? String(status.stage) : '',
+            score: status && typeof status.score === 'number' ? status.score : 0,
+            text: status && status.text ? String(status.text) : ''
+          });
+        }
+      });
+      post({type: 'ready', key: key});
+    } catch (error) {
+      post({type: 'error', message: String(error && error.message || error), key: key});
+    }
+  };
+
+  window.airvanaRunnerControl = {
+    togglePause: function () { if (session && session.togglePause) session.togglePause(); },
+    restart: function () { if (currentKey) window.startAirvanaGame(currentKey, false); },
+    mute: function (value) { if (session && session.setMuted) session.setMuted(value === true || value === 'true'); },
+    destroy: function () { if (session && session.destroy) { try { session.destroy(); } catch (e) {} session = null; } }
+  };
+
+  post({type: 'boot', complete: !!window.AirvanaCompleteGames, deep: !!window.AirvanaDeepGames});
+})();
+</script>
+</body>
+</html>

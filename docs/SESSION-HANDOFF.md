@@ -1,4 +1,4 @@
-# Airvana 开发交接（2026-08-21 · 第二轮）
+# Airvana 开发交接（2026-08-31 · 第三轮）
 
 > 新会话请先读本文件 + `docs/Airvana-全项目结构化需求清单-v3.0.md`（v3.1 内容），即可接续工作。
 
@@ -6,7 +6,7 @@
 
 - 目录：`airvana-v5-fullstack`（Node + SQLite 本地全栈，无第三方依赖）
 - 启动：`npm start` → 移动端 `http://127.0.0.1:8082/`，工作台 `/workspace`
-- 测试：`npm test`（298/298）、`npm run verify`（30/30）
+- 测试：`npm test`（315/315）、`npm run verify`（30/30）
 - 缩放调试：`/?display-scale=0.7`
 
 ## 当前基线
@@ -17,7 +17,7 @@
 | SQLite 表 | 69 张 |
 | 移动端接入端点 | 46 个（当日之前为 10 个） |
 | 桥接方法 | `public/local-api-bridge-v1.js`，约 56 个 |
-| 测试 / 校验 | **298 / 298**，30 / 30 |
+| 测试 / 校验 | **315 / 315**，30 / 30 |
 | `public/` 体积 | 127 MB；APK **55 MB**（v1.1.0，桌面已有产物） |
 
 ## 已完成主线（2026-08-20 ~ 08-21）
@@ -53,11 +53,28 @@
 - 第三方（邮件 / OAuth / KYC / 外部发布 / 链上 / 支付 / 推送）只标注边界，不伪造成功
 - 版本号三处一致：`build-apk.sh` 的 versionCode/versionName/产物名 + `MainActivity` 的 `app-version` + `index.html` 的 `nativeApkVersion`
 
+## 本轮新增（2026-08-31 · 第三轮）
+
+**实验分支已真正作用于成品运行时**（上一轮遗留的第 1 号待办已关闭）：
+
+1. 新增 `src/experiments.mjs`：分桶解析、可优化字段白名单、真实分配统计的单一来源；`/api/experiments/:id/assignment` 与投放层复用同一套逻辑
+2. `/content/:id` 投放期解析分桶并注入 `globalThis.__AIRVANA_VARIANT__`；成品内 `applyVariant()` 真实消费 5 个字段：
+   - `title` / `hook` → 改写标题与首屏文案（同时改 `document.title` 与 DATA）
+   - `coverStyle` → 写入 `data-cover-style`，取值为合法颜色时改 `--accent`（成品配色已改为走该变量）
+   - `interactionOrder` → 支持 `reverse` 或 `3,1` 式索引重排 sections
+   - `difficulty` → 真实改变通关所需检查数（easy/normal/hard → 1/2/3）
+3. **不破坏的三件事**：存量成品 `html_text` 与 `checksum` 不变（注入只在投放副本）；运行证明链恒为 `playable_start → step_complete → playable_complete`；旧成品（manifest 无 `variantAware`）不注入，工作台如实提示而不是假定生效
+4. **缓存正确性**：内容存在 running 实验时 `/content/:id` 返回 `private, no-store` + `Vary: Cookie`；无实验时恢复 `public, max-age=60`
+5. **边界**：匿名访问不分桶、不注入、不落记录；实验 paused 后立即停止影响投放
+6. 工作台展示真实分支分配数（对照 N / 实验 N）与 `runtimeVariantAware`；旧的「待接能力」文案已删除，测试加了反向守卫防止回退
+7. 顺带修掉根目录 `.claude/launch.json` 里 `cwd` 与 `--prefix` 同时存在导致路径拼两次、dev server 起不来的问题
+8. **实库验证**（`data/airvana.db`）：`experiments` 新增 1 条（hook 字段、100% 放量）、`experiment_assignments` 新增真实分配、最新成品 `manifest.variantAware=1` 且 checksum 自洽无注入残留；浏览器实测首屏副标题变为实验值、点击通关三事件齐全且保留奖励资格
+
 ## 剩余待办
 
-1. **实验分支尚未作用于成品运行时**：分桶记录已是服务端权威，但成品渲染还没按 `variant/control` 切换；UI 已明确标注为待接能力，不伪造效果
-2. **Web 端体积深化**：`public/` 127 MB 中 ai-twin 仍占 81 MB；若要 Web 也降到 100 MB 以下需外置 HeyGen 样片
-3. **法律文本律师复核**：主体 Cerdar Ai Limited（BVI）已填入，上线前需目标法域律师意见
+1. **Web 端体积深化**：`public/` 127 MB 中 ai-twin 仍占 81 MB；若要 Web 也降到 100 MB 以下需外置 HeyGen 样片
+2. **法律文本律师复核**：主体 Cerdar Ai Limited（BVI）已填入，上线前需目标法域律师意见
+3. **实验效果度量（可选）**：分支已真实投放，但还没把运行/互动数据按分支聚合成对照报表；没有统计口径前不展示"哪个分支更好"的结论
 4. **边界项**：真实第三方接入、生产基础设施（PostgreSQL / 队列 / 对象存储 / CI/CD / 监控）
 
 ## 关键文件索引
@@ -69,6 +86,7 @@
 | 服务端路由 | `src/app.mjs` |
 | 数据表 | `src/db.mjs` |
 | 经济模型 | `src/economy.mjs` |
+| 灰度分桶 | `src/experiments.mjs` |
 | 移动端 | `public/index.html` + `public/boot.js` |
 | 服务端桥接 | `public/local-api-bridge-v1.js` |
 | 国际化 | `public/i18n-v1.js` |

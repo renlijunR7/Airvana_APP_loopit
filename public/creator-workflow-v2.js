@@ -97,6 +97,20 @@
     return fallback;
   }
 
+  function deriveThemeTitle(source, type, isQuiz) {
+    var text = String(source || '').split(/[，。,.!！？?；;\n]/)[0] || '';
+    text = text.replace(/^(我想要?|帮我|请|来|做一个|做一款|创作一个|设计一款|设计一个|一个|一款)+/, '');
+    text = text.replace(/^(针对|面向)(.{1,8})的/, '');
+    text = text.replace(/^(可爱卡通|轻写实|像素|赛博朋克|霓虹赛博|国风|水墨|现代)(风格)?的?/, '');
+    text = text.replace(/(的)?(休闲|经营|益智|放置|互动|闯关|蓄力)*(小)?(游戏|挑战|故事|测评|指南|问答|玩法|体验)?$/, '');
+    text = text.replace(/在(.{1,6})(里|上|中|内)/, '$1');
+    text = text.replace(/的$/, '').trim();
+    if (!text) return '';
+    if (text.length > 12) text = text.slice(0, 12);
+    var suffix = isQuiz ? '互动问答' : type === '互动测评' ? '互动测评' : type === '互动叙事' ? '互动故事' : '互动挑战';
+    return text + suffix;
+  }
+
   function extractIntent(text, options) {
     var source = String(text || '').trim();
     var config = options || {};
@@ -135,9 +149,11 @@
       ? ['tapHoldControl', 'retryState', 'scoreFeedback', 'mobilePortrait']
       : ['tapControl', 'retryState', 'scoreFeedback'];
     if (/图片|视觉|卡通|插画/.test(source)) recommended.push('imageAssets');
+    var suggestedTitle = deriveThemeTitle(source, type, isQuiz);
     return {
       schema_version: VERSION,
       source_text: source,
+      suggested_title: suggestedTitle,
       work_type: type,
       target_players: target,
       core_mechanic: mechanic,
@@ -156,7 +172,7 @@
   function buildQuestions(intent, answers) {
     var current = answers || {};
     var fields = [
-      {id:'control_mode', prompt:'希望使用长按蓄力还是点击跳跃？', options:['长按蓄力','点击跳跃'], default_value:intent.control_mode || '长按蓄力'},
+      {id:'control_mode', prompt:'希望采用哪种主要操作方式？', options:['长按蓄力','点击操作'], default_value:intent.control_mode || '点击操作'},
       {id:'visual_style', prompt:'偏好可爱卡通还是轻写实风格？', options:['可爱卡通','轻写实'], default_value:intent.visual_style || '可爱卡通'},
       {id:'target_duration_seconds', prompt:'一局预计持续多久？', options:['30 秒','60 秒','90 秒'], default_value:String(intent.target_duration_seconds || 60) + ' 秒'},
       {id:'remix_allowed', prompt:'是否允许其他用户 Remix？', options:['不允许','允许'], default_value:intent.remix_default ? '允许' : '不允许'}
