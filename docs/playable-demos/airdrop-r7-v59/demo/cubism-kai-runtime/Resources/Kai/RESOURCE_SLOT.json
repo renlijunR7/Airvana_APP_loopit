@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "status": "BLOCKED",
+  "model_id": "kai",
+  "role": "authorized-kai",
+  "model3_url": "./Resources/Kai/Kai.model3.json",
+  "asset_manifest_url": "./Resources/Kai/Kai.asset-manifest.json",
+  "asset_manifest_sha256": null,
+  "authorization": {
+    "status": "PENDING",
+    "rights_confirmed": false,
+    "evidence": null
+  },
+  "required_runtime_assets": [
+    "Kai.asset-manifest.json whose exact bytes match asset_manifest_sha256",
+    "SHA-256 entries for Kai.model3.json and every declared model asset",
+    "Kai.model3.json",
+    "Kai.moc3",
+    "one or more textures referenced by Kai.model3.json",
+    "one authored physics3.json referenced by Kai.model3.json",
+    "at least one motion3.json in at least one model3 motion group",
+    "at least one exp3.json expression referenced by Kai.model3.json",
+    "non-empty EyeBlink parameter group in Kai.model3.json Groups",
+    "non-empty LipSync parameter group in Kai.model3.json Groups"
+  ],
+  "optional_authored_assets": [
+    "pose3.json",
+    "userdata3.json",
+    "cdi3.json"
+  ],
+  "host_renderer_contract": {
+    "authorized_status": "AUTHORIZED",
+    "physics_required": true,
+    "motion_groups_min": 1,
+    "expressions_min": 1,
+    "asset_manifest_file": "Kai.asset-manifest.json",
+    "asset_manifest_algorithm": "SHA-256",
+    "asset_manifest_sha256_format": "64 lowercase hexadecimal characters",
+    "asset_manifest_hash_scope": "exact manifest file bytes",
+    "ready_payload_hash_field": "assetManifestSha256",
+    "required_parameter_groups": [
+      "EyeBlink",
+      "LipSync"
+    ]
+  },
+  "blocking_reason": "No authorized Kai Cubism model bundle has been supplied. Mark sample resources are intentionally excluded."
+}

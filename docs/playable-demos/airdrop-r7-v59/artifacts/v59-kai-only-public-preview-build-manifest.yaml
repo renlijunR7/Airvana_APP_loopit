@@ -1,0 +1,76 @@
+build_id: v59-kai-only-public-preview
+created_at: "2026-09-02T00:00:00+08:00"
+environment: public_local_preview
+technical_status: PASS
+licensing_status: BLOCKED
+production_status: BLOCKED
+
+identity:
+  startup_kol_id: kai
+  startup_display_name: Kai
+  startup_avatar_mode: hybrid
+  active_renderer: sprite
+  formal_live2d: false
+
+files:
+  - path: README.md
+    bytes: 3072
+    sha256: ca7f0f276e399d14aa440bfc3faa18a75f5884f4b926c7e0a068d1f74e71d337
+  - path: demo/Airvana_Airdrop_Game_Offline_v59_KaiOnlyPublicPreview.html
+    bytes: 50778202
+    sha256: c082037917acb58a39cc8018ca42863823cedf23ece41a5ffd3d4e2feaab4720
+  - path: demo/Kai_FaceOverlay_Visemes_v5.png
+    bytes: 2162627
+    sha256: a747bdcb8a1cfa1c554da86f1eef05e83f139264fdc9bc6292aac2768916202d
+  - path: demo/cubism-kai-runtime/README.md
+    bytes: 957
+    sha256: 0027539e71033c6b5629f918a62fce5ef05e04d202b76a88e241f4c9b9166939
+  - path: demo/cubism-kai-runtime/Resources/Kai/RESOURCE_SLOT.json
+    bytes: 1720
+    sha256: 4a46e2fad30c83c2fdb257d8f6864aac13d7b6b1e8e3f31222da56d6f7a102b4
+  - path: artifacts/v59-kai-only-public-preview-playable-config.json
+    bytes: 9176
+    sha256: f179d80988fb5255a4a5986c5d44dd9983a3a07bcbd4b644a595bed339bf8fde
+  - path: artifacts/v59-kai-only-public-preview-adapter.json
+    bytes: 6974
+    sha256: 30550e3476515fe887f7154500d05554b6b62684facdba993d858e1e2b318129
+  - path: artifacts/v59-kai-only-public-preview-QA.md
+    bytes: 2065
+    sha256: 088fc7fd167eeef3924ff638c881f78b6ea6ba7f6efe8b656f15ac1d99b4e8ff
+
+public_exclusions:
+  cubism_core: NOT_INCLUDED
+  cubism_sdk_archive: NOT_INCLUDED
+  mao_moc3_and_model_assets: NOT_INCLUDED
+  mao_presenter_assets: NOT_INCLUDED
+  authorized_kai_moc3: NOT_AVAILABLE
+
+authorization_gate:
+  path: demo/cubism-kai-runtime/Resources/Kai/RESOURCE_SLOT.json
+  status: BLOCKED
+  authorization_status: PENDING
+  rights_confirmed: false
+
+qa:
+  host_inline_javascript: PASS_3_OF_3
+  json_parse: PASS
+  default_kai: PASS
+  default_avatar_mode_hybrid: PASS
+  fallback_renderer_sprite: PASS
+  kai_face_sheet_http_200: PASS
+  observed_face_frames:
+    - mouth-a
+    - rest
+    - mouth-e
+    - blink
+    - mouth-o
+  mao_or_cubism_core_requests: NONE
+  responsive_430x932: PASS
+  horizontal_page_overflow: NONE
+
+release_blockers:
+  - Authorized Kai Cubism model bundle and integrity manifest are missing.
+  - Kai model, likeness, commercial, source-distribution, and production rights are not recorded as approved.
+  - Live2D publication and expandable-application classification are not recorded as approved.
+  - Campaign Brief and Campaign Contract for this v59 public scope are not approved.
+  - Production device, WebView, accessibility, privacy, and backend integration QA are incomplete.

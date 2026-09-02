@@ -1,0 +1,327 @@
+{
+  "schema_version": "1.0.0",
+  "playable_id": "plb_htx_kol_lifecycle_v1",
+  "campaign_id": "cmp_htx_kol_lifecycle_v1",
+  "contract_version": "1.5.0",
+  "version": "1.14.3",
+  "status": "draft",
+  "template_id": "tpl_airdrop_game_visual_upgrade",
+  "locales": {
+    "default": "en-US",
+    "supported": [
+      "en-US"
+    ]
+  },
+  "presentation": {
+    "title": "HTX Airdrop Quest - Kai-only Public Preview",
+    "tone": "clear, energetic and verification-aware",
+    "theme": "international sci-fi campaign operations HUD",
+    "logo_asset_id": "asset_kol_avatar_pool",
+    "color_tokens": {
+      "primary": "#46E7FF",
+      "secondary": "#5BE49B",
+      "background": "#040910",
+      "text": "#FFFFFF"
+    },
+    "copy_pack": {
+      "intro_headline": "HTX Airdrop Quest",
+      "intro_body": "Catch tokens and ask your KOL campaign guide.",
+      "start_button": "Enter",
+      "success_title": "Round complete",
+      "failure_title": "Try again",
+      "retry_button": "Retry",
+      "cta_label": "Continue",
+      "share_copy": "Continue the campaign with Kai.",
+      "reward_eligibility": "Eligibility requires campaign verification.",
+      "reward_terms": "Availability and fulfillment remain subject to campaign terms."
+    }
+  },
+  "gameplay": {
+    "mechanic": "catch",
+    "core_loop": "Catch campaign tokens, open the presenter chat and ask a question. Every page load starts with Kai, Command Hub and the identity-safe Kai hybrid renderer. The public package uses the existing Kai sprite and registered whole-face frame for local preview; it contains no Cubism Core, Mao sample model or authorized Kai moc3.",
+    "rounds": 1,
+    "target_duration_seconds": 45,
+    "difficulty": {
+      "minimum": 1,
+      "maximum": 3,
+      "default": 2
+    },
+    "input_modes": [
+      "tap",
+      "keyboard",
+      "microphone"
+    ],
+    "state_transitions": [
+      {
+        "from": "intro",
+        "event": "start",
+        "to": "playing",
+        "guard": null
+      },
+      {
+        "from": "playing",
+        "event": "pause",
+        "to": "paused",
+        "guard": null
+      },
+      {
+        "from": "paused",
+        "event": "resume",
+        "to": "playing",
+        "guard": null
+      },
+      {
+        "from": "playing",
+        "event": "complete_success",
+        "to": "success",
+        "guard": "Completion condition is met"
+      },
+      {
+        "from": "playing",
+        "event": "complete_failure",
+        "to": "failure",
+        "guard": "Completion condition is not met"
+      },
+      {
+        "from": "failure",
+        "event": "retry",
+        "to": "playing",
+        "guard": null
+      },
+      {
+        "from": "success",
+        "event": "finish",
+        "to": "exit",
+        "guard": null
+      },
+      {
+        "from": "failure",
+        "event": "exit",
+        "to": "exit",
+        "guard": null
+      }
+    ],
+    "scoring": {
+      "enabled": true,
+      "rule": "Existing local preview scoring rules",
+      "minimum": 0,
+      "maximum": 999999
+    }
+  },
+  "screens": [
+    {
+      "screen_id": "screen_intro",
+      "state": "intro",
+      "copy_keys": [
+        "intro_headline",
+        "intro_body",
+        "start_button"
+      ],
+      "asset_ids": [
+        "asset_kol_avatar_pool"
+      ],
+      "actions": [
+        "start"
+      ]
+    },
+    {
+      "screen_id": "screen_playing",
+      "state": "playing",
+      "copy_keys": [],
+      "asset_ids": [
+        "asset_kol_avatar_pool",
+        "asset_kai_digital_human_sprite",
+        "asset_kai_face_overlay_visemes_v5",
+        "asset_kai_cubism_resource_slot"
+      ],
+      "actions": [
+        "catch_token",
+        "open_presenter_chat",
+        "ask_presenter_question",
+        "observe_selected_presenter",
+        "open_campaign_kol_social_hub_when_authorized"
+      ]
+    },
+    {
+      "screen_id": "screen_paused",
+      "state": "paused",
+      "copy_keys": [],
+      "asset_ids": [
+        "asset_kol_avatar_pool"
+      ],
+      "actions": [
+        "resume"
+      ]
+    },
+    {
+      "screen_id": "screen_success",
+      "state": "success",
+      "copy_keys": [
+        "success_title"
+      ],
+      "asset_ids": [
+        "asset_kol_avatar_pool"
+      ],
+      "actions": [
+        "finish"
+      ]
+    },
+    {
+      "screen_id": "screen_failure",
+      "state": "failure",
+      "copy_keys": [
+        "failure_title",
+        "retry_button"
+      ],
+      "asset_ids": [
+        "asset_kol_avatar_pool"
+      ],
+      "actions": [
+        "retry",
+        "exit"
+      ]
+    }
+  ],
+  "cta": {
+    "cta_id": "cta_none_local_preview",
+    "type": "none",
+    "label_key": "cta_label",
+    "destination_id": "destination_none_local_preview",
+    "allowed_states": [],
+    "open_mode": "same_context"
+  },
+  "reward_presentation": {
+    "reward_id": "reward_campaign_points_preview",
+    "type": "points",
+    "eligibility_copy_key": "reward_eligibility",
+    "terms_copy_key": "reward_terms",
+    "claim_action": "NOT_APPLICABLE"
+  },
+  "field_authority": {
+    "locked_fields": [
+      "cta.destination_id",
+      "reward_presentation",
+      "constraints",
+      "build.environment",
+      "telemetry",
+      "kol_social_links",
+      "visible_kol_identity",
+      "visible_avatar_renderer"
+    ],
+    "editable_fields": [
+      "presentation.theme",
+      "presentation.copy_pack.share_copy"
+    ],
+    "agentic_fields": [],
+    "runtime_fields": [
+      "runtime.session_id",
+      "runtime.locale",
+      "runtime.device_class",
+      "runtime.kol_id",
+      "runtime.presenter_id",
+      "runtime.answer_intent",
+      "runtime.avatar_state",
+      "runtime.avatar_face_expression",
+      "runtime.avatar_viseme",
+      "runtime.kol_social_link_status",
+      "runtime.avatar_requested",
+      "runtime.avatar_renderer",
+      "runtime.cubism_status",
+      "runtime.avatar_fallback_reason",
+      "runtime.avatar_sample_role"
+    ]
+  },
+  "runtime_policy": {
+    "segmentation_inputs": [
+      "locale",
+      "device_class"
+    ],
+    "agentic_bounds": [],
+    "experiment_id": null,
+    "variant_id": null,
+    "fallback_behavior": "Start every page load with Kai, Command Hub and the identity-safe Kai hybrid renderer. Restore only gameplay and mock campaign progress. Keep the authorized Kai Cubism resource slot BLOCKED until licensed model files and rights evidence are supplied. Do not load or offer Mao in this public preview."
+  },
+  "telemetry": {
+    "required_events": [
+      "impression",
+      "play_start",
+      "valid_interaction",
+      "play_complete",
+      "play_fail",
+      "replay",
+      "error"
+    ],
+    "common_properties": [
+      "event_id",
+      "event_time",
+      "campaign_id",
+      "contract_version",
+      "playable_id",
+      "playable_config_version",
+      "build_id",
+      "creative_id",
+      "channel_id",
+      "kol_id",
+      "link_id",
+      "session_id",
+      "locale",
+      "region",
+      "device_class",
+      "consent_state"
+    ],
+    "deduplication_strategy": "Generate one unique event_id per transition.",
+    "consent_behavior": "Microphone permission is requested only after explicit press-and-hold; no remote analytics are connected in this local preview."
+  },
+  "build": {
+    "target": "web_h5",
+    "entry": "demo/Airvana_Airdrop_Game_Offline_v59_KaiOnlyPublicPreview.html",
+    "asset_base": "./",
+    "minimum_viewport_width": 360,
+    "supported_orientations": [
+      "portrait"
+    ],
+    "dependency_lock": "Bundled React and ReactDOM vendor code plus precompiled application code. No Live2D Cubism Core, Mao model data or SDK download package is included in this public preview.",
+    "environment": "preview"
+  },
+  "constraints": {
+    "approved_asset_ids": [
+      "asset_kol_avatar_pool",
+      "asset_kai_digital_human_sprite",
+      "asset_kai_face_overlay_visemes_v5",
+      "asset_kai_cubism_resource_slot"
+    ],
+    "prohibited_phrases": [
+      "Kai Cubism connected before verified first frame",
+      "Mark presented as Kai",
+      "Mao presented as Kai",
+      "Mao sample cleared for production before licence review",
+      "Official digital human",
+      "Guaranteed reward",
+      "Guaranteed return"
+    ],
+    "required_disclosures": [
+      "CAMPAIGN OPS",
+      "Verification required"
+    ],
+    "privacy_prohibited_fields": [
+      "seed_phrase",
+      "private_key",
+      "raw_kyc_document",
+      "password",
+      "otp"
+    ],
+    "manual_review_required": true
+  },
+  "metadata": {
+    "created_at": "2026-09-01T00:00:00+08:00",
+    "updated_at": "2026-09-02T00:00:00+08:00",
+    "created_by": "Airvana local preview",
+    "notes": [
+      "Public GitHub scope is Kai-only and local preview only.",
+      "The package includes the existing Kai sprite hybrid and registered whole-face viseme sheet; it is not a formal Live2D model.",
+      "The Mao selector, Mao sample assets and Cubism Core are excluded from the public package.",
+      "The Kai RESOURCE_SLOT remains BLOCKED until an authorized Kai model bundle, rights evidence and applicable production approval are supplied.",
+      "No production campaign, reward settlement, KYC collection or commercial attribution authority is included."
+    ]
+  }
+}

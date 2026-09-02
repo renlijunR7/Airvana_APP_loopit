@@ -1,0 +1,224 @@
+{
+  "schema_version": "1.0.0",
+  "adapter_version": "1.3.3-public",
+  "build_id": "v59-kai-only-public-preview",
+  "default_avatar_mode": "hybrid",
+  "identity": {
+    "model_id": "kai",
+    "required_role": "authorized-kai",
+    "sample_substitution_allowed": false
+  },
+  "available_avatar_modes": [
+    {
+      "value": "hybrid",
+      "label": "Campaign KOL · identity-safe (Kai default)",
+      "default": true
+    },
+    {
+      "value": "live2d",
+      "label": "Half Body face rig",
+      "default": false
+    }
+  ],
+  "startup_identity_policy": {
+    "default_kol_id": "kai",
+    "default_avatar_mode": "hybrid",
+    "default_chat_style": "command",
+    "restore_gameplay_progress": true,
+    "session_only_fields": [
+      "kolId",
+      "chatAvatarMode",
+      "chatStyle"
+    ],
+    "legacy_progress_sources": [
+      "airvana_htx_kol_lifecycle_v58",
+      "airvana_htx_kol_lifecycle_v57"
+    ],
+    "legacy_visual_preferences_restored": false,
+    "reset_returns_to_defaults": true
+  },
+  "cubism": {
+    "sdk": "not bundled in public preview",
+    "resource_slot_url": "./cubism-kai-runtime/Resources/Kai/RESOURCE_SLOT.json",
+    "asset_manifest_slot_field": "asset_manifest_url",
+    "asset_manifest_slot_value": "./Resources/Kai/Kai.asset-manifest.json",
+    "asset_manifest_allowlist_suffix": "/cubism-kai-runtime/Resources/Kai/Kai.asset-manifest.json",
+    "runtime_url": null,
+    "model3_allowlist_suffix": "/cubism-kai-runtime/Resources/Kai/Kai.model3.json",
+    "load_timeout_ms": 12000,
+    "required_model3_version": 3,
+    "required_exports": [
+      "moc3",
+      "textures",
+      "physics3",
+      "motions",
+      "expressions"
+    ],
+    "required_parameter_groups": [
+      "EyeBlink",
+      "LipSync"
+    ],
+    "ready_gate": [
+      "same_origin_slot",
+      "slot_status_authorized",
+      "likeness_and_model_rights_approved",
+      "authorized_kai_identity",
+      "asset_manifest_sha256",
+      "approved_model3_path",
+      "every_manifest_file_sha256_match",
+      "all_model3_references_manifest_covered",
+      "runtime_model_loaded",
+      "real_first_frame",
+      "required_capabilities"
+    ],
+    "asset_manifest_contract": {
+      "schema_version": 1,
+      "digest_algorithm": "SHA-256",
+      "digest_input": "exact response bytes of Kai.asset-manifest.json",
+      "slot_digest_format": "64 lowercase hexadecimal characters",
+      "identity": {
+        "model_id": "kai"
+      },
+      "algorithm_field": "SHA-256",
+      "asset_entry_fields": [
+        "path",
+        "sha256"
+      ],
+      "required_coverage": "Kai.model3.json and every asset referenced by Kai.model3.json",
+      "verification": "GET and SHA-256 verify every file entry before mounting the Cubism runtime",
+      "path_policy": "Kai-directory relative paths only; reject percent encoding, backslashes, dot segments, absolute or protocol paths, query, fragment and control characters",
+      "runtime_ready_digest_match_required": true
+    }
+  },
+  "identity_surface_mapping": {
+    "selection_source": "chatAvatarMode",
+    "campaign_attribution_source": "kolId",
+    "campaign_attribution_mutated_by_presenter_selection": false,
+    "surfaces": [
+      "game_dock_name",
+      "game_dock_portrait",
+      "game_dock_accessible_name",
+      "chat_header_name",
+      "chat_header_portrait",
+      "loading_visual",
+      "failure_visual",
+      "live_renderer",
+      "answer_label",
+      "preview_voice_policy",
+      "social_availability"
+    ],
+    "kai": {
+      "identity": "campaign KOL record",
+      "loading_visual": "authorized Kai runtime or existing Kai sprite fallback",
+      "answer_label": "campaign KOL name",
+      "social_availability": "campaign-approved HTTPS destinations only"
+    },
+    "unmodeled_campaign_kol": {
+      "identity": "selected campaign KOL record",
+      "loading_visual": "fixed identity-safe KOL portrait",
+      "live_renderer": "not_claimed",
+      "full_body_status": "asset_pending",
+      "substitute_character_allowed": false,
+      "answer_label": "selected campaign KOL name",
+      "social_availability": "campaign-approved HTTPS destinations only"
+    }
+  },
+  "bridge": {
+    "version": 1,
+    "host_source": "airvana-cubism-host",
+    "runtime_source": "airvana-cubism-runtime",
+    "host_payload_fields": [
+      "interactionState",
+      "speechViseme",
+      "mouthOpen",
+      "speechProgress",
+      "answerIntent",
+      "expressionHint",
+      "reducedMotion"
+    ],
+    "runtime_ready_fields": [
+      "modelId",
+      "role",
+      "firstFrame",
+      "assetManifestSha256",
+      "capabilities.moc3",
+      "capabilities.mouthOpen",
+      "capabilities.stateGestures"
+    ],
+    "trust_checks": [
+      "event_source_is_runtime_iframe",
+      "exact_same_origin",
+      "protocol_version_match",
+      "model_id_is_kai",
+      "role_is_authorized_kai",
+      "first_frame_is_true"
+    ]
+  },
+  "fallback": {
+    "default_kai_renderer": "sprite",
+    "body": "existing full-body six-pose Kai gesture raster",
+    "face": "Kai_FaceOverlay_Visemes_v5.png",
+    "face_frames": [
+      "idle",
+      "blink",
+      "rest",
+      "mouth-a",
+      "mouth-o",
+      "mouth-e"
+    ],
+    "reasons": [
+      "not-open",
+      "http-required",
+      "slot-missing",
+      "model-export-pending",
+      "authorization-pending",
+      "identity-mismatch",
+      "manifest-unverified",
+      "manifest-digest-unavailable",
+      "manifest-path-rejected",
+      "manifest-missing",
+      "manifest-invalid",
+      "manifest-mismatch",
+      "manifest-asset-missing",
+      "manifest-asset-mismatch",
+      "model-path-rejected",
+      "model3-missing",
+      "model3-invalid",
+      "model-capability-missing",
+      "model-parameters-missing",
+      "asset-path-rejected",
+      "asset-missing",
+      "first-frame-timeout",
+      "identity-or-capability-mismatch",
+      "runtime-error"
+    ]
+  },
+  "renderer_handoff": {
+    "outgoing_fade_ms": 84,
+    "empty_gap_ms": 16,
+    "incoming_fade_ms": 180,
+    "simultaneous_visible_heads_allowed": false,
+    "failure_fallback_transition_ms": 0,
+    "failure_fallback_policy": "retain the identity-matched Kai sprite fallback; never claim formal Cubism without an authorized first frame",
+    "reduced_motion_transition_ms": 0
+  },
+  "current_delivery": {
+    "cubism_sdk_runtime_template": "NOT_BUNDLED_PUBLIC_PREVIEW",
+    "kai_cubism_export": "BLOCKED_PENDING_AUTHORIZED_MODEL_EXPORT",
+    "default_active_renderer": "sprite",
+    "default_avatar_mode": "hybrid",
+    "default_kol_id": "kai",
+    "default_chat_style": "command",
+    "visual_preferences_persisted": false,
+    "unmodeled_kol_renderer": "identity-safe-portrait",
+    "local_preview": "AVAILABLE_WITH_KAI_SPRITE_FALLBACK",
+    "production_release": "BLOCKED"
+  },
+  "public_distribution": {
+    "scope": "KAI_ONLY_LOCAL_PREVIEW",
+    "cubism_core_included": false,
+    "mao_model_included": false,
+    "authorized_kai_moc3_included": false,
+    "production_status": "BLOCKED"
+  }
+}
