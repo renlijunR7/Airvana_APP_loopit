@@ -23,8 +23,38 @@
     strategy: 'crystal-bastion'
   });
   const results = [];
+  const sprites = window.AirvanaPlayableAssetsV3;
 
   const wait = milliseconds => new Promise(resolve => setTimeout(resolve, milliseconds));
+
+  async function preloadArt() {
+    const sources = [...new Set(registry.list().map(profile => profile.background).filter(Boolean))];
+    await Promise.all(sources.map(source => new Promise((resolve, reject) => {
+      const image = new Image();
+      image.onload = resolve;
+      image.onerror = () => reject(new Error(`art asset failed to load: ${source}`));
+      image.src = source;
+    })));
+  }
+
+  async function waitForRuntimeReady(engine, timeoutMilliseconds) {
+    const startedAt = performance.now();
+    while (performance.now() - startedAt < timeoutMilliseconds) {
+      const inspection = engine && typeof engine.inspect === 'function' ? engine.inspect() : null;
+      if (inspection && inspection.artReady) return inspection;
+      await wait(40);
+    }
+    return engine && typeof engine.inspect === 'function' ? engine.inspect() : null;
+  }
+
+  async function waitForVisiblePixels(canvas, timeoutMilliseconds) {
+    const startedAt = performance.now();
+    while (performance.now() - startedAt < timeoutMilliseconds) {
+      if (hasVisiblePixels(canvas)) return true;
+      await wait(40);
+    }
+    return hasVisiblePixels(canvas);
+  }
 
   function titleFor(key) {
     const item = [...complete.list(), ...deep.list()].find(entry => entry.key === key);
@@ -44,31 +74,46 @@
     return points.some(([x, y]) => context.getImageData(x, y, 1, 1).data[3] > 0);
   }
 
+  await preloadArt();
+  if (!sprites || !await sprites.load() || sprites.keys().length !== 64) throw new Error('64 gameplay sprites failed to load');
+
   for (const profile of registry.list()) {
     const canvas = document.createElement('canvas');
     canvas.width = 360;
     canvas.height = 640;
+    canvas.getContext('2d', {willReadFrequently: true});
     let engine = null;
     let error = null;
     try {
       const runtime = complete.has(profile.gameKey) ? complete : deep;
-      engine = runtime.mount(canvas, profile.gameKey, {muted: true});
-      await wait(160);
-      if (!hasVisiblePixels(canvas)) throw new Error('canvas remained transparent');
+      const drawsBefore = Object.values(sprites.snapshot().drawCounts).reduce((sum,count)=>sum+count,0);
+      engine = runtime.mount(canvas, profile.gameKey, {muted: true, reducedMotion: true});
+      if (typeof engine.togglePause !== 'function' || engine.togglePause() !== true) throw new Error('pause contract failed');
+      const inspection = await waitForRuntimeReady(engine, 3500);
+      if (!inspection || !inspection.artReady) throw new Error('classic-v1 art did not become ready');
+      if (inspection.artPack !== 'classic-v1') throw new Error(`unexpected art pack: ${inspection.artPack || 'none'}`);
+      if (inspection.stages !== 3) throw new Error(`unexpected stage count: ${inspection.stages}`);
+      if ((inspection.gameplayStates || []).join('>') !== 'intro>playing>paused>success>failure>retry') throw new Error('incomplete gameplay state contract');
+      if (engine.togglePause() !== false) throw new Error('resume contract failed');
+      if (typeof engine.draw === 'function') engine.draw();
+      if (!await waitForVisiblePixels(canvas, 1200)) throw new Error('canvas remained transparent');
+      const drawsAfter = Object.values(sprites.snapshot().drawCounts).reduce((sum,count)=>sum+count,0);
+      if (drawsAfter <= drawsBefore) throw new Error('no actual gameplay sprite drawn');
+      if (!sprites.forGame(profile.gameKey).length) throw new Error('gameplay assets missing from registry');
     } catch (caught) {
       error = caught instanceof Error ? caught.message : String(caught);
     }
 
     const passed = !error;
-    results.push({key: profile.gameKey, family: profile.familyKey, passed, error});
+    results.push({key: profile.gameKey, family: profile.familyKey, artPack: profile.assetPack, stages: 3, passed, error});
     const row = document.createElement('li');
     row.className = passed ? 'is-pass' : 'is-fail';
-    row.textContent = `${passed ? '通过' : '失败'} · ${profile.gameKey}${error ? ` · ${error}` : ''}`;
+    row.textContent = `${passed ? '通过' : '失败'} · ${profile.gameKey} · classic-v1 · 三阶段${error ? ` · ${error}` : ''}`;
     resultList.appendChild(row);
 
     const preferredSample = preferredSampleByFamily[profile.familyKey];
     const shouldRepresent = preferredSample ? preferredSample === profile.gameKey : !representedFamilies.has(profile.familyKey);
-    if (passed && !representedFamilies.has(profile.familyKey) && shouldRepresent) {
+    if (passed) {
       representedFamilies.add(profile.familyKey);
       const figure = document.createElement('figure');
       figure.className = 'sample';
@@ -85,6 +130,6 @@
   const failed = results.length - passed;
   summary.dataset.validationComplete = 'true';
   summary.dataset.pass = String(failed === 0);
-  summary.textContent = `${passed} / ${results.length} 运行通过${failed ? ` · ${failed} 款失败` : ' · 12 类玩法均已采样'}`;
+  summary.textContent = `${passed} / ${results.length} 运行通过${failed ? ` · ${failed} 款失败` : ' · 64 个游戏对象已加载 · 逐款绘制与暂停验证通过'}`;
   window.__AIRVANA_GAME_ART_VALIDATION__ = Object.freeze({passed, failed, total: results.length, results});
 })();

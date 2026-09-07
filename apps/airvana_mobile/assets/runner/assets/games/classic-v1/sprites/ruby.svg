@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="ruby">
+<title>ruby — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M32 5L55 17L59 39L43 59H21L5 39L9 17Z" fill="#d95d39" /><path d="M32 5L44 23L41 43L32 59L55 44L59 39L55 17Z" fill="#a83e33" stroke="none"/><path d="M32 5L20 23L23 43L32 59L5 39L9 17Z" fill="#eb8a59" stroke="none"/><path d="M9 17L20 23H44L55 17M5 39L23 43H41L59 39M20 23L23 43M44 23L41 43" fill="none" stroke="#243042" stroke-width="2"/>
+</g>
+</svg>

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="560" viewBox="0 0 360 560" shape-rendering="geometricPrecision"><rect x="0" y="0" width="360" height="560" fill="#766988"/><path d="M0 20L360 20" fill="none" stroke="#655A78" stroke-width="2"/><path d="M140 20L140 84" fill="none" stroke="#655A78" stroke-width="2"/><path d="M0 84L360 84" fill="none" stroke="#655A78" stroke-width="2"/><path d="M248 84L248 148" fill="none" stroke="#655A78" stroke-width="2"/><path d="M0 148L360 148" fill="none" stroke="#655A78" stroke-width="2"/><path d="M16 148L16 212" fill="none" stroke="#655A78" stroke-width="2"/><path d="M0 212L360 212" fill="none" stroke="#655A78" stroke-width="2"/><path d="M124 212L124 276" fill="none" stroke="#655A78" stroke-width="2"/><path d="M0 276L360 276" fill="none" stroke="#655A78" stroke-width="2"/><path d="M232 276L232 340" fill="none" stroke="#655A78" stroke-width="2"/><path d="M0 340L360 340" fill="none" stroke="#655A78" stroke-width="2"/><path d="M0 340L0 404" fill="none" stroke="#655A78" stroke-width="2"/><path d="M0 404L360 404" fill="none" stroke="#655A78" stroke-width="2"/><path d="M108 404L108 468" fill="none" stroke="#655A78" stroke-width="2"/><path d="M0 468L360 468" fill="none" stroke="#655A78" stroke-width="2"/><path d="M216 468L216 532" fill="none" stroke="#655A78" stroke-width="2"/><path d="M0 532L360 532" fill="none" stroke="#655A78" stroke-width="2"/><path d="M324 532L324 596" fill="none" stroke="#655A78" stroke-width="2"/><rect x="18" y="66" width="324" height="420" fill="#94839F" stroke="#49435E" stroke-width="3"/><rect x="24" y="72" width="312" height="408" fill="#B6A7BF" stroke="#655A78" stroke-width="2"/><g transform="translate(40 247) scale(1.28125) translate(0 0)">
+<title>cup — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M16 10H48L55 54H9Z" fill="#d95d39" /><path d="M38 10H48L55 54H40Z" fill="#a83e33" stroke="none"/><rect x="8" y="53" width="48" height="7" rx="3" fill="#fff4d2" /><rect x="15" y="6" width="34" height="7" rx="2" fill="#fff4d2" /><path d="M20 20L17 43" fill="none" stroke="#fff4d2" stroke-width="3"/>
+</g>
+</g><g transform="translate(141 247) scale(1.28125) translate(0 0)">
+<title>cup — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M16 10H48L55 54H9Z" fill="#d95d39" /><path d="M38 10H48L55 54H40Z" fill="#a83e33" stroke="none"/><rect x="8" y="53" width="48" height="7" rx="3" fill="#fff4d2" /><rect x="15" y="6" width="34" height="7" rx="2" fill="#fff4d2" /><path d="M20 20L17 43" fill="none" stroke="#fff4d2" stroke-width="3"/>
+</g>
+</g><g transform="translate(242 247) scale(1.28125) translate(0 0)">
+<title>cup — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M16 10H48L55 54H9Z" fill="#d95d39" /><path d="M38 10H48L55 54H40Z" fill="#a83e33" stroke="none"/><rect x="8" y="53" width="48" height="7" rx="3" fill="#fff4d2" /><rect x="15" y="6" width="34" height="7" rx="2" fill="#fff4d2" /><path d="M20 20L17 43" fill="none" stroke="#fff4d2" stroke-width="3"/>
+</g>
+</g><g transform="translate(62 365) scale(0.53125) translate(0 0)">
+<title>star — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M32 4L40 23L60 25L45 39L49 59L32 49L15 59L19 39L4 25L24 23Z" fill="#e4b44f" /><path d="M32 4V34L49 59L45 39L60 25L40 23Z" fill="#b47f32" stroke="none"/>
+</g>
+</g><path d="M89 203L276 203" fill="none" stroke="#49435E" stroke-width="3"/><polygon points="267,195 280,203 267,211" fill="#49435E"/></svg>

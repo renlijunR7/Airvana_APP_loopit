@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="fire">
+<title>fire — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M35 3Q43 16 35 26Q47 22 45 13Q59 29 56 43Q54 59 33 61Q10 60 7 42Q5 28 21 13Q19 31 26 28Q36 20 35 3Z" fill="#d95d39" /><path d="M29 28Q32 40 38 41Q42 40 43 32Q54 48 42 56Q29 63 21 53Q12 43 29 28Z" fill="#e4b44f" />
+</g>
+</svg>

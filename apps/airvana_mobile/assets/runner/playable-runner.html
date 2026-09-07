@@ -34,7 +34,7 @@
 <div id="boot-error"></div>
 <script src="sensor-interactions-v1.js"></script>
 <script src="game-art-system-v1.js"></script>
-<script src="character-runtime-v1.js"></script>
+<script src="playable-assets-v3.js"></script>
 <script src="complete-games-v3.js"></script>
 <script src="deep-games-v2.js"></script>
 <script>
@@ -45,6 +45,7 @@
   var DEEP_KEYS = ['star-mower', 'star-deck', 'adventurer-journal', 'idiom-detective', 'hex-frontier', 'garden-renewal'];
   var session = null;
   var currentKey = null;
+  var currentMuted = true;
 
   function post(payload) {
     try {
@@ -80,9 +81,11 @@
       return;
     }
     currentKey = key;
+    currentMuted = muted === true || muted === 'true';
+    document.getElementById('boot-error').style.display = 'none';
     try {
       session = engine.mount(canvas, key, {
-        muted: muted === true || muted === 'true',
+        muted: currentMuted,
         reducedMotion: false,
         onComplete: function (result) {
           post({
@@ -116,8 +119,11 @@
 
   window.airvanaRunnerControl = {
     togglePause: function () { if (session && session.togglePause) session.togglePause(); },
-    restart: function () { if (currentKey) window.startAirvanaGame(currentKey, false); },
-    mute: function (value) { if (session && session.setMuted) session.setMuted(value === true || value === 'true'); },
+    restart: function () { if (currentKey) window.startAirvanaGame(currentKey, currentMuted); },
+    mute: function (value) {
+      currentMuted = value === true || value === 'true';
+      if (session && session.setMuted) session.setMuted(currentMuted);
+    },
     destroy: function () { if (session && session.destroy) { try { session.destroy(); } catch (e) {} session = null; } }
   };
 

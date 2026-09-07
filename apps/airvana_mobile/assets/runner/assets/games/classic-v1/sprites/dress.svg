@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="dress">
+<title>dress — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M21 5H27Q31 12 36 5H43L40 20L37 28L52 57Q32 64 11 57L26 28L23 20Z" fill="#d95d39" /><path d="M37 28L52 57L42 60L31 30Z" fill="#a83e33" stroke="none"/><rect x="25" y="25" width="14" height="5" rx="1" fill="#e4b44f" /><path d="M22 46L18 55M32 40V57" fill="none" stroke="#fff4d2" stroke-width="2"/><path d="M21 5L17 15L23 20M43 5L48 15L40 20" fill="#fff4d2" />
+</g>
+</svg>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="star">
+<title>star — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M32 4L40 23L60 25L45 39L49 59L32 49L15 59L19 39L4 25L24 23Z" fill="#e4b44f" /><path d="M32 4V34L49 59L45 39L60 25L40 23Z" fill="#b47f32" stroke="none"/>
+</g>
+</svg>

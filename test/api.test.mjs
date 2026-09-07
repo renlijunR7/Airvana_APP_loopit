@@ -184,7 +184,7 @@ test('real task pipeline generates, moderates, reviews, versions and publishes',
   const page = await fetch(`${base}/content/${content.id}`);
   assert.equal(page.status, 200);
   const html = await page.text();
-  assert.match(html, /Airvana 运行时/);
+  assert.match(html, /server-game-runtime-v3/);
   assert.match(html, /playable_complete/);
   assert.match(html, /保存到本设备/);
   const data = await bootstrap(cookie);

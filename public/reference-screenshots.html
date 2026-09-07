@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light">
+  <title>原图展示 · Airvana</title>
+  <link rel="stylesheet" href="/reference-screenshots-v1.css?v=1.0.1">
+  <link rel="stylesheet" href="/reference-screenshots-page-v1.css?v=1.0.0">
+</head>
+<body>
+  <main class="screenshot-gallery">
+    <header class="gallery-header">
+      <a class="gallery-back" href="/" aria-label="返回 Airvana App">← 返回 App</a>
+      <span class="gallery-label">原图展示</span>
+    </header>
+
+    <section class="gallery-heading" aria-labelledby="gallery-title">
+      <p class="gallery-kicker">你提供的游戏截图</p>
+      <h1 id="gallery-title">保留原本的画面</h1>
+      <p class="gallery-description">直接展示原图，不重新绘制场景、角色或界面。</p>
+    </section>
+
+    <nav id="gallery-game-nav" class="gallery-game-nav" aria-label="选择截图主题"></nav>
+
+    <section class="gallery-selected" aria-labelledby="gallery-selected-title">
+      <div class="gallery-selected-heading">
+        <h2 id="gallery-selected-title">正在载入截图</h2>
+        <span id="gallery-position" class="gallery-position"></span>
+      </div>
+      <div class="gallery-toolbar">
+        <div class="gallery-display-toggle" role="group" aria-label="截图显示范围">
+          <button type="button" id="gallery-core" aria-pressed="true">游戏画面</button>
+          <button type="button" id="gallery-full" aria-pressed="false">完整截图</button>
+        </div>
+        <div id="gallery-image-nav" class="gallery-image-nav" role="group" aria-label="同主题截图" hidden></div>
+      </div>
+      <p id="gallery-view-note" class="gallery-view-note">仅裁去截图外围，画面内素材保持原样。</p>
+      <div id="gallery-stage" class="gallery-stage" aria-live="polite"></div>
+      <p id="gallery-error" class="gallery-error" role="alert" hidden>截图暂时无法显示，请刷新后重试。</p>
+      <div class="gallery-pagination" aria-label="切换截图主题">
+        <button type="button" id="gallery-previous" aria-label="上一个截图主题">← 上一个</button>
+        <span class="gallery-static-badge">静态截图 · 非可玩复刻</span>
+        <button type="button" id="gallery-next" aria-label="下一个截图主题">下一个 →</button>
+      </div>
+      <footer class="gallery-footer">
+        <p>图片中的按钮、分数和角色为原截图内容，不是当前可操作的游戏。</p>
+        <a id="gallery-interactive-link" href="/reference-arcade.html">查看上一版互动 →</a>
+      </footer>
+    </section>
+  </main>
+  <script src="/reference-screenshots-v1.js?v=1.0.3"></script>
+  <script src="/reference-screenshots-page-v1.js?v=1.0.0"></script>
+</body>
+</html>

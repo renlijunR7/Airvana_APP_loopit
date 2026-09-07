@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="560" viewBox="0 0 360 560" shape-rendering="geometricPrecision"><rect x="0" y="0" width="360" height="560" fill="#51919A"/><path d="M30 35L57 35" fill="none" stroke="#3A7B86" stroke-width="3"/><path d="M118 35L145 35" fill="none" stroke="#3A7B86" stroke-width="3"/><path d="M206 35L233 35" fill="none" stroke="#3A7B86" stroke-width="3"/><path d="M294 35L321 35" fill="none" stroke="#3A7B86" stroke-width="3"/><path d="M0 93L27 93" fill="none" stroke="#3A7B86" stroke-width="3"/><path d="M88 93L115 93" fill="none" stroke="#3A7B86" stroke-width="3"/><path d="M176 93L203 93" fill="none" stroke="#3A7B86" stroke-width="3"/><path d="M264 93L291 93" fill="none" stroke="#3A7B86" stroke-width="3"/><path d="M352 93L379 93" fill="none" stroke="#3A7B86" stroke-width="3"/><path d="M15 151L42 151" fill="none" stroke="#3A7B86" stroke-width="3"/><path d="M103 151L130 151" fill="none" stroke="#3A7B86" stroke-width="3"/><path d="M191 151L218 151" fill="none" stroke="#3A7B86" stroke-width="3"/><path d="M279 151L306 151" fill="none" stroke="#3A7B86" stroke-width="3"/><path d="M30 209L57 209" fill="none" stroke="#3A7B86" stroke-width="3"/><path d="M118 209L145 209" fill="none" stroke="#3A7B86" stroke-width="3"/><path d="M206 209L233 209" fill="none" stroke="#3A7B86" stroke-width="3"/><path d="M294 209L321 209" fill="none" stroke="#3A7B86" stroke-width="3"/><path d="M0 267L27 267" fill="none" stroke="#3A7B86" stroke-width="3"/><path d="M88 267L115 267" fill="none" stroke="#3A7B86" stroke-width="3"/><path d="M176 267L203 267" fill="none" stroke="#3A7B86" stroke-width="3"/><path d="M264 267L291 267" fill="none" stroke="#3A7B86" stroke-width="3"/><path d="M352 267L379 267" fill="none" stroke="#3A7B86" stroke-width="3"/><path d="M15 325L42 325" fill="none" stroke="#3A7B86" stroke-width="3"/><path d="M103 325L130 325" fill="none" stroke="#3A7B86" stroke-width="3"/><path d="M191 325L218 325" fill="none" stroke="#3A7B86" stroke-width="3"/><path d="M279 325L306 325" fill="none" stroke="#3A7B86" stroke-width="3"/><path d="M30 383L57 383" fill="none" stroke="#3A7B86" stroke-width="3"/><path d="M118 383L145 383" fill="none" stroke="#3A7B86" stroke-width="3"/><path d="M206 383L233 383" fill="none" stroke="#3A7B86" stroke-width="3"/><path d="M294 383L321 383" fill="none" stroke="#3A7B86" stroke-width="3"/><path d="M0 441L27 441" fill="none" stroke="#3A7B86" stroke-width="3"/><path d="M88 441L115 441" fill="none" stroke="#3A7B86" stroke-width="3"/><path d="M176 441L203 441" fill="none" stroke="#3A7B86" stroke-width="3"/><path d="M264 441L291 441" fill="none" stroke="#3A7B86" stroke-width="3"/><path d="M352 441L379 441" fill="none" stroke="#3A7B86" stroke-width="3"/><path d="M15 499L42 499" fill="none" stroke="#3A7B86" stroke-width="3"/><path d="M103 499L130 499" fill="none" stroke="#3A7B86" stroke-width="3"/><path d="M191 499L218 499" fill="none" stroke="#3A7B86" stroke-width="3"/><path d="M279 499L306 499" fill="none" stroke="#3A7B86" stroke-width="3"/><path d="M30 557L57 557" fill="none" stroke="#3A7B86" stroke-width="3"/><path d="M118 557L145 557" fill="none" stroke="#3A7B86" stroke-width="3"/><path d="M206 557L233 557" fill="none" stroke="#3A7B86" stroke-width="3"/><path d="M294 557L321 557" fill="none" stroke="#3A7B86" stroke-width="3"/><polygon points="0,0 360,0 360,85 295,85 295,106 221,106 221,117 108,117 108,103 38,103 38,86 0,86" fill="#D9C99A"/><polygon points="0,0 360,0 360,64 289,64 289,83 210,83 210,92 113,92 113,81 35,81 35,64 0,64" fill="#9AC7BD"/><polygon points="50,75 302,75 302,101 329,101 329,471 300,471 300,502 54,502 54,479 28,479 28,104 50,104" fill="#D9C99A"/><rect x="43" y="98" width="273" height="383" fill="#B5C88E" stroke="#405943" stroke-width="3"/><rect x="35.5" y="101" width="289" height="358" fill="#286170"/><rect x="39.5" y="105" width="281" height="350" fill="#D9C99A"/><rect x="44.5" y="110" width="64" height="64" fill="#9AC7BD" stroke="#3A7B86" stroke-width="2"/><g transform="translate(48.5 114) scale(0.875) translate(0 0)">
+<title>flower — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M32 33V59" fill="none" stroke="#416b47" stroke-width="5"/><path d="M30 47Q14 29 10 42Q13 54 31 52M34 43Q50 25 56 38Q49 51 33 50" fill="#689754" /><path d="M25 17Q20 4 31 3Q43 3 40 17Q53 12 57 23Q60 34 45 35Q55 45 46 51Q36 56 31 43Q24 57 14 50Q7 41 19 34Q3 33 7 22Q11 12 25 17Z" fill="#db8ca1" /><circle cx="32" cy="28" r="10" fill="#e4b44f" />
+</g>
+</g><rect x="113.5" y="110" width="64" height="64" fill="#9AC7BD" stroke="#3A7B86" stroke-width="2"/><g transform="translate(117.5 114) scale(0.875) translate(0 0)">
+<title>tree — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M26 34H39L40 58H23Z" fill="#8b6041" /><path d="M32 34H39L40 58H32Z" fill="#614631" stroke="none"/><path d="M14 39Q4 36 8 24Q5 14 18 13Q20 1 31 6Q45 0 48 14Q62 14 57 27Q62 38 47 42Q40 47 31 41Q20 46 14 39Z" fill="#689754" /><path d="M11 35Q23 40 30 31Q39 39 54 30Q62 39 47 42Q40 47 31 41Q20 46 14 39Z" fill="#416b47" stroke="none"/><path d="M26 51L32 44M34 55L38 48" fill="none" stroke="#b47f32" stroke-width="2"/>
+</g>
+</g><rect x="182.5" y="110" width="64" height="64" fill="#9AC7BD" stroke="#3A7B86" stroke-width="2"/><g transform="translate(186.5 114) scale(0.875) translate(0 0)">
+<title>flower — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M32 33V59" fill="none" stroke="#416b47" stroke-width="5"/><path d="M30 47Q14 29 10 42Q13 54 31 52M34 43Q50 25 56 38Q49 51 33 50" fill="#689754" /><path d="M25 17Q20 4 31 3Q43 3 40 17Q53 12 57 23Q60 34 45 35Q55 45 46 51Q36 56 31 43Q24 57 14 50Q7 41 19 34Q3 33 7 22Q11 12 25 17Z" fill="#db8ca1" /><circle cx="32" cy="28" r="10" fill="#e4b44f" />
+</g>
+</g><rect x="251.5" y="110" width="64" height="64" fill="#9AC7BD" stroke="#3A7B86" stroke-width="2"/><g transform="translate(255.5 114) scale(0.875) translate(0 0)">
+<title>flower — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M32 33V59" fill="none" stroke="#416b47" stroke-width="5"/><path d="M30 47Q14 29 10 42Q13 54 31 52M34 43Q50 25 56 38Q49 51 33 50" fill="#689754" /><path d="M25 17Q20 4 31 3Q43 3 40 17Q53 12 57 23Q60 34 45 35Q55 45 46 51Q36 56 31 43Q24 57 14 50Q7 41 19 34Q3 33 7 22Q11 12 25 17Z" fill="#db8ca1" /><circle cx="32" cy="28" r="10" fill="#e4b44f" />
+</g>
+</g><rect x="44.5" y="179" width="64" height="64" fill="#9AC7BD" stroke="#3A7B86" stroke-width="2"/><g transform="translate(48.5 183) scale(0.875) translate(0 0)">
+<title>green apple — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M31 18Q17 10 9 24Q4 34 13 49Q21 62 32 56Q45 61 54 48Q62 32 53 22Q44 11 31 18Z" fill="#8eb854" /><path d="M43 16Q52 25 50 39Q48 53 36 57Q48 59 55 46Q63 29 51 20Z" fill="#416b47" stroke="none"/><path d="M31 18L34 7" fill="none" stroke="#8b6041" stroke-width="4"/><path d="M34 12Q38 2 52 6Q46 18 34 12Z" fill="#689754" />
+</g>
+</g><rect x="113.5" y="179" width="64" height="64" fill="#9AC7BD" stroke="#3A7B86" stroke-width="2"/><g transform="translate(117.5 183) scale(0.875) translate(0 0)">
+<title>tree — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M26 34H39L40 58H23Z" fill="#8b6041" /><path d="M32 34H39L40 58H32Z" fill="#614631" stroke="none"/><path d="M14 39Q4 36 8 24Q5 14 18 13Q20 1 31 6Q45 0 48 14Q62 14 57 27Q62 38 47 42Q40 47 31 41Q20 46 14 39Z" fill="#689754" /><path d="M11 35Q23 40 30 31Q39 39 54 30Q62 39 47 42Q40 47 31 41Q20 46 14 39Z" fill="#416b47" stroke="none"/><path d="M26 51L32 44M34 55L38 48" fill="none" stroke="#b47f32" stroke-width="2"/>
+</g>
+</g><rect x="182.5" y="179" width="64" height="64" fill="#9AC7BD" stroke="#3A7B86" stroke-width="2"/><g transform="translate(186.5 183) scale(0.875) translate(0 0)">
+<title>house — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M11 25H53V59H11Z" fill="#fff4d2" /><path d="M53 25H42V59H53Z" fill="#b47f32" stroke="none"/><path d="M4 28L30 5L60 28H50L30 12L13 28Z" fill="#d95d39" /><rect x="42" y="7" width="8" height="14" fill="#8b6041" /><rect x="18" y="32" width="11" height="12" fill="#75c3c7" /><path d="M23 32V44M18 38H29" fill="none" stroke="#fff4d2" stroke-width="2"/><rect x="34" y="38" width="13" height="21" rx="1" fill="#8b6041" /><circle cx="43" cy="49" r="1.5" fill="#e4b44f" stroke="none"/><rect x="7" y="57" width="50" height="5" rx="1" fill="#614631" />
+</g>
+</g><rect x="251.5" y="179" width="64" height="64" fill="#9AC7BD" stroke="#3A7B86" stroke-width="2"/><g transform="translate(255.5 183) scale(0.875) translate(0 0)">
+<title>green apple — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M31 18Q17 10 9 24Q4 34 13 49Q21 62 32 56Q45 61 54 48Q62 32 53 22Q44 11 31 18Z" fill="#8eb854" /><path d="M43 16Q52 25 50 39Q48 53 36 57Q48 59 55 46Q63 29 51 20Z" fill="#416b47" stroke="none"/><path d="M31 18L34 7" fill="none" stroke="#8b6041" stroke-width="4"/><path d="M34 12Q38 2 52 6Q46 18 34 12Z" fill="#689754" />
+</g>
+</g><rect x="44.5" y="248" width="64" height="64" fill="#9AC7BD" stroke="#3A7B86" stroke-width="2"/><g transform="translate(48.5 252) scale(0.875) translate(0 0)">
+<title>flower — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M32 33V59" fill="none" stroke="#416b47" stroke-width="5"/><path d="M30 47Q14 29 10 42Q13 54 31 52M34 43Q50 25 56 38Q49 51 33 50" fill="#689754" /><path d="M25 17Q20 4 31 3Q43 3 40 17Q53 12 57 23Q60 34 45 35Q55 45 46 51Q36 56 31 43Q24 57 14 50Q7 41 19 34Q3 33 7 22Q11 12 25 17Z" fill="#db8ca1" /><circle cx="32" cy="28" r="10" fill="#e4b44f" />
+</g>
+</g><rect x="113.5" y="248" width="64" height="64" fill="#9AC7BD" stroke="#3A7B86" stroke-width="2"/><g transform="translate(117.5 252) scale(0.875) translate(0 0)">
+<title>tree — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M26 34H39L40 58H23Z" fill="#8b6041" /><path d="M32 34H39L40 58H32Z" fill="#614631" stroke="none"/><path d="M14 39Q4 36 8 24Q5 14 18 13Q20 1 31 6Q45 0 48 14Q62 14 57 27Q62 38 47 42Q40 47 31 41Q20 46 14 39Z" fill="#689754" /><path d="M11 35Q23 40 30 31Q39 39 54 30Q62 39 47 42Q40 47 31 41Q20 46 14 39Z" fill="#416b47" stroke="none"/><path d="M26 51L32 44M34 55L38 48" fill="none" stroke="#b47f32" stroke-width="2"/>
+</g>
+</g><rect x="182.5" y="248" width="64" height="64" fill="#9AC7BD" stroke="#3A7B86" stroke-width="2"/><g transform="translate(186.5 252) scale(0.875) translate(0 0)">
+<title>flower — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M32 33V59" fill="none" stroke="#416b47" stroke-width="5"/><path d="M30 47Q14 29 10 42Q13 54 31 52M34 43Q50 25 56 38Q49 51 33 50" fill="#689754" /><path d="M25 17Q20 4 31 3Q43 3 40 17Q53 12 57 23Q60 34 45 35Q55 45 46 51Q36 56 31 43Q24 57 14 50Q7 41 19 34Q3 33 7 22Q11 12 25 17Z" fill="#db8ca1" /><circle cx="32" cy="28" r="10" fill="#e4b44f" />
+</g>
+</g><rect x="251.5" y="248" width="64" height="64" fill="#9AC7BD" stroke="#3A7B86" stroke-width="2"/><g transform="translate(255.5 252) scale(0.875) translate(0 0)">
+<title>flower — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M32 33V59" fill="none" stroke="#416b47" stroke-width="5"/><path d="M30 47Q14 29 10 42Q13 54 31 52M34 43Q50 25 56 38Q49 51 33 50" fill="#689754" /><path d="M25 17Q20 4 31 3Q43 3 40 17Q53 12 57 23Q60 34 45 35Q55 45 46 51Q36 56 31 43Q24 57 14 50Q7 41 19 34Q3 33 7 22Q11 12 25 17Z" fill="#db8ca1" /><circle cx="32" cy="28" r="10" fill="#e4b44f" />
+</g>
+</g><rect x="44.5" y="317" width="64" height="64" fill="#9AC7BD" stroke="#3A7B86" stroke-width="2"/><g transform="translate(48.5 321) scale(0.875) translate(0 0)">
+<title>green apple — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M31 18Q17 10 9 24Q4 34 13 49Q21 62 32 56Q45 61 54 48Q62 32 53 22Q44 11 31 18Z" fill="#8eb854" /><path d="M43 16Q52 25 50 39Q48 53 36 57Q48 59 55 46Q63 29 51 20Z" fill="#416b47" stroke="none"/><path d="M31 18L34 7" fill="none" stroke="#8b6041" stroke-width="4"/><path d="M34 12Q38 2 52 6Q46 18 34 12Z" fill="#689754" />
+</g>
+</g><rect x="113.5" y="317" width="64" height="64" fill="#9AC7BD" stroke="#3A7B86" stroke-width="2"/><g transform="translate(117.5 321) scale(0.875) translate(0 0)">
+<title>tree — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M26 34H39L40 58H23Z" fill="#8b6041" /><path d="M32 34H39L40 58H32Z" fill="#614631" stroke="none"/><path d="M14 39Q4 36 8 24Q5 14 18 13Q20 1 31 6Q45 0 48 14Q62 14 57 27Q62 38 47 42Q40 47 31 41Q20 46 14 39Z" fill="#689754" /><path d="M11 35Q23 40 30 31Q39 39 54 30Q62 39 47 42Q40 47 31 41Q20 46 14 39Z" fill="#416b47" stroke="none"/><path d="M26 51L32 44M34 55L38 48" fill="none" stroke="#b47f32" stroke-width="2"/>
+</g>
+</g><rect x="182.5" y="317" width="64" height="64" fill="#9AC7BD" stroke="#3A7B86" stroke-width="2"/><g transform="translate(186.5 321) scale(0.875) translate(0 0)">
+<title>house — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M11 25H53V59H11Z" fill="#fff4d2" /><path d="M53 25H42V59H53Z" fill="#b47f32" stroke="none"/><path d="M4 28L30 5L60 28H50L30 12L13 28Z" fill="#d95d39" /><rect x="42" y="7" width="8" height="14" fill="#8b6041" /><rect x="18" y="32" width="11" height="12" fill="#75c3c7" /><path d="M23 32V44M18 38H29" fill="none" stroke="#fff4d2" stroke-width="2"/><rect x="34" y="38" width="13" height="21" rx="1" fill="#8b6041" /><circle cx="43" cy="49" r="1.5" fill="#e4b44f" stroke="none"/><rect x="7" y="57" width="50" height="5" rx="1" fill="#614631" />
+</g>
+</g><rect x="251.5" y="317" width="64" height="64" fill="#9AC7BD" stroke="#3A7B86" stroke-width="2"/><g transform="translate(255.5 321) scale(0.875) translate(0 0)">
+<title>green apple — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M31 18Q17 10 9 24Q4 34 13 49Q21 62 32 56Q45 61 54 48Q62 32 53 22Q44 11 31 18Z" fill="#8eb854" /><path d="M43 16Q52 25 50 39Q48 53 36 57Q48 59 55 46Q63 29 51 20Z" fill="#416b47" stroke="none"/><path d="M31 18L34 7" fill="none" stroke="#8b6041" stroke-width="4"/><path d="M34 12Q38 2 52 6Q46 18 34 12Z" fill="#689754" />
+</g>
+</g><rect x="44.5" y="386" width="64" height="64" fill="#9AC7BD" stroke="#3A7B86" stroke-width="2"/><g transform="translate(48.5 390) scale(0.875) translate(0 0)">
+<title>flower — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M32 33V59" fill="none" stroke="#416b47" stroke-width="5"/><path d="M30 47Q14 29 10 42Q13 54 31 52M34 43Q50 25 56 38Q49 51 33 50" fill="#689754" /><path d="M25 17Q20 4 31 3Q43 3 40 17Q53 12 57 23Q60 34 45 35Q55 45 46 51Q36 56 31 43Q24 57 14 50Q7 41 19 34Q3 33 7 22Q11 12 25 17Z" fill="#db8ca1" /><circle cx="32" cy="28" r="10" fill="#e4b44f" />
+</g>
+</g><rect x="113.5" y="386" width="64" height="64" fill="#9AC7BD" stroke="#3A7B86" stroke-width="2"/><g transform="translate(117.5 390) scale(0.875) translate(0 0)">
+<title>tree — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M26 34H39L40 58H23Z" fill="#8b6041" /><path d="M32 34H39L40 58H32Z" fill="#614631" stroke="none"/><path d="M14 39Q4 36 8 24Q5 14 18 13Q20 1 31 6Q45 0 48 14Q62 14 57 27Q62 38 47 42Q40 47 31 41Q20 46 14 39Z" fill="#689754" /><path d="M11 35Q23 40 30 31Q39 39 54 30Q62 39 47 42Q40 47 31 41Q20 46 14 39Z" fill="#416b47" stroke="none"/><path d="M26 51L32 44M34 55L38 48" fill="none" stroke="#b47f32" stroke-width="2"/>
+</g>
+</g><rect x="182.5" y="386" width="64" height="64" fill="#9AC7BD" stroke="#3A7B86" stroke-width="2"/><g transform="translate(186.5 390) scale(0.875) translate(0 0)">
+<title>flower — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M32 33V59" fill="none" stroke="#416b47" stroke-width="5"/><path d="M30 47Q14 29 10 42Q13 54 31 52M34 43Q50 25 56 38Q49 51 33 50" fill="#689754" /><path d="M25 17Q20 4 31 3Q43 3 40 17Q53 12 57 23Q60 34 45 35Q55 45 46 51Q36 56 31 43Q24 57 14 50Q7 41 19 34Q3 33 7 22Q11 12 25 17Z" fill="#db8ca1" /><circle cx="32" cy="28" r="10" fill="#e4b44f" />
+</g>
+</g><rect x="251.5" y="386" width="64" height="64" fill="#9AC7BD" stroke="#3A7B86" stroke-width="2"/><g transform="translate(255.5 390) scale(0.875) translate(0 0)">
+<title>flower — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M32 33V59" fill="none" stroke="#416b47" stroke-width="5"/><path d="M30 47Q14 29 10 42Q13 54 31 52M34 43Q50 25 56 38Q49 51 33 50" fill="#689754" /><path d="M25 17Q20 4 31 3Q43 3 40 17Q53 12 57 23Q60 34 45 35Q55 45 46 51Q36 56 31 43Q24 57 14 50Q7 41 19 34Q3 33 7 22Q11 12 25 17Z" fill="#db8ca1" /><circle cx="32" cy="28" r="10" fill="#e4b44f" />
+</g>
+</g><rect x="173" y="112" width="12" height="337" fill="#5F95A1"/><rect x="54" y="266" width="252" height="12" fill="#5F95A1"/></svg>

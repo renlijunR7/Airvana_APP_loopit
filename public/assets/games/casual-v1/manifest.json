@@ -1,0 +1,3005 @@
+{
+  "schema": "airvana.game-art-manifest.v2",
+  "version": "1.0.0",
+  "status": "LOCAL_DEMO",
+  "build_scope": "complete-assets",
+  "art_pack": "casual-v1",
+  "visual_style": "bright polished 2.5D casual mobile game, dimensional materials and saturated friendly color",
+  "game_count": 38,
+  "environment_count": 38,
+  "asset_count": 114,
+  "source_generator": "OpenAI built-in ImageGen",
+  "composition_builder": "scripts/build-casual-scenes-v1.mjs",
+  "source_artwork_policy": "Each game has an independent themed world and source environment. User reference is style guidance; original generated environments and sprites; no old classic-v1 SVG art reused",
+  "environments": [
+    {
+      "game_key": "safety-workshop",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/safety-workshop.png",
+        "format": "png",
+        "width": 1006,
+        "height": 1564,
+        "bytes": 2111414,
+        "sha256": "26ff066e53f53bd8c366710506cae8e7c31c844e13ff0422038740e9f727cfbc",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/safety-workshop.prompt.txt"
+      }
+    },
+    {
+      "game_key": "stellar-farm",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/stellar-farm.png",
+        "format": "png",
+        "width": 1006,
+        "height": 1564,
+        "bytes": 2378342,
+        "sha256": "bcb1c1a7cc5a47819e47828f27334460e85eaeb9688bdb98a2a0f0237f20548c",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/stellar-farm.prompt.txt"
+      }
+    },
+    {
+      "game_key": "pixel-quest",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/pixel-quest.png",
+        "format": "png",
+        "width": 1005,
+        "height": 1565,
+        "bytes": 2304245,
+        "sha256": "722cba298c0d40e878c7769042793b5e60f86ee7265e682358559ad289be7fc4",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/pixel-quest.prompt.txt"
+      }
+    },
+    {
+      "game_key": "red-cup-shuffle",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/red-cup-shuffle.png",
+        "format": "png",
+        "width": 1006,
+        "height": 1564,
+        "bytes": 2063204,
+        "sha256": "16f07777344518c8c312968f3d5d685404fc4d74cc76bcec62e691f130daea92",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/red-cup-shuffle.prompt.txt"
+      }
+    },
+    {
+      "game_key": "magic-choir",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/magic-choir.png",
+        "format": "png",
+        "width": 1006,
+        "height": 1564,
+        "bytes": 1834267,
+        "sha256": "d3b3bce41dd5e47758c8a3c1080fd1a27e3e1f6aac85871e91d842bfb2d54f2e",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/magic-choir.prompt.txt"
+      }
+    },
+    {
+      "game_key": "paws-stage",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/paws-stage.png",
+        "format": "png",
+        "width": 1006,
+        "height": 1564,
+        "bytes": 2108721,
+        "sha256": "b09dec2374432a2fa9134bbebf96c46dd8b3a2bb4cf1caadf3945a177d220435",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/paws-stage.prompt.txt"
+      }
+    },
+    {
+      "game_key": "puppet-studio",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/puppet-studio.png",
+        "format": "png",
+        "width": 1006,
+        "height": 1563,
+        "bytes": 2150032,
+        "sha256": "bcd7967eb432159ee738479dbe5e25aa3770643d6327b166fc1f61079945c870",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/puppet-studio.prompt.txt"
+      }
+    },
+    {
+      "game_key": "firefly-mail",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/firefly-mail.png",
+        "format": "png",
+        "width": 1024,
+        "height": 1536,
+        "bytes": 2261654,
+        "sha256": "17d89d8ffa41430cc4038fda710e3f9994bb6167bb8b2c4aab0753d47294f3b5",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/firefly-mail.prompt.txt"
+      }
+    },
+    {
+      "game_key": "whisker-escape",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/whisker-escape.png",
+        "format": "png",
+        "width": 1024,
+        "height": 1536,
+        "bytes": 2155230,
+        "sha256": "0a2fd29e2e5393b25e0faa1d8e3b77a180b08820309758d0b7144858b5950a78",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/whisker-escape.prompt.txt"
+      }
+    },
+    {
+      "game_key": "coin-journey",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/coin-journey.png",
+        "format": "png",
+        "width": 1024,
+        "height": 1536,
+        "bytes": 2318390,
+        "sha256": "b677089c544ed0bbbf113abc604ce8f4b1b07bb33faa47a11315ec6fccb8131a",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/coin-journey.prompt.txt"
+      }
+    },
+    {
+      "game_key": "jungle-dive",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/jungle-dive.png",
+        "format": "png",
+        "width": 1024,
+        "height": 1536,
+        "bytes": 2717097,
+        "sha256": "f1c3b53b9c19c5f3d5b2cf5a3efdf8515301b7e2f5a8e8d55e5e23a84a54b91b",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/jungle-dive.prompt.txt"
+      }
+    },
+    {
+      "game_key": "rift-strike",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/rift-strike.png",
+        "format": "png",
+        "width": 1024,
+        "height": 1536,
+        "bytes": 2554951,
+        "sha256": "d16c96c83e9208c4aca4735481d3ab36481bb2475014f76bef17d81c42baa296",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/rift-strike.prompt.txt"
+      }
+    },
+    {
+      "game_key": "stardust-island",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/stardust-island.png",
+        "format": "png",
+        "width": 1006,
+        "height": 1563,
+        "bytes": 2439918,
+        "sha256": "f5b6c9f1cd30e954cb8b6a3200c74625fb64ed1408d86fca38474bd2163c70ec",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/stardust-island.prompt.txt"
+      }
+    },
+    {
+      "game_key": "formation-knights",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/formation-knights.png",
+        "format": "png",
+        "width": 1024,
+        "height": 1536,
+        "bytes": 2789571,
+        "sha256": "a44b46a281e0e4440480317fb7999b6c8a0e85c54a00a7f9848f8ca3b1e69525",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/formation-knights.prompt.txt"
+      }
+    },
+    {
+      "game_key": "galaxy-toy-shop",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/galaxy-toy-shop.png",
+        "format": "png",
+        "width": 1006,
+        "height": 1564,
+        "bytes": 2062985,
+        "sha256": "4ab29136c3bd09f1f216712be44b9852213038ae45731039c892e703f7f8253b",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/galaxy-toy-shop.prompt.txt"
+      }
+    },
+    {
+      "game_key": "city-rush",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/city-rush.png",
+        "format": "png",
+        "width": 1006,
+        "height": 1563,
+        "bytes": 2384087,
+        "sha256": "0b8ca055241e52ed2b2f390b5349ef49dd80b13f743b8a29d39d256df698fec3",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/city-rush.prompt.txt"
+      }
+    },
+    {
+      "game_key": "sky-cannon",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/sky-cannon.png",
+        "format": "png",
+        "width": 1024,
+        "height": 1536,
+        "bytes": 2222147,
+        "sha256": "1ffde14fb3acf36977f13d9e7641213c9ce309a4cad2f40d90e8e2b4e9507c64",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/sky-cannon.prompt.txt"
+      }
+    },
+    {
+      "game_key": "neon-dash",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/neon-dash.png",
+        "format": "png",
+        "width": 1006,
+        "height": 1564,
+        "bytes": 1992271,
+        "sha256": "52e0114837cc277e4e69e5f8af8208dfa8f9239fd2dec86cc220014345671094",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/neon-dash.prompt.txt"
+      }
+    },
+    {
+      "game_key": "pulse-forge",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/pulse-forge.png",
+        "format": "png",
+        "width": 1005,
+        "height": 1565,
+        "bytes": 2187219,
+        "sha256": "d692bd5399d6bd042e3e87bce30a7a202d2ddae67422d61f6b7090dedc6b6efb",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/pulse-forge.prompt.txt"
+      }
+    },
+    {
+      "game_key": "sky-stack",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/sky-stack.png",
+        "format": "png",
+        "width": 1006,
+        "height": 1563,
+        "bytes": 1823749,
+        "sha256": "29d5668c3c671362d37d4a7531eef28310beb88e3b05858db54ef60c9aefdb3b",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/sky-stack.prompt.txt"
+      }
+    },
+    {
+      "game_key": "rune-circuit",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/rune-circuit.png",
+        "format": "png",
+        "width": 1024,
+        "height": 1536,
+        "bytes": 2594576,
+        "sha256": "801fd67af6131746a5157a0c105dcbaa34a8be1f6cd357dfe29d9a21771e6248",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/rune-circuit.prompt.txt"
+      }
+    },
+    {
+      "game_key": "prism-match",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/prism-match.png",
+        "format": "png",
+        "width": 1024,
+        "height": 1536,
+        "bytes": 2352819,
+        "sha256": "7996d6b03ea0602c3c34b564eec044fce7ea610f23c6f0edd140e199abf4f7b0",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/prism-match.prompt.txt"
+      }
+    },
+    {
+      "game_key": "star-cups",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/star-cups.png",
+        "format": "png",
+        "width": 1006,
+        "height": 1563,
+        "bytes": 2464544,
+        "sha256": "ea111f204e1fe075a901f28072831d257ff991d34cd69e4a5eb7589cb7f9588d",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/star-cups.prompt.txt"
+      }
+    },
+    {
+      "game_key": "deep-catch",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/deep-catch.png",
+        "format": "png",
+        "width": 1024,
+        "height": 1536,
+        "bytes": 2271231,
+        "sha256": "4ef5a8a3f5ed8e7295f17ed7d210c748d9e0507d528e8efde8a40eff93efd10b",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/deep-catch.prompt.txt"
+      }
+    },
+    {
+      "game_key": "ember-bastion",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/ember-bastion.png",
+        "format": "png",
+        "width": 1024,
+        "height": 1536,
+        "bytes": 2573736,
+        "sha256": "9619f6cfb4a9e3871bf83947e4837bab29ac6b97613858989faa1ccb390db943",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/ember-bastion.prompt.txt"
+      }
+    },
+    {
+      "game_key": "nova-drift",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/nova-drift.png",
+        "format": "png",
+        "width": 1006,
+        "height": 1563,
+        "bytes": 2087193,
+        "sha256": "a67a83d47e91c8e98191702471b18db29e52111f77c08b73ce628d9e1ea50aed",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/nova-drift.prompt.txt"
+      }
+    },
+    {
+      "game_key": "void-squadron",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/void-squadron.png",
+        "format": "png",
+        "width": 1024,
+        "height": 1536,
+        "bytes": 2416825,
+        "sha256": "64ce1b1281f4b8050227c0b39c48d08c44a98299b6da2519337cd35f4cd7efd1",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/void-squadron.prompt.txt"
+      }
+    },
+    {
+      "game_key": "orchard-merge",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/orchard-merge.png",
+        "format": "png",
+        "width": 1024,
+        "height": 1536,
+        "bytes": 2741522,
+        "sha256": "9d3a6db810a29bb44a0b1a1ab5a8aee9cb6c76f2bed862da873f23c4bede3c40",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/orchard-merge.prompt.txt"
+      }
+    },
+    {
+      "game_key": "star-mower",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/star-mower.png",
+        "format": "png",
+        "width": 1024,
+        "height": 1536,
+        "bytes": 2517326,
+        "sha256": "983a49dbfa05b95c9d9ba7714963fec34a20676099251ebc70da6de6dda3a845",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/star-mower.prompt.txt"
+      }
+    },
+    {
+      "game_key": "moonlight-tea-shop",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/moonlight-tea-shop.png",
+        "format": "png",
+        "width": 1006,
+        "height": 1563,
+        "bytes": 2380391,
+        "sha256": "e956dbb65d0de1c0d80c88069d1bf562a2e92523589354b2e1d7bdf76dde9af6",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/moonlight-tea-shop.prompt.txt"
+      }
+    },
+    {
+      "game_key": "microbe-arena",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/microbe-arena.png",
+        "format": "png",
+        "width": 1024,
+        "height": 1536,
+        "bytes": 2077104,
+        "sha256": "a7b7c8f248abe3c674f8fd00971251a337cc89ea7759d10771fd4b6e0e7151fe",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/microbe-arena.prompt.txt"
+      }
+    },
+    {
+      "game_key": "star-deck",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/star-deck.png",
+        "format": "png",
+        "width": 1024,
+        "height": 1536,
+        "bytes": 2545840,
+        "sha256": "4b0baab42e609dddc954ee8a228761eea53d4dcb259fb5b8c02a9a3a7ae5bff7",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/star-deck.prompt.txt"
+      }
+    },
+    {
+      "game_key": "crystal-bastion",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/crystal-bastion.png",
+        "format": "png",
+        "width": 1024,
+        "height": 1536,
+        "bytes": 2524703,
+        "sha256": "c5e13ac0a4987f1d2a52a60042a08201ff4c4b6c49c443fef5820367cd37d3e6",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/crystal-bastion.prompt.txt"
+      }
+    },
+    {
+      "game_key": "adventurer-journal",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/adventurer-journal.png",
+        "format": "png",
+        "width": 1024,
+        "height": 1536,
+        "bytes": 2869200,
+        "sha256": "95662991ac1191bf0bc91e588c61048e49842694b71695b66718b0da3de52200",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/adventurer-journal.prompt.txt"
+      }
+    },
+    {
+      "game_key": "idiom-detective",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/idiom-detective.png",
+        "format": "png",
+        "width": 1024,
+        "height": 1536,
+        "bytes": 2373882,
+        "sha256": "66c27c2788da6b97b58b092e4a8e0f48ceade5de9a7a1bdf121c70937a50f669",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/idiom-detective.prompt.txt"
+      }
+    },
+    {
+      "game_key": "hex-frontier",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/hex-frontier.png",
+        "format": "png",
+        "width": 1024,
+        "height": 1536,
+        "bytes": 2722085,
+        "sha256": "1f47ef8ff06e8f1bce5548615a846213a3cda3abd30be14d99e66c597f7fc4ee",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/hex-frontier.prompt.txt"
+      }
+    },
+    {
+      "game_key": "studio-wardrobe",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/studio-wardrobe.png",
+        "format": "png",
+        "width": 1024,
+        "height": 1536,
+        "bytes": 2666984,
+        "sha256": "5c7d4810b00964d7d4cf18f4fbd9c297d301cd55c865d0a9a2fd1c660bc74e96",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/studio-wardrobe.prompt.txt"
+      }
+    },
+    {
+      "game_key": "garden-renewal",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/garden-renewal.png",
+        "format": "png",
+        "width": 1024,
+        "height": 1536,
+        "bytes": 2511653,
+        "sha256": "607e9de6b293fba986507c0b2eb7e35356e2e44efe2da95840a103b9a989d191",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/garden-renewal.prompt.txt"
+      }
+    }
+  ],
+  "cover_sprite_keys": [
+    "amethyst",
+    "bullet",
+    "cannon",
+    "car",
+    "cat",
+    "coffee",
+    "crystal",
+    "cup",
+    "dress",
+    "drone",
+    "emerald",
+    "enemy_ship",
+    "energy",
+    "fish",
+    "flower",
+    "green_apple",
+    "guardian",
+    "hat",
+    "hero",
+    "hook",
+    "house",
+    "key",
+    "kitten",
+    "letter",
+    "mailbox",
+    "microbe",
+    "microbe_enemy",
+    "model",
+    "mower",
+    "orange",
+    "parcel",
+    "pear",
+    "plum",
+    "plush",
+    "potion",
+    "predator_fish",
+    "raider",
+    "red_apple",
+    "roadblock",
+    "ruby",
+    "runner",
+    "sapphire",
+    "scroll",
+    "seedling",
+    "seeds",
+    "sentinel",
+    "shield",
+    "shoes",
+    "spacecraft",
+    "spore",
+    "star",
+    "sword",
+    "tea",
+    "tent",
+    "treasure",
+    "tree",
+    "turret",
+    "watering_can"
+  ],
+  "assets": [
+    {
+      "asset_id": "asset_casual_v1_safety-workshop",
+      "game_key": "safety-workshop",
+      "content_id": 1,
+      "title": "Crypto City 安全挑战",
+      "mechanic": "quiz",
+      "runtime": "complete-games-v3",
+      "world_id": "safety-workshop",
+      "shared_environment": false,
+      "role": "dedicated_gameplay_scene",
+      "source_authoring": "reference-guided raster generation and deterministic game-layout composition",
+      "source_generator": "OpenAI built-in ImageGen",
+      "provenance": "Independent game-specific generated environment and transparent gameplay sprites guided by user reference; no third-party game screenshots or copied characters used",
+      "prompt_set": "public/assets/games/casual-v1/sources/safety-workshop.prompt.txt",
+      "reference_role": "style only",
+      "owner": "Airvana local demo owner",
+      "authorization_status": "local_preview_user_requested",
+      "release_approved": false,
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/safety-workshop.png",
+        "format": "png",
+        "width": 1006,
+        "height": 1564,
+        "bytes": 2111414,
+        "sha256": "26ff066e53f53bd8c366710506cae8e7c31c844e13ff0422038740e9f727cfbc",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/safety-workshop.prompt.txt"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/casual-v1/scenes/safety-workshop.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 81230,
+        "sha256": "2c64c64acefb9f46edab73ec6c44a502cef1c53c4fef6e39e2ae251bb9b13b1d"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/casual-v1/covers/safety-workshop.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 91618,
+        "sha256": "943e4fbc94cbceafc02ea27e096dfaabfc80196d7eaac8272f51e50884047157"
+      },
+      "cover_png": {
+        "path": "public/assets/games/casual-v1/covers-png/safety-workshop.png",
+        "format": "png",
+        "width": 720,
+        "height": 1120,
+        "bytes": 887490,
+        "sha256": "6843041d11e128eea52a2b3dfb2b4c3bee1e96720a92b95b62fdebc02862c045"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/scenes/safety-workshop.webp",
+      "flutter_cover_png": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/covers-png/safety-workshop.png",
+      "cover_sprite_keys": [
+        "shield",
+        "key"
+      ]
+    },
+    {
+      "asset_id": "asset_casual_v1_stellar-farm",
+      "game_key": "stellar-farm",
+      "content_id": 2,
+      "title": "星际农场",
+      "mechanic": "builder",
+      "runtime": "complete-games-v3",
+      "world_id": "stellar-farm",
+      "shared_environment": false,
+      "role": "dedicated_gameplay_scene",
+      "source_authoring": "reference-guided raster generation and deterministic game-layout composition",
+      "source_generator": "OpenAI built-in ImageGen",
+      "provenance": "Independent game-specific generated environment and transparent gameplay sprites guided by user reference; no third-party game screenshots or copied characters used",
+      "prompt_set": "public/assets/games/casual-v1/sources/stellar-farm.prompt.txt",
+      "reference_role": "style only",
+      "owner": "Airvana local demo owner",
+      "authorization_status": "local_preview_user_requested",
+      "release_approved": false,
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/stellar-farm.png",
+        "format": "png",
+        "width": 1006,
+        "height": 1564,
+        "bytes": 2378342,
+        "sha256": "bcb1c1a7cc5a47819e47828f27334460e85eaeb9688bdb98a2a0f0237f20548c",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/stellar-farm.prompt.txt"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/casual-v1/scenes/stellar-farm.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 139898,
+        "sha256": "fa5cb9b33627b60bbccdb0860f493efde6ff22d7a385f9e076cdfb5a9b12dc8b"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/casual-v1/covers/stellar-farm.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 157684,
+        "sha256": "c7753bb6a666d9e57dd651e783dafb51337d830d73eb5107edfdc1669fde8dbd"
+      },
+      "cover_png": {
+        "path": "public/assets/games/casual-v1/covers-png/stellar-farm.png",
+        "format": "png",
+        "width": 720,
+        "height": 1120,
+        "bytes": 1403664,
+        "sha256": "771a586eb7df949e85b80f81d357d644457ce9ef6f0d2f1104bdeb48531b1c5f"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/scenes/stellar-farm.webp",
+      "flutter_cover_png": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/covers-png/stellar-farm.png",
+      "cover_sprite_keys": [
+        "house",
+        "seedling",
+        "flower",
+        "green_apple",
+        "tree"
+      ]
+    },
+    {
+      "asset_id": "asset_casual_v1_pixel-quest",
+      "game_key": "pixel-quest",
+      "content_id": 5,
+      "title": "像素冒险",
+      "mechanic": "runner",
+      "runtime": "complete-games-v3",
+      "world_id": "pixel-quest",
+      "shared_environment": false,
+      "role": "dedicated_gameplay_scene",
+      "source_authoring": "reference-guided raster generation and deterministic game-layout composition",
+      "source_generator": "OpenAI built-in ImageGen",
+      "provenance": "Independent game-specific generated environment and transparent gameplay sprites guided by user reference; no third-party game screenshots or copied characters used",
+      "prompt_set": "public/assets/games/casual-v1/sources/pixel-quest.prompt.txt",
+      "reference_role": "style only",
+      "owner": "Airvana local demo owner",
+      "authorization_status": "local_preview_user_requested",
+      "release_approved": false,
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/pixel-quest.png",
+        "format": "png",
+        "width": 1005,
+        "height": 1565,
+        "bytes": 2304245,
+        "sha256": "722cba298c0d40e878c7769042793b5e60f86ee7265e682358559ad289be7fc4",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/pixel-quest.prompt.txt"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/casual-v1/scenes/pixel-quest.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 143050,
+        "sha256": "c370bcaeb6cecb8dcec1e2e83ed80b7b4dbed8deb586b53dec11cac56649e549"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/casual-v1/covers/pixel-quest.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 163578,
+        "sha256": "21dcf0c0eba7340ff51df5076a6131c2401320679ffca694d94ab15a04108e5d"
+      },
+      "cover_png": {
+        "path": "public/assets/games/casual-v1/covers-png/pixel-quest.png",
+        "format": "png",
+        "width": 720,
+        "height": 1120,
+        "bytes": 1754234,
+        "sha256": "d9b4dc4cab6a7ab77b9a2cdc3d4ec5f5a3863cdcc40e9bb69c609ec8ca9e195a"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/scenes/pixel-quest.webp",
+      "flutter_cover_png": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/covers-png/pixel-quest.png",
+      "cover_sprite_keys": [
+        "energy",
+        "roadblock",
+        "runner"
+      ]
+    },
+    {
+      "asset_id": "asset_casual_v1_red-cup-shuffle",
+      "game_key": "red-cup-shuffle",
+      "content_id": 6,
+      "title": "红杯速配",
+      "mechanic": "cups",
+      "runtime": "complete-games-v3",
+      "world_id": "red-cup-shuffle",
+      "shared_environment": false,
+      "role": "dedicated_gameplay_scene",
+      "source_authoring": "reference-guided raster generation and deterministic game-layout composition",
+      "source_generator": "OpenAI built-in ImageGen",
+      "provenance": "Independent game-specific generated environment and transparent gameplay sprites guided by user reference; no third-party game screenshots or copied characters used",
+      "prompt_set": "public/assets/games/casual-v1/sources/red-cup-shuffle.prompt.txt",
+      "reference_role": "style only",
+      "owner": "Airvana local demo owner",
+      "authorization_status": "local_preview_user_requested",
+      "release_approved": false,
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/red-cup-shuffle.png",
+        "format": "png",
+        "width": 1006,
+        "height": 1564,
+        "bytes": 2063204,
+        "sha256": "16f07777344518c8c312968f3d5d685404fc4d74cc76bcec62e691f130daea92",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/red-cup-shuffle.prompt.txt"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/casual-v1/scenes/red-cup-shuffle.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 83124,
+        "sha256": "f1448ce8a88ff286e0dd4a4d1fbc08f83e29e55ff9d0b4abfe16f6714b810666"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/casual-v1/covers/red-cup-shuffle.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 70956,
+        "sha256": "2bb9258e5ab249443c6c43a5ae011bbb71a3ce4f148f023d2d7125bdfeb9ea99"
+      },
+      "cover_png": {
+        "path": "public/assets/games/casual-v1/covers-png/red-cup-shuffle.png",
+        "format": "png",
+        "width": 720,
+        "height": 1120,
+        "bytes": 778502,
+        "sha256": "c4ffafda80c222e79e5b30180b1031a6ed0adb1b9d2c1788730849208402b30a"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/scenes/red-cup-shuffle.webp",
+      "flutter_cover_png": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/covers-png/red-cup-shuffle.png",
+      "cover_sprite_keys": [
+        "cup",
+        "ruby"
+      ]
+    },
+    {
+      "asset_id": "asset_casual_v1_magic-choir",
+      "game_key": "magic-choir",
+      "content_id": 9,
+      "title": "魔法合唱团",
+      "mechanic": "rhythm",
+      "runtime": "complete-games-v3",
+      "world_id": "magic-choir",
+      "shared_environment": false,
+      "role": "dedicated_gameplay_scene",
+      "source_authoring": "reference-guided raster generation and deterministic game-layout composition",
+      "source_generator": "OpenAI built-in ImageGen",
+      "provenance": "Independent game-specific generated environment and transparent gameplay sprites guided by user reference; no third-party game screenshots or copied characters used",
+      "prompt_set": "public/assets/games/casual-v1/sources/magic-choir.prompt.txt",
+      "reference_role": "style only",
+      "owner": "Airvana local demo owner",
+      "authorization_status": "local_preview_user_requested",
+      "release_approved": false,
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/magic-choir.png",
+        "format": "png",
+        "width": 1006,
+        "height": 1564,
+        "bytes": 1834267,
+        "sha256": "d3b3bce41dd5e47758c8a3c1080fd1a27e3e1f6aac85871e91d842bfb2d54f2e",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/magic-choir.prompt.txt"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/casual-v1/scenes/magic-choir.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 104384,
+        "sha256": "e7d677dc41abc6400018a9f271eef1e8f8e2676b4be92e94b40d31b9ae2d7172"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/casual-v1/covers/magic-choir.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 92658,
+        "sha256": "1e9e10e50aba54416e6556295e7aa1a231fe1cdea8aa949b5db6362d0a3727e4"
+      },
+      "cover_png": {
+        "path": "public/assets/games/casual-v1/covers-png/magic-choir.png",
+        "format": "png",
+        "width": 720,
+        "height": 1120,
+        "bytes": 853065,
+        "sha256": "f3029a31964e4afc3bba02c9b46f860c65228a90e7e999c954a74d2f4df1812c"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/scenes/magic-choir.webp",
+      "flutter_cover_png": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/covers-png/magic-choir.png",
+      "cover_sprite_keys": [
+        "star"
+      ]
+    },
+    {
+      "asset_id": "asset_casual_v1_paws-stage",
+      "game_key": "paws-stage",
+      "content_id": 10,
+      "title": "萌宠音乐盒",
+      "mechanic": "sequence",
+      "runtime": "complete-games-v3",
+      "world_id": "paws-stage",
+      "shared_environment": false,
+      "role": "dedicated_gameplay_scene",
+      "source_authoring": "reference-guided raster generation and deterministic game-layout composition",
+      "source_generator": "OpenAI built-in ImageGen",
+      "provenance": "Independent game-specific generated environment and transparent gameplay sprites guided by user reference; no third-party game screenshots or copied characters used",
+      "prompt_set": "public/assets/games/casual-v1/sources/paws-stage.prompt.txt",
+      "reference_role": "style only",
+      "owner": "Airvana local demo owner",
+      "authorization_status": "local_preview_user_requested",
+      "release_approved": false,
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/paws-stage.png",
+        "format": "png",
+        "width": 1006,
+        "height": 1564,
+        "bytes": 2108721,
+        "sha256": "b09dec2374432a2fa9134bbebf96c46dd8b3a2bb4cf1caadf3945a177d220435",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/paws-stage.prompt.txt"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/casual-v1/scenes/paws-stage.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 143288,
+        "sha256": "bc0afc57be8a3ef6f2c0b4cc9a859d80ba8b9dea69ff0c7e25b924118912a3b6"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/casual-v1/covers/paws-stage.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 131390,
+        "sha256": "04642e92114636be0e57912de16bbe99bc596b2765e519d94ba69912ad0ac5b3"
+      },
+      "cover_png": {
+        "path": "public/assets/games/casual-v1/covers-png/paws-stage.png",
+        "format": "png",
+        "width": 720,
+        "height": 1120,
+        "bytes": 1305235,
+        "sha256": "543a67af72623e415a947483f1c1050d3b09f26e2eb9b7a7037d759eab107d34"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/scenes/paws-stage.webp",
+      "flutter_cover_png": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/covers-png/paws-stage.png",
+      "cover_sprite_keys": [
+        "plush",
+        "cat",
+        "kitten"
+      ]
+    },
+    {
+      "asset_id": "asset_casual_v1_puppet-studio",
+      "game_key": "puppet-studio",
+      "content_id": 12,
+      "title": "玩偶造型工坊",
+      "mechanic": "wardrobe",
+      "runtime": "complete-games-v3",
+      "world_id": "puppet-studio",
+      "shared_environment": false,
+      "role": "dedicated_gameplay_scene",
+      "source_authoring": "reference-guided raster generation and deterministic game-layout composition",
+      "source_generator": "OpenAI built-in ImageGen",
+      "provenance": "Independent game-specific generated environment and transparent gameplay sprites guided by user reference; no third-party game screenshots or copied characters used",
+      "prompt_set": "public/assets/games/casual-v1/sources/puppet-studio.prompt.txt",
+      "reference_role": "style only",
+      "owner": "Airvana local demo owner",
+      "authorization_status": "local_preview_user_requested",
+      "release_approved": false,
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/puppet-studio.png",
+        "format": "png",
+        "width": 1006,
+        "height": 1563,
+        "bytes": 2150032,
+        "sha256": "bcd7967eb432159ee738479dbe5e25aa3770643d6327b166fc1f61079945c870",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/puppet-studio.prompt.txt"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/casual-v1/scenes/puppet-studio.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 138644,
+        "sha256": "3726d03df98da94ad0d95006c1c459ebf32ad21d69e3e8620041bb3bc2fba039"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/casual-v1/covers/puppet-studio.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 144290,
+        "sha256": "0abf6deb853b3d19c68756f5d8587d6ba08cc3ebda99da7f9c4ae8fbbf08c40b"
+      },
+      "cover_png": {
+        "path": "public/assets/games/casual-v1/covers-png/puppet-studio.png",
+        "format": "png",
+        "width": 720,
+        "height": 1120,
+        "bytes": 1422544,
+        "sha256": "1dc21a77d1eaaf560a3160e204048da2b1127277a4e8cef4f6b1078fbc9e2be1"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/scenes/puppet-studio.webp",
+      "flutter_cover_png": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/covers-png/puppet-studio.png",
+      "cover_sprite_keys": [
+        "plush",
+        "dress",
+        "shoes",
+        "hat"
+      ]
+    },
+    {
+      "asset_id": "asset_casual_v1_firefly-mail",
+      "game_key": "firefly-mail",
+      "content_id": 14,
+      "title": "萤火信箱",
+      "mechanic": "sort",
+      "runtime": "complete-games-v3",
+      "world_id": "firefly-mail",
+      "shared_environment": false,
+      "role": "dedicated_gameplay_scene",
+      "source_authoring": "reference-guided raster generation and deterministic game-layout composition",
+      "source_generator": "OpenAI built-in ImageGen",
+      "provenance": "Independent game-specific generated environment and transparent gameplay sprites guided by user reference; no third-party game screenshots or copied characters used",
+      "prompt_set": "public/assets/games/casual-v1/sources/firefly-mail.prompt.txt",
+      "reference_role": "style only",
+      "owner": "Airvana local demo owner",
+      "authorization_status": "local_preview_user_requested",
+      "release_approved": false,
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/firefly-mail.png",
+        "format": "png",
+        "width": 1024,
+        "height": 1536,
+        "bytes": 2261654,
+        "sha256": "17d89d8ffa41430cc4038fda710e3f9994bb6167bb8b2c4aab0753d47294f3b5",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/firefly-mail.prompt.txt"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/casual-v1/scenes/firefly-mail.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 146260,
+        "sha256": "6370150513951ce4041b1749cfc586bbf6eedc16075991f0f2092f6bb1e1cd94"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/casual-v1/covers/firefly-mail.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 156330,
+        "sha256": "62b2b1f2a49393ba81734f99ecd85a9f4a4046b0b953ea1858750dc4e6ce9e4d"
+      },
+      "cover_png": {
+        "path": "public/assets/games/casual-v1/covers-png/firefly-mail.png",
+        "format": "png",
+        "width": 720,
+        "height": 1120,
+        "bytes": 1665237,
+        "sha256": "6e7682c747f11727cf0067f973f94343d8049600ed1735021128a6bfebb7e0a0"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/scenes/firefly-mail.webp",
+      "flutter_cover_png": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/covers-png/firefly-mail.png",
+      "cover_sprite_keys": [
+        "mailbox",
+        "letter"
+      ]
+    },
+    {
+      "asset_id": "asset_casual_v1_whisker-escape",
+      "game_key": "whisker-escape",
+      "content_id": 15,
+      "title": "猫咪潜逃",
+      "mechanic": "maze",
+      "runtime": "complete-games-v3",
+      "world_id": "whisker-escape",
+      "shared_environment": false,
+      "role": "dedicated_gameplay_scene",
+      "source_authoring": "reference-guided raster generation and deterministic game-layout composition",
+      "source_generator": "OpenAI built-in ImageGen",
+      "provenance": "Independent game-specific generated environment and transparent gameplay sprites guided by user reference; no third-party game screenshots or copied characters used",
+      "prompt_set": "public/assets/games/casual-v1/sources/whisker-escape.prompt.txt",
+      "reference_role": "style only",
+      "owner": "Airvana local demo owner",
+      "authorization_status": "local_preview_user_requested",
+      "release_approved": false,
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/whisker-escape.png",
+        "format": "png",
+        "width": 1024,
+        "height": 1536,
+        "bytes": 2155230,
+        "sha256": "0a2fd29e2e5393b25e0faa1d8e3b77a180b08820309758d0b7144858b5950a78",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/whisker-escape.prompt.txt"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/casual-v1/scenes/whisker-escape.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 105616,
+        "sha256": "228bb8d96d4a744bab6e38151922ef097b5d219ef0c8f54d7d05ae5e0f303fe3"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/casual-v1/covers/whisker-escape.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 79686,
+        "sha256": "29ef140274dcb3c1833e4082c00a8084f3cff6062ee9ea4a5d52f543a9ccfed5"
+      },
+      "cover_png": {
+        "path": "public/assets/games/casual-v1/covers-png/whisker-escape.png",
+        "format": "png",
+        "width": 720,
+        "height": 1120,
+        "bytes": 734442,
+        "sha256": "68b66915c258d8d56d0c50b927ecac2f0b493699df94b43a46a078571cca8920"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/scenes/whisker-escape.webp",
+      "flutter_cover_png": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/covers-png/whisker-escape.png",
+      "cover_sprite_keys": [
+        "cat",
+        "key"
+      ]
+    },
+    {
+      "asset_id": "asset_casual_v1_coin-journey",
+      "game_key": "coin-journey",
+      "content_id": 16,
+      "title": "金币环游记",
+      "mechanic": "coin",
+      "runtime": "complete-games-v3",
+      "world_id": "coin-journey",
+      "shared_environment": false,
+      "role": "dedicated_gameplay_scene",
+      "source_authoring": "reference-guided raster generation and deterministic game-layout composition",
+      "source_generator": "OpenAI built-in ImageGen",
+      "provenance": "Independent game-specific generated environment and transparent gameplay sprites guided by user reference; no third-party game screenshots or copied characters used",
+      "prompt_set": "public/assets/games/casual-v1/sources/coin-journey.prompt.txt",
+      "reference_role": "style only",
+      "owner": "Airvana local demo owner",
+      "authorization_status": "local_preview_user_requested",
+      "release_approved": false,
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/coin-journey.png",
+        "format": "png",
+        "width": 1024,
+        "height": 1536,
+        "bytes": 2318390,
+        "sha256": "b677089c544ed0bbbf113abc604ce8f4b1b07bb33faa47a11315ec6fccb8131a",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/coin-journey.prompt.txt"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/casual-v1/scenes/coin-journey.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 137680,
+        "sha256": "257b5ba5053732cd0e7e934752f41c862dc4ee54eae9976bc9eff398e5f9b88c"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/casual-v1/covers/coin-journey.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 148404,
+        "sha256": "f70566e4fbffbd5ecf076d8c5bf882efc35ccc541901922ab8c066e49de150d0"
+      },
+      "cover_png": {
+        "path": "public/assets/games/casual-v1/covers-png/coin-journey.png",
+        "format": "png",
+        "width": 720,
+        "height": 1120,
+        "bytes": 1519276,
+        "sha256": "86feccab3856cde8c6d8208d8ce14fe3104f462dcf48a4425ade3ee528845790"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/scenes/coin-journey.webp",
+      "flutter_cover_png": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/covers-png/coin-journey.png",
+      "cover_sprite_keys": [
+        "star"
+      ]
+    },
+    {
+      "asset_id": "asset_casual_v1_jungle-dive",
+      "game_key": "jungle-dive",
+      "content_id": 17,
+      "title": "丛林潜游",
+      "mechanic": "fishing",
+      "runtime": "complete-games-v3",
+      "world_id": "jungle-dive",
+      "shared_environment": false,
+      "role": "dedicated_gameplay_scene",
+      "source_authoring": "reference-guided raster generation and deterministic game-layout composition",
+      "source_generator": "OpenAI built-in ImageGen",
+      "provenance": "Independent game-specific generated environment and transparent gameplay sprites guided by user reference; no third-party game screenshots or copied characters used",
+      "prompt_set": "public/assets/games/casual-v1/sources/jungle-dive.prompt.txt",
+      "reference_role": "style only",
+      "owner": "Airvana local demo owner",
+      "authorization_status": "local_preview_user_requested",
+      "release_approved": false,
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/jungle-dive.png",
+        "format": "png",
+        "width": 1024,
+        "height": 1536,
+        "bytes": 2717097,
+        "sha256": "f1c3b53b9c19c5f3d5b2cf5a3efdf8515301b7e2f5a8e8d55e5e23a84a54b91b",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/jungle-dive.prompt.txt"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/casual-v1/scenes/jungle-dive.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 199802,
+        "sha256": "b76e804270ec47d4f21e4e7e64f3d6bace817d790d7ba6b70656be807dac01e1"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/casual-v1/covers/jungle-dive.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 217360,
+        "sha256": "c196f7b5b36610e5ce24121851d89ec854bb914823a9a1a3c9a9b2b010bc112c"
+      },
+      "cover_png": {
+        "path": "public/assets/games/casual-v1/covers-png/jungle-dive.png",
+        "format": "png",
+        "width": 720,
+        "height": 1120,
+        "bytes": 2082105,
+        "sha256": "ae5b77759fafd96ce2bffc0e0501494c6c9fe6fdb39b80d62a1f40f0901e9208"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/scenes/jungle-dive.webp",
+      "flutter_cover_png": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/covers-png/jungle-dive.png",
+      "cover_sprite_keys": [
+        "hook",
+        "fish",
+        "predator_fish"
+      ]
+    },
+    {
+      "asset_id": "asset_casual_v1_rift-strike",
+      "game_key": "rift-strike",
+      "content_id": 18,
+      "title": "裂隙突击",
+      "mechanic": "shooter",
+      "runtime": "complete-games-v3",
+      "world_id": "rift-strike",
+      "shared_environment": false,
+      "role": "dedicated_gameplay_scene",
+      "source_authoring": "reference-guided raster generation and deterministic game-layout composition",
+      "source_generator": "OpenAI built-in ImageGen",
+      "provenance": "Independent game-specific generated environment and transparent gameplay sprites guided by user reference; no third-party game screenshots or copied characters used",
+      "prompt_set": "public/assets/games/casual-v1/sources/rift-strike.prompt.txt",
+      "reference_role": "style only",
+      "owner": "Airvana local demo owner",
+      "authorization_status": "local_preview_user_requested",
+      "release_approved": false,
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/rift-strike.png",
+        "format": "png",
+        "width": 1024,
+        "height": 1536,
+        "bytes": 2554951,
+        "sha256": "d16c96c83e9208c4aca4735481d3ab36481bb2475014f76bef17d81c42baa296",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/rift-strike.prompt.txt"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/casual-v1/scenes/rift-strike.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 128568,
+        "sha256": "31e3ee4d362ae83b8ce23b5cf63f91eec715be3ce44319f2c0126b2eac08e04c"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/casual-v1/covers/rift-strike.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 175086,
+        "sha256": "8f69af1101923dafcef30a59edef1300736bbb7d12d47d404bd25692f319687a"
+      },
+      "cover_png": {
+        "path": "public/assets/games/casual-v1/covers-png/rift-strike.png",
+        "format": "png",
+        "width": 720,
+        "height": 1120,
+        "bytes": 1341692,
+        "sha256": "57f3c6a9ba85a49ef8dca9b7160efe128a202c4df62a67658aa7263a72d940b1"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/scenes/rift-strike.webp",
+      "flutter_cover_png": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/covers-png/rift-strike.png",
+      "cover_sprite_keys": [
+        "drone",
+        "enemy_ship",
+        "bullet",
+        "spacecraft"
+      ]
+    },
+    {
+      "asset_id": "asset_casual_v1_stardust-island",
+      "game_key": "stardust-island",
+      "content_id": 19,
+      "title": "星砂岛",
+      "mechanic": "builder",
+      "runtime": "complete-games-v3",
+      "world_id": "stardust-island",
+      "shared_environment": false,
+      "role": "dedicated_gameplay_scene",
+      "source_authoring": "reference-guided raster generation and deterministic game-layout composition",
+      "source_generator": "OpenAI built-in ImageGen",
+      "provenance": "Independent game-specific generated environment and transparent gameplay sprites guided by user reference; no third-party game screenshots or copied characters used",
+      "prompt_set": "public/assets/games/casual-v1/sources/stardust-island.prompt.txt",
+      "reference_role": "style only",
+      "owner": "Airvana local demo owner",
+      "authorization_status": "local_preview_user_requested",
+      "release_approved": false,
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/stardust-island.png",
+        "format": "png",
+        "width": 1006,
+        "height": 1563,
+        "bytes": 2439918,
+        "sha256": "f5b6c9f1cd30e954cb8b6a3200c74625fb64ed1408d86fca38474bd2163c70ec",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/stardust-island.prompt.txt"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/casual-v1/scenes/stardust-island.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 169140,
+        "sha256": "8f486191e18c5e05e026fd5c6ea7e2ca633bc397266797633bc8feaffdb63de4"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/casual-v1/covers/stardust-island.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 164744,
+        "sha256": "7deec6e36bb3a0018c65cdc46fe9b45cbb6931bfdff564aeab7160d1de60722d"
+      },
+      "cover_png": {
+        "path": "public/assets/games/casual-v1/covers-png/stardust-island.png",
+        "format": "png",
+        "width": 720,
+        "height": 1120,
+        "bytes": 1474228,
+        "sha256": "01996202dab411a3ac68029616c6704bf1bfd3250885f34adacd5e59d539eb34"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/scenes/stardust-island.webp",
+      "flutter_cover_png": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/covers-png/stardust-island.png",
+      "cover_sprite_keys": [
+        "seedling",
+        "flower",
+        "green_apple",
+        "tree",
+        "house"
+      ]
+    },
+    {
+      "asset_id": "asset_casual_v1_formation-knights",
+      "game_key": "formation-knights",
+      "content_id": 20,
+      "title": "阵线骑士",
+      "mechanic": "battle",
+      "runtime": "complete-games-v3",
+      "world_id": "formation-knights",
+      "shared_environment": false,
+      "role": "dedicated_gameplay_scene",
+      "source_authoring": "reference-guided raster generation and deterministic game-layout composition",
+      "source_generator": "OpenAI built-in ImageGen",
+      "provenance": "Independent game-specific generated environment and transparent gameplay sprites guided by user reference; no third-party game screenshots or copied characters used",
+      "prompt_set": "public/assets/games/casual-v1/sources/formation-knights.prompt.txt",
+      "reference_role": "style only",
+      "owner": "Airvana local demo owner",
+      "authorization_status": "local_preview_user_requested",
+      "release_approved": false,
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/formation-knights.png",
+        "format": "png",
+        "width": 1024,
+        "height": 1536,
+        "bytes": 2789571,
+        "sha256": "a44b46a281e0e4440480317fb7999b6c8a0e85c54a00a7f9848f8ca3b1e69525",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/formation-knights.prompt.txt"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/casual-v1/scenes/formation-knights.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 158742,
+        "sha256": "c4af903e1d4734ef70a21b128d910f3a44bd90bec65e47ad006c5b39e7ebdb2e"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/casual-v1/covers/formation-knights.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 174254,
+        "sha256": "05cc13f8daee13aa0ea420af0a06fe1c69eb38d6c79631ad1d274cf1aa3742fc"
+      },
+      "cover_png": {
+        "path": "public/assets/games/casual-v1/covers-png/formation-knights.png",
+        "format": "png",
+        "width": 720,
+        "height": 1120,
+        "bytes": 1468332,
+        "sha256": "fec2a2a47ae4689a0f442d34ec48c1ae3a47d76d6206651a26588f38bbcb80dc"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/scenes/formation-knights.webp",
+      "flutter_cover_png": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/covers-png/formation-knights.png",
+      "cover_sprite_keys": [
+        "sentinel",
+        "hero",
+        "sword",
+        "shield",
+        "potion"
+      ]
+    },
+    {
+      "asset_id": "asset_casual_v1_galaxy-toy-shop",
+      "game_key": "galaxy-toy-shop",
+      "content_id": 21,
+      "title": "银河玩具店",
+      "mechanic": "shop",
+      "runtime": "complete-games-v3",
+      "world_id": "galaxy-toy-shop",
+      "shared_environment": false,
+      "role": "dedicated_gameplay_scene",
+      "source_authoring": "reference-guided raster generation and deterministic game-layout composition",
+      "source_generator": "OpenAI built-in ImageGen",
+      "provenance": "Independent game-specific generated environment and transparent gameplay sprites guided by user reference; no third-party game screenshots or copied characters used",
+      "prompt_set": "public/assets/games/casual-v1/sources/galaxy-toy-shop.prompt.txt",
+      "reference_role": "style only",
+      "owner": "Airvana local demo owner",
+      "authorization_status": "local_preview_user_requested",
+      "release_approved": false,
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/galaxy-toy-shop.png",
+        "format": "png",
+        "width": 1006,
+        "height": 1564,
+        "bytes": 2062985,
+        "sha256": "4ab29136c3bd09f1f216712be44b9852213038ae45731039c892e703f7f8253b",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/galaxy-toy-shop.prompt.txt"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/casual-v1/scenes/galaxy-toy-shop.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 120212,
+        "sha256": "b9ffbf6559e45bc0e70bfedd1a8d5d09466079fe3ea03a069141d30e6e9442e6"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/casual-v1/covers/galaxy-toy-shop.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 110772,
+        "sha256": "7cc47be7854bcba9587aa684addf70418168c89882944a78552e77ded277a17a"
+      },
+      "cover_png": {
+        "path": "public/assets/games/casual-v1/covers-png/galaxy-toy-shop.png",
+        "format": "png",
+        "width": 720,
+        "height": 1120,
+        "bytes": 1085548,
+        "sha256": "42c1ecd33130df59adee6d147fba9b942c912f3f5c0cb0bcf8c38d501f454256"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/scenes/galaxy-toy-shop.webp",
+      "flutter_cover_png": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/covers-png/galaxy-toy-shop.png",
+      "cover_sprite_keys": [
+        "plush",
+        "parcel",
+        "star"
+      ]
+    },
+    {
+      "asset_id": "asset_casual_v1_city-rush",
+      "game_key": "city-rush",
+      "content_id": 22,
+      "title": "城市极速",
+      "mechanic": "drift",
+      "runtime": "complete-games-v3",
+      "world_id": "city-rush",
+      "shared_environment": false,
+      "role": "dedicated_gameplay_scene",
+      "source_authoring": "reference-guided raster generation and deterministic game-layout composition",
+      "source_generator": "OpenAI built-in ImageGen",
+      "provenance": "Independent game-specific generated environment and transparent gameplay sprites guided by user reference; no third-party game screenshots or copied characters used",
+      "prompt_set": "public/assets/games/casual-v1/sources/city-rush.prompt.txt",
+      "reference_role": "style only",
+      "owner": "Airvana local demo owner",
+      "authorization_status": "local_preview_user_requested",
+      "release_approved": false,
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/city-rush.png",
+        "format": "png",
+        "width": 1006,
+        "height": 1563,
+        "bytes": 2384087,
+        "sha256": "0b8ca055241e52ed2b2f390b5349ef49dd80b13f743b8a29d39d256df698fec3",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/city-rush.prompt.txt"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/casual-v1/scenes/city-rush.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 151728,
+        "sha256": "8c97690aa13ecdb9fbb8f29c2f7e500508fce7c9c12abb6c704947e3c16f2ba5"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/casual-v1/covers/city-rush.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 168668,
+        "sha256": "205cf3ca41d77e092e38c16a8c3d0f35cc2bbf5b241ea61ba2f2593c777634ed"
+      },
+      "cover_png": {
+        "path": "public/assets/games/casual-v1/covers-png/city-rush.png",
+        "format": "png",
+        "width": 720,
+        "height": 1120,
+        "bytes": 1592041,
+        "sha256": "e9419d58af932bf2bc4d971c6ead9b3baaa7464234c6193d2837b9507f6edd10"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/scenes/city-rush.webp",
+      "flutter_cover_png": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/covers-png/city-rush.png",
+      "cover_sprite_keys": [
+        "roadblock",
+        "car"
+      ]
+    },
+    {
+      "asset_id": "asset_casual_v1_sky-cannon",
+      "game_key": "sky-cannon",
+      "content_id": 23,
+      "title": "云端炮手",
+      "mechanic": "defense",
+      "runtime": "complete-games-v3",
+      "world_id": "sky-cannon",
+      "shared_environment": false,
+      "role": "dedicated_gameplay_scene",
+      "source_authoring": "reference-guided raster generation and deterministic game-layout composition",
+      "source_generator": "OpenAI built-in ImageGen",
+      "provenance": "Independent game-specific generated environment and transparent gameplay sprites guided by user reference; no third-party game screenshots or copied characters used",
+      "prompt_set": "public/assets/games/casual-v1/sources/sky-cannon.prompt.txt",
+      "reference_role": "style only",
+      "owner": "Airvana local demo owner",
+      "authorization_status": "local_preview_user_requested",
+      "release_approved": false,
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/sky-cannon.png",
+        "format": "png",
+        "width": 1024,
+        "height": 1536,
+        "bytes": 2222147,
+        "sha256": "1ffde14fb3acf36977f13d9e7641213c9ce309a4cad2f40d90e8e2b4e9507c64",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/sky-cannon.prompt.txt"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/casual-v1/scenes/sky-cannon.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 116270,
+        "sha256": "4d2c657896804e5aa2484f7bed51964a1f851c49edf2c9b3a10400d6f557a6ec"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/casual-v1/covers/sky-cannon.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 143410,
+        "sha256": "d6093b20d55da747717c76b5f6a0bf0ba9b16d6fc70dd5530d6a1180795faf31"
+      },
+      "cover_png": {
+        "path": "public/assets/games/casual-v1/covers-png/sky-cannon.png",
+        "format": "png",
+        "width": 720,
+        "height": 1120,
+        "bytes": 1182620,
+        "sha256": "d29fd108d3ba21293a3a43861556ad4d2fdbf9de26a5722184a186836760e7b4"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/scenes/sky-cannon.webp",
+      "flutter_cover_png": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/covers-png/sky-cannon.png",
+      "cover_sprite_keys": [
+        "cannon",
+        "raider",
+        "turret",
+        "crystal"
+      ]
+    },
+    {
+      "asset_id": "asset_casual_v1_neon-dash",
+      "game_key": "neon-dash",
+      "content_id": 24,
+      "title": "霓虹疾跑",
+      "mechanic": "runner",
+      "runtime": "complete-games-v3",
+      "world_id": "neon-dash",
+      "shared_environment": false,
+      "role": "dedicated_gameplay_scene",
+      "source_authoring": "reference-guided raster generation and deterministic game-layout composition",
+      "source_generator": "OpenAI built-in ImageGen",
+      "provenance": "Independent game-specific generated environment and transparent gameplay sprites guided by user reference; no third-party game screenshots or copied characters used",
+      "prompt_set": "public/assets/games/casual-v1/sources/neon-dash.prompt.txt",
+      "reference_role": "style only",
+      "owner": "Airvana local demo owner",
+      "authorization_status": "local_preview_user_requested",
+      "release_approved": false,
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/neon-dash.png",
+        "format": "png",
+        "width": 1006,
+        "height": 1564,
+        "bytes": 1992271,
+        "sha256": "52e0114837cc277e4e69e5f8af8208dfa8f9239fd2dec86cc220014345671094",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/neon-dash.prompt.txt"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/casual-v1/scenes/neon-dash.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 81340,
+        "sha256": "9e7e6bd01b517d972420506d72dc64256e4cbef0dd45f50af94f4db103108905"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/casual-v1/covers/neon-dash.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 105854,
+        "sha256": "10e9d498a7ed218a29215ce740d5397226c63bce3c4e439c414aa96f37150aed"
+      },
+      "cover_png": {
+        "path": "public/assets/games/casual-v1/covers-png/neon-dash.png",
+        "format": "png",
+        "width": 720,
+        "height": 1120,
+        "bytes": 1157537,
+        "sha256": "f56e6aee4d58b8b9d3cd5d08911b9860a5b162d1340efbdf959e17eb186b549c"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/scenes/neon-dash.webp",
+      "flutter_cover_png": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/covers-png/neon-dash.png",
+      "cover_sprite_keys": [
+        "energy",
+        "roadblock",
+        "runner"
+      ]
+    },
+    {
+      "asset_id": "asset_casual_v1_pulse-forge",
+      "game_key": "pulse-forge",
+      "content_id": 25,
+      "title": "节拍熔炉",
+      "mechanic": "rhythm",
+      "runtime": "complete-games-v3",
+      "world_id": "pulse-forge",
+      "shared_environment": false,
+      "role": "dedicated_gameplay_scene",
+      "source_authoring": "reference-guided raster generation and deterministic game-layout composition",
+      "source_generator": "OpenAI built-in ImageGen",
+      "provenance": "Independent game-specific generated environment and transparent gameplay sprites guided by user reference; no third-party game screenshots or copied characters used",
+      "prompt_set": "public/assets/games/casual-v1/sources/pulse-forge.prompt.txt",
+      "reference_role": "style only",
+      "owner": "Airvana local demo owner",
+      "authorization_status": "local_preview_user_requested",
+      "release_approved": false,
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/pulse-forge.png",
+        "format": "png",
+        "width": 1005,
+        "height": 1565,
+        "bytes": 2187219,
+        "sha256": "d692bd5399d6bd042e3e87bce30a7a202d2ddae67422d61f6b7090dedc6b6efb",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/pulse-forge.prompt.txt"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/casual-v1/scenes/pulse-forge.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 109378,
+        "sha256": "f46e13142d9d9bb73c4942b042c1e2122ccb9e123c883a71be63a25608d877db"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/casual-v1/covers/pulse-forge.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 109522,
+        "sha256": "2150da3541d0e3aff0bbc6a7adb8646671033fbdf5fe3e7b22399b4203dd334f"
+      },
+      "cover_png": {
+        "path": "public/assets/games/casual-v1/covers-png/pulse-forge.png",
+        "format": "png",
+        "width": 720,
+        "height": 1120,
+        "bytes": 919560,
+        "sha256": "dbe5375c5474da939cf15679a4118cad135775fbff52470640d0e81e09d46176"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/scenes/pulse-forge.webp",
+      "flutter_cover_png": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/covers-png/pulse-forge.png",
+      "cover_sprite_keys": [
+        "star"
+      ]
+    },
+    {
+      "asset_id": "asset_casual_v1_sky-stack",
+      "game_key": "sky-stack",
+      "content_id": 26,
+      "title": "天际叠塔",
+      "mechanic": "stack",
+      "runtime": "complete-games-v3",
+      "world_id": "sky-stack",
+      "shared_environment": false,
+      "role": "dedicated_gameplay_scene",
+      "source_authoring": "reference-guided raster generation and deterministic game-layout composition",
+      "source_generator": "OpenAI built-in ImageGen",
+      "provenance": "Independent game-specific generated environment and transparent gameplay sprites guided by user reference; no third-party game screenshots or copied characters used",
+      "prompt_set": "public/assets/games/casual-v1/sources/sky-stack.prompt.txt",
+      "reference_role": "style only",
+      "owner": "Airvana local demo owner",
+      "authorization_status": "local_preview_user_requested",
+      "release_approved": false,
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/sky-stack.png",
+        "format": "png",
+        "width": 1006,
+        "height": 1563,
+        "bytes": 1823749,
+        "sha256": "29d5668c3c671362d37d4a7531eef28310beb88e3b05858db54ef60c9aefdb3b",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/sky-stack.prompt.txt"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/casual-v1/scenes/sky-stack.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 84794,
+        "sha256": "998e6ab42283dca80187a1d675bb36af869442e91c4f96f1530168418221e7ec"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/casual-v1/covers/sky-stack.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 83392,
+        "sha256": "bf9aead54ed637c5048e6b63941e9de3f2a4d8d0832b47d4af050b0a785e6c65"
+      },
+      "cover_png": {
+        "path": "public/assets/games/casual-v1/covers-png/sky-stack.png",
+        "format": "png",
+        "width": 720,
+        "height": 1120,
+        "bytes": 847669,
+        "sha256": "688674461d2146ea9414a001587544429314b02d63f5a7b4286f6ba9f930cbcd"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/scenes/sky-stack.webp",
+      "flutter_cover_png": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/covers-png/sky-stack.png",
+      "cover_sprite_keys": []
+    },
+    {
+      "asset_id": "asset_casual_v1_rune-circuit",
+      "game_key": "rune-circuit",
+      "content_id": 27,
+      "title": "符文回路",
+      "mechanic": "circuit",
+      "runtime": "complete-games-v3",
+      "world_id": "rune-circuit",
+      "shared_environment": false,
+      "role": "dedicated_gameplay_scene",
+      "source_authoring": "reference-guided raster generation and deterministic game-layout composition",
+      "source_generator": "OpenAI built-in ImageGen",
+      "provenance": "Independent game-specific generated environment and transparent gameplay sprites guided by user reference; no third-party game screenshots or copied characters used",
+      "prompt_set": "public/assets/games/casual-v1/sources/rune-circuit.prompt.txt",
+      "reference_role": "style only",
+      "owner": "Airvana local demo owner",
+      "authorization_status": "local_preview_user_requested",
+      "release_approved": false,
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/rune-circuit.png",
+        "format": "png",
+        "width": 1024,
+        "height": 1536,
+        "bytes": 2594576,
+        "sha256": "801fd67af6131746a5157a0c105dcbaa34a8be1f6cd357dfe29d9a21771e6248",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/rune-circuit.prompt.txt"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/casual-v1/scenes/rune-circuit.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 161522,
+        "sha256": "db16d6591bf614a2aa643c20dd3c1c4a8d1858d50dcd9d1c1baeb3b9c39a75e5"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/casual-v1/covers/rune-circuit.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 128184,
+        "sha256": "57085e51604cad6ddb78f824c92a8a74c1eb4d8cdc9072ea46cc8fa60a6b37c2"
+      },
+      "cover_png": {
+        "path": "public/assets/games/casual-v1/covers-png/rune-circuit.png",
+        "format": "png",
+        "width": 720,
+        "height": 1120,
+        "bytes": 980690,
+        "sha256": "31a5ef7b1a50fc4b41a257dda9d43cd695348199a87f89fef5cf018a85a74c1f"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/scenes/rune-circuit.webp",
+      "flutter_cover_png": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/covers-png/rune-circuit.png",
+      "cover_sprite_keys": []
+    },
+    {
+      "asset_id": "asset_casual_v1_prism-match",
+      "game_key": "prism-match",
+      "content_id": 28,
+      "title": "棱镜连击",
+      "mechanic": "match",
+      "runtime": "complete-games-v3",
+      "world_id": "prism-match",
+      "shared_environment": false,
+      "role": "dedicated_gameplay_scene",
+      "source_authoring": "reference-guided raster generation and deterministic game-layout composition",
+      "source_generator": "OpenAI built-in ImageGen",
+      "provenance": "Independent game-specific generated environment and transparent gameplay sprites guided by user reference; no third-party game screenshots or copied characters used",
+      "prompt_set": "public/assets/games/casual-v1/sources/prism-match.prompt.txt",
+      "reference_role": "style only",
+      "owner": "Airvana local demo owner",
+      "authorization_status": "local_preview_user_requested",
+      "release_approved": false,
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/prism-match.png",
+        "format": "png",
+        "width": 1024,
+        "height": 1536,
+        "bytes": 2352819,
+        "sha256": "7996d6b03ea0602c3c34b564eec044fce7ea610f23c6f0edd140e199abf4f7b0",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/prism-match.prompt.txt"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/casual-v1/scenes/prism-match.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 128292,
+        "sha256": "e3d2ab02d9d2e58ef3b8c8eb6887c7313904f66f23f91d8a02706c092138935c"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/casual-v1/covers/prism-match.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 165290,
+        "sha256": "6823783469b6debed6c9f3e57d2e5c79d53725a90ace277905407082314d548c"
+      },
+      "cover_png": {
+        "path": "public/assets/games/casual-v1/covers-png/prism-match.png",
+        "format": "png",
+        "width": 720,
+        "height": 1120,
+        "bytes": 1168591,
+        "sha256": "1398d2b241470c7897682846040cd4324df93f564e3eaa0dd98409754e87a2e3"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/scenes/prism-match.webp",
+      "flutter_cover_png": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/covers-png/prism-match.png",
+      "cover_sprite_keys": [
+        "emerald",
+        "sapphire",
+        "amethyst",
+        "ruby"
+      ]
+    },
+    {
+      "asset_id": "asset_casual_v1_star-cups",
+      "game_key": "star-cups",
+      "content_id": 29,
+      "title": "星杯幻术",
+      "mechanic": "cups",
+      "runtime": "complete-games-v3",
+      "world_id": "star-cups",
+      "shared_environment": false,
+      "role": "dedicated_gameplay_scene",
+      "source_authoring": "reference-guided raster generation and deterministic game-layout composition",
+      "source_generator": "OpenAI built-in ImageGen",
+      "provenance": "Independent game-specific generated environment and transparent gameplay sprites guided by user reference; no third-party game screenshots or copied characters used",
+      "prompt_set": "public/assets/games/casual-v1/sources/star-cups.prompt.txt",
+      "reference_role": "style only",
+      "owner": "Airvana local demo owner",
+      "authorization_status": "local_preview_user_requested",
+      "release_approved": false,
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/star-cups.png",
+        "format": "png",
+        "width": 1006,
+        "height": 1563,
+        "bytes": 2464544,
+        "sha256": "ea111f204e1fe075a901f28072831d257ff991d34cd69e4a5eb7589cb7f9588d",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/star-cups.prompt.txt"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/casual-v1/scenes/star-cups.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 135432,
+        "sha256": "e34d7e0ffcf8c7ce4a811f6d0edfbde6efa7e05681884e9500b915d98e024989"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/casual-v1/covers/star-cups.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 120942,
+        "sha256": "a87553b82e49f7faef52f4c564740032eb44762986c7863b3388a36385427a05"
+      },
+      "cover_png": {
+        "path": "public/assets/games/casual-v1/covers-png/star-cups.png",
+        "format": "png",
+        "width": 720,
+        "height": 1120,
+        "bytes": 1082492,
+        "sha256": "1418314d1fb3affb3a321cdc7db2654418777d4d94ec6719f1286432ae2bb895"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/scenes/star-cups.webp",
+      "flutter_cover_png": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/covers-png/star-cups.png",
+      "cover_sprite_keys": [
+        "cup",
+        "star"
+      ]
+    },
+    {
+      "asset_id": "asset_casual_v1_deep-catch",
+      "game_key": "deep-catch",
+      "content_id": 30,
+      "title": "深海寻光",
+      "mechanic": "fishing",
+      "runtime": "complete-games-v3",
+      "world_id": "deep-catch",
+      "shared_environment": false,
+      "role": "dedicated_gameplay_scene",
+      "source_authoring": "reference-guided raster generation and deterministic game-layout composition",
+      "source_generator": "OpenAI built-in ImageGen",
+      "provenance": "Independent game-specific generated environment and transparent gameplay sprites guided by user reference; no third-party game screenshots or copied characters used",
+      "prompt_set": "public/assets/games/casual-v1/sources/deep-catch.prompt.txt",
+      "reference_role": "style only",
+      "owner": "Airvana local demo owner",
+      "authorization_status": "local_preview_user_requested",
+      "release_approved": false,
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/deep-catch.png",
+        "format": "png",
+        "width": 1024,
+        "height": 1536,
+        "bytes": 2271231,
+        "sha256": "4ef5a8a3f5ed8e7295f17ed7d210c748d9e0507d528e8efde8a40eff93efd10b",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/deep-catch.prompt.txt"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/casual-v1/scenes/deep-catch.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 127704,
+        "sha256": "33d494eed18c736adf3d668d80a74ac32b1dd4efb3e60f13e6dd248057c17056"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/casual-v1/covers/deep-catch.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 147746,
+        "sha256": "1d7e4059025a17454cb71b8a7f1812c103557d28213113e502f12b32ce0af2ee"
+      },
+      "cover_png": {
+        "path": "public/assets/games/casual-v1/covers-png/deep-catch.png",
+        "format": "png",
+        "width": 720,
+        "height": 1120,
+        "bytes": 1548125,
+        "sha256": "dc153cfef057f8461f5474b266ea5d4d5412ba85ce412673086a421b09920c74"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/scenes/deep-catch.webp",
+      "flutter_cover_png": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/covers-png/deep-catch.png",
+      "cover_sprite_keys": [
+        "hook",
+        "fish",
+        "predator_fish"
+      ]
+    },
+    {
+      "asset_id": "asset_casual_v1_ember-bastion",
+      "game_key": "ember-bastion",
+      "content_id": 31,
+      "title": "赤焰防线",
+      "mechanic": "defense",
+      "runtime": "complete-games-v3",
+      "world_id": "ember-bastion",
+      "shared_environment": false,
+      "role": "dedicated_gameplay_scene",
+      "source_authoring": "reference-guided raster generation and deterministic game-layout composition",
+      "source_generator": "OpenAI built-in ImageGen",
+      "provenance": "Independent game-specific generated environment and transparent gameplay sprites guided by user reference; no third-party game screenshots or copied characters used",
+      "prompt_set": "public/assets/games/casual-v1/sources/ember-bastion.prompt.txt",
+      "reference_role": "style only",
+      "owner": "Airvana local demo owner",
+      "authorization_status": "local_preview_user_requested",
+      "release_approved": false,
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/ember-bastion.png",
+        "format": "png",
+        "width": 1024,
+        "height": 1536,
+        "bytes": 2573736,
+        "sha256": "9619f6cfb4a9e3871bf83947e4837bab29ac6b97613858989faa1ccb390db943",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/ember-bastion.prompt.txt"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/casual-v1/scenes/ember-bastion.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 160570,
+        "sha256": "c271bf1a13a1b7c9fa97d41d96edb1e23cbfc6fe92b8c23781dd4aba855ee3d8"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/casual-v1/covers/ember-bastion.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 182316,
+        "sha256": "b663a4f0a73317402c4d1588faf324d40efa65d13c9d62103f80e9a7a054bc88"
+      },
+      "cover_png": {
+        "path": "public/assets/games/casual-v1/covers-png/ember-bastion.png",
+        "format": "png",
+        "width": 720,
+        "height": 1120,
+        "bytes": 1503928,
+        "sha256": "28bf247816c86d72e01e4f6ac0e407d4ea899034eb0f762e9f417d370a7ce116"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/scenes/ember-bastion.webp",
+      "flutter_cover_png": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/covers-png/ember-bastion.png",
+      "cover_sprite_keys": [
+        "cannon",
+        "raider",
+        "turret",
+        "crystal"
+      ]
+    },
+    {
+      "asset_id": "asset_casual_v1_nova-drift",
+      "game_key": "nova-drift",
+      "content_id": 32,
+      "title": "新星漂移",
+      "mechanic": "drift",
+      "runtime": "complete-games-v3",
+      "world_id": "nova-drift",
+      "shared_environment": false,
+      "role": "dedicated_gameplay_scene",
+      "source_authoring": "reference-guided raster generation and deterministic game-layout composition",
+      "source_generator": "OpenAI built-in ImageGen",
+      "provenance": "Independent game-specific generated environment and transparent gameplay sprites guided by user reference; no third-party game screenshots or copied characters used",
+      "prompt_set": "public/assets/games/casual-v1/sources/nova-drift.prompt.txt",
+      "reference_role": "style only",
+      "owner": "Airvana local demo owner",
+      "authorization_status": "local_preview_user_requested",
+      "release_approved": false,
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/nova-drift.png",
+        "format": "png",
+        "width": 1006,
+        "height": 1563,
+        "bytes": 2087193,
+        "sha256": "a67a83d47e91c8e98191702471b18db29e52111f77c08b73ce628d9e1ea50aed",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/nova-drift.prompt.txt"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/casual-v1/scenes/nova-drift.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 101758,
+        "sha256": "0fac0caaedef01ab0fe272acec67032c8b849d62232a388cf3b46cf878eeb456"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/casual-v1/covers/nova-drift.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 119422,
+        "sha256": "032ebeb3b8310f4c886adbe4b1dacd7736d15d11d493be194d98b592f7417c13"
+      },
+      "cover_png": {
+        "path": "public/assets/games/casual-v1/covers-png/nova-drift.png",
+        "format": "png",
+        "width": 720,
+        "height": 1120,
+        "bytes": 1210013,
+        "sha256": "3b2fa21f4da8db1ac45dc899bdb1000c285796a14f193a5f47f0e31cd21f30d6"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/scenes/nova-drift.webp",
+      "flutter_cover_png": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/covers-png/nova-drift.png",
+      "cover_sprite_keys": [
+        "roadblock",
+        "car"
+      ]
+    },
+    {
+      "asset_id": "asset_casual_v1_void-squadron",
+      "game_key": "void-squadron",
+      "content_id": 33,
+      "title": "虚空小队",
+      "mechanic": "shooter",
+      "runtime": "complete-games-v3",
+      "world_id": "void-squadron",
+      "shared_environment": false,
+      "role": "dedicated_gameplay_scene",
+      "source_authoring": "reference-guided raster generation and deterministic game-layout composition",
+      "source_generator": "OpenAI built-in ImageGen",
+      "provenance": "Independent game-specific generated environment and transparent gameplay sprites guided by user reference; no third-party game screenshots or copied characters used",
+      "prompt_set": "public/assets/games/casual-v1/sources/void-squadron.prompt.txt",
+      "reference_role": "style only",
+      "owner": "Airvana local demo owner",
+      "authorization_status": "local_preview_user_requested",
+      "release_approved": false,
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/void-squadron.png",
+        "format": "png",
+        "width": 1024,
+        "height": 1536,
+        "bytes": 2416825,
+        "sha256": "64ce1b1281f4b8050227c0b39c48d08c44a98299b6da2519337cd35f4cd7efd1",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/void-squadron.prompt.txt"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/casual-v1/scenes/void-squadron.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 125170,
+        "sha256": "dc083e6623bf4bfa2c3c6e19f46c61abd61b0198d7de7990cbba335868774212"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/casual-v1/covers/void-squadron.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 179072,
+        "sha256": "905450437817e3b8bcdc2a1fd4f4892184f4a7a4de32ccb3699d6462550296c0"
+      },
+      "cover_png": {
+        "path": "public/assets/games/casual-v1/covers-png/void-squadron.png",
+        "format": "png",
+        "width": 720,
+        "height": 1120,
+        "bytes": 1190919,
+        "sha256": "32b220425d246c4012440b5e75f4ac93fed6d1a8b18c23cfa3295046856f21a3"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/scenes/void-squadron.webp",
+      "flutter_cover_png": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/covers-png/void-squadron.png",
+      "cover_sprite_keys": [
+        "drone",
+        "enemy_ship",
+        "bullet",
+        "spacecraft"
+      ]
+    },
+    {
+      "asset_id": "asset_casual_v1_orchard-merge",
+      "game_key": "orchard-merge",
+      "content_id": 34,
+      "title": "果园合合塔",
+      "mechanic": "match",
+      "runtime": "complete-games-v3",
+      "world_id": "orchard-merge",
+      "shared_environment": false,
+      "role": "dedicated_gameplay_scene",
+      "source_authoring": "reference-guided raster generation and deterministic game-layout composition",
+      "source_generator": "OpenAI built-in ImageGen",
+      "provenance": "Independent game-specific generated environment and transparent gameplay sprites guided by user reference; no third-party game screenshots or copied characters used",
+      "prompt_set": "public/assets/games/casual-v1/sources/orchard-merge.prompt.txt",
+      "reference_role": "style only",
+      "owner": "Airvana local demo owner",
+      "authorization_status": "local_preview_user_requested",
+      "release_approved": false,
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/orchard-merge.png",
+        "format": "png",
+        "width": 1024,
+        "height": 1536,
+        "bytes": 2741522,
+        "sha256": "9d3a6db810a29bb44a0b1a1ab5a8aee9cb6c76f2bed862da873f23c4bede3c40",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/orchard-merge.prompt.txt"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/casual-v1/scenes/orchard-merge.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 202838,
+        "sha256": "6e40d64f57dbd8fdc46f6e988ad97a95fe17ff0fe4cb30102da28043b836ff52"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/casual-v1/covers/orchard-merge.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 203664,
+        "sha256": "b3d5f11952a3842c3d81d3ad86a36234175849684920995513af64000354444e"
+      },
+      "cover_png": {
+        "path": "public/assets/games/casual-v1/covers-png/orchard-merge.png",
+        "format": "png",
+        "width": 720,
+        "height": 1120,
+        "bytes": 1656889,
+        "sha256": "a3f007ed3da85bf9c4cd6c50586af54e8992b930bd546cc4227bafcafb720a40"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/scenes/orchard-merge.webp",
+      "flutter_cover_png": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/covers-png/orchard-merge.png",
+      "cover_sprite_keys": [
+        "plum",
+        "pear",
+        "orange",
+        "green_apple",
+        "red_apple"
+      ]
+    },
+    {
+      "asset_id": "asset_casual_v1_star-mower",
+      "game_key": "star-mower",
+      "content_id": 35,
+      "title": "星尘割草",
+      "mechanic": "survival",
+      "runtime": "deep-games-v2",
+      "world_id": "star-mower",
+      "shared_environment": false,
+      "role": "dedicated_gameplay_scene",
+      "source_authoring": "reference-guided raster generation and deterministic game-layout composition",
+      "source_generator": "OpenAI built-in ImageGen",
+      "provenance": "Independent game-specific generated environment and transparent gameplay sprites guided by user reference; no third-party game screenshots or copied characters used",
+      "prompt_set": "public/assets/games/casual-v1/sources/star-mower.prompt.txt",
+      "reference_role": "style only",
+      "owner": "Airvana local demo owner",
+      "authorization_status": "local_preview_user_requested",
+      "release_approved": false,
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/star-mower.png",
+        "format": "png",
+        "width": 1024,
+        "height": 1536,
+        "bytes": 2517326,
+        "sha256": "983a49dbfa05b95c9d9ba7714963fec34a20676099251ebc70da6de6dda3a845",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/star-mower.prompt.txt"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/casual-v1/scenes/star-mower.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 164518,
+        "sha256": "fdc745bcce937938ac44cb3749a68944077b37af9be486b11be6857797cd7d30"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/casual-v1/covers/star-mower.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 179286,
+        "sha256": "b76249bfb6a40979672315a9c73b967ad152453f833b8d5a48d15b714384f676"
+      },
+      "cover_png": {
+        "path": "public/assets/games/casual-v1/covers-png/star-mower.png",
+        "format": "png",
+        "width": 720,
+        "height": 1120,
+        "bytes": 1715550,
+        "sha256": "cf43711df3632e0fd8c48347ee499981255e4f7db25d39b3191da66f3951a085"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/scenes/star-mower.webp",
+      "flutter_cover_png": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/covers-png/star-mower.png",
+      "cover_sprite_keys": [
+        "spore",
+        "mower"
+      ]
+    },
+    {
+      "asset_id": "asset_casual_v1_moonlight-tea-shop",
+      "game_key": "moonlight-tea-shop",
+      "content_id": 36,
+      "title": "月光奶茶铺",
+      "mechanic": "shop",
+      "runtime": "complete-games-v3",
+      "world_id": "moonlight-tea-shop",
+      "shared_environment": false,
+      "role": "dedicated_gameplay_scene",
+      "source_authoring": "reference-guided raster generation and deterministic game-layout composition",
+      "source_generator": "OpenAI built-in ImageGen",
+      "provenance": "Independent game-specific generated environment and transparent gameplay sprites guided by user reference; no third-party game screenshots or copied characters used",
+      "prompt_set": "public/assets/games/casual-v1/sources/moonlight-tea-shop.prompt.txt",
+      "reference_role": "style only",
+      "owner": "Airvana local demo owner",
+      "authorization_status": "local_preview_user_requested",
+      "release_approved": false,
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/moonlight-tea-shop.png",
+        "format": "png",
+        "width": 1006,
+        "height": 1563,
+        "bytes": 2380391,
+        "sha256": "e956dbb65d0de1c0d80c88069d1bf562a2e92523589354b2e1d7bdf76dde9af6",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/moonlight-tea-shop.prompt.txt"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/casual-v1/scenes/moonlight-tea-shop.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 145620,
+        "sha256": "b666e0fc643d62bb1d588261a80403114b988060a9dcff30334cbd8c9936523f"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/casual-v1/covers/moonlight-tea-shop.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 114178,
+        "sha256": "9157c9dcf3a2e3204eb437f9672444441f9df6cf10b45dce555956badc8dab94"
+      },
+      "cover_png": {
+        "path": "public/assets/games/casual-v1/covers-png/moonlight-tea-shop.png",
+        "format": "png",
+        "width": 720,
+        "height": 1120,
+        "bytes": 1151340,
+        "sha256": "fa6f029745121fcfa263cfacdbdd6dbc21f8c75c649cc4208e6bb4b30b87b39a"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/scenes/moonlight-tea-shop.webp",
+      "flutter_cover_png": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/covers-png/moonlight-tea-shop.png",
+      "cover_sprite_keys": [
+        "tea",
+        "coffee",
+        "cup"
+      ]
+    },
+    {
+      "asset_id": "asset_casual_v1_microbe-arena",
+      "game_key": "microbe-arena",
+      "content_id": 37,
+      "title": "微粒竞技场",
+      "mechanic": "survival",
+      "runtime": "complete-games-v3",
+      "world_id": "microbe-arena",
+      "shared_environment": false,
+      "role": "dedicated_gameplay_scene",
+      "source_authoring": "reference-guided raster generation and deterministic game-layout composition",
+      "source_generator": "OpenAI built-in ImageGen",
+      "provenance": "Independent game-specific generated environment and transparent gameplay sprites guided by user reference; no third-party game screenshots or copied characters used",
+      "prompt_set": "public/assets/games/casual-v1/sources/microbe-arena.prompt.txt",
+      "reference_role": "style only",
+      "owner": "Airvana local demo owner",
+      "authorization_status": "local_preview_user_requested",
+      "release_approved": false,
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/microbe-arena.png",
+        "format": "png",
+        "width": 1024,
+        "height": 1536,
+        "bytes": 2077104,
+        "sha256": "a7b7c8f248abe3c674f8fd00971251a337cc89ea7759d10771fd4b6e0e7151fe",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/microbe-arena.prompt.txt"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/casual-v1/scenes/microbe-arena.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 112086,
+        "sha256": "722d3c7f891fb857def0b02380dcfc60380c078ecb9629df409f4994ade5eed7"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/casual-v1/covers/microbe-arena.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 135646,
+        "sha256": "4121c25d2a8f8b11bf6bba853faff3025f1fd598faadbf0068d54fa7297bf426"
+      },
+      "cover_png": {
+        "path": "public/assets/games/casual-v1/covers-png/microbe-arena.png",
+        "format": "png",
+        "width": 720,
+        "height": 1120,
+        "bytes": 1639084,
+        "sha256": "4a362e8bc373ef03d568511891a0878d681a34a142342c9759f8a991b20785b1"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/scenes/microbe-arena.webp",
+      "flutter_cover_png": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/covers-png/microbe-arena.png",
+      "cover_sprite_keys": [
+        "microbe",
+        "microbe_enemy",
+        "spore"
+      ]
+    },
+    {
+      "asset_id": "asset_casual_v1_star-deck",
+      "game_key": "star-deck",
+      "content_id": 38,
+      "title": "星轨牌阵",
+      "mechanic": "cards",
+      "runtime": "deep-games-v2",
+      "world_id": "star-deck",
+      "shared_environment": false,
+      "role": "dedicated_gameplay_scene",
+      "source_authoring": "reference-guided raster generation and deterministic game-layout composition",
+      "source_generator": "OpenAI built-in ImageGen",
+      "provenance": "Independent game-specific generated environment and transparent gameplay sprites guided by user reference; no third-party game screenshots or copied characters used",
+      "prompt_set": "public/assets/games/casual-v1/sources/star-deck.prompt.txt",
+      "reference_role": "style only",
+      "owner": "Airvana local demo owner",
+      "authorization_status": "local_preview_user_requested",
+      "release_approved": false,
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/star-deck.png",
+        "format": "png",
+        "width": 1024,
+        "height": 1536,
+        "bytes": 2545840,
+        "sha256": "4b0baab42e609dddc954ee8a228761eea53d4dcb259fb5b8c02a9a3a7ae5bff7",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/star-deck.prompt.txt"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/casual-v1/scenes/star-deck.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 140696,
+        "sha256": "1a8d158a8efe38d2304905cccd68efc94f72a65e4aedf4b68f6ba80b1a404eac"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/casual-v1/covers/star-deck.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 152012,
+        "sha256": "1599348c3387a86862b1d8d6740c47f185dacc8997cd28848089fcb24b82c94a"
+      },
+      "cover_png": {
+        "path": "public/assets/games/casual-v1/covers-png/star-deck.png",
+        "format": "png",
+        "width": 720,
+        "height": 1120,
+        "bytes": 1220671,
+        "sha256": "33e44fcf803804c8b46d6891ab7970cf0d880ea881d0727085c14115e206a350"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/scenes/star-deck.webp",
+      "flutter_cover_png": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/covers-png/star-deck.png",
+      "cover_sprite_keys": [
+        "sentinel",
+        "hero",
+        "sword",
+        "shield",
+        "potion"
+      ]
+    },
+    {
+      "asset_id": "asset_casual_v1_crystal-bastion",
+      "game_key": "crystal-bastion",
+      "content_id": 39,
+      "title": "晶核防线",
+      "mechanic": "defense",
+      "runtime": "complete-games-v3",
+      "world_id": "crystal-bastion",
+      "shared_environment": false,
+      "role": "dedicated_gameplay_scene",
+      "source_authoring": "reference-guided raster generation and deterministic game-layout composition",
+      "source_generator": "OpenAI built-in ImageGen",
+      "provenance": "Independent game-specific generated environment and transparent gameplay sprites guided by user reference; no third-party game screenshots or copied characters used",
+      "prompt_set": "public/assets/games/casual-v1/sources/crystal-bastion.prompt.txt",
+      "reference_role": "style only",
+      "owner": "Airvana local demo owner",
+      "authorization_status": "local_preview_user_requested",
+      "release_approved": false,
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/crystal-bastion.png",
+        "format": "png",
+        "width": 1024,
+        "height": 1536,
+        "bytes": 2524703,
+        "sha256": "c5e13ac0a4987f1d2a52a60042a08201ff4c4b6c49c443fef5820367cd37d3e6",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/crystal-bastion.prompt.txt"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/casual-v1/scenes/crystal-bastion.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 164132,
+        "sha256": "ac65860b8719c938b0f30e9e1d737103e7145bf4c11cc63c0c0619426c3fe148"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/casual-v1/covers/crystal-bastion.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 190578,
+        "sha256": "d4cad06a4a5529bb4a699c9fa32e73d0c2a5fdf643680b86bbe925b2ca02ff86"
+      },
+      "cover_png": {
+        "path": "public/assets/games/casual-v1/covers-png/crystal-bastion.png",
+        "format": "png",
+        "width": 720,
+        "height": 1120,
+        "bytes": 1642943,
+        "sha256": "e1aab8b594c92222de2d63a4aec4e949e01d25006257b2e49b0230f2f50b0ecb"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/scenes/crystal-bastion.webp",
+      "flutter_cover_png": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/covers-png/crystal-bastion.png",
+      "cover_sprite_keys": [
+        "cannon",
+        "raider",
+        "turret",
+        "crystal"
+      ]
+    },
+    {
+      "asset_id": "asset_casual_v1_adventurer-journal",
+      "game_key": "adventurer-journal",
+      "content_id": 40,
+      "title": "冒险者日志",
+      "mechanic": "maze",
+      "runtime": "deep-games-v2",
+      "world_id": "adventurer-journal",
+      "shared_environment": false,
+      "role": "dedicated_gameplay_scene",
+      "source_authoring": "reference-guided raster generation and deterministic game-layout composition",
+      "source_generator": "OpenAI built-in ImageGen",
+      "provenance": "Independent game-specific generated environment and transparent gameplay sprites guided by user reference; no third-party game screenshots or copied characters used",
+      "prompt_set": "public/assets/games/casual-v1/sources/adventurer-journal.prompt.txt",
+      "reference_role": "style only",
+      "owner": "Airvana local demo owner",
+      "authorization_status": "local_preview_user_requested",
+      "release_approved": false,
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/adventurer-journal.png",
+        "format": "png",
+        "width": 1024,
+        "height": 1536,
+        "bytes": 2869200,
+        "sha256": "95662991ac1191bf0bc91e588c61048e49842694b71695b66718b0da3de52200",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/adventurer-journal.prompt.txt"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/casual-v1/scenes/adventurer-journal.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 213840,
+        "sha256": "a72afe229ae1979d7cd55115f4b1688b91cfe43bbcf301c5935411a4d10e5a2f"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/casual-v1/covers/adventurer-journal.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 244842,
+        "sha256": "83ff807254594f0792e70cb1d62b3497a8ce2e5d4e22c8b17b98d7ef0c40ffb1"
+      },
+      "cover_png": {
+        "path": "public/assets/games/casual-v1/covers-png/adventurer-journal.png",
+        "format": "png",
+        "width": 720,
+        "height": 1120,
+        "bytes": 2130340,
+        "sha256": "145f5b773ed9e934e8c28db30f983ec64d9539fac2a1b4c8e6243abb67fa7560"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/scenes/adventurer-journal.webp",
+      "flutter_cover_png": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/covers-png/adventurer-journal.png",
+      "cover_sprite_keys": [
+        "tent",
+        "tree",
+        "house",
+        "guardian",
+        "treasure"
+      ]
+    },
+    {
+      "asset_id": "asset_casual_v1_idiom-detective",
+      "game_key": "idiom-detective",
+      "content_id": 41,
+      "title": "成语侦探",
+      "mechanic": "cards",
+      "runtime": "deep-games-v2",
+      "world_id": "idiom-detective",
+      "shared_environment": false,
+      "role": "dedicated_gameplay_scene",
+      "source_authoring": "reference-guided raster generation and deterministic game-layout composition",
+      "source_generator": "OpenAI built-in ImageGen",
+      "provenance": "Independent game-specific generated environment and transparent gameplay sprites guided by user reference; no third-party game screenshots or copied characters used",
+      "prompt_set": "public/assets/games/casual-v1/sources/idiom-detective.prompt.txt",
+      "reference_role": "style only",
+      "owner": "Airvana local demo owner",
+      "authorization_status": "local_preview_user_requested",
+      "release_approved": false,
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/idiom-detective.png",
+        "format": "png",
+        "width": 1024,
+        "height": 1536,
+        "bytes": 2373882,
+        "sha256": "66c27c2788da6b97b58b092e4a8e0f48ceade5de9a7a1bdf121c70937a50f669",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/idiom-detective.prompt.txt"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/casual-v1/scenes/idiom-detective.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 124026,
+        "sha256": "7e998e312c11e4047328a504c95de057cab491ae53d5b29b36ca147f4495c5ac"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/casual-v1/covers/idiom-detective.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 129094,
+        "sha256": "2a9d56cf0a688f8e63459865e5c81518bad3d1d2dd180f3002e4da15a913491c"
+      },
+      "cover_png": {
+        "path": "public/assets/games/casual-v1/covers-png/idiom-detective.png",
+        "format": "png",
+        "width": 720,
+        "height": 1120,
+        "bytes": 1206792,
+        "sha256": "782f5615cd349642175953a694e19f64636af9208ab780baaf475ee68bf000df"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/scenes/idiom-detective.webp",
+      "flutter_cover_png": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/covers-png/idiom-detective.png",
+      "cover_sprite_keys": [
+        "tree",
+        "flower",
+        "scroll",
+        "key",
+        "star",
+        "treasure"
+      ]
+    },
+    {
+      "asset_id": "asset_casual_v1_hex-frontier",
+      "game_key": "hex-frontier",
+      "content_id": 42,
+      "title": "六角前线",
+      "mechanic": "battle",
+      "runtime": "deep-games-v2",
+      "world_id": "hex-frontier",
+      "shared_environment": false,
+      "role": "dedicated_gameplay_scene",
+      "source_authoring": "reference-guided raster generation and deterministic game-layout composition",
+      "source_generator": "OpenAI built-in ImageGen",
+      "provenance": "Independent game-specific generated environment and transparent gameplay sprites guided by user reference; no third-party game screenshots or copied characters used",
+      "prompt_set": "public/assets/games/casual-v1/sources/hex-frontier.prompt.txt",
+      "reference_role": "style only",
+      "owner": "Airvana local demo owner",
+      "authorization_status": "local_preview_user_requested",
+      "release_approved": false,
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/hex-frontier.png",
+        "format": "png",
+        "width": 1024,
+        "height": 1536,
+        "bytes": 2722085,
+        "sha256": "1f47ef8ff06e8f1bce5548615a846213a3cda3abd30be14d99e66c597f7fc4ee",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/hex-frontier.prompt.txt"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/casual-v1/scenes/hex-frontier.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 170608,
+        "sha256": "a6fc7ac79fcb819b060c726aeb5eeec4018001992a627e1d898a21e65ea75a38"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/casual-v1/covers/hex-frontier.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 170364,
+        "sha256": "994cbde05b267ccc2d8cc404fd4b3adc42ffc1de945305e518610d4afea16ee9"
+      },
+      "cover_png": {
+        "path": "public/assets/games/casual-v1/covers-png/hex-frontier.png",
+        "format": "png",
+        "width": 720,
+        "height": 1120,
+        "bytes": 1322560,
+        "sha256": "4f1addc36b39d0de66cdcb1b95643518c3b2d2d2a3e7ea52f26e9e77178d657f"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/scenes/hex-frontier.webp",
+      "flutter_cover_png": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/covers-png/hex-frontier.png",
+      "cover_sprite_keys": [
+        "raider",
+        "guardian"
+      ]
+    },
+    {
+      "asset_id": "asset_casual_v1_studio-wardrobe",
+      "game_key": "studio-wardrobe",
+      "content_id": 43,
+      "title": "今日造型师",
+      "mechanic": "wardrobe",
+      "runtime": "complete-games-v3",
+      "world_id": "studio-wardrobe",
+      "shared_environment": false,
+      "role": "dedicated_gameplay_scene",
+      "source_authoring": "reference-guided raster generation and deterministic game-layout composition",
+      "source_generator": "OpenAI built-in ImageGen",
+      "provenance": "Independent game-specific generated environment and transparent gameplay sprites guided by user reference; no third-party game screenshots or copied characters used",
+      "prompt_set": "public/assets/games/casual-v1/sources/studio-wardrobe.prompt.txt",
+      "reference_role": "style only",
+      "owner": "Airvana local demo owner",
+      "authorization_status": "local_preview_user_requested",
+      "release_approved": false,
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/studio-wardrobe.png",
+        "format": "png",
+        "width": 1024,
+        "height": 1536,
+        "bytes": 2666984,
+        "sha256": "5c7d4810b00964d7d4cf18f4fbd9c297d301cd55c865d0a9a2fd1c660bc74e96",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/studio-wardrobe.prompt.txt"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/casual-v1/scenes/studio-wardrobe.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 148468,
+        "sha256": "a5df7c8da5ee1e64a020103c049366de8fe409a25b77f6007fd8be79c67670a0"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/casual-v1/covers/studio-wardrobe.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 146322,
+        "sha256": "c6717de67f85105cb41d49336094e0621fcbe338f54a71a906fcdff356d274f1"
+      },
+      "cover_png": {
+        "path": "public/assets/games/casual-v1/covers-png/studio-wardrobe.png",
+        "format": "png",
+        "width": 720,
+        "height": 1120,
+        "bytes": 1275695,
+        "sha256": "7bcdfa7c7bbbc249bc67da95259dab233c44dcfdc3eddae19eba78a3a42a8450"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/scenes/studio-wardrobe.webp",
+      "flutter_cover_png": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/covers-png/studio-wardrobe.png",
+      "cover_sprite_keys": [
+        "model",
+        "dress",
+        "shoes",
+        "hat"
+      ]
+    },
+    {
+      "asset_id": "asset_casual_v1_garden-renewal",
+      "game_key": "garden-renewal",
+      "content_id": 44,
+      "title": "花园焕新",
+      "mechanic": "match",
+      "runtime": "deep-games-v2",
+      "world_id": "garden-renewal",
+      "shared_environment": false,
+      "role": "dedicated_gameplay_scene",
+      "source_authoring": "reference-guided raster generation and deterministic game-layout composition",
+      "source_generator": "OpenAI built-in ImageGen",
+      "provenance": "Independent game-specific generated environment and transparent gameplay sprites guided by user reference; no third-party game screenshots or copied characters used",
+      "prompt_set": "public/assets/games/casual-v1/sources/garden-renewal.prompt.txt",
+      "reference_role": "style only",
+      "owner": "Airvana local demo owner",
+      "authorization_status": "local_preview_user_requested",
+      "release_approved": false,
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "source": {
+        "path": "public/assets/games/casual-v1/environments/garden-renewal.png",
+        "format": "png",
+        "width": 1024,
+        "height": 1536,
+        "bytes": 2511653,
+        "sha256": "607e9de6b293fba986507c0b2eb7e35356e2e44efe2da95840a103b9a989d191",
+        "source_generator": "OpenAI built-in ImageGen",
+        "reference_role": "user supplied visual style reference only",
+        "prompt_record": "public/assets/games/casual-v1/sources/garden-renewal.prompt.txt"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/casual-v1/scenes/garden-renewal.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 168800,
+        "sha256": "10e1a2912d4dac12a43e56b2f83513a24f2bfe9795439328a75383f47952afef"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/casual-v1/covers/garden-renewal.webp",
+        "format": "webp",
+        "width": 720,
+        "height": 1120,
+        "bytes": 173238,
+        "sha256": "e7cae5f30714b9fa82f15ecf94ab3833bf701bdd44f77651882d3b02313ea01d"
+      },
+      "cover_png": {
+        "path": "public/assets/games/casual-v1/covers-png/garden-renewal.png",
+        "format": "png",
+        "width": 720,
+        "height": 1120,
+        "bytes": 1343790,
+        "sha256": "bc9dd8bfeb5dc60bc97f39f397268d1a36d39f074515b9d994d8c6570037ed95"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/scenes/garden-renewal.webp",
+      "flutter_cover_png": "apps/airvana_mobile/assets/runner/assets/games/casual-v1/covers-png/garden-renewal.png",
+      "cover_sprite_keys": [
+        "seedling",
+        "watering_can",
+        "seeds",
+        "flower"
+      ]
+    }
+  ]
+}

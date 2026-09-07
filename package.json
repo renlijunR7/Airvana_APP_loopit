@@ -6,11 +6,13 @@
   "scripts": {
     "dev": "node --watch server.mjs",
     "start": "node server.mjs",
+    "preview": "node scripts/start-local-preview.mjs",
     "test": "node --test --test-concurrency=1",
     "verify": "node scripts/verify.mjs"
   },
   "dependencies": {
-    "ethers": "^6.15.0"
+    "ethers": "^6.15.0",
+    "matter-js": "0.20.0"
   },
   "engines": {
     "node": ">=22"

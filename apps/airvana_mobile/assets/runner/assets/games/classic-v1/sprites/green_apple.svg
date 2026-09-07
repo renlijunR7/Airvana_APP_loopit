@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="green apple">
+<title>green apple — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M31 18Q17 10 9 24Q4 34 13 49Q21 62 32 56Q45 61 54 48Q62 32 53 22Q44 11 31 18Z" fill="#8eb854" /><path d="M43 16Q52 25 50 39Q48 53 36 57Q48 59 55 46Q63 29 51 20Z" fill="#416b47" stroke="none"/><path d="M31 18L34 7" fill="none" stroke="#8b6041" stroke-width="4"/><path d="M34 12Q38 2 52 6Q46 18 34 12Z" fill="#689754" />
+</g>
+</svg>

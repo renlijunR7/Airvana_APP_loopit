@@ -909,6 +909,48 @@ function migrate(db) {
       updated_at TEXT NOT NULL
     );
 
+    CREATE TABLE IF NOT EXISTS game_coin_ledgers (
+      id TEXT PRIMARY KEY,
+      user_id TEXT NOT NULL REFERENCES users(id),
+      playable_id TEXT NOT NULL,
+      title TEXT NOT NULL DEFAULT '',
+      balance INTEGER NOT NULL DEFAULT 0,
+      completions INTEGER NOT NULL DEFAULT 0,
+      last_reward_date TEXT,
+      created_at TEXT NOT NULL,
+      updated_at TEXT NOT NULL,
+      UNIQUE(user_id, playable_id)
+    );
+
+    CREATE TABLE IF NOT EXISTS game_completions (
+      id TEXT PRIMARY KEY,
+      user_id TEXT NOT NULL REFERENCES users(id),
+      playable_id TEXT NOT NULL,
+      success INTEGER NOT NULL DEFAULT 0,
+      score INTEGER NOT NULL DEFAULT 0,
+      stage TEXT NOT NULL DEFAULT '',
+      summary TEXT NOT NULL DEFAULT '',
+      coins_earned INTEGER NOT NULL DEFAULT 0,
+      aip_earned INTEGER NOT NULL DEFAULT 0,
+      created_at TEXT NOT NULL
+    );
+
+    CREATE TABLE IF NOT EXISTS invite_profiles (
+      user_id TEXT PRIMARY KEY REFERENCES users(id),
+      invite_code TEXT NOT NULL UNIQUE,
+      created_at TEXT NOT NULL
+    );
+
+    CREATE TABLE IF NOT EXISTS invite_redemptions (
+      id TEXT PRIMARY KEY,
+      inviter_user_id TEXT NOT NULL REFERENCES users(id),
+      invitee_user_id TEXT NOT NULL UNIQUE REFERENCES users(id),
+      status TEXT NOT NULL CHECK(status IN ('registered','qualified')),
+      qualified_at TEXT,
+      created_at TEXT NOT NULL,
+      updated_at TEXT NOT NULL
+    );
+
     CREATE INDEX IF NOT EXISTS idx_tasks_status ON agent_tasks(status, created_at);
     CREATE INDEX IF NOT EXISTS idx_contents_owner ON contents(owner_user_id, updated_at);
     CREATE INDEX IF NOT EXISTS idx_contents_status ON contents(status, published_at);
@@ -933,6 +975,9 @@ function migrate(db) {
     CREATE INDEX IF NOT EXISTS idx_notifications_user ON notifications(user_id, read_at, created_at);
     CREATE INDEX IF NOT EXISTS idx_content_appeals_status ON content_appeals(status, created_at);
     CREATE INDEX IF NOT EXISTS idx_task_steps ON agent_task_steps(task_id, sequence);
+    CREATE INDEX IF NOT EXISTS idx_game_coin_user ON game_coin_ledgers(user_id, updated_at);
+    CREATE INDEX IF NOT EXISTS idx_game_completions_user ON game_completions(user_id, playable_id, created_at);
+    CREATE INDEX IF NOT EXISTS idx_invite_redemptions_inviter ON invite_redemptions(inviter_user_id, status, created_at);
   `);
 
   const reportColumns = db.prepare('PRAGMA table_info(content_reports)').all().map(column => column.name);

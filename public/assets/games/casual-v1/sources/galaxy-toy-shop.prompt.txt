@@ -1,0 +1,9 @@
+Game: galaxy-toy-shop
+Generator: OpenAI built-in ImageGen
+Reference role: style only
+Original file: /Users/lijunren/.codex/generated_images/01a0722a-cd21-7871-b0c6-5c67239a7801/exec-8ed78fd8-1d60-4395-a186-c090b50e5578.png
+Visual QA: reviewed individually; independent game world; clear central playfield; no baked UI or live character
+
+Use case: stylized-concept. Asset type: unique portrait gameplay environment for one named mobile game, aspect ratio 360:560. The attached image is STYLE REFERENCE ONLY: use its mature high-quality casual mobile-game 2.5D rendering, saturated but harmonious colors, clearly modeled rounded materials, polished hand-painted textures and soft readable lighting. Create an original new world, NOT the reference farm/people/train. No phone frame, text, letters, numbers, signs, logos, UI panels, controls, buttons, or characters/gameplay items baked into the scene. No flat vector art, pixel-art rendering, low-poly primitive placeholder shapes, photorealism, ornate filigree, random surreal fantasy details. Environment belongs to the specific game world below and should look distinct from every other game's world. Camera elevated three-quarter top view, central 60% width and 75% height left relatively empty and low-contrast for separately animated game objects. Frame with relevant dimensional environmental props at edges/corners only. Output a finished polished raster game background, no typography.
+Game: Galaxy Toy Shop, assembling toy orders and packaging. World: a cheerful toy boutique in a small moon spaceport. A broad immaculate creamy-yellow rounded work counter in the central area, far edges framed by glossy pastel cubby shelves with rounded robot toys and rockets, unopened candy-colored boxes on peripheral shelves, a top porthole showing a blue planet and starfield. Welcoming polished toy materials, not medieval interior or generic cafe. No order forms, text, loose toys or boxes in the central work area.
+

@@ -1,0 +1,65 @@
+:root {
+  color: #25262a;
+  background: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 280px; }
+button, a { -webkit-tap-highlight-color: transparent; }
+button { font: inherit; cursor: pointer; }
+button:focus-visible, a:focus-visible { outline: 3px solid #377dce; outline-offset: 3px; }
+button, .gallery-back, .gallery-footer a { min-height: 44px; }
+button { min-width: 44px; }
+[hidden] { display: none !important; }
+
+.screenshot-gallery {
+  width: min(100%, 840px);
+  margin: 0 auto;
+  padding: max(12px, env(safe-area-inset-top)) 16px max(24px, env(safe-area-inset-bottom));
+}
+.gallery-header { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.gallery-back { display: inline-flex; align-items: center; color: #515660; text-decoration: none; font-size: 13px; }
+.gallery-label { color: #707580; font-size: 12px; letter-spacing: .06em; }
+.gallery-heading { padding: 14px 0 20px; }
+.gallery-kicker { margin: 0 0 7px; color: #787d84; font-size: 12px; }
+.gallery-heading h1 { margin: 0; font-size: clamp(25px, 4vw, 32px); font-weight: 730; line-height: 1.3; letter-spacing: -.04em; }
+.gallery-description { margin: 10px 0 0; color: #6b717b; font-size: 13px; line-height: 1.7; }
+.gallery-game-nav { display: flex; gap: 7px; overflow-x: auto; overscroll-behavior-x: contain; padding: 2px 2px 12px; scrollbar-width: thin; }
+.gallery-game-nav button { flex: 0 0 auto; padding: 9px 14px; color: #535861; background: #f5f5f6; border: 1px solid transparent; border-radius: 12px; font-size: 13px; font-weight: 600; white-space: nowrap; }
+.gallery-game-nav button[aria-pressed="true"] { background: #24272d; color: #fff; }
+.gallery-selected { width: min(100%, 520px); margin: 4px auto 0; }
+.gallery-selected-heading { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 10px 0 14px; }
+.gallery-selected-heading h2 { font-size: 18px; line-height: 1.45; margin: 0; }
+.gallery-position { flex: 0 0 auto; color: #858993; font-size: 12px; font-variant-numeric: tabular-nums; }
+.gallery-toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; }
+.gallery-display-toggle { display: flex; max-width: 100%; padding: 3px; background: #f2f3f5; border-radius: 12px; }
+.gallery-display-toggle button { border: 0; border-radius: 9px; padding: 7px 16px; color: #6b707a; background: transparent; font-size: 13px; white-space: nowrap; }
+.gallery-display-toggle button[aria-pressed="true"] { background: #fff; color: #25262a; box-shadow: 0 1px 5px #20242c12; font-weight: 650; }
+.gallery-image-nav { display: flex; gap: 5px; }
+.gallery-image-nav button { padding: 7px 10px; border: 1px solid #e1e3e7; border-radius: 9px; font-size: 12px; background: #fff; color: #737985; }
+.gallery-image-nav button[aria-pressed="true"] { color: #25262a; border-color: #616977; background: #f7f8f9; }
+.gallery-view-note { min-height: 20px; margin: 9px 0 12px; font-size: 11px; line-height: 1.6; color: #8b8e96; }
+.gallery-stage { width: 100%; background: #f7f7f8; border-radius: 16px; overflow: hidden; }
+.gallery-stage > .reference-shot { width: 100%; margin: 0; border-radius: 0; }
+.gallery-stage .reference-shot__image { display: block; }
+.gallery-error { margin: 16px 0; padding: 14px; border: 1px solid #e7c9c0; border-radius: 10px; color: #8d3926; font-size: 13px; }
+.gallery-pagination { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 4px; padding: 10px 0 4px; }
+.gallery-pagination button { padding: 6px 3px; border: 0; background: none; color: #555c66; font-size: 12px; white-space: nowrap; }
+.gallery-static-badge { text-align: center; color: #858a94; font-size: 10px; line-height: 1.5; }
+.gallery-footer { border-top: 1px solid #ededf0; padding-top: 12px; }
+.gallery-footer p { margin: 0; color: #858a94; font-size: 11px; line-height: 1.7; }
+.gallery-footer a { display: inline-flex; align-items: center; color: #566879; font-size: 12px; text-decoration: none; }
+
+@media (min-width: 640px) {
+  .screenshot-gallery { padding-left: 30px; padding-right: 30px; }
+  .gallery-heading { padding-top: 28px; }
+  .gallery-selected { margin-top: 14px; }
+  .gallery-static-badge { font-size: 11px; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .gallery-game-nav { scroll-behavior: smooth; }
+}

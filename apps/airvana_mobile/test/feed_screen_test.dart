@@ -171,7 +171,7 @@ void main() {
         await tester.pump();
       }
       expect(find.byKey(const ValueKey('feed-inline-result')), findsOneWidget);
-      expect(find.text('三阶段试玩完成'), findsOneWidget);
+      expect(find.text('本地交互演示完成'), findsOneWidget);
 
       await tester.tap(find.byKey(const ValueKey('feed-inline-retry')));
       await tester.pump();

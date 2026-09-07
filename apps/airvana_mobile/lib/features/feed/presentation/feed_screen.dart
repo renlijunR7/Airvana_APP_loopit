@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:airvana_mobile/app/providers.dart';
 import 'package:airvana_mobile/design_system/airvana_theme.dart';
 import 'package:airvana_mobile/design_system/app_state_view.dart';
+import 'package:airvana_mobile/features/runtime/presentation/h5_game_runtime.dart';
 import 'package:airvana_mobile/features/shared/data/airvana_repository.dart';
 import 'package:airvana_mobile/features/shared/data/legacy_demo_catalog.dart';
 import 'package:airvana_mobile/features/shared/domain/airvana_models.dart';
@@ -596,9 +597,11 @@ class _LegacyPlayablePage extends StatelessWidget {
                 ),
                 if (active)
                   Positioned.fill(
-                    child: playable.id == 'plb_orchard_merge'
-                        ? const _OrchardInlineGame()
-                        : _FeedInlineGame(playable: playable, onExit: onClose),
+                    child: _FeedGameSurface(
+                      playable: playable,
+                      muted: muted,
+                      onExit: onClose,
+                    ),
                   ),
                 Positioned(
                   left: 14,
@@ -606,16 +609,19 @@ class _LegacyPlayablePage extends StatelessWidget {
                   top: 12,
                   child: Row(
                     children: [
-                      Expanded(
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: _GlassBadge(
-                            label: playable.localDemo
-                                ? 'AIRVANA ORIGINAL · 完整三阶段试玩'
-                                : 'RUNTIME · ${playable.stage}',
+                      if (active)
+                        const Spacer()
+                      else
+                        Expanded(
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: _GlassBadge(
+                              label: playable.localDemo
+                                  ? 'AIRVANA ORIGINAL'
+                                  : 'RUNTIME · ${playable.stage}',
+                            ),
                           ),
                         ),
-                      ),
                       const SizedBox(width: 8),
                       _CircleGlass(
                         icon: muted
@@ -940,6 +946,147 @@ class _FeedCover extends StatelessWidget {
   }
 }
 
+/// All supported local games, including Orchard, share the bundled H5 engines.
+/// A platform without WebView keeps only an explicitly labelled UI demo.
+class _FeedGameSurface extends StatelessWidget {
+  const _FeedGameSurface({
+    required this.playable,
+    required this.muted,
+    required this.onExit,
+  });
+
+  final Playable playable;
+  final bool muted;
+  final VoidCallback onExit;
+
+  @override
+  Widget build(BuildContext context) {
+    final gameKey = h5GameKeyForPlayable(playable.id);
+    final supportedGame = LegacyDemoCatalog.legacyWebPlayables.any(
+      (item) => item.id == playable.id,
+    );
+    if (playable.localDemo &&
+        supportedGame &&
+        gameKey != null &&
+        h5GameRuntimeSupported()) {
+      return _FeedH5InlineGame(
+        key: ValueKey('feed-h5-surface-${playable.id}'),
+        playable: playable,
+        gameKey: gameKey,
+        muted: muted,
+        onExit: onExit,
+      );
+    }
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        playable.id == 'plb_orchard_merge'
+            ? const _OrchardInlineGame()
+            : _FeedInlineGame(playable: playable, onExit: onExit),
+        const Positioned(
+          left: 20,
+          right: 20,
+          bottom: 2,
+          child: IgnorePointer(
+            child: ColoredBox(
+              color: Color(0xFF182735),
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 7, vertical: 4),
+                child: Text(
+                  '本地交互演示 · 当前平台未启用完整游戏引擎',
+                  key: ValueKey('feed-demo-runtime-notice'),
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Color(0xFFF2E8CF), fontSize: 9),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _FeedH5InlineGame extends ConsumerStatefulWidget {
+  const _FeedH5InlineGame({
+    super.key,
+    required this.playable,
+    required this.gameKey,
+    required this.muted,
+    required this.onExit,
+  });
+
+  final Playable playable;
+  final String gameKey;
+  final bool muted;
+  final VoidCallback onExit;
+
+  @override
+  ConsumerState<_FeedH5InlineGame> createState() => _FeedH5InlineGameState();
+}
+
+class _FeedH5InlineGameState extends ConsumerState<_FeedH5InlineGame> {
+  int _runId = 1;
+  H5GameResult? _result;
+  String _status = '';
+
+  Future<void> _onComplete(H5GameResult result) async {
+    if (_result != null) return;
+    final runId = _runId;
+    setState(() {
+      _result = result;
+      _status = '正在保存本机体验记录';
+    });
+    try {
+      await ref
+          .read(airvanaRepositoryProvider)
+          .recordPlayableExperience(
+            widget.playable,
+            status: result.success ? 'completed' : 'failed',
+            completedAt: DateTime.now().toUtc(),
+          );
+      ref.invalidate(experienceHistoryProvider);
+      if (mounted && runId == _runId) {
+        setState(() => _status = '体验记录已保存到本机');
+      }
+    } on Object {
+      if (mounted && runId == _runId) {
+        setState(() => _status = '结果尚未保存，当前局结果仍可查看');
+      }
+    }
+  }
+
+  void _restart() => setState(() {
+    _runId += 1;
+    _result = null;
+    _status = '';
+  });
+
+  @override
+  Widget build(BuildContext context) => ColoredBox(
+    color: const Color(0xFF182735),
+    child: Padding(
+      padding: const EdgeInsets.only(top: 58),
+      child: _result == null
+          ? H5GameRuntime(
+              key: ValueKey('feed-h5-${widget.playable.id}-$_runId'),
+              gameKey: widget.gameKey,
+              muted: widget.muted,
+              onComplete: _onComplete,
+            )
+          : _FeedInlineResult(
+              key: const ValueKey('feed-h5-result'),
+              success: _result!.success,
+              score: _result!.score,
+              status: _status,
+              completeRuntime: true,
+              onRestart: _restart,
+              onExit: widget.onExit,
+            ),
+    ),
+  );
+}
+
 class _OrchardInlineGame extends StatefulWidget {
   const _OrchardInlineGame();
 
@@ -1014,150 +1161,182 @@ class _OrchardInlineGameState extends State<_OrchardInlineGame> {
     return Semantics(
       key: const ValueKey('feed-inline-game'),
       container: true,
-      label: '果园合合塔原创代码绘制互动场景',
+      label: '果园合合塔游戏区域',
       child: ColoredBox(
         color: const Color(0xC9071109),
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(11, 58, 11, 12),
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-              color: const Color(0x3DFFFFFF),
-              borderRadius: BorderRadius.circular(18),
-              border: Border.all(color: Colors.white24),
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(18),
-              child: Stack(
-                children: [
-                  Positioned.fill(
-                    child: Image.asset(
-                      'assets/legacy/covers/orchard-merge.jpg',
-                      fit: BoxFit.cover,
+          padding: const EdgeInsets.fromLTRB(11, 12, 11, 12),
+          child: Column(
+            children: [
+              SizedBox(
+                height: 44,
+                child: Row(
+                  children: [
+                    _OrchardControl(
+                      label: _paused ? '继续' : '暂停',
+                      onTap: () => setState(() => _paused = !_paused),
                     ),
-                  ),
-                  const Positioned.fill(
-                    child: ColoredBox(color: Color(0x4A081208)),
-                  ),
-                  Positioned.fill(
-                    child: Padding(
-                      padding: const EdgeInsets.all(12),
-                      child: _complete
-                          ? _OrchardResult(onRestart: _restart)
-                          : Column(
-                              children: [
-                                _OrchardStageHeader(stage: _stage),
-                                const SizedBox(height: 8),
-                                Row(
-                                  children: [
-                                    _OrchardMetric(
-                                      label: '本局得分',
-                                      value: '$_score',
-                                    ),
-                                    const SizedBox(width: 7),
-                                    const _OrchardMetric(
-                                      label: '目标等级',
-                                      value: '5',
-                                      accent: true,
-                                    ),
-                                    const SizedBox(width: 7),
-                                    _OrchardMetric(
-                                      label: '剩余步数',
-                                      value: '$_moves',
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 8),
-                                Expanded(
-                                  child: Container(
-                                    padding: const EdgeInsets.all(10),
-                                    decoration: BoxDecoration(
-                                      color: const Color(0xEDE9E4CC),
-                                      borderRadius: BorderRadius.circular(18),
-                                      border: Border.all(
-                                        color: const Color(0xFFE5E0CB),
-                                        width: 4,
-                                      ),
-                                    ),
-                                    child: GridView.builder(
-                                      physics:
-                                          const NeverScrollableScrollPhysics(),
-                                      itemCount: _fruits.length,
-                                      gridDelegate:
-                                          const SliverGridDelegateWithFixedCrossAxisCount(
-                                            crossAxisCount: 5,
-                                            crossAxisSpacing: 5,
-                                            mainAxisSpacing: 5,
-                                          ),
-                                      itemBuilder: (context, index) {
-                                        final target = index == _targetIndex;
-                                        return Semantics(
-                                          button: true,
-                                          label: target
-                                              ? '选择发光的同级水果'
-                                              : '选择水果 ${index + 1}',
-                                          child: InkWell(
-                                            key: ValueKey(
-                                              'orchard-fruit-$index',
-                                            ),
-                                            onTap: () => _choose(index),
-                                            borderRadius: BorderRadius.circular(
-                                              12,
-                                            ),
-                                            child: AnimatedContainer(
-                                              duration: const Duration(
-                                                milliseconds: 180,
-                                              ),
-                                              alignment: Alignment.center,
-                                              decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                borderRadius:
-                                                    BorderRadius.circular(12),
-                                                border: Border.all(
-                                                  color: target
-                                                      ? const Color(0xFFFFD666)
-                                                      : const Color(0xFFE1DDCF),
-                                                  width: target ? 3 : 1,
-                                                ),
-                                                boxShadow: target
-                                                    ? const [
-                                                        BoxShadow(
-                                                          color: Color(
-                                                            0x99FFD666,
-                                                          ),
-                                                          blurRadius: 12,
-                                                        ),
-                                                      ]
-                                                    : null,
-                                              ),
-                                              child: Text(
-                                                _fruits[index],
-                                                style: const TextStyle(
-                                                  fontSize: 30,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(height: 8),
-                                _OrchardProgress(
-                                  score: _score,
-                                  paused: _paused,
-                                  onPause: () => setState(() {
-                                    _paused = !_paused;
-                                  }),
-                                  onRestart: _restart,
-                                ),
-                              ],
-                            ),
-                    ),
-                  ),
-                ],
+                    const SizedBox(width: 4),
+                    _OrchardControl(label: '重开', onTap: _restart),
+                    const Spacer(),
+                    if (_paused)
+                      const Padding(
+                        padding: EdgeInsets.only(right: 100),
+                        child: Text(
+                          '已暂停',
+                          style: TextStyle(color: Colors.white70, fontSize: 10),
+                        ),
+                      ),
+                  ],
+                ),
               ),
-            ),
+              const SizedBox(height: 6),
+              Expanded(
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: const Color(0x3DFFFFFF),
+                    borderRadius: BorderRadius.circular(18),
+                    border: Border.all(color: Colors.white24),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(18),
+                    child: Stack(
+                      children: [
+                        Positioned.fill(
+                          child: Image.asset(
+                            'assets/runner/assets/games/casual-v1/covers-png/orchard-merge.png',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        const Positioned.fill(
+                          child: ColoredBox(color: Color(0x4A081208)),
+                        ),
+                        Positioned.fill(
+                          child: Padding(
+                            padding: const EdgeInsets.all(12),
+                            child: _complete
+                                ? _OrchardResult(onRestart: _restart)
+                                : Column(
+                                    children: [
+                                      _OrchardHud(
+                                        stage: _stage,
+                                        score: _score,
+                                        moves: _moves,
+                                      ),
+                                      const SizedBox(height: 8),
+                                      Expanded(
+                                        child: Container(
+                                          padding: const EdgeInsets.all(10),
+                                          decoration: BoxDecoration(
+                                            color: const Color(0xEDE9E4CC),
+                                            borderRadius: BorderRadius.circular(
+                                              18,
+                                            ),
+                                            border: Border.all(
+                                              color: const Color(0xFFE5E0CB),
+                                              width: 4,
+                                            ),
+                                          ),
+                                          child: LayoutBuilder(
+                                            builder: (context, constraints) => GridView.builder(
+                                              padding: EdgeInsets.zero,
+                                              physics:
+                                                  const NeverScrollableScrollPhysics(),
+                                              itemCount: _fruits.length,
+                                              gridDelegate:
+                                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                                    crossAxisCount: 5,
+                                                    crossAxisSpacing: 5,
+                                                    mainAxisSpacing: 5,
+                                                    childAspectRatio:
+                                                        (constraints.maxWidth -
+                                                            20) /
+                                                        (constraints.maxHeight -
+                                                            20),
+                                                  ),
+                                              itemBuilder: (context, index) {
+                                                final target =
+                                                    index == _targetIndex;
+                                                return Semantics(
+                                                  button: true,
+                                                  label: target
+                                                      ? '选择发光的同级水果'
+                                                      : '选择水果 ${index + 1}',
+                                                  child: InkWell(
+                                                    key: ValueKey(
+                                                      'orchard-fruit-$index',
+                                                    ),
+                                                    onTap: () => _choose(index),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                          12,
+                                                        ),
+                                                    child: AnimatedContainer(
+                                                      duration: const Duration(
+                                                        milliseconds: 180,
+                                                      ),
+                                                      alignment:
+                                                          Alignment.center,
+                                                      decoration: BoxDecoration(
+                                                        color: Colors.white,
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                              12,
+                                                            ),
+                                                        border: Border.all(
+                                                          color: target
+                                                              ? const Color(
+                                                                  0xFFFFD666,
+                                                                )
+                                                              : const Color(
+                                                                  0xFFE1DDCF,
+                                                                ),
+                                                          width: target ? 3 : 1,
+                                                        ),
+                                                        boxShadow: target
+                                                            ? const [
+                                                                BoxShadow(
+                                                                  color: Color(
+                                                                    0x99FFD666,
+                                                                  ),
+                                                                  blurRadius:
+                                                                      12,
+                                                                ),
+                                                              ]
+                                                            : null,
+                                                      ),
+                                                      child: Text(
+                                                        _fruits[index],
+                                                        style: TextStyle(
+                                                          fontSize:
+                                                              ((constraints.maxWidth -
+                                                                          20) /
+                                                                      5 *
+                                                                      .7)
+                                                                  .clamp(
+                                                                    22,
+                                                                    40,
+                                                                  ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),
@@ -1165,158 +1344,52 @@ class _OrchardInlineGameState extends State<_OrchardInlineGame> {
   }
 }
 
-class _OrchardStageHeader extends StatelessWidget {
-  const _OrchardStageHeader({required this.stage});
+class _OrchardHud extends StatelessWidget {
+  const _OrchardHud({
+    required this.stage,
+    required this.score,
+    required this.moves,
+  });
 
   final int stage;
-
-  @override
-  Widget build(BuildContext context) => Container(
-    padding: const EdgeInsets.fromLTRB(13, 10, 10, 10),
-    decoration: BoxDecoration(
-      color: const Color(0xC9345737),
-      borderRadius: BorderRadius.circular(14),
-    ),
-    child: Row(
-      children: [
-        const Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                '果园合合塔',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w900,
-                ),
-              ),
-              SizedBox(height: 3),
-              Text(
-                '合成相邻同级果实，培育黄金果王',
-                style: TextStyle(color: Colors.white70, fontSize: 9),
-              ),
-            ],
-          ),
-        ),
-        Container(
-          width: 54,
-          height: 38,
-          alignment: Alignment.center,
-          decoration: const BoxDecoration(
-            color: Color(0xFFF7F2DC),
-            borderRadius: BorderRadius.all(Radius.circular(999)),
-          ),
-          child: Text(
-            '$stage/3',
-            style: const TextStyle(
-              color: Color(0xFF36543A),
-              fontWeight: FontWeight.w900,
-            ),
-          ),
-        ),
-      ],
-    ),
-  );
-}
-
-class _OrchardMetric extends StatelessWidget {
-  const _OrchardMetric({
-    required this.label,
-    required this.value,
-    this.accent = false,
-  });
-
-  final String label;
-  final String value;
-  final bool accent;
-
-  @override
-  Widget build(BuildContext context) => Expanded(
-    child: Container(
-      height: 48,
-      padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 6),
-      decoration: BoxDecoration(
-        color: const Color(0xFFF8F5E8),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            label,
-            style: const TextStyle(color: Color(0xFF777162), fontSize: 8),
-          ),
-          Text(
-            value,
-            style: TextStyle(
-              color: accent ? AirvanaColors.accent : const Color(0xFF26342A),
-              fontSize: 17,
-              height: 1.15,
-              fontWeight: FontWeight.w900,
-            ),
-          ),
-        ],
-      ),
-    ),
-  );
-}
-
-class _OrchardProgress extends StatelessWidget {
-  const _OrchardProgress({
-    required this.score,
-    required this.paused,
-    required this.onPause,
-    required this.onRestart,
-  });
-
   final int score;
-  final bool paused;
-  final VoidCallback onPause;
-  final VoidCallback onRestart;
+  final int moves;
 
   @override
   Widget build(BuildContext context) => Container(
-    padding: const EdgeInsets.fromLTRB(12, 8, 8, 7),
+    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 9),
     decoration: BoxDecoration(
-      color: const Color(0xEEF8F5E8),
-      borderRadius: BorderRadius.circular(14),
+      color: const Color(0xECF8F5E8),
+      borderRadius: BorderRadius.circular(12),
     ),
     child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                '果实图鉴',
-                style: TextStyle(fontSize: 8, fontWeight: FontWeight.w800),
-              ),
-              const SizedBox(height: 5),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(99),
-                child: LinearProgressIndicator(
-                  value: score / 5,
-                  minHeight: 7,
-                  color: const Color(0xFF8BB84D),
-                  backgroundColor: const Color(0xFFD9D4BF),
-                ),
-              ),
-              const SizedBox(height: 4),
-              Text(
-                '当前最高 ${score.clamp(0, 5)} / 5',
-                style: const TextStyle(
-                  fontSize: 8,
-                  fontWeight: FontWeight.w800,
-                ),
-              ),
-            ],
+        Text(
+          '目标 $score/5',
+          style: const TextStyle(
+            color: Color(0xFF36543A),
+            fontSize: 12,
+            fontWeight: FontWeight.w900,
           ),
         ),
-        const SizedBox(width: 9),
-        _OrchardControl(label: paused ? '继续' : '暂停', onTap: onPause),
-        const SizedBox(width: 5),
-        _OrchardControl(label: '重开', onTap: onRestart),
+        Text(
+          '$moves 步',
+          style: const TextStyle(
+            color: Color(0xFF36543A),
+            fontSize: 12,
+            fontWeight: FontWeight.w900,
+          ),
+        ),
+        Text(
+          '$stage/3',
+          semanticsLabel: '第 $stage 阶段，共 3 阶段',
+          style: const TextStyle(
+            color: Color(0xFF777162),
+            fontSize: 11,
+            fontWeight: FontWeight.w800,
+          ),
+        ),
       ],
     ),
   );
@@ -1342,8 +1415,8 @@ class _OrchardControl extends StatelessWidget {
       onTap: onTap,
       borderRadius: BorderRadius.circular(99),
       child: Container(
-        width: 38,
-        height: 38,
+        width: 44,
+        height: 44,
         alignment: Alignment.center,
         decoration: const BoxDecoration(
           color: Color(0xC91D211D),
@@ -1353,7 +1426,7 @@ class _OrchardControl extends StatelessWidget {
           label,
           style: const TextStyle(
             color: Colors.white,
-            fontSize: 8,
+            fontSize: 10,
             fontWeight: FontWeight.w800,
           ),
         ),
@@ -1381,12 +1454,12 @@ class _OrchardResult extends StatelessWidget {
           const Text('🏆', style: TextStyle(fontSize: 44)),
           const SizedBox(height: 10),
           const Text(
-            '果园合成完成',
+            '果园交互演示完成',
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
           ),
           const SizedBox(height: 6),
           const Text(
-            '三阶段试玩已完成；结果仅保存到当前本地演示。',
+            '交互演示结束；当前平台未启用完整 H5 游戏引擎。',
             textAlign: TextAlign.center,
             style: TextStyle(color: AirvanaColors.muted, fontSize: 10),
           ),
@@ -1886,6 +1959,7 @@ class _FeedInlineResult extends StatelessWidget {
     required this.status,
     required this.onRestart,
     required this.onExit,
+    this.completeRuntime = false,
   });
 
   final bool success;
@@ -1893,6 +1967,7 @@ class _FeedInlineResult extends StatelessWidget {
   final String status;
   final VoidCallback onRestart;
   final VoidCallback onExit;
+  final bool completeRuntime;
 
   @override
   Widget build(BuildContext context) => Center(
@@ -1900,9 +1975,9 @@ class _FeedInlineResult extends StatelessWidget {
       constraints: const BoxConstraints(maxWidth: 330),
       padding: const EdgeInsets.all(22),
       decoration: BoxDecoration(
-        color: const Color(0xF20C1513),
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: Colors.white24),
+        color: const Color(0xFF182735),
+        borderRadius: BorderRadius.circular(4),
+        border: Border.all(color: const Color(0xFF8295A0), width: 2),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -1916,7 +1991,11 @@ class _FeedInlineResult extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           Text(
-            success ? '三阶段试玩完成' : '本次挑战未完成',
+            success
+                ? completeRuntime
+                      ? '三阶段游戏完成'
+                      : '本地交互演示完成'
+                : '本次挑战未完成',
             textAlign: TextAlign.center,
             style: const TextStyle(
               color: Colors.white,
@@ -1926,7 +2005,7 @@ class _FeedInlineResult extends StatelessWidget {
           ),
           const SizedBox(height: 7),
           Text(
-            '本局得分 $score / 3 · $status',
+            '本局得分 $score${completeRuntime ? '' : ' / 3'} · $status',
             textAlign: TextAlign.center,
             style: const TextStyle(color: Colors.white70, fontSize: 10),
           ),
@@ -2307,7 +2386,7 @@ class _CircleGlass extends StatelessWidget {
         tooltip: label,
         onPressed: onTap,
         padding: EdgeInsets.zero,
-        constraints: const BoxConstraints.tightFor(width: 40, height: 40),
+        constraints: const BoxConstraints.tightFor(width: 44, height: 44),
         icon: Icon(icon, semanticLabel: label, color: Colors.white, size: 22),
       ),
     );

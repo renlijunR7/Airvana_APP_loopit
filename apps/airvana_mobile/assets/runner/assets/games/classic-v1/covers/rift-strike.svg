@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="560" viewBox="0 0 360 560" shape-rendering="geometricPrecision"><rect x="0" y="0" width="360" height="560" fill="#17263B"/><rect x="15" y="429" width="3" height="3" fill="#6F829A"/><rect x="112" y="502" width="2" height="2" fill="#253A53"/><rect x="209" y="39" width="2" height="2" fill="#253A53"/><rect x="306" y="112" width="2" height="2" fill="#6F829A"/><rect x="67" y="185" width="2" height="2" fill="#253A53"/><rect x="164" y="258" width="2" height="2" fill="#253A53"/><rect x="261" y="331" width="2" height="2" fill="#6F829A"/><rect x="22" y="404" width="2" height="2" fill="#253A53"/><rect x="119" y="477" width="3" height="3" fill="#253A53"/><rect x="216" y="14" width="2" height="2" fill="#6F829A"/><rect x="313" y="87" width="2" height="2" fill="#253A53"/><rect x="74" y="160" width="2" height="2" fill="#253A53"/><rect x="171" y="233" width="2" height="2" fill="#6F829A"/><rect x="268" y="306" width="2" height="2" fill="#253A53"/><rect x="29" y="379" width="2" height="2" fill="#253A53"/><rect x="126" y="452" width="2" height="2" fill="#6F829A"/><rect x="223" y="525" width="3" height="3" fill="#253A53"/><rect x="320" y="62" width="2" height="2" fill="#253A53"/><rect x="81" y="135" width="2" height="2" fill="#6F829A"/><rect x="178" y="208" width="2" height="2" fill="#253A53"/><rect x="275" y="281" width="2" height="2" fill="#253A53"/><rect x="36" y="354" width="2" height="2" fill="#6F829A"/><rect x="133" y="427" width="2" height="2" fill="#253A53"/><rect x="230" y="500" width="2" height="2" fill="#253A53"/><rect x="327" y="37" width="3" height="3" fill="#6F829A"/><rect x="88" y="110" width="2" height="2" fill="#253A53"/><rect x="185" y="183" width="2" height="2" fill="#253A53"/><rect x="282" y="256" width="2" height="2" fill="#6F829A"/><rect x="43" y="329" width="2" height="2" fill="#253A53"/><rect x="140" y="402" width="2" height="2" fill="#253A53"/><rect x="237" y="475" width="2" height="2" fill="#6F829A"/><rect x="334" y="12" width="2" height="2" fill="#253A53"/><rect x="95" y="85" width="3" height="3" fill="#253A53"/><rect x="192" y="158" width="2" height="2" fill="#6F829A"/><rect x="289" y="231" width="2" height="2" fill="#253A53"/><rect x="50" y="304" width="2" height="2" fill="#253A53"/><rect x="147" y="377" width="2" height="2" fill="#6F829A"/><rect x="244" y="450" width="2" height="2" fill="#253A53"/><rect x="341" y="523" width="2" height="2" fill="#253A53"/><rect x="102" y="60" width="2" height="2" fill="#6F829A"/><rect x="199" y="133" width="3" height="3" fill="#253A53"/><rect x="296" y="206" width="2" height="2" fill="#253A53"/><rect x="57" y="279" width="2" height="2" fill="#6F829A"/><rect x="154" y="352" width="2" height="2" fill="#253A53"/><rect x="251" y="425" width="2" height="2" fill="#253A53"/><rect x="12" y="498" width="2" height="2" fill="#6F829A"/><rect x="109" y="35" width="2" height="2" fill="#253A53"/><rect x="206" y="108" width="2" height="2" fill="#253A53"/><rect x="303" y="181" width="3" height="3" fill="#6F829A"/><rect x="64" y="254" width="2" height="2" fill="#253A53"/><rect x="161" y="327" width="2" height="2" fill="#253A53"/><rect x="258" y="400" width="2" height="2" fill="#6F829A"/><rect x="19" y="473" width="2" height="2" fill="#253A53"/><rect x="116" y="546" width="2" height="2" fill="#253A53"/><path d="M12 0L12 560" fill="none" stroke="#253A53" stroke-width="2"/><path d="M348 0L348 560" fill="none" stroke="#253A53" stroke-width="2"/><polygon points="0,0 68,0 68,17 46,17 46,37 0,37" fill="#101B2B"/><polygon points="360,523 310,523 310,544 292,544 292,560 360,560" fill="#101B2B"/><g transform="translate(41 100) scale(0.796875) translate(0 0)">
+<title>drone — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M17 20L25 28M47 20L39 28M17 44L25 36M47 44L39 36" fill="none" stroke="#243042" stroke-width="5"/><ellipse cx="15" cy="16" rx="12" ry="5" fill="#4977a5" /><ellipse cx="49" cy="16" rx="12" ry="5" fill="#4977a5" /><ellipse cx="15" cy="48" rx="12" ry="5" fill="#4977a5" /><ellipse cx="49" cy="48" rx="12" ry="5" fill="#4977a5" /><rect x="21" y="22" width="22" height="21" rx="6" fill="#fff4d2" /><rect x="25" y="26" width="14" height="8" rx="2" fill="#75c3c7" /><circle cx="32" cy="38" r="2" fill="#d95d39" stroke="none"/><path d="M15 10V22M49 10V22M15 42V54M49 42V54" fill="none" stroke="#243042" stroke-width="2"/>
+</g>
+</g><g transform="translate(115 100) scale(0.796875) translate(0 0)">
+<title>drone — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M17 20L25 28M47 20L39 28M17 44L25 36M47 44L39 36" fill="none" stroke="#243042" stroke-width="5"/><ellipse cx="15" cy="16" rx="12" ry="5" fill="#4977a5" /><ellipse cx="49" cy="16" rx="12" ry="5" fill="#4977a5" /><ellipse cx="15" cy="48" rx="12" ry="5" fill="#4977a5" /><ellipse cx="49" cy="48" rx="12" ry="5" fill="#4977a5" /><rect x="21" y="22" width="22" height="21" rx="6" fill="#fff4d2" /><rect x="25" y="26" width="14" height="8" rx="2" fill="#75c3c7" /><circle cx="32" cy="38" r="2" fill="#d95d39" stroke="none"/><path d="M15 10V22M49 10V22M15 42V54M49 42V54" fill="none" stroke="#243042" stroke-width="2"/>
+</g>
+</g><g transform="translate(189 100) scale(0.796875) translate(0 0)">
+<title>drone — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M17 20L25 28M47 20L39 28M17 44L25 36M47 44L39 36" fill="none" stroke="#243042" stroke-width="5"/><ellipse cx="15" cy="16" rx="12" ry="5" fill="#4977a5" /><ellipse cx="49" cy="16" rx="12" ry="5" fill="#4977a5" /><ellipse cx="15" cy="48" rx="12" ry="5" fill="#4977a5" /><ellipse cx="49" cy="48" rx="12" ry="5" fill="#4977a5" /><rect x="21" y="22" width="22" height="21" rx="6" fill="#fff4d2" /><rect x="25" y="26" width="14" height="8" rx="2" fill="#75c3c7" /><circle cx="32" cy="38" r="2" fill="#d95d39" stroke="none"/><path d="M15 10V22M49 10V22M15 42V54M49 42V54" fill="none" stroke="#243042" stroke-width="2"/>
+</g>
+</g><g transform="translate(263 100) scale(0.796875) translate(0 0)">
+<title>drone — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M17 20L25 28M47 20L39 28M17 44L25 36M47 44L39 36" fill="none" stroke="#243042" stroke-width="5"/><ellipse cx="15" cy="16" rx="12" ry="5" fill="#4977a5" /><ellipse cx="49" cy="16" rx="12" ry="5" fill="#4977a5" /><ellipse cx="15" cy="48" rx="12" ry="5" fill="#4977a5" /><ellipse cx="49" cy="48" rx="12" ry="5" fill="#4977a5" /><rect x="21" y="22" width="22" height="21" rx="6" fill="#fff4d2" /><rect x="25" y="26" width="14" height="8" rx="2" fill="#75c3c7" /><circle cx="32" cy="38" r="2" fill="#d95d39" stroke="none"/><path d="M15 10V22M49 10V22M15 42V54M49 42V54" fill="none" stroke="#243042" stroke-width="2"/>
+</g>
+</g><g transform="translate(41 165) scale(0.796875) translate(0 0)">
+<title>enemy ship — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M8 10L22 25H42L56 10L59 37L47 48H17L5 37Z" fill="#8e74a6" /><path d="M5 37L17 38L25 54H39L47 38L59 37L47 48H17Z" fill="#345276" /><path d="M23 25L32 15L41 25L38 38H26Z" fill="#d95d39" /><path d="M25 30H39V36H25Z" fill="#e4b44f" /><path d="M12 17V30M52 17V30" fill="none" stroke="#fff4d2" stroke-width="3"/><rect x="15" y="42" width="6" height="10" fill="#d95d39" /><rect x="43" y="42" width="6" height="10" fill="#d95d39" />
+</g>
+</g><g transform="translate(115 165) scale(0.796875) translate(0 0)">
+<title>enemy ship — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M8 10L22 25H42L56 10L59 37L47 48H17L5 37Z" fill="#8e74a6" /><path d="M5 37L17 38L25 54H39L47 38L59 37L47 48H17Z" fill="#345276" /><path d="M23 25L32 15L41 25L38 38H26Z" fill="#d95d39" /><path d="M25 30H39V36H25Z" fill="#e4b44f" /><path d="M12 17V30M52 17V30" fill="none" stroke="#fff4d2" stroke-width="3"/><rect x="15" y="42" width="6" height="10" fill="#d95d39" /><rect x="43" y="42" width="6" height="10" fill="#d95d39" />
+</g>
+</g><g transform="translate(189 165) scale(0.796875) translate(0 0)">
+<title>enemy ship — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M8 10L22 25H42L56 10L59 37L47 48H17L5 37Z" fill="#8e74a6" /><path d="M5 37L17 38L25 54H39L47 38L59 37L47 48H17Z" fill="#345276" /><path d="M23 25L32 15L41 25L38 38H26Z" fill="#d95d39" /><path d="M25 30H39V36H25Z" fill="#e4b44f" /><path d="M12 17V30M52 17V30" fill="none" stroke="#fff4d2" stroke-width="3"/><rect x="15" y="42" width="6" height="10" fill="#d95d39" /><rect x="43" y="42" width="6" height="10" fill="#d95d39" />
+</g>
+</g><g transform="translate(263 165) scale(0.796875) translate(0 0)">
+<title>enemy ship — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M8 10L22 25H42L56 10L59 37L47 48H17L5 37Z" fill="#8e74a6" /><path d="M5 37L17 38L25 54H39L47 38L59 37L47 48H17Z" fill="#345276" /><path d="M23 25L32 15L41 25L38 38H26Z" fill="#d95d39" /><path d="M25 30H39V36H25Z" fill="#e4b44f" /><path d="M12 17V30M52 17V30" fill="none" stroke="#fff4d2" stroke-width="3"/><rect x="15" y="42" width="6" height="10" fill="#d95d39" /><rect x="43" y="42" width="6" height="10" fill="#d95d39" />
+</g>
+</g><g transform="translate(41 230) scale(0.796875) translate(0 0)">
+<title>drone — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M17 20L25 28M47 20L39 28M17 44L25 36M47 44L39 36" fill="none" stroke="#243042" stroke-width="5"/><ellipse cx="15" cy="16" rx="12" ry="5" fill="#4977a5" /><ellipse cx="49" cy="16" rx="12" ry="5" fill="#4977a5" /><ellipse cx="15" cy="48" rx="12" ry="5" fill="#4977a5" /><ellipse cx="49" cy="48" rx="12" ry="5" fill="#4977a5" /><rect x="21" y="22" width="22" height="21" rx="6" fill="#fff4d2" /><rect x="25" y="26" width="14" height="8" rx="2" fill="#75c3c7" /><circle cx="32" cy="38" r="2" fill="#d95d39" stroke="none"/><path d="M15 10V22M49 10V22M15 42V54M49 42V54" fill="none" stroke="#243042" stroke-width="2"/>
+</g>
+</g><g transform="translate(115 230) scale(0.796875) translate(0 0)">
+<title>drone — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M17 20L25 28M47 20L39 28M17 44L25 36M47 44L39 36" fill="none" stroke="#243042" stroke-width="5"/><ellipse cx="15" cy="16" rx="12" ry="5" fill="#4977a5" /><ellipse cx="49" cy="16" rx="12" ry="5" fill="#4977a5" /><ellipse cx="15" cy="48" rx="12" ry="5" fill="#4977a5" /><ellipse cx="49" cy="48" rx="12" ry="5" fill="#4977a5" /><rect x="21" y="22" width="22" height="21" rx="6" fill="#fff4d2" /><rect x="25" y="26" width="14" height="8" rx="2" fill="#75c3c7" /><circle cx="32" cy="38" r="2" fill="#d95d39" stroke="none"/><path d="M15 10V22M49 10V22M15 42V54M49 42V54" fill="none" stroke="#243042" stroke-width="2"/>
+</g>
+</g><g transform="translate(189 230) scale(0.796875) translate(0 0)">
+<title>drone — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M17 20L25 28M47 20L39 28M17 44L25 36M47 44L39 36" fill="none" stroke="#243042" stroke-width="5"/><ellipse cx="15" cy="16" rx="12" ry="5" fill="#4977a5" /><ellipse cx="49" cy="16" rx="12" ry="5" fill="#4977a5" /><ellipse cx="15" cy="48" rx="12" ry="5" fill="#4977a5" /><ellipse cx="49" cy="48" rx="12" ry="5" fill="#4977a5" /><rect x="21" y="22" width="22" height="21" rx="6" fill="#fff4d2" /><rect x="25" y="26" width="14" height="8" rx="2" fill="#75c3c7" /><circle cx="32" cy="38" r="2" fill="#d95d39" stroke="none"/><path d="M15 10V22M49 10V22M15 42V54M49 42V54" fill="none" stroke="#243042" stroke-width="2"/>
+</g>
+</g><g transform="translate(263 230) scale(0.796875) translate(0 0)">
+<title>drone — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M17 20L25 28M47 20L39 28M17 44L25 36M47 44L39 36" fill="none" stroke="#243042" stroke-width="5"/><ellipse cx="15" cy="16" rx="12" ry="5" fill="#4977a5" /><ellipse cx="49" cy="16" rx="12" ry="5" fill="#4977a5" /><ellipse cx="15" cy="48" rx="12" ry="5" fill="#4977a5" /><ellipse cx="49" cy="48" rx="12" ry="5" fill="#4977a5" /><rect x="21" y="22" width="22" height="21" rx="6" fill="#fff4d2" /><rect x="25" y="26" width="14" height="8" rx="2" fill="#75c3c7" /><circle cx="32" cy="38" r="2" fill="#d95d39" stroke="none"/><path d="M15 10V22M49 10V22M15 42V54M49 42V54" fill="none" stroke="#243042" stroke-width="2"/>
+</g>
+</g><g transform="translate(160 324.5) scale(0.1875) translate(0 0)">
+<title>bullet — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M32 5L39 15V42L32 51L25 42V15Z" fill="#e4b44f" /><path d="M25 40L32 46L39 40V49L32 60L25 49Z" fill="#d95d39" /><path d="M32 13V34" fill="none" stroke="#fff4d2" stroke-width="3"/>
+</g>
+</g><g transform="translate(170 280.5) scale(0.1875) translate(0 0)">
+<title>bullet — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M32 5L39 15V42L32 51L25 42V15Z" fill="#e4b44f" /><path d="M25 40L32 46L39 40V49L32 60L25 49Z" fill="#d95d39" /><path d="M32 13V34" fill="none" stroke="#fff4d2" stroke-width="3"/>
+</g>
+</g><g transform="translate(180 236.5) scale(0.1875) translate(0 0)">
+<title>bullet — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M32 5L39 15V42L32 51L25 42V15Z" fill="#e4b44f" /><path d="M25 40L32 46L39 40V49L32 60L25 49Z" fill="#d95d39" /><path d="M32 13V34" fill="none" stroke="#fff4d2" stroke-width="3"/>
+</g>
+</g><g transform="translate(139 432) scale(1.28125) translate(0 0)">
+<title>spacecraft — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M32 3L40 22L45 29L56 35L59 50L42 44L39 53H25L22 44L5 50L8 35L19 29L24 22Z" fill="#fff4d2" /><path d="M32 3L39 26H25Z" fill="#d95d39" /><path d="M12 36L21 32L24 43L6 49ZM43 32L52 36L58 49L40 43Z" fill="#4977a5" /><path d="M27 25L32 18L37 25V37H27Z" fill="#75c3c7" /><path d="M26 53L29 60L32 56L35 61L39 53Z" fill="#e4b44f" />
+</g>
+</g></svg>

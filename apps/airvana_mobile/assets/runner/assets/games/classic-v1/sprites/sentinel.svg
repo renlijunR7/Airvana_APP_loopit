@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="sentinel">
+<title>sentinel — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M17 25L13 44L18 49H46L51 44L47 25Z" fill="#345276" /><path d="M22 5H42L48 13V23L42 29H22L16 23V13Z" fill="#d95d39" /><rect x="20" y="13" width="24" height="8" rx="2" fill="#243042" /><rect x="23" y="15" width="6" height="4" fill="#e4b44f" stroke="none"/><rect x="35" y="15" width="6" height="4" fill="#e4b44f" stroke="none"/><path d="M8 29H19V47H7L4 40Z" fill="#d95d39" /><path d="M45 29H56L60 40L56 47H45Z" fill="#d95d39" /><rect x="21" y="46" width="9" height="12" rx="1" fill="#345276" /><rect x="35" y="46" width="9" height="12" rx="1" fill="#345276" /><rect x="16" y="55" width="15" height="6" rx="1" fill="#243042" /><rect x="34" y="55" width="15" height="6" rx="1" fill="#243042" /><path d="M27 31H38L41 37L33 44L25 38Z" fill="#e4b44f" />
+</g>
+</svg>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="kitten">
+<title>kitten — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M15 35Q6 39 10 50L18 57H45L51 47L47 34Z" fill="#fff4d2" /><path d="M46 45Q59 49 58 37" fill="none" stroke="#243042" stroke-width="7"/><path d="M46 45Q59 49 58 37" fill="none" stroke="#db8ca1" stroke-width="4"/><path d="M9 27L10 7L23 13H41L54 7L55 27Q53 40 32 41Q11 40 9 27Z" fill="#fff4d2" /><path d="M13 12V24L23 17M50 12V24L40 17" fill="#db8ca1" stroke="none"/><path d="M9 24L10 7L23 13L28 29L18 33Z" fill="#8e74a6" stroke="none"/><rect x="20" y="24" width="4" height="5" rx="1" fill="#243042" stroke="none"/><rect x="41" y="24" width="4" height="5" rx="1" fill="#243042" stroke="none"/><path d="M29 29H35L32 33Z" fill="#db8ca1" /><path d="M32 33L27 35M32 33L37 35" fill="none" stroke="#243042" stroke-width="2"/><rect x="22" y="47" width="9" height="12" rx="3" fill="#fff4d2" /><rect x="35" y="47" width="9" height="12" rx="3" fill="#fff4d2" />
+</g>
+</svg>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="mailbox">
+<title>mailbox — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<rect x="28" y="35" width="7" height="25" fill="#8b6041" /><path d="M8 18Q8 6 20 6H44Q57 7 57 20V39H8Z" fill="#4977a5" /><path d="M20 6Q33 7 33 20V39H8V18Q8 6 20 6Z" fill="#d95d39" /><path d="M13 19Q13 12 20 12Q27 12 27 19V34H13Z" fill="#a83e33" /><rect x="15" y="24" width="10" height="3" rx="1" fill="#243042" stroke="none"/><path d="M46 25V4" fill="none" stroke="#614631" stroke-width="3"/><path d="M46 4H60V12H46Z" fill="#e4b44f" /><rect x="19" y="57" width="25" height="4" rx="1" fill="#614631" />
+</g>
+</svg>

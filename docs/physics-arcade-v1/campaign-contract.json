@@ -1,0 +1,298 @@
+{
+  "schema_version": "1.0.0",
+  "campaign_id": "physics-arcade-local-v1",
+  "version": "1.0.0",
+  "status": "draft",
+  "owners": {
+    "business_owner": "本地项目用户",
+    "operations_owner": "本地项目用户",
+    "approval_owner": "待生产审核",
+    "kill_switch_owner": "本地项目用户"
+  },
+  "objective": {
+    "primary": "engagement",
+    "primary_success_event": "play_complete",
+    "primary_kpi": "LOCAL QA: completed playable runs / started runs",
+    "secondary": [],
+    "funnel_boundary": "本地试玩与游戏内分数，不新增商业CTA、奖励或外部转化"
+  },
+  "audience": {
+    "included_regions": [
+      "HK"
+    ],
+    "excluded_regions": [],
+    "languages": [
+      "zh-CN"
+    ],
+    "minimum_age": 18,
+    "lifecycle_stages": [
+      "mixed"
+    ],
+    "interests": [
+      "物理休闲游戏"
+    ],
+    "accessibility_requirements": [
+      "触控与键盘",
+      "减少动态效果",
+      "暂停与静音"
+    ]
+  },
+  "channels": [
+    {
+      "channel_id": "local-home",
+      "channel_type": "in_app",
+      "placement": "首页前五位"
+    }
+  ],
+  "brand": {
+    "legal_entity": "NOT_APPLICABLE: 本地原创玩法演示",
+    "asset_manifest": [
+      {
+        "asset_id": "cloud-sling",
+        "asset_type": "other",
+        "location": "public/assets/games/physics-casual-v2/cloud-sling.png",
+        "authorization_status": "not_required",
+        "usage_restrictions": [
+          "内置图像工具生成的本地原创风格素材；非参考游戏原始资产，不代表第三方IP或生产授权",
+          "仅本地presentation升级，不改变商业字段、关卡规则或现有准入"
+        ]
+      },
+      {
+        "asset_id": "candy-swing",
+        "asset_type": "other",
+        "location": "public/assets/games/physics-casual-v2/candy-swing.png",
+        "authorization_status": "not_required",
+        "usage_restrictions": [
+          "内置图像工具生成的本地原创风格素材；非参考游戏原始资产，不代表第三方IP或生产授权",
+          "仅本地presentation升级，不改变商业字段、关卡规则或现有准入"
+        ]
+      },
+      {
+        "asset_id": "happy-cup",
+        "asset_type": "other",
+        "location": "public/assets/games/physics-casual-v2/happy-cup.png",
+        "authorization_status": "not_required",
+        "usage_restrictions": [
+          "内置图像工具生成的本地原创风格素材；非参考游戏原始资产，不代表第三方IP或生产授权",
+          "仅本地presentation升级，不改变商业字段、关卡规则或现有准入"
+        ]
+      },
+      {
+        "asset_id": "spring-dig",
+        "asset_type": "other",
+        "location": "public/assets/games/physics-casual-v2/spring-dig.png",
+        "authorization_status": "not_required",
+        "usage_restrictions": [
+          "内置图像工具生成的本地原创风格素材；非参考游戏原始资产，不代表第三方IP或生产授权",
+          "仅本地presentation升级，不改变商业字段、关卡规则或现有准入"
+        ]
+      },
+      {
+        "asset_id": "fruit-drop",
+        "asset_type": "other",
+        "location": "public/assets/games/physics-casual-v2/fruit-drop.png",
+        "authorization_status": "not_required",
+        "usage_restrictions": [
+          "内置图像工具生成的本地原创风格素材；非参考游戏原始资产，不代表第三方IP或生产授权",
+          "仅本地presentation升级，不改变商业字段、关卡规则或现有准入"
+        ]
+      },
+      {
+        "asset_id": "physics-casual-v2-atlas",
+        "asset_type": "other",
+        "location": "public/assets/games/physics-casual-v2/atlas.png",
+        "authorization_status": "not_required",
+        "usage_restrictions": [
+          "内置图像工具生成的透明角色与道具图集，代码按alpha边界读取；原始PNG不改写",
+          "仅本地试玩；不声称来自原作或已经完成生产/IP审批"
+        ]
+      }
+    ],
+    "approved_claims": [],
+    "prohibited_claims": [
+      "官方复刻",
+      "原作授权",
+      "真实商业收益"
+    ],
+    "required_disclosures": [
+      "本地试玩"
+    ],
+    "authorization_status": "pending"
+  },
+  "gameplay": {
+    "mechanic": "other",
+    "template_id": "physics-arcade-v1",
+    "target_duration_seconds": 180,
+    "rounds": 5,
+    "required_states": [
+      "intro",
+      "playing",
+      "paused",
+      "success",
+      "failure",
+      "retry",
+      "exit"
+    ],
+    "input_modes": [
+      "tap",
+      "drag",
+      "swipe",
+      "keyboard"
+    ],
+    "difficulty_bounds": {
+      "minimum": 1,
+      "maximum": 5,
+      "default": 1
+    }
+  },
+  "cta": {
+    "cta_id": "none",
+    "type": "none",
+    "label": "",
+    "destination": "",
+    "allowed_states": []
+  },
+  "reward": {
+    "reward_id": "none",
+    "type": "none",
+    "value_description": "不新增奖励；游戏分数不具备货币价值",
+    "eligibility": "NOT_APPLICABLE",
+    "inventory_cap": 0,
+    "expiry": null,
+    "fulfillment_owner": "NOT_APPLICABLE",
+    "material_terms": "不修改平台现有奖励规则"
+  },
+  "compliance": {
+    "legal_entity": "NOT_APPLICABLE: 本地原创玩法演示",
+    "promoted_activity": "原创物理小游戏本地预览",
+    "target_regions_reviewed": [
+      "HK"
+    ],
+    "manual_review_required": true,
+    "legal_approval_status": "pending",
+    "prohibited_claims": [
+      "官方复刻",
+      "投资收益"
+    ],
+    "required_disclosures": [
+      "LOCAL"
+    ],
+    "evidence_sources": [
+      "用户本轮要求：五类游戏接入并优先展示"
+    ]
+  },
+  "data_policy": {
+    "collected_fields": [],
+    "prohibited_fields": [
+      "seed_phrase",
+      "private_key",
+      "raw_kyc",
+      "raw_kyc_document"
+    ],
+    "consent_requirements": [
+      "不新增外部追踪"
+    ],
+    "retention_days": 0,
+    "privacy_owner": "本地项目用户"
+  },
+  "measurement": {
+    "primary_kpi": "LOCAL QA: completed playable runs / started runs",
+    "primary_success_event": "play_complete",
+    "required_events": [
+      "impression",
+      "play_start",
+      "valid_interaction",
+      "level_complete",
+      "play_complete",
+      "play_fail",
+      "replay"
+    ],
+    "dimensions": [
+      "game_key",
+      "level",
+      "run_id"
+    ],
+    "deduplication_rule": "每局每关完成只发一次；销毁实例后禁止回调",
+    "bot_fraud_rule": "客户端分数不作为商业结算依据",
+    "source_of_truth": "本地运行状态及测试记录"
+  },
+  "attribution": {
+    "model": "none",
+    "window_days": 0,
+    "success_event": "play_complete",
+    "kol_priority": "not_applicable",
+    "cross_device_policy": "不新增跨设备识别",
+    "deduplication_key": "run_id+level+event",
+    "exclusion_rules": [
+      "非生产"
+    ],
+    "settlement_status": "not_applicable"
+  },
+  "commercial": {
+    "currency": "USD",
+    "build_budget_cap": null,
+    "media_budget_cap": 0,
+    "reward_budget_cap": 0,
+    "kol_settlement_budget_cap": 0
+  },
+  "governance": {
+    "locked_fields": [
+      "commercial",
+      "reward",
+      "cta",
+      "compliance",
+      "attribution",
+      "approval",
+      "attribution.kol_priority",
+      "attribution.model",
+      "attribution.window_days",
+      "audience.excluded_regions",
+      "audience.included_regions",
+      "audience.minimum_age",
+      "cta.destination",
+      "data_policy",
+      "measurement.primary_success_event",
+      "release.kill_switch"
+    ],
+    "editable_fields": [
+      "presentation",
+      "gameplay"
+    ],
+    "agentic_fields": [],
+    "runtime_fields": [
+      "run_id",
+      "level"
+    ],
+    "allowed_experiment_fields": []
+  },
+  "approval": {
+    "status": "draft",
+    "approved_by": [],
+    "approved_at": null,
+    "evidence": []
+  },
+  "release": {
+    "targets": [
+      "web_h5"
+    ],
+    "release_owner": "本地项目用户",
+    "rollback_target": "移除新增五款注册与首页优先ID，原有游戏及历史数据保留",
+    "kill_switch": {
+      "owner": "本地项目用户",
+      "mechanism": "移除physics-arcade-v1入口或停止本地预览"
+    }
+  },
+  "metadata": {
+    "created_at": "2026-09-06T00:00:00+08:00",
+    "updated_at": "2026-09-07T00:00:00+08:00",
+    "source_brief": "campaign-brief.yaml",
+    "notes": [
+      "LOCAL DEMO，非生产审批",
+      "HK/18仅schema本地占位，不定义新投放区域或改变已有准入",
+      "保留现有角色、品牌Logo、商业权限、奖励规则",
+      "参考核心机制，不复制原作角色、美术、商标或关卡",
+      "HK仅为本地schema占位；已检查本次只含娱乐玩法，不作法律批准或外部投放授权。",
+      "2026-09-07 LOCAL presentation v2：五张主题PNG背景与共享RGBA图集取代默认纯矢量表现；保留代码绘制降级。生成提示词见casual-art-v2-prompts.json。Campaign仍为1.0.0 draft，未改变商业规则或批准状态。"
+    ]
+  }
+}

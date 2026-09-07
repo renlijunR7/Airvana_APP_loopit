@@ -630,3 +630,165 @@ export function economySnapshot(db, user) {
     },
   };
 }
+
+// ---------------------------------------------------------------------------
+// 游戏完整闭环（移动端本地口径对齐）：金币按作品隔离；每作品每日首次有效完成 +5 AIP。
+// ---------------------------------------------------------------------------
+
+export const GAME_COIN_BOUNDARY = '游戏金币按作品隔离，不可跨作品转移，不支持兑换 AIP/AIT 或提现。';
+
+const PLAYABLE_ID_PATTERN = /^plb_[a-z0-9_-]{1,72}$/;
+
+function publicGameLedger(row) {
+  return {
+    playableId: row.playable_id,
+    title: row.title,
+    balance: Number(row.balance),
+    completions: Number(row.completions),
+    lastRewardDate: row.last_reward_date || null,
+    updatedAt: row.updated_at,
+  };
+}
+
+export function listGameCoinLedgers(db, userId) {
+  return db.prepare('SELECT * FROM game_coin_ledgers WHERE user_id=? ORDER BY updated_at DESC').all(userId)
+    .map(publicGameLedger);
+}
+
+export function recordGameCompletion(db, { userId, playableId, title = '', success = false, score = 0, stage = '', summary = '' }) {
+  const normalizedId = String(playableId || '').trim();
+  if (!PLAYABLE_ID_PATTERN.test(normalizedId)) throw new HttpError(400, 'playableId 无效（需要 plb_ 前缀）', 'invalid_playable_id');
+  const numericScore = Number(score);
+  if (!Number.isInteger(numericScore) || numericScore < 0 || numericScore > 1_000_000) throw new HttpError(400, '游戏得分无效', 'invalid_game_score');
+  const succeeded = success === true;
+  const coinsEarned = succeeded ? numericScore : 0;
+  return transaction(db, () => {
+    const now = isoNow();
+    const day = now.slice(0, 10);
+    db.prepare(`INSERT INTO game_coin_ledgers (id,user_id,playable_id,title,balance,completions,created_at,updated_at)
+      VALUES (?,?,?,?,0,0,?,?)
+      ON CONFLICT(user_id,playable_id) DO NOTHING`)
+      .run(uid('gcl'), userId, normalizedId, String(title).slice(0, 120), now, now);
+    if (title) db.prepare('UPDATE game_coin_ledgers SET title=? WHERE user_id=? AND playable_id=?').run(String(title).slice(0, 120), userId, normalizedId);
+    db.prepare(`UPDATE game_coin_ledgers SET balance=balance+?,completions=completions+?,updated_at=? WHERE user_id=? AND playable_id=?`)
+      .run(coinsEarned, succeeded ? 1 : 0, now, userId, normalizedId);
+    let earnedAip = 0;
+    let alreadyRewardedToday = false;
+    if (succeeded) {
+      const reward = awardAipRule(db, {
+        userId,
+        ruleKey: 'playable_complete',
+        eventKey: `game-daily:${userId}:${normalizedId}:${day}`,
+        subjectType: 'playable',
+        subjectId: normalizedId,
+        metadata: { day, score: numericScore, stage: String(stage).slice(0, 80), proof: 'mobile-h5-complete' },
+      });
+      alreadyRewardedToday = reward.idempotent;
+      if (!reward.idempotent) {
+        earnedAip = AIP_REWARD_RULES.playable_complete.amount;
+        db.prepare('UPDATE game_coin_ledgers SET last_reward_date=? WHERE user_id=? AND playable_id=?').run(day, userId, normalizedId);
+      }
+    }
+    db.prepare(`INSERT INTO game_completions (id,user_id,playable_id,success,score,stage,summary,coins_earned,aip_earned,created_at)
+      VALUES (?,?,?,?,?,?,?,?,?,?)`)
+      .run(uid('gcp'), userId, normalizedId, succeeded ? 1 : 0, numericScore, String(stage).slice(0, 80), String(summary).slice(0, 300), coinsEarned, earnedAip, now);
+    const ledger = db.prepare('SELECT * FROM game_coin_ledgers WHERE user_id=? AND playable_id=?').get(userId, normalizedId);
+    return {
+      ledger: publicGameLedger(ledger),
+      success: succeeded,
+      coinsEarned,
+      earnedAip,
+      alreadyRewardedToday,
+      boundary: GAME_COIN_BOUNDARY,
+    };
+  });
+}
+
+// ---------------------------------------------------------------------------
+// 邀请任务：邀请码 → 被邀请人登记 → 合格（完成注册并配置 Agent）后给邀请人入账。
+// ---------------------------------------------------------------------------
+
+export const INVITE_BOUNDARY = '邀请奖励为 AIP 行为积分：不可提现、不可转让；同一被邀请人仅计一次合格邀请。';
+
+function generateInviteCode(db, user) {
+  const seed = String(user.display_name || 'AIR').replace(/[^A-Za-z]/g, '').slice(0, 3).toUpperCase() || 'AIR';
+  for (let attempt = 0; attempt < 24; attempt += 1) {
+    const digits = String(Math.floor(1000 + Math.random() * 9000));
+    const code = `AIR-${seed}-${digits}`;
+    if (!db.prepare('SELECT user_id FROM invite_profiles WHERE invite_code=?').get(code)) return code;
+  }
+  return `AIR-${uid('c').slice(-8).toUpperCase()}`;
+}
+
+export function ensureInviteProfile(db, user) {
+  const existing = db.prepare('SELECT * FROM invite_profiles WHERE user_id=?').get(user.id);
+  if (existing) return existing;
+  const code = generateInviteCode(db, user);
+  db.prepare('INSERT INTO invite_profiles (user_id,invite_code,created_at) VALUES (?,?,?)').run(user.id, code, isoNow());
+  return db.prepare('SELECT * FROM invite_profiles WHERE user_id=?').get(user.id);
+}
+
+export function inviteSummary(db, user) {
+  const profile = ensureInviteProfile(db, user);
+  const counts = db.prepare(`SELECT
+      COUNT(*) AS invited,
+      SUM(CASE WHEN status='qualified' THEN 1 ELSE 0 END) AS qualified
+    FROM invite_redemptions WHERE inviter_user_id=?`).get(user.id);
+  const earned = db.prepare(`SELECT COALESCE(SUM(amount),0) AS total FROM point_events
+    WHERE user_id=? AND currency='AIP' AND event_type='qualified_invitation' AND status='posted'`).get(user.id);
+  return {
+    inviteCode: profile.invite_code,
+    invitedCount: Number(counts.invited || 0),
+    qualifiedCount: Number(counts.qualified || 0),
+    earnedAip: Number(earned.total || 0),
+    rewardPerQualified: AIP_REWARD_RULES.qualified_invitation.amount,
+    boundary: INVITE_BOUNDARY,
+  };
+}
+
+export function redeemInvite(db, { inviteeUserId, inviteCode }) {
+  const code = String(inviteCode || '').trim().toUpperCase();
+  if (!code) throw new HttpError(400, '请填写邀请码', 'invalid_invite_code');
+  const profile = db.prepare('SELECT * FROM invite_profiles WHERE invite_code=?').get(code);
+  if (!profile) throw new HttpError(404, '邀请码无效', 'invalid_invite_code');
+  if (profile.user_id === inviteeUserId) throw new HttpError(400, '不能使用自己的邀请码', 'self_invite_forbidden');
+  return transaction(db, () => {
+    const existing = db.prepare('SELECT * FROM invite_redemptions WHERE invitee_user_id=?').get(inviteeUserId);
+    if (existing) {
+      if (existing.inviter_user_id !== profile.user_id) throw new HttpError(409, '该账号已绑定其他邀请码', 'invite_already_bound');
+      return { redemptionId: existing.id, status: existing.status, idempotent: true };
+    }
+    const now = isoNow();
+    const id = uid('inv');
+    db.prepare(`INSERT INTO invite_redemptions (id,inviter_user_id,invitee_user_id,status,created_at,updated_at)
+      VALUES (?,?,?,'registered',?,?)`).run(id, profile.user_id, inviteeUserId, now, now);
+    return { redemptionId: id, status: 'registered', idempotent: false };
+  });
+}
+
+export function qualifyInvite(db, { inviteeUserId }) {
+  return transaction(db, () => {
+    const redemption = db.prepare('SELECT * FROM invite_redemptions WHERE invitee_user_id=?').get(inviteeUserId);
+    if (!redemption) throw new HttpError(404, '该账号没有待完成的邀请任务', 'invite_not_found');
+    if (redemption.status === 'qualified') {
+      return { redemptionId: redemption.id, status: 'qualified', idempotent: true, inviterUserId: redemption.inviter_user_id, earnedAip: 0 };
+    }
+    const now = isoNow();
+    db.prepare(`UPDATE invite_redemptions SET status='qualified',qualified_at=?,updated_at=? WHERE id=?`).run(now, now, redemption.id);
+    const reward = awardAipRule(db, {
+      userId: redemption.inviter_user_id,
+      ruleKey: 'qualified_invitation',
+      eventKey: `qualified-invitation:${inviteeUserId}`,
+      subjectType: 'user',
+      subjectId: inviteeUserId,
+      metadata: { redemptionId: redemption.id, proof: 'invitee-registered-and-configured-agent' },
+    });
+    return {
+      redemptionId: redemption.id,
+      status: 'qualified',
+      idempotent: false,
+      inviterUserId: redemption.inviter_user_id,
+      earnedAip: reward.idempotent ? 0 : AIP_REWARD_RULES.qualified_invitation.amount,
+    };
+  });
+}

@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="560" viewBox="0 0 360 560" shape-rendering="geometricPrecision"><rect x="0" y="0" width="360" height="560" fill="#B0CED0"/><rect x="17" y="75" width="326" height="421" fill="#7D929D" stroke="#294354" stroke-width="3"/><path d="M20 97L340 97" fill="none" stroke="#5F8197" stroke-width="2"/><path d="M20 145L340 145" fill="none" stroke="#5F8197" stroke-width="2"/><path d="M20 193L340 193" fill="none" stroke="#5F8197" stroke-width="2"/><path d="M20 241L340 241" fill="none" stroke="#5F8197" stroke-width="2"/><path d="M20 289L340 289" fill="none" stroke="#5F8197" stroke-width="2"/><path d="M20 337L340 337" fill="none" stroke="#5F8197" stroke-width="2"/><path d="M20 385L340 385" fill="none" stroke="#5F8197" stroke-width="2"/><path d="M20 433L340 433" fill="none" stroke="#5F8197" stroke-width="2"/><rect x="44" y="30" width="48" height="6" fill="#5F8197"/><rect x="31" y="36" width="75" height="8" fill="#5F8197"/><rect x="128" y="30" width="48" height="6" fill="#5F8197"/><rect x="115" y="36" width="75" height="8" fill="#5F8197"/><rect x="212" y="30" width="48" height="6" fill="#5F8197"/><rect x="199" y="36" width="75" height="8" fill="#5F8197"/><rect x="296" y="30" width="48" height="6" fill="#5F8197"/><rect x="283" y="36" width="75" height="8" fill="#5F8197"/><rect x="25" y="144" width="309" height="12" fill="#294354"/><rect x="26" y="148" width="307" height="4" fill="#B0CED0"/><g transform="translate(50 107) scale(1) translate(0 0)">
+<title>cannon — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<circle cx="18" cy="50" r="10" fill="#8b6041" /><circle cx="18" cy="50" r="4" fill="#e4b44f" /><circle cx="46" cy="50" r="10" fill="#8b6041" /><circle cx="46" cy="50" r="4" fill="#e4b44f" /><path d="M17 41L43 19L52 28L27 50Z" fill="#345276" /><path d="M42 17L48 12L60 25L54 31Z" fill="#4977a5" /><path d="M18 40L25 35L34 45L27 52Z" fill="#4977a5" /><rect x="11" y="47" width="40" height="6" rx="2" fill="#614631" /><path d="M21 36L13 29L8 30" fill="none" stroke="#8b6041" stroke-width="3"/><circle cx="7" cy="28" r="3" fill="#e4b44f" />
+</g>
+</g><g transform="translate(213 117.5) scale(0.8125) translate(0 0)">
+<title>raider — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M20 23L10 53H50L42 23Z" fill="#a83e33" /><path d="M20 8L30 3L42 9L44 25H19Z" fill="#345276" /><path d="M20 17L29 13L40 17V28L31 33L21 27Z" fill="#e8b88e" /><path d="M20 19H41V25H20Z" fill="#243042" /><rect x="24" y="21" width="4" height="2" fill="#fff4d2" stroke="none"/><rect x="34" y="21" width="4" height="2" fill="#fff4d2" stroke="none"/><rect x="23" y="31" width="16" height="16" rx="1" fill="#8b6041" /><path d="M23 47H31V59H18V54ZM34 47H42L48 59H33Z" fill="#345276" /><path d="M11 43L10 15" fill="none" stroke="#8b6041" stroke-width="4"/><path d="M9 10L20 14L23 23L10 23Z" fill="#fff4d2" /><path d="M41 33L52 42L48 47L37 39Z" fill="#e8b88e" />
+</g>
+</g><rect x="25" y="257" width="309" height="12" fill="#294354"/><rect x="26" y="261" width="307" height="4" fill="#B0CED0"/><g transform="translate(50 220) scale(1) translate(0 0)">
+<title>turret — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M15 32H49L54 55H10Z" fill="#345276" /><rect x="9" y="53" width="46" height="8" rx="2" fill="#8b6041" /><rect x="19" y="21" width="26" height="23" rx="4" fill="#4977a5" /><path d="M14 15L22 10H50V25H22L14 22Z" fill="#fff4d2" /><rect x="43" y="8" width="13" height="19" rx="2" fill="#4977a5" /><rect x="14" y="37" width="37" height="7" rx="1" fill="#e4b44f" /><circle cx="25" cy="20" r="5" fill="#243042" /><circle cx="25" cy="20" r="2" fill="#d95d39" stroke="none"/><path d="M19 49H44" fill="none" stroke="#fff4d2" stroke-width="2"/>
+</g>
+</g><g transform="translate(261 230.5) scale(0.8125) translate(0 0)">
+<title>raider — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M20 23L10 53H50L42 23Z" fill="#a83e33" /><path d="M20 8L30 3L42 9L44 25H19Z" fill="#345276" /><path d="M20 17L29 13L40 17V28L31 33L21 27Z" fill="#e8b88e" /><path d="M20 19H41V25H20Z" fill="#243042" /><rect x="24" y="21" width="4" height="2" fill="#fff4d2" stroke="none"/><rect x="34" y="21" width="4" height="2" fill="#fff4d2" stroke="none"/><rect x="23" y="31" width="16" height="16" rx="1" fill="#8b6041" /><path d="M23 47H31V59H18V54ZM34 47H42L48 59H33Z" fill="#345276" /><path d="M11 43L10 15" fill="none" stroke="#8b6041" stroke-width="4"/><path d="M9 10L20 14L23 23L10 23Z" fill="#fff4d2" /><path d="M41 33L52 42L48 47L37 39Z" fill="#e8b88e" />
+</g>
+</g><rect x="25" y="370" width="309" height="12" fill="#294354"/><rect x="26" y="374" width="307" height="4" fill="#B0CED0"/><g transform="translate(50 333) scale(1) translate(0 0)">
+<title>cannon — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<circle cx="18" cy="50" r="10" fill="#8b6041" /><circle cx="18" cy="50" r="4" fill="#e4b44f" /><circle cx="46" cy="50" r="10" fill="#8b6041" /><circle cx="46" cy="50" r="4" fill="#e4b44f" /><path d="M17 41L43 19L52 28L27 50Z" fill="#345276" /><path d="M42 17L48 12L60 25L54 31Z" fill="#4977a5" /><path d="M18 40L25 35L34 45L27 52Z" fill="#4977a5" /><rect x="11" y="47" width="40" height="6" rx="2" fill="#614631" /><path d="M21 36L13 29L8 30" fill="none" stroke="#8b6041" stroke-width="3"/><circle cx="7" cy="28" r="3" fill="#e4b44f" />
+</g>
+</g><g transform="translate(213 343.5) scale(0.8125) translate(0 0)">
+<title>raider — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M20 23L10 53H50L42 23Z" fill="#a83e33" /><path d="M20 8L30 3L42 9L44 25H19Z" fill="#345276" /><path d="M20 17L29 13L40 17V28L31 33L21 27Z" fill="#e8b88e" /><path d="M20 19H41V25H20Z" fill="#243042" /><rect x="24" y="21" width="4" height="2" fill="#fff4d2" stroke="none"/><rect x="34" y="21" width="4" height="2" fill="#fff4d2" stroke="none"/><rect x="23" y="31" width="16" height="16" rx="1" fill="#8b6041" /><path d="M23 47H31V59H18V54ZM34 47H42L48 59H33Z" fill="#345276" /><path d="M11 43L10 15" fill="none" stroke="#8b6041" stroke-width="4"/><path d="M9 10L20 14L23 23L10 23Z" fill="#fff4d2" /><path d="M41 33L52 42L48 47L37 39Z" fill="#e8b88e" />
+</g>
+</g><g transform="translate(272 461.5) scale(0.734375) translate(0 0)">
+<title>crystal — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M31 3L43 13L50 32L43 53L32 61L18 49L13 28L20 10Z" fill="#75c3c7" /><path d="M31 3L30 31L32 61L43 53L50 32L43 13Z" fill="#4977a5" /><path d="M20 10L30 31L13 28ZM18 49L30 31L43 53L32 61Z" fill="#345276" stroke="none"/><path d="M31 3L30 31L50 32M30 31L32 61M30 31L43 13" fill="none" stroke="#243042" stroke-width="1.5"/>
+</g>
+</g></svg>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="house">
+<title>house — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M11 25H53V59H11Z" fill="#fff4d2" /><path d="M53 25H42V59H53Z" fill="#b47f32" stroke="none"/><path d="M4 28L30 5L60 28H50L30 12L13 28Z" fill="#d95d39" /><rect x="42" y="7" width="8" height="14" fill="#8b6041" /><rect x="18" y="32" width="11" height="12" fill="#75c3c7" /><path d="M23 32V44M18 38H29" fill="none" stroke="#fff4d2" stroke-width="2"/><rect x="34" y="38" width="13" height="21" rx="1" fill="#8b6041" /><circle cx="43" cy="49" r="1.5" fill="#e4b44f" stroke="none"/><rect x="7" y="57" width="50" height="5" rx="1" fill="#614631" />
+</g>
+</svg>

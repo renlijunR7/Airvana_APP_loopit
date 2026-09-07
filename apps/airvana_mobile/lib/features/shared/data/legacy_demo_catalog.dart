@@ -14,7 +14,8 @@ abstract final class LegacyDemoCatalog {
       contentType: 'game',
       version: 2,
       summary: '面向钱包新用户的安全互动体验；当前版本正在优化第 2 个互动节点。',
-      coverAsset: 'assets/legacy/covers/safety-workshop.jpg',
+      coverAsset:
+          'assets/runner/assets/games/casual-v1/covers-png/safety-workshop.png',
       stage: '运行中',
       agentName: 'Nova',
       ownerHandle: '@kai.builds',
@@ -32,7 +33,8 @@ abstract final class LegacyDemoCatalog {
       contentType: 'game',
       version: 3,
       summary: '围绕社区参与设计的品牌互动版本；所有指标均为演示数据。',
-      coverAsset: 'assets/legacy/covers/stellar-farm.jpg',
+      coverAsset:
+          'assets/runner/assets/games/casual-v1/covers-png/stellar-farm.png',
       stage: '优化中',
       agentName: 'BuzzBee',
       ownerHandle: '@nina',
@@ -50,7 +52,8 @@ abstract final class LegacyDemoCatalog {
       contentType: 'game',
       version: 1,
       summary: '通过节奏闯关理解产品操作路径；每一关解释一个关键功能。',
-      coverAsset: 'assets/legacy/covers/pixel-quest.jpg',
+      coverAsset:
+          'assets/runner/assets/games/casual-v1/covers-png/pixel-quest.png',
       stage: '运行中',
       agentName: 'Nova',
       ownerHandle: '@ivy.codes',
@@ -68,7 +71,8 @@ abstract final class LegacyDemoCatalog {
       contentType: 'game',
       version: 2,
       summary: '经典猜杯小游戏改编，用于承接品牌活动流量并做趣味转化。',
-      coverAsset: 'assets/legacy/covers/red-cup-shuffle.jpg',
+      coverAsset:
+          'assets/runner/assets/games/casual-v1/covers-png/red-cup-shuffle.png',
       stage: '运行中',
       agentName: 'Owlex',
       ownerHandle: '@marco.fire',
@@ -86,7 +90,8 @@ abstract final class LegacyDemoCatalog {
       contentType: 'game',
       version: 3,
       summary: '编排四轨节奏，让鼓点、低音、和声与主旋律在终点同步。',
-      coverAsset: 'assets/legacy/covers/magic-choir.jpg',
+      coverAsset:
+          'assets/runner/assets/games/casual-v1/covers-png/magic-choir.png',
       stage: '完整试玩',
       agentName: 'Mochi',
       ownerHandle: '@silas.arch',
@@ -104,7 +109,8 @@ abstract final class LegacyDemoCatalog {
       contentType: 'game',
       version: 2,
       summary: '萌宠互动小游戏，用轻松内容承接高粘性社区流量演示。',
-      coverAsset: 'assets/legacy/covers/paws-stage.jpg',
+      coverAsset:
+          'assets/runner/assets/games/casual-v1/covers-png/paws-stage.png',
       stage: '优化中',
       agentName: 'Nova',
       ownerHandle: '@nikki.zhang',
@@ -122,7 +128,8 @@ abstract final class LegacyDemoCatalog {
       contentType: 'game',
       version: 1,
       summary: '把头像变成跳舞玩偶的创意互动，演示 UGC 内容再创作路径。',
-      coverAsset: 'assets/legacy/covers/puppet-studio.jpg',
+      coverAsset:
+          'assets/runner/assets/games/casual-v1/covers-png/puppet-studio.png',
       stage: '运行中',
       agentName: 'BuzzBee',
       ownerHandle: '@daseul.gwon',
@@ -140,7 +147,8 @@ abstract final class LegacyDemoCatalog {
       contentType: 'game',
       version: 1,
       summary: '给虚拟角色写一封信换取互动回信，测试情感化内容体验。',
-      coverAsset: 'assets/legacy/covers/firefly-mail.jpg',
+      coverAsset:
+          'assets/runner/assets/games/casual-v1/covers-png/firefly-mail.png',
       stage: '运行中',
       agentName: 'Mira',
       ownerHandle: '@hanzz.marco',
@@ -158,7 +166,8 @@ abstract final class LegacyDemoCatalog {
       contentType: 'game',
       version: 3,
       summary: '逐格控制猫咪穿越三间房，避开巡逻灯并抵达安全出口。',
-      coverAsset: 'assets/legacy/covers/whisker-escape.jpg',
+      coverAsset:
+          'assets/runner/assets/games/casual-v1/covers-png/whisker-escape.png',
       stage: '完整试玩',
       agentName: 'Mochi',
       ownerHandle: '@mia.paws',
@@ -176,7 +185,8 @@ abstract final class LegacyDemoCatalog {
       contentType: 'game',
       version: 1,
       summary: '像素风金币收集挑战，在混乱道具中判断路线并积累连击。',
-      coverAsset: 'assets/legacy/covers/coin-journey.jpg',
+      coverAsset:
+          'assets/runner/assets/games/casual-v1/covers-png/coin-journey.png',
       stage: '运行中',
       agentName: 'Kiko',
       ownerHandle: '@coin.quest',
@@ -194,7 +204,8 @@ abstract final class LegacyDemoCatalog {
       contentType: 'game',
       version: 3,
       summary: '控制探险员下潜深度，收集果实、避开暗礁并管理氧气。',
-      coverAsset: 'assets/legacy/covers/jungle-dive.jpg',
+      coverAsset:
+          'assets/runner/assets/games/casual-v1/covers-png/jungle-dive.png',
       stage: '完整试玩',
       agentName: 'Owlex',
       ownerHandle: '@diver.dave',
@@ -212,7 +223,8 @@ abstract final class LegacyDemoCatalog {
       contentType: 'game',
       version: 1,
       summary: '科幻小队战术挑战，在裂隙战场中选择武器、阵型与撤离时机。',
-      coverAsset: 'assets/legacy/covers/rift-strike.jpg',
+      coverAsset:
+          'assets/runner/assets/games/casual-v1/covers-png/rift-strike.png',
       stage: '运行中',
       agentName: 'Rex',
       ownerHandle: '@rhea.frontier',
@@ -230,7 +242,8 @@ abstract final class LegacyDemoCatalog {
       contentType: 'game',
       version: 1,
       summary: '在阳光海岛经营农场、结识伙伴，完成轻松治愈的日常任务。',
-      coverAsset: 'assets/legacy/covers/stardust-island.jpg',
+      coverAsset:
+          'assets/runner/assets/games/casual-v1/covers-png/stardust-island.png',
       stage: '优化中',
       agentName: 'BuzzBee',
       ownerHandle: '@lumi.island',
@@ -248,7 +261,8 @@ abstract final class LegacyDemoCatalog {
       contentType: 'game',
       version: 1,
       summary: '组建骑士阵容抵御暗影军团，用站位与技能组合完成快速战斗。',
-      coverAsset: 'assets/legacy/covers/formation-knights.jpg',
+      coverAsset:
+          'assets/runner/assets/games/casual-v1/covers-png/formation-knights.png',
       stage: '运行中',
       agentName: 'Nova',
       ownerHandle: '@knight.byte',
@@ -266,7 +280,8 @@ abstract final class LegacyDemoCatalog {
       contentType: 'game',
       version: 1,
       summary: '经营一间穿梭星系的玩具店，为不同星球顾客匹配稀有收藏。',
-      coverAsset: 'assets/legacy/covers/galaxy-toy-shop.jpg',
+      coverAsset:
+          'assets/runner/assets/games/casual-v1/covers-png/galaxy-toy-shop.png',
       stage: '运行中',
       agentName: 'Mira',
       ownerHandle: '@nova.shop',
@@ -284,7 +299,8 @@ abstract final class LegacyDemoCatalog {
       contentType: 'game',
       version: 3,
       summary: '驾驶原创跑车穿越城市检查点，控制漂移路线并避开动态路障。',
-      coverAsset: 'assets/legacy/covers/city-rush.jpg',
+      coverAsset:
+          'assets/runner/assets/games/casual-v1/covers-png/city-rush.png',
       stage: '完整试玩',
       agentName: 'Rex',
       ownerHandle: '@racer.nine',
@@ -302,7 +318,8 @@ abstract final class LegacyDemoCatalog {
       contentType: 'game',
       version: 1,
       summary: '部署不同炮手抵御空降恶魔，利用弹道与元素克制守住城镇。',
-      coverAsset: 'assets/legacy/covers/sky-cannon.jpg',
+      coverAsset:
+          'assets/runner/assets/games/casual-v1/covers-png/sky-cannon.png',
       stage: '运行中',
       agentName: 'Kiko',
       ownerHandle: '@cannon.pop',
@@ -320,7 +337,8 @@ abstract final class LegacyDemoCatalog {
       contentType: 'game',
       version: 1,
       summary: '在三条霓虹跑道间切换，避开能量障碍并完成冲刺。',
-      coverAsset: 'assets/legacy/covers/neon-dash.jpg',
+      coverAsset:
+          'assets/runner/assets/games/casual-v1/covers-png/neon-dash.png',
       stage: '本地 DEMO',
       agentName: 'Nova',
       category: '疾跑躲避',
@@ -334,7 +352,8 @@ abstract final class LegacyDemoCatalog {
       contentType: 'game',
       version: 1,
       summary: '跟随发光节拍敲击四枚音垫，累积连击。',
-      coverAsset: 'assets/legacy/covers/pulse-forge.jpg',
+      coverAsset:
+          'assets/runner/assets/games/casual-v1/covers-png/pulse-forge.png',
       stage: '本地 DEMO',
       agentName: 'Mochi',
       category: '节奏点按',
@@ -348,7 +367,8 @@ abstract final class LegacyDemoCatalog {
       contentType: 'game',
       version: 1,
       summary: '判断移动平台的落点，把云端模块稳稳叠高。',
-      coverAsset: 'assets/legacy/covers/sky-stack.jpg',
+      coverAsset:
+          'assets/runner/assets/games/casual-v1/covers-png/sky-stack.png',
       stage: '本地 DEMO',
       agentName: 'BuzzBee',
       category: '叠塔时机',
@@ -362,7 +382,8 @@ abstract final class LegacyDemoCatalog {
       contentType: 'game',
       version: 1,
       summary: '按目标顺序拖放或点按符文，接通古代科技回路。',
-      coverAsset: 'assets/legacy/covers/rune-circuit.jpg',
+      coverAsset:
+          'assets/runner/assets/games/casual-v1/covers-png/rune-circuit.png',
       stage: '本地 DEMO',
       agentName: 'Owlex',
       category: '拖放拼图',
@@ -376,7 +397,8 @@ abstract final class LegacyDemoCatalog {
       contentType: 'game',
       version: 1,
       summary: '在晶体矩阵中找到目标颜色，连续触发棱镜连击。',
-      coverAsset: 'assets/legacy/covers/prism-match.jpg',
+      coverAsset:
+          'assets/runner/assets/games/casual-v1/covers-png/prism-match.png',
       stage: '本地 DEMO',
       agentName: 'Kiko',
       category: '三消判断',
@@ -390,7 +412,8 @@ abstract final class LegacyDemoCatalog {
       contentType: 'game',
       version: 1,
       summary: '记住彗星精灵藏在哪只星杯下，再从洗牌后的位置找出它。',
-      coverAsset: 'assets/legacy/covers/star-cups.jpg',
+      coverAsset:
+          'assets/runner/assets/games/casual-v1/covers-png/star-cups.png',
       stage: '本地 DEMO',
       agentName: 'Mira',
       category: '杯子记忆',
@@ -404,7 +427,8 @@ abstract final class LegacyDemoCatalog {
       contentType: 'game',
       version: 1,
       summary: '等待光鱼进入捕捉区，在正确深度启动机械抓钩。',
-      coverAsset: 'assets/legacy/covers/deep-catch.jpg',
+      coverAsset:
+          'assets/runner/assets/games/casual-v1/covers-png/deep-catch.png',
       stage: '本地 DEMO',
       agentName: 'Sora',
       category: '钓鱼反应',
@@ -418,7 +442,8 @@ abstract final class LegacyDemoCatalog {
       contentType: 'game',
       version: 1,
       summary: '判断暗影来袭的路线，及时启动对应防御塔。',
-      coverAsset: 'assets/legacy/covers/ember-bastion.jpg',
+      coverAsset:
+          'assets/runner/assets/games/casual-v1/covers-png/ember-bastion.png',
       stage: '本地 DEMO',
       agentName: 'Rex',
       category: '塔防策略',
@@ -432,7 +457,8 @@ abstract final class LegacyDemoCatalog {
       contentType: 'game',
       version: 1,
       summary: '根据弯道信号选择漂移方向，保持速度穿越轨道城市。',
-      coverAsset: 'assets/legacy/covers/nova-drift.jpg',
+      coverAsset:
+          'assets/runner/assets/games/casual-v1/covers-png/nova-drift.png',
       stage: '本地 DEMO',
       agentName: 'Nova',
       category: '竞速漂移',
@@ -446,7 +472,8 @@ abstract final class LegacyDemoCatalog {
       contentType: 'game',
       version: 1,
       summary: '锁定九宫格中的敌方无人机，完成快速火控训练。',
-      coverAsset: 'assets/legacy/covers/void-squadron.jpg',
+      coverAsset:
+          'assets/runner/assets/games/casual-v1/covers-png/void-squadron.png',
       stage: '本地 DEMO',
       agentName: 'Kiko',
       category: '太空射击',
@@ -460,7 +487,8 @@ abstract final class LegacyDemoCatalog {
       contentType: 'game',
       version: 1,
       summary: '从果箱中找出正在发光的同类水果，连续完成合成升级。',
-      coverAsset: 'assets/legacy/covers/orchard-merge.jpg',
+      coverAsset:
+          'assets/runner/assets/games/casual-v1/covers-png/orchard-merge.png',
       stage: '完整试玩',
       agentName: 'Mochi',
       category: '休闲益智',
@@ -474,7 +502,8 @@ abstract final class LegacyDemoCatalog {
       contentType: 'game',
       version: 3,
       summary: '驾驶清扫车穿越三片异星草场，以自动星刃抵御星尘孢体。',
-      coverAsset: 'assets/legacy/covers/star-mower.jpg',
+      coverAsset:
+          'assets/runner/assets/games/casual-v1/covers-png/star-mower.png',
       stage: '深度试玩',
       agentName: 'Nova',
       category: '实时生存',
@@ -488,7 +517,8 @@ abstract final class LegacyDemoCatalog {
       contentType: 'game',
       version: 1,
       summary: '读取顾客订单，按高亮流程完成茶底、奶量、配料与封杯。',
-      coverAsset: 'assets/legacy/covers/moonlight-tea-shop.jpg',
+      coverAsset:
+          'assets/runner/assets/games/casual-v1/covers-png/moonlight-tea-shop.png',
       stage: '完整试玩',
       agentName: 'Mira',
       category: '模拟经营',
@@ -502,7 +532,8 @@ abstract final class LegacyDemoCatalog {
       contentType: 'game',
       version: 1,
       summary: '在培养皿中吞噬更小的营养粒，同时避开更大的本地机器人。',
-      coverAsset: 'assets/legacy/covers/microbe-arena.jpg',
+      coverAsset:
+          'assets/runner/assets/games/casual-v1/covers-png/microbe-arena.png',
       stage: '完整试玩',
       agentName: 'Kiko',
       category: 'IO 竞技',
@@ -516,7 +547,8 @@ abstract final class LegacyDemoCatalog {
       contentType: 'game',
       version: 3,
       summary: '读取敌方意图，管理能量、生命与护盾，完成攻防组合。',
-      coverAsset: 'assets/legacy/covers/star-deck.jpg',
+      coverAsset:
+          'assets/runner/assets/games/casual-v1/covers-png/star-deck.png',
       stage: '深度试玩',
       agentName: 'Rex',
       category: '回合牌组',
@@ -530,7 +562,8 @@ abstract final class LegacyDemoCatalog {
       contentType: 'game',
       version: 1,
       summary: '判断怪物来袭路线，启动对应晶塔并守住三线石门。',
-      coverAsset: 'assets/legacy/covers/crystal-bastion.jpg',
+      coverAsset:
+          'assets/runner/assets/games/casual-v1/covers-png/crystal-bastion.png',
       stage: '完整试玩',
       agentName: 'Rex',
       category: '射击塔防',
@@ -544,7 +577,8 @@ abstract final class LegacyDemoCatalog {
       contentType: 'game',
       version: 3,
       summary: '跨越雾林、镜湖与观星台，在路线选择中维持生命、补给与士气。',
-      coverAsset: 'assets/legacy/covers/adventurer-journal.jpg',
+      coverAsset:
+          'assets/runner/assets/games/casual-v1/covers-png/adventurer-journal.png',
       stage: '深度试玩',
       agentName: 'Owlex',
       category: '分支 RPG',
@@ -558,7 +592,8 @@ abstract final class LegacyDemoCatalog {
       contentType: 'game',
       version: 3,
       summary: '调查四章案卷，在证词、物证与字义线索中排除矛盾。',
-      coverAsset: 'assets/legacy/covers/idiom-detective.jpg',
+      coverAsset:
+          'assets/runner/assets/games/casual-v1/covers-png/idiom-detective.png',
       stage: '深度试玩',
       agentName: 'Sora',
       category: '语言推理',
@@ -572,7 +607,8 @@ abstract final class LegacyDemoCatalog {
       contentType: 'game',
       version: 3,
       summary: '指挥侦察、守卫与工兵，在六角地图中移动、攻击并控制前哨。',
-      coverAsset: 'assets/legacy/covers/hex-frontier.jpg',
+      coverAsset:
+          'assets/runner/assets/games/casual-v1/covers-png/hex-frontier.png',
       stage: '深度试玩',
       agentName: 'Nova',
       category: '六角策略',
@@ -586,7 +622,8 @@ abstract final class LegacyDemoCatalog {
       contentType: 'game',
       version: 1,
       summary: '根据通勤、晚餐与周末场景，从真实材质单品中完成搭配。',
-      coverAsset: 'assets/legacy/covers/studio-wardrobe.jpg',
+      coverAsset:
+          'assets/runner/assets/games/casual-v1/covers-png/studio-wardrobe.png',
       stage: '完整试玩',
       agentName: 'Mochi',
       category: '换装穿搭',
@@ -600,7 +637,8 @@ abstract final class LegacyDemoCatalog {
       contentType: 'game',
       version: 3,
       summary: '交换相邻花砖、制造连锁，并把收集结果转化为庭院修复进度。',
-      coverAsset: 'assets/legacy/covers/garden-renewal.jpg',
+      coverAsset:
+          'assets/runner/assets/games/casual-v1/covers-png/garden-renewal.png',
       stage: '深度试玩',
       agentName: 'BuzzBee',
       category: '三消焕新',

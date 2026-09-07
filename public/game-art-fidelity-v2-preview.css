@@ -1,0 +1,15 @@
+:root { color-scheme: dark; font-family: Inter, ui-sans-serif, system-ui, -apple-system, "PingFang SC", sans-serif; }
+* { box-sizing: border-box; }
+body { margin: 0; background: #09090c; color: #fff; }
+header { padding: 44px 4vw 28px; background: radial-gradient(circle at 12% 0%, #52202f 0, transparent 34%), #0d0d11; border-bottom: 1px solid #2c2c34; }
+header p { margin: 0 0 8px; color: #ff5266; font-size: 13px; font-weight: 800; letter-spacing: .16em; }
+h1 { margin: 0; font-size: clamp(28px, 4vw, 54px); }
+#summary { margin-top: 12px; color: #aaaab4; }
+main { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 18px; padding: 24px 4vw 56px; }
+article { overflow: hidden; background: #17171d; border: 1px solid #30303a; border-radius: 22px; box-shadow: 0 16px 38px rgba(0,0,0,.28); }
+img { display: block; width: 100%; aspect-ratio: 941 / 1672; object-fit: cover; background: #25252c; }
+.meta { padding: 14px 15px 16px; min-height: 88px; }
+.meta strong { display: block; font-size: 16px; line-height: 1.35; }
+.meta span { display: block; margin-top: 5px; color: #9d9da8; font-size: 12px; }
+@media (max-width: 1000px) { main { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 620px) { main { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; padding-inline: 12px; } header { padding-inline: 18px; } }

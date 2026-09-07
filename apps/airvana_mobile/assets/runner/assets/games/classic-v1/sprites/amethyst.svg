@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="amethyst">
+<title>amethyst — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M24 4H40L51 18V47L40 59H24L13 47V18Z" fill="#8e74a6" /><path d="M24 4L22 18V46L24 59L13 47V18Z" fill="#b39cc4" stroke="none"/><path d="M40 4L43 18V46L40 59L51 47V18Z" fill="#655180" stroke="none"/><path d="M13 18H51M13 47H51M24 4L22 18V47L24 59M40 4L43 18V47L40 59" fill="none" stroke="#243042" stroke-width="2"/>
+</g>
+</svg>

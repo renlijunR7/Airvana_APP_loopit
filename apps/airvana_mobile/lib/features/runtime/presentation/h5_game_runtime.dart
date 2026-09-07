@@ -22,8 +22,7 @@ class H5GameResult {
 
 /// 是否可用内嵌 WebView 承载 H5 完整玩法。
 /// Web 目标与未注册 WebView 平台实现的环境（如 widget 测试、桌面）自动降级。
-bool h5GameRuntimeSupported() =>
-    !kIsWeb && WebViewPlatform.instance != null;
+bool h5GameRuntimeSupported() => !kIsWeb && WebViewPlatform.instance != null;
 
 /// 把 legacy playable_id（plb_neon_dash）换算为引擎 gameKey（neon-dash）。
 String? h5GameKeyForPlayable(String playableId) {
@@ -80,7 +79,8 @@ class _H5GameRuntimeState extends State<H5GameRuntime> {
           },
           // 只允许 runner 资产页自身；外部导航一律拦截。
           onNavigationRequest: (request) =>
-              request.url.startsWith('http') && !request.url.contains('flutter_assets')
+              request.url.startsWith('http') &&
+                  !request.url.contains('flutter_assets')
               ? NavigationDecision.prevent
               : NavigationDecision.navigate,
         ),
@@ -92,6 +92,17 @@ class _H5GameRuntimeState extends State<H5GameRuntime> {
     _controller.runJavaScript(
       'startAirvanaGame(${jsonEncode(widget.gameKey)}, ${widget.muted})',
     );
+  }
+
+  @override
+  void didUpdateWidget(covariant H5GameRuntime oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.gameKey != widget.gameKey) {
+      _startGame();
+    } else if (oldWidget.muted != widget.muted) {
+      // Update the existing engine; toggling feed audio must not restart a run.
+      setMuted(widget.muted);
+    }
   }
 
   void _onBridgeMessage(JavaScriptMessage message) {
@@ -171,10 +182,7 @@ class _H5GameRuntimeState extends State<H5GameRuntime> {
           bottom: 10,
           child: Row(
             children: [
-              _RuntimeChip(
-                label: _paused ? '继续' : '暂停',
-                onTap: togglePause,
-              ),
+              _RuntimeChip(label: _paused ? '继续' : '暂停', onTap: togglePause),
               const SizedBox(width: 8),
               _RuntimeChip(label: '重开', onTap: restart),
               const Spacer(),
@@ -184,10 +192,7 @@ class _H5GameRuntimeState extends State<H5GameRuntime> {
                     _statusText,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      color: Colors.white60,
-                      fontSize: 10,
-                    ),
+                    style: const TextStyle(color: Colors.white60, fontSize: 10),
                   ),
                 ),
               const SizedBox(width: 8),

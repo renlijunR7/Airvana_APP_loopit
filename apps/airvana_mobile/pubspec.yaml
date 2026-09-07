@@ -75,6 +75,15 @@ flutter:
     - assets/legacy/avatars/
     - assets/legacy/capability-icons/
     - assets/runner/
+    - assets/runner/assets/games/casual-v1/scenes/
+    - assets/runner/assets/games/casual-v1/sprites/
+    - assets/runner/assets/games/casual-v1/covers/
+    - assets/runner/assets/games/casual-v1/covers-png/
+    - assets/runner/assets/games/classic-v1/
+    - assets/runner/assets/games/classic-v1/scenes/
+    - assets/runner/assets/games/classic-v1/sprites/
+    - assets/runner/assets/games/classic-v1/covers/
+    - assets/runner/assets/games/classic-v1/covers-png/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="model">
+<title>model — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M22 6Q32 0 42 7L45 25H18Z" fill="#8b6041" /><path d="M24 9H40V20Q38 28 32 27Q25 27 23 20Z" fill="#e8b88e" /><path d="M24 7Q33 3 40 9V14L34 11L25 16Z" fill="#8b6041" /><path d="M24 28L15 43L19 47L27 37H37L45 47L49 43L40 28Z" fill="#fff4d2" /><path d="M26 37H39L43 48H22Z" fill="#4977a5" /><path d="M24 48H31V57H22ZM34 48H41L43 57H34Z" fill="#e8b88e" /><rect x="19" y="56" width="13" height="5" rx="1" fill="#d95d39" /><rect x="33" y="56" width="14" height="5" rx="1" fill="#d95d39" /><rect x="27" y="17" width="2" height="3" fill="#243042" stroke="none"/><rect x="36" y="17" width="2" height="3" fill="#243042" stroke="none"/><path d="M30 23H34" fill="none" stroke="#243042" stroke-width="2"/>
+</g>
+</svg>

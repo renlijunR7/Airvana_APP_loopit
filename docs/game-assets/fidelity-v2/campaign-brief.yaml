@@ -1,0 +1,40 @@
+schema_version: 1.0.0
+brief_id: brief_game_art_fidelity_v2_20260905
+status: approved_for_local_implementation
+campaign_id: cmp_home_complete_games_v3_20260815
+owner: Airvana local demo owner
+objective:
+  primary: visual_fidelity
+  statement: 为现有 38 款可玩游戏分别提供一张高保真、玩法可辨识的竖屏游戏场景。
+  success_event: existing_play_complete
+  acceptance:
+    - 38 款游戏全部有独立场景，不复用通用背景
+    - Web 与 Flutter 本地 WebView 使用同一版本素材
+    - 不改变原有玩法状态机、计分、失败、完成、重玩和退出逻辑
+audience:
+  placement: Airvana 首页游戏试玩与移动端内嵌试玩
+  locale: zh-CN
+  regions: [HK, SG]
+creative:
+  direction: premium stylized 3D mobile game scene
+  aspect_ratio: "9:16"
+  dimensions: "941x1672"
+  forbidden:
+    - 文案、Logo、水印、第三方品牌标识
+    - 已知影视、动漫、游戏角色或其明显衍生形象
+    - 虚构奖励、收益、商业合作或联网对战证据
+platforms:
+  - Web H5
+  - iOS Flutter WebView
+  - Android Flutter WebView
+locked_fields:
+  - gameplay runtime and state transitions
+  - completion and replay events
+  - CTA and destination
+  - reward and economy
+  - campaign authority and entitlements
+release_boundary:
+  implementation: LOCAL_DEMO
+  external_release: blocked_pending_human_approval
+  commercial_claims: prohibited
+rollback: restore game-art registry v3.0.0 and its prior mixed asset paths

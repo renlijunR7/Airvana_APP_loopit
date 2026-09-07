@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="guardian">
+<title>guardian — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M18 25H45L49 52H13Z" fill="#345276" /><path d="M22 5H40L46 13V26H17V13Z" fill="#fff4d2" /><path d="M20 15H43V23H20Z" fill="#345276" /><path d="M27 16V22M34 16V22M40 16V22" fill="none" stroke="#e4b44f" stroke-width="2"/><path d="M26 4L31 1L36 4V14H26Z" fill="#d95d39" /><rect x="22" y="29" width="18" height="16" rx="2" fill="#fff4d2" /><path d="M24 45H31V58H20V53ZM33 45H41L45 58H33Z" fill="#fff4d2" /><rect x="18" y="55" width="14" height="6" rx="1" fill="#345276" /><rect x="33" y="55" width="14" height="6" rx="1" fill="#345276" /><path d="M8 27L23 30V44L16 52L7 44Z" fill="#e4b44f" /><path d="M15 33V45" fill="none" stroke="#fff4d2" stroke-width="3"/><path d="M51 50V9" fill="none" stroke="#8b6041" stroke-width="3"/><path d="M51 4L56 16H46Z" fill="#fff4d2" />
+</g>
+</svg>

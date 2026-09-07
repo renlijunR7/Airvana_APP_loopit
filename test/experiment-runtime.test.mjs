@@ -2,6 +2,8 @@ import test, { after, before } from 'node:test';
 import assert from 'node:assert/strict';
 import http from 'node:http';
 import crypto from 'node:crypto';
+import fs from 'node:fs';
+import vm from 'node:vm';
 import { createApp } from '../src/app.mjs';
 
 let app; let server; let base;
@@ -221,10 +223,14 @@ test('shipped runtime applies each optimizable field for real', async () => {
   assert.deepEqual(untouched.data.payload.sections.map(s => s.heading), ['A', 'B', 'C']);
 });
 
-test('difficulty variants keep the runtime proof chain at start → step_complete → complete', async () => {
+test('difficulty variants alter the actual game move budget while preserving all three boards', async () => {
   const html = app.db.prepare("SELECT html_text FROM content_artifacts ORDER BY rowid DESC LIMIT 1").get().html_text;
-  // 通关所需检查数变化时，仍然只发送一次 step_complete，最后一击才 complete
-  assert.match(html, /if\(!checkpointSent\)\{await event\('step_complete'/);
-  assert.match(html, /i\+=1;if\(i>=requiredChecks\)await complete\(\);else draw\(\)/);
-  assert.match(html, /slice\(0,requiredChecks\)/);
+  const context = { Math }; vm.runInNewContext(fs.readFileSync(new URL('../public/server-game-runtime-v3.js', import.meta.url), 'utf8'), context);
+  const easyVariant = applyVariantOn(html, { field: 'difficulty', value: 'easy' }, sampleData());
+  const hardVariant = applyVariantOn(html, { field: 'difficulty', value: 'hard' }, sampleData());
+  const make = variant => new context.AirvanaServerGameV3.MemoryGame({ art: ['emerald','ruby','sapphire','amethyst','key','star'] }, { difficulty: variant.requiredChecks, random: () => .99 });
+  const easy = make(easyVariant); const hard = make(hardVariant);
+  assert.equal(easy.moves, 12); assert.equal(hard.moves, 9);
+  assert.equal(easy.snapshot().stages, 3); assert.equal(hard.snapshot().stages, 3);
+  assert.match(html, /difficulty:requiredChecks/);
 });

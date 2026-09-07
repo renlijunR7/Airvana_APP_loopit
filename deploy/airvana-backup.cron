@@ -1,0 +1,4 @@
+SHELL=/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+30 4 * * * root /opt/airvana/current/deploy/backup.sh >> /var/log/airvana-backup.log 2>&1

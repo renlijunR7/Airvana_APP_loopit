@@ -410,7 +410,7 @@ test('mobile Home ships ten original offline arcade games with sound, best score
 
   assert.equal(playableIds.size,10);
   assert.equal(stages.size,9);
-  assert.equal(component.state.sessions.filter(item=>arcadeIds.includes(item.id)&&item.cover?.includes('/home-arcade/')).length,10);
+  assert.equal(component.state.sessions.filter(item=>arcadeIds.includes(item.id)&&item.cover?.includes('/classic-v1/covers/')).length,10);
   component.toggleFeedMiniGameSound();
   assert.equal(component.state.feedMiniGameMuted,true);
 });
@@ -427,14 +427,14 @@ test('mobile Home runs all eleven category demos through complete local replay l
       assert.equal(definition.type,'deep');
       assert.equal(definition.stages,3);
       assert.ok(definition.deepGameKey);
-      assert.equal(definition.art,contentId===34?'imagegen-atlas-v2':'code-native-v3');
+      assert.equal(definition.art,'casual-v1');
       continue;
     }
     if (deepIds.has(contentId)) {
       assert.equal(definition.type,'deep');
       assert.equal(definition.stages,3);
       assert.ok(definition.deepGameKey);
-      assert.equal(definition.art,'code-native-v2');
+      assert.equal(definition.art,'casual-v1');
       continue;
     }
     component.startFeedMiniGame(contentId);
@@ -462,11 +462,10 @@ test('mobile Discover synchronizes all 38 complete original games into the first
   const {component}=createMobileComponent();
   component.setState({screen:'discover',discoverCat:'recommend'});
   const values=component.renderVals();
-  assert.equal(values.discoverSections[0].tag,'原创新游');
+  assert.equal(values.discoverSections[0].tag,'截图原图与互动游戏');
   assert.deepEqual(Array.from(values.discoverSections[0].items,item=>item.id),[34,35,36,37,38,39,40,41,42,43,44,24,25,26,27,28,29,30,31,32,33,1,2,5,6,9,10,12,14,15,16,17,18,19,20,21,22,23]);
-  assert.ok(values.discoverSections[0].items.every(item=>item.hasCover&&/\/(?:store-fidelity-v4|character-consistency-v1)\//.test(item.cover)));
-  assert.deepEqual(Array.from(values.discoverSections[0].items.filter(item=>/\/character-consistency-v1\//.test(item.cover)),item=>item.id),[36,5,10,12,20]);
-  assert.ok(values.discoverSections[0].items.filter(item=>/\/character-consistency-v1\//.test(item.cover)).every(item=>item.cover.endsWith('.svg?v=1.0.1')));
+  assert.ok(values.discoverSections[0].items.every(item=>item.hasCover));
+  assert.equal(values.discoverSections[0].items.filter(item=>/\/classic-v1\/covers\//.test(item.cover)).length,38);
   assert.ok(values.discoverSections[0].items.every(item=>typeof item.onOpen==='function'));
 });
 

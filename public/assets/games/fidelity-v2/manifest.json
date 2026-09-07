@@ -1,0 +1,1524 @@
+{
+  "schema": "airvana.game-art-manifest.v2",
+  "version": "2.0.0",
+  "generated_at": "2026-09-05T00:00:00+08:00",
+  "status": "LOCAL_DEMO",
+  "source_generator": "OpenAI built-in ImageGen",
+  "prompt_set": "docs/game-assets/fidelity-v2/prompt-set.md",
+  "base_campaign_contract": "docs/playable-demos/home-complete-v3/campaign-contract.json",
+  "game_count": 38,
+  "authorization_status": "pending_human_release_approval",
+  "release_review": {
+    "gate_id": "gate_game_art_fidelity_v2_20260905",
+    "technical_review": {
+      "status": "technical_review_passed",
+      "reviewed_at": "2026-09-05T17:43:00+08:00",
+      "evidence": [
+        "38/38 source PNG and runtime JPEG dimensions and SHA-256 checksums verified",
+        "Four browser contact sheets visually reviewed across all 38 scenes",
+        "Playwright runtime page: 38/38 engines mounted; 12/12 families sampled; console 0 errors and 0 warnings",
+        "Scoped Node regression: 198/198 passed",
+        "Structural verification: 30/30 passed",
+        "Flutter analyze: no issues",
+        "Flutter tests: 115/115 passed"
+      ]
+    },
+    "human_brand_review": {
+      "status": "pending",
+      "approved_by": null,
+      "approved_at": null
+    },
+    "external_release": {
+      "status": "blocked_pending_human_approval",
+      "production_enabled": false
+    },
+    "rollback": {
+      "registry_version": "3.0.0",
+      "strategy": "Restore the prior game-art registry mapping; fidelity-v2 is versioned and non-destructive."
+    }
+  },
+  "assets": [
+    {
+      "asset_id": "asset_fidelity_v2_safety-workshop",
+      "game_key": "safety-workshop",
+      "content_id": 1,
+      "title": "Crypto City 安全挑战",
+      "mechanic": "quiz",
+      "runtime": "complete-games-v3",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "provenance": "OpenAI built-in ImageGen; prompt record in docs/game-assets/fidelity-v2/prompt-set.md",
+      "authorization_status": "pending_human_release_approval",
+      "locale": "language-neutral",
+      "version": "2.0.0",
+      "usage_restrictions": [
+        "Airvana LOCAL_DEMO only until human brand and release approval",
+        "No third-party logo, trademark, UI text, watermark, or known character IP",
+        "Do not treat the generated scene as evidence of a commercial partnership"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false,
+      "expires_at": null,
+      "source": {
+        "path": "public/assets/games/fidelity-v2/source/safety-workshop-gameplay-v2.png",
+        "format": "png",
+        "width": 941,
+        "height": 1672,
+        "bytes": 1927519,
+        "sha256": "d386ccd19a6c56eba59bedf0a1ee2f428838a7d75888430eb77ea3a117fc3802"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/fidelity-v2/runtime/safety-workshop-gameplay-v2.jpg",
+        "format": "jpeg",
+        "height": 1672,
+        "width": 941,
+        "bytes": 422865,
+        "sha256": "50b4ddb5b797bcd4b533225dd21437751db1321130cfc686cd503626aa12d234"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/fidelity-v2/runtime/safety-workshop-gameplay-v2.jpg"
+    },
+    {
+      "asset_id": "asset_fidelity_v2_stellar-farm",
+      "game_key": "stellar-farm",
+      "content_id": 2,
+      "title": "星际农场",
+      "mechanic": "builder",
+      "runtime": "complete-games-v3",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "provenance": "OpenAI built-in ImageGen; prompt record in docs/game-assets/fidelity-v2/prompt-set.md",
+      "authorization_status": "pending_human_release_approval",
+      "locale": "language-neutral",
+      "version": "2.0.0",
+      "usage_restrictions": [
+        "Airvana LOCAL_DEMO only until human brand and release approval",
+        "No third-party logo, trademark, UI text, watermark, or known character IP",
+        "Do not treat the generated scene as evidence of a commercial partnership"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false,
+      "expires_at": null,
+      "source": {
+        "path": "public/assets/games/fidelity-v2/source/stellar-farm-gameplay-v2.png",
+        "format": "png",
+        "width": 941,
+        "height": 1672,
+        "bytes": 2564561,
+        "sha256": "6aacdd7cb1d728f74fe01facf46315cd8e862f373fb81cb7d101aea5748c3b0a"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/fidelity-v2/runtime/stellar-farm-gameplay-v2.jpg",
+        "format": "jpeg",
+        "height": 1672,
+        "width": 941,
+        "bytes": 670804,
+        "sha256": "d53f0f98765f3640f847b04f34a1e6a8d13f16db1624a375593d21b642994e42"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/fidelity-v2/runtime/stellar-farm-gameplay-v2.jpg"
+    },
+    {
+      "asset_id": "asset_fidelity_v2_pixel-quest",
+      "game_key": "pixel-quest",
+      "content_id": 5,
+      "title": "像素冒险",
+      "mechanic": "runner",
+      "runtime": "complete-games-v3",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "provenance": "OpenAI built-in ImageGen; prompt record in docs/game-assets/fidelity-v2/prompt-set.md",
+      "authorization_status": "pending_human_release_approval",
+      "locale": "language-neutral",
+      "version": "2.0.0",
+      "usage_restrictions": [
+        "Airvana LOCAL_DEMO only until human brand and release approval",
+        "No third-party logo, trademark, UI text, watermark, or known character IP",
+        "Do not treat the generated scene as evidence of a commercial partnership"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false,
+      "expires_at": null,
+      "source": {
+        "path": "public/assets/games/fidelity-v2/source/pixel-quest-gameplay-v2.png",
+        "format": "png",
+        "width": 941,
+        "height": 1672,
+        "bytes": 1886792,
+        "sha256": "651f8c2f036c6bf5ff676b4fbb0038c035f0a19c6b59758e7d6fc4eeaeba4130"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/fidelity-v2/runtime/pixel-quest-gameplay-v2.jpg",
+        "format": "jpeg",
+        "height": 1672,
+        "width": 941,
+        "bytes": 378895,
+        "sha256": "2b64d4ed5e983431933155e07ef054fd0f25fd522ae4ff8fab779174992a7369"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/fidelity-v2/runtime/pixel-quest-gameplay-v2.jpg"
+    },
+    {
+      "asset_id": "asset_fidelity_v2_red-cup-shuffle",
+      "game_key": "red-cup-shuffle",
+      "content_id": 6,
+      "title": "红杯速配",
+      "mechanic": "cups",
+      "runtime": "complete-games-v3",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "provenance": "OpenAI built-in ImageGen; prompt record in docs/game-assets/fidelity-v2/prompt-set.md",
+      "authorization_status": "pending_human_release_approval",
+      "locale": "language-neutral",
+      "version": "2.0.0",
+      "usage_restrictions": [
+        "Airvana LOCAL_DEMO only until human brand and release approval",
+        "No third-party logo, trademark, UI text, watermark, or known character IP",
+        "Do not treat the generated scene as evidence of a commercial partnership"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false,
+      "expires_at": null,
+      "source": {
+        "path": "public/assets/games/fidelity-v2/source/red-cup-shuffle-gameplay-v2.png",
+        "format": "png",
+        "width": 941,
+        "height": 1672,
+        "bytes": 1988975,
+        "sha256": "b9d30f8628452519d53c0d5212a18dac1fa8087dac4178c61ddda9fe5fc02149"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/fidelity-v2/runtime/red-cup-shuffle-gameplay-v2.jpg",
+        "format": "jpeg",
+        "height": 1672,
+        "width": 941,
+        "bytes": 427591,
+        "sha256": "6b1c4907daab567513355c2c134a6333fba510fbb1584239fa8d9013df546687"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/fidelity-v2/runtime/red-cup-shuffle-gameplay-v2.jpg"
+    },
+    {
+      "asset_id": "asset_fidelity_v2_magic-choir",
+      "game_key": "magic-choir",
+      "content_id": 9,
+      "title": "魔法合唱团",
+      "mechanic": "rhythm",
+      "runtime": "complete-games-v3",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "provenance": "OpenAI built-in ImageGen; prompt record in docs/game-assets/fidelity-v2/prompt-set.md",
+      "authorization_status": "pending_human_release_approval",
+      "locale": "language-neutral",
+      "version": "2.0.0",
+      "usage_restrictions": [
+        "Airvana LOCAL_DEMO only until human brand and release approval",
+        "No third-party logo, trademark, UI text, watermark, or known character IP",
+        "Do not treat the generated scene as evidence of a commercial partnership"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false,
+      "expires_at": null,
+      "source": {
+        "path": "public/assets/games/fidelity-v2/source/magic-choir-gameplay-v2.png",
+        "format": "png",
+        "width": 941,
+        "height": 1672,
+        "bytes": 2704115,
+        "sha256": "dd5c387b6b3b609691a9674d189cbe1190176428e702ea482bfc2638996b525e"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/fidelity-v2/runtime/magic-choir-gameplay-v2.jpg",
+        "format": "jpeg",
+        "height": 1672,
+        "width": 941,
+        "bytes": 682019,
+        "sha256": "e8158f5b6b4d95a49e54acb6c6476b8e3b09760a30cd6ef39a8269cd5cba5408"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/fidelity-v2/runtime/magic-choir-gameplay-v2.jpg"
+    },
+    {
+      "asset_id": "asset_fidelity_v2_paws-stage",
+      "game_key": "paws-stage",
+      "content_id": 10,
+      "title": "萌宠音乐盒",
+      "mechanic": "sequence",
+      "runtime": "complete-games-v3",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "provenance": "OpenAI built-in ImageGen; prompt record in docs/game-assets/fidelity-v2/prompt-set.md",
+      "authorization_status": "pending_human_release_approval",
+      "locale": "language-neutral",
+      "version": "2.0.0",
+      "usage_restrictions": [
+        "Airvana LOCAL_DEMO only until human brand and release approval",
+        "No third-party logo, trademark, UI text, watermark, or known character IP",
+        "Do not treat the generated scene as evidence of a commercial partnership"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false,
+      "expires_at": null,
+      "source": {
+        "path": "public/assets/games/fidelity-v2/source/paws-stage-gameplay-v2.png",
+        "format": "png",
+        "width": 941,
+        "height": 1672,
+        "bytes": 2066199,
+        "sha256": "4465cd348963c1fcf798e6520056d24104b351abedb3ae8f56164b65d53c19e0"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/fidelity-v2/runtime/paws-stage-gameplay-v2.jpg",
+        "format": "jpeg",
+        "height": 1672,
+        "width": 941,
+        "bytes": 471181,
+        "sha256": "0c813fcd9b643be4fe8d4388dffa9b06c0c503f25984e938983306283e26ce69"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/fidelity-v2/runtime/paws-stage-gameplay-v2.jpg"
+    },
+    {
+      "asset_id": "asset_fidelity_v2_puppet-studio",
+      "game_key": "puppet-studio",
+      "content_id": 12,
+      "title": "玩偶造型工坊",
+      "mechanic": "wardrobe",
+      "runtime": "complete-games-v3",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "provenance": "OpenAI built-in ImageGen; prompt record in docs/game-assets/fidelity-v2/prompt-set.md",
+      "authorization_status": "pending_human_release_approval",
+      "locale": "language-neutral",
+      "version": "2.0.0",
+      "usage_restrictions": [
+        "Airvana LOCAL_DEMO only until human brand and release approval",
+        "No third-party logo, trademark, UI text, watermark, or known character IP",
+        "Do not treat the generated scene as evidence of a commercial partnership"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false,
+      "expires_at": null,
+      "source": {
+        "path": "public/assets/games/fidelity-v2/source/puppet-studio-gameplay-v2.png",
+        "format": "png",
+        "width": 941,
+        "height": 1672,
+        "bytes": 1877703,
+        "sha256": "ae88bacf34f262dd9370261e810e636f8a1d622df9c42dd459af1ea6b94b8425"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/fidelity-v2/runtime/puppet-studio-gameplay-v2.jpg",
+        "format": "jpeg",
+        "height": 1672,
+        "width": 941,
+        "bytes": 413183,
+        "sha256": "4e09c029ba9f0d2f1134da28744bc65c60199ff3b3655b4a00424ac5d65b589b"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/fidelity-v2/runtime/puppet-studio-gameplay-v2.jpg"
+    },
+    {
+      "asset_id": "asset_fidelity_v2_firefly-mail",
+      "game_key": "firefly-mail",
+      "content_id": 14,
+      "title": "萤火信箱",
+      "mechanic": "sort",
+      "runtime": "complete-games-v3",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "provenance": "OpenAI built-in ImageGen; prompt record in docs/game-assets/fidelity-v2/prompt-set.md",
+      "authorization_status": "pending_human_release_approval",
+      "locale": "language-neutral",
+      "version": "2.0.0",
+      "usage_restrictions": [
+        "Airvana LOCAL_DEMO only until human brand and release approval",
+        "No third-party logo, trademark, UI text, watermark, or known character IP",
+        "Do not treat the generated scene as evidence of a commercial partnership"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false,
+      "expires_at": null,
+      "source": {
+        "path": "public/assets/games/fidelity-v2/source/firefly-mail-gameplay-v2.png",
+        "format": "png",
+        "width": 941,
+        "height": 1672,
+        "bytes": 2347125,
+        "sha256": "2ac25ee0fa25b482c8607cd48980068429d6a6718c58bc39055865f18ef0cdf9"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/fidelity-v2/runtime/firefly-mail-gameplay-v2.jpg",
+        "format": "jpeg",
+        "height": 1672,
+        "width": 941,
+        "bytes": 576600,
+        "sha256": "f8e51ef010847523f5b61ba96a1a16656ca0156fa223c51309796cce82690b2e"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/fidelity-v2/runtime/firefly-mail-gameplay-v2.jpg"
+    },
+    {
+      "asset_id": "asset_fidelity_v2_whisker-escape",
+      "game_key": "whisker-escape",
+      "content_id": 15,
+      "title": "猫咪潜逃",
+      "mechanic": "maze",
+      "runtime": "complete-games-v3",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "provenance": "OpenAI built-in ImageGen; prompt record in docs/game-assets/fidelity-v2/prompt-set.md",
+      "authorization_status": "pending_human_release_approval",
+      "locale": "language-neutral",
+      "version": "2.0.0",
+      "usage_restrictions": [
+        "Airvana LOCAL_DEMO only until human brand and release approval",
+        "No third-party logo, trademark, UI text, watermark, or known character IP",
+        "Do not treat the generated scene as evidence of a commercial partnership"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false,
+      "expires_at": null,
+      "source": {
+        "path": "public/assets/games/fidelity-v2/source/whisker-escape-gameplay-v2.png",
+        "format": "png",
+        "width": 941,
+        "height": 1672,
+        "bytes": 1765169,
+        "sha256": "7c75e2008a6114c93f5bdf31c3473de64f024743bd5b8c419ffc68af0b87e4b1"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/fidelity-v2/runtime/whisker-escape-gameplay-v2.jpg",
+        "format": "jpeg",
+        "height": 1672,
+        "width": 941,
+        "bytes": 347165,
+        "sha256": "59627607a1a582cedb46d3754ea3bcabe918d35f2c1f095f31ed8cf75c83ed6a"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/fidelity-v2/runtime/whisker-escape-gameplay-v2.jpg"
+    },
+    {
+      "asset_id": "asset_fidelity_v2_coin-journey",
+      "game_key": "coin-journey",
+      "content_id": 16,
+      "title": "金币环游记",
+      "mechanic": "coin",
+      "runtime": "complete-games-v3",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "provenance": "OpenAI built-in ImageGen; prompt record in docs/game-assets/fidelity-v2/prompt-set.md",
+      "authorization_status": "pending_human_release_approval",
+      "locale": "language-neutral",
+      "version": "2.0.0",
+      "usage_restrictions": [
+        "Airvana LOCAL_DEMO only until human brand and release approval",
+        "No third-party logo, trademark, UI text, watermark, or known character IP",
+        "Do not treat the generated scene as evidence of a commercial partnership"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false,
+      "expires_at": null,
+      "source": {
+        "path": "public/assets/games/fidelity-v2/source/coin-journey-gameplay-v2.png",
+        "format": "png",
+        "width": 941,
+        "height": 1672,
+        "bytes": 2496947,
+        "sha256": "ee92186300a6790ca392b5cedbbd82d95fa9f4d83ce652d4684cc4224f9f3f0c"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/fidelity-v2/runtime/coin-journey-gameplay-v2.jpg",
+        "format": "jpeg",
+        "height": 1672,
+        "width": 941,
+        "bytes": 607903,
+        "sha256": "84cc5c13e2e87747a3cf4c256a649c95b14d454367ed07080f00b64eb84d2c3c"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/fidelity-v2/runtime/coin-journey-gameplay-v2.jpg"
+    },
+    {
+      "asset_id": "asset_fidelity_v2_jungle-dive",
+      "game_key": "jungle-dive",
+      "content_id": 17,
+      "title": "丛林潜游",
+      "mechanic": "fishing",
+      "runtime": "complete-games-v3",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "provenance": "OpenAI built-in ImageGen; prompt record in docs/game-assets/fidelity-v2/prompt-set.md",
+      "authorization_status": "pending_human_release_approval",
+      "locale": "language-neutral",
+      "version": "2.0.0",
+      "usage_restrictions": [
+        "Airvana LOCAL_DEMO only until human brand and release approval",
+        "No third-party logo, trademark, UI text, watermark, or known character IP",
+        "Do not treat the generated scene as evidence of a commercial partnership"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false,
+      "expires_at": null,
+      "source": {
+        "path": "public/assets/games/fidelity-v2/source/jungle-dive-gameplay-v2.png",
+        "format": "png",
+        "width": 941,
+        "height": 1672,
+        "bytes": 2360332,
+        "sha256": "6ab49392bb75182e12fde51f70ed915651ba04492d07bd9b58b36556127af632"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/fidelity-v2/runtime/jungle-dive-gameplay-v2.jpg",
+        "format": "jpeg",
+        "height": 1672,
+        "width": 941,
+        "bytes": 539859,
+        "sha256": "a8407f890170b86aef21b3b037a12c27bcbb45b93380ffa6b63a671fd23fb7b1"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/fidelity-v2/runtime/jungle-dive-gameplay-v2.jpg"
+    },
+    {
+      "asset_id": "asset_fidelity_v2_rift-strike",
+      "game_key": "rift-strike",
+      "content_id": 18,
+      "title": "裂隙突击",
+      "mechanic": "shooter",
+      "runtime": "complete-games-v3",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "provenance": "OpenAI built-in ImageGen; prompt record in docs/game-assets/fidelity-v2/prompt-set.md",
+      "authorization_status": "pending_human_release_approval",
+      "locale": "language-neutral",
+      "version": "2.0.0",
+      "usage_restrictions": [
+        "Airvana LOCAL_DEMO only until human brand and release approval",
+        "No third-party logo, trademark, UI text, watermark, or known character IP",
+        "Do not treat the generated scene as evidence of a commercial partnership"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false,
+      "expires_at": null,
+      "source": {
+        "path": "public/assets/games/fidelity-v2/source/rift-strike-gameplay-v2.png",
+        "format": "png",
+        "width": 941,
+        "height": 1672,
+        "bytes": 2351163,
+        "sha256": "08acbee00c894b039565cd9270bf1a61f6b983cc9db674e92bf86a6a419da1fd"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/fidelity-v2/runtime/rift-strike-gameplay-v2.jpg",
+        "format": "jpeg",
+        "height": 1672,
+        "width": 941,
+        "bytes": 526394,
+        "sha256": "fbd0f8faae783307508859c0f92a55fd66cf649ea40e974ae3e73a57d277e618"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/fidelity-v2/runtime/rift-strike-gameplay-v2.jpg"
+    },
+    {
+      "asset_id": "asset_fidelity_v2_stardust-island",
+      "game_key": "stardust-island",
+      "content_id": 19,
+      "title": "星砂岛",
+      "mechanic": "builder",
+      "runtime": "complete-games-v3",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "provenance": "OpenAI built-in ImageGen; prompt record in docs/game-assets/fidelity-v2/prompt-set.md",
+      "authorization_status": "pending_human_release_approval",
+      "locale": "language-neutral",
+      "version": "2.0.0",
+      "usage_restrictions": [
+        "Airvana LOCAL_DEMO only until human brand and release approval",
+        "No third-party logo, trademark, UI text, watermark, or known character IP",
+        "Do not treat the generated scene as evidence of a commercial partnership"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false,
+      "expires_at": null,
+      "source": {
+        "path": "public/assets/games/fidelity-v2/source/stardust-island-gameplay-v2.png",
+        "format": "png",
+        "width": 941,
+        "height": 1672,
+        "bytes": 2301249,
+        "sha256": "e23d53a26bb86162f32940073f5107a7273b850b1891f4fcd88a5c5d2f1ae6ba"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/fidelity-v2/runtime/stardust-island-gameplay-v2.jpg",
+        "format": "jpeg",
+        "height": 1672,
+        "width": 941,
+        "bytes": 549312,
+        "sha256": "254a589d2b356f04f24a70f97aa772c1b831046df678b143831bc34a7a94a7af"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/fidelity-v2/runtime/stardust-island-gameplay-v2.jpg"
+    },
+    {
+      "asset_id": "asset_fidelity_v2_formation-knights",
+      "game_key": "formation-knights",
+      "content_id": 20,
+      "title": "阵线骑士",
+      "mechanic": "battle",
+      "runtime": "complete-games-v3",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "provenance": "OpenAI built-in ImageGen; prompt record in docs/game-assets/fidelity-v2/prompt-set.md",
+      "authorization_status": "pending_human_release_approval",
+      "locale": "language-neutral",
+      "version": "2.0.0",
+      "usage_restrictions": [
+        "Airvana LOCAL_DEMO only until human brand and release approval",
+        "No third-party logo, trademark, UI text, watermark, or known character IP",
+        "Do not treat the generated scene as evidence of a commercial partnership"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false,
+      "expires_at": null,
+      "source": {
+        "path": "public/assets/games/fidelity-v2/source/formation-knights-gameplay-v2.png",
+        "format": "png",
+        "width": 941,
+        "height": 1672,
+        "bytes": 2215978,
+        "sha256": "79cd0bd06892e36dd65ed9ee02c6826f22e289bd781256d1b9dc48d540045e58"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/fidelity-v2/runtime/formation-knights-gameplay-v2.jpg",
+        "format": "jpeg",
+        "height": 1672,
+        "width": 941,
+        "bytes": 489742,
+        "sha256": "c0fa8f971d76cc5bc7f13102159c175c5efbc26046cacb57626162e1769ca1ca"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/fidelity-v2/runtime/formation-knights-gameplay-v2.jpg"
+    },
+    {
+      "asset_id": "asset_fidelity_v2_galaxy-toy-shop",
+      "game_key": "galaxy-toy-shop",
+      "content_id": 21,
+      "title": "银河玩具店",
+      "mechanic": "shop",
+      "runtime": "complete-games-v3",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "provenance": "OpenAI built-in ImageGen; prompt record in docs/game-assets/fidelity-v2/prompt-set.md",
+      "authorization_status": "pending_human_release_approval",
+      "locale": "language-neutral",
+      "version": "2.0.0",
+      "usage_restrictions": [
+        "Airvana LOCAL_DEMO only until human brand and release approval",
+        "No third-party logo, trademark, UI text, watermark, or known character IP",
+        "Do not treat the generated scene as evidence of a commercial partnership"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false,
+      "expires_at": null,
+      "source": {
+        "path": "public/assets/games/fidelity-v2/source/galaxy-toy-shop-gameplay-v2.png",
+        "format": "png",
+        "width": 941,
+        "height": 1672,
+        "bytes": 2267613,
+        "sha256": "d84dd9ca133e3e57693b7a2c47b1189e2c841093f4275bf81092e25bf6333f39"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/fidelity-v2/runtime/galaxy-toy-shop-gameplay-v2.jpg",
+        "format": "jpeg",
+        "height": 1672,
+        "width": 941,
+        "bytes": 558751,
+        "sha256": "19f45047252fd1d5fd4785abae16c097f87ad92982235743a639dcb90bff44cf"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/fidelity-v2/runtime/galaxy-toy-shop-gameplay-v2.jpg"
+    },
+    {
+      "asset_id": "asset_fidelity_v2_city-rush",
+      "game_key": "city-rush",
+      "content_id": 22,
+      "title": "城市极速",
+      "mechanic": "drift",
+      "runtime": "complete-games-v3",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "provenance": "OpenAI built-in ImageGen; prompt record in docs/game-assets/fidelity-v2/prompt-set.md",
+      "authorization_status": "pending_human_release_approval",
+      "locale": "language-neutral",
+      "version": "2.0.0",
+      "usage_restrictions": [
+        "Airvana LOCAL_DEMO only until human brand and release approval",
+        "No third-party logo, trademark, UI text, watermark, or known character IP",
+        "Do not treat the generated scene as evidence of a commercial partnership"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false,
+      "expires_at": null,
+      "source": {
+        "path": "public/assets/games/fidelity-v2/source/city-rush-gameplay-v2.png",
+        "format": "png",
+        "width": 941,
+        "height": 1672,
+        "bytes": 2548062,
+        "sha256": "d50cb072c1945a652a2e4b5ef8f59fc3e122815e37b31ef8e711887b358aaf72"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/fidelity-v2/runtime/city-rush-gameplay-v2.jpg",
+        "format": "jpeg",
+        "height": 1672,
+        "width": 941,
+        "bytes": 644267,
+        "sha256": "d4d0358be58215ace8fae5194863a043779034a07ee4a725a193577662b0d692"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/fidelity-v2/runtime/city-rush-gameplay-v2.jpg"
+    },
+    {
+      "asset_id": "asset_fidelity_v2_sky-cannon",
+      "game_key": "sky-cannon",
+      "content_id": 23,
+      "title": "云端炮手",
+      "mechanic": "defense",
+      "runtime": "complete-games-v3",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "provenance": "OpenAI built-in ImageGen; prompt record in docs/game-assets/fidelity-v2/prompt-set.md",
+      "authorization_status": "pending_human_release_approval",
+      "locale": "language-neutral",
+      "version": "2.0.0",
+      "usage_restrictions": [
+        "Airvana LOCAL_DEMO only until human brand and release approval",
+        "No third-party logo, trademark, UI text, watermark, or known character IP",
+        "Do not treat the generated scene as evidence of a commercial partnership"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false,
+      "expires_at": null,
+      "source": {
+        "path": "public/assets/games/fidelity-v2/source/sky-cannon-gameplay-v2.png",
+        "format": "png",
+        "width": 941,
+        "height": 1672,
+        "bytes": 2843194,
+        "sha256": "5fc8008d99bc8791d8e52607ae0bf006421b1f415d04901812b19b20039c1857"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/fidelity-v2/runtime/sky-cannon-gameplay-v2.jpg",
+        "format": "jpeg",
+        "height": 1672,
+        "width": 941,
+        "bytes": 765626,
+        "sha256": "8ff5c360694df15ae9f36acb8bdee473c189658e6f6dc6270241a55a9f7e83da"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/fidelity-v2/runtime/sky-cannon-gameplay-v2.jpg"
+    },
+    {
+      "asset_id": "asset_fidelity_v2_neon-dash",
+      "game_key": "neon-dash",
+      "content_id": 24,
+      "title": "霓虹疾跑",
+      "mechanic": "runner",
+      "runtime": "complete-games-v3",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "provenance": "OpenAI built-in ImageGen; prompt record in docs/game-assets/fidelity-v2/prompt-set.md",
+      "authorization_status": "pending_human_release_approval",
+      "locale": "language-neutral",
+      "version": "2.0.0",
+      "usage_restrictions": [
+        "Airvana LOCAL_DEMO only until human brand and release approval",
+        "No third-party logo, trademark, UI text, watermark, or known character IP",
+        "Do not treat the generated scene as evidence of a commercial partnership"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false,
+      "expires_at": null,
+      "source": {
+        "path": "public/assets/games/fidelity-v2/source/neon-dash-gameplay-v2.png",
+        "format": "png",
+        "width": 941,
+        "height": 1672,
+        "bytes": 2064488,
+        "sha256": "89d2ab3e49ab15491ea0aecdb5409eec5394cb041c3c3e2f82e239a05dcfc9a8"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/fidelity-v2/runtime/neon-dash-gameplay-v2.jpg",
+        "format": "jpeg",
+        "height": 1672,
+        "width": 941,
+        "bytes": 436601,
+        "sha256": "4781b08bc9d2cf38adb2356954b9329bfa511d27f9d20ea67ffc3d085c1a577f"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/fidelity-v2/runtime/neon-dash-gameplay-v2.jpg"
+    },
+    {
+      "asset_id": "asset_fidelity_v2_pulse-forge",
+      "game_key": "pulse-forge",
+      "content_id": 25,
+      "title": "节拍熔炉",
+      "mechanic": "rhythm",
+      "runtime": "complete-games-v3",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "provenance": "OpenAI built-in ImageGen; prompt record in docs/game-assets/fidelity-v2/prompt-set.md",
+      "authorization_status": "pending_human_release_approval",
+      "locale": "language-neutral",
+      "version": "2.0.0",
+      "usage_restrictions": [
+        "Airvana LOCAL_DEMO only until human brand and release approval",
+        "No third-party logo, trademark, UI text, watermark, or known character IP",
+        "Do not treat the generated scene as evidence of a commercial partnership"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false,
+      "expires_at": null,
+      "source": {
+        "path": "public/assets/games/fidelity-v2/source/pulse-forge-gameplay-v2.png",
+        "format": "png",
+        "width": 941,
+        "height": 1672,
+        "bytes": 2337634,
+        "sha256": "c6e3b77e632089faa3952aa1fd6e4e5f6359f2bf71587f3e54c2afb23a761a33"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/fidelity-v2/runtime/pulse-forge-gameplay-v2.jpg",
+        "format": "jpeg",
+        "height": 1672,
+        "width": 941,
+        "bytes": 611336,
+        "sha256": "8632df48ec2829198271ed210e58e9cf871d71297cefc2afd1bf55b7d2057bc9"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/fidelity-v2/runtime/pulse-forge-gameplay-v2.jpg"
+    },
+    {
+      "asset_id": "asset_fidelity_v2_sky-stack",
+      "game_key": "sky-stack",
+      "content_id": 26,
+      "title": "天际叠塔",
+      "mechanic": "stack",
+      "runtime": "complete-games-v3",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "provenance": "OpenAI built-in ImageGen; prompt record in docs/game-assets/fidelity-v2/prompt-set.md",
+      "authorization_status": "pending_human_release_approval",
+      "locale": "language-neutral",
+      "version": "2.0.0",
+      "usage_restrictions": [
+        "Airvana LOCAL_DEMO only until human brand and release approval",
+        "No third-party logo, trademark, UI text, watermark, or known character IP",
+        "Do not treat the generated scene as evidence of a commercial partnership"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false,
+      "expires_at": null,
+      "source": {
+        "path": "public/assets/games/fidelity-v2/source/sky-stack-gameplay-v2.png",
+        "format": "png",
+        "width": 941,
+        "height": 1672,
+        "bytes": 2047437,
+        "sha256": "935681e652e0324d7e52d3f69111e151c73a1200e63acf4a20a2972058313dcb"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/fidelity-v2/runtime/sky-stack-gameplay-v2.jpg",
+        "format": "jpeg",
+        "height": 1672,
+        "width": 941,
+        "bytes": 416569,
+        "sha256": "25c1a747013486795673e704b025942ee0a6efc095875b3c3a798fdac81ce876"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/fidelity-v2/runtime/sky-stack-gameplay-v2.jpg"
+    },
+    {
+      "asset_id": "asset_fidelity_v2_rune-circuit",
+      "game_key": "rune-circuit",
+      "content_id": 27,
+      "title": "符文回路",
+      "mechanic": "circuit",
+      "runtime": "complete-games-v3",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "provenance": "OpenAI built-in ImageGen; prompt record in docs/game-assets/fidelity-v2/prompt-set.md",
+      "authorization_status": "pending_human_release_approval",
+      "locale": "language-neutral",
+      "version": "2.0.0",
+      "usage_restrictions": [
+        "Airvana LOCAL_DEMO only until human brand and release approval",
+        "No third-party logo, trademark, UI text, watermark, or known character IP",
+        "Do not treat the generated scene as evidence of a commercial partnership"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false,
+      "expires_at": null,
+      "source": {
+        "path": "public/assets/games/fidelity-v2/source/rune-circuit-gameplay-v2.png",
+        "format": "png",
+        "width": 941,
+        "height": 1672,
+        "bytes": 2293158,
+        "sha256": "216de077dea4b22a7f2d7f94caff3ea6ce4e220a537fef3b1ca3157d4cd9c6bc"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/fidelity-v2/runtime/rune-circuit-gameplay-v2.jpg",
+        "format": "jpeg",
+        "height": 1672,
+        "width": 941,
+        "bytes": 530473,
+        "sha256": "fefdcfedd6819d8013bb3aabb4a09189808973fa5aa32d2494dfc586fc4c1a59"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/fidelity-v2/runtime/rune-circuit-gameplay-v2.jpg"
+    },
+    {
+      "asset_id": "asset_fidelity_v2_prism-match",
+      "game_key": "prism-match",
+      "content_id": 28,
+      "title": "棱镜连击",
+      "mechanic": "match",
+      "runtime": "complete-games-v3",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "provenance": "OpenAI built-in ImageGen; prompt record in docs/game-assets/fidelity-v2/prompt-set.md",
+      "authorization_status": "pending_human_release_approval",
+      "locale": "language-neutral",
+      "version": "2.0.0",
+      "usage_restrictions": [
+        "Airvana LOCAL_DEMO only until human brand and release approval",
+        "No third-party logo, trademark, UI text, watermark, or known character IP",
+        "Do not treat the generated scene as evidence of a commercial partnership"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false,
+      "expires_at": null,
+      "source": {
+        "path": "public/assets/games/fidelity-v2/source/prism-match-gameplay-v2.png",
+        "format": "png",
+        "width": 941,
+        "height": 1672,
+        "bytes": 2540709,
+        "sha256": "14e7fa323c84c5eecb1a42552ab3d66af7aa15c4dbbff993c6a2546eb596cebd"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/fidelity-v2/runtime/prism-match-gameplay-v2.jpg",
+        "format": "jpeg",
+        "height": 1672,
+        "width": 941,
+        "bytes": 703115,
+        "sha256": "7501fab65c7a1e5eb2cc58f84131015871a6d7b27c204b41dcc22f6973523c0d"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/fidelity-v2/runtime/prism-match-gameplay-v2.jpg"
+    },
+    {
+      "asset_id": "asset_fidelity_v2_star-cups",
+      "game_key": "star-cups",
+      "content_id": 29,
+      "title": "星杯幻术",
+      "mechanic": "cups",
+      "runtime": "complete-games-v3",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "provenance": "OpenAI built-in ImageGen; prompt record in docs/game-assets/fidelity-v2/prompt-set.md",
+      "authorization_status": "pending_human_release_approval",
+      "locale": "language-neutral",
+      "version": "2.0.0",
+      "usage_restrictions": [
+        "Airvana LOCAL_DEMO only until human brand and release approval",
+        "No third-party logo, trademark, UI text, watermark, or known character IP",
+        "Do not treat the generated scene as evidence of a commercial partnership"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false,
+      "expires_at": null,
+      "source": {
+        "path": "public/assets/games/fidelity-v2/source/star-cups-gameplay-v2.png",
+        "format": "png",
+        "width": 941,
+        "height": 1672,
+        "bytes": 2266679,
+        "sha256": "601397786ad055a30ed6f62f505444d0668966b523a2494260133fb8c72780a7"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/fidelity-v2/runtime/star-cups-gameplay-v2.jpg",
+        "format": "jpeg",
+        "height": 1672,
+        "width": 941,
+        "bytes": 510424,
+        "sha256": "34da1b3febf101d90b83589fa17c04a1a347f34dca8f0b2230302a455783e012"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/fidelity-v2/runtime/star-cups-gameplay-v2.jpg"
+    },
+    {
+      "asset_id": "asset_fidelity_v2_deep-catch",
+      "game_key": "deep-catch",
+      "content_id": 30,
+      "title": "深海寻光",
+      "mechanic": "fishing",
+      "runtime": "complete-games-v3",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "provenance": "OpenAI built-in ImageGen; prompt record in docs/game-assets/fidelity-v2/prompt-set.md",
+      "authorization_status": "pending_human_release_approval",
+      "locale": "language-neutral",
+      "version": "2.0.0",
+      "usage_restrictions": [
+        "Airvana LOCAL_DEMO only until human brand and release approval",
+        "No third-party logo, trademark, UI text, watermark, or known character IP",
+        "Do not treat the generated scene as evidence of a commercial partnership"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false,
+      "expires_at": null,
+      "source": {
+        "path": "public/assets/games/fidelity-v2/source/deep-catch-gameplay-v2.png",
+        "format": "png",
+        "width": 941,
+        "height": 1672,
+        "bytes": 2118235,
+        "sha256": "b17cb515023f9b7ce4afc7912cc50aab1dc19a87c6f739604f1a0fff5c67b586"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/fidelity-v2/runtime/deep-catch-gameplay-v2.jpg",
+        "format": "jpeg",
+        "height": 1672,
+        "width": 941,
+        "bytes": 474460,
+        "sha256": "7896e13507487160e56b1f8f2800e99fc4c6c0e662687886e018eea16400f8e4"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/fidelity-v2/runtime/deep-catch-gameplay-v2.jpg"
+    },
+    {
+      "asset_id": "asset_fidelity_v2_ember-bastion",
+      "game_key": "ember-bastion",
+      "content_id": 31,
+      "title": "赤焰防线",
+      "mechanic": "defense",
+      "runtime": "complete-games-v3",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "provenance": "OpenAI built-in ImageGen; prompt record in docs/game-assets/fidelity-v2/prompt-set.md",
+      "authorization_status": "pending_human_release_approval",
+      "locale": "language-neutral",
+      "version": "2.0.0",
+      "usage_restrictions": [
+        "Airvana LOCAL_DEMO only until human brand and release approval",
+        "No third-party logo, trademark, UI text, watermark, or known character IP",
+        "Do not treat the generated scene as evidence of a commercial partnership"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false,
+      "expires_at": null,
+      "source": {
+        "path": "public/assets/games/fidelity-v2/source/ember-bastion-gameplay-v2.png",
+        "format": "png",
+        "width": 941,
+        "height": 1672,
+        "bytes": 2609143,
+        "sha256": "0538753071007351c404162eefd5cafb8510937bf704451100f63ca5c216730c"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/fidelity-v2/runtime/ember-bastion-gameplay-v2.jpg",
+        "format": "jpeg",
+        "height": 1672,
+        "width": 941,
+        "bytes": 668465,
+        "sha256": "cdb09647f618a366dd4ad04b3bd7b539327519254e58970c2bf219ef91298d2c"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/fidelity-v2/runtime/ember-bastion-gameplay-v2.jpg"
+    },
+    {
+      "asset_id": "asset_fidelity_v2_nova-drift",
+      "game_key": "nova-drift",
+      "content_id": 32,
+      "title": "新星漂移",
+      "mechanic": "drift",
+      "runtime": "complete-games-v3",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "provenance": "OpenAI built-in ImageGen; prompt record in docs/game-assets/fidelity-v2/prompt-set.md",
+      "authorization_status": "pending_human_release_approval",
+      "locale": "language-neutral",
+      "version": "2.0.0",
+      "usage_restrictions": [
+        "Airvana LOCAL_DEMO only until human brand and release approval",
+        "No third-party logo, trademark, UI text, watermark, or known character IP",
+        "Do not treat the generated scene as evidence of a commercial partnership"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false,
+      "expires_at": null,
+      "source": {
+        "path": "public/assets/games/fidelity-v2/source/nova-drift-gameplay-v2.png",
+        "format": "png",
+        "width": 941,
+        "height": 1672,
+        "bytes": 2273546,
+        "sha256": "bed5208e03b58c7dada96f9e0e85624ed5f4a74c36108762b79bbada3bea21d2"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/fidelity-v2/runtime/nova-drift-gameplay-v2.jpg",
+        "format": "jpeg",
+        "height": 1672,
+        "width": 941,
+        "bytes": 482069,
+        "sha256": "f2c976687170d54bb220053b45804f45364041e7bbdc3cc796a8faee17582517"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/fidelity-v2/runtime/nova-drift-gameplay-v2.jpg"
+    },
+    {
+      "asset_id": "asset_fidelity_v2_void-squadron",
+      "game_key": "void-squadron",
+      "content_id": 33,
+      "title": "虚空小队",
+      "mechanic": "shooter",
+      "runtime": "complete-games-v3",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "provenance": "OpenAI built-in ImageGen; prompt record in docs/game-assets/fidelity-v2/prompt-set.md",
+      "authorization_status": "pending_human_release_approval",
+      "locale": "language-neutral",
+      "version": "2.0.0",
+      "usage_restrictions": [
+        "Airvana LOCAL_DEMO only until human brand and release approval",
+        "No third-party logo, trademark, UI text, watermark, or known character IP",
+        "Do not treat the generated scene as evidence of a commercial partnership"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false,
+      "expires_at": null,
+      "source": {
+        "path": "public/assets/games/fidelity-v2/source/void-squadron-gameplay-v2.png",
+        "format": "png",
+        "width": 941,
+        "height": 1672,
+        "bytes": 2293637,
+        "sha256": "c0954487e48b1698039933775eea8b2176402cd4a789d0b48f601fed71a73738"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/fidelity-v2/runtime/void-squadron-gameplay-v2.jpg",
+        "format": "jpeg",
+        "height": 1672,
+        "width": 941,
+        "bytes": 491458,
+        "sha256": "0fad9d860134d7e4ea914ba48107335c93267a771c5aa013083ad7398b11a142"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/fidelity-v2/runtime/void-squadron-gameplay-v2.jpg"
+    },
+    {
+      "asset_id": "asset_fidelity_v2_orchard-merge",
+      "game_key": "orchard-merge",
+      "content_id": 34,
+      "title": "果园合合塔",
+      "mechanic": "match",
+      "runtime": "complete-games-v3",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "provenance": "OpenAI built-in ImageGen; prompt record in docs/game-assets/fidelity-v2/prompt-set.md",
+      "authorization_status": "pending_human_release_approval",
+      "locale": "language-neutral",
+      "version": "2.0.0",
+      "usage_restrictions": [
+        "Airvana LOCAL_DEMO only until human brand and release approval",
+        "No third-party logo, trademark, UI text, watermark, or known character IP",
+        "Do not treat the generated scene as evidence of a commercial partnership"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false,
+      "expires_at": null,
+      "source": {
+        "path": "public/assets/games/fidelity-v2/source/orchard-merge-gameplay-v2.png",
+        "format": "png",
+        "width": 941,
+        "height": 1672,
+        "bytes": 2240933,
+        "sha256": "c11cd7faebb9ffd481be7c68ffd739a7c94bb4d18827480706a7c68d084aca00"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/fidelity-v2/runtime/orchard-merge-gameplay-v2.jpg",
+        "format": "jpeg",
+        "height": 1672,
+        "width": 941,
+        "bytes": 538898,
+        "sha256": "8637e49c801d4f9eac4ada4dc0bced745f821fcf6814e281f01337ecb95f966c"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/fidelity-v2/runtime/orchard-merge-gameplay-v2.jpg"
+    },
+    {
+      "asset_id": "asset_fidelity_v2_star-mower",
+      "game_key": "star-mower",
+      "content_id": 35,
+      "title": "星尘割草",
+      "mechanic": "survival",
+      "runtime": "deep-games-v2",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "provenance": "OpenAI built-in ImageGen; prompt record in docs/game-assets/fidelity-v2/prompt-set.md",
+      "authorization_status": "pending_human_release_approval",
+      "locale": "language-neutral",
+      "version": "2.0.0",
+      "usage_restrictions": [
+        "Airvana LOCAL_DEMO only until human brand and release approval",
+        "No third-party logo, trademark, UI text, watermark, or known character IP",
+        "Do not treat the generated scene as evidence of a commercial partnership"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false,
+      "expires_at": null,
+      "source": {
+        "path": "public/assets/games/fidelity-v2/source/star-mower-gameplay-v2.png",
+        "format": "png",
+        "width": 941,
+        "height": 1672,
+        "bytes": 2503348,
+        "sha256": "24f8a9751ad365eed9e973a07df87e5a36d9dc7d87fe08e4665f35b8559ee3e2"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/fidelity-v2/runtime/star-mower-gameplay-v2.jpg",
+        "format": "jpeg",
+        "height": 1672,
+        "width": 941,
+        "bytes": 584791,
+        "sha256": "be275317a982bfbff6fc63ef23aaa3e824d95ce8aee8adca325f3c9120babe44"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/fidelity-v2/runtime/star-mower-gameplay-v2.jpg"
+    },
+    {
+      "asset_id": "asset_fidelity_v2_moonlight-tea-shop",
+      "game_key": "moonlight-tea-shop",
+      "content_id": 36,
+      "title": "月光奶茶铺",
+      "mechanic": "shop",
+      "runtime": "complete-games-v3",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "provenance": "OpenAI built-in ImageGen; prompt record in docs/game-assets/fidelity-v2/prompt-set.md",
+      "authorization_status": "pending_human_release_approval",
+      "locale": "language-neutral",
+      "version": "2.0.0",
+      "usage_restrictions": [
+        "Airvana LOCAL_DEMO only until human brand and release approval",
+        "No third-party logo, trademark, UI text, watermark, or known character IP",
+        "Do not treat the generated scene as evidence of a commercial partnership"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false,
+      "expires_at": null,
+      "source": {
+        "path": "public/assets/games/fidelity-v2/source/moonlight-tea-shop-gameplay-v2.png",
+        "format": "png",
+        "width": 941,
+        "height": 1672,
+        "bytes": 2141937,
+        "sha256": "c9e41fef06f3e24a910daa1c1fc9732c7621cb91cfc2b484fa382af4049d291a"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/fidelity-v2/runtime/moonlight-tea-shop-gameplay-v2.jpg",
+        "format": "jpeg",
+        "height": 1672,
+        "width": 941,
+        "bytes": 501388,
+        "sha256": "c800596230acaaac9540bb4c9d7b94cb20d34217d7e1a6dcbd4b19cb30859b86"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/fidelity-v2/runtime/moonlight-tea-shop-gameplay-v2.jpg"
+    },
+    {
+      "asset_id": "asset_fidelity_v2_microbe-arena",
+      "game_key": "microbe-arena",
+      "content_id": 37,
+      "title": "微粒竞技场",
+      "mechanic": "survival",
+      "runtime": "complete-games-v3",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "provenance": "OpenAI built-in ImageGen; prompt record in docs/game-assets/fidelity-v2/prompt-set.md",
+      "authorization_status": "pending_human_release_approval",
+      "locale": "language-neutral",
+      "version": "2.0.0",
+      "usage_restrictions": [
+        "Airvana LOCAL_DEMO only until human brand and release approval",
+        "No third-party logo, trademark, UI text, watermark, or known character IP",
+        "Do not treat the generated scene as evidence of a commercial partnership"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false,
+      "expires_at": null,
+      "source": {
+        "path": "public/assets/games/fidelity-v2/source/microbe-arena-gameplay-v2.png",
+        "format": "png",
+        "width": 941,
+        "height": 1672,
+        "bytes": 2140470,
+        "sha256": "f5da7efc0defabf1bdfece72ac07803877ef8d4a0d24c2f5a01b491201d3a5ac"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/fidelity-v2/runtime/microbe-arena-gameplay-v2.jpg",
+        "format": "jpeg",
+        "height": 1672,
+        "width": 941,
+        "bytes": 442880,
+        "sha256": "6cc4a9ab97354fa71f77c5a7fb15e5ee6809674bd435cd5a867bbe8c051c4b53"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/fidelity-v2/runtime/microbe-arena-gameplay-v2.jpg"
+    },
+    {
+      "asset_id": "asset_fidelity_v2_star-deck",
+      "game_key": "star-deck",
+      "content_id": 38,
+      "title": "星轨牌阵",
+      "mechanic": "cards",
+      "runtime": "deep-games-v2",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "provenance": "OpenAI built-in ImageGen; prompt record in docs/game-assets/fidelity-v2/prompt-set.md",
+      "authorization_status": "pending_human_release_approval",
+      "locale": "language-neutral",
+      "version": "2.0.0",
+      "usage_restrictions": [
+        "Airvana LOCAL_DEMO only until human brand and release approval",
+        "No third-party logo, trademark, UI text, watermark, or known character IP",
+        "Do not treat the generated scene as evidence of a commercial partnership"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false,
+      "expires_at": null,
+      "source": {
+        "path": "public/assets/games/fidelity-v2/source/star-deck-gameplay-v2.png",
+        "format": "png",
+        "width": 941,
+        "height": 1672,
+        "bytes": 2586454,
+        "sha256": "b5b4039e8f212699dee2eee9846b04cf31d3c96affe4a9c5dc39ce5c3e586b47"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/fidelity-v2/runtime/star-deck-gameplay-v2.jpg",
+        "format": "jpeg",
+        "height": 1672,
+        "width": 941,
+        "bytes": 641050,
+        "sha256": "f1b655cf4bdd394189c21fd8698fe269d28e5b072d6a59b0bb82ef2371a43ea6"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/fidelity-v2/runtime/star-deck-gameplay-v2.jpg"
+    },
+    {
+      "asset_id": "asset_fidelity_v2_crystal-bastion",
+      "game_key": "crystal-bastion",
+      "content_id": 39,
+      "title": "晶核防线",
+      "mechanic": "defense",
+      "runtime": "complete-games-v3",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "provenance": "OpenAI built-in ImageGen; prompt record in docs/game-assets/fidelity-v2/prompt-set.md",
+      "authorization_status": "pending_human_release_approval",
+      "locale": "language-neutral",
+      "version": "2.0.0",
+      "usage_restrictions": [
+        "Airvana LOCAL_DEMO only until human brand and release approval",
+        "No third-party logo, trademark, UI text, watermark, or known character IP",
+        "Do not treat the generated scene as evidence of a commercial partnership"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false,
+      "expires_at": null,
+      "source": {
+        "path": "public/assets/games/fidelity-v2/source/crystal-bastion-gameplay-v2.png",
+        "format": "png",
+        "width": 941,
+        "height": 1672,
+        "bytes": 2764224,
+        "sha256": "68c7f9ace0a44342a0508801e4b4ffd2177c00bd3cb987eb398a84bc54aa2b9e"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/fidelity-v2/runtime/crystal-bastion-gameplay-v2.jpg",
+        "format": "jpeg",
+        "height": 1672,
+        "width": 941,
+        "bytes": 690684,
+        "sha256": "766a458709a365ec235f53b76ad063f8737b0bb6f745e20e10a881061ecfa4d8"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/fidelity-v2/runtime/crystal-bastion-gameplay-v2.jpg"
+    },
+    {
+      "asset_id": "asset_fidelity_v2_adventurer-journal",
+      "game_key": "adventurer-journal",
+      "content_id": 40,
+      "title": "冒险者日志",
+      "mechanic": "maze",
+      "runtime": "deep-games-v2",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "provenance": "OpenAI built-in ImageGen; prompt record in docs/game-assets/fidelity-v2/prompt-set.md",
+      "authorization_status": "pending_human_release_approval",
+      "locale": "language-neutral",
+      "version": "2.0.0",
+      "usage_restrictions": [
+        "Airvana LOCAL_DEMO only until human brand and release approval",
+        "No third-party logo, trademark, UI text, watermark, or known character IP",
+        "Do not treat the generated scene as evidence of a commercial partnership"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false,
+      "expires_at": null,
+      "source": {
+        "path": "public/assets/games/fidelity-v2/source/adventurer-journal-gameplay-v2.png",
+        "format": "png",
+        "width": 941,
+        "height": 1672,
+        "bytes": 2507188,
+        "sha256": "c536e698d71cccb58119c80b01969e6cc1b4bbb8156219c9f7363b32aa6cb9fc"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/fidelity-v2/runtime/adventurer-journal-gameplay-v2.jpg",
+        "format": "jpeg",
+        "height": 1672,
+        "width": 941,
+        "bytes": 590610,
+        "sha256": "d6cddf552cb79fa1daf3e4a4b59724d35196d11369c17162762d700106f622a1"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/fidelity-v2/runtime/adventurer-journal-gameplay-v2.jpg"
+    },
+    {
+      "asset_id": "asset_fidelity_v2_idiom-detective",
+      "game_key": "idiom-detective",
+      "content_id": 41,
+      "title": "成语侦探",
+      "mechanic": "cards",
+      "runtime": "deep-games-v2",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "provenance": "OpenAI built-in ImageGen; prompt record in docs/game-assets/fidelity-v2/prompt-set.md",
+      "authorization_status": "pending_human_release_approval",
+      "locale": "language-neutral",
+      "version": "2.0.0",
+      "usage_restrictions": [
+        "Airvana LOCAL_DEMO only until human brand and release approval",
+        "No third-party logo, trademark, UI text, watermark, or known character IP",
+        "Do not treat the generated scene as evidence of a commercial partnership"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false,
+      "expires_at": null,
+      "source": {
+        "path": "public/assets/games/fidelity-v2/source/idiom-detective-gameplay-v2.png",
+        "format": "png",
+        "width": 941,
+        "height": 1672,
+        "bytes": 2137254,
+        "sha256": "c812c785d86c96ee08c4c49a98ae70894233239dc29d4d49e011febbc22e5cba"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/fidelity-v2/runtime/idiom-detective-gameplay-v2.jpg",
+        "format": "jpeg",
+        "height": 1672,
+        "width": 941,
+        "bytes": 459261,
+        "sha256": "9c563bc1254c13fce07f610660b068b20523a4203157ef6c79e75eab146b9b72"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/fidelity-v2/runtime/idiom-detective-gameplay-v2.jpg"
+    },
+    {
+      "asset_id": "asset_fidelity_v2_hex-frontier",
+      "game_key": "hex-frontier",
+      "content_id": 42,
+      "title": "六角前线",
+      "mechanic": "battle",
+      "runtime": "deep-games-v2",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "provenance": "OpenAI built-in ImageGen; prompt record in docs/game-assets/fidelity-v2/prompt-set.md",
+      "authorization_status": "pending_human_release_approval",
+      "locale": "language-neutral",
+      "version": "2.0.0",
+      "usage_restrictions": [
+        "Airvana LOCAL_DEMO only until human brand and release approval",
+        "No third-party logo, trademark, UI text, watermark, or known character IP",
+        "Do not treat the generated scene as evidence of a commercial partnership"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false,
+      "expires_at": null,
+      "source": {
+        "path": "public/assets/games/fidelity-v2/source/hex-frontier-gameplay-v2.png",
+        "format": "png",
+        "width": 941,
+        "height": 1672,
+        "bytes": 2809727,
+        "sha256": "4a55f4c448b83b09de206237a873d93a37f16a93306c10061621ea2e44689482"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/fidelity-v2/runtime/hex-frontier-gameplay-v2.jpg",
+        "format": "jpeg",
+        "height": 1672,
+        "width": 941,
+        "bytes": 714945,
+        "sha256": "8e8fe1abc28b7c92bc045810a38b9f5b58f86634db9e423732e6b2689289dc54"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/fidelity-v2/runtime/hex-frontier-gameplay-v2.jpg"
+    },
+    {
+      "asset_id": "asset_fidelity_v2_studio-wardrobe",
+      "game_key": "studio-wardrobe",
+      "content_id": 43,
+      "title": "今日造型师",
+      "mechanic": "wardrobe",
+      "runtime": "complete-games-v3",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "provenance": "OpenAI built-in ImageGen; prompt record in docs/game-assets/fidelity-v2/prompt-set.md",
+      "authorization_status": "pending_human_release_approval",
+      "locale": "language-neutral",
+      "version": "2.0.0",
+      "usage_restrictions": [
+        "Airvana LOCAL_DEMO only until human brand and release approval",
+        "No third-party logo, trademark, UI text, watermark, or known character IP",
+        "Do not treat the generated scene as evidence of a commercial partnership"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false,
+      "expires_at": null,
+      "source": {
+        "path": "public/assets/games/fidelity-v2/source/studio-wardrobe-gameplay-v2.png",
+        "format": "png",
+        "width": 941,
+        "height": 1672,
+        "bytes": 2200115,
+        "sha256": "74fec8f69ad5635ce4e130eb9a5ca202a2c8b9bb7bd4bb929977bfd1d8bc9b55"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/fidelity-v2/runtime/studio-wardrobe-gameplay-v2.jpg",
+        "format": "jpeg",
+        "height": 1672,
+        "width": 941,
+        "bytes": 515919,
+        "sha256": "4a41fbdf43cef305fe9230c75c612139e43f9c234f80cdeeefb996c199ed6b1f"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/fidelity-v2/runtime/studio-wardrobe-gameplay-v2.jpg"
+    },
+    {
+      "asset_id": "asset_fidelity_v2_garden-renewal",
+      "game_key": "garden-renewal",
+      "content_id": 44,
+      "title": "花园焕新",
+      "mechanic": "match",
+      "runtime": "deep-games-v2",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "provenance": "OpenAI built-in ImageGen; prompt record in docs/game-assets/fidelity-v2/prompt-set.md",
+      "authorization_status": "pending_human_release_approval",
+      "locale": "language-neutral",
+      "version": "2.0.0",
+      "usage_restrictions": [
+        "Airvana LOCAL_DEMO only until human brand and release approval",
+        "No third-party logo, trademark, UI text, watermark, or known character IP",
+        "Do not treat the generated scene as evidence of a commercial partnership"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false,
+      "expires_at": null,
+      "source": {
+        "path": "public/assets/games/fidelity-v2/source/garden-renewal-gameplay-v2.png",
+        "format": "png",
+        "width": 941,
+        "height": 1672,
+        "bytes": 2775950,
+        "sha256": "96efa20f2b367530a634c70535c9f83baf743602fee463f9dfa7e94f0d21d5b4"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/fidelity-v2/runtime/garden-renewal-gameplay-v2.jpg",
+        "format": "jpeg",
+        "height": 1672,
+        "width": 941,
+        "bytes": 706712,
+        "sha256": "7411802a45bfd10f8871ba47fb21101d2b7064ebfa0b645590a514463c676fba"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/fidelity-v2/runtime/garden-renewal-gameplay-v2.jpg"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="pear">
+<title>pear — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M29 12Q21 12 22 25Q22 30 14 36Q5 44 12 54Q18 61 33 59Q48 59 53 49Q57 38 44 30Q39 27 39 19Q38 11 29 12Z" fill="#e4b44f" /><path d="M34 13Q39 17 35 31Q47 40 45 49Q43 56 34 59Q51 58 53 47Q56 37 43 30Q38 27 39 19Z" fill="#b47f32" stroke="none"/><path d="M31 13Q31 6 38 4" fill="none" stroke="#8b6041" stroke-width="4"/><path d="M34 10Q45 2 54 12Q43 20 34 10Z" fill="#689754" />
+</g>
+</svg>

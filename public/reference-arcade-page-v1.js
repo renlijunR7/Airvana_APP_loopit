@@ -1,0 +1,14 @@
+(function(){'use strict';
+const runtime=window.AirvanaPhysicsGames,games=window.AirvanaReferenceGames.list();
+const requested=new URLSearchParams(location.search).get('game'),key=games.some(g=>g.key===requested)?requested:games[0].key;
+const definition=games.find(g=>g.key===key),nav=document.getElementById('games'),pause=document.getElementById('pause');
+document.documentElement.style.setProperty('--theme',definition.color);
+games.forEach((item,i)=>{const a=document.createElement('a'),n=document.createElement('span');a.href='?game='+item.key;n.textContent=String(i+1).padStart(2,'0');a.append(n,document.createTextNode(item.title));if(item.key===key)a.setAttribute('aria-current','page');nav.append(a);});
+nav.querySelector('[aria-current]')?.scrollIntoView({block:'nearest',inline:'center'});
+let muted=true,started=false;window.airvanaReferenceEvents=[];
+const game=runtime.mount(document.getElementById('game'),key,{muted:true,onStatus:s=>{pause.textContent=s.paused?'继续':'暂停';},onEvent:(name,payload)=>{if(!started&&['resume','valid_interaction','replay'].includes(name)){started=true;game.emit('play_start');}window.airvanaReferenceEvents.push({name,payload});if(window.airvanaReferenceEvents.length>300)window.airvanaReferenceEvents.shift();},onComplete:r=>{document.getElementById('result').textContent='三关完成 · '+Math.round(r.score)+' 分 · 可重开再玩';const card=game.overlay?.querySelector('.physics-result');if(card){card.querySelector('h2').textContent='全部通关！';card.querySelector('p').textContent='已完成 3 个关卡 · 总分 '+Math.round(r.score);const buttons=card.querySelectorAll('button');buttons.forEach(b=>b.remove());const replay=document.createElement('button');replay.textContent='再玩一轮';replay.onclick=()=>location.reload();card.append(replay);}}});
+window.airvanaReferencePreview=game;
+game.togglePause();pause.textContent='开始';
+const welcome=game.overlay.querySelector('.physics-result');welcome.querySelector('span').textContent='HOW TO PLAY';welcome.querySelector('h2').textContent=definition.title;welcome.querySelector('p').textContent=definition.instruction+' 共 3 关，随时可暂停或重试。';welcome.querySelector('button').textContent='开始游戏';welcome.querySelectorAll('button')[1]?.remove();
+pause.onclick=()=>game.togglePause();document.getElementById('restart').onclick=()=>location.reload();document.getElementById('sound').onclick=e=>{muted=!muted;game.setMuted(muted);e.target.textContent=muted?'静音':'音效开';e.target.setAttribute('aria-pressed',String(muted));};window.addEventListener('pagehide',()=>game.destroy(),{once:true});
+})();

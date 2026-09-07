@@ -1,0 +1,2894 @@
+{
+  "schema": "airvana.game-art-manifest.v2",
+  "version": "1.0.0",
+  "status": "LOCAL_DEMO",
+  "source_authoring": "code-authored",
+  "source_generator": "scripts/build-classic-scenes-v1.mjs",
+  "asset_count": 76,
+  "game_count": 38,
+  "reference_policy": "Original drawings informed by classic arcade, 16-bit strategy, puzzle-board and tabletop design conventions; no copied characters or assets.",
+  "raster_inputs": 0,
+  "ai_image_inputs": 0,
+  "visual_rules": [
+    "limited palette",
+    "solid fills",
+    "hard-edged shade shapes",
+    "readable gameplay area",
+    "no gradient",
+    "no glow",
+    "no filter",
+    "no baked text"
+  ],
+  "cover_sprite_keys": [
+    "amethyst",
+    "bullet",
+    "cannon",
+    "car",
+    "cat",
+    "coffee",
+    "crystal",
+    "cup",
+    "dress",
+    "drone",
+    "emerald",
+    "enemy_ship",
+    "energy",
+    "fish",
+    "flower",
+    "green_apple",
+    "guardian",
+    "hat",
+    "hero",
+    "hook",
+    "house",
+    "key",
+    "kitten",
+    "letter",
+    "microbe",
+    "microbe_enemy",
+    "model",
+    "mower",
+    "orange",
+    "parcel",
+    "pear",
+    "plum",
+    "plush",
+    "potion",
+    "predator_fish",
+    "raider",
+    "red_apple",
+    "roadblock",
+    "ruby",
+    "runner",
+    "sapphire",
+    "scroll",
+    "sentinel",
+    "shield",
+    "shoes",
+    "spacecraft",
+    "spore",
+    "star",
+    "sword",
+    "tea",
+    "tent",
+    "treasure",
+    "tree",
+    "turret"
+  ],
+  "assets": [
+    {
+      "asset_id": "asset_classic_v1_safety-workshop",
+      "game_key": "safety-workshop",
+      "content_id": 1,
+      "title": "Crypto City 安全挑战",
+      "mechanic": "quiz",
+      "runtime": "complete-games-v3",
+      "family": "safety",
+      "palette": "city",
+      "motif": "security-terminal",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "source_authoring": "code-authored",
+      "source_generator": "scripts/build-classic-scenes-v1.mjs",
+      "license": "Original project artwork; no third-party art inputs",
+      "provenance": "Original SVG geometry authored in source code; no raster or generative image inputs",
+      "authorization_status": "local_preview_user_requested",
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "release_approved": false,
+      "source": {
+        "path": "scripts/build-classic-scenes-v1.mjs",
+        "format": "javascript"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/classic-v1/scenes/safety-workshop.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 2062,
+        "sha256": "7cd77a8b70093a1921d8c39d77d1249b88ac2014a8955022f8518ab0d9679f1e",
+        "format": "svg"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/classic-v1/covers/safety-workshop.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 3942,
+        "sha256": "58bbdedb9f609b0cf89d3b2a9e8c18d9596be2cdf1859eafbf7e0ef5aee6d5d9",
+        "format": "svg"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/classic-v1/scenes/safety-workshop.svg"
+    },
+    {
+      "asset_id": "asset_classic_v1_stellar-farm",
+      "game_key": "stellar-farm",
+      "content_id": 2,
+      "title": "星际农场",
+      "mechanic": "builder",
+      "runtime": "complete-games-v3",
+      "family": "nature",
+      "palette": "meadow",
+      "motif": "irrigated-farm",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "source_authoring": "code-authored",
+      "source_generator": "scripts/build-classic-scenes-v1.mjs",
+      "license": "Original project artwork; no third-party art inputs",
+      "provenance": "Original SVG geometry authored in source code; no raster or generative image inputs",
+      "authorization_status": "local_preview_user_requested",
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "release_approved": false,
+      "source": {
+        "path": "scripts/build-classic-scenes-v1.mjs",
+        "format": "javascript"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/classic-v1/scenes/stellar-farm.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 5659,
+        "sha256": "609985a8c8c15bb47047b27542266ca1f390b8bee97578258f93f0f1157e6d3a",
+        "format": "svg"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/classic-v1/covers/stellar-farm.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 20312,
+        "sha256": "af90736cddc324f23db3850f06ced4ed9c66474af00835db2b7b59a412fc777e",
+        "format": "svg"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/classic-v1/scenes/stellar-farm.svg"
+    },
+    {
+      "asset_id": "asset_classic_v1_pixel-quest",
+      "game_key": "pixel-quest",
+      "content_id": 5,
+      "title": "像素冒险",
+      "mechanic": "runner",
+      "runtime": "complete-games-v3",
+      "family": "motion",
+      "palette": "meadow",
+      "motif": "forest-trail",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "source_authoring": "code-authored",
+      "source_generator": "scripts/build-classic-scenes-v1.mjs",
+      "license": "Original project artwork; no third-party art inputs",
+      "provenance": "Original SVG geometry authored in source code; no raster or generative image inputs",
+      "authorization_status": "local_preview_user_requested",
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "release_approved": false,
+      "source": {
+        "path": "scripts/build-classic-scenes-v1.mjs",
+        "format": "javascript"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/classic-v1/scenes/pixel-quest.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 4178,
+        "sha256": "f12c4779a699cca9d31b1c89f214b17e193dd60561889a3e9c3b96005e1179a3",
+        "format": "svg"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/classic-v1/covers/pixel-quest.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 7142,
+        "sha256": "66ec9a81944ec978ecc9353ad6513d3a35664f325bb89ac5cf8c7867b86cded1",
+        "format": "svg"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/classic-v1/scenes/pixel-quest.svg"
+    },
+    {
+      "asset_id": "asset_classic_v1_red-cup-shuffle",
+      "game_key": "red-cup-shuffle",
+      "content_id": 6,
+      "title": "红杯速配",
+      "mechanic": "cups",
+      "runtime": "complete-games-v3",
+      "family": "collection",
+      "palette": "wood",
+      "motif": "red-tabletop",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "source_authoring": "code-authored",
+      "source_generator": "scripts/build-classic-scenes-v1.mjs",
+      "license": "Original project artwork; no third-party art inputs",
+      "provenance": "Original SVG geometry authored in source code; no raster or generative image inputs",
+      "authorization_status": "local_preview_user_requested",
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "release_approved": false,
+      "source": {
+        "path": "scripts/build-classic-scenes-v1.mjs",
+        "format": "javascript"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/classic-v1/scenes/red-cup-shuffle.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 1681,
+        "sha256": "8b99cbe2f67255e9f442bdd4491c9f5743e67118a79b5da76b7ec936d2487cff",
+        "format": "svg"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/classic-v1/covers/red-cup-shuffle.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 3942,
+        "sha256": "0b3fc73d71f393344758217eb372dc9c1de19e284121f407e6fcb6f29ec220f3",
+        "format": "svg"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/classic-v1/scenes/red-cup-shuffle.svg"
+    },
+    {
+      "asset_id": "asset_classic_v1_magic-choir",
+      "game_key": "magic-choir",
+      "content_id": 9,
+      "title": "魔法合唱团",
+      "mechanic": "rhythm",
+      "runtime": "complete-games-v3",
+      "family": "rhythm",
+      "palette": "violet",
+      "motif": "four-track-studio",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "source_authoring": "code-authored",
+      "source_generator": "scripts/build-classic-scenes-v1.mjs",
+      "license": "Original project artwork; no third-party art inputs",
+      "provenance": "Original SVG geometry authored in source code; no raster or generative image inputs",
+      "authorization_status": "local_preview_user_requested",
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "release_approved": false,
+      "source": {
+        "path": "scripts/build-classic-scenes-v1.mjs",
+        "format": "javascript"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/classic-v1/scenes/magic-choir.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 1617,
+        "sha256": "65cd1fe9bc9be95864e907da896a072fe8d6cacacd7d15425d244c13dc826fb6",
+        "format": "svg"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/classic-v1/covers/magic-choir.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 6937,
+        "sha256": "860b4db58b66722d123c754ae285aac27e6ac83892cdc9853b76016448795107",
+        "format": "svg"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/classic-v1/scenes/magic-choir.svg"
+    },
+    {
+      "asset_id": "asset_classic_v1_paws-stage",
+      "game_key": "paws-stage",
+      "content_id": 10,
+      "title": "萌宠音乐盒",
+      "mechanic": "sequence",
+      "runtime": "complete-games-v3",
+      "family": "rhythm",
+      "palette": "rose",
+      "motif": "pet-theatre",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "source_authoring": "code-authored",
+      "source_generator": "scripts/build-classic-scenes-v1.mjs",
+      "license": "Original project artwork; no third-party art inputs",
+      "provenance": "Original SVG geometry authored in source code; no raster or generative image inputs",
+      "authorization_status": "local_preview_user_requested",
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "release_approved": false,
+      "source": {
+        "path": "scripts/build-classic-scenes-v1.mjs",
+        "format": "javascript"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/classic-v1/scenes/paws-stage.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 1617,
+        "sha256": "1bf0375b107787bac044dca4b0acfaa403d0150e493ea54b2db0cc986581017b",
+        "format": "svg"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/classic-v1/covers/paws-stage.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 6725,
+        "sha256": "37e77249c58a56673830b7e14378f4b631cd6bc4595e8edb2b4f01fcfbf806b3",
+        "format": "svg"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/classic-v1/scenes/paws-stage.svg"
+    },
+    {
+      "asset_id": "asset_classic_v1_puppet-studio",
+      "game_key": "puppet-studio",
+      "content_id": 12,
+      "title": "玩偶造型工坊",
+      "mechanic": "wardrobe",
+      "runtime": "complete-games-v3",
+      "family": "creation",
+      "palette": "rose",
+      "motif": "doll-workbench",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "source_authoring": "code-authored",
+      "source_generator": "scripts/build-classic-scenes-v1.mjs",
+      "license": "Original project artwork; no third-party art inputs",
+      "provenance": "Original SVG geometry authored in source code; no raster or generative image inputs",
+      "authorization_status": "local_preview_user_requested",
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "release_approved": false,
+      "source": {
+        "path": "scripts/build-classic-scenes-v1.mjs",
+        "format": "javascript"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/classic-v1/scenes/puppet-studio.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 4008,
+        "sha256": "7a53c0653c642821db8ed92e62ec128c4ceb6d0cbde6d009dc3c4bb62aecc9e2",
+        "format": "svg"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/classic-v1/covers/puppet-studio.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 7407,
+        "sha256": "7a71266ee45f746bf1e05b524e40e161db66ce31d9f454567b5cf224b6e00f7d",
+        "format": "svg"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/classic-v1/scenes/puppet-studio.svg"
+    },
+    {
+      "asset_id": "asset_classic_v1_firefly-mail",
+      "game_key": "firefly-mail",
+      "content_id": 14,
+      "title": "萤火信箱",
+      "mechanic": "sort",
+      "runtime": "complete-games-v3",
+      "family": "story",
+      "palette": "night",
+      "motif": "village-post-office",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "source_authoring": "code-authored",
+      "source_generator": "scripts/build-classic-scenes-v1.mjs",
+      "license": "Original project artwork; no third-party art inputs",
+      "provenance": "Original SVG geometry authored in source code; no raster or generative image inputs",
+      "authorization_status": "local_preview_user_requested",
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "release_approved": false,
+      "source": {
+        "path": "scripts/build-classic-scenes-v1.mjs",
+        "format": "javascript"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/classic-v1/scenes/firefly-mail.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 1958,
+        "sha256": "01ee3babd35eadf6b9c31f1a8f438189ec6152e98bcfd724ec996fea8e0c6615",
+        "format": "svg"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/classic-v1/covers/firefly-mail.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 4214,
+        "sha256": "3aa72d4aaf94ca053ed23a11a2690f50dfe407409b990c2062d045db7bd70f9e",
+        "format": "svg"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/classic-v1/scenes/firefly-mail.svg"
+    },
+    {
+      "asset_id": "asset_classic_v1_whisker-escape",
+      "game_key": "whisker-escape",
+      "content_id": 15,
+      "title": "猫咪潜逃",
+      "mechanic": "maze",
+      "runtime": "complete-games-v3",
+      "family": "stealth",
+      "palette": "dungeon",
+      "motif": "castle-corridor",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "source_authoring": "code-authored",
+      "source_generator": "scripts/build-classic-scenes-v1.mjs",
+      "license": "Original project artwork; no third-party art inputs",
+      "provenance": "Original SVG geometry authored in source code; no raster or generative image inputs",
+      "authorization_status": "local_preview_user_requested",
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "release_approved": false,
+      "source": {
+        "path": "scripts/build-classic-scenes-v1.mjs",
+        "format": "javascript"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/classic-v1/scenes/whisker-escape.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 22184,
+        "sha256": "a737490d9b0d704f5ee34afc7cbb049bf7e54a27d1b3a4bf1e4b70406d4a144c",
+        "format": "svg"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/classic-v1/covers/whisker-escape.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 30029,
+        "sha256": "2a4ac911557a58f7c1fc14e04a8671cc7dc0a2d800a316cdb5b1f80fdaedd0d9",
+        "format": "svg"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/classic-v1/scenes/whisker-escape.svg"
+    },
+    {
+      "asset_id": "asset_classic_v1_coin-journey",
+      "game_key": "coin-journey",
+      "content_id": 16,
+      "title": "金币环游记",
+      "mechanic": "coin",
+      "runtime": "complete-games-v3",
+      "family": "economy",
+      "palette": "sand",
+      "motif": "desert-rings",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "source_authoring": "code-authored",
+      "source_generator": "scripts/build-classic-scenes-v1.mjs",
+      "license": "Original project artwork; no third-party art inputs",
+      "provenance": "Original SVG geometry authored in source code; no raster or generative image inputs",
+      "authorization_status": "local_preview_user_requested",
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "release_approved": false,
+      "source": {
+        "path": "scripts/build-classic-scenes-v1.mjs",
+        "format": "javascript"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/classic-v1/scenes/coin-journey.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 595,
+        "sha256": "9ee346413b31831826b9c2f1d9f80bc6217dbf9b757343b20b99da759415ffc4",
+        "format": "svg"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/classic-v1/covers/coin-journey.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 1611,
+        "sha256": "38c5e07697252e9eebf39d512cc4b46d51051c08b4c201ee6e941e8c55222ce1",
+        "format": "svg"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/classic-v1/scenes/coin-journey.svg"
+    },
+    {
+      "asset_id": "asset_classic_v1_jungle-dive",
+      "game_key": "jungle-dive",
+      "content_id": 17,
+      "title": "丛林潜游",
+      "mechanic": "fishing",
+      "runtime": "complete-games-v3",
+      "family": "ocean",
+      "palette": "coast",
+      "motif": "mangrove-lagoon",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "source_authoring": "code-authored",
+      "source_generator": "scripts/build-classic-scenes-v1.mjs",
+      "license": "Original project artwork; no third-party art inputs",
+      "provenance": "Original SVG geometry authored in source code; no raster or generative image inputs",
+      "authorization_status": "local_preview_user_requested",
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "release_approved": false,
+      "source": {
+        "path": "scripts/build-classic-scenes-v1.mjs",
+        "format": "javascript"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/classic-v1/scenes/jungle-dive.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 4482,
+        "sha256": "21c6c8b1dfd03d1089387be7c73def1ce5742e9ac58bdb6252f1ab076b5b2913",
+        "format": "svg"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/classic-v1/covers/jungle-dive.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 8172,
+        "sha256": "b14b12ae5c614d56f1b13ccfd8513e9f6165e95944fb9bd7bebdf957997f5561",
+        "format": "svg"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/classic-v1/scenes/jungle-dive.svg"
+    },
+    {
+      "asset_id": "asset_classic_v1_rift-strike",
+      "game_key": "rift-strike",
+      "content_id": 18,
+      "title": "裂隙突击",
+      "mechanic": "shooter",
+      "runtime": "complete-games-v3",
+      "family": "space",
+      "palette": "night",
+      "motif": "orbital-sector",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "source_authoring": "code-authored",
+      "source_generator": "scripts/build-classic-scenes-v1.mjs",
+      "license": "Original project artwork; no third-party art inputs",
+      "provenance": "Original SVG geometry authored in source code; no raster or generative image inputs",
+      "authorization_status": "local_preview_user_requested",
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "release_approved": false,
+      "source": {
+        "path": "scripts/build-classic-scenes-v1.mjs",
+        "format": "javascript"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/classic-v1/scenes/rift-strike.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 3642,
+        "sha256": "7e16952627904351e75900b8ae4805f118424af4daf5d3db39ffde1f90a0a23b",
+        "format": "svg"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/classic-v1/covers/rift-strike.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 14780,
+        "sha256": "36c2e73c56912e470b9dbb394593830b46371e4e30b47dd2db3f2bcf504124c9",
+        "format": "svg"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/classic-v1/scenes/rift-strike.svg"
+    },
+    {
+      "asset_id": "asset_classic_v1_stardust-island",
+      "game_key": "stardust-island",
+      "content_id": 19,
+      "title": "星砂岛",
+      "mechanic": "builder",
+      "runtime": "complete-games-v3",
+      "family": "nature",
+      "palette": "coast",
+      "motif": "small-island",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "source_authoring": "code-authored",
+      "source_generator": "scripts/build-classic-scenes-v1.mjs",
+      "license": "Original project artwork; no third-party art inputs",
+      "provenance": "Original SVG geometry authored in source code; no raster or generative image inputs",
+      "authorization_status": "local_preview_user_requested",
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "release_approved": false,
+      "source": {
+        "path": "scripts/build-classic-scenes-v1.mjs",
+        "format": "javascript"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/classic-v1/scenes/stardust-island.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 3771,
+        "sha256": "44770f2e7f2b55dcb5030789d703f93d85ce467dfba77f2d787bfff0189ac4ea",
+        "format": "svg"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/classic-v1/covers/stardust-island.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 18044,
+        "sha256": "fa3a4d42a317b3bbf0078c12ed5d3c03a2363fa0175f67d2ba29a3523a8d5e95",
+        "format": "svg"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/classic-v1/scenes/stardust-island.svg"
+    },
+    {
+      "asset_id": "asset_classic_v1_formation-knights",
+      "game_key": "formation-knights",
+      "content_id": 20,
+      "title": "阵线骑士",
+      "mechanic": "battle",
+      "runtime": "complete-games-v3",
+      "family": "strategy",
+      "palette": "meadow",
+      "motif": "walled-training-ground",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "source_authoring": "code-authored",
+      "source_generator": "scripts/build-classic-scenes-v1.mjs",
+      "license": "Original project artwork; no third-party art inputs",
+      "provenance": "Original SVG geometry authored in source code; no raster or generative image inputs",
+      "authorization_status": "local_preview_user_requested",
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "release_approved": false,
+      "source": {
+        "path": "scripts/build-classic-scenes-v1.mjs",
+        "format": "javascript"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/classic-v1/scenes/formation-knights.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 17742,
+        "sha256": "2ee28aec80a7d08b53376f0c225d37794c5db04e2db4bb63849c96b8b6a92fef",
+        "format": "svg"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/classic-v1/covers/formation-knights.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 22041,
+        "sha256": "2e42e3d468d11f0ae7a961994c42b44962bf859f797f22512ea120ed2a8a9f2b",
+        "format": "svg"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/classic-v1/scenes/formation-knights.svg"
+    },
+    {
+      "asset_id": "asset_classic_v1_galaxy-toy-shop",
+      "game_key": "galaxy-toy-shop",
+      "content_id": 21,
+      "title": "银河玩具店",
+      "mechanic": "shop",
+      "runtime": "complete-games-v3",
+      "family": "collection",
+      "palette": "violet",
+      "motif": "toy-counter",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "source_authoring": "code-authored",
+      "source_generator": "scripts/build-classic-scenes-v1.mjs",
+      "license": "Original project artwork; no third-party art inputs",
+      "provenance": "Original SVG geometry authored in source code; no raster or generative image inputs",
+      "authorization_status": "local_preview_user_requested",
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "release_approved": false,
+      "source": {
+        "path": "scripts/build-classic-scenes-v1.mjs",
+        "format": "javascript"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/classic-v1/scenes/galaxy-toy-shop.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 2356,
+        "sha256": "9687ef4e4816515100c32ca6935ed0ac54f43d9f0282c4cbbe5fbbd0a94671de",
+        "format": "svg"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/classic-v1/covers/galaxy-toy-shop.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 5606,
+        "sha256": "97bc2df8af8f9bd81d3dbe48a610e81723332add4de96cb8f86b82ca1cd6d31a",
+        "format": "svg"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/classic-v1/scenes/galaxy-toy-shop.svg"
+    },
+    {
+      "asset_id": "asset_classic_v1_city-rush",
+      "game_key": "city-rush",
+      "content_id": 22,
+      "title": "城市极速",
+      "mechanic": "drift",
+      "runtime": "complete-games-v3",
+      "family": "motion",
+      "palette": "city",
+      "motif": "city-road",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "source_authoring": "code-authored",
+      "source_generator": "scripts/build-classic-scenes-v1.mjs",
+      "license": "Original project artwork; no third-party art inputs",
+      "provenance": "Original SVG geometry authored in source code; no raster or generative image inputs",
+      "authorization_status": "local_preview_user_requested",
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "release_approved": false,
+      "source": {
+        "path": "scripts/build-classic-scenes-v1.mjs",
+        "format": "javascript"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/classic-v1/scenes/city-rush.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 3797,
+        "sha256": "ed572b9d4ddf859238392409db82d697d7d887f3a4666c1b774534f97123d58c",
+        "format": "svg"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/classic-v1/covers/city-rush.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 6853,
+        "sha256": "ef21a58677da1b11084c56d8d4d3f74863e8c7d6c7df27ae462702c5a8ce3209",
+        "format": "svg"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/classic-v1/scenes/city-rush.svg"
+    },
+    {
+      "asset_id": "asset_classic_v1_sky-cannon",
+      "game_key": "sky-cannon",
+      "content_id": 23,
+      "title": "云端炮手",
+      "mechanic": "defense",
+      "runtime": "complete-games-v3",
+      "family": "strategy",
+      "palette": "city",
+      "motif": "airship-deck",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "source_authoring": "code-authored",
+      "source_generator": "scripts/build-classic-scenes-v1.mjs",
+      "license": "Original project artwork; no third-party art inputs",
+      "provenance": "Original SVG geometry authored in source code; no raster or generative image inputs",
+      "authorization_status": "local_preview_user_requested",
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "release_approved": false,
+      "source": {
+        "path": "scripts/build-classic-scenes-v1.mjs",
+        "format": "javascript"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/classic-v1/scenes/sky-cannon.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 1337,
+        "sha256": "1fecd35897da0f4c5a65f7e2e3d90bba3d4e068aecf73dcac1d662923c0e5248",
+        "format": "svg"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/classic-v1/covers/sky-cannon.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 7142,
+        "sha256": "1bcb1394a495b934df2bcbf07069a30c265b4f24bdf538b59bf94f5bbc076e61",
+        "format": "svg"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/classic-v1/scenes/sky-cannon.svg"
+    },
+    {
+      "asset_id": "asset_classic_v1_neon-dash",
+      "game_key": "neon-dash",
+      "content_id": 24,
+      "title": "霓虹疾跑",
+      "mechanic": "runner",
+      "runtime": "complete-games-v3",
+      "family": "motion",
+      "palette": "night",
+      "motif": "city-lanes",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "source_authoring": "code-authored",
+      "source_generator": "scripts/build-classic-scenes-v1.mjs",
+      "license": "Original project artwork; no third-party art inputs",
+      "provenance": "Original SVG geometry authored in source code; no raster or generative image inputs",
+      "authorization_status": "local_preview_user_requested",
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "release_approved": false,
+      "source": {
+        "path": "scripts/build-classic-scenes-v1.mjs",
+        "format": "javascript"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/classic-v1/scenes/neon-dash.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 1402,
+        "sha256": "f8c5f6357fac41ab816df319ee9715d5cde8a64aa2464825da2e6a4a9ffb5839",
+        "format": "svg"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/classic-v1/covers/neon-dash.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 4366,
+        "sha256": "f0588d7c9fcfbd83f66f1250bee60f24d8dc8acb4a3a92d2e4ce120c935fe823",
+        "format": "svg"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/classic-v1/scenes/neon-dash.svg"
+    },
+    {
+      "asset_id": "asset_classic_v1_pulse-forge",
+      "game_key": "pulse-forge",
+      "content_id": 25,
+      "title": "节拍熔炉",
+      "mechanic": "rhythm",
+      "runtime": "complete-games-v3",
+      "family": "rhythm",
+      "palette": "wood",
+      "motif": "drum-machine",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "source_authoring": "code-authored",
+      "source_generator": "scripts/build-classic-scenes-v1.mjs",
+      "license": "Original project artwork; no third-party art inputs",
+      "provenance": "Original SVG geometry authored in source code; no raster or generative image inputs",
+      "authorization_status": "local_preview_user_requested",
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "release_approved": false,
+      "source": {
+        "path": "scripts/build-classic-scenes-v1.mjs",
+        "format": "javascript"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/classic-v1/scenes/pulse-forge.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 1617,
+        "sha256": "f573926c2da37a321e14f6bfb0c4d36c0f8f2c1f0b1b7acad399c765a82db58d",
+        "format": "svg"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/classic-v1/covers/pulse-forge.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 6937,
+        "sha256": "63039d6b9f508f0f67abf22dd53a117363181911f89d86e385dcff302c9231ac",
+        "format": "svg"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/classic-v1/scenes/pulse-forge.svg"
+    },
+    {
+      "asset_id": "asset_classic_v1_sky-stack",
+      "game_key": "sky-stack",
+      "content_id": 26,
+      "title": "天际叠塔",
+      "mechanic": "stack",
+      "runtime": "complete-games-v3",
+      "family": "motion",
+      "palette": "city",
+      "motif": "construction-site",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "source_authoring": "code-authored",
+      "source_generator": "scripts/build-classic-scenes-v1.mjs",
+      "license": "Original project artwork; no third-party art inputs",
+      "provenance": "Original SVG geometry authored in source code; no raster or generative image inputs",
+      "authorization_status": "local_preview_user_requested",
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "release_approved": false,
+      "source": {
+        "path": "scripts/build-classic-scenes-v1.mjs",
+        "format": "javascript"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/classic-v1/scenes/sky-stack.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 1975,
+        "sha256": "b6edea044e95603cf5a5a0c2203f461d9477892a5d63ae308a921a63e3ee5545",
+        "format": "svg"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/classic-v1/covers/sky-stack.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 2835,
+        "sha256": "6e78b3701efd7b31bd621d7362b31e27ffe36001a7a47d9266c4aafde460adb7",
+        "format": "svg"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/classic-v1/scenes/sky-stack.svg"
+    },
+    {
+      "asset_id": "asset_classic_v1_rune-circuit",
+      "game_key": "rune-circuit",
+      "content_id": 27,
+      "title": "符文回路",
+      "mechanic": "circuit",
+      "runtime": "complete-games-v3",
+      "family": "strategy",
+      "palette": "puzzle",
+      "motif": "circuit-table",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "source_authoring": "code-authored",
+      "source_generator": "scripts/build-classic-scenes-v1.mjs",
+      "license": "Original project artwork; no third-party art inputs",
+      "provenance": "Original SVG geometry authored in source code; no raster or generative image inputs",
+      "authorization_status": "local_preview_user_requested",
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "release_approved": false,
+      "source": {
+        "path": "scripts/build-classic-scenes-v1.mjs",
+        "format": "javascript"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/classic-v1/scenes/rune-circuit.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 2773,
+        "sha256": "b7d533c506d3e98780cc57b8c8674897d21957e00b4c40e5a7048e16eaa2ca99",
+        "format": "svg"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/classic-v1/covers/rune-circuit.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 7409,
+        "sha256": "7b80c01b59f9b02f95b27466ea581045ebe1a3f2268da6346d2dd0c2b1df6e65",
+        "format": "svg"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/classic-v1/scenes/rune-circuit.svg"
+    },
+    {
+      "asset_id": "asset_classic_v1_prism-match",
+      "game_key": "prism-match",
+      "content_id": 28,
+      "title": "棱镜连击",
+      "mechanic": "match",
+      "runtime": "complete-games-v3",
+      "family": "economy",
+      "palette": "puzzle",
+      "motif": "jewel-board",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "source_authoring": "code-authored",
+      "source_generator": "scripts/build-classic-scenes-v1.mjs",
+      "license": "Original project artwork; no third-party art inputs",
+      "provenance": "Original SVG geometry authored in source code; no raster or generative image inputs",
+      "authorization_status": "local_preview_user_requested",
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "release_approved": false,
+      "source": {
+        "path": "scripts/build-classic-scenes-v1.mjs",
+        "format": "javascript"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/classic-v1/scenes/prism-match.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 1929,
+        "sha256": "2b38a6937eca0261f0c5e1cd135c0c1849bc010e14a478f13d02369286c5663e",
+        "format": "svg"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/classic-v1/covers/prism-match.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 18254,
+        "sha256": "149f3fce6481673218c16136a8ce292cbf1e70e6401a944f46238a5860a6c36f",
+        "format": "svg"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/classic-v1/scenes/prism-match.svg"
+    },
+    {
+      "asset_id": "asset_classic_v1_star-cups",
+      "game_key": "star-cups",
+      "content_id": 29,
+      "title": "星杯幻术",
+      "mechanic": "cups",
+      "runtime": "complete-games-v3",
+      "family": "collection",
+      "palette": "violet",
+      "motif": "violet-tabletop",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "source_authoring": "code-authored",
+      "source_generator": "scripts/build-classic-scenes-v1.mjs",
+      "license": "Original project artwork; no third-party art inputs",
+      "provenance": "Original SVG geometry authored in source code; no raster or generative image inputs",
+      "authorization_status": "local_preview_user_requested",
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "release_approved": false,
+      "source": {
+        "path": "scripts/build-classic-scenes-v1.mjs",
+        "format": "javascript"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/classic-v1/scenes/star-cups.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 1681,
+        "sha256": "e1aeaeeb493ec8e4469d214932155e60c393ae0baf57f7737863476a20406402",
+        "format": "svg"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/classic-v1/covers/star-cups.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 3758,
+        "sha256": "d1808615ee78bc4a80a986b269d599772f933e658327c1d3cc1bbd646105eb6c",
+        "format": "svg"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/classic-v1/scenes/star-cups.svg"
+    },
+    {
+      "asset_id": "asset_classic_v1_deep-catch",
+      "game_key": "deep-catch",
+      "content_id": 30,
+      "title": "深海寻光",
+      "mechanic": "fishing",
+      "runtime": "complete-games-v3",
+      "family": "ocean",
+      "palette": "sea",
+      "motif": "deep-sea",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "source_authoring": "code-authored",
+      "source_generator": "scripts/build-classic-scenes-v1.mjs",
+      "license": "Original project artwork; no third-party art inputs",
+      "provenance": "Original SVG geometry authored in source code; no raster or generative image inputs",
+      "authorization_status": "local_preview_user_requested",
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "release_approved": false,
+      "source": {
+        "path": "scripts/build-classic-scenes-v1.mjs",
+        "format": "javascript"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/classic-v1/scenes/deep-catch.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 3482,
+        "sha256": "cb7659390393acda0fdd793aa3ec553b23ae604f3ab223132ff3b904c1e4d06c",
+        "format": "svg"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/classic-v1/covers/deep-catch.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 7172,
+        "sha256": "820d110ed302fb14962d62287880814d398931d21d60f82a3d37ec06ec77f6b4",
+        "format": "svg"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/classic-v1/scenes/deep-catch.svg"
+    },
+    {
+      "asset_id": "asset_classic_v1_ember-bastion",
+      "game_key": "ember-bastion",
+      "content_id": 31,
+      "title": "赤焰防线",
+      "mechanic": "defense",
+      "runtime": "complete-games-v3",
+      "family": "strategy",
+      "palette": "sand",
+      "motif": "sandstone-rampart",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "source_authoring": "code-authored",
+      "source_generator": "scripts/build-classic-scenes-v1.mjs",
+      "license": "Original project artwork; no third-party art inputs",
+      "provenance": "Original SVG geometry authored in source code; no raster or generative image inputs",
+      "authorization_status": "local_preview_user_requested",
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "release_approved": false,
+      "source": {
+        "path": "scripts/build-classic-scenes-v1.mjs",
+        "format": "javascript"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/classic-v1/scenes/ember-bastion.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 17742,
+        "sha256": "d7c1b0fd40f4373091568152a1bf188a3bd84ef7a871188adf148e5474002a31",
+        "format": "svg"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/classic-v1/covers/ember-bastion.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 23547,
+        "sha256": "4d78c65fefaec5ee12d7ce5f63a69413523ba07d46ba9ee120ee376b1a1e967a",
+        "format": "svg"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/classic-v1/scenes/ember-bastion.svg"
+    },
+    {
+      "asset_id": "asset_classic_v1_nova-drift",
+      "game_key": "nova-drift",
+      "content_id": 32,
+      "title": "新星漂移",
+      "mechanic": "drift",
+      "runtime": "complete-games-v3",
+      "family": "motion",
+      "palette": "track",
+      "motif": "country-circuit",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "source_authoring": "code-authored",
+      "source_generator": "scripts/build-classic-scenes-v1.mjs",
+      "license": "Original project artwork; no third-party art inputs",
+      "provenance": "Original SVG geometry authored in source code; no raster or generative image inputs",
+      "authorization_status": "local_preview_user_requested",
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "release_approved": false,
+      "source": {
+        "path": "scripts/build-classic-scenes-v1.mjs",
+        "format": "javascript"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/classic-v1/scenes/nova-drift.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 2570,
+        "sha256": "292dd880e8bf04672ddc187b3807e505f2a1dbd35c4114eff1c163f34beaeae4",
+        "format": "svg"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/classic-v1/covers/nova-drift.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 5626,
+        "sha256": "ba152ac1cbf21e7ca1aaa542180a8070e1dd73db1258bfdd0c16f94548f4a40b",
+        "format": "svg"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/classic-v1/scenes/nova-drift.svg"
+    },
+    {
+      "asset_id": "asset_classic_v1_void-squadron",
+      "game_key": "void-squadron",
+      "content_id": 33,
+      "title": "虚空小队",
+      "mechanic": "shooter",
+      "runtime": "complete-games-v3",
+      "family": "space",
+      "palette": "night",
+      "motif": "deep-space",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "source_authoring": "code-authored",
+      "source_generator": "scripts/build-classic-scenes-v1.mjs",
+      "license": "Original project artwork; no third-party art inputs",
+      "provenance": "Original SVG geometry authored in source code; no raster or generative image inputs",
+      "authorization_status": "local_preview_user_requested",
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "release_approved": false,
+      "source": {
+        "path": "scripts/build-classic-scenes-v1.mjs",
+        "format": "javascript"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/classic-v1/scenes/void-squadron.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 3496,
+        "sha256": "7c9d5948a127f37d816be64121295f6b89a9bc865f88780d8d66f652b945d91d",
+        "format": "svg"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/classic-v1/covers/void-squadron.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 14634,
+        "sha256": "71f68a21a9c75bc1095936bc6ccb333239c582cdb7ab95ed8dcd4b2a1f4059f9",
+        "format": "svg"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/classic-v1/scenes/void-squadron.svg"
+    },
+    {
+      "asset_id": "asset_classic_v1_orchard-merge",
+      "game_key": "orchard-merge",
+      "content_id": 34,
+      "title": "果园合合塔",
+      "mechanic": "match",
+      "runtime": "complete-games-v3",
+      "family": "nature",
+      "palette": "meadow",
+      "motif": "orchard-table",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "source_authoring": "code-authored",
+      "source_generator": "scripts/build-classic-scenes-v1.mjs",
+      "license": "Original project artwork; no third-party art inputs",
+      "provenance": "Original SVG geometry authored in source code; no raster or generative image inputs",
+      "authorization_status": "local_preview_user_requested",
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "release_approved": false,
+      "source": {
+        "path": "scripts/build-classic-scenes-v1.mjs",
+        "format": "javascript"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/classic-v1/scenes/orchard-merge.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 5726,
+        "sha256": "87546d87d757930b3c4496b256164002d239b891c787021cf0f08394b2735e4b",
+        "format": "svg"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/classic-v1/covers/orchard-merge.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 23393,
+        "sha256": "45c72eacd350fd28fea17e6f3d783d948604b37d1f37c0f678bc2c55bb1797f1",
+        "format": "svg"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/classic-v1/scenes/orchard-merge.svg"
+    },
+    {
+      "asset_id": "asset_classic_v1_moonlight-tea-shop",
+      "game_key": "moonlight-tea-shop",
+      "content_id": 36,
+      "title": "月光奶茶铺",
+      "mechanic": "shop",
+      "runtime": "complete-games-v3",
+      "family": "collection",
+      "palette": "wood",
+      "motif": "tea-counter",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "source_authoring": "code-authored",
+      "source_generator": "scripts/build-classic-scenes-v1.mjs",
+      "license": "Original project artwork; no third-party art inputs",
+      "provenance": "Original SVG geometry authored in source code; no raster or generative image inputs",
+      "authorization_status": "local_preview_user_requested",
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "release_approved": false,
+      "source": {
+        "path": "scripts/build-classic-scenes-v1.mjs",
+        "format": "javascript"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/classic-v1/scenes/moonlight-tea-shop.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 2356,
+        "sha256": "a02785d42c3f3baa087044668d302f08117ed3ede85be01496ce595e11043842",
+        "format": "svg"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/classic-v1/covers/moonlight-tea-shop.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 5430,
+        "sha256": "e64c37eec8488b1e0ae6c8feb8f3065e6e1f868289bbd16661497f5baf04812e",
+        "format": "svg"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/classic-v1/scenes/moonlight-tea-shop.svg"
+    },
+    {
+      "asset_id": "asset_classic_v1_microbe-arena",
+      "game_key": "microbe-arena",
+      "content_id": 37,
+      "title": "微粒竞技场",
+      "mechanic": "survival",
+      "runtime": "complete-games-v3",
+      "family": "ocean",
+      "palette": "sea",
+      "motif": "laboratory-slide",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "source_authoring": "code-authored",
+      "source_generator": "scripts/build-classic-scenes-v1.mjs",
+      "license": "Original project artwork; no third-party art inputs",
+      "provenance": "Original SVG geometry authored in source code; no raster or generative image inputs",
+      "authorization_status": "local_preview_user_requested",
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "release_approved": false,
+      "source": {
+        "path": "scripts/build-classic-scenes-v1.mjs",
+        "format": "javascript"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/classic-v1/scenes/microbe-arena.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 3950,
+        "sha256": "b76b59dc07c7c2ac9003757f4ff430425ba655c217caa9c7868890f369d9caa1",
+        "format": "svg"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/classic-v1/covers/microbe-arena.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 10827,
+        "sha256": "0ab3f35135fd49dd2d35f0f72969790a80c46dcc357c93fde85429d3a97dec57",
+        "format": "svg"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/classic-v1/scenes/microbe-arena.svg"
+    },
+    {
+      "asset_id": "asset_classic_v1_crystal-bastion",
+      "game_key": "crystal-bastion",
+      "content_id": 39,
+      "title": "晶核防线",
+      "mechanic": "defense",
+      "runtime": "complete-games-v3",
+      "family": "strategy",
+      "palette": "citadel",
+      "motif": "stone-citadel",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "source_authoring": "code-authored",
+      "source_generator": "scripts/build-classic-scenes-v1.mjs",
+      "license": "Original project artwork; no third-party art inputs",
+      "provenance": "Original SVG geometry authored in source code; no raster or generative image inputs",
+      "authorization_status": "local_preview_user_requested",
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "release_approved": false,
+      "source": {
+        "path": "scripts/build-classic-scenes-v1.mjs",
+        "format": "javascript"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/classic-v1/scenes/crystal-bastion.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 26936,
+        "sha256": "23ce2bc08ec8d29d2c1a27423edf7d99bc45779b8c356ec147a403dde3a46644",
+        "format": "svg"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/classic-v1/covers/crystal-bastion.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 33110,
+        "sha256": "c198f0e4035db0891725ab838bf69694605634b07ed752bf79b7e4f43f707219",
+        "format": "svg"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/classic-v1/scenes/crystal-bastion.svg"
+    },
+    {
+      "asset_id": "asset_classic_v1_studio-wardrobe",
+      "game_key": "studio-wardrobe",
+      "content_id": 43,
+      "title": "今日造型师",
+      "mechanic": "wardrobe",
+      "runtime": "complete-games-v3",
+      "family": "creation",
+      "palette": "rose",
+      "motif": "tailor-workshop",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "source_authoring": "code-authored",
+      "source_generator": "scripts/build-classic-scenes-v1.mjs",
+      "license": "Original project artwork; no third-party art inputs",
+      "provenance": "Original SVG geometry authored in source code; no raster or generative image inputs",
+      "authorization_status": "local_preview_user_requested",
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "release_approved": false,
+      "source": {
+        "path": "scripts/build-classic-scenes-v1.mjs",
+        "format": "javascript"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/classic-v1/scenes/studio-wardrobe.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 3984,
+        "sha256": "0dcac5c278272f9eb6f77920fec28e5995d343590f46a00d7886f9e965e86fee",
+        "format": "svg"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/classic-v1/covers/studio-wardrobe.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 7059,
+        "sha256": "ceb864059781d0d32c5461f94c86cbc14a916f830d0727112dac69270367b2a2",
+        "format": "svg"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/classic-v1/scenes/studio-wardrobe.svg"
+    },
+    {
+      "asset_id": "asset_classic_v1_garden-renewal",
+      "game_key": "garden-renewal",
+      "content_id": 44,
+      "title": "花园焕新",
+      "mechanic": "match",
+      "runtime": "deep-games-v2",
+      "family": "nature",
+      "palette": "meadow",
+      "motif": "garden-plots",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "source_authoring": "code-authored",
+      "source_generator": "scripts/build-classic-scenes-v1.mjs",
+      "license": "Original project artwork; no third-party art inputs",
+      "provenance": "Original SVG geometry authored in source code; no raster or generative image inputs",
+      "authorization_status": "local_preview_user_requested",
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "release_approved": false,
+      "source": {
+        "path": "scripts/build-classic-scenes-v1.mjs",
+        "format": "javascript"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/classic-v1/scenes/garden-renewal.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 6490,
+        "sha256": "7aee819930494eedeb45ff91ffa568e0a26b690cfc66f7fa98e8cf22e0faf44c",
+        "format": "svg"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/classic-v1/covers/garden-renewal.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 20763,
+        "sha256": "38129d8b9711973e76f640680efecd97aa2eef84ced454eec362d04e22d49cbe",
+        "format": "svg"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/classic-v1/scenes/garden-renewal.svg"
+    },
+    {
+      "asset_id": "asset_classic_v1_adventurer-journal",
+      "game_key": "adventurer-journal",
+      "content_id": 40,
+      "title": "冒险者日志",
+      "mechanic": "maze",
+      "runtime": "deep-games-v2",
+      "family": "story",
+      "palette": "sand",
+      "motif": "overland-map",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "source_authoring": "code-authored",
+      "source_generator": "scripts/build-classic-scenes-v1.mjs",
+      "license": "Original project artwork; no third-party art inputs",
+      "provenance": "Original SVG geometry authored in source code; no raster or generative image inputs",
+      "authorization_status": "local_preview_user_requested",
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "release_approved": false,
+      "source": {
+        "path": "scripts/build-classic-scenes-v1.mjs",
+        "format": "javascript"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/classic-v1/scenes/adventurer-journal.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 1811,
+        "sha256": "79072462a04c24320557d8aa9708de81d85e22c55c4c536d2602627d5799161a",
+        "format": "svg"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/classic-v1/covers/adventurer-journal.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 5616,
+        "sha256": "2da847dca5339ca765abc96e014827ee3de1471ae00fc674c3713d009fa460b6",
+        "format": "svg"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/classic-v1/scenes/adventurer-journal.svg"
+    },
+    {
+      "asset_id": "asset_classic_v1_idiom-detective",
+      "game_key": "idiom-detective",
+      "content_id": 41,
+      "title": "成语侦探",
+      "mechanic": "cards",
+      "runtime": "deep-games-v2",
+      "family": "story",
+      "palette": "wood",
+      "motif": "study-desk",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "source_authoring": "code-authored",
+      "source_generator": "scripts/build-classic-scenes-v1.mjs",
+      "license": "Original project artwork; no third-party art inputs",
+      "provenance": "Original SVG geometry authored in source code; no raster or generative image inputs",
+      "authorization_status": "local_preview_user_requested",
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "release_approved": false,
+      "source": {
+        "path": "scripts/build-classic-scenes-v1.mjs",
+        "format": "javascript"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/classic-v1/scenes/idiom-detective.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 2720,
+        "sha256": "06a5ef9935d7371dceb31aead26544c99d584b526dfea1d60c7885959497d291",
+        "format": "svg"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/classic-v1/covers/idiom-detective.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 6482,
+        "sha256": "e6559ef5c1b2682149997e6f48ed0196db43524971981b4b674de296f12e18d9",
+        "format": "svg"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/classic-v1/scenes/idiom-detective.svg"
+    },
+    {
+      "asset_id": "asset_classic_v1_star-deck",
+      "game_key": "star-deck",
+      "content_id": 38,
+      "title": "星轨牌阵",
+      "mechanic": "cards",
+      "runtime": "deep-games-v2",
+      "family": "strategy",
+      "palette": "dungeon",
+      "motif": "tactical-tabletop",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "source_authoring": "code-authored",
+      "source_generator": "scripts/build-classic-scenes-v1.mjs",
+      "license": "Original project artwork; no third-party art inputs",
+      "provenance": "Original SVG geometry authored in source code; no raster or generative image inputs",
+      "authorization_status": "local_preview_user_requested",
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "release_approved": false,
+      "source": {
+        "path": "scripts/build-classic-scenes-v1.mjs",
+        "format": "javascript"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/classic-v1/scenes/star-deck.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 13097,
+        "sha256": "270b17b9e7584eead736becf7b84e86d6c376ee645cb071866c81e168b07c78d",
+        "format": "svg"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/classic-v1/covers/star-deck.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 17396,
+        "sha256": "45f85cca2d8bd8b0cbcdb54303c8ba6bbe5a20018463469cdeb70a013c346e0b",
+        "format": "svg"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/classic-v1/scenes/star-deck.svg"
+    },
+    {
+      "asset_id": "asset_classic_v1_hex-frontier",
+      "game_key": "hex-frontier",
+      "content_id": 42,
+      "title": "六角前线",
+      "mechanic": "battle",
+      "runtime": "deep-games-v2",
+      "family": "strategy",
+      "palette": "meadow",
+      "motif": "borderlands",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "source_authoring": "code-authored",
+      "source_generator": "scripts/build-classic-scenes-v1.mjs",
+      "license": "Original project artwork; no third-party art inputs",
+      "provenance": "Original SVG geometry authored in source code; no raster or generative image inputs",
+      "authorization_status": "local_preview_user_requested",
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "release_approved": false,
+      "source": {
+        "path": "scripts/build-classic-scenes-v1.mjs",
+        "format": "javascript"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/classic-v1/scenes/hex-frontier.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 5537,
+        "sha256": "225c15bb2aafb6159238a5c06f9614aa82ae2629ec076959cf59a1f084166563",
+        "format": "svg"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/classic-v1/covers/hex-frontier.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 14708,
+        "sha256": "b420a87e258a1428ce8146fe5b2b6f53ebf129aa7a23272c31a61872b34cc5aa",
+        "format": "svg"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/classic-v1/scenes/hex-frontier.svg"
+    },
+    {
+      "asset_id": "asset_classic_v1_star-mower",
+      "game_key": "star-mower",
+      "content_id": 35,
+      "title": "星尘割草",
+      "mechanic": "survival",
+      "runtime": "deep-games-v2",
+      "family": "space",
+      "palette": "night",
+      "motif": "orbital-arena",
+      "role": "dedicated_gameplay_scene",
+      "owner": "Airvana local demo owner",
+      "source_authoring": "code-authored",
+      "source_generator": "scripts/build-classic-scenes-v1.mjs",
+      "license": "Original project artwork; no third-party art inputs",
+      "provenance": "Original SVG geometry authored in source code; no raster or generative image inputs",
+      "authorization_status": "local_preview_user_requested",
+      "locale": "language-neutral",
+      "version": "1.0.0",
+      "release_approved": false,
+      "source": {
+        "path": "scripts/build-classic-scenes-v1.mjs",
+        "format": "javascript"
+      },
+      "runtime_asset": {
+        "path": "public/assets/games/classic-v1/scenes/star-mower.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 3589,
+        "sha256": "059d364d7801d1e37cb3e47663f7b0dffb6b13bae05a01fb22c987bdfe6e5a4a",
+        "format": "svg"
+      },
+      "cover_asset": {
+        "path": "public/assets/games/classic-v1/covers/star-mower.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 9121,
+        "sha256": "adef9eb2e7de3370d08f0d7a769ab16f7903fb26aa14aff7c646a609b1122e84",
+        "format": "svg"
+      },
+      "flutter_asset": "apps/airvana_mobile/assets/runner/assets/games/classic-v1/scenes/star-mower.svg"
+    }
+  ],
+  "games": [
+    {
+      "key": "safety-workshop",
+      "family": "safety",
+      "palette": "city",
+      "mechanic": "quiz",
+      "motif": "security-terminal",
+      "source_authoring": "code-authored",
+      "license": "Original project artwork; no third-party art inputs",
+      "palette_colors": {
+        "bg": "#5F8197",
+        "light": "#B0CED0",
+        "dark": "#294354",
+        "ink": "#172F42",
+        "path": "#7D929D",
+        "edge": "#45677E",
+        "accent": "#E9B15B"
+      },
+      "scene": {
+        "path": "/assets/games/classic-v1/scenes/safety-workshop.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 2062,
+        "sha256": "7cd77a8b70093a1921d8c39d77d1249b88ac2014a8955022f8518ab0d9679f1e"
+      },
+      "cover": {
+        "path": "/assets/games/classic-v1/covers/safety-workshop.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 3942,
+        "sha256": "58bbdedb9f609b0cf89d3b2a9e8c18d9596be2cdf1859eafbf7e0ef5aee6d5d9"
+      }
+    },
+    {
+      "key": "stellar-farm",
+      "family": "nature",
+      "palette": "meadow",
+      "mechanic": "builder",
+      "motif": "irrigated-farm",
+      "source_authoring": "code-authored",
+      "license": "Original project artwork; no third-party art inputs",
+      "palette_colors": {
+        "bg": "#8FAE76",
+        "light": "#B5C88E",
+        "dark": "#405943",
+        "ink": "#253D35",
+        "path": "#D4BE91",
+        "edge": "#728958",
+        "accent": "#DB8753"
+      },
+      "scene": {
+        "path": "/assets/games/classic-v1/scenes/stellar-farm.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 5659,
+        "sha256": "609985a8c8c15bb47047b27542266ca1f390b8bee97578258f93f0f1157e6d3a"
+      },
+      "cover": {
+        "path": "/assets/games/classic-v1/covers/stellar-farm.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 20312,
+        "sha256": "af90736cddc324f23db3850f06ced4ed9c66474af00835db2b7b59a412fc777e"
+      }
+    },
+    {
+      "key": "pixel-quest",
+      "family": "motion",
+      "palette": "meadow",
+      "mechanic": "runner",
+      "motif": "forest-trail",
+      "source_authoring": "code-authored",
+      "license": "Original project artwork; no third-party art inputs",
+      "palette_colors": {
+        "bg": "#8FAE76",
+        "light": "#B5C88E",
+        "dark": "#405943",
+        "ink": "#253D35",
+        "path": "#D4BE91",
+        "edge": "#728958",
+        "accent": "#DB8753"
+      },
+      "scene": {
+        "path": "/assets/games/classic-v1/scenes/pixel-quest.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 4178,
+        "sha256": "f12c4779a699cca9d31b1c89f214b17e193dd60561889a3e9c3b96005e1179a3"
+      },
+      "cover": {
+        "path": "/assets/games/classic-v1/covers/pixel-quest.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 7142,
+        "sha256": "66ec9a81944ec978ecc9353ad6513d3a35664f325bb89ac5cf8c7867b86cded1"
+      }
+    },
+    {
+      "key": "red-cup-shuffle",
+      "family": "collection",
+      "palette": "wood",
+      "mechanic": "cups",
+      "motif": "red-tabletop",
+      "source_authoring": "code-authored",
+      "license": "Original project artwork; no third-party art inputs",
+      "palette_colors": {
+        "bg": "#B38F68",
+        "light": "#DDC9A1",
+        "dark": "#806247",
+        "ink": "#493D36",
+        "path": "#C9AD7F",
+        "edge": "#A7805C",
+        "accent": "#B9564F"
+      },
+      "scene": {
+        "path": "/assets/games/classic-v1/scenes/red-cup-shuffle.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 1681,
+        "sha256": "8b99cbe2f67255e9f442bdd4491c9f5743e67118a79b5da76b7ec936d2487cff"
+      },
+      "cover": {
+        "path": "/assets/games/classic-v1/covers/red-cup-shuffle.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 3942,
+        "sha256": "0b3fc73d71f393344758217eb372dc9c1de19e284121f407e6fcb6f29ec220f3"
+      }
+    },
+    {
+      "key": "magic-choir",
+      "family": "rhythm",
+      "palette": "violet",
+      "mechanic": "sequencer",
+      "motif": "four-track-studio",
+      "source_authoring": "code-authored",
+      "license": "Original project artwork; no third-party art inputs",
+      "palette_colors": {
+        "bg": "#766988",
+        "light": "#B6A7BF",
+        "dark": "#49435E",
+        "ink": "#2C2C44",
+        "path": "#94839F",
+        "edge": "#655A78",
+        "accent": "#E6BC79"
+      },
+      "scene": {
+        "path": "/assets/games/classic-v1/scenes/magic-choir.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 1617,
+        "sha256": "65cd1fe9bc9be95864e907da896a072fe8d6cacacd7d15425d244c13dc826fb6"
+      },
+      "cover": {
+        "path": "/assets/games/classic-v1/covers/magic-choir.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 6937,
+        "sha256": "860b4db58b66722d123c754ae285aac27e6ac83892cdc9853b76016448795107"
+      }
+    },
+    {
+      "key": "paws-stage",
+      "family": "rhythm",
+      "palette": "rose",
+      "mechanic": "sequence",
+      "motif": "pet-theatre",
+      "source_authoring": "code-authored",
+      "license": "Original project artwork; no third-party art inputs",
+      "palette_colors": {
+        "bg": "#CEB4AB",
+        "light": "#F0DECA",
+        "dark": "#927779",
+        "ink": "#584751",
+        "path": "#E2C8B8",
+        "edge": "#B49A98",
+        "accent": "#BD685F"
+      },
+      "scene": {
+        "path": "/assets/games/classic-v1/scenes/paws-stage.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 1617,
+        "sha256": "1bf0375b107787bac044dca4b0acfaa403d0150e493ea54b2db0cc986581017b"
+      },
+      "cover": {
+        "path": "/assets/games/classic-v1/covers/paws-stage.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 6725,
+        "sha256": "37e77249c58a56673830b7e14378f4b631cd6bc4595e8edb2b4f01fcfbf806b3"
+      }
+    },
+    {
+      "key": "puppet-studio",
+      "family": "creation",
+      "palette": "rose",
+      "mechanic": "wardrobe",
+      "motif": "doll-workbench",
+      "source_authoring": "code-authored",
+      "license": "Original project artwork; no third-party art inputs",
+      "palette_colors": {
+        "bg": "#CEB4AB",
+        "light": "#F0DECA",
+        "dark": "#927779",
+        "ink": "#584751",
+        "path": "#E2C8B8",
+        "edge": "#B49A98",
+        "accent": "#BD685F"
+      },
+      "scene": {
+        "path": "/assets/games/classic-v1/scenes/puppet-studio.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 4008,
+        "sha256": "7a53c0653c642821db8ed92e62ec128c4ceb6d0cbde6d009dc3c4bb62aecc9e2"
+      },
+      "cover": {
+        "path": "/assets/games/classic-v1/covers/puppet-studio.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 7407,
+        "sha256": "7a71266ee45f746bf1e05b524e40e161db66ce31d9f454567b5cf224b6e00f7d"
+      }
+    },
+    {
+      "key": "firefly-mail",
+      "family": "story",
+      "palette": "night",
+      "mechanic": "sort",
+      "motif": "village-post-office",
+      "source_authoring": "code-authored",
+      "license": "Original project artwork; no third-party art inputs",
+      "palette_colors": {
+        "bg": "#17263B",
+        "light": "#405B79",
+        "dark": "#101B2B",
+        "ink": "#0C1626",
+        "path": "#6F829A",
+        "edge": "#253A53",
+        "accent": "#EBC977"
+      },
+      "scene": {
+        "path": "/assets/games/classic-v1/scenes/firefly-mail.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 1958,
+        "sha256": "01ee3babd35eadf6b9c31f1a8f438189ec6152e98bcfd724ec996fea8e0c6615"
+      },
+      "cover": {
+        "path": "/assets/games/classic-v1/covers/firefly-mail.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 4214,
+        "sha256": "3aa72d4aaf94ca053ed23a11a2690f50dfe407409b990c2062d045db7bd70f9e"
+      }
+    },
+    {
+      "key": "whisker-escape",
+      "family": "stealth",
+      "palette": "dungeon",
+      "mechanic": "maze",
+      "motif": "castle-corridor",
+      "source_authoring": "code-authored",
+      "license": "Original project artwork; no third-party art inputs",
+      "palette_colors": {
+        "bg": "#596776",
+        "light": "#8995A0",
+        "dark": "#364552",
+        "ink": "#202F3D",
+        "path": "#71808A",
+        "edge": "#4A5969",
+        "accent": "#CEA866"
+      },
+      "scene": {
+        "path": "/assets/games/classic-v1/scenes/whisker-escape.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 22184,
+        "sha256": "a737490d9b0d704f5ee34afc7cbb049bf7e54a27d1b3a4bf1e4b70406d4a144c"
+      },
+      "cover": {
+        "path": "/assets/games/classic-v1/covers/whisker-escape.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 30029,
+        "sha256": "2a4ac911557a58f7c1fc14e04a8671cc7dc0a2d800a316cdb5b1f80fdaedd0d9"
+      }
+    },
+    {
+      "key": "coin-journey",
+      "family": "economy",
+      "palette": "sand",
+      "mechanic": "coin",
+      "motif": "desert-rings",
+      "source_authoring": "code-authored",
+      "license": "Original project artwork; no third-party art inputs",
+      "palette_colors": {
+        "bg": "#D0B98A",
+        "light": "#EDD9A6",
+        "dark": "#987C57",
+        "ink": "#4F4A40",
+        "path": "#B19A72",
+        "edge": "#BEA57B",
+        "accent": "#C8724D"
+      },
+      "scene": {
+        "path": "/assets/games/classic-v1/scenes/coin-journey.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 595,
+        "sha256": "9ee346413b31831826b9c2f1d9f80bc6217dbf9b757343b20b99da759415ffc4"
+      },
+      "cover": {
+        "path": "/assets/games/classic-v1/covers/coin-journey.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 1611,
+        "sha256": "38c5e07697252e9eebf39d512cc4b46d51051c08b4c201ee6e941e8c55222ce1"
+      }
+    },
+    {
+      "key": "jungle-dive",
+      "family": "ocean",
+      "palette": "coast",
+      "mechanic": "fishing",
+      "motif": "mangrove-lagoon",
+      "source_authoring": "code-authored",
+      "license": "Original project artwork; no third-party art inputs",
+      "palette_colors": {
+        "bg": "#51919A",
+        "light": "#9AC7BD",
+        "dark": "#286170",
+        "ink": "#233B4F",
+        "path": "#D9C99A",
+        "edge": "#3A7B86",
+        "accent": "#E2915C"
+      },
+      "scene": {
+        "path": "/assets/games/classic-v1/scenes/jungle-dive.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 4482,
+        "sha256": "21c6c8b1dfd03d1089387be7c73def1ce5742e9ac58bdb6252f1ab076b5b2913"
+      },
+      "cover": {
+        "path": "/assets/games/classic-v1/covers/jungle-dive.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 8172,
+        "sha256": "b14b12ae5c614d56f1b13ccfd8513e9f6165e95944fb9bd7bebdf957997f5561"
+      }
+    },
+    {
+      "key": "rift-strike",
+      "family": "space",
+      "palette": "night",
+      "mechanic": "shooter",
+      "motif": "orbital-sector",
+      "source_authoring": "code-authored",
+      "license": "Original project artwork; no third-party art inputs",
+      "palette_colors": {
+        "bg": "#17263B",
+        "light": "#405B79",
+        "dark": "#101B2B",
+        "ink": "#0C1626",
+        "path": "#6F829A",
+        "edge": "#253A53",
+        "accent": "#EBC977"
+      },
+      "scene": {
+        "path": "/assets/games/classic-v1/scenes/rift-strike.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 3642,
+        "sha256": "7e16952627904351e75900b8ae4805f118424af4daf5d3db39ffde1f90a0a23b"
+      },
+      "cover": {
+        "path": "/assets/games/classic-v1/covers/rift-strike.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 14780,
+        "sha256": "36c2e73c56912e470b9dbb394593830b46371e4e30b47dd2db3f2bcf504124c9"
+      }
+    },
+    {
+      "key": "stardust-island",
+      "family": "nature",
+      "palette": "coast",
+      "mechanic": "builder",
+      "motif": "small-island",
+      "source_authoring": "code-authored",
+      "license": "Original project artwork; no third-party art inputs",
+      "palette_colors": {
+        "bg": "#51919A",
+        "light": "#9AC7BD",
+        "dark": "#286170",
+        "ink": "#233B4F",
+        "path": "#D9C99A",
+        "edge": "#3A7B86",
+        "accent": "#E2915C"
+      },
+      "scene": {
+        "path": "/assets/games/classic-v1/scenes/stardust-island.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 3771,
+        "sha256": "44770f2e7f2b55dcb5030789d703f93d85ce467dfba77f2d787bfff0189ac4ea"
+      },
+      "cover": {
+        "path": "/assets/games/classic-v1/covers/stardust-island.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 18044,
+        "sha256": "fa3a4d42a317b3bbf0078c12ed5d3c03a2363fa0175f67d2ba29a3523a8d5e95"
+      }
+    },
+    {
+      "key": "formation-knights",
+      "family": "strategy",
+      "palette": "meadow",
+      "mechanic": "battle",
+      "motif": "walled-training-ground",
+      "source_authoring": "code-authored",
+      "license": "Original project artwork; no third-party art inputs",
+      "palette_colors": {
+        "bg": "#8FAE76",
+        "light": "#B5C88E",
+        "dark": "#405943",
+        "ink": "#253D35",
+        "path": "#D4BE91",
+        "edge": "#728958",
+        "accent": "#DB8753"
+      },
+      "scene": {
+        "path": "/assets/games/classic-v1/scenes/formation-knights.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 17742,
+        "sha256": "2ee28aec80a7d08b53376f0c225d37794c5db04e2db4bb63849c96b8b6a92fef"
+      },
+      "cover": {
+        "path": "/assets/games/classic-v1/covers/formation-knights.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 22041,
+        "sha256": "2e42e3d468d11f0ae7a961994c42b44962bf859f797f22512ea120ed2a8a9f2b"
+      }
+    },
+    {
+      "key": "galaxy-toy-shop",
+      "family": "collection",
+      "palette": "violet",
+      "mechanic": "shop",
+      "motif": "toy-counter",
+      "source_authoring": "code-authored",
+      "license": "Original project artwork; no third-party art inputs",
+      "palette_colors": {
+        "bg": "#766988",
+        "light": "#B6A7BF",
+        "dark": "#49435E",
+        "ink": "#2C2C44",
+        "path": "#94839F",
+        "edge": "#655A78",
+        "accent": "#E6BC79"
+      },
+      "scene": {
+        "path": "/assets/games/classic-v1/scenes/galaxy-toy-shop.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 2356,
+        "sha256": "9687ef4e4816515100c32ca6935ed0ac54f43d9f0282c4cbbe5fbbd0a94671de"
+      },
+      "cover": {
+        "path": "/assets/games/classic-v1/covers/galaxy-toy-shop.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 5606,
+        "sha256": "97bc2df8af8f9bd81d3dbe48a610e81723332add4de96cb8f86b82ca1cd6d31a"
+      }
+    },
+    {
+      "key": "city-rush",
+      "family": "motion",
+      "palette": "city",
+      "mechanic": "drift",
+      "motif": "city-road",
+      "source_authoring": "code-authored",
+      "license": "Original project artwork; no third-party art inputs",
+      "palette_colors": {
+        "bg": "#5F8197",
+        "light": "#B0CED0",
+        "dark": "#294354",
+        "ink": "#172F42",
+        "path": "#7D929D",
+        "edge": "#45677E",
+        "accent": "#E9B15B"
+      },
+      "scene": {
+        "path": "/assets/games/classic-v1/scenes/city-rush.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 3797,
+        "sha256": "ed572b9d4ddf859238392409db82d697d7d887f3a4666c1b774534f97123d58c"
+      },
+      "cover": {
+        "path": "/assets/games/classic-v1/covers/city-rush.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 6853,
+        "sha256": "ef21a58677da1b11084c56d8d4d3f74863e8c7d6c7df27ae462702c5a8ce3209"
+      }
+    },
+    {
+      "key": "sky-cannon",
+      "family": "strategy",
+      "palette": "city",
+      "mechanic": "defense",
+      "motif": "airship-deck",
+      "source_authoring": "code-authored",
+      "license": "Original project artwork; no third-party art inputs",
+      "palette_colors": {
+        "bg": "#5F8197",
+        "light": "#B0CED0",
+        "dark": "#294354",
+        "ink": "#172F42",
+        "path": "#7D929D",
+        "edge": "#45677E",
+        "accent": "#E9B15B"
+      },
+      "scene": {
+        "path": "/assets/games/classic-v1/scenes/sky-cannon.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 1337,
+        "sha256": "1fecd35897da0f4c5a65f7e2e3d90bba3d4e068aecf73dcac1d662923c0e5248"
+      },
+      "cover": {
+        "path": "/assets/games/classic-v1/covers/sky-cannon.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 7142,
+        "sha256": "1bcb1394a495b934df2bcbf07069a30c265b4f24bdf538b59bf94f5bbc076e61"
+      }
+    },
+    {
+      "key": "neon-dash",
+      "family": "motion",
+      "palette": "night",
+      "mechanic": "runner",
+      "motif": "city-lanes",
+      "source_authoring": "code-authored",
+      "license": "Original project artwork; no third-party art inputs",
+      "palette_colors": {
+        "bg": "#17263B",
+        "light": "#405B79",
+        "dark": "#101B2B",
+        "ink": "#0C1626",
+        "path": "#6F829A",
+        "edge": "#253A53",
+        "accent": "#EBC977"
+      },
+      "scene": {
+        "path": "/assets/games/classic-v1/scenes/neon-dash.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 1402,
+        "sha256": "f8c5f6357fac41ab816df319ee9715d5cde8a64aa2464825da2e6a4a9ffb5839"
+      },
+      "cover": {
+        "path": "/assets/games/classic-v1/covers/neon-dash.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 4366,
+        "sha256": "f0588d7c9fcfbd83f66f1250bee60f24d8dc8acb4a3a92d2e4ce120c935fe823"
+      }
+    },
+    {
+      "key": "pulse-forge",
+      "family": "rhythm",
+      "palette": "wood",
+      "mechanic": "rhythm",
+      "motif": "drum-machine",
+      "source_authoring": "code-authored",
+      "license": "Original project artwork; no third-party art inputs",
+      "palette_colors": {
+        "bg": "#B38F68",
+        "light": "#DDC9A1",
+        "dark": "#806247",
+        "ink": "#493D36",
+        "path": "#C9AD7F",
+        "edge": "#A7805C",
+        "accent": "#B9564F"
+      },
+      "scene": {
+        "path": "/assets/games/classic-v1/scenes/pulse-forge.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 1617,
+        "sha256": "f573926c2da37a321e14f6bfb0c4d36c0f8f2c1f0b1b7acad399c765a82db58d"
+      },
+      "cover": {
+        "path": "/assets/games/classic-v1/covers/pulse-forge.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 6937,
+        "sha256": "63039d6b9f508f0f67abf22dd53a117363181911f89d86e385dcff302c9231ac"
+      }
+    },
+    {
+      "key": "sky-stack",
+      "family": "motion",
+      "palette": "city",
+      "mechanic": "stack",
+      "motif": "construction-site",
+      "source_authoring": "code-authored",
+      "license": "Original project artwork; no third-party art inputs",
+      "palette_colors": {
+        "bg": "#5F8197",
+        "light": "#B0CED0",
+        "dark": "#294354",
+        "ink": "#172F42",
+        "path": "#7D929D",
+        "edge": "#45677E",
+        "accent": "#E9B15B"
+      },
+      "scene": {
+        "path": "/assets/games/classic-v1/scenes/sky-stack.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 1975,
+        "sha256": "b6edea044e95603cf5a5a0c2203f461d9477892a5d63ae308a921a63e3ee5545"
+      },
+      "cover": {
+        "path": "/assets/games/classic-v1/covers/sky-stack.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 2835,
+        "sha256": "6e78b3701efd7b31bd621d7362b31e27ffe36001a7a47d9266c4aafde460adb7"
+      }
+    },
+    {
+      "key": "rune-circuit",
+      "family": "strategy",
+      "palette": "puzzle",
+      "mechanic": "circuit",
+      "motif": "circuit-table",
+      "source_authoring": "code-authored",
+      "license": "Original project artwork; no third-party art inputs",
+      "palette_colors": {
+        "bg": "#CED6C0",
+        "light": "#F5EBD0",
+        "dark": "#7E9D89",
+        "ink": "#334D49",
+        "path": "#B6C7B2",
+        "edge": "#B7C5AA",
+        "accent": "#DA9363"
+      },
+      "scene": {
+        "path": "/assets/games/classic-v1/scenes/rune-circuit.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 2773,
+        "sha256": "b7d533c506d3e98780cc57b8c8674897d21957e00b4c40e5a7048e16eaa2ca99"
+      },
+      "cover": {
+        "path": "/assets/games/classic-v1/covers/rune-circuit.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 7409,
+        "sha256": "7b80c01b59f9b02f95b27466ea581045ebe1a3f2268da6346d2dd0c2b1df6e65"
+      }
+    },
+    {
+      "key": "prism-match",
+      "family": "economy",
+      "palette": "puzzle",
+      "mechanic": "match",
+      "motif": "jewel-board",
+      "source_authoring": "code-authored",
+      "license": "Original project artwork; no third-party art inputs",
+      "palette_colors": {
+        "bg": "#CED6C0",
+        "light": "#F5EBD0",
+        "dark": "#7E9D89",
+        "ink": "#334D49",
+        "path": "#B6C7B2",
+        "edge": "#B7C5AA",
+        "accent": "#DA9363"
+      },
+      "scene": {
+        "path": "/assets/games/classic-v1/scenes/prism-match.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 1929,
+        "sha256": "2b38a6937eca0261f0c5e1cd135c0c1849bc010e14a478f13d02369286c5663e"
+      },
+      "cover": {
+        "path": "/assets/games/classic-v1/covers/prism-match.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 18254,
+        "sha256": "149f3fce6481673218c16136a8ce292cbf1e70e6401a944f46238a5860a6c36f"
+      }
+    },
+    {
+      "key": "star-cups",
+      "family": "collection",
+      "palette": "violet",
+      "mechanic": "cups",
+      "motif": "violet-tabletop",
+      "source_authoring": "code-authored",
+      "license": "Original project artwork; no third-party art inputs",
+      "palette_colors": {
+        "bg": "#766988",
+        "light": "#B6A7BF",
+        "dark": "#49435E",
+        "ink": "#2C2C44",
+        "path": "#94839F",
+        "edge": "#655A78",
+        "accent": "#E6BC79"
+      },
+      "scene": {
+        "path": "/assets/games/classic-v1/scenes/star-cups.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 1681,
+        "sha256": "e1aeaeeb493ec8e4469d214932155e60c393ae0baf57f7737863476a20406402"
+      },
+      "cover": {
+        "path": "/assets/games/classic-v1/covers/star-cups.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 3758,
+        "sha256": "d1808615ee78bc4a80a986b269d599772f933e658327c1d3cc1bbd646105eb6c"
+      }
+    },
+    {
+      "key": "deep-catch",
+      "family": "ocean",
+      "palette": "sea",
+      "mechanic": "fishing",
+      "motif": "deep-sea",
+      "source_authoring": "code-authored",
+      "license": "Original project artwork; no third-party art inputs",
+      "palette_colors": {
+        "bg": "#467B95",
+        "light": "#8BB7C1",
+        "dark": "#28465F",
+        "ink": "#19334C",
+        "path": "#6B9BAC",
+        "edge": "#3D6B84",
+        "accent": "#D6BB7B"
+      },
+      "scene": {
+        "path": "/assets/games/classic-v1/scenes/deep-catch.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 3482,
+        "sha256": "cb7659390393acda0fdd793aa3ec553b23ae604f3ab223132ff3b904c1e4d06c"
+      },
+      "cover": {
+        "path": "/assets/games/classic-v1/covers/deep-catch.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 7172,
+        "sha256": "820d110ed302fb14962d62287880814d398931d21d60f82a3d37ec06ec77f6b4"
+      }
+    },
+    {
+      "key": "ember-bastion",
+      "family": "strategy",
+      "palette": "sand",
+      "mechanic": "defense",
+      "motif": "sandstone-rampart",
+      "source_authoring": "code-authored",
+      "license": "Original project artwork; no third-party art inputs",
+      "palette_colors": {
+        "bg": "#D0B98A",
+        "light": "#EDD9A6",
+        "dark": "#987C57",
+        "ink": "#4F4A40",
+        "path": "#B19A72",
+        "edge": "#BEA57B",
+        "accent": "#C8724D"
+      },
+      "scene": {
+        "path": "/assets/games/classic-v1/scenes/ember-bastion.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 17742,
+        "sha256": "d7c1b0fd40f4373091568152a1bf188a3bd84ef7a871188adf148e5474002a31"
+      },
+      "cover": {
+        "path": "/assets/games/classic-v1/covers/ember-bastion.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 23547,
+        "sha256": "4d78c65fefaec5ee12d7ce5f63a69413523ba07d46ba9ee120ee376b1a1e967a"
+      }
+    },
+    {
+      "key": "nova-drift",
+      "family": "motion",
+      "palette": "track",
+      "mechanic": "drift",
+      "motif": "country-circuit",
+      "source_authoring": "code-authored",
+      "license": "Original project artwork; no third-party art inputs",
+      "palette_colors": {
+        "bg": "#79A487",
+        "light": "#B5CCA2",
+        "dark": "#304348",
+        "ink": "#22323B",
+        "path": "#59676C",
+        "edge": "#638E76",
+        "accent": "#E77C60"
+      },
+      "scene": {
+        "path": "/assets/games/classic-v1/scenes/nova-drift.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 2570,
+        "sha256": "292dd880e8bf04672ddc187b3807e505f2a1dbd35c4114eff1c163f34beaeae4"
+      },
+      "cover": {
+        "path": "/assets/games/classic-v1/covers/nova-drift.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 5626,
+        "sha256": "ba152ac1cbf21e7ca1aaa542180a8070e1dd73db1258bfdd0c16f94548f4a40b"
+      }
+    },
+    {
+      "key": "void-squadron",
+      "family": "space",
+      "palette": "night",
+      "mechanic": "shooter",
+      "motif": "deep-space",
+      "source_authoring": "code-authored",
+      "license": "Original project artwork; no third-party art inputs",
+      "palette_colors": {
+        "bg": "#17263B",
+        "light": "#405B79",
+        "dark": "#101B2B",
+        "ink": "#0C1626",
+        "path": "#6F829A",
+        "edge": "#253A53",
+        "accent": "#EBC977"
+      },
+      "scene": {
+        "path": "/assets/games/classic-v1/scenes/void-squadron.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 3496,
+        "sha256": "7c9d5948a127f37d816be64121295f6b89a9bc865f88780d8d66f652b945d91d"
+      },
+      "cover": {
+        "path": "/assets/games/classic-v1/covers/void-squadron.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 14634,
+        "sha256": "71f68a21a9c75bc1095936bc6ccb333239c582cdb7ab95ed8dcd4b2a1f4059f9"
+      }
+    },
+    {
+      "key": "orchard-merge",
+      "family": "nature",
+      "palette": "meadow",
+      "mechanic": "merge",
+      "motif": "orchard-table",
+      "source_authoring": "code-authored",
+      "license": "Original project artwork; no third-party art inputs",
+      "palette_colors": {
+        "bg": "#8FAE76",
+        "light": "#B5C88E",
+        "dark": "#405943",
+        "ink": "#253D35",
+        "path": "#D4BE91",
+        "edge": "#728958",
+        "accent": "#DB8753"
+      },
+      "scene": {
+        "path": "/assets/games/classic-v1/scenes/orchard-merge.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 5726,
+        "sha256": "87546d87d757930b3c4496b256164002d239b891c787021cf0f08394b2735e4b"
+      },
+      "cover": {
+        "path": "/assets/games/classic-v1/covers/orchard-merge.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 23393,
+        "sha256": "45c72eacd350fd28fea17e6f3d783d948604b37d1f37c0f678bc2c55bb1797f1"
+      }
+    },
+    {
+      "key": "moonlight-tea-shop",
+      "family": "collection",
+      "palette": "wood",
+      "mechanic": "shop",
+      "motif": "tea-counter",
+      "source_authoring": "code-authored",
+      "license": "Original project artwork; no third-party art inputs",
+      "palette_colors": {
+        "bg": "#B38F68",
+        "light": "#DDC9A1",
+        "dark": "#806247",
+        "ink": "#493D36",
+        "path": "#C9AD7F",
+        "edge": "#A7805C",
+        "accent": "#B9564F"
+      },
+      "scene": {
+        "path": "/assets/games/classic-v1/scenes/moonlight-tea-shop.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 2356,
+        "sha256": "a02785d42c3f3baa087044668d302f08117ed3ede85be01496ce595e11043842"
+      },
+      "cover": {
+        "path": "/assets/games/classic-v1/covers/moonlight-tea-shop.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 5430,
+        "sha256": "e64c37eec8488b1e0ae6c8feb8f3065e6e1f868289bbd16661497f5baf04812e"
+      }
+    },
+    {
+      "key": "microbe-arena",
+      "family": "ocean",
+      "palette": "sea",
+      "mechanic": "io",
+      "motif": "laboratory-slide",
+      "source_authoring": "code-authored",
+      "license": "Original project artwork; no third-party art inputs",
+      "palette_colors": {
+        "bg": "#467B95",
+        "light": "#8BB7C1",
+        "dark": "#28465F",
+        "ink": "#19334C",
+        "path": "#6B9BAC",
+        "edge": "#3D6B84",
+        "accent": "#D6BB7B"
+      },
+      "scene": {
+        "path": "/assets/games/classic-v1/scenes/microbe-arena.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 3950,
+        "sha256": "b76b59dc07c7c2ac9003757f4ff430425ba655c217caa9c7868890f369d9caa1"
+      },
+      "cover": {
+        "path": "/assets/games/classic-v1/covers/microbe-arena.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 10827,
+        "sha256": "0ab3f35135fd49dd2d35f0f72969790a80c46dcc357c93fde85429d3a97dec57"
+      }
+    },
+    {
+      "key": "crystal-bastion",
+      "family": "strategy",
+      "palette": "citadel",
+      "mechanic": "defense",
+      "motif": "stone-citadel",
+      "source_authoring": "code-authored",
+      "license": "Original project artwork; no third-party art inputs",
+      "palette_colors": {
+        "bg": "#A7CD77",
+        "light": "#F8EAC8",
+        "dark": "#55734D",
+        "ink": "#344E42",
+        "path": "#E7D6AE",
+        "edge": "#8EB964",
+        "accent": "#51A9BC"
+      },
+      "scene": {
+        "path": "/assets/games/classic-v1/scenes/crystal-bastion.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 26936,
+        "sha256": "23ce2bc08ec8d29d2c1a27423edf7d99bc45779b8c356ec147a403dde3a46644"
+      },
+      "cover": {
+        "path": "/assets/games/classic-v1/covers/crystal-bastion.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 33110,
+        "sha256": "c198f0e4035db0891725ab838bf69694605634b07ed752bf79b7e4f43f707219"
+      }
+    },
+    {
+      "key": "studio-wardrobe",
+      "family": "creation",
+      "palette": "rose",
+      "mechanic": "wardrobe",
+      "motif": "tailor-workshop",
+      "source_authoring": "code-authored",
+      "license": "Original project artwork; no third-party art inputs",
+      "palette_colors": {
+        "bg": "#CEB4AB",
+        "light": "#F0DECA",
+        "dark": "#927779",
+        "ink": "#584751",
+        "path": "#E2C8B8",
+        "edge": "#B49A98",
+        "accent": "#BD685F"
+      },
+      "scene": {
+        "path": "/assets/games/classic-v1/scenes/studio-wardrobe.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 3984,
+        "sha256": "0dcac5c278272f9eb6f77920fec28e5995d343590f46a00d7886f9e965e86fee"
+      },
+      "cover": {
+        "path": "/assets/games/classic-v1/covers/studio-wardrobe.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 7059,
+        "sha256": "ceb864059781d0d32c5461f94c86cbc14a916f830d0727112dac69270367b2a2"
+      }
+    },
+    {
+      "key": "garden-renewal",
+      "family": "nature",
+      "palette": "meadow",
+      "mechanic": "garden",
+      "motif": "garden-plots",
+      "source_authoring": "code-authored",
+      "license": "Original project artwork; no third-party art inputs",
+      "palette_colors": {
+        "bg": "#8FAE76",
+        "light": "#B5C88E",
+        "dark": "#405943",
+        "ink": "#253D35",
+        "path": "#D4BE91",
+        "edge": "#728958",
+        "accent": "#DB8753"
+      },
+      "scene": {
+        "path": "/assets/games/classic-v1/scenes/garden-renewal.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 6490,
+        "sha256": "7aee819930494eedeb45ff91ffa568e0a26b690cfc66f7fa98e8cf22e0faf44c"
+      },
+      "cover": {
+        "path": "/assets/games/classic-v1/covers/garden-renewal.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 20763,
+        "sha256": "38129d8b9711973e76f640680efecd97aa2eef84ced454eec362d04e22d49cbe"
+      }
+    },
+    {
+      "key": "adventurer-journal",
+      "family": "story",
+      "palette": "sand",
+      "mechanic": "journal",
+      "motif": "overland-map",
+      "source_authoring": "code-authored",
+      "license": "Original project artwork; no third-party art inputs",
+      "palette_colors": {
+        "bg": "#D0B98A",
+        "light": "#EDD9A6",
+        "dark": "#987C57",
+        "ink": "#4F4A40",
+        "path": "#B19A72",
+        "edge": "#BEA57B",
+        "accent": "#C8724D"
+      },
+      "scene": {
+        "path": "/assets/games/classic-v1/scenes/adventurer-journal.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 1811,
+        "sha256": "79072462a04c24320557d8aa9708de81d85e22c55c4c536d2602627d5799161a"
+      },
+      "cover": {
+        "path": "/assets/games/classic-v1/covers/adventurer-journal.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 5616,
+        "sha256": "2da847dca5339ca765abc96e014827ee3de1471ae00fc674c3713d009fa460b6"
+      }
+    },
+    {
+      "key": "idiom-detective",
+      "family": "story",
+      "palette": "wood",
+      "mechanic": "idiom",
+      "motif": "study-desk",
+      "source_authoring": "code-authored",
+      "license": "Original project artwork; no third-party art inputs",
+      "palette_colors": {
+        "bg": "#B38F68",
+        "light": "#DDC9A1",
+        "dark": "#806247",
+        "ink": "#493D36",
+        "path": "#C9AD7F",
+        "edge": "#A7805C",
+        "accent": "#B9564F"
+      },
+      "scene": {
+        "path": "/assets/games/classic-v1/scenes/idiom-detective.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 2720,
+        "sha256": "06a5ef9935d7371dceb31aead26544c99d584b526dfea1d60c7885959497d291"
+      },
+      "cover": {
+        "path": "/assets/games/classic-v1/covers/idiom-detective.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 6482,
+        "sha256": "e6559ef5c1b2682149997e6f48ed0196db43524971981b4b674de296f12e18d9"
+      }
+    },
+    {
+      "key": "star-deck",
+      "family": "strategy",
+      "palette": "dungeon",
+      "mechanic": "deck",
+      "motif": "tactical-tabletop",
+      "source_authoring": "code-authored",
+      "license": "Original project artwork; no third-party art inputs",
+      "palette_colors": {
+        "bg": "#596776",
+        "light": "#8995A0",
+        "dark": "#364552",
+        "ink": "#202F3D",
+        "path": "#71808A",
+        "edge": "#4A5969",
+        "accent": "#CEA866"
+      },
+      "scene": {
+        "path": "/assets/games/classic-v1/scenes/star-deck.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 13097,
+        "sha256": "270b17b9e7584eead736becf7b84e86d6c376ee645cb071866c81e168b07c78d"
+      },
+      "cover": {
+        "path": "/assets/games/classic-v1/covers/star-deck.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 17396,
+        "sha256": "45f85cca2d8bd8b0cbcdb54303c8ba6bbe5a20018463469cdeb70a013c346e0b"
+      }
+    },
+    {
+      "key": "hex-frontier",
+      "family": "strategy",
+      "palette": "meadow",
+      "mechanic": "hex",
+      "motif": "borderlands",
+      "source_authoring": "code-authored",
+      "license": "Original project artwork; no third-party art inputs",
+      "palette_colors": {
+        "bg": "#8FAE76",
+        "light": "#B5C88E",
+        "dark": "#405943",
+        "ink": "#253D35",
+        "path": "#D4BE91",
+        "edge": "#728958",
+        "accent": "#DB8753"
+      },
+      "scene": {
+        "path": "/assets/games/classic-v1/scenes/hex-frontier.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 5537,
+        "sha256": "225c15bb2aafb6159238a5c06f9614aa82ae2629ec076959cf59a1f084166563"
+      },
+      "cover": {
+        "path": "/assets/games/classic-v1/covers/hex-frontier.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 14708,
+        "sha256": "b420a87e258a1428ce8146fe5b2b6f53ebf129aa7a23272c31a61872b34cc5aa"
+      }
+    },
+    {
+      "key": "star-mower",
+      "family": "space",
+      "palette": "night",
+      "mechanic": "mower",
+      "motif": "orbital-arena",
+      "source_authoring": "code-authored",
+      "license": "Original project artwork; no third-party art inputs",
+      "palette_colors": {
+        "bg": "#17263B",
+        "light": "#405B79",
+        "dark": "#101B2B",
+        "ink": "#0C1626",
+        "path": "#6F829A",
+        "edge": "#253A53",
+        "accent": "#EBC977"
+      },
+      "scene": {
+        "path": "/assets/games/classic-v1/scenes/star-mower.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 3589,
+        "sha256": "059d364d7801d1e37cb3e47663f7b0dffb6b13bae05a01fb22c987bdfe6e5a4a"
+      },
+      "cover": {
+        "path": "/assets/games/classic-v1/covers/star-mower.svg",
+        "width": 360,
+        "height": 560,
+        "bytes": 9121,
+        "sha256": "adef9eb2e7de3370d08f0d7a769ab16f7903fb26aa14aff7c646a609b1122e84"
+      }
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="shield">
+<title>shield — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M32 4L56 13L52 42Q46 54 32 61Q18 54 12 42L8 13Z" fill="#e4b44f" /><path d="M32 12L48 18L45 39Q41 47 32 52Q23 47 19 39L16 18Z" fill="#4977a5" /><path d="M32 12V52Q23 47 19 39L16 18Z" fill="#345276" stroke="none"/><path d="M32 21L35 29L44 30L37 36L39 45L32 40L25 45L27 36L20 30L29 29Z" fill="#fff4d2" />
+</g>
+</svg>

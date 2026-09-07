@@ -1,0 +1,531 @@
+{
+  "reference": "/var/folders/2b/ynzvsrxj3y35t269xzsm7hj80000gn/T/codex-clipboard-4d370e2b-e554-4440-b330-cd61b0a9c51c.jpg",
+  "createdAt": "2026-09-06",
+  "atlases": [
+    {
+      "family": "action",
+      "keys": [
+        "runner",
+        "roadblock",
+        "energy",
+        "car",
+        "spacecraft",
+        "enemy_ship",
+        "bullet",
+        "drone",
+        "fish",
+        "predator_fish",
+        "hook",
+        "microbe",
+        "microbe_enemy",
+        "mower",
+        "spore",
+        "cannon"
+      ],
+      "source": "/Users/lijunren/.codex/generated_images/01a0722a-895a-70f1-8466-167e27ac3cd9/exec-fb3bb2c5-e382-4e9c-8cd3-c12a673768f5.png",
+      "chromaKey": true,
+      "prompt": "Use case: stylized-concept.\nAsset type: Production gameplay sprite sheet, not a screenshot or UI mockup.\nInput image 1 is STYLE REFERENCE ONLY: the bright polished 2.5D casual farm mobile-game scene. Create new original objects, do not reproduce its characters, train, UI or composition.\nArt direction: Charming premium casual mobile-game artwork, rounded toy-like sculpted volumes, cheerful saturated greens, warm golds and clear blues, hand-painted 3D cartoon finish, soft controlled shading and clear readable silhouettes. Consistent soft light from upper left. Rendered-painting quality like the reference game assets, not realistic photos or shiny AI fantasy art.\nLayout is TECHNICAL: square canvas, exactly 4 columns × 4 rows of equally sized invisible cells. One distinct complete isolated object centered inside EACH cell. Each sprite must fit within the central 70% of its cell, leaving at least 15% empty transparent padding on all four sides. Never touch or cross cell boundaries. No panels, no labels, no letters, no numbers, no grid lines, no UI, no watermark.\nBackground: genuine transparent alpha channel everywhere outside the 16 objects; no white backdrop, no checkerboard painted into image, no floor, no scene, no shadow extending outside a cell.\nAvoid: flat vector illustration, black outlines, pixel art, thick comic contour, photorealistic material, cinematic light, lens flare, glow halo, dark purple fantasy mood, hyper-detailed ornate filigree, generic emoji.\nExactly 16 DIFFERENT action-game sprites, reading order left-to-right top-to-bottom:\nROW 1: (1) full-body cheerful young runner in red cap blue outfit, side-facing right in a running pose; (2) orange-and-white road barricade with two feet; (3) chunky golden lightning-bolt energy pickup; (4) cute compact red racing car, top-down angled slightly so front faces up.\nROW 2: (5) friendly white-blue toy spaceship, nose upwards; (6) red-orange enemy toy spaceship, nose downwards, distinct from player ship; (7) small rounded golden projectile capsule; (8) cheerful blue four-rotor delivery drone.\nROW 3: (9) cute orange fish swimming right; (10) larger blue predatory fish swimming right with a few cartoon teeth, not frightening; (11) fishing hook on short line with red-white float; (12) friendly green round microbe with face.\nROW 4: (13) grumpy reddish round enemy microbe; (14) green-red push lawnmower seen three-quarter top; (15) red mushroom with cream spots; (16) friendly wheeled toy cannon pointing upper-right.\nAll characters have complete bodies and naturally joined limbs. All 16 objects readable at 64 px.",
+      "backgroundEditPrompt": "Use case: precise-object-edit.\nChange ONLY the background of this production 4×4 sprite sheet.\nReplace every visible white and gray checkerboard square with one perfectly uniform flat chroma-key MAGENTA background, exact RGB (255,0,255), hex #FF00FF. All gaps between sprites, enclosed negative spaces, outer margins and cell padding must have that exact same solid magenta color.\nPreserve all 16 existing objects EXACTLY: same positions, sizes, colors, shapes, expressions, poses, fine details, hand-painted 2.5D rendering, soft shading on the objects. Do not move or regenerate objects. No cropping. Keep full bodies, leaves, antennae, handles, holes and all separated components.\nRemove the background contact shadows only so the magenta backdrop is fully flat. No checkerboard, no white/gray/black background, no alpha simulation. No text, no grid lines, no labels, no framing. The result will undergo deterministic chroma-key import into a game engine.",
+      "rects": [
+        [
+          0,
+          0,
+          318,
+          331
+        ],
+        [
+          318,
+          0,
+          312,
+          331
+        ],
+        [
+          630,
+          0,
+          275,
+          331
+        ],
+        [
+          905,
+          0,
+          349,
+          331
+        ],
+        [
+          0,
+          331,
+          318,
+          296
+        ],
+        [
+          318,
+          331,
+          312,
+          296
+        ],
+        [
+          630,
+          331,
+          275,
+          296
+        ],
+        [
+          905,
+          331,
+          349,
+          296
+        ],
+        [
+          0,
+          627,
+          318,
+          284
+        ],
+        [
+          318,
+          627,
+          312,
+          284
+        ],
+        [
+          630,
+          627,
+          275,
+          284
+        ],
+        [
+          905,
+          627,
+          349,
+          284
+        ],
+        [
+          0,
+          911,
+          318,
+          343
+        ],
+        [
+          318,
+          911,
+          312,
+          343
+        ],
+        [
+          630,
+          911,
+          275,
+          343
+        ],
+        [
+          905,
+          911,
+          349,
+          343
+        ]
+      ],
+      "sourceHistory": [
+        {
+          "path": "/Users/lijunren/.codex/generated_images/01a0722a-895a-70f1-8466-167e27ac3cd9/exec-11e24070-6174-4c3e-8391-365c4b1b8ab4.png",
+          "role": "original-generation-with-baked-checkerboard",
+          "prompt": "Use case: stylized-concept.\nAsset type: Production gameplay sprite sheet, not a screenshot or UI mockup.\nInput image 1 is STYLE REFERENCE ONLY: the bright polished 2.5D casual farm mobile-game scene. Create new original objects, do not reproduce its characters, train, UI or composition.\nArt direction: Charming premium casual mobile-game artwork, rounded toy-like sculpted volumes, cheerful saturated greens, warm golds and clear blues, hand-painted 3D cartoon finish, soft controlled shading and clear readable silhouettes. Consistent soft light from upper left. Rendered-painting quality like the reference game assets, not realistic photos or shiny AI fantasy art.\nLayout is TECHNICAL: square canvas, exactly 4 columns × 4 rows of equally sized invisible cells. One distinct complete isolated object centered inside EACH cell. Each sprite must fit within the central 70% of its cell, leaving at least 15% empty transparent padding on all four sides. Never touch or cross cell boundaries. No panels, no labels, no letters, no numbers, no grid lines, no UI, no watermark.\nBackground: genuine transparent alpha channel everywhere outside the 16 objects; no white backdrop, no checkerboard painted into image, no floor, no scene, no shadow extending outside a cell.\nAvoid: flat vector illustration, black outlines, pixel art, thick comic contour, photorealistic material, cinematic light, lens flare, glow halo, dark purple fantasy mood, hyper-detailed ornate filigree, generic emoji.\nExactly 16 DIFFERENT action-game sprites, reading order left-to-right top-to-bottom:\nROW 1: (1) full-body cheerful young runner in red cap blue outfit, side-facing right in a running pose; (2) orange-and-white road barricade with two feet; (3) chunky golden lightning-bolt energy pickup; (4) cute compact red racing car, top-down angled slightly so front faces up.\nROW 2: (5) friendly white-blue toy spaceship, nose upwards; (6) red-orange enemy toy spaceship, nose downwards, distinct from player ship; (7) small rounded golden projectile capsule; (8) cheerful blue four-rotor delivery drone.\nROW 3: (9) cute orange fish swimming right; (10) larger blue predatory fish swimming right with a few cartoon teeth, not frightening; (11) fishing hook on short line with red-white float; (12) friendly green round microbe with face.\nROW 4: (13) grumpy reddish round enemy microbe; (14) green-red push lawnmower seen three-quarter top; (15) red mushroom with cream spots; (16) friendly wheeled toy cannon pointing upper-right.\nAll characters have complete bodies and naturally joined limbs. All 16 objects readable at 64 px."
+        },
+        {
+          "path": "/Users/lijunren/.codex/generated_images/01a0722a-895a-70f1-8466-167e27ac3cd9/exec-1000b02a-c37a-428b-9d83-c91223dbcd3f.png",
+          "role": "unsuccessful-native-alpha-edit-rgb-result",
+          "prompt": "Use case: background-extraction.\nEdit the attached sprite sheet only by removing the white/light-gray checkerboard background. The checkerboard is currently baked into the pixels and is NOT transparency.\nCreate a PNG with a GENUINE transparent ALPHA channel outside all 16 objects. The whole canvas background including all gaps and cell padding must be alpha=0, not white, gray, black, checkerboard, or another painted color.\nKeep all 16 sprites, exact 4×4 cell positions, their full shapes, colors, proportions, lighting and painted rendering unchanged. Preserve every complete object, antenna, fingers, hooks, wings and wheels. Remove the floor contact shadows as part of the background extraction.\nThis is production asset extraction, not a mockup of transparency. No other edits. No grid, no text, no frame. Output real RGBA transparency."
+        }
+      ]
+    },
+    {
+      "family": "puzzle",
+      "keys": [
+        "green_apple",
+        "pear",
+        "red_apple",
+        "orange",
+        "plum",
+        "golden_fruit",
+        "emerald",
+        "ruby",
+        "sapphire",
+        "amethyst",
+        "cup",
+        "star",
+        "parcel",
+        "scroll",
+        "key",
+        "flower"
+      ],
+      "source": "/Users/lijunren/.codex/generated_images/01a0722a-895a-70f1-8466-167e27ac3cd9/exec-5f4236f0-8279-4201-bb32-f5ad9a887957.png",
+      "chromaKey": true,
+      "prompt": "Use case: stylized-concept.\nAsset type: Production gameplay sprite sheet, not a screenshot or UI mockup.\nInput image 1 is STYLE REFERENCE ONLY: the bright polished 2.5D casual farm mobile-game scene. Create new original objects, do not reproduce its characters, train, UI or composition.\nArt direction: Charming premium casual mobile-game artwork, rounded toy-like sculpted volumes, cheerful saturated greens, warm golds and clear blues, hand-painted 3D cartoon finish, soft controlled shading and clear readable silhouettes. Consistent soft light from upper left. Rendered-painting quality like the reference game assets, not realistic photos or shiny AI fantasy art.\nLayout is TECHNICAL: square canvas, exactly 4 columns × 4 rows of equally sized invisible cells. One distinct complete isolated object centered inside EACH cell. Each sprite must fit within the central 70% of its cell, leaving at least 15% empty transparent padding on all four sides. Never touch or cross cell boundaries. No panels, no labels, no letters, no numbers, no grid lines, no UI, no watermark.\nBackground: genuine transparent alpha channel everywhere outside the 16 objects; no white backdrop, no checkerboard painted into image, no floor, no scene, no shadow extending outside a cell.\nAvoid: flat vector illustration, black outlines, pixel art, thick comic contour, photorealistic material, cinematic light, lens flare, glow halo, dark purple fantasy mood, hyper-detailed ornate filigree, generic emoji.\nExactly 16 DIFFERENT puzzle-game sprites, reading order left-to-right top-to-bottom:\nROW 1: (1) plump green apple with leaf; (2) yellow pear with leaf; (3) plump red apple with leaf; (4) ripe orange fruit with leaf.\nROW 2: (5) purple plum with leaf; (6) golden apple wearing a small gold crown, the final evolved fruit; (7) chunky green emerald gem; (8) chunky red ruby gem.\nROW 3: (9) chunky blue sapphire gem; (10) chunky purple amethyst gem; (11) upside-down red game cup, simple complete shell shape with no handle; (12) plump gold five-point star.\nROW 4: (13) wrapped cardboard parcel box with string; (14) rolled cream parchment scroll with no writing; (15) large gold old-fashioned key; (16) pink daisy flower with green stem and two leaves.\nFruit are plump hand-painted game items, not photographic fruit. Gems are simple bright toy facets, no sparkling halo. All 16 objects readable at 64 px.",
+      "backgroundEditPrompt": "Use case: precise-object-edit.\nChange ONLY the background of this production 4×4 sprite sheet.\nReplace every visible white and gray checkerboard square with one perfectly uniform flat chroma-key MAGENTA background, exact RGB (255,0,255), hex #FF00FF. All gaps between sprites, enclosed negative spaces, outer margins and cell padding must have that exact same solid magenta color.\nPreserve all 16 existing objects EXACTLY: same positions, sizes, colors, shapes, expressions, poses, fine details, hand-painted 2.5D rendering, soft shading on the objects. Do not move or regenerate objects. No cropping. Keep full bodies, leaves, antennae, handles, holes and all separated components.\nRemove the background contact shadows only so the magenta backdrop is fully flat. No checkerboard, no white/gray/black background, no alpha simulation. No text, no grid lines, no labels, no framing. The result will undergo deterministic chroma-key import into a game engine.",
+      "rects": [
+        [
+          0,
+          0,
+          321,
+          341
+        ],
+        [
+          321,
+          0,
+          308,
+          341
+        ],
+        [
+          629,
+          0,
+          301,
+          341
+        ],
+        [
+          930,
+          0,
+          324,
+          341
+        ],
+        [
+          0,
+          341,
+          321,
+          303
+        ],
+        [
+          321,
+          341,
+          308,
+          303
+        ],
+        [
+          629,
+          341,
+          301,
+          303
+        ],
+        [
+          930,
+          341,
+          324,
+          303
+        ],
+        [
+          0,
+          644,
+          321,
+          283
+        ],
+        [
+          321,
+          644,
+          308,
+          283
+        ],
+        [
+          629,
+          644,
+          301,
+          283
+        ],
+        [
+          930,
+          644,
+          324,
+          283
+        ],
+        [
+          0,
+          927,
+          321,
+          327
+        ],
+        [
+          321,
+          927,
+          308,
+          327
+        ],
+        [
+          629,
+          927,
+          301,
+          327
+        ],
+        [
+          930,
+          927,
+          324,
+          327
+        ]
+      ],
+      "sourceHistory": [
+        {
+          "path": "/Users/lijunren/.codex/generated_images/01a0722a-895a-70f1-8466-167e27ac3cd9/exec-b33bd8e4-2756-4f2a-bba9-185cd6e6ffe6.png",
+          "role": "original-generation-with-baked-checkerboard",
+          "prompt": "Use case: stylized-concept.\nAsset type: Production gameplay sprite sheet, not a screenshot or UI mockup.\nInput image 1 is STYLE REFERENCE ONLY: the bright polished 2.5D casual farm mobile-game scene. Create new original objects, do not reproduce its characters, train, UI or composition.\nArt direction: Charming premium casual mobile-game artwork, rounded toy-like sculpted volumes, cheerful saturated greens, warm golds and clear blues, hand-painted 3D cartoon finish, soft controlled shading and clear readable silhouettes. Consistent soft light from upper left. Rendered-painting quality like the reference game assets, not realistic photos or shiny AI fantasy art.\nLayout is TECHNICAL: square canvas, exactly 4 columns × 4 rows of equally sized invisible cells. One distinct complete isolated object centered inside EACH cell. Each sprite must fit within the central 70% of its cell, leaving at least 15% empty transparent padding on all four sides. Never touch or cross cell boundaries. No panels, no labels, no letters, no numbers, no grid lines, no UI, no watermark.\nBackground: genuine transparent alpha channel everywhere outside the 16 objects; no white backdrop, no checkerboard painted into image, no floor, no scene, no shadow extending outside a cell.\nAvoid: flat vector illustration, black outlines, pixel art, thick comic contour, photorealistic material, cinematic light, lens flare, glow halo, dark purple fantasy mood, hyper-detailed ornate filigree, generic emoji.\nExactly 16 DIFFERENT puzzle-game sprites, reading order left-to-right top-to-bottom:\nROW 1: (1) plump green apple with leaf; (2) yellow pear with leaf; (3) plump red apple with leaf; (4) ripe orange fruit with leaf.\nROW 2: (5) purple plum with leaf; (6) golden apple wearing a small gold crown, the final evolved fruit; (7) chunky green emerald gem; (8) chunky red ruby gem.\nROW 3: (9) chunky blue sapphire gem; (10) chunky purple amethyst gem; (11) upside-down red game cup, simple complete shell shape with no handle; (12) plump gold five-point star.\nROW 4: (13) wrapped cardboard parcel box with string; (14) rolled cream parchment scroll with no writing; (15) large gold old-fashioned key; (16) pink daisy flower with green stem and two leaves.\nFruit are plump hand-painted game items, not photographic fruit. Gems are simple bright toy facets, no sparkling halo. All 16 objects readable at 64 px."
+        }
+      ]
+    },
+    {
+      "family": "strategy",
+      "keys": [
+        "hero",
+        "sentinel",
+        "guardian",
+        "crystal",
+        "turret",
+        "raider",
+        "sword",
+        "shield",
+        "potion",
+        "frost",
+        "fire",
+        "boots",
+        "tent",
+        "house",
+        "tree",
+        "treasure"
+      ],
+      "source": "/Users/lijunren/.codex/generated_images/01a0722a-895a-70f1-8466-167e27ac3cd9/exec-d0ddb98e-1058-48a4-b125-8d041412db54.png",
+      "chromaKey": true,
+      "prompt": "Use case: stylized-concept.\nAsset type: Production gameplay sprite sheet, not a screenshot or UI mockup.\nInput image 1 is STYLE REFERENCE ONLY: the bright polished 2.5D casual farm mobile-game scene. Create new original objects, do not reproduce its characters, train, UI or composition.\nArt direction: Charming premium casual mobile-game artwork, rounded toy-like sculpted volumes, cheerful saturated greens, warm golds and clear blues, hand-painted 3D cartoon finish, soft controlled shading and clear readable silhouettes. Consistent soft light from upper left. Rendered-painting quality like the reference game assets, not realistic photos or shiny AI fantasy art.\nLayout is TECHNICAL: square canvas, exactly 4 columns × 4 rows of equally sized invisible cells. One distinct complete isolated object centered inside EACH cell. Each sprite must fit within the central 70% of its cell, leaving at least 15% empty transparent padding on all four sides. Never touch or cross cell boundaries. No panels, no labels, no letters, no numbers, no grid lines, no UI, no watermark.\nBackground: genuine transparent alpha channel everywhere outside the 16 objects; no white backdrop, no checkerboard painted into image, no floor, no scene, no shadow extending outside a cell.\nAvoid: flat vector illustration, black outlines, pixel art, thick comic contour, photorealistic material, cinematic light, lens flare, glow halo, dark purple fantasy mood, hyper-detailed ornate filigree, generic emoji.\nExactly 16 DIFFERENT adventure/strategy game sprites, reading order left-to-right top-to-bottom:\nROW 1: (1) full-body friendly blue-clad adventurer with red scarf and small brown boots; (2) stout friendly red robot sentinel with two arms and two feet; (3) full-body brave gold-blue knight guardian with small shield; (4) upright chunky sky-blue crystal.\nROW 2: (5) compact blue toy turret on a little mechanical base; (6) full-body cartoon masked bandit with orange jacket and brown boots, playful not scary; (7) single rounded steel sword with golden hilt; (8) rounded blue shield with gold border.\nROW 3: (9) small round red healing potion bottle with cork; (10) chunky pale-blue snowflake frost token; (11) friendly orange flame-shaped fire token; (12) pair of brown explorer boots.\nROW 4: (13) orange camping tent; (14) cozy small cream farm cottage with red roof; (15) lush rounded green fruit tree with brown trunk; (16) open wooden treasure chest filled with gold coins.\nThe human and robot actors must be full-body isolated sprites with legs visible, no portrait framing. Props must be charming farm-adventure toys, no ornate dark fantasy. All 16 objects readable at 64 px.",
+      "backgroundEditPrompt": "Use case: precise-object-edit.\nChange ONLY the background of this production 4×4 sprite sheet.\nReplace every visible white and gray checkerboard square with one perfectly uniform flat chroma-key MAGENTA background, exact RGB (255,0,255), hex #FF00FF. All gaps between sprites, enclosed negative spaces, outer margins and cell padding must have that exact same solid magenta color.\nPreserve all 16 existing objects EXACTLY: same positions, sizes, colors, shapes, expressions, poses, fine details, hand-painted 2.5D rendering, soft shading on the objects. Do not move or regenerate objects. No cropping. Keep full bodies, leaves, antennae, handles, holes and all separated components.\nRemove the background contact shadows only so the magenta backdrop is fully flat. No checkerboard, no white/gray/black background, no alpha simulation. No text, no grid lines, no labels, no framing. The result will undergo deterministic chroma-key import into a game engine.",
+      "rects": [
+        [
+          0,
+          0,
+          309,
+          355
+        ],
+        [
+          309,
+          0,
+          316,
+          355
+        ],
+        [
+          625,
+          0,
+          284,
+          355
+        ],
+        [
+          909,
+          0,
+          345,
+          355
+        ],
+        [
+          0,
+          355,
+          309,
+          280
+        ],
+        [
+          309,
+          355,
+          316,
+          280
+        ],
+        [
+          625,
+          355,
+          284,
+          280
+        ],
+        [
+          909,
+          355,
+          345,
+          280
+        ],
+        [
+          0,
+          635,
+          309,
+          280
+        ],
+        [
+          309,
+          635,
+          316,
+          280
+        ],
+        [
+          625,
+          635,
+          284,
+          280
+        ],
+        [
+          909,
+          635,
+          345,
+          280
+        ],
+        [
+          0,
+          915,
+          309,
+          339
+        ],
+        [
+          309,
+          915,
+          316,
+          339
+        ],
+        [
+          625,
+          915,
+          284,
+          339
+        ],
+        [
+          909,
+          915,
+          345,
+          339
+        ]
+      ],
+      "sourceHistory": [
+        {
+          "path": "/Users/lijunren/.codex/generated_images/01a0722a-895a-70f1-8466-167e27ac3cd9/exec-021485d3-e264-4912-be19-f92aeaf7276c.png",
+          "role": "original-generation-with-baked-checkerboard",
+          "prompt": "Use case: stylized-concept.\nAsset type: Production gameplay sprite sheet, not a screenshot or UI mockup.\nInput image 1 is STYLE REFERENCE ONLY: the bright polished 2.5D casual farm mobile-game scene. Create new original objects, do not reproduce its characters, train, UI or composition.\nArt direction: Charming premium casual mobile-game artwork, rounded toy-like sculpted volumes, cheerful saturated greens, warm golds and clear blues, hand-painted 3D cartoon finish, soft controlled shading and clear readable silhouettes. Consistent soft light from upper left. Rendered-painting quality like the reference game assets, not realistic photos or shiny AI fantasy art.\nLayout is TECHNICAL: square canvas, exactly 4 columns × 4 rows of equally sized invisible cells. One distinct complete isolated object centered inside EACH cell. Each sprite must fit within the central 70% of its cell, leaving at least 15% empty transparent padding on all four sides. Never touch or cross cell boundaries. No panels, no labels, no letters, no numbers, no grid lines, no UI, no watermark.\nBackground: genuine transparent alpha channel everywhere outside the 16 objects; no white backdrop, no checkerboard painted into image, no floor, no scene, no shadow extending outside a cell.\nAvoid: flat vector illustration, black outlines, pixel art, thick comic contour, photorealistic material, cinematic light, lens flare, glow halo, dark purple fantasy mood, hyper-detailed ornate filigree, generic emoji.\nExactly 16 DIFFERENT adventure/strategy game sprites, reading order left-to-right top-to-bottom:\nROW 1: (1) full-body friendly blue-clad adventurer with red scarf and small brown boots; (2) stout friendly red robot sentinel with two arms and two feet; (3) full-body brave gold-blue knight guardian with small shield; (4) upright chunky sky-blue crystal.\nROW 2: (5) compact blue toy turret on a little mechanical base; (6) full-body cartoon masked bandit with orange jacket and brown boots, playful not scary; (7) single rounded steel sword with golden hilt; (8) rounded blue shield with gold border.\nROW 3: (9) small round red healing potion bottle with cork; (10) chunky pale-blue snowflake frost token; (11) friendly orange flame-shaped fire token; (12) pair of brown explorer boots.\nROW 4: (13) orange camping tent; (14) cozy small cream farm cottage with red roof; (15) lush rounded green fruit tree with brown trunk; (16) open wooden treasure chest filled with gold coins.\nThe human and robot actors must be full-body isolated sprites with legs visible, no portrait framing. Props must be charming farm-adventure toys, no ornate dark fantasy. All 16 objects readable at 64 px."
+        }
+      ]
+    },
+    {
+      "family": "lifestyle",
+      "keys": [
+        "cat",
+        "kitten",
+        "plush",
+        "model",
+        "dress",
+        "hat",
+        "shoes",
+        "glasses",
+        "tea",
+        "coffee",
+        "seedling",
+        "watering_can",
+        "seeds",
+        "shovel",
+        "mailbox",
+        "letter"
+      ],
+      "source": "/Users/lijunren/.codex/generated_images/01a0722a-895a-70f1-8466-167e27ac3cd9/exec-06791b7a-5fd8-45bf-ab38-f730e4340993.png",
+      "chromaKey": true,
+      "prompt": "Use case: stylized-concept.\nAsset type: Production gameplay sprite sheet, not a screenshot or UI mockup.\nInput image 1 is STYLE REFERENCE ONLY: the bright polished 2.5D casual farm mobile-game scene. Create new original objects, do not reproduce its characters, train, UI or composition.\nArt direction: Charming premium casual mobile-game artwork, rounded toy-like sculpted volumes, cheerful saturated greens, warm golds and clear blues, hand-painted 3D cartoon finish, soft controlled shading and clear readable silhouettes. Consistent soft light from upper left. Rendered-painting quality like the reference game assets, not realistic photos or shiny AI fantasy art.\nLayout is TECHNICAL: square canvas, exactly 4 columns × 4 rows of equally sized invisible cells. One distinct complete isolated object centered inside EACH cell. Each sprite must fit within the central 70% of its cell, leaving at least 15% empty transparent padding on all four sides. Never touch or cross cell boundaries. No panels, no labels, no letters, no numbers, no grid lines, no UI, no watermark.\nBackground: genuine transparent alpha channel everywhere outside the 16 objects; no white backdrop, no checkerboard painted into image, no floor, no scene, no shadow extending outside a cell.\nAvoid: flat vector illustration, black outlines, pixel art, thick comic contour, photorealistic material, cinematic light, lens flare, glow halo, dark purple fantasy mood, hyper-detailed ornate filigree, generic emoji.\nExactly 16 DIFFERENT cozy casual-game sprites, reading order left-to-right top-to-bottom:\nROW 1: (1) cute orange tabby cat sitting with full body and tail; (2) little white-and-gray kitten sitting with full body and tail; (3) brown plush teddy bear with red bow, full body; (4) full-body cheerful female fashion model wearing a simple blue dress and shoes, neutral standing pose, not the reference character.\nROW 2: (5) standalone red summer dress hanging without hanger; (6) straw sunhat with orange ribbon; (7) pair of blue-red sneakers; (8) rounded blue sunglasses.\nROW 3: (9) cream ceramic teacup on saucer containing green tea with tiny green tea leaf motif; (10) warm red coffee cup on saucer containing brown coffee with cream foam; (11) green seedling in terracotta flowerpot; (12) green garden watering can.\nROW 4: (13) cream seed packet with tiny plant illustration but NO TEXT; (14) small gardener shovel with wooden handle and steel blade; (15) blue country mailbox on a short wooden post with red flag; (16) cream folded envelope sealed with red heart wax.\nTea and coffee are clearly different drinks, not potion bottles. All 16 objects readable at 64 px.",
+      "backgroundEditPrompt": "Use case: precise-object-edit.\nChange ONLY the background of this production 4×4 sprite sheet.\nReplace every visible white and gray checkerboard square with one perfectly uniform flat chroma-key MAGENTA background, exact RGB (255,0,255), hex #FF00FF. All gaps between sprites, enclosed negative spaces, outer margins and cell padding must have that exact same solid magenta color.\nPreserve all 16 existing objects EXACTLY: same positions, sizes, colors, shapes, expressions, poses, fine details, hand-painted 2.5D rendering, soft shading on the objects. Do not move or regenerate objects. No cropping. Keep full bodies, leaves, antennae, handles, holes and all separated components.\nRemove the background contact shadows only so the magenta backdrop is fully flat. No checkerboard, no white/gray/black background, no alpha simulation. No text, no grid lines, no labels, no framing. The result will undergo deterministic chroma-key import into a game engine.",
+      "rects": [
+        [
+          0,
+          0,
+          301,
+          370
+        ],
+        [
+          301,
+          0,
+          324,
+          370
+        ],
+        [
+          625,
+          0,
+          287,
+          370
+        ],
+        [
+          912,
+          0,
+          342,
+          370
+        ],
+        [
+          0,
+          370,
+          301,
+          290
+        ],
+        [
+          301,
+          370,
+          324,
+          290
+        ],
+        [
+          625,
+          370,
+          287,
+          290
+        ],
+        [
+          912,
+          370,
+          342,
+          290
+        ],
+        [
+          0,
+          660,
+          301,
+          278
+        ],
+        [
+          301,
+          660,
+          324,
+          278
+        ],
+        [
+          625,
+          660,
+          287,
+          278
+        ],
+        [
+          912,
+          660,
+          342,
+          278
+        ],
+        [
+          0,
+          938,
+          301,
+          316
+        ],
+        [
+          301,
+          938,
+          324,
+          316
+        ],
+        [
+          625,
+          938,
+          287,
+          316
+        ],
+        [
+          912,
+          938,
+          342,
+          316
+        ]
+      ],
+      "sourceHistory": [
+        {
+          "path": "/Users/lijunren/.codex/generated_images/01a0722a-895a-70f1-8466-167e27ac3cd9/exec-02db17dd-6167-4d09-96aa-aa1b6431afdb.png",
+          "role": "original-generation-with-baked-checkerboard",
+          "prompt": "Use case: stylized-concept.\nAsset type: Production gameplay sprite sheet, not a screenshot or UI mockup.\nInput image 1 is STYLE REFERENCE ONLY: the bright polished 2.5D casual farm mobile-game scene. Create new original objects, do not reproduce its characters, train, UI or composition.\nArt direction: Charming premium casual mobile-game artwork, rounded toy-like sculpted volumes, cheerful saturated greens, warm golds and clear blues, hand-painted 3D cartoon finish, soft controlled shading and clear readable silhouettes. Consistent soft light from upper left. Rendered-painting quality like the reference game assets, not realistic photos or shiny AI fantasy art.\nLayout is TECHNICAL: square canvas, exactly 4 columns × 4 rows of equally sized invisible cells. One distinct complete isolated object centered inside EACH cell. Each sprite must fit within the central 70% of its cell, leaving at least 15% empty transparent padding on all four sides. Never touch or cross cell boundaries. No panels, no labels, no letters, no numbers, no grid lines, no UI, no watermark.\nBackground: genuine transparent alpha channel everywhere outside the 16 objects; no white backdrop, no checkerboard painted into image, no floor, no scene, no shadow extending outside a cell.\nAvoid: flat vector illustration, black outlines, pixel art, thick comic contour, photorealistic material, cinematic light, lens flare, glow halo, dark purple fantasy mood, hyper-detailed ornate filigree, generic emoji.\nExactly 16 DIFFERENT cozy casual-game sprites, reading order left-to-right top-to-bottom:\nROW 1: (1) cute orange tabby cat sitting with full body and tail; (2) little white-and-gray kitten sitting with full body and tail; (3) brown plush teddy bear with red bow, full body; (4) full-body cheerful female fashion model wearing a simple blue dress and shoes, neutral standing pose, not the reference character.\nROW 2: (5) standalone red summer dress hanging without hanger; (6) straw sunhat with orange ribbon; (7) pair of blue-red sneakers; (8) rounded blue sunglasses.\nROW 3: (9) cream ceramic teacup on saucer containing green tea with tiny green tea leaf motif; (10) warm red coffee cup on saucer containing brown coffee with cream foam; (11) green seedling in terracotta flowerpot; (12) green garden watering can.\nROW 4: (13) cream seed packet with tiny plant illustration but NO TEXT; (14) small gardener shovel with wooden handle and steel blade; (15) blue country mailbox on a short wooden post with red flag; (16) cream folded envelope sealed with red heart wax.\nTea and coffee are clearly different drinks, not potion bottles. All 16 objects readable at 64 px."
+        }
+      ]
+    }
+  ]
+}

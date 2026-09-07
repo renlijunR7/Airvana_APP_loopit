@@ -187,9 +187,9 @@ test('Discover is a separate swipeable 2.5-card gallery while Home remains immer
   assert.match(mobileEntry, /class="discover-page"[\s\S]*?class="discover-tab-bar"[\s\S]*?class="discover-content main-tab-scroll" role="region" aria-label="发现内容列表"/);
   assert.match(mobileCss, /\.discover-page\s*\{[^}]*display:\s*flex;[^}]*flex-direction:\s*column;[^}]*overflow:\s*hidden;/s);
   assert.match(mobileCss, /\.discover-tab-bar\s*\{[^}]*flex:\s*none;[^}]*background:\s*var\(--surface-canvas,/s);
-  assert.match(mobileEntry, /const homeArcadeDiscoverIds = \[34,35,36,37,38,39,40,41,42,43,44,24,25,26,27,28,29,30,31,32,33,1,2,5,6,9,10,12,14,15,16,17,18,19,20,21,22,23\]/);
-  assert.match(mobileEntry, /tag:'原创新游'/);
-  assert.match(mobileEntry, /38 款原创离线游戏 · 全部具备三阶段玩法与重玩闭环/);
+  assert.match(mobileEntry, /const homeArcadeDiscoverIds = \[111,112,113,114,115,116,117,118,101,102,103,104,105,34,35,36,37,38,39,40,41,42,43,44,24,25,26,27,28,29,30,31,32,33,1,2,5,6,9,10,12,14,15,16,17,18,19,20,21,22,23\]/);
+  assert.match(mobileEntry, /const arcadeDiscoverItems = homeArcadeDiscoverIds\.map/);
+  assert.match(mobileEntry, /原创离线互动 · 本地最高分/);
   assert.match(mobileEntry, /display:flex;gap:10px;overflow-x:auto/);
   assert.match(mobileEntry, /width:calc\(40% - 8px\);flex:none/);
   assert.match(mobileEntry, /scroll-snap-type:x proximity/);
@@ -218,7 +218,7 @@ test('Home keeps the additional Playables under original names and store-fidelit
     assert.ok(mobileEntry.includes(file.replace('.jpg','')), `missing store-fidelity cover key: ${file}`);
     assert.equal(fs.existsSync(path.join(root, 'public/assets/game-covers/store-fidelity-v4', file)), true, `missing store-fidelity cover file: ${file}`);
   }
-  assert.match(mobileEntry, /const governedArcadeIds = new Set\(\[1,2,5,6,9,10,12,14,15,16,17,18,19,20,21,22,23,\.\.\.Array\.from\(\{length:21\},\(_,index\)=>index\+24\)\]\)/);
+  assert.match(mobileEntry, /const governedArcadeIds = new Set\(\[1,2,5,6,9,10,12,14,15,16,17,18,19,20,21,22,23,\.\.\.Array\.from\(\{length:21\},\(_,index\)=>index\+24\),101,102,103,104,105,111,112,113,114,115,116,117,118\]\)/);
   assert.match(mobileEntry, /const sessions = \[\.\.\.sessionsWithCurrentArcadeCatalog, \.\.\.seededSessions\.filter\(item => !restoredSessionIds\.has\(item\.id\)\)\]/);
 });
 
@@ -243,9 +243,9 @@ test('Home and Discover keep all eleven category games on the governed v3 packag
   }
   assert.match(mobileEntry,/contract_version:'3\.0\.0'/);
   assert.match(mobileEntry,/playable_config_version:'3\.0\.0'/);
-  assert.match(mobileEntry,/deep-games-v2\.js\?v=2\.2\.0/);
+  assert.match(mobileEntry,/deep-games-v2\.js\?v=3\.2\.0/);
   assert.match(mobileEntry,/sensor-interactions-v1\.js\?v=1\.1\.0/);
-  assert.match(mobileEntry,/complete-games-v3\.js\?v=3\.6\.0/);
+  assert.match(mobileEntry,/complete-games-v3\.js\?v=4\.2\.0/);
   assert.match(mobileEntry,/runtime:'complete-v3'/);
   assert.match(mobileEntry,/miniGameDeepVisible/);
   assert.match(mobileEntry,/对手均为确定性本地机器人，不是真人联机/);
@@ -340,11 +340,11 @@ test('Home media area exposes all 38 governed complete local games', () => {
   assert.match(mobileEntry, /ensureFeedAudio\(\)/);
   assert.match(mobileEntry, /airvana\.feed-mini-game\.muted/);
   assert.match(mobileEntry, /feedMiniGameBestScores/);
-  assert.match(mobileEntry, /const featuredInteractiveIds=\[34,35,36,37,38,39,40,41,42,43,44,24,25,26,27,28,29,30,31,32,33,1,2,5,6,9,10,12,14,15,16,17,18,19,20,21,22,23\]/);
-  assert.match(mobileEntry, /character-runtime-v1\.js\?v=1\.0\.1/);
+  assert.match(mobileEntry, /const featuredInteractiveIds=\[111,112,113,114,115,116,117,118,101,102,103,104,105,34,35,36,37,38,39,40,41,42,43,44,24,25,26,27,28,29,30,31,32,33,1,2,5,6,9,10,12,14,15,16,17,18,19,20,21,22,23\]/);
+  assert.match(mobileEntry, /game-art-system-v1\.js\?v=6\.0\.0/);
   assert.match(mobileEntry, /sensor-interactions-v1\.js\?v=1\.1\.0/);
-  assert.match(mobileEntry, /complete-games-v3\.js\?v=3\.6\.0/);
-  assert.match(mobileEntry, /runtime=definition\.runtime==='complete-v3'\?window\.AirvanaCompleteGames:window\.AirvanaDeepGames/);
+  assert.match(mobileEntry, /complete-games-v3\.js\?v=4\.2\.0/);
+  assert.match(mobileEntry, /definition\.runtime==='physics-v1'\?window\.AirvanaPhysicsGames:definition\.runtime==='complete-v3'\?window\.AirvanaCompleteGames:window\.Airvana/);
   assert.match(mobileCss, /\.feed-mini-game\s*\{[^}]*touch-action:manipulation/);
   assert.match(mobileCss, /\.feed-mini-game-launcher\s*\{[^}]*min-height:44px/);
   assert.match(mobileCss, /\.feed-safety-game__choice > \.sc-interp\s*\{[^}]*width:100%[^}]*grid-column:2/);

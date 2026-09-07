@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="parcel">
+<title>parcel — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M5 17L30 5L59 16V48L33 61L5 49Z" fill="#e4b44f" /><path d="M5 17L33 30V61L5 49Z" fill="#8b6041" /><path d="M33 30L59 16V48L33 61Z" fill="#b47f32" /><path d="M18 11L46 22V42L39 46V26L12 14Z" fill="#fff4d2" /><path d="M45 10L18 22V40L24 43V25L52 13Z" fill="#fff4d2" /><rect x="38" y="46" width="12" height="7" rx="1" fill="#fff4d2" transform="rotate(-25 44 50)"/>
+</g>
+</svg>

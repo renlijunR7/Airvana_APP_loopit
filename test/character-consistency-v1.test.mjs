@@ -45,13 +45,15 @@ test('character runtime exposes the five canonical profiles and has a no-Image f
   assert.equal(runtime.draw({},'pixel-quest',{x:0,y:0,w:10,h:10}),false);
 });
 
-test('complete runtime and Home load the character layer before using pilot covers',()=>{
-  const scriptIndex=indexSource.indexOf('character-runtime-v1.js?v=1.0.1');
-  const completeIndex=indexSource.indexOf('complete-games-v3.js?v=3.6.0');
-  assert.ok(scriptIndex>=0&&completeIndex>scriptIndex);
-  assert.match(indexSource,/const characterConsistencyPilotCoverKeys=\{5:'pixel-quest',10:'paws-stage',12:'puppet-studio',20:'formation-knights',36:'moonlight-tea-shop'\}/);
-  assert.match(indexSource,/game-covers\/character-consistency-v1\/['"]?\+key\+'\.svg\?v=1\.0\.1/);
-  for(const characterId of manifest.files.map(item=>item.character_id)) assert.ok(completeSource.includes(`heroCharacterId: '${characterId}'`),characterId);
-  assert.match(completeSource,/version: '3\.6\.0'/);
-  assert.match(completeSource,/drawCanonicalCharacter/);
+test('current Home and runtime consistently select original classic SVG sprites and covers',()=>{
+  assert.ok(indexSource.includes('complete-games-v3.js?v=4.2.0'));
+  // The legacy mapping identifier is retained; its actual art sources are classic SVG.
+  assert.match(indexSource,/const casualGameCoverKeys=/);
+  assert.ok(indexSource.includes("/assets/games/classic-v1/covers/"));
+  assert.doesNotMatch(indexSource,/\/assets\/games\/casual-v1\//);
+  assert.doesNotMatch(indexSource,/const characterConsistencyPilotCoverKeys/);
+  assert.match(completeSource,/version: '4\.2\.0'/);
+  assert.match(completeSource,/classic-v1\/scenes\//);
+  assert.match(completeSource,/CLASSIC_SCENE_BASE \+ this\.gameKey \+ '\.svg'/);
+  assert.doesNotMatch(completeSource,/casual-v1/);
 });

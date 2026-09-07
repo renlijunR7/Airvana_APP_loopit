@@ -9,7 +9,7 @@ h1 { margin:8px 0 16px; font-size:clamp(32px,5vw,56px); letter-spacing:-.05em; }
 .summary[data-pass="false"] { background:#fff0f1; color:#a51c2b; border-color:#ffc2c7; }
 .samples { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:15px; margin-top:28px; }
 .sample { border-radius:24px; overflow:hidden; background:#080b0d; box-shadow:0 16px 36px rgba(28,28,30,.13); }
-.sample canvas { display:block; width:100%; aspect-ratio:360/640; background:#111; }
+.sample canvas { display:block; width:100%; height:auto; aspect-ratio:360/560; background:#111; }
 .sample figcaption { padding:11px 13px 13px; color:#fff; }
 .sample strong,.sample span { display:block; }
 .sample strong { font-size:13px; }

@@ -1,0 +1,126 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="560" viewBox="0 0 360 560" shape-rendering="geometricPrecision"><rect x="0" y="0" width="360" height="560" fill="#CED6C0"/><path d="M0 20L360 20" fill="none" stroke="#B7C5AA" stroke-width="2"/><path d="M140 20L140 84" fill="none" stroke="#B7C5AA" stroke-width="2"/><path d="M0 84L360 84" fill="none" stroke="#B7C5AA" stroke-width="2"/><path d="M248 84L248 148" fill="none" stroke="#B7C5AA" stroke-width="2"/><path d="M0 148L360 148" fill="none" stroke="#B7C5AA" stroke-width="2"/><path d="M16 148L16 212" fill="none" stroke="#B7C5AA" stroke-width="2"/><path d="M0 212L360 212" fill="none" stroke="#B7C5AA" stroke-width="2"/><path d="M124 212L124 276" fill="none" stroke="#B7C5AA" stroke-width="2"/><path d="M0 276L360 276" fill="none" stroke="#B7C5AA" stroke-width="2"/><path d="M232 276L232 340" fill="none" stroke="#B7C5AA" stroke-width="2"/><path d="M0 340L360 340" fill="none" stroke="#B7C5AA" stroke-width="2"/><path d="M0 340L0 404" fill="none" stroke="#B7C5AA" stroke-width="2"/><path d="M0 404L360 404" fill="none" stroke="#B7C5AA" stroke-width="2"/><path d="M108 404L108 468" fill="none" stroke="#B7C5AA" stroke-width="2"/><path d="M0 468L360 468" fill="none" stroke="#B7C5AA" stroke-width="2"/><path d="M216 468L216 532" fill="none" stroke="#B7C5AA" stroke-width="2"/><path d="M0 532L360 532" fill="none" stroke="#B7C5AA" stroke-width="2"/><path d="M324 532L324 596" fill="none" stroke="#B7C5AA" stroke-width="2"/><rect x="18" y="66" width="324" height="420" fill="#B6C7B2" stroke="#7E9D89" stroke-width="3"/><rect x="24" y="72" width="312" height="408" fill="#F5EBD0" stroke="#B7C5AA" stroke-width="2"/><polygon points="32,25 41,35 32,45 23,35" fill="#7E9D89"/><polygon points="328,25 337,35 328,45 319,35" fill="#7E9D89"/><polygon points="32,512 41,522 32,532 23,522" fill="#7E9D89"/><polygon points="328,512 337,522 328,532 319,522" fill="#7E9D89"/><rect x="28.5" y="128.5" width="303" height="303" fill="#7E9D89"/><rect x="32.5" y="132.5" width="295" height="295" fill="#B6C7B2"/><rect x="37.5" y="137.5" width="53" height="53" fill="#F5EBD0" stroke="#B7C5AA" stroke-width="2"/><g transform="translate(41.5 141.5) scale(0.703125) translate(0 0)">
+<title>sapphire — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M19 7H45L59 25L46 55H18L5 25Z" fill="#4977a5" /><path d="M5 25H21L32 7H19ZM59 25H43L32 55H46ZM21 25L18 55H32Z" fill="#345276" stroke="none"/><path d="M32 7L43 25L32 55L21 25Z" fill="#75c3c7" stroke="none"/><path d="M5 25H59M19 7L21 25L18 55M45 7L43 25L46 55" fill="none" stroke="#243042" stroke-width="1.5"/>
+</g>
+</g><rect x="95.5" y="137.5" width="53" height="53" fill="#F5EBD0" stroke="#B7C5AA" stroke-width="2"/><g transform="translate(99.5 141.5) scale(0.703125) translate(0 0)">
+<title>emerald — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M19 7H45L59 25L46 55H18L5 25Z" fill="#689754" /><path d="M5 25H21L32 7H19ZM59 25H43L32 55H46ZM21 25L18 55H32Z" fill="#416b47" stroke="none"/><path d="M32 7L43 25L32 55L21 25Z" fill="#96b966" stroke="none"/><path d="M5 25H59M19 7L21 25L18 55M45 7L43 25L46 55" fill="none" stroke="#243042" stroke-width="1.5"/>
+</g>
+</g><rect x="153.5" y="137.5" width="53" height="53" fill="#F5EBD0" stroke="#B7C5AA" stroke-width="2"/><g transform="translate(157.5 141.5) scale(0.703125) translate(0 0)">
+<title>sapphire — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M19 7H45L59 25L46 55H18L5 25Z" fill="#4977a5" /><path d="M5 25H21L32 7H19ZM59 25H43L32 55H46ZM21 25L18 55H32Z" fill="#345276" stroke="none"/><path d="M32 7L43 25L32 55L21 25Z" fill="#75c3c7" stroke="none"/><path d="M5 25H59M19 7L21 25L18 55M45 7L43 25L46 55" fill="none" stroke="#243042" stroke-width="1.5"/>
+</g>
+</g><rect x="211.5" y="137.5" width="53" height="53" fill="#F5EBD0" stroke="#B7C5AA" stroke-width="2"/><g transform="translate(215.5 141.5) scale(0.703125) translate(0 0)">
+<title>emerald — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M19 7H45L59 25L46 55H18L5 25Z" fill="#689754" /><path d="M5 25H21L32 7H19ZM59 25H43L32 55H46ZM21 25L18 55H32Z" fill="#416b47" stroke="none"/><path d="M32 7L43 25L32 55L21 25Z" fill="#96b966" stroke="none"/><path d="M5 25H59M19 7L21 25L18 55M45 7L43 25L46 55" fill="none" stroke="#243042" stroke-width="1.5"/>
+</g>
+</g><rect x="269.5" y="137.5" width="53" height="53" fill="#F5EBD0" stroke="#B7C5AA" stroke-width="2"/><g transform="translate(273.5 141.5) scale(0.703125) translate(0 0)">
+<title>sapphire — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M19 7H45L59 25L46 55H18L5 25Z" fill="#4977a5" /><path d="M5 25H21L32 7H19ZM59 25H43L32 55H46ZM21 25L18 55H32Z" fill="#345276" stroke="none"/><path d="M32 7L43 25L32 55L21 25Z" fill="#75c3c7" stroke="none"/><path d="M5 25H59M19 7L21 25L18 55M45 7L43 25L46 55" fill="none" stroke="#243042" stroke-width="1.5"/>
+</g>
+</g><rect x="37.5" y="195.5" width="53" height="53" fill="#F5EBD0" stroke="#B7C5AA" stroke-width="2"/><g transform="translate(41.5 199.5) scale(0.703125) translate(0 0)">
+<title>ruby — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M32 5L55 17L59 39L43 59H21L5 39L9 17Z" fill="#d95d39" /><path d="M32 5L44 23L41 43L32 59L55 44L59 39L55 17Z" fill="#a83e33" stroke="none"/><path d="M32 5L20 23L23 43L32 59L5 39L9 17Z" fill="#eb8a59" stroke="none"/><path d="M9 17L20 23H44L55 17M5 39L23 43H41L59 39M20 23L23 43M44 23L41 43" fill="none" stroke="#243042" stroke-width="2"/>
+</g>
+</g><rect x="95.5" y="195.5" width="53" height="53" fill="#F5EBD0" stroke="#B7C5AA" stroke-width="2"/><g transform="translate(99.5 199.5) scale(0.703125) translate(0 0)">
+<title>amethyst — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M24 4H40L51 18V47L40 59H24L13 47V18Z" fill="#8e74a6" /><path d="M24 4L22 18V46L24 59L13 47V18Z" fill="#b39cc4" stroke="none"/><path d="M40 4L43 18V46L40 59L51 47V18Z" fill="#655180" stroke="none"/><path d="M13 18H51M13 47H51M24 4L22 18V47L24 59M40 4L43 18V47L40 59" fill="none" stroke="#243042" stroke-width="2"/>
+</g>
+</g><rect x="153.5" y="195.5" width="53" height="53" fill="#F5EBD0" stroke="#B7C5AA" stroke-width="2"/><g transform="translate(157.5 199.5) scale(0.703125) translate(0 0)">
+<title>ruby — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M32 5L55 17L59 39L43 59H21L5 39L9 17Z" fill="#d95d39" /><path d="M32 5L44 23L41 43L32 59L55 44L59 39L55 17Z" fill="#a83e33" stroke="none"/><path d="M32 5L20 23L23 43L32 59L5 39L9 17Z" fill="#eb8a59" stroke="none"/><path d="M9 17L20 23H44L55 17M5 39L23 43H41L59 39M20 23L23 43M44 23L41 43" fill="none" stroke="#243042" stroke-width="2"/>
+</g>
+</g><rect x="211.5" y="195.5" width="53" height="53" fill="#F5EBD0" stroke="#B7C5AA" stroke-width="2"/><g transform="translate(215.5 199.5) scale(0.703125) translate(0 0)">
+<title>amethyst — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M24 4H40L51 18V47L40 59H24L13 47V18Z" fill="#8e74a6" /><path d="M24 4L22 18V46L24 59L13 47V18Z" fill="#b39cc4" stroke="none"/><path d="M40 4L43 18V46L40 59L51 47V18Z" fill="#655180" stroke="none"/><path d="M13 18H51M13 47H51M24 4L22 18V47L24 59M40 4L43 18V47L40 59" fill="none" stroke="#243042" stroke-width="2"/>
+</g>
+</g><rect x="269.5" y="195.5" width="53" height="53" fill="#F5EBD0" stroke="#B7C5AA" stroke-width="2"/><g transform="translate(273.5 199.5) scale(0.703125) translate(0 0)">
+<title>ruby — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M32 5L55 17L59 39L43 59H21L5 39L9 17Z" fill="#d95d39" /><path d="M32 5L44 23L41 43L32 59L55 44L59 39L55 17Z" fill="#a83e33" stroke="none"/><path d="M32 5L20 23L23 43L32 59L5 39L9 17Z" fill="#eb8a59" stroke="none"/><path d="M9 17L20 23H44L55 17M5 39L23 43H41L59 39M20 23L23 43M44 23L41 43" fill="none" stroke="#243042" stroke-width="2"/>
+</g>
+</g><rect x="37.5" y="253.5" width="53" height="53" fill="#F5EBD0" stroke="#B7C5AA" stroke-width="2"/><g transform="translate(41.5 257.5) scale(0.703125) translate(0 0)">
+<title>emerald — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M19 7H45L59 25L46 55H18L5 25Z" fill="#689754" /><path d="M5 25H21L32 7H19ZM59 25H43L32 55H46ZM21 25L18 55H32Z" fill="#416b47" stroke="none"/><path d="M32 7L43 25L32 55L21 25Z" fill="#96b966" stroke="none"/><path d="M5 25H59M19 7L21 25L18 55M45 7L43 25L46 55" fill="none" stroke="#243042" stroke-width="1.5"/>
+</g>
+</g><rect x="95.5" y="253.5" width="53" height="53" fill="#F5EBD0" stroke="#B7C5AA" stroke-width="2"/><g transform="translate(99.5 257.5) scale(0.703125) translate(0 0)">
+<title>sapphire — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M19 7H45L59 25L46 55H18L5 25Z" fill="#4977a5" /><path d="M5 25H21L32 7H19ZM59 25H43L32 55H46ZM21 25L18 55H32Z" fill="#345276" stroke="none"/><path d="M32 7L43 25L32 55L21 25Z" fill="#75c3c7" stroke="none"/><path d="M5 25H59M19 7L21 25L18 55M45 7L43 25L46 55" fill="none" stroke="#243042" stroke-width="1.5"/>
+</g>
+</g><rect x="153.5" y="253.5" width="53" height="53" fill="#F5EBD0" stroke="#B7C5AA" stroke-width="2"/><g transform="translate(157.5 257.5) scale(0.703125) translate(0 0)">
+<title>emerald — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M19 7H45L59 25L46 55H18L5 25Z" fill="#689754" /><path d="M5 25H21L32 7H19ZM59 25H43L32 55H46ZM21 25L18 55H32Z" fill="#416b47" stroke="none"/><path d="M32 7L43 25L32 55L21 25Z" fill="#96b966" stroke="none"/><path d="M5 25H59M19 7L21 25L18 55M45 7L43 25L46 55" fill="none" stroke="#243042" stroke-width="1.5"/>
+</g>
+</g><rect x="211.5" y="253.5" width="53" height="53" fill="#F5EBD0" stroke="#B7C5AA" stroke-width="2"/><g transform="translate(215.5 257.5) scale(0.703125) translate(0 0)">
+<title>sapphire — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M19 7H45L59 25L46 55H18L5 25Z" fill="#4977a5" /><path d="M5 25H21L32 7H19ZM59 25H43L32 55H46ZM21 25L18 55H32Z" fill="#345276" stroke="none"/><path d="M32 7L43 25L32 55L21 25Z" fill="#75c3c7" stroke="none"/><path d="M5 25H59M19 7L21 25L18 55M45 7L43 25L46 55" fill="none" stroke="#243042" stroke-width="1.5"/>
+</g>
+</g><rect x="269.5" y="253.5" width="53" height="53" fill="#F5EBD0" stroke="#B7C5AA" stroke-width="2"/><g transform="translate(273.5 257.5) scale(0.703125) translate(0 0)">
+<title>emerald — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M19 7H45L59 25L46 55H18L5 25Z" fill="#689754" /><path d="M5 25H21L32 7H19ZM59 25H43L32 55H46ZM21 25L18 55H32Z" fill="#416b47" stroke="none"/><path d="M32 7L43 25L32 55L21 25Z" fill="#96b966" stroke="none"/><path d="M5 25H59M19 7L21 25L18 55M45 7L43 25L46 55" fill="none" stroke="#243042" stroke-width="1.5"/>
+</g>
+</g><rect x="37.5" y="311.5" width="53" height="53" fill="#F5EBD0" stroke="#B7C5AA" stroke-width="2"/><g transform="translate(41.5 315.5) scale(0.703125) translate(0 0)">
+<title>amethyst — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M24 4H40L51 18V47L40 59H24L13 47V18Z" fill="#8e74a6" /><path d="M24 4L22 18V46L24 59L13 47V18Z" fill="#b39cc4" stroke="none"/><path d="M40 4L43 18V46L40 59L51 47V18Z" fill="#655180" stroke="none"/><path d="M13 18H51M13 47H51M24 4L22 18V47L24 59M40 4L43 18V47L40 59" fill="none" stroke="#243042" stroke-width="2"/>
+</g>
+</g><rect x="95.5" y="311.5" width="53" height="53" fill="#F5EBD0" stroke="#B7C5AA" stroke-width="2"/><g transform="translate(99.5 315.5) scale(0.703125) translate(0 0)">
+<title>ruby — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M32 5L55 17L59 39L43 59H21L5 39L9 17Z" fill="#d95d39" /><path d="M32 5L44 23L41 43L32 59L55 44L59 39L55 17Z" fill="#a83e33" stroke="none"/><path d="M32 5L20 23L23 43L32 59L5 39L9 17Z" fill="#eb8a59" stroke="none"/><path d="M9 17L20 23H44L55 17M5 39L23 43H41L59 39M20 23L23 43M44 23L41 43" fill="none" stroke="#243042" stroke-width="2"/>
+</g>
+</g><rect x="153.5" y="311.5" width="53" height="53" fill="#F5EBD0" stroke="#B7C5AA" stroke-width="2"/><g transform="translate(157.5 315.5) scale(0.703125) translate(0 0)">
+<title>amethyst — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M24 4H40L51 18V47L40 59H24L13 47V18Z" fill="#8e74a6" /><path d="M24 4L22 18V46L24 59L13 47V18Z" fill="#b39cc4" stroke="none"/><path d="M40 4L43 18V46L40 59L51 47V18Z" fill="#655180" stroke="none"/><path d="M13 18H51M13 47H51M24 4L22 18V47L24 59M40 4L43 18V47L40 59" fill="none" stroke="#243042" stroke-width="2"/>
+</g>
+</g><rect x="211.5" y="311.5" width="53" height="53" fill="#F5EBD0" stroke="#B7C5AA" stroke-width="2"/><g transform="translate(215.5 315.5) scale(0.703125) translate(0 0)">
+<title>ruby — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M32 5L55 17L59 39L43 59H21L5 39L9 17Z" fill="#d95d39" /><path d="M32 5L44 23L41 43L32 59L55 44L59 39L55 17Z" fill="#a83e33" stroke="none"/><path d="M32 5L20 23L23 43L32 59L5 39L9 17Z" fill="#eb8a59" stroke="none"/><path d="M9 17L20 23H44L55 17M5 39L23 43H41L59 39M20 23L23 43M44 23L41 43" fill="none" stroke="#243042" stroke-width="2"/>
+</g>
+</g><rect x="269.5" y="311.5" width="53" height="53" fill="#F5EBD0" stroke="#B7C5AA" stroke-width="2"/><g transform="translate(273.5 315.5) scale(0.703125) translate(0 0)">
+<title>amethyst — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M24 4H40L51 18V47L40 59H24L13 47V18Z" fill="#8e74a6" /><path d="M24 4L22 18V46L24 59L13 47V18Z" fill="#b39cc4" stroke="none"/><path d="M40 4L43 18V46L40 59L51 47V18Z" fill="#655180" stroke="none"/><path d="M13 18H51M13 47H51M24 4L22 18V47L24 59M40 4L43 18V47L40 59" fill="none" stroke="#243042" stroke-width="2"/>
+</g>
+</g><rect x="37.5" y="369.5" width="53" height="53" fill="#F5EBD0" stroke="#B7C5AA" stroke-width="2"/><g transform="translate(41.5 373.5) scale(0.703125) translate(0 0)">
+<title>sapphire — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M19 7H45L59 25L46 55H18L5 25Z" fill="#4977a5" /><path d="M5 25H21L32 7H19ZM59 25H43L32 55H46ZM21 25L18 55H32Z" fill="#345276" stroke="none"/><path d="M32 7L43 25L32 55L21 25Z" fill="#75c3c7" stroke="none"/><path d="M5 25H59M19 7L21 25L18 55M45 7L43 25L46 55" fill="none" stroke="#243042" stroke-width="1.5"/>
+</g>
+</g><rect x="95.5" y="369.5" width="53" height="53" fill="#F5EBD0" stroke="#B7C5AA" stroke-width="2"/><g transform="translate(99.5 373.5) scale(0.703125) translate(0 0)">
+<title>emerald — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M19 7H45L59 25L46 55H18L5 25Z" fill="#689754" /><path d="M5 25H21L32 7H19ZM59 25H43L32 55H46ZM21 25L18 55H32Z" fill="#416b47" stroke="none"/><path d="M32 7L43 25L32 55L21 25Z" fill="#96b966" stroke="none"/><path d="M5 25H59M19 7L21 25L18 55M45 7L43 25L46 55" fill="none" stroke="#243042" stroke-width="1.5"/>
+</g>
+</g><rect x="153.5" y="369.5" width="53" height="53" fill="#F5EBD0" stroke="#B7C5AA" stroke-width="2"/><g transform="translate(157.5 373.5) scale(0.703125) translate(0 0)">
+<title>sapphire — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M19 7H45L59 25L46 55H18L5 25Z" fill="#4977a5" /><path d="M5 25H21L32 7H19ZM59 25H43L32 55H46ZM21 25L18 55H32Z" fill="#345276" stroke="none"/><path d="M32 7L43 25L32 55L21 25Z" fill="#75c3c7" stroke="none"/><path d="M5 25H59M19 7L21 25L18 55M45 7L43 25L46 55" fill="none" stroke="#243042" stroke-width="1.5"/>
+</g>
+</g><rect x="211.5" y="369.5" width="53" height="53" fill="#F5EBD0" stroke="#B7C5AA" stroke-width="2"/><g transform="translate(215.5 373.5) scale(0.703125) translate(0 0)">
+<title>emerald — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M19 7H45L59 25L46 55H18L5 25Z" fill="#689754" /><path d="M5 25H21L32 7H19ZM59 25H43L32 55H46ZM21 25L18 55H32Z" fill="#416b47" stroke="none"/><path d="M32 7L43 25L32 55L21 25Z" fill="#96b966" stroke="none"/><path d="M5 25H59M19 7L21 25L18 55M45 7L43 25L46 55" fill="none" stroke="#243042" stroke-width="1.5"/>
+</g>
+</g><rect x="269.5" y="369.5" width="53" height="53" fill="#F5EBD0" stroke="#B7C5AA" stroke-width="2"/><g transform="translate(273.5 373.5) scale(0.703125) translate(0 0)">
+<title>sapphire — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M19 7H45L59 25L46 55H18L5 25Z" fill="#4977a5" /><path d="M5 25H21L32 7H19ZM59 25H43L32 55H46ZM21 25L18 55H32Z" fill="#345276" stroke="none"/><path d="M32 7L43 25L32 55L21 25Z" fill="#75c3c7" stroke="none"/><path d="M5 25H59M19 7L21 25L18 55M45 7L43 25L46 55" fill="none" stroke="#243042" stroke-width="1.5"/>
+</g>
+</g></svg>

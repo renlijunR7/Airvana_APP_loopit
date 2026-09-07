@@ -10,7 +10,9 @@ import { assertOptimizable, assignVariant, assignmentCounts, resolveContentVaria
 import {
   AIP_REWARD_RULES, ECONOMY_VERSION, activateSubscription, awardAipRule, completePaymentSettlement,
   consumeAip, consumeCreation, createAitEntitlement, economySnapshot, ensureEconomyAccount,
-  grantAip, quoteCreation, requestAitSettlement, reviewAitEntitlement, reviewBenefitClaim,
+  grantAip, inviteSummary, listGameCoinLedgers, qualifyInvite, quoteCreation, recordGameCompletion,
+  redeemInvite, requestAitSettlement, reviewAitEntitlement, reviewBenefitClaim,
+  GAME_COIN_BOUNDARY,
   reviewCreatorApplication, reviewLedgerAppeal, reviewPaymentSettlement, seedEconomyPlans,
   submitCreatorApplication, submitLedgerAppeal, upsertCampaignEconomyRule,
 } from './economy.mjs';
@@ -84,13 +86,40 @@ function validateCampaignBrief(brief) {
   }
 }
 
-function ipFor(req) {
-  return String(req.headers['x-forwarded-for'] || req.socket.remoteAddress || 'unknown').split(',')[0].trim();
+function firstForwardedValue(value) {
+  return String(value || '').split(',')[0].trim();
 }
 
-function requestContext(req, secret) {
+function ipFor(req, trustProxy) {
+  if (trustProxy) {
+    const forwarded = firstForwardedValue(req.headers['x-forwarded-for']);
+    if (forwarded) return forwarded;
+  }
+  return String(req.socket.remoteAddress || 'unknown');
+}
+
+function protocolFor(req, trustProxy) {
+  if (trustProxy) {
+    const forwarded = firstForwardedValue(req.headers['x-forwarded-proto']).toLowerCase();
+    if (forwarded === 'http' || forwarded === 'https') return forwarded;
+  }
+  return req.socket.encrypted ? 'https' : 'http';
+}
+
+function hostFor(req, trustProxy) {
+  const candidate = trustProxy
+    ? firstForwardedValue(req.headers['x-forwarded-host']) || String(req.headers.host || '')
+    : String(req.headers.host || '');
+  return /^[A-Za-z0-9.-]+(?::\d+)?$/.test(candidate) ? candidate : 'localhost';
+}
+
+function originFor(req, trustProxy) {
+  return `${protocolFor(req, trustProxy)}://${hostFor(req, trustProxy)}`;
+}
+
+function requestContext(req, secret, trustProxy) {
   return {
-    ipHash: sha256(`${secret}:ip:${ipFor(req)}`),
+    ipHash: sha256(`${secret}:ip:${ipFor(req, trustProxy)}`),
     deviceHash: sha256(`${secret}:device:${String(req.headers['x-airvana-device'] || 'missing')}`),
   };
 }
@@ -304,9 +333,12 @@ function serializeFeedContent(db, row) {
     SUM(CASE WHEN event_type='save' AND status='eligible' THEN 1 ELSE 0 END) saves
     FROM engagement_events WHERE content_id=?`).get(row.id) || {};
   const comments = Number(db.prepare(`SELECT COUNT(*) n FROM content_comments WHERE content_id=? AND status='visible'`).get(row.id)?.n || 0);
+  const currentArt = safeJson(db.prepare("SELECT manifest_json FROM content_artifacts WHERE content_id=? AND version=? AND status='ready'").get(row.id, row.current_version)?.manifest_json || '{}');
+  const gameBackground = typeof currentArt.background === 'string' && /^\/assets\/games\/casual-v1\/scenes\/[a-z-]+\.webp$/.test(currentArt.background) ? currentArt.background : null;
   return {
     ...mapContent(row),
     authorName: row.author_name,
+    gameBackground,
     boostedUntil: row.boost_expires_at,
     likes: Number(counts.likes || 0),
     saves: Number(counts.saves || 0),
@@ -537,6 +569,7 @@ export function createApp(options = {}) {
   if (env.NODE_ENV === 'production' && secret === 'airvana-development-secret-change-me') throw new Error('APP_SECRET must be configured in production');
   const allowDemo = options.allowDemo ?? (env.NODE_ENV !== 'production' && env.ALLOW_DEMO_AUTH !== 'false');
   const cookieSecure = env.COOKIE_SECURE === 'true';
+  const trustProxy = env.TRUST_PROXY === 'loopback';
   const corsAllowedOrigins = new Set(String(env.CORS_ALLOWED_ORIGINS || (env.NODE_ENV === 'production'
     ? ''
     : 'http://127.0.0.1:8083,http://localhost:8083,http://127.0.0.1:8084,http://localhost:8084,http://127.0.0.1:8085,http://localhost:8085'))
@@ -549,7 +582,7 @@ export function createApp(options = {}) {
   async function handler(req, res) {
     const url = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
     const pathname = url.pathname;
-    const ctx = requestContext(req, secret);
+    const ctx = requestContext(req, secret, trustProxy);
     try {
       const requestOrigin = String(req.headers.origin || '');
       const corsAllowed = requestOrigin && corsAllowedOrigins.has(requestOrigin);
@@ -589,7 +622,7 @@ export function createApp(options = {}) {
       if (!currentBucket || currentBucket.resetAt < Date.now()) rateBuckets.set(bucketKey, { count: 1, resetAt: Date.now() + windowMs });
       else if (++currentBucket.count > limit) throw new HttpError(429, '请求过于频繁，请稍后重试', 'rate_limited');
       if (!['GET', 'HEAD', 'OPTIONS'].includes(req.method) && req.headers.origin) {
-        const expectedOrigin = `${req.socket.encrypted ? 'https' : 'http'}://${req.headers.host}`;
+        const expectedOrigin = originFor(req, trustProxy);
         if (req.headers.origin !== expectedOrigin && !corsAllowed) throw new HttpError(403, '请求来源验证失败', 'origin_mismatch');
       }
       if (pathname === '/api/health' && req.method === 'GET') {
@@ -606,8 +639,8 @@ export function createApp(options = {}) {
         const nonce = randomToken(12);
         const issuedAt = isoNow();
         const expiresAt = plusMinutes(10);
-        const origin = `${req.socket.encrypted ? 'https' : 'http'}://${req.headers.host}`;
-        const domain = String(req.headers.host || 'localhost');
+        const origin = originFor(req, trustProxy);
+        const domain = hostFor(req, trustProxy);
         const message = `${domain} wants you to sign in with your Ethereum account:\n${address}\n\nSign in to Airvana as ${role}. This request does not trigger a blockchain transaction or token transfer.\n\nURI: ${origin}\nVersion: 1\nChain ID: ${chainId}\nNonce: ${nonce}\nIssued At: ${issuedAt}\nExpiration Time: ${expiresAt}`;
         db.prepare(`INSERT INTO auth_challenges (id,address,chain_id,requested_role,message,nonce,expires_at,created_at) VALUES (?,?,?,?,?,?,?,?)`)
           .run(uid('challenge'), address.toLowerCase(), chainId, role, message, nonce, expiresAt, issuedAt);
@@ -764,6 +797,47 @@ export function createApp(options = {}) {
           if (AIP_REWARD_RULES[streakRule]) streakReward = awardAipRule(db, { userId: user.id, ruleKey: streakRule, eventKey: `login-streak:${user.id}:${day}`, metadata: { streak } });
         }
         return sendJson(res, base.idempotent ? 200 : 201, { idempotent: base.idempotent, streak, baseReward: AIP_REWARD_RULES.daily_login.amount, streakReward: streakReward ? AIP_REWARD_RULES[`streak_day_${Math.min(streak, 7)}`].amount : 0, economy: economySnapshot(db, user) });
+      }
+
+      if (pathname === '/api/games/coins' && req.method === 'GET') {
+        const user = requireUser(db, req);
+        return sendJson(res, 200, { ledgers: listGameCoinLedgers(db, user.id), boundary: GAME_COIN_BOUNDARY });
+      }
+
+      if (pathname === '/api/games/complete' && req.method === 'POST') {
+        const user = requireUser(db, req);
+        const body = await readJson(req);
+        const result = recordGameCompletion(db, {
+          userId: user.id,
+          playableId: body.playableId,
+          title: String(body.title || '').slice(0, 120),
+          success: body.success === true,
+          score: asInt(body.score ?? 0, 0, 1_000_000, '游戏得分'),
+          stage: String(body.stage || ''),
+          summary: String(body.summary || ''),
+        });
+        audit(db, { actorUserId: user.id, action: 'game.completion_recorded', subjectType: 'playable', subjectId: result.ledger.playableId, after: { success: result.success, coinsEarned: result.coinsEarned, earnedAip: result.earnedAip }, ipHash: ctx.ipHash });
+        return sendJson(res, result.earnedAip > 0 ? 201 : 200, { ...result, economy: economySnapshot(db, user) });
+      }
+
+      if (pathname === '/api/invites/summary' && req.method === 'GET') {
+        const user = requireUser(db, req);
+        return sendJson(res, 200, { invite: inviteSummary(db, user) });
+      }
+
+      if (pathname === '/api/invites/redeem' && req.method === 'POST') {
+        const user = requireUser(db, req);
+        const body = await readJson(req);
+        const result = redeemInvite(db, { inviteeUserId: user.id, inviteCode: body.inviteCode });
+        if (!result.idempotent) audit(db, { actorUserId: user.id, action: 'invite.redeemed', subjectType: 'invite_redemption', subjectId: result.redemptionId, ipHash: ctx.ipHash });
+        return sendJson(res, result.idempotent ? 200 : 201, result);
+      }
+
+      if (pathname === '/api/invites/qualify' && req.method === 'POST') {
+        const user = requireUser(db, req);
+        const result = qualifyInvite(db, { inviteeUserId: user.id });
+        if (!result.idempotent) audit(db, { actorUserId: user.id, action: 'invite.qualified', subjectType: 'invite_redemption', subjectId: result.redemptionId, after: { inviterUserId: result.inviterUserId, earnedAip: result.earnedAip }, ipHash: ctx.ipHash });
+        return sendJson(res, result.idempotent ? 200 : 201, result);
       }
 
       if (pathname === '/api/economy/creation/quote' && req.method === 'GET') {
@@ -973,8 +1047,8 @@ export function createApp(options = {}) {
         const nonce = randomToken(12);
         const issuedAt = isoNow();
         const expiresAt = plusMinutes(10);
-        const origin = `${req.socket.encrypted ? 'https' : 'http'}://${req.headers.host}`;
-        const domain = String(req.headers.host || 'localhost');
+        const origin = originFor(req, trustProxy);
+        const domain = hostFor(req, trustProxy);
         const message = `${domain} requests a wallet binding signature:\n${address}\n\nBind this wallet to Airvana account ${user.id}. This request does not trigger a blockchain transaction, token approval, or asset transfer.\n\nURI: ${origin}\nPurpose: bind-wallet\nChain ID: ${chainId}\nNonce: ${nonce}\nIssued At: ${issuedAt}\nExpiration Time: ${expiresAt}`;
         db.prepare(`INSERT INTO wallet_binding_challenges (id,user_id,address,chain_id,message,nonce,expires_at,created_at)
           VALUES (?,?,?,?,?,?,?,?)`).run(uid('wallet_challenge'), user.id, normalized, chainId, message, nonce, expiresAt, issuedAt);
@@ -2793,8 +2867,9 @@ export function createApp(options = {}) {
         if (!artifact) throw new HttpError(404, '内容成品不存在', 'not_found');
         // 灰度投放：分桶在服务端解析并落真实分配记录，注入到投放副本，存量成品与 checksum 不变
         const running = db.prepare(`SELECT id FROM experiments WHERE content_id=? AND status='running' LIMIT 1`).get(content.id);
-        const viewer = getSessionUser(db, req);
-        const variant = running ? resolveContentVariant(db, content.id, viewer?.id || null) : null;
+        // HEAD is a read-only availability probe, not a delivered experiment exposure.
+        const viewer = req.method === 'GET' ? getSessionUser(db, req) : null;
+        const variant = running && req.method === 'GET' ? resolveContentVariant(db, content.id, viewer?.id || null) : null;
         let html = artifact.html_text;
         if (variant && artifactVariantAware(db, content.id)) {
           const payload = jsonString(variant).replaceAll('<', '\\u003c').replaceAll('>', '\\u003e').replaceAll('&', '\\u0026');
@@ -2803,7 +2878,7 @@ export function createApp(options = {}) {
         res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8',
           // 内容处于灰度时按人投放，禁止任何共享缓存复用他人分支
           'Cache-Control': running ? 'private, no-store' : 'public, max-age=60', Vary: 'Cookie',
-          'X-Frame-Options': 'SAMEORIGIN', 'X-Content-Type-Options': 'nosniff', 'Content-Security-Policy': "default-src 'self'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'self'; img-src 'self' data:; frame-ancestors 'self'" });
+          'X-Frame-Options': 'SAMEORIGIN', 'X-Content-Type-Options': 'nosniff', 'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src 'self'; img-src 'self' data:; frame-ancestors 'self'" });
         return res.end(req.method === 'HEAD' ? '' : html);
       }
 
@@ -2813,7 +2888,9 @@ export function createApp(options = {}) {
         const content = requireOwnedContent(db, params.id, user);
         const artifact = db.prepare(`SELECT * FROM content_artifacts WHERE content_id=? AND version=? AND status='ready'`).get(content.id, content.current_version);
         if (!artifact) throw new HttpError(404, '内容成品不存在', 'not_found');
-        res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff' });
+        res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store',
+          // Only the authenticated owner's successful preview may run in the same-origin shell.
+          'X-Frame-Options': 'SAMEORIGIN', 'X-Content-Type-Options': 'nosniff', 'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src 'self'; img-src 'self' data:; frame-ancestors 'self'" });
         return res.end(req.method === 'HEAD' ? '' : artifact.html_text);
       }
 
