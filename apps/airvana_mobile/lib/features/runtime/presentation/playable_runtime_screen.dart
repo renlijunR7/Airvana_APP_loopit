@@ -6,6 +6,7 @@ import 'package:airvana_mobile/design_system/generated_cover.dart';
 import 'package:airvana_mobile/features/runtime/domain/server_runtime_proof.dart';
 import 'package:airvana_mobile/features/runtime/presentation/generated_playable_runtime.dart';
 import 'package:airvana_mobile/features/runtime/presentation/h5_game_runtime.dart';
+import 'package:airvana_mobile/features/runtime/presentation/standalone_game_runtime.dart';
 import 'package:airvana_mobile/features/shared/domain/airvana_models.dart';
 import 'package:airvana_mobile/features/shared/presentation/content_report_sheet.dart';
 import 'package:airvana_mobile/features/shared/presentation/playable_social_sheets.dart';
@@ -137,6 +138,7 @@ class _PlayableRuntimeScreenState extends ConsumerState<PlayableRuntimeScreen> {
   String _feedback = '选择正确行动完成 3 个阶段';
   bool _h5Success = false;
   bool _h5FallbackToChoices = false;
+  bool _standaloneFallbackToChoices = false;
   String _gameRewardMessage = '';
 
   /// 仅在服务端真实返回运行证明结果后才有值；本地演示奖励不写这里。
@@ -148,9 +150,16 @@ class _PlayableRuntimeScreenState extends ConsumerState<PlayableRuntimeScreen> {
   Playable get playable => widget.playable;
   _RuntimeSpec get _spec => _RuntimeSpec.forPlayable(playable);
 
+  /// 独立打包游戏（120-132）整包在安装包内，直接加载它自己的入口。
+  bool get _useStandaloneRuntime =>
+      !_standaloneFallbackToChoices &&
+      h5GameRuntimeSupported() &&
+      playable.standaloneAsset.isNotEmpty;
+
   /// legacy 38 款走 H5 完整玩法引擎；WebView 不可用或加载失败时
   /// 回退到本地选择题演示结构。
   bool get _useH5Runtime =>
+      !_useStandaloneRuntime &&
       !_h5FallbackToChoices &&
       h5GameRuntimeSupported() &&
       h5GameKeyForPlayable(playable.id) != null &&
@@ -500,6 +509,14 @@ class _PlayableRuntimeScreenState extends ConsumerState<PlayableRuntimeScreen> {
                   ),
                   if (!_started)
                     _Intro(playable: playable, spec: _spec, onStart: _start),
+                  if (_started && !_complete && _useStandaloneRuntime)
+                    StandaloneGameRuntime(
+                      key: ValueKey('standalone-${playable.id}-$_runId'),
+                      asset: playable.standaloneAsset,
+                      onLoadError: (_) => setState(
+                        () => _standaloneFallbackToChoices = true,
+                      ),
+                    ),
                   if (_started && !_complete && _useH5Runtime)
                     H5GameRuntime(
                       key: ValueKey('h5-runtime-${playable.id}-$_runId'),
@@ -509,7 +526,10 @@ class _PlayableRuntimeScreenState extends ConsumerState<PlayableRuntimeScreen> {
                       onLoadError: (_) =>
                           setState(() => _h5FallbackToChoices = true),
                     ),
-                  if (_started && !_complete && !_useH5Runtime)
+                  if (_started &&
+                      !_complete &&
+                      !_useH5Runtime &&
+                      !_useStandaloneRuntime)
                     _GameBoard(
                       playable: playable,
                       spec: _spec,

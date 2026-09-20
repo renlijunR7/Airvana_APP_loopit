@@ -30,6 +30,7 @@ class Playable {
     this.comments = 0,
     this.saves = 0,
     this.localDemo = false,
+    this.standaloneAsset = '',
   });
 
   factory Playable.fromJson(Map<String, dynamic> json) {
@@ -74,6 +75,10 @@ class Playable {
   final int comments;
   final int saves;
   final bool localDemo;
+
+  /// 独立打包游戏（Web 的 120-132）在安装包内的入口，例如
+  /// `assets/arcade/kol-town/index.html`；普通 Playable 为空串。
+  final String standaloneAsset;
 
   String get publicPath => '/content/$id';
 }

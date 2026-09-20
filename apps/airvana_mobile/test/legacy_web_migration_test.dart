@@ -9,10 +9,23 @@ void main() {
     TestWidgetsFlutterBinding.ensureInitialized();
   });
 
-  test('legacy Web catalog keeps all 51 playables in its exact order', () {
+  test('legacy Web catalog keeps all 64 playables in its exact order', () {
     final playables = LegacyDemoCatalog.legacyWebPlayables;
-    expect(playables, hasLength(51));
+    expect(playables, hasLength(64));
     expect(playables.map((item) => item.id), const [
+      'plb_kol_town',
+      'plb_coin_dozer',
+      'plb_htx_quest',
+      'plb_token_harbor',
+      'plb_coin_castle',
+      'plb_lucky_fruit',
+      'plb_city_squad',
+      'plb_mini_gp_racers',
+      'plb_street_gold_rush',
+      'plb_star_table',
+      'plb_sud_texas',
+      'plb_risk_run',
+      'plb_niguolaia',
       'plb_sky_raid',
       'plb_harvest_lane',
       'plb_island_sling',
@@ -70,6 +83,19 @@ void main() {
   test('legacy Web discover covers and categories stay exact and complete', () {
     final playables = LegacyDemoCatalog.legacyWebPlayables;
     expect(playables.map((item) => item.coverAsset), const [
+      'assets/featured-originals-v2/kol-town-user-20260916-srgb.png',
+      'assets/featured-originals-v2/coin-dozer-user-20260915-srgb.png',
+      'assets/featured-originals-v2/htx-quest-user-20260915-srgb.png',
+      'assets/featured-originals-v2/token-harbor-user-20260915-srgb.png',
+      'assets/featured-originals-v2/coin-castle-user-20260915-srgb.png',
+      'assets/featured-originals-v2/lucky-fruit-user-20260915-srgb.png',
+      'assets/featured-originals-v2/city-squad-user-20260915-srgb.png',
+      'assets/featured-originals-v2/mini-gp-racers-user-20260915-srgb.png',
+      'assets/featured-originals-v2/street-gold-rush-user-20260915-srgb.png',
+      'assets/featured-originals-v2/star-table-user-20260915-srgb.png',
+      'assets/featured-originals-v2/sud-texas-user-20260915-srgb.png',
+      'assets/featured-originals-v2/risk-run-user-20260915-srgb.png',
+      'assets/featured-originals-v2/niguolaia.png',
       'assets/runner/assets/games/reference-screenshots-v1/sky-raid.jpg',
       'assets/runner/assets/games/reference-screenshots-v1/harvest-lane.jpg',
       'assets/runner/assets/games/reference-screenshots-v1/island-sling.jpg',
@@ -123,6 +149,19 @@ void main() {
       'assets/runner/assets/games/casual-v1/covers-png/star-cups.png',
     ]);
     expect(playables.map((item) => item.category), const [
+      '独立打包游戏',
+      '独立打包游戏',
+      '独立打包游戏',
+      '独立打包游戏',
+      '独立打包游戏',
+      '独立打包游戏',
+      '独立打包游戏',
+      '独立打包游戏',
+      '独立打包游戏',
+      '独立打包游戏',
+      '独立打包游戏',
+      '独立打包游戏',
+      '独立打包游戏',
       '原创小游戏',
       '原创小游戏',
       '原创小游戏',
@@ -199,7 +238,7 @@ void main() {
   );
 
   testWidgets(
-    'discover renders all 51 legacy games and provides working local filters and search',
+    'discover renders all 64 legacy games and provides working local filters and search',
     (tester) async {
       tester.view.physicalSize = const Size(430, 932);
       tester.view.devicePixelRatio = 1;
@@ -214,21 +253,21 @@ void main() {
       );
       await tester.pump();
 
-      expect(find.text('51 / 51'), findsOneWidget);
-      expect(find.textContaining('LOCAL DEMO · 51 款原创离线游戏'), findsOneWidget);
+      expect(find.text('64 / 64'), findsOneWidget);
+      expect(find.textContaining('LOCAL DEMO · 64 款原创离线游戏'), findsOneWidget);
       expect(
-        find.byKey(const ValueKey('discover-card-plb_sky_raid')),
+        find.byKey(const ValueKey('discover-card-plb_kol_town')),
         findsOneWidget,
       );
       expect(
-        find.byKey(const ValueKey('discover-cover-plb_sky_raid')),
+        find.byKey(const ValueKey('discover-cover-plb_kol_town')),
         findsOneWidget,
       );
       expect(
-        find.byKey(const ValueKey('discover-category-plb_sky_raid')),
+        find.byKey(const ValueKey('discover-category-plb_kol_town')),
         findsOneWidget,
       );
-      expect(find.text('原创小游戏'), findsWidgets);
+      expect(find.text('独立打包游戏'), findsWidgets);
       for (final section in ['safety', 'community', 'attribution']) {
         expect(
           find.byKey(ValueKey('discover-showcase-section-$section')),
@@ -368,7 +407,7 @@ void main() {
       );
       await tester.tap(find.text('关注'));
       await tester.pump();
-      expect(find.text('0 / 51'), findsOneWidget);
+      expect(find.text('0 / 64'), findsOneWidget);
       expect(find.text('暂无关注作品'), findsOneWidget);
       expect(find.textContaining('关注创作者后'), findsOneWidget);
       expect(find.text('#安全教育'), findsNothing);

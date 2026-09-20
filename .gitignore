@@ -27,3 +27,9 @@ externalNativeBuild/
 assets-original/
 .playwright-cli/
 output/
+
+# 独立打包游戏在 Flutter 侧的副本：由 scripts/sync-flutter-runner.mjs 从
+# public/arcade 与 public/assets/featured-originals-v2 生成，不重复入库。
+# 构建前执行：node scripts/sync-flutter-runner.mjs
+apps/airvana_mobile/assets/arcade/
+apps/airvana_mobile/assets/featured-originals-v2/

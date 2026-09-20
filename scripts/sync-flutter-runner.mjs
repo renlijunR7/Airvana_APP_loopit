@@ -66,10 +66,30 @@ function copyAssets(dir) {
   return { dir, files };
 }
 
+// 独立打包游戏（Web 的 120-132）整包随安装包分发。
+function copyStandaloneArcade() {
+  const from = path.join(webDir, 'arcade');
+  if (!fs.existsSync(from)) return { dir: 'arcade', skipped: true };
+  const to = path.join(root, 'apps/airvana_mobile/assets/arcade');
+  fs.cpSync(from, to, { recursive: true, force: true });
+  const covers = path.join(webDir, 'assets/featured-originals-v2');
+  if (fs.existsSync(covers)) {
+    fs.cpSync(covers, path.join(root, 'apps/airvana_mobile/assets/featured-originals-v2'), {
+      recursive: true,
+      force: true,
+    });
+  }
+  let files = 0;
+  for (const entry of fs.readdirSync(to, { recursive: true, withFileTypes: true })) {
+    if (entry.isFile()) files += 1;
+  }
+  return { dir: 'arcade', files };
+}
+
 export function sync() {
   fs.mkdirSync(runnerDir, { recursive: true });
   const engines = ENGINE_FILES.map(copyEngine);
-  const assets = ASSET_DIRS.map(copyAssets);
+  const assets = [...ASSET_DIRS.map(copyAssets), copyStandaloneArcade()];
   return { engines, assets };
 }
 

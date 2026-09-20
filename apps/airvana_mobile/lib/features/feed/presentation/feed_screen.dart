@@ -5,6 +5,7 @@ import 'package:airvana_mobile/design_system/airvana_theme.dart';
 import 'package:airvana_mobile/design_system/generated_cover.dart';
 import 'package:airvana_mobile/design_system/app_state_view.dart';
 import 'package:airvana_mobile/features/runtime/presentation/h5_game_runtime.dart';
+import 'package:airvana_mobile/features/runtime/presentation/standalone_game_runtime.dart';
 import 'package:airvana_mobile/features/shared/data/airvana_repository.dart';
 import 'package:airvana_mobile/features/shared/data/legacy_demo_catalog.dart';
 import 'package:airvana_mobile/features/shared/domain/airvana_models.dart';
@@ -967,6 +968,13 @@ class _FeedGameSurface extends StatelessWidget {
     final supportedGame = LegacyDemoCatalog.legacyWebPlayables.any(
       (item) => item.id == playable.id,
     );
+    // 独立打包游戏整包在安装包内，直接在信息流里加载它自己的入口。
+    if (playable.standaloneAsset.isNotEmpty && h5GameRuntimeSupported()) {
+      return StandaloneGameRuntime(
+        key: ValueKey('feed-standalone-${playable.id}'),
+        asset: playable.standaloneAsset,
+      );
+    }
     if (playable.localDemo &&
         supportedGame &&
         gameKey != null &&

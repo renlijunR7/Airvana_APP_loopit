@@ -181,7 +181,7 @@ void main() {
       await tester.pumpAndSettle();
 
       final destinations = <(int, String)>[
-        (0, '赤翼突围'),
+        (0, 'Luna 小镇'),
         (1, '#原创新游'),
         (2, '增长网络'),
         (3, '消息'),
@@ -336,7 +336,7 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(
-        find.text('运营 Agentic Playable「赤翼突围」'),
+        find.text('运营 Agentic Playable「Luna 小镇 · KOL Town」'),
         findsOneWidget,
       );
       expect(find.bySemanticsLabel('退出当前作品'), findsOneWidget);
@@ -350,13 +350,14 @@ void main() {
           reason: '$label 必须可以通过读屏触发',
         );
       }
-      expect(find.bySemanticsLabel('关注 Airvana Arcade'), findsOneWidget);
+      expect(find.bySemanticsLabel('关注 Luna 小镇'), findsOneWidget);
 
-      await tester.tap(find.byKey(const ValueKey('play-plb_sky_raid')));
+      await tester.tap(find.byKey(const ValueKey('play-plb_kol_town')));
       await tester.pumpAndSettle();
-      // 首条已是 Web 顺序里的 111 赤翼突围，走通用内联兜底而不是果园专属组件。
+      // 首条是 Web 顺序里的 132 Luna 小镇；测试环境无 WebView，
+      // 独立打包游戏落到通用内联兜底。
       expect(
-        find.byKey(const ValueKey('feed-inline-game-plb_sky_raid')),
+        find.byKey(const ValueKey('feed-inline-game-plb_kol_town')),
         findsOneWidget,
       );
       expect(
@@ -367,19 +368,19 @@ void main() {
       await tester.pump();
       expect(find.byKey(const ValueKey('feed-inline-game')), findsNothing);
 
-      await tester.tap(find.bySemanticsLabel('关注 Airvana Arcade'));
+      await tester.tap(find.bySemanticsLabel('关注 Luna 小镇'));
       await tester.pump();
-      expect(find.bySemanticsLabel('管理对 Airvana Arcade 的关注'), findsOneWidget);
+      expect(find.bySemanticsLabel('管理对 Luna 小镇 的关注'), findsOneWidget);
 
-      await tester.tap(find.bySemanticsLabel('管理对 Airvana Arcade 的关注'));
+      await tester.tap(find.bySemanticsLabel('管理对 Luna 小镇 的关注'));
       await tester.pumpAndSettle();
       expect(find.bySemanticsLabel('取消关注确认'), findsOneWidget);
-      expect(find.text('不再关注 Airvana Arcade？'), findsOneWidget);
+      expect(find.text('不再关注 Luna 小镇？'), findsOneWidget);
       await tester.tap(find.text('保留关注'));
       await tester.pumpAndSettle();
-      expect(find.bySemanticsLabel('管理对 Airvana Arcade 的关注'), findsOneWidget);
+      expect(find.bySemanticsLabel('管理对 Luna 小镇 的关注'), findsOneWidget);
 
-      await tester.tap(find.bySemanticsLabel('分享 赤翼突围'));
+      await tester.tap(find.bySemanticsLabel('分享 Luna 小镇 · KOL Town'));
       await tester.pump(const Duration(milliseconds: 140));
       expect(find.bySemanticsLabel('分享 Playable'), findsOneWidget);
       expect(find.bySemanticsLabel('分享到 Instagram'), findsOneWidget);
@@ -394,7 +395,7 @@ void main() {
       expect(find.text('分享链接已复制；当前仅记录复制行为'), findsOneWidget);
       expect(find.text('已分享'), findsNothing);
 
-      await tester.tap(find.bySemanticsLabel('查看 赤翼突围 的评论'));
+      await tester.tap(find.bySemanticsLabel('查看 Luna 小镇 · KOL Town 的评论'));
       await tester.pumpAndSettle();
       expect(find.text('2 条评论'), findsOneWidget);
       expect(find.text('Mina'), findsOneWidget);
@@ -455,14 +456,14 @@ void main() {
       );
       await tester.tap(find.byTooltip('关闭评论'));
       await tester.pumpAndSettle();
-      final commentAction = find.bySemanticsLabel('查看 赤翼突围 的评论');
+      final commentAction = find.bySemanticsLabel('查看 Luna 小镇 · KOL Town 的评论');
       expect(
         find.descendant(of: commentAction, matching: find.text('1')),
         findsOneWidget,
       );
 
       await tester.tap(
-        find.bySemanticsLabel('基于 赤翼突围 创建受控 Remix 草稿'),
+        find.bySemanticsLabel('基于 Luna 小镇 · KOL Town 创建受控 Remix 草稿'),
       );
       await tester.pumpAndSettle();
       expect(find.text('创建 Remix 草稿'), findsOneWidget);

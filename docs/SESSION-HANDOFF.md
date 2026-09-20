@@ -220,6 +220,31 @@ xcrun devicectl device process launch --device <UDID> ai.airvana.airvanaMobile
 
 - 创作者中心「核心指标」区块仍是写死的演示值（`'128'` / `'512'` / `'86'` / `'0 · 待接入'`），现在紧挨着真实的创作周报，口径上不一致，建议后续用真实数据替换或移除
 
+## 仓库与提交（务必先看）
+
+- **Git 仓库根是 `airvana-v5-fullstack/`，不是外层 `Airvana_APP_v1.0.0_loopit_hifi/`。**
+  外层目录也是一个 git 仓库，但零提交、无远程；在那里操作 git 推不上去。
+- 远程：`https://github.com/renlijunR7/Airvana_APP_loopit`（分支 `main`）
+
+### 提交 `5db7a0a` 的内容与其信息不符
+
+`5db7a0a feat: replicate Web game catalogue into Flutter (38 to 51 playables)`
+共 **1877 文件 / 32 万行**，实际同时包含**两条互不相关的工作线**：
+
+1. 信息里写的：Web 游戏目录复刻到 Flutter（38 → 51 个 playable）；
+2. **信息里没写的**：Flutter 服务端全面接线——运行证明与真实 AIP、P1 五项
+   （删除账号 / 举报 / 工单 / 创作者资格 / 会话管理）、真实登录与登出、
+   P2 六项（Boost / 素材授权 / AI 分身 / 订阅 / 钱包地址 / 未成年人模式）、
+   退出登录不生效的修复、发现页封面与生成封面、全屏登录页。
+
+按第 2 条找改动时，不要按提交信息搜，直接按文件路径查：
+`lib/features/account/`、`lib/features/creator_center/`、`lib/design_system/generated_cover.dart`、
+以及测试 `auth_test` / `signed_out_test` / `account_services_test` /
+`platform_services_test` / `server_runtime_proof_test` / `generated_cover_test` /
+`sign_in_screen_test` / `discover_covers_test`。
+
+该提交已推送，不再改写历史。后续提交请一条工作线一条 commit。
+
 ## 开发铁律（务必遵守）
 
 - **桥接降级**：所有服务端调用失败必须静默降级回本地演示；只有服务端真实返回才标 `server_confirmed`
