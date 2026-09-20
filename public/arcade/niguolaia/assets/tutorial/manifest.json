@@ -1,0 +1,175 @@
+{
+  "sourceGame": "http://game.zhongyigames.com/niguolaia/",
+  "license": "公开原版资源，复用/商用/再分发许可未确认。",
+  "assets": [
+    {
+      "name": "dialog-slice",
+      "file": "dialog-slice.png",
+      "width": 80,
+      "height": 81,
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/b3/b320ce97-61d5-4234-841a-9bfe39a76137.80e53.png",
+      "sourceRect": [
+        397,
+        146,
+        80,
+        81
+      ],
+      "capInsets": [
+        35,
+        34,
+        37,
+        35
+      ]
+    },
+    {
+      "name": "dialog-panel",
+      "file": "dialog-panel.png",
+      "width": 630,
+      "height": 180,
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/b3/b320ce97-61d5-4234-841a-9bfe39a76137.80e53.png",
+      "sourceRect": null,
+      "reconstruction": "Nine-slice at original prefab logical size"
+    },
+    {
+      "name": "name-bar",
+      "file": "name-bar.png",
+      "width": 209,
+      "height": 47,
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/b3/b320ce97-61d5-4234-841a-9bfe39a76137.80e53.png",
+      "sourceRect": [
+        4,
+        199,
+        209,
+        47
+      ]
+    },
+    {
+      "name": "plot-name-bar",
+      "file": "plot-name-bar.png",
+      "width": 209,
+      "height": 47,
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/b3/b320ce97-61d5-4234-841a-9bfe39a76137.80e53.png",
+      "sourceRect": [
+        4,
+        146,
+        209,
+        47
+      ]
+    },
+    {
+      "name": "white-hand",
+      "file": "white-hand.png",
+      "width": 98,
+      "height": 98,
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/main/native/1d/1dd7e5d8-0c9a-48dd-a56b-2d084faa49da.545dc.png",
+      "sourceRect": [
+        2,
+        150,
+        98,
+        98
+      ]
+    },
+    {
+      "name": "tap-ring",
+      "file": "tap-ring.png",
+      "width": 146,
+      "height": 146,
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/main/native/1d/1dd7e5d8-0c9a-48dd-a56b-2d084faa49da.545dc.png",
+      "sourceRect": [
+        2,
+        2,
+        146,
+        146
+      ]
+    },
+    {
+      "name": "tap-ring-small",
+      "file": "tap-ring-small.png",
+      "width": 76,
+      "height": 76,
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/main/native/1d/1dd7e5d8-0c9a-48dd-a56b-2d084faa49da.545dc.png",
+      "sourceRect": [
+        102,
+        150,
+        76,
+        76
+      ]
+    },
+    {
+      "name": "tap-light",
+      "file": "tap-light.png",
+      "width": 106,
+      "height": 106,
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/05/056a65f7-12a7-4938-a729-9d0bcef1eead.99833.png",
+      "sourceRect": [
+        398,
+        327,
+        106,
+        106
+      ]
+    },
+    {
+      "name": "diaochan-name",
+      "file": "diaochan-name.png",
+      "width": 124,
+      "height": 92,
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/bb/bb6ea735-2b3d-4663-831e-39b1e82481da.0874b/FZDHTJW.ttf",
+      "sourceRect": null,
+      "reconstruction": "Original FZDHTJW font, rendered text at 2x source logical size (62 x 46), #ffe971 with black outline. Full font not bundled."
+    },
+    {
+      "name": "diaochan-full",
+      "file": "diaochan-full.png",
+      "width": 424,
+      "height": 469,
+      "sourceUrl": "see diaochan-full.source.json",
+      "sourceRect": null,
+      "scaleFromSource": 2
+    },
+    {
+      "name": "diaochan-idle",
+      "file": "diaochan-idle.png",
+      "width": 2544,
+      "height": 480,
+      "frames": 6,
+      "frameWidth": 424,
+      "frameHeight": 480,
+      "fps": 7.2,
+      "anchor": [
+        0.5,
+        1
+      ],
+      "source": "diaochan-full.source.json"
+    }
+  ],
+  "originalPrefab": {
+    "panelSize": [
+      630,
+      180
+    ],
+    "panelCenter": [
+      0,
+      -34.521
+    ],
+    "characterCenter": [
+      -219.528,
+      -33.484
+    ],
+    "characterScale": 1.3,
+    "nameCenter": [
+      -209.062,
+      -56.174
+    ],
+    "textWidth": 370,
+    "textCenterX": 90,
+    "spotlightSize": [
+      200,
+      200
+    ],
+    "nameColor": "#ffe971",
+    "nameFontSize": 30,
+    "nameLineHeight": 35,
+    "darkOpacity": 0.6274509803921569,
+    "spotlight": "200 x 200 ellipse, inverted mask"
+  }
+}

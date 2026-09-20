@@ -1,0 +1,73 @@
+{
+  "file": "unit-shadow-original.png",
+  "originalName": "enemy_shadow",
+  "spriteFrameUuid": "b18uBR2QdLFLe5pf5CYunR",
+  "sourcePage": "http://game.zhongyigames.com/niguolaia/",
+  "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+  "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/0e/0efed7b68.80d1d.json",
+  "frame": {
+    "name": "enemy_shadow",
+    "texture": "86VeyjioxLN7MWiJ4hhXjC",
+    "rect": [
+      565,
+      342,
+      100,
+      81
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      100,
+      81
+    ],
+    "rotated": 1,
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "dimensions": [
+    100,
+    81
+  ],
+  "origin": [
+    0.5,
+    0.5
+  ],
+  "anchor": [
+    0.5,
+    0.5
+  ],
+  "nativeScale": [
+    0.32,
+    0.32
+  ],
+  "referenceRenderSize": [
+    32,
+    25.92
+  ],
+  "positionOffset": [
+    0,
+    0
+  ],
+  "originalNodeOpacity": 255,
+  "intrinsicAlphaRange": [
+    0,
+    59
+  ],
+  "sha256": "199b93f0fd3b605f48c0ff5e5a67976f4e9f8c648dde644927d696a7ac9e105c",
+  "identicalExistingAsset": "../ui/enemy_shadow.png",
+  "extraction": "Byte-identical copy of verified original atlas crop; pixel equality against source texture checked after reversing atlas rotation. No resizing/redrawing.",
+  "evidence": [
+    "GameEnemy and GameHero prefab shadow nodes both reference b18uBR2QdLFLe5pf5CYunR.",
+    "BattleScene.initShadowPool creates independent cc.Sprite from battleAtlas.getSpriteFrame(\"enemy_shadow\") and adds to battleNode at LAYER_GAME_BG_UP.",
+    "BattleScene.createEnemyByData and createSoldierByData replace prefab shadowNode with pooled external shadow.",
+    "GameEnemy: this.shadowNode.scaleX=this.enemyData.shadowScaling[0]/1e4; this.shadowNode.scaleY=this.enemyData.shadowScaling[1]/1e4.",
+    "GameHero: this.shadowNode.scale=this.heroData.shadowScaling/1e4. Soldier 41001 has shadowScaling:3200."
+  ],
+  "licenseStatus": "Publicly served original resource; no commercial/redistribution permission established."
+}

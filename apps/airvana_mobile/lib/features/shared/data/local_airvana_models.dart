@@ -728,6 +728,7 @@ class LocalProfileFeatureState {
     this.networkProfile = 'normal',
     this.regionProfile = 'global',
     this.nonFinancialMode = false,
+    this.serverSignedOut = false,
     this.popupStates = const {
       'version': true,
       'message': true,
@@ -798,6 +799,7 @@ class LocalProfileFeatureState {
           : 'normal',
       regionProfile: '${json['region_profile'] ?? 'global'}',
       nonFinancialMode: json['non_financial_mode'] == true,
+      serverSignedOut: json['server_signed_out'] == true,
       popupStates: rawPopupStates is Map
           ? Map<String, bool>.unmodifiable(
               rawPopupStates.map(
@@ -830,6 +832,12 @@ class LocalProfileFeatureState {
   final String networkProfile;
   final String regionProfile;
   final bool nonFinancialMode;
+
+  /// 用户是否**主动退出**了服务端登录。
+  ///
+  /// 用来区分「从没登录过」和「刚刚退出」：前者可以自动建演示会话，
+  /// 后者绝不能——否则退出会被下一个请求立刻撤销。
+  final bool serverSignedOut;
   final Map<String, bool> popupStates;
 
   LocalProfileFeatureState copyWith({
@@ -855,6 +863,7 @@ class LocalProfileFeatureState {
     String? networkProfile,
     String? regionProfile,
     bool? nonFinancialMode,
+    bool? serverSignedOut,
     Map<String, bool>? popupStates,
   }) => LocalProfileFeatureState(
     subscriptionPlanKey: subscriptionPlanKey ?? this.subscriptionPlanKey,
@@ -881,6 +890,7 @@ class LocalProfileFeatureState {
     networkProfile: networkProfile ?? this.networkProfile,
     regionProfile: regionProfile ?? this.regionProfile,
     nonFinancialMode: nonFinancialMode ?? this.nonFinancialMode,
+    serverSignedOut: serverSignedOut ?? this.serverSignedOut,
     popupStates: popupStates ?? this.popupStates,
   );
 
@@ -907,6 +917,7 @@ class LocalProfileFeatureState {
     'network_profile': networkProfile,
     'region_profile': regionProfile,
     'non_financial_mode': nonFinancialMode,
+    'server_signed_out': serverSignedOut,
     'popup_states': popupStates,
   };
 }

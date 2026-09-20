@@ -2,9 +2,12 @@ import 'dart:async';
 
 import 'package:airvana_mobile/app/providers.dart';
 import 'package:airvana_mobile/design_system/airvana_theme.dart';
+import 'package:airvana_mobile/design_system/generated_cover.dart';
+import 'package:airvana_mobile/features/runtime/domain/server_runtime_proof.dart';
 import 'package:airvana_mobile/features/runtime/presentation/generated_playable_runtime.dart';
 import 'package:airvana_mobile/features/runtime/presentation/h5_game_runtime.dart';
 import 'package:airvana_mobile/features/shared/domain/airvana_models.dart';
+import 'package:airvana_mobile/features/shared/presentation/content_report_sheet.dart';
 import 'package:airvana_mobile/features/shared/presentation/playable_social_sheets.dart';
 import 'package:airvana_mobile/shared/presentation/airvana_logo.dart';
 import 'package:flutter/material.dart';
@@ -136,6 +139,12 @@ class _PlayableRuntimeScreenState extends ConsumerState<PlayableRuntimeScreen> {
   bool _h5FallbackToChoices = false;
   String _gameRewardMessage = '';
 
+  /// 仅在服务端真实返回运行证明结果后才有值；本地演示奖励不写这里。
+  String _serverProofMessage = '';
+
+  /// 本局已在服务端开启的运行证明会话；开启失败时为 null（静默降级）。
+  RuntimeProofHandle? _proofHandle;
+
   Playable get playable => widget.playable;
   _RuntimeSpec get _spec => _RuntimeSpec.forPlayable(playable);
 
@@ -155,6 +164,7 @@ class _PlayableRuntimeScreenState extends ConsumerState<PlayableRuntimeScreen> {
       _h5Success = result.success;
       _feedback = result.summary;
       _gameRewardMessage = '';
+      _serverProofMessage = '';
     });
     unawaited(
       _recordTerminalExperience(
@@ -183,11 +193,42 @@ class _PlayableRuntimeScreenState extends ConsumerState<PlayableRuntimeScreen> {
             ? '金币 +${result.score} · 本作品今日首次有效完成 +${reward.earnedAip} AIP'
             : '金币 +${result.score} · 今日 AIP 已发放（每作品每日一次）';
       });
+
+      // 服务端权威运行证明：本局开始时已发 playable_start，这里补完后两步。
+      // 会话没开起来或任一步失败都返回 null，上面的本地演示文案原样保留，
+      // 绝不把本地结果标成服务端确认。
+      final handle = _proofHandle;
+      final proof = handle == null
+          ? null
+          : await container
+                .read(airvanaRepositoryProvider)
+                .completeRuntimeProof(handle, score: result.score);
+      if (!mounted || _runId != runId || proof == null) return;
+      container.invalidate(accountProvider);
+      container.invalidate(creatorCenterProvider);
+      setState(() {
+        if (proof.posted) {
+          _serverProofMessage = '服务端已确认运行证明 · 真实入账 +${proof.points} AIP';
+        } else if (proof.rewardStatus == 'daily_duplicate') {
+          _serverProofMessage = '服务端已确认运行证明 · 该作品 24 小时内已发放，本次不重复计入';
+        } else if (!proof.rewardEligible) {
+          _serverProofMessage = '服务端已确认运行证明 · 本次不具备奖励资格（自有内容或触发频控）';
+        } else {
+          _serverProofMessage = '服务端已确认运行证明 · 未入账（${proof.rewardStatus}）';
+        }
+      });
     } catch (error) {
       if (!mounted || _runId != runId) return;
       setState(() => _gameRewardMessage = '闭环记账失败：$error');
     }
   }
+
+  /// 本机记录 → 本地演示奖励 → 服务端运行证明，按可信度递进拼接。
+  String get _runtimeStatusMessage => [
+    _experienceRecordMessage,
+    if (_gameRewardMessage.isNotEmpty) _gameRewardMessage,
+    if (_serverProofMessage.isNotEmpty) _serverProofMessage,
+  ].join(' · ');
 
   String get _experienceRecordMessage {
     if (_experienceSaving) return '正在保存本机体验记录';
@@ -222,6 +263,10 @@ class _PlayableRuntimeScreenState extends ConsumerState<PlayableRuntimeScreen> {
   }
 
   void _start() {
+    _proofHandle = null;
+    // 服务端以 playable_start 为计时起点，必须在这里发出，
+    // 不能等结束时补——不足最短时长不但没有 AIP，还会被判为异常完成建风险案。
+    unawaited(_openServerProof());
     setState(() {
       _runId += 1;
       _started = true;
@@ -270,6 +315,17 @@ class _PlayableRuntimeScreenState extends ConsumerState<PlayableRuntimeScreen> {
         ),
       );
     }
+  }
+
+  Future<void> _openServerProof() async {
+    final runId = _runId + 1;
+    final container = ProviderScope.containerOf(context, listen: false);
+    final handle = await container
+        .read(airvanaRepositoryProvider)
+        .openRuntimeProof(playableKey: playable.id, title: playable.title);
+    // 开会话期间玩家可能已重开一局；只认当前这局的句柄。
+    if (!mounted || _runId != runId) return;
+    _proofHandle = handle;
   }
 
   Future<void> _recordTerminalExperience({
@@ -358,7 +414,7 @@ class _PlayableRuntimeScreenState extends ConsumerState<PlayableRuntimeScreen> {
         _showMessage('已记录“不感兴趣”本地意图');
         return;
       case AirvanaShareChoice.report:
-        _showMessage('举报已记录为本地演示，尚未发送到服务端');
+        await showContentReportSheet(context, ref, playable);
         return;
       case AirvanaShareChoice.block:
         _showMessage('屏蔽作者已记录为本地演示，尚未发送到服务端');
@@ -475,9 +531,7 @@ class _PlayableRuntimeScreenState extends ConsumerState<PlayableRuntimeScreen> {
                       success: _useH5Runtime
                           ? _h5Success
                           : _score >= _spec.successThreshold,
-                      experienceRecordMessage: _gameRewardMessage.isEmpty
-                          ? _experienceRecordMessage
-                          : '$_experienceRecordMessage · $_gameRewardMessage',
+                      experienceRecordMessage: _runtimeStatusMessage,
                       onRestart: _start,
                       onExit: () => context.pop(),
                     ),
@@ -566,22 +620,11 @@ class _RuntimeCoverFallback extends StatelessWidget {
   final Playable playable;
 
   @override
-  Widget build(BuildContext context) => DecoratedBox(
+  Widget build(BuildContext context) => GeneratedCover(
     key: ValueKey('runtime-cover-fallback-${playable.id}'),
-    decoration: const BoxDecoration(
-      gradient: LinearGradient(
-        colors: [Color(0xFF263B32), Color(0xFF0A110E)],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-      ),
-    ),
-    child: Center(
-      child: Icon(
-        Icons.sports_esports_rounded,
-        size: 84,
-        color: Colors.white.withValues(alpha: .16),
-      ),
-    ),
+    seed: playable.id,
+    title: playable.title,
+    contentType: playable.contentType,
   );
 }
 

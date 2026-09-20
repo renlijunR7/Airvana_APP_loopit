@@ -30,7 +30,7 @@ void main() {
 
     expect(snapshot.localDemo, isTrue);
     expect(snapshot.user.displayName, 'Kai Chen');
-    expect(snapshot.playables, hasLength(38));
+    expect(snapshot.playables, hasLength(51));
     expect(snapshot.playables.every((item) => item.localDemo), isTrue);
   });
 

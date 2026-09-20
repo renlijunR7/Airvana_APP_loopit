@@ -1,0 +1,209 @@
+{
+  "schema_version": "1.0.0",
+  "campaign_id": "cmp_kol_town_demo",
+  "version": "0.10.0",
+  "status": "draft",
+  "owners": {
+    "business_owner": "【待人工录入】",
+    "operations_owner": "【待人工录入】",
+    "approval_owner": "【待人工录入】",
+    "kill_switch_owner": "【待人工录入】"
+  },
+  "objective": {
+    "primary": "registration",
+    "primary_success_event": "registration_complete",
+    "primary_kpi": "approved_exchange_registration_conversion_rate",
+    "secondary": ["approved_app_install_count", "approved_first_deposit_count", "approved_first_spot_trade_count", "approved_d7_return_rate", "approved_reactivation_session_count", "local_growth_mission_completion_rate", "local_campaign_acceptance_rate"],
+    "target_value": null,
+    "target_window": null,
+    "funnel_boundary": "Target external funnel: confirmed app install -> approved exchange registration -> first deposit -> first spot trade -> D7 valid return -> reactivation session. The local playable only produces scenario-choice mission proofs and simulated operating records. Every external KPI remains zero until an approved exchange, app-store, attribution, ledger or order-system server callback is integrated."
+  },
+  "audience": {
+    "included_regions": ["HK"],
+    "excluded_regions": [],
+    "languages": ["zh-Hans"],
+    "minimum_age": 18,
+    "lifecycle_stages": ["prospect", "new_user", "active_user", "lapsed_user"],
+    "interests": ["KOL communities", "crypto product education", "interactive growth campaigns"],
+    "accessibility_requirements": ["touch and keyboard support", "visible focus", "reduced motion", "status not conveyed by color alone"]
+  },
+  "channels": [
+    {
+      "channel_id": "local_integrated_http",
+      "channel_type": "kol",
+      "kol_id": "kol_demo_luna",
+      "placement": "127.0.0.1 LOCAL_INTEGRATED_DEMO H5"
+    }
+  ],
+  "brand": {
+    "legal_entity": "【待人工录入】",
+    "asset_manifest": [
+      {
+        "asset_id": "asset_design_v2_reference",
+        "asset_type": "other",
+        "location": "Claude Design project 99a17deb-7444-4612-9c03-4261c4c9ec3f / KOL小镇 设计稿 v2.dc.html",
+        "locale": "zh-Hans",
+        "checksum": null,
+        "authorization_status": "pending",
+        "usage_restrictions": ["local prototype reference only", "no public release until authorization is confirmed"]
+      },
+      {
+        "asset_id": "asset_janachumi_isometric_city_cc0",
+        "asset_type": "background",
+        "location": "assets/vendor/janachumi-isometric-city-cc0/",
+        "locale": null,
+        "checksum": "sha256:d7376663fd7d09c4cfd25a3fe3b373ce19a7d4402a5b585cb0ee98b29bd2ed3e",
+        "authorization_status": "approved",
+        "usage_restrictions": ["CC0; do not imply creator endorsement"]
+      },
+      {
+        "asset_id": "asset_imagegen_scene_pack_v1",
+        "asset_type": "background",
+        "location": "assets/generated/",
+        "locale": "zh-Hans",
+        "checksum": null,
+        "authorization_status": "not_required",
+        "usage_restrictions": ["DEMO / LOCAL only until brand review"]
+      },
+      {
+        "asset_id": "asset_exchange_growth_ops_hub_v1",
+        "asset_type": "background",
+        "location": "assets/generated/exchange-growth-ops-hub-v1.png",
+        "locale": null,
+        "checksum": "sha256:f0db756bf1e4dbdb2923551c5c4a03d718704460c8a8d20868bd03224f781e5c",
+        "authorization_status": "not_required",
+        "usage_restrictions": ["DEMO / LOCAL fictional exchange growth scene", "no public or brand use before review"]
+      },
+      {
+        "asset_id": "asset_user_luna_avatar",
+        "asset_type": "character",
+        "location": "assets/user/luna-avatar.jpg",
+        "locale": null,
+        "checksum": null,
+        "authorization_status": "pending",
+        "usage_restrictions": ["user-supplied local demo reference", "public release authorization pending"]
+      },
+      {
+        "asset_id": "asset_live2d_mao_official_sample",
+        "asset_type": "character",
+        "location": "assets/live2d/mao-runtime/",
+        "locale": null,
+        "checksum": "sha256:76b41ae8b98012df6bcddf71a1bcdad50039de201f4d7e1b242e4f25f1b2707a",
+        "authorization_status": "approved",
+        "usage_restrictions": ["Official Free Material Mao technical preview only", "must be labelled as Mao and not presented as Luna", "production release remains subject to bundled Live2D licences and review"]
+      },
+      {
+        "asset_id": "asset_demo_vector_town",
+        "asset_type": "background",
+        "location": "local generated HTML/CSS/SVG",
+        "locale": null,
+        "checksum": null,
+        "authorization_status": "not_required",
+        "usage_restrictions": ["DEMO / LOCAL only"]
+      }
+    ],
+    "approved_claims": [],
+    "prohibited_claims": ["guaranteed returns", "investment profits", "cash-equivalent or token rewards", "local clicks or gameplay described as confirmed exchange conversion", "deposit or trade volume incentives without legal approval", "claiming the KOL AI avatar is the real person speaking live"],
+    "required_disclosures": ["DEMO / LOCAL", "Local mission completion is not an app install, exchange registration, deposit, trade, retention or reactivation confirmation.", "External KPIs require approved server-side confirmation and are not integrated.", "No real app download, account creation, KYC, wallet, deposit or trade is performed.", "Luna AI avatar uses local rules and is not the real person speaking live.", "The Live2D technical preview uses official sample Mao and is not a Luna digital twin.", "Virtual bricks and operating revenue have no cash, withdrawal, transfer or investment value.", "Market prediction is a game and not investment advice."],
+    "authorization_status": "pending"
+  },
+  "gameplay": {
+    "mechanic": "scenario_choice",
+    "template_id": "kol_town_isometric_v15_exchange_growth",
+    "target_duration_seconds": 240,
+    "rounds": 6,
+    "required_states": ["intro", "consent", "playing", "paused", "success", "failure", "retry", "replay", "share", "cta", "reward", "exit"],
+    "input_modes": ["tap", "keyboard"],
+    "difficulty_bounds": {"minimum": 1, "maximum": 5, "default": 2}
+  },
+  "cta": {
+    "cta_id": "cta_demo_info",
+    "type": "none",
+    "label": "DEMO：查看活动说明",
+    "destination": "DISABLED_PENDING_APPROVAL",
+    "allowed_states": ["success", "cta", "exit"]
+  },
+  "reward": {
+    "reward_id": "reward_none_demo",
+    "type": "none",
+    "value_description": "No real reward. Bricks and demo cards are non-transferable local SQLite game progress with no monetary value.",
+    "eligibility": "Not applicable",
+    "inventory_cap": null,
+    "expiry": null,
+    "fulfillment_owner": "【待人工录入】",
+    "material_terms": "DEMO / LOCAL only; server validation creates no-value demo cards only. No fulfillment, redemption, transfer, purchase, investment or cash value."
+  },
+  "compliance": {
+    "legal_entity": "【待人工录入】",
+    "promoted_activity": "Local simulation of exchange growth marketing from acquisition through reactivation, with no actual financial promotion, account opening, deposit or transaction.",
+    "target_regions_reviewed": ["HK"],
+    "manual_review_required": true,
+    "legal_approval_status": "pending",
+    "prohibited_claims": ["guaranteed returns", "profit promises", "cash-equivalent virtual points", "unconfirmed download, registration, deposit or trade claims", "trade-volume or deposit incentives without legal approval"],
+    "required_disclosures": ["DEMO / LOCAL", "Local proof is separate from exchange KPI confirmation.", "External KPI callbacks are not integrated.", "Virtual bricks have no cash or investment value.", "Not investment advice."],
+    "evidence_sources": ["campaign-brief.yaml", "Claude Design project source", "qa-report.md"]
+  },
+  "data_policy": {
+    "collected_fields": ["local demo alias", "PBKDF2 PIN hash and salt", "hashed local session token", "guest id", "game progress", "game event", "screen id", "task id", "local timestamp", "campaign id", "creative id", "channel id", "KOL id", "link id", "transient KOL AI chat text processed on localhost and discarded", "chat intent, message length, mode and safety outcome without raw chat text"],
+    "prohibited_fields": ["KYC documents", "government ID", "real name", "wallet address", "wallet private key", "seed phrase", "precise location", "email", "phone", "private_key", "raw_kyc_document", "seed_phrase"],
+    "consent_requirements": ["Explicit local-storage consent before local alias registration", "Guest entry requires no identity field", "KOL AI chat must disclose local rule mode and session-only raw text handling", "Future raw transcript retention, remote model use, remote analytics or external identity requires separate policy approval"],
+    "retention_days": 30,
+    "privacy_owner": "【待人工录入】"
+  },
+  "measurement": {
+    "primary_kpi": "approved_exchange_registration_conversion_rate",
+    "primary_success_event": "registration_complete",
+    "required_events": ["impression", "play_start", "valid_interaction", "level_start", "level_complete", "play_complete", "play_fail", "replay", "share", "cta_view", "cta_click", "registration_complete", "reward_eligible", "reward_claim", "consent_granted", "return_session", "error"],
+    "dimensions": ["campaign_id", "playable_id", "contract_version", "playable_version", "session_id", "screen_id", "task_id", "building_id", "brand_campaign_id", "lifecycle_stage", "growth_kpi", "local_proof_complete", "external_confirmation", "settlement_mode", "theme", "viewport", "creative_id", "channel_id", "kol_id", "link_id", "interaction_type", "chat_intent", "chat_mode"],
+    "deduplication_rule": "Local SQLite enforces unique event_id. Production exchange KPIs require separate server-side user, event, campaign and time-window deduplication; local registration_complete remains a demo-alias event and is excluded from the external registration KPI.",
+    "bot_fraud_rule": "LOCAL DEMO only. External acquisition and financial KPIs require approved anti-fraud, eligibility, region, account-status and abnormal-activity exclusion rules before production use.",
+    "source_of_truth": "Local gameplay proof: SQLite events table written by server.py. External app install: approved app-store or attribution callback. External registration and return: approved exchange account backend. First deposit: approved exchange ledger. First spot trade: approved exchange order system. No external source is integrated in this build."
+  },
+  "attribution": {
+    "model": "last_click",
+    "window_days": 1,
+    "success_event": "registration_complete",
+    "kol_priority": "exclusive_link_priority",
+    "cross_device_policy": "Local-device only; no cross-device stitching in DEMO / LOCAL.",
+    "deduplication_key": "server click_id + local session + event_id",
+    "exclusion_rules": ["exclude debug-reset sessions", "exclude local QA aliases and local demo registration_complete", "exclude duplicate event_id", "exclude ineligible region, age or account status", "exclude reversed deposit and invalid or cancelled trade", "never use local attribution for settlement"],
+    "settlement_status": "not_applicable",
+    "payable_event": null,
+    "terms_reference": null
+  },
+  "commercial": {
+    "currency": "USD",
+    "build_budget_cap": null,
+    "media_budget_cap": null,
+    "reward_budget_cap": null,
+    "kol_settlement_budget_cap": null
+  },
+  "governance": {
+    "locked_fields": ["approval", "reward", "cta.destination", "audience.included_regions", "audience.excluded_regions", "audience.minimum_age", "compliance", "commercial", "attribution", "attribution.model", "attribution.window_days", "attribution.kol_priority", "measurement.primary_success_event", "data_policy", "kol_chat.identity_disclosure", "kol_chat.safety_policy", "kol_chat.action_allowlist", "live2d.model_identity", "live2d.license_boundary", "release.kill_switch"],
+    "editable_fields": ["presentation.copy", "presentation.theme", "presentation.kol_chat_approved_copy", "gameplay.optional_tasks", "accessibility"],
+    "agentic_fields": ["presentation.theme_variant", "presentation.onboarding_copy", "gameplay.task_order", "gameplay.hint_frequency"],
+    "runtime_fields": ["session_id", "guest_id", "privacy_safe_user_id", "screen_id", "score", "bricks", "prosperity", "completed_tasks", "business_revenue", "brand_reputation", "brand_order_status", "growth_proof_status", "lifecycle_stage_filter", "theme", "consent_state", "chat_intent", "chat_mode", "chat_safety_outcome", "live2d_state", "live2d_model_id"],
+    "allowed_experiment_fields": ["presentation.theme_variant", "gameplay.task_order", "presentation.onboarding_copy"]
+  },
+  "approval": {
+    "status": "draft",
+    "approved_by": [],
+    "approved_at": null,
+    "evidence": []
+  },
+  "release": {
+    "targets": ["web_h5"],
+    "release_owner": "【待人工录入】",
+    "rollback_target": "campaign-contract.v0.1.0.json and playable-config.v0.1.0.json static demo",
+    "kill_switch": {
+      "owner": "【待人工录入】",
+      "mechanism": "Run python3 server.py --set-kill-switch on for the SQLite switch. Browser fallbacks: localStorage kol_town_kill_switch=1 or ?disabled=1."
+    }
+  },
+  "metadata": {
+    "created_at": "2026-09-03T00:00:00+08:00",
+    "updated_at": "2026-09-07T16:00:00+08:00",
+    "source_brief": "campaign-brief.yaml",
+    "notes": ["Version 0.10.0 defines a six-Campaign exchange lifecycle sandbox: app install, registration, first deposit, first spot trade, D7 return and reactivation session. Each Campaign has exactly one primary KPI and a separate local proof.", "External KPI confirmation is fail-closed and remains zero because app-store, attribution, exchange account, ledger and order-system callbacks are not integrated.", "Deposit and trade Campaigns require separate legal, compliance and risk approval before any production marketing use.", "The local registration_complete event means demo alias creation only and is explicitly excluded from external exchange registration measurement.", "Version 0.8.0 adds eight distinct enterable pre-rendered 3D interior game scenes.", "The rendered Live2D model is official sample Mao, explicitly not Luna and not a digital twin; an authorized Luna Live2D model remains pending.", "HK and minimum age 18 are assumptions, not approvals.", "Claude Design is the structural baseline; public brand and likeness authorization remains pending."]
+  }
+}

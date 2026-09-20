@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="2168" viewBox="0 0 1000 2168">
+<defs><filter id="soft"><feGaussianBlur stdDeviation="7"/></filter><mask id="keep" maskUnits="userSpaceOnUse" x="0" y="0" width="1000" height="2168"><rect width="1000" height="2168" fill="white"/><g fill="black" filter="url(#soft)">
+<!-- Areas occupied by original interactive UI, loose coins and prizes. -->
+<rect x="0" y="0" width="245" height="272"/>
+<rect x="268" y="0" width="447" height="190"/>
+<rect x="802" y="0" width="198" height="337"/>
+<rect x="852" y="327" width="148" height="282"/>
+<rect x="17" y="292" width="146" height="156"/>
+<rect x="0" y="453" width="170" height="266"/>
+<path d="M376 364H614V508H669L500 615 329 508H376Z"/>
+<path d="M310 799H696V872H805L1000 974V2168H0V1040L180 930V872H310Z"/>
+</g></mask></defs><rect width="1000" height="2168" fill="white" mask="url(#keep)"/></svg>

@@ -3,6 +3,8 @@ import 'package:airvana_mobile/features/shared/data/local_airvana_models.dart';
 import 'package:airvana_mobile/design_system/airvana_shared_cards.dart';
 import 'package:airvana_mobile/features/history/presentation/experience_history_screen.dart'
     show profileLocalWorkspaceProvider;
+import 'package:airvana_mobile/features/creator_center/domain/creator_center_snapshot.dart';
+import 'package:airvana_mobile/features/creator_center/presentation/creator_center_modules.dart';
 import 'package:airvana_mobile/design_system/airvana_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -24,7 +26,18 @@ class _CreatorCenterPageBodyState extends ConsumerState<CreatorCenterPageBody> {
   String _period = '7d';
   final Set<String> _appliedOpportunities = {};
 
-  static const _periods = [('7d', '近 7 天'), ('30d', '近 30 天'), ('90d', '近 90 天')];
+  static const _periods = [
+    ('7d', '近 7 天'),
+    ('30d', '近 30 天'),
+    ('90d', '近 90 天'),
+  ];
+
+  /// 服务端聚合快照；未接入时为 [CreatorCenterSnapshot.offline]，各模块自行显示未接入。
+  CreatorCenterSnapshot get _server =>
+      ref.watch(creatorCenterProvider).value ?? CreatorCenterSnapshot.offline;
+
+  void _openSecondary(BuildContext context, String destination) =>
+      context.push('/profile/secondary/$destination');
 
   @override
   Widget build(BuildContext context) {
@@ -139,6 +152,10 @@ class _CreatorCenterPageBodyState extends ConsumerState<CreatorCenterPageBody> {
     final workspace = ref.watch(profileLocalWorkspaceProvider).value;
     final published = workspace?.playables ?? const [];
     return [
+      CreatorWeeklyReportCard(snapshot: _server),
+      const SizedBox(height: 14),
+      CreatorIncentiveCard(snapshot: _server),
+      const SizedBox(height: 14),
       _Panel(
         child: Row(
           children: [
@@ -218,16 +235,17 @@ class _CreatorCenterPageBodyState extends ConsumerState<CreatorCenterPageBody> {
         ),
       ),
       const SizedBox(height: 14),
-      _SectionHeading(
-        title: '核心指标',
-        meta: '演示值与服务端确认值分开展示',
-      ),
+      _SectionHeading(title: '核心指标', meta: '演示值与服务端确认值分开展示'),
       const SizedBox(height: 10),
       Row(
         children: [
           _MetricCard(
             label: '互动完成 · 演示',
-            value: _period == '7d' ? '128' : _period == '30d' ? '512' : '1,436',
+            value: _period == '7d'
+                ? '128'
+                : _period == '30d'
+                ? '512'
+                : '1,436',
           ),
           const SizedBox(width: 8),
           _MetricCard(label: '发布作品', value: '${published.length}'),
@@ -280,7 +298,10 @@ class _CreatorCenterPageBodyState extends ConsumerState<CreatorCenterPageBody> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const _SectionHeading(title: 'Campaign 漏斗', meta: 'Canonical 事件是否完整接入'),
+            const _SectionHeading(
+              title: 'Campaign 漏斗',
+              meta: 'Canonical 事件是否完整接入',
+            ),
             const SizedBox(height: 10),
             for (final (label, value, hooked) in const [
               ('playable_start', '128 · 演示', true),
@@ -326,7 +347,10 @@ class _CreatorCenterPageBodyState extends ConsumerState<CreatorCenterPageBody> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const _SectionHeading(title: 'Playable 表现', meta: '只统计当前 KOL 的本地内容'),
+            const _SectionHeading(
+              title: 'Playable 表现',
+              meta: '只统计当前 KOL 的本地内容',
+            ),
             const SizedBox(height: 10),
             if (published.isEmpty)
               const Text(
@@ -386,6 +410,8 @@ class _CreatorCenterPageBodyState extends ConsumerState<CreatorCenterPageBody> {
   // ---------- Tab 2 运营建议 ----------
 
   List<Widget> _advice(BuildContext context) => [
+    CreatorChallengesCard(snapshot: _server),
+    const SizedBox(height: 14),
     _Panel(
       child: Row(
         children: [
@@ -549,6 +575,8 @@ class _CreatorCenterPageBodyState extends ConsumerState<CreatorCenterPageBody> {
   // ---------- Tab 3 增长体系 ----------
 
   List<Widget> _growth(BuildContext context) => [
+    CreatorGrowthTasksCard(snapshot: _server),
+    const SizedBox(height: 14),
     _Panel(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -744,6 +772,10 @@ class _CreatorCenterPageBodyState extends ConsumerState<CreatorCenterPageBody> {
           ),
         ),
       ),
+    const SizedBox(height: 14),
+    CreatorAcademyCard(
+      onOpen: (destination) => _openSecondary(context, destination),
+    ),
   ];
 }
 
@@ -838,7 +870,10 @@ class _SectionHeading extends StatelessWidget {
           style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w900),
         ),
       ),
-      Text(meta, style: const TextStyle(fontSize: 9, color: AirvanaColors.muted)),
+      Text(
+        meta,
+        style: const TextStyle(fontSize: 9, color: AirvanaColors.muted),
+      ),
     ],
   );
 }
@@ -960,12 +995,15 @@ class _TrendPainter extends CustomPainter {
         ..strokeJoin = StrokeJoin.round
         ..color = AirvanaColors.accent,
     );
-    canvas.drawCircle(at(points.length - 1), 4, Paint()..color = AirvanaColors.accent);
+    canvas.drawCircle(
+      at(points.length - 1),
+      4,
+      Paint()..color = AirvanaColors.accent,
+    );
   }
 
   @override
-  bool shouldRepaint(_TrendPainter oldDelegate) =>
-      oldDelegate.points != points;
+  bool shouldRepaint(_TrendPainter oldDelegate) => oldDelegate.points != points;
 }
 
 class _Panel extends StatelessWidget {

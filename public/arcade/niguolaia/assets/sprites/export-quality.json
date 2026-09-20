@@ -1,0 +1,28 @@
+{
+  "generated": "2026-09-08",
+  "spriteEntries": 19,
+  "referencedImages": 157,
+  "uniqueAnimationSheets": 113,
+  "referencedPngBytes": 74165770,
+  "validationErrors": [],
+  "implemented": [
+    "All four base tower classes, levels 1 to 3",
+    "Original stand, shoot, build and upgrade clips, all authored directions",
+    "Four source enemy appearances and three friendly barracks troop levels",
+    "Source bone rotation/translation/scale/shear timelines",
+    "Source Bezier, linear and stepped curves",
+    "Slot attachment/color and draw-order timelines",
+    "Weighted and unweighted mesh deformation",
+    "Analytic uniform two-bone IK including stretch and softness",
+    "Numerical fallback for nonuniform IK",
+    "Per-image and per-animation original skeleton origin",
+    "Original node scales and exact external shadow PNG"
+  ],
+  "remainingLimitations": [
+    "Offline PNG sampling at approximately 24 frames per second replaces continuous runtime evaluation.",
+    "The original game executable and original Spine/GPU runtime were not run, so pixel-by-pixel runtime parity is not certified.",
+    "Only clips referenced by these delivered battle/tutorial assets were exported; later chapters, advanced branches and unrelated hero animations remain outside this set."
+  ],
+  "sourceGameScriptsExecuted": false,
+  "commercialLicenseVerified": false
+}

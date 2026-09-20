@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no" />
+    <meta name="theme-color" content="#5ec8ff" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <title>街区淘金大冲刺</title>
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main id="app" aria-label="街区淘金大冲刺">
+      <canvas id="gameCanvas" aria-label="三跑道跑酷游戏画面"></canvas>
+
+      <section id="hud" class="hud is-hidden" aria-live="polite">
+        <div class="hud-pill hud-gold">
+          <span class="gold-mini" aria-hidden="true"></span>
+          <strong id="runGold">0</strong>
+        </div>
+        <div class="hud-center">
+          <div class="multiplier"><span id="multiplier">×1</span></div>
+          <div class="distance"><strong id="distance">0</strong><span>m</span></div>
+          <div id="bossMeter" class="boss-meter is-hidden" aria-label="浣熊首领生命值">
+            <span>浣熊首领</span>
+            <div><i id="bossHealth"></i></div>
+          </div>
+        </div>
+        <div class="hud-actions">
+          <button id="muteButton" class="icon-button" type="button" aria-label="静音">♪</button>
+          <button id="pauseButton" class="icon-button" type="button" aria-label="暂停">Ⅱ</button>
+        </div>
+        <div id="powerupRack" class="powerup-rack"></div>
+      </section>
+
+      <div id="toast" class="toast" role="status"></div>
+      <div id="combo" class="combo" aria-hidden="true"></div>
+
+      <section id="homeScreen" class="screen home-screen">
+        <div class="brand">
+          <span class="eyebrow">原创街区跑酷</span>
+          <h1>街区淘金<br /><em>大冲刺</em></h1>
+          <p>追上偷走金条的浣熊，重建你的树屋！</p>
+        </div>
+
+        <div class="home-actions">
+          <button id="playButton" class="primary-button" type="button">
+            <span class="play-triangle" aria-hidden="true"></span>
+            开始追击
+          </button>
+          <div class="wallet">
+            <span class="gold-mini" aria-hidden="true"></span>
+            <strong id="walletGold">0</strong>
+          </div>
+        </div>
+
+        <aside class="build-card">
+          <div class="build-art" aria-hidden="true">
+            <span class="house-roof"></span>
+            <span class="house-body"></span>
+            <span class="house-window"></span>
+          </div>
+          <div class="build-copy">
+            <span class="card-kicker">街区基地</span>
+            <strong>树屋等级 <b id="homeLevel">1</b></strong>
+            <div class="progress-track"><i id="homeProgress"></i></div>
+          </div>
+          <button id="buildButton" class="small-button" type="button">升级 <span id="buildCost">120</span></button>
+        </aside>
+
+        <nav class="unlock-strip" aria-label="待解锁内容">
+          <button id="characterHint" type="button"><span class="avatar-dot cat-dot"></span><b>灰尾</b><small>当前角色</small></button>
+          <button id="characterLocked" type="button" aria-label="角色达到树屋3级解锁"><span class="avatar-dot fox-dot">🔒</span><b>赤狐</b><small>3级解锁</small></button>
+          <button id="worldLocked" type="button" aria-label="世界达到树屋5级解锁"><span class="avatar-dot beach-dot">🔒</span><b>海岸</b><small>5级解锁</small></button>
+        </nav>
+      </section>
+
+      <section id="tutorialScreen" class="screen tutorial-screen is-hidden">
+        <div class="tutorial-card">
+          <span class="swipe-figure" aria-hidden="true">↕</span>
+          <h2>滑动闪避</h2>
+          <p>左右换道 · 上滑跳跃 · 下滑滑铲</p>
+          <button id="tutorialButton" class="primary-button compact" type="button">知道了</button>
+        </div>
+      </section>
+
+      <section id="pauseScreen" class="screen pause-screen is-hidden">
+        <div class="modal-card">
+          <span class="eyebrow">追击暂停</span>
+          <h2>喘口气</h2>
+          <p>准备好后继续追浣熊。</p>
+          <button id="resumeButton" class="primary-button compact" type="button">继续</button>
+          <button id="quitButton" class="text-button" type="button">返回基地</button>
+        </div>
+      </section>
+
+      <section id="resultsScreen" class="screen results-screen is-hidden">
+        <div class="modal-card results-card">
+          <span class="eyebrow">本次追击</span>
+          <h2 id="resultTitle">漂亮的一跑！</h2>
+          <div class="result-grid">
+            <div><strong id="resultDistance">0m</strong><span>距离</span></div>
+            <div><strong id="resultGold">0</strong><span>金条</span></div>
+            <div><strong id="resultBest">0m</strong><span>最佳</span></div>
+          </div>
+          <div id="bossReward" class="boss-reward is-hidden">首领奖励 +150 金条</div>
+          <button id="retryButton" class="primary-button compact" type="button">再跑一次</button>
+          <button id="homeButton" class="text-button" type="button">返回基地</button>
+        </div>
+      </section>
+
+      <div id="countdown" class="countdown" aria-hidden="true"></div>
+      <div id="rotateHint" class="rotate-hint">横屏空间更宽，但竖屏也能畅玩</div>
+    </main>
+
+    <noscript>需要启用 JavaScript 才能运行游戏。</noscript>
+    <script type="module" src="./game/main.js"></script>
+  </body>
+</html>

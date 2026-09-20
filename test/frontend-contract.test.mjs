@@ -20,6 +20,81 @@ const entryRedirect = read('public/entry-redirect.js');
 const completeGamesRuntime = read('public/complete-games-v3.js');
 const termsOfService = read('public/legal-terms-v1.js');
 const privacyPolicy = read('public/legal-privacy-v1.js');
+const riskRunEntry = read('public/arcade/risk-run/index.html');
+const coinCastleEntry = read('public/arcade/coin-castle/index.html');
+const arcadeManifest = JSON.parse(read('public/arcade/manifest.json'));
+
+test('the twelve user-selected covers lead Home and all thirteen arcade games ship as same-origin bundles', () => {
+  assert.match(mobileEntry, /const featuredInteractiveIds=\[132,122,121,127,125,120,123,128,129,130,131,126,124/);
+  assert.match(mobileEntry, /const homeArcadeDiscoverIds = \[132,122,121,127,125,120,123,128,129,130,131,126,124/);
+  assert.match(mobileEntry, /id:126[\s\S]*?standaloneUrl:'\/arcade\/risk-run\/'/);
+  assert.match(riskRunEntry, /Risk Run/);
+  assert.match(riskRunEntry, /airdropVersion:\s*"risk"/);
+  for (const file of ['v62-dual-theme.css', 'Kai_FaceOverlay_Visemes_v5.png', 'live2d-model-runtimes/cubism5/index.html']) {
+    assert.equal(fs.existsSync(path.join(root, 'public/arcade/risk-run', file)), true, file);
+  }
+  const riskEntry = arcadeManifest.games.find(game => game.id === 126);
+  assert.equal(riskEntry?.entry, '/arcade/risk-run/');
+  assert.equal(riskEntry?.rewardPolicy, 'campaign-points-only-no-transfer');
+
+  assert.match(mobileEntry, /id:125[\s\S]*?standaloneUrl:'\/arcade\/coin-castle\/'/);
+  assert.match(coinCastleEntry, /\/arcade\/coin-castle\/assets\/index-[^"']+\.js/);
+  assert.match(coinCastleEntry, /\/arcade\/coin-castle\/assets\/index-[^"']+\.css/);
+  assert.doesNotMatch(coinCastleEntry, /\/_next\//);
+  for (const file of ['castle.png', 'castle-reference-v2.png', 'reference-source.jpg', 'reference-preserve-mask.svg']) {
+    assert.equal(fs.existsSync(path.join(root, 'public/arcade/coin-castle', file)), true, file);
+  }
+  const entry = arcadeManifest.games.find(game => game.id === 125);
+  assert.equal(entry?.entry, '/arcade/coin-castle/');
+  assert.equal(entry?.rewardPolicy, 'local-virtual-coins-only');
+
+  for (const [id, slug, marker] of [
+    [132, 'kol-town', '小镇'],
+    [127, 'token-harbor', 'Token Harbor'],
+    [128, 'mini-gp-racers', 'Mini GP'],
+    [129, 'street-gold-rush', '淘金'],
+    [130, 'star-table', '星桌'],
+    [131, 'sud-texas', '德州扑克']
+  ]) {
+    const bundledEntry = read(`public/arcade/${slug}/index.html`);
+    assert.match(bundledEntry, new RegExp(marker, 'i'), `${slug} entry marker`);
+    assert.match(mobileEntry, new RegExp(`id:${id}[^\\n]+standaloneUrl:'\\/arcade\\/${slug}\\/'`));
+    assert.equal(arcadeManifest.games.find(game => game.id === id)?.entry, `/arcade/${slug}/`);
+  }
+  assert.equal(arcadeManifest.games.length, 13);
+});
+
+test('the twelve supplied portrait covers stay centered over blurred same-image backdrops', () => {
+  assert.match(mobileEntry, /class="play-feed__cover-stack"/);
+  assert.match(mobileEntry, /class="play-feed__cover-backdrop" src="\{\{ ss\.cover \}\}" alt="" aria-hidden="true"/);
+  assert.match(mobileEntry, /object-fit:\{\{ ss\.coverFit \}\}/);
+  assert.match(mobileEntry, /transform:translateX\(\{\{ ss\.coverShiftX \}\}\)/);
+  assert.match(mobileEntry, /coverShiftX:x\.coverShiftX\|\|'0'/);
+  assert.match(mobileEntry, /hasCoverBackdrop:Boolean\(x\.cover\)&&!x\.referenceKey&&x\.coverBackdrop===true/);
+  assert.match(mobileEntry, /coverFit:x\.coverFit\|\|\(x\.coverBackdrop===true\?'contain':'cover'\)/);
+  const suppliedCovers = [
+    [132, 'kol-town-user-20260916-srgb.png'],
+    [122, 'coin-dozer-user-20260915-srgb.png'],
+    [121, 'htx-quest-user-20260915-srgb.png'],
+    [127, 'token-harbor-user-20260915-srgb.png'],
+    [125, 'coin-castle-user-20260915-srgb.png'],
+    [120, 'lucky-fruit-user-20260915-srgb.png'],
+    [123, 'city-squad-user-20260915-srgb.png'],
+    [128, 'mini-gp-racers-user-20260915-srgb.png'],
+    [129, 'street-gold-rush-user-20260915-srgb.png'],
+    [130, 'star-table-user-20260915-srgb.png'],
+    [131, 'sud-texas-user-20260915-srgb.png'],
+    [126, 'risk-run-user-20260915-srgb.png']
+  ];
+  assert.equal((mobileEntry.match(/coverBackdrop:true/g) || []).length, suppliedCovers.length);
+  for (const [id, file] of suppliedCovers) {
+    assert.match(mobileEntry, new RegExp(`id:${id}[^\\n]+cover:'\\/assets\\/featured-originals-v2\\/${file.replace('.', '\\.')}'[^\\n]+coverShiftX:'0'[^\\n]+coverBackdrop:true[^\\n]+coverFit:'contain'`));
+    assert.equal(fs.existsSync(path.join(root, 'public/assets/featured-originals-v2', file)), true, file);
+  }
+  assert.doesNotMatch(mobileEntry, /id:(?:120|121|122|123|125|126|127|128|129|130|131)[^\n]+coverShiftX:'(?:[1-9]|-)/);
+  assert.match(mobileCss, /\.play-feed__cover-stack\s*\{[^}]*overflow:\s*hidden;[^}]*pointer-events:\s*none;/s);
+  assert.match(mobileCss, /\.play-feed__cover-backdrop\s*\{[^}]*object-fit:\s*cover;[^}]*filter:\s*blur\(18px\) brightness\(\.56\) saturate\(\.9\);/s);
+});
 
 test('root exposes the current five-destination mobile shell and keeps the workspace separate', () => {
   assert.match(mobileEntry, /Content Driven Agent World/);
@@ -62,7 +137,7 @@ test('frontend-only phases expose truthful evidence, progressive creation and a 
 test('visible divider lines use the shared 0.7px thickness without changing component borders', () => {
   assert.match(mobileCss, /--divider-height:\s*0\.7px;/);
   assert.match(css, /--divider-height:\s*\.7px;/);
-  assert.match(mobileEntry, /airvana-v4\.css\?v=5\.5\.85/);
+  assert.match(mobileEntry, /airvana-v4\.css\?v=5\.5\.87/);
   assert.match(mobileEntry, /creator-language-workspace\.css\?v=1\.0\.\d+/);
   assert.doesNotMatch(mobileEntry, /border-(?:top|bottom):\s*1px\s+solid/);
   assert.doesNotMatch(mobileCss, /border-(?:top|bottom):\s*1px\s+solid/);
@@ -187,7 +262,7 @@ test('Discover is a separate swipeable 2.5-card gallery while Home remains immer
   assert.match(mobileEntry, /class="discover-page"[\s\S]*?class="discover-tab-bar"[\s\S]*?class="discover-content main-tab-scroll" role="region" aria-label="发现内容列表"/);
   assert.match(mobileCss, /\.discover-page\s*\{[^}]*display:\s*flex;[^}]*flex-direction:\s*column;[^}]*overflow:\s*hidden;/s);
   assert.match(mobileCss, /\.discover-tab-bar\s*\{[^}]*flex:\s*none;[^}]*background:\s*var\(--surface-canvas,/s);
-  assert.match(mobileEntry, /const homeArcadeDiscoverIds = \[111,112,113,114,115,116,117,118,101,102,103,104,105,34,35,36,37,38,39,40,41,42,43,44,24,25,26,27,28,29,30,31,32,33,1,2,5,6,9,10,12,14,15,16,17,18,19,20,21,22,23\]/);
+  assert.match(mobileEntry, /const homeArcadeDiscoverIds = \[132,122,121,127,125,120,123,128,129,130,131,126,124,111,112,113,114,115,116,117,118,101,102,103,104,105,34,35,36,37,38,39,40,41,42,43,44,24,25,26,27,28,29,30,31,32,33,1,2,5,6,9,10,12,14,15,16,17,18,19,20,21,22,23\]/);
   assert.match(mobileEntry, /const arcadeDiscoverItems = homeArcadeDiscoverIds\.map/);
   assert.match(mobileEntry, /原创离线互动 · 本地最高分/);
   assert.match(mobileEntry, /display:flex;gap:10px;overflow-x:auto/);
@@ -218,7 +293,7 @@ test('Home keeps the additional Playables under original names and store-fidelit
     assert.ok(mobileEntry.includes(file.replace('.jpg','')), `missing store-fidelity cover key: ${file}`);
     assert.equal(fs.existsSync(path.join(root, 'public/assets/game-covers/store-fidelity-v4', file)), true, `missing store-fidelity cover file: ${file}`);
   }
-  assert.match(mobileEntry, /const governedArcadeIds = new Set\(\[1,2,5,6,9,10,12,14,15,16,17,18,19,20,21,22,23,\.\.\.Array\.from\(\{length:21\},\(_,index\)=>index\+24\),101,102,103,104,105,111,112,113,114,115,116,117,118\]\)/);
+  assert.match(mobileEntry, /const governedArcadeIds = new Set\(\[1,2,5,6,9,10,12,14,15,16,17,18,19,20,21,22,23,\.\.\.Array\.from\(\{length:21\},\(_,index\)=>index\+24\),101,102,103,104,105,111,112,113,114,115,116,117,118,120,121,122,123,124,125,126,127,128,129,130,131,132\]\)/);
   assert.match(mobileEntry, /const sessions = \[\.\.\.sessionsWithCurrentArcadeCatalog, \.\.\.seededSessions\.filter\(item => !restoredSessionIds\.has\(item\.id\)\)\]/);
 });
 
@@ -313,7 +388,7 @@ test('mobile text entry avoids iOS focus zoom and keeps comment and email fields
   assert.match(mobileCss, /\.email-login-card\s*\{[^}]*min-width:\s*0;[^}]*max-width:\s*100%;[^}]*overflow-x:\s*hidden;/);
 });
 
-test('Home media area exposes all 38 governed complete local games', () => {
+test('Home media area keeps all 38 governed games alongside thirteen bundled originals', () => {
   for (const gameKey of ['safety-workshop','stellar-farm','pixel-quest','red-cup-shuffle','magic-choir','paws-stage','puppet-studio','firefly-mail','whisker-escape','coin-journey','jungle-dive','rift-strike','stardust-island','formation-knights','galaxy-toy-shop','city-rush','sky-cannon','neon-dash','pulse-forge','sky-stack','rune-circuit','prism-match','star-cups','deep-catch','ember-bastion','nova-drift','void-squadron','orchard-merge','moonlight-tea-shop','microbe-arena','crystal-bastion','studio-wardrobe']) {
     assert.ok(completeGamesRuntime.includes(`'${gameKey}'`), `missing complete game runtime entry: ${gameKey}`);
   }
@@ -340,7 +415,7 @@ test('Home media area exposes all 38 governed complete local games', () => {
   assert.match(mobileEntry, /ensureFeedAudio\(\)/);
   assert.match(mobileEntry, /airvana\.feed-mini-game\.muted/);
   assert.match(mobileEntry, /feedMiniGameBestScores/);
-  assert.match(mobileEntry, /const featuredInteractiveIds=\[111,112,113,114,115,116,117,118,101,102,103,104,105,34,35,36,37,38,39,40,41,42,43,44,24,25,26,27,28,29,30,31,32,33,1,2,5,6,9,10,12,14,15,16,17,18,19,20,21,22,23\]/);
+  assert.match(mobileEntry, /const featuredInteractiveIds=\[132,122,121,127,125,120,123,128,129,130,131,126,124,111,112,113,114,115,116,117,118,101,102,103,104,105,34,35,36,37,38,39,40,41,42,43,44,24,25,26,27,28,29,30,31,32,33,1,2,5,6,9,10,12,14,15,16,17,18,19,20,21,22,23\]/);
   assert.match(mobileEntry, /game-art-system-v1\.js\?v=6\.0\.0/);
   assert.match(mobileEntry, /sensor-interactions-v1\.js\?v=1\.1\.0/);
   assert.match(mobileEntry, /complete-games-v3\.js\?v=4\.2\.0/);
@@ -937,7 +1012,7 @@ test('creator center closes the governed Brief-to-settlement loop without claimi
   assert.match(mobileEntry, /campaignSettlementBasis:'【待人工录入】'/);
   assert.match(mobileCss, /\.creator-center-page\s*\{/);
   assert.match(mobileCss, /\.creator-center-tabs\s*\{/);
-  assert.match(mobileEntry, /airvana-v4\.css\?v=5\.5\.85/);
+  assert.match(mobileEntry, /airvana-v4\.css\?v=5\.5\.87/);
   assert.match(mobileEntry, /class="creator-center-tab \{\{ tab\.className \}\}"[^>]*><span>\{\{ tab\.label \}\}<\/span><\/div>/);
   assert.doesNotMatch(mobileEntry, /<em>\{\{ tab\.meta \}\}<\/em>/);
   assert.match(mobileCss, /\.creator-center-tab\.is-active\s*\{\s*color:\s*var\(--creator-ink\);\s*\}/);
@@ -1677,7 +1752,7 @@ test('prompt-first composer closes inspiration, asset, goal and preflight loops 
   assert.doesNotMatch(mobileCss, /\.composer-sheet-dialog\s*\{[^}]*max-height:\s*calc\(100dvh/);
   assert.match(mobileCss, /\.inspiration-mode-option\s*\{[\s\S]*?min-height:\s*44px/);
   assert.match(mobileCss, /@media \(max-width: 360px\)/);
-  assert.match(mobileEntry, /airvana-v4\.css\?v=5\.5\.85/);
+  assert.match(mobileEntry, /airvana-v4\.css\?v=5\.5\.87/);
   assert.match(mobileEntry, /indexedDB\.open\('airvana\.local-composer-assets\.v1',1\)/);
   assert.match(mobileEntry, /composerAssetManifest\(assets\)/);
   assert.doesNotMatch(mobileEntry, /素材授权待确认|授权状态默认为待确认|授权状态已重置为待确认|切换授权|深度模式必须全部确认授权|pending-assets|blocked-assets/);

@@ -1,0 +1,4936 @@
+{
+  "archer": {
+    "source": "tower1_1",
+    "animation": "stand_down",
+    "file": "archer.png",
+    "width": 202,
+    "height": 288,
+    "frameWidth": 202,
+    "frameHeight": 288,
+    "anchor": [
+      0.5148514851485149,
+      0.6666666666666666
+    ],
+    "residualConstraints": [],
+    "origin": [
+      104,
+      192
+    ],
+    "scale": 1,
+    "nativeScale": 0.36,
+    "sourcePixels": true,
+    "exactSkeletonRuntime": false,
+    "shoot": {
+      "file": "archer-shoot-down.png",
+      "frameWidth": 202,
+      "frameHeight": 296,
+      "frames": 15,
+      "duration": 0.566667,
+      "fps": 24.705883,
+      "loop": false,
+      "origin": [
+        104,
+        200
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.5148514851485149,
+        0.6756756756756757
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "build": {
+      "file": "archer-build-down.png",
+      "frameWidth": 232,
+      "frameHeight": 536,
+      "frames": 18,
+      "duration": 0.666667,
+      "fps": 25.499999,
+      "loop": false,
+      "origin": [
+        111,
+        395
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.47844827586206895,
+        0.7369402985074627
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "upgrade": {
+      "file": "archer-upgrade-down.png",
+      "frameWidth": 235,
+      "frameHeight": 351,
+      "frames": 16,
+      "duration": 0.6,
+      "fps": 24.999999,
+      "loop": false,
+      "origin": [
+        121,
+        239
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.5148936170212766,
+        0.6809116809116809
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "towerLevel": 1,
+    "type": "archer",
+    "directions": {
+      "down": {
+        "source": "tower1_1",
+        "animation": "stand_down",
+        "file": "archer.png",
+        "width": 202,
+        "height": 288,
+        "frameWidth": 202,
+        "frameHeight": 288,
+        "anchor": [
+          0.5148514851485149,
+          0.6666666666666666
+        ],
+        "residualConstraints": [],
+        "origin": [
+          104,
+          192
+        ],
+        "scale": 1,
+        "nativeScale": 0.36,
+        "sourcePixels": true,
+        "exactSkeletonRuntime": false,
+        "shoot": {
+          "file": "archer-shoot-down.png",
+          "frameWidth": 202,
+          "frameHeight": 296,
+          "frames": 15,
+          "duration": 0.566667,
+          "fps": 24.705883,
+          "loop": false,
+          "origin": [
+            104,
+            200
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.5148514851485149,
+            0.6756756756756757
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "build": {
+          "file": "archer-build-down.png",
+          "frameWidth": 232,
+          "frameHeight": 536,
+          "frames": 18,
+          "duration": 0.666667,
+          "fps": 25.499999,
+          "loop": false,
+          "origin": [
+            111,
+            395
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.47844827586206895,
+            0.7369402985074627
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "upgrade": {
+          "file": "archer-upgrade-down.png",
+          "frameWidth": 235,
+          "frameHeight": 351,
+          "frames": 16,
+          "duration": 0.6,
+          "fps": 24.999999,
+          "loop": false,
+          "origin": [
+            121,
+            239
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.5148936170212766,
+            0.6809116809116809
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        }
+      },
+      "left": {
+        "source": "tower1_1",
+        "animation": "stand_left",
+        "file": "archer-stand-left.png",
+        "width": 202,
+        "height": 287,
+        "frameWidth": 202,
+        "frameHeight": 287,
+        "anchor": [
+          0.5148514851485149,
+          0.6655052264808362
+        ],
+        "residualConstraints": [],
+        "origin": [
+          104,
+          191
+        ],
+        "scale": 1,
+        "nativeScale": 0.36,
+        "sourcePixels": true,
+        "exactSkeletonRuntime": false,
+        "shoot": {
+          "file": "archer-shoot-left.png",
+          "frameWidth": 202,
+          "frameHeight": 299,
+          "frames": 14,
+          "duration": 0.533333,
+          "fps": 24.374999,
+          "loop": false,
+          "origin": [
+            104,
+            203
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.5148514851485149,
+            0.6789297658862876
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "build": {
+          "file": "archer-build-left.png",
+          "frameWidth": 232,
+          "frameHeight": 532,
+          "frames": 18,
+          "duration": 0.666667,
+          "fps": 25.499999,
+          "loop": false,
+          "origin": [
+            111,
+            391
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.47844827586206895,
+            0.7349624060150376
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "upgrade": {
+          "file": "archer-upgrade-left.png",
+          "frameWidth": 219,
+          "frameHeight": 343,
+          "frames": 16,
+          "duration": 0.6,
+          "fps": 24.999999,
+          "loop": false,
+          "origin": [
+            113,
+            240
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.5159817351598174,
+            0.6997084548104956
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        }
+      },
+      "right": {
+        "source": "tower1_1",
+        "animation": "stand_right",
+        "file": "archer-stand-right.png",
+        "width": 202,
+        "height": 287,
+        "frameWidth": 202,
+        "frameHeight": 287,
+        "anchor": [
+          0.5148514851485149,
+          0.6655052264808362
+        ],
+        "residualConstraints": [],
+        "origin": [
+          104,
+          191
+        ],
+        "scale": 1,
+        "nativeScale": 0.36,
+        "sourcePixels": true,
+        "exactSkeletonRuntime": false,
+        "shoot": {
+          "file": "archer-shoot-right.png",
+          "frameWidth": 202,
+          "frameHeight": 298,
+          "frames": 14,
+          "duration": 0.533333,
+          "fps": 24.374999,
+          "loop": false,
+          "origin": [
+            104,
+            202
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.5148514851485149,
+            0.6778523489932886
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "build": {
+          "file": "archer-build-right.png",
+          "frameWidth": 232,
+          "frameHeight": 542,
+          "frames": 18,
+          "duration": 0.666667,
+          "fps": 25.499999,
+          "loop": false,
+          "origin": [
+            111,
+            401
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.47844827586206895,
+            0.7398523985239852
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "upgrade": {
+          "file": "archer-upgrade-right.png",
+          "frameWidth": 235,
+          "frameHeight": 352,
+          "frames": 16,
+          "duration": 0.6,
+          "fps": 24.999999,
+          "loop": false,
+          "origin": [
+            121,
+            240
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.5148936170212766,
+            0.6818181818181818
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        }
+      },
+      "up": {
+        "source": "tower1_1",
+        "animation": "stand_up",
+        "file": "archer-stand-up.png",
+        "width": 202,
+        "height": 332,
+        "frameWidth": 202,
+        "frameHeight": 332,
+        "anchor": [
+          0.5148514851485149,
+          0.7108433734939759
+        ],
+        "residualConstraints": [],
+        "origin": [
+          104,
+          236
+        ],
+        "scale": 1,
+        "nativeScale": 0.36,
+        "sourcePixels": true,
+        "exactSkeletonRuntime": false,
+        "shoot": {
+          "file": "archer-shoot-up.png",
+          "frameWidth": 202,
+          "frameHeight": 333,
+          "frames": 13,
+          "duration": 0.5,
+          "fps": 24.0,
+          "loop": false,
+          "origin": [
+            104,
+            237
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.5148514851485149,
+            0.7117117117117117
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "build": {
+          "file": "archer-build-up.png",
+          "frameWidth": 232,
+          "frameHeight": 582,
+          "frames": 18,
+          "duration": 0.666667,
+          "fps": 25.499999,
+          "loop": false,
+          "origin": [
+            111,
+            441
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.47844827586206895,
+            0.7577319587628866
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "upgrade": {
+          "file": "archer-upgrade-up.png",
+          "frameWidth": 235,
+          "frameHeight": 410,
+          "frames": 16,
+          "duration": 0.6,
+          "fps": 24.999999,
+          "loop": false,
+          "origin": [
+            121,
+            298
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.5148936170212766,
+            0.7268292682926829
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        }
+      }
+    },
+    "animationExport": "Original texture pixels with authored transform, color, attachment, draw-order and deform curves; analytic IK stretch/softness; offline raster sampling."
+  },
+  "cannon": {
+    "source": "tower2_1",
+    "animation": "stand",
+    "file": "cannon.png",
+    "width": 211,
+    "height": 242,
+    "frameWidth": 211,
+    "frameHeight": 242,
+    "anchor": [
+      0.5165876777251185,
+      0.5371900826446281
+    ],
+    "residualConstraints": [],
+    "origin": [
+      109,
+      130
+    ],
+    "scale": 1,
+    "nativeScale": 0.36,
+    "sourcePixels": true,
+    "exactSkeletonRuntime": false,
+    "shoot": {
+      "file": "cannon-shoot.png",
+      "frameWidth": 322,
+      "frameHeight": 386,
+      "frames": 19,
+      "duration": 0.733333,
+      "fps": 24.545454,
+      "loop": false,
+      "origin": [
+        161,
+        274
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.5,
+        0.7098445595854922
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "build": {
+      "file": "cannon-build.png",
+      "frameWidth": 227,
+      "frameHeight": 470,
+      "frames": 13,
+      "duration": 0.5,
+      "fps": 24.0,
+      "loop": false,
+      "origin": [
+        117,
+        316
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.5154185022026432,
+        0.6723404255319149
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "upgrade": {
+      "file": "cannon-upgrade.png",
+      "frameWidth": 212,
+      "frameHeight": 302,
+      "frames": 18,
+      "duration": 0.666667,
+      "fps": 25.499999,
+      "loop": false,
+      "origin": [
+        109,
+        190
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.5141509433962265,
+        0.6291390728476821
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "towerLevel": 1,
+    "type": "cannon",
+    "directions": {
+      "default": {
+        "source": "tower2_1",
+        "animation": "stand",
+        "file": "cannon.png",
+        "width": 211,
+        "height": 242,
+        "frameWidth": 211,
+        "frameHeight": 242,
+        "anchor": [
+          0.5165876777251185,
+          0.5371900826446281
+        ],
+        "residualConstraints": [],
+        "origin": [
+          109,
+          130
+        ],
+        "scale": 1,
+        "nativeScale": 0.36,
+        "sourcePixels": true,
+        "exactSkeletonRuntime": false,
+        "shoot": {
+          "file": "cannon-shoot.png",
+          "frameWidth": 322,
+          "frameHeight": 386,
+          "frames": 19,
+          "duration": 0.733333,
+          "fps": 24.545454,
+          "loop": false,
+          "origin": [
+            161,
+            274
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.5,
+            0.7098445595854922
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "build": {
+          "file": "cannon-build.png",
+          "frameWidth": 227,
+          "frameHeight": 470,
+          "frames": 13,
+          "duration": 0.5,
+          "fps": 24.0,
+          "loop": false,
+          "origin": [
+            117,
+            316
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.5154185022026432,
+            0.6723404255319149
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "upgrade": {
+          "file": "cannon-upgrade.png",
+          "frameWidth": 212,
+          "frameHeight": 302,
+          "frames": 18,
+          "duration": 0.666667,
+          "fps": 25.499999,
+          "loop": false,
+          "origin": [
+            109,
+            190
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.5141509433962265,
+            0.6291390728476821
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        }
+      }
+    },
+    "animationExport": "Original texture pixels with authored transform, color, attachment, draw-order and deform curves; analytic IK stretch/softness; offline raster sampling."
+  },
+  "barracks": {
+    "source": "tower3_1",
+    "animation": "stand",
+    "file": "barracks.png",
+    "width": 202,
+    "height": 296,
+    "frameWidth": 202,
+    "frameHeight": 296,
+    "anchor": [
+      0.5148514851485149,
+      0.6554054054054054
+    ],
+    "residualConstraints": [],
+    "origin": [
+      104,
+      194
+    ],
+    "scale": 1,
+    "nativeScale": 0.36,
+    "sourcePixels": true,
+    "exactSkeletonRuntime": false,
+    "shoot": {
+      "file": "barracks-shoot.png",
+      "frameWidth": 269,
+      "frameHeight": 315,
+      "frames": 15,
+      "duration": 0.566667,
+      "fps": 24.705883,
+      "loop": false,
+      "origin": [
+        104,
+        213
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.38661710037174724,
+        0.6761904761904762
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "build": {
+      "file": "barracks-build.png",
+      "frameWidth": 249,
+      "frameHeight": 502,
+      "frames": 13,
+      "duration": 0.5,
+      "fps": 24.0,
+      "loop": false,
+      "origin": [
+        128,
+        372
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.5140562248995983,
+        0.7410358565737052
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "upgrade": {
+      "file": "barracks-upgrade.png",
+      "frameWidth": 247,
+      "frameHeight": 372,
+      "frames": 18,
+      "duration": 0.666667,
+      "fps": 25.499999,
+      "loop": false,
+      "origin": [
+        127,
+        246
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.5141700404858299,
+        0.6612903225806451
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "towerLevel": 1,
+    "type": "barracks",
+    "directions": {
+      "default": {
+        "source": "tower3_1",
+        "animation": "stand",
+        "file": "barracks.png",
+        "width": 202,
+        "height": 296,
+        "frameWidth": 202,
+        "frameHeight": 296,
+        "anchor": [
+          0.5148514851485149,
+          0.6554054054054054
+        ],
+        "residualConstraints": [],
+        "origin": [
+          104,
+          194
+        ],
+        "scale": 1,
+        "nativeScale": 0.36,
+        "sourcePixels": true,
+        "exactSkeletonRuntime": false,
+        "shoot": {
+          "file": "barracks-shoot.png",
+          "frameWidth": 269,
+          "frameHeight": 315,
+          "frames": 15,
+          "duration": 0.566667,
+          "fps": 24.705883,
+          "loop": false,
+          "origin": [
+            104,
+            213
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.38661710037174724,
+            0.6761904761904762
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "build": {
+          "file": "barracks-build.png",
+          "frameWidth": 249,
+          "frameHeight": 502,
+          "frames": 13,
+          "duration": 0.5,
+          "fps": 24.0,
+          "loop": false,
+          "origin": [
+            128,
+            372
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.5140562248995983,
+            0.7410358565737052
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "upgrade": {
+          "file": "barracks-upgrade.png",
+          "frameWidth": 247,
+          "frameHeight": 372,
+          "frames": 18,
+          "duration": 0.666667,
+          "fps": 25.499999,
+          "loop": false,
+          "origin": [
+            127,
+            246
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.5141700404858299,
+            0.6612903225806451
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        }
+      }
+    },
+    "animationExport": "Original texture pixels with authored transform, color, attachment, draw-order and deform curves; analytic IK stretch/softness; offline raster sampling."
+  },
+  "mage": {
+    "source": "tower4_1",
+    "animation": "stand_right",
+    "file": "mage.png",
+    "width": 202,
+    "height": 309,
+    "frameWidth": 202,
+    "frameHeight": 309,
+    "anchor": [
+      0.5148514851485149,
+      0.686084142394822
+    ],
+    "residualConstraints": [],
+    "origin": [
+      104,
+      212
+    ],
+    "scale": 1,
+    "nativeScale": 0.36,
+    "sourcePixels": true,
+    "exactSkeletonRuntime": false,
+    "shoot": {
+      "file": "mage-shoot-right.png",
+      "frameWidth": 565,
+      "frameHeight": 628,
+      "frames": 18,
+      "duration": 0.666667,
+      "fps": 25.499999,
+      "loop": false,
+      "origin": [
+        250,
+        523
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.4424778761061947,
+        0.8328025477707006
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "build": {
+      "file": "mage-build-right.png",
+      "frameWidth": 222,
+      "frameHeight": 553,
+      "frames": 18,
+      "duration": 0.666667,
+      "fps": 25.499999,
+      "loop": false,
+      "origin": [
+        109,
+        443
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.49099099099099097,
+        0.8010849909584087
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "upgrade": {
+      "file": "mage-upgrade-right.png",
+      "frameWidth": 216,
+      "frameHeight": 372,
+      "frames": 18,
+      "duration": 0.666667,
+      "fps": 25.499999,
+      "loop": false,
+      "origin": [
+        111,
+        270
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.5138888888888888,
+        0.7258064516129032
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "towerLevel": 1,
+    "type": "mage",
+    "directions": {
+      "left": {
+        "source": "tower4_1",
+        "animation": "stand_left",
+        "file": "mage-stand-left.png",
+        "width": 202,
+        "height": 309,
+        "frameWidth": 202,
+        "frameHeight": 309,
+        "anchor": [
+          0.5148514851485149,
+          0.686084142394822
+        ],
+        "residualConstraints": [],
+        "origin": [
+          104,
+          212
+        ],
+        "scale": 1,
+        "nativeScale": 0.36,
+        "sourcePixels": true,
+        "exactSkeletonRuntime": false,
+        "shoot": {
+          "file": "mage-shoot-left.png",
+          "frameWidth": 565,
+          "frameHeight": 628,
+          "frames": 18,
+          "duration": 0.666667,
+          "fps": 25.499999,
+          "loop": false,
+          "origin": [
+            323,
+            523
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.5716814159292035,
+            0.8328025477707006
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "build": {
+          "file": "mage-build-left.png",
+          "frameWidth": 248,
+          "frameHeight": 552,
+          "frames": 18,
+          "duration": 0.666667,
+          "fps": 25.499999,
+          "loop": false,
+          "origin": [
+            135,
+            442
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.5443548387096774,
+            0.8007246376811594
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "upgrade": {
+          "file": "mage-upgrade-left.png",
+          "frameWidth": 241,
+          "frameHeight": 369,
+          "frames": 18,
+          "duration": 0.666667,
+          "fps": 25.499999,
+          "loop": false,
+          "origin": [
+            136,
+            267
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.5643153526970954,
+            0.7235772357723578
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        }
+      },
+      "right": {
+        "source": "tower4_1",
+        "animation": "stand_right",
+        "file": "mage.png",
+        "width": 202,
+        "height": 309,
+        "frameWidth": 202,
+        "frameHeight": 309,
+        "anchor": [
+          0.5148514851485149,
+          0.686084142394822
+        ],
+        "residualConstraints": [],
+        "origin": [
+          104,
+          212
+        ],
+        "scale": 1,
+        "nativeScale": 0.36,
+        "sourcePixels": true,
+        "exactSkeletonRuntime": false,
+        "shoot": {
+          "file": "mage-shoot-right.png",
+          "frameWidth": 565,
+          "frameHeight": 628,
+          "frames": 18,
+          "duration": 0.666667,
+          "fps": 25.499999,
+          "loop": false,
+          "origin": [
+            250,
+            523
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.4424778761061947,
+            0.8328025477707006
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "build": {
+          "file": "mage-build-right.png",
+          "frameWidth": 222,
+          "frameHeight": 553,
+          "frames": 18,
+          "duration": 0.666667,
+          "fps": 25.499999,
+          "loop": false,
+          "origin": [
+            109,
+            443
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.49099099099099097,
+            0.8010849909584087
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "upgrade": {
+          "file": "mage-upgrade-right.png",
+          "frameWidth": 216,
+          "frameHeight": 372,
+          "frames": 18,
+          "duration": 0.666667,
+          "fps": 25.499999,
+          "loop": false,
+          "origin": [
+            111,
+            270
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.5138888888888888,
+            0.7258064516129032
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        }
+      }
+    },
+    "animationExport": "Original texture pixels with authored transform, color, attachment, draw-order and deform curves; analytic IK stretch/softness; offline raster sampling."
+  },
+  "infantry": {
+    "source": "enemy7_1",
+    "animation": "stand_right",
+    "file": "infantry.png",
+    "width": 150,
+    "height": 152,
+    "frameWidth": 150,
+    "frameHeight": 152,
+    "anchor": [
+      0.35333333333333333,
+      0.9078947368421053
+    ],
+    "residualConstraints": [],
+    "origin": [
+      53,
+      138
+    ],
+    "scale": 1,
+    "nativeScale": 0.36,
+    "sourcePixels": true,
+    "exactSkeletonRuntime": false,
+    "walk": {
+      "file": "infantry-walk.png",
+      "frameWidth": 148,
+      "frameHeight": 168,
+      "frames": 17,
+      "duration": 0.666667,
+      "fps": 25.499999,
+      "loop": true,
+      "origin": [
+        58,
+        155
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.3918918918918919,
+        0.9226190476190477
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "attack": {
+      "file": "infantry-attack.png",
+      "frameWidth": 216,
+      "frameHeight": 183,
+      "frames": 13,
+      "duration": 0.5,
+      "fps": 24.0,
+      "loop": false,
+      "origin": [
+        70,
+        144
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.32407407407407407,
+        0.7868852459016393
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "death": {
+      "file": "infantry-death.png",
+      "frameWidth": 283,
+      "frameHeight": 197,
+      "frames": 10,
+      "duration": 0.333333,
+      "fps": 26.999999,
+      "loop": false,
+      "origin": [
+        186,
+        138
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.657243816254417,
+        0.700507614213198
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "type": "infantry",
+    "directions": {
+      "right": {
+        "source": "enemy7_1",
+        "animation": "stand_right",
+        "file": "infantry.png",
+        "width": 150,
+        "height": 152,
+        "frameWidth": 150,
+        "frameHeight": 152,
+        "anchor": [
+          0.35333333333333333,
+          0.9078947368421053
+        ],
+        "residualConstraints": [],
+        "origin": [
+          53,
+          138
+        ],
+        "scale": 1,
+        "nativeScale": 0.36,
+        "sourcePixels": true,
+        "exactSkeletonRuntime": false,
+        "walk": {
+          "file": "infantry-walk.png",
+          "frameWidth": 148,
+          "frameHeight": 168,
+          "frames": 17,
+          "duration": 0.666667,
+          "fps": 25.499999,
+          "loop": true,
+          "origin": [
+            58,
+            155
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.3918918918918919,
+            0.9226190476190477
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "attack": {
+          "file": "infantry-attack.png",
+          "frameWidth": 216,
+          "frameHeight": 183,
+          "frames": 13,
+          "duration": 0.5,
+          "fps": 24.0,
+          "loop": false,
+          "origin": [
+            70,
+            144
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.32407407407407407,
+            0.7868852459016393
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "death": {
+          "file": "infantry-death.png",
+          "frameWidth": 283,
+          "frameHeight": 197,
+          "frames": 10,
+          "duration": 0.333333,
+          "fps": 26.999999,
+          "loop": false,
+          "origin": [
+            186,
+            138
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.657243816254417,
+            0.700507614213198
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        }
+      },
+      "down": {
+        "source": "enemy7_1",
+        "animation": "stand_down",
+        "file": "infantry-stand-down.png",
+        "width": 182,
+        "height": 153,
+        "frameWidth": 182,
+        "frameHeight": 153,
+        "anchor": [
+          0.47802197802197804,
+          0.9215686274509803
+        ],
+        "residualConstraints": [],
+        "origin": [
+          87,
+          141
+        ],
+        "scale": 1,
+        "nativeScale": 0.36,
+        "sourcePixels": true,
+        "exactSkeletonRuntime": false,
+        "walk": {
+          "file": "infantry-walk-down.png",
+          "frameWidth": 190,
+          "frameHeight": 161,
+          "frames": 17,
+          "duration": 0.666667,
+          "fps": 25.499999,
+          "loop": true,
+          "origin": [
+            97,
+            154
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.5105263157894737,
+            0.9565217391304348
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        }
+      },
+      "up": {
+        "source": "enemy7_1",
+        "animation": "run_up",
+        "file": "infantry-run-up.png",
+        "width": 138,
+        "height": 158,
+        "frameWidth": 138,
+        "frameHeight": 158,
+        "anchor": [
+          0.41304347826086957,
+          0.9620253164556962
+        ],
+        "residualConstraints": [],
+        "origin": [
+          57,
+          152
+        ],
+        "scale": 1,
+        "nativeScale": 0.36,
+        "sourcePixels": true,
+        "exactSkeletonRuntime": false,
+        "standSource": "First frame of run_up; no authored stand_up",
+        "walk": {
+          "file": "infantry-walk-up.png",
+          "frameWidth": 150,
+          "frameHeight": 162,
+          "frames": 17,
+          "duration": 0.666667,
+          "fps": 25.499999,
+          "loop": true,
+          "origin": [
+            69,
+            152
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.46,
+            0.9382716049382716
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        }
+      }
+    },
+    "sourceRole": "enemy",
+    "animationExport": "Original texture pixels with authored transform, color, attachment, draw-order and deform curves; analytic IK stretch/softness; offline raster sampling.",
+    "shadow": {
+      "file": "unit-shadow-original.png",
+      "width": 100,
+      "height": 81,
+      "origin": [
+        50,
+        40.5
+      ],
+      "nativeScale": 0.32
+    }
+  },
+  "soldier": {
+    "source": "tower3_1_soldier",
+    "animation": "stand_right",
+    "file": "soldier.png",
+    "width": 167,
+    "height": 149,
+    "frameWidth": 167,
+    "frameHeight": 149,
+    "anchor": [
+      0.31736526946107785,
+      0.912751677852349
+    ],
+    "residualConstraints": [],
+    "origin": [
+      53,
+      136
+    ],
+    "scale": 1,
+    "nativeScale": 0.36,
+    "sourcePixels": true,
+    "exactSkeletonRuntime": false,
+    "walk": {
+      "file": "soldier-walk.png",
+      "frameWidth": 170,
+      "frameHeight": 165,
+      "frames": 17,
+      "duration": 0.666667,
+      "fps": 25.499999,
+      "loop": true,
+      "origin": [
+        56,
+        153
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.32941176470588235,
+        0.9272727272727272
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "attack": {
+      "file": "soldier-attack.png",
+      "frameWidth": 280,
+      "frameHeight": 149,
+      "frames": 13,
+      "duration": 0.5,
+      "fps": 24.0,
+      "loop": false,
+      "origin": [
+        72,
+        136
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.2571428571428571,
+        0.912751677852349
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "death": {
+      "file": "soldier-death.png",
+      "frameWidth": 251,
+      "frameHeight": 178,
+      "frames": 10,
+      "duration": 0.333333,
+      "fps": 26.999999,
+      "loop": false,
+      "origin": [
+        137,
+        136
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.545816733067729,
+        0.7640449438202247
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "type": "soldier",
+    "directions": {
+      "right": {
+        "source": "tower3_1_soldier",
+        "animation": "stand_right",
+        "file": "soldier.png",
+        "width": 167,
+        "height": 149,
+        "frameWidth": 167,
+        "frameHeight": 149,
+        "anchor": [
+          0.31736526946107785,
+          0.912751677852349
+        ],
+        "residualConstraints": [],
+        "origin": [
+          53,
+          136
+        ],
+        "scale": 1,
+        "nativeScale": 0.36,
+        "sourcePixels": true,
+        "exactSkeletonRuntime": false,
+        "walk": {
+          "file": "soldier-walk.png",
+          "frameWidth": 170,
+          "frameHeight": 165,
+          "frames": 17,
+          "duration": 0.666667,
+          "fps": 25.499999,
+          "loop": true,
+          "origin": [
+            56,
+            153
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.32941176470588235,
+            0.9272727272727272
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "attack": {
+          "file": "soldier-attack.png",
+          "frameWidth": 280,
+          "frameHeight": 149,
+          "frames": 13,
+          "duration": 0.5,
+          "fps": 24.0,
+          "loop": false,
+          "origin": [
+            72,
+            136
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.2571428571428571,
+            0.912751677852349
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "death": {
+          "file": "soldier-death.png",
+          "frameWidth": 251,
+          "frameHeight": 178,
+          "frames": 10,
+          "duration": 0.333333,
+          "fps": 26.999999,
+          "loop": false,
+          "origin": [
+            137,
+            136
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.545816733067729,
+            0.7640449438202247
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        }
+      },
+      "left": {
+        "source": "tower3_1_soldier",
+        "animation": "stand_left",
+        "file": "soldier-stand-left.png",
+        "width": 167,
+        "height": 149,
+        "frameWidth": 167,
+        "frameHeight": 149,
+        "anchor": [
+          0.6826347305389222,
+          0.912751677852349
+        ],
+        "residualConstraints": [],
+        "origin": [
+          114,
+          136
+        ],
+        "scale": 1,
+        "nativeScale": 0.36,
+        "sourcePixels": true,
+        "exactSkeletonRuntime": false,
+        "walk": {
+          "file": "soldier-walk-left.png",
+          "frameWidth": 170,
+          "frameHeight": 165,
+          "frames": 17,
+          "duration": 0.666667,
+          "fps": 25.499999,
+          "loop": true,
+          "origin": [
+            114,
+            153
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.6705882352941176,
+            0.9272727272727272
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "attack": {
+          "file": "soldier-attack-left.png",
+          "frameWidth": 280,
+          "frameHeight": 149,
+          "frames": 13,
+          "duration": 0.5,
+          "fps": 24.0,
+          "loop": false,
+          "origin": [
+            208,
+            136
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.7428571428571429,
+            0.912751677852349
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "death": {
+          "file": "soldier-death-left.png",
+          "frameWidth": 250,
+          "frameHeight": 180,
+          "frames": 10,
+          "duration": 0.333333,
+          "fps": 26.999999,
+          "loop": false,
+          "origin": [
+            114,
+            139
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.456,
+            0.7722222222222223
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        }
+      }
+    },
+    "sourceRole": "friendly barracks unit",
+    "animationExport": "Original texture pixels with authored transform, color, attachment, draw-order and deform curves; analytic IK stretch/softness; offline raster sampling.",
+    "shadow": {
+      "file": "unit-shadow-original.png",
+      "width": 100,
+      "height": 81,
+      "origin": [
+        50,
+        40.5
+      ],
+      "nativeScale": 0.32
+    },
+    "towerLevel": 1
+  },
+  "heavy": {
+    "source": "enemy5_1",
+    "animation": "stand_right",
+    "file": "heavy.png",
+    "width": 135,
+    "height": 156,
+    "frameWidth": 135,
+    "frameHeight": 156,
+    "anchor": [
+      0.35555555555555557,
+      0.8461538461538461
+    ],
+    "residualConstraints": [],
+    "origin": [
+      48,
+      132
+    ],
+    "scale": 1,
+    "nativeScale": 0.36,
+    "sourcePixels": true,
+    "exactSkeletonRuntime": false,
+    "walk": {
+      "file": "heavy-walk.png",
+      "frameWidth": 171,
+      "frameHeight": 185,
+      "frames": 17,
+      "duration": 0.666667,
+      "fps": 25.499999,
+      "loop": true,
+      "origin": [
+        81,
+        157
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.47368421052631576,
+        0.8486486486486486
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "attack": {
+      "file": "heavy-attack.png",
+      "frameWidth": 383,
+      "frameHeight": 286,
+      "frames": 13,
+      "duration": 0.5,
+      "fps": 24.0,
+      "loop": false,
+      "origin": [
+        165,
+        218
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.4308093994778068,
+        0.7622377622377622
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "death": {
+      "file": "heavy-death.png",
+      "frameWidth": 239,
+      "frameHeight": 176,
+      "frames": 49,
+      "duration": 2.0,
+      "fps": 24.0,
+      "loop": false,
+      "origin": [
+        79,
+        134
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.3305439330543933,
+        0.7613636363636364
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "type": "heavy",
+    "directions": {
+      "right": {
+        "source": "enemy5_1",
+        "animation": "stand_right",
+        "file": "heavy.png",
+        "width": 135,
+        "height": 156,
+        "frameWidth": 135,
+        "frameHeight": 156,
+        "anchor": [
+          0.35555555555555557,
+          0.8461538461538461
+        ],
+        "residualConstraints": [],
+        "origin": [
+          48,
+          132
+        ],
+        "scale": 1,
+        "nativeScale": 0.36,
+        "sourcePixels": true,
+        "exactSkeletonRuntime": false,
+        "walk": {
+          "file": "heavy-walk.png",
+          "frameWidth": 171,
+          "frameHeight": 185,
+          "frames": 17,
+          "duration": 0.666667,
+          "fps": 25.499999,
+          "loop": true,
+          "origin": [
+            81,
+            157
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.47368421052631576,
+            0.8486486486486486
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "attack": {
+          "file": "heavy-attack.png",
+          "frameWidth": 383,
+          "frameHeight": 286,
+          "frames": 13,
+          "duration": 0.5,
+          "fps": 24.0,
+          "loop": false,
+          "origin": [
+            165,
+            218
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.4308093994778068,
+            0.7622377622377622
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "death": {
+          "file": "heavy-death.png",
+          "frameWidth": 239,
+          "frameHeight": 176,
+          "frames": 49,
+          "duration": 2.0,
+          "fps": 24.0,
+          "loop": false,
+          "origin": [
+            79,
+            134
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.3305439330543933,
+            0.7613636363636364
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        }
+      },
+      "down": {
+        "source": "enemy5_1",
+        "animation": "stand_down",
+        "file": "heavy-stand-down.png",
+        "width": 146,
+        "height": 174,
+        "frameWidth": 146,
+        "frameHeight": 174,
+        "anchor": [
+          0.363013698630137,
+          0.8333333333333334
+        ],
+        "residualConstraints": [],
+        "origin": [
+          53,
+          145
+        ],
+        "scale": 1,
+        "nativeScale": 0.36,
+        "sourcePixels": true,
+        "exactSkeletonRuntime": false,
+        "walk": {
+          "file": "heavy-walk-down.png",
+          "frameWidth": 150,
+          "frameHeight": 182,
+          "frames": 17,
+          "duration": 0.666667,
+          "fps": 25.499999,
+          "loop": true,
+          "origin": [
+            64,
+            158
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.4266666666666667,
+            0.8681318681318682
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        }
+      },
+      "up": {
+        "source": "enemy5_1",
+        "animation": "stand_up",
+        "file": "heavy-stand-up.png",
+        "width": 137,
+        "height": 153,
+        "frameWidth": 137,
+        "frameHeight": 153,
+        "anchor": [
+          0.6058394160583942,
+          0.9084967320261438
+        ],
+        "residualConstraints": [],
+        "origin": [
+          83,
+          139
+        ],
+        "scale": 1,
+        "nativeScale": 0.36,
+        "sourcePixels": true,
+        "exactSkeletonRuntime": false,
+        "walk": {
+          "file": "heavy-walk-up.png",
+          "frameWidth": 174,
+          "frameHeight": 189,
+          "frames": 17,
+          "duration": 0.666667,
+          "fps": 25.499999,
+          "loop": true,
+          "origin": [
+            76,
+            158
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.4367816091954023,
+            0.8359788359788359
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        }
+      }
+    },
+    "sourceRole": "enemy",
+    "animationExport": "Original texture pixels with authored transform, color, attachment, draw-order and deform curves; analytic IK stretch/softness; offline raster sampling.",
+    "shadow": {
+      "file": "unit-shadow-original.png",
+      "width": 100,
+      "height": 81,
+      "origin": [
+        50,
+        40.5
+      ],
+      "nativeScale": 0.32
+    }
+  },
+  "fast": {
+    "source": "enemy12_1",
+    "animation": "stand_right",
+    "file": "fast.png",
+    "width": 143,
+    "height": 153,
+    "frameWidth": 143,
+    "frameHeight": 153,
+    "anchor": [
+      0.3776223776223776,
+      0.8431372549019608
+    ],
+    "residualConstraints": [],
+    "origin": [
+      54,
+      129
+    ],
+    "scale": 1,
+    "nativeScale": 0.36,
+    "sourcePixels": true,
+    "exactSkeletonRuntime": false,
+    "walk": {
+      "file": "fast-walk.png",
+      "frameWidth": 192,
+      "frameHeight": 191,
+      "frames": 11,
+      "duration": 0.433333,
+      "fps": 25.384615,
+      "loop": true,
+      "origin": [
+        86,
+        153
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.4479166666666667,
+        0.8010471204188482
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "attack": {
+      "file": "fast-attack.png",
+      "frameWidth": 350,
+      "frameHeight": 215,
+      "frames": 13,
+      "duration": 0.5,
+      "fps": 24.0,
+      "loop": false,
+      "origin": [
+        165,
+        161
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.4714285714285714,
+        0.7488372093023256
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "death": {
+      "file": "fast-death.png",
+      "frameWidth": 240,
+      "frameHeight": 175,
+      "frames": 49,
+      "duration": 2.0,
+      "fps": 24.0,
+      "loop": false,
+      "origin": [
+        80,
+        134
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.3333333333333333,
+        0.7657142857142857
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "type": "fast",
+    "directions": {
+      "right": {
+        "source": "enemy12_1",
+        "animation": "stand_right",
+        "file": "fast.png",
+        "width": 143,
+        "height": 153,
+        "frameWidth": 143,
+        "frameHeight": 153,
+        "anchor": [
+          0.3776223776223776,
+          0.8431372549019608
+        ],
+        "residualConstraints": [],
+        "origin": [
+          54,
+          129
+        ],
+        "scale": 1,
+        "nativeScale": 0.36,
+        "sourcePixels": true,
+        "exactSkeletonRuntime": false,
+        "walk": {
+          "file": "fast-walk.png",
+          "frameWidth": 192,
+          "frameHeight": 191,
+          "frames": 11,
+          "duration": 0.433333,
+          "fps": 25.384615,
+          "loop": true,
+          "origin": [
+            86,
+            153
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.4479166666666667,
+            0.8010471204188482
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "attack": {
+          "file": "fast-attack.png",
+          "frameWidth": 350,
+          "frameHeight": 215,
+          "frames": 13,
+          "duration": 0.5,
+          "fps": 24.0,
+          "loop": false,
+          "origin": [
+            165,
+            161
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.4714285714285714,
+            0.7488372093023256
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "death": {
+          "file": "fast-death.png",
+          "frameWidth": 240,
+          "frameHeight": 175,
+          "frames": 49,
+          "duration": 2.0,
+          "fps": 24.0,
+          "loop": false,
+          "origin": [
+            80,
+            134
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.3333333333333333,
+            0.7657142857142857
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        }
+      },
+      "down": {
+        "source": "enemy12_1",
+        "animation": "stand_down",
+        "file": "fast-stand-down.png",
+        "width": 99,
+        "height": 169,
+        "frameWidth": 99,
+        "frameHeight": 169,
+        "anchor": [
+          0.5454545454545454,
+          0.834319526627219
+        ],
+        "residualConstraints": [],
+        "origin": [
+          54,
+          141
+        ],
+        "scale": 1,
+        "nativeScale": 0.36,
+        "sourcePixels": true,
+        "exactSkeletonRuntime": false,
+        "walk": {
+          "file": "fast-walk-down.png",
+          "frameWidth": 113,
+          "frameHeight": 198,
+          "frames": 11,
+          "duration": 0.433333,
+          "fps": 25.384615,
+          "loop": true,
+          "origin": [
+            63,
+            172
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.5575221238938053,
+            0.8686868686868687
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        }
+      },
+      "up": {
+        "source": "enemy12_1",
+        "animation": "stand_up",
+        "file": "fast-stand-up.png",
+        "width": 101,
+        "height": 175,
+        "frameWidth": 101,
+        "frameHeight": 175,
+        "anchor": [
+          0.46534653465346537,
+          0.7885714285714286
+        ],
+        "residualConstraints": [],
+        "origin": [
+          47,
+          138
+        ],
+        "scale": 1,
+        "nativeScale": 0.36,
+        "sourcePixels": true,
+        "exactSkeletonRuntime": false,
+        "walk": {
+          "file": "fast-walk-up.png",
+          "frameWidth": 148,
+          "frameHeight": 208,
+          "frames": 12,
+          "duration": 0.5,
+          "fps": 24.0,
+          "loop": true,
+          "origin": [
+            48,
+            169
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.32432432432432434,
+            0.8125
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        }
+      }
+    },
+    "sourceRole": "enemy",
+    "animationExport": "Original texture pixels with authored transform, color, attachment, draw-order and deform curves; analytic IK stretch/softness; offline raster sampling.",
+    "shadow": {
+      "file": "unit-shadow-original.png",
+      "width": 100,
+      "height": 81,
+      "origin": [
+        50,
+        40.5
+      ],
+      "nativeScale": 0.32
+    }
+  },
+  "spearman": {
+    "source": "enemy1_1",
+    "animation": "stand_right",
+    "file": "spearman.png",
+    "width": 170,
+    "height": 150,
+    "frameWidth": 170,
+    "frameHeight": 150,
+    "anchor": [
+      0.31176470588235294,
+      0.9133333333333333
+    ],
+    "residualConstraints": [],
+    "origin": [
+      53,
+      137
+    ],
+    "scale": 1,
+    "nativeScale": 0.36,
+    "sourcePixels": true,
+    "exactSkeletonRuntime": false,
+    "walk": {
+      "file": "spearman-walk.png",
+      "frameWidth": 176,
+      "frameHeight": 167,
+      "frames": 17,
+      "duration": 0.666667,
+      "fps": 25.499999,
+      "loop": true,
+      "origin": [
+        59,
+        154
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.3352272727272727,
+        0.9221556886227545
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "attack": {
+      "file": "spearman-attack.png",
+      "frameWidth": 231,
+      "frameHeight": 198,
+      "frames": 13,
+      "duration": 0.5,
+      "fps": 24.0,
+      "loop": false,
+      "origin": [
+        53,
+        172
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.22943722943722944,
+        0.8686868686868687
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "death": {
+      "file": "spearman-death.png",
+      "frameWidth": 253,
+      "frameHeight": 184,
+      "frames": 10,
+      "duration": 0.333333,
+      "fps": 26.999999,
+      "loop": false,
+      "origin": [
+        136,
+        140
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.5375494071146245,
+        0.7608695652173914
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "type": "spearman",
+    "directions": {
+      "right": {
+        "source": "enemy1_1",
+        "animation": "stand_right",
+        "file": "spearman.png",
+        "width": 170,
+        "height": 150,
+        "frameWidth": 170,
+        "frameHeight": 150,
+        "anchor": [
+          0.31176470588235294,
+          0.9133333333333333
+        ],
+        "residualConstraints": [],
+        "origin": [
+          53,
+          137
+        ],
+        "scale": 1,
+        "nativeScale": 0.36,
+        "sourcePixels": true,
+        "exactSkeletonRuntime": false,
+        "walk": {
+          "file": "spearman-walk.png",
+          "frameWidth": 176,
+          "frameHeight": 167,
+          "frames": 17,
+          "duration": 0.666667,
+          "fps": 25.499999,
+          "loop": true,
+          "origin": [
+            59,
+            154
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.3352272727272727,
+            0.9221556886227545
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "attack": {
+          "file": "spearman-attack.png",
+          "frameWidth": 231,
+          "frameHeight": 198,
+          "frames": 13,
+          "duration": 0.5,
+          "fps": 24.0,
+          "loop": false,
+          "origin": [
+            53,
+            172
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.22943722943722944,
+            0.8686868686868687
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "death": {
+          "file": "spearman-death.png",
+          "frameWidth": 253,
+          "frameHeight": 184,
+          "frames": 10,
+          "duration": 0.333333,
+          "fps": 26.999999,
+          "loop": false,
+          "origin": [
+            136,
+            140
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.5375494071146245,
+            0.7608695652173914
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        }
+      },
+      "left": {
+        "source": "enemy1_1",
+        "animation": "stand_left",
+        "file": "spearman-stand-left.png",
+        "width": 170,
+        "height": 150,
+        "frameWidth": 170,
+        "frameHeight": 150,
+        "anchor": [
+          0.6882352941176471,
+          0.9133333333333333
+        ],
+        "residualConstraints": [],
+        "origin": [
+          117,
+          137
+        ],
+        "scale": 1,
+        "nativeScale": 0.36,
+        "sourcePixels": true,
+        "exactSkeletonRuntime": false,
+        "walk": {
+          "file": "spearman-walk-left.png",
+          "frameWidth": 176,
+          "frameHeight": 167,
+          "frames": 17,
+          "duration": 0.666667,
+          "fps": 25.499999,
+          "loop": true,
+          "origin": [
+            117,
+            154
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.6647727272727273,
+            0.9221556886227545
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "attack": {
+          "file": "spearman-attack-left.png",
+          "frameWidth": 230,
+          "frameHeight": 198,
+          "frames": 13,
+          "duration": 0.5,
+          "fps": 24.0,
+          "loop": false,
+          "origin": [
+            177,
+            172
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.7695652173913043,
+            0.8686868686868687
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "death": {
+          "file": "spearman-death-left.png",
+          "frameWidth": 253,
+          "frameHeight": 184,
+          "frames": 10,
+          "duration": 0.333333,
+          "fps": 26.999999,
+          "loop": false,
+          "origin": [
+            117,
+            142
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.4624505928853755,
+            0.7717391304347826
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        }
+      },
+      "down": {
+        "source": "enemy1_1",
+        "animation": "stand_down",
+        "file": "spearman-stand-down.png",
+        "width": 168,
+        "height": 165,
+        "frameWidth": 168,
+        "frameHeight": 165,
+        "anchor": [
+          0.36904761904761907,
+          0.8545454545454545
+        ],
+        "residualConstraints": [],
+        "origin": [
+          62,
+          141
+        ],
+        "scale": 1,
+        "nativeScale": 0.36,
+        "sourcePixels": true,
+        "exactSkeletonRuntime": false,
+        "walk": {
+          "file": "spearman-walk-down.png",
+          "frameWidth": 174,
+          "frameHeight": 174,
+          "frames": 17,
+          "duration": 0.666667,
+          "fps": 25.499999,
+          "loop": true,
+          "origin": [
+            64,
+            153
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.367816091954023,
+            0.8793103448275862
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        }
+      },
+      "up": {
+        "source": "enemy1_1",
+        "animation": "run_up",
+        "file": "spearman-run-up.png",
+        "width": 163,
+        "height": 158,
+        "frameWidth": 163,
+        "frameHeight": 158,
+        "anchor": [
+          0.656441717791411,
+          0.9620253164556962
+        ],
+        "residualConstraints": [],
+        "origin": [
+          107,
+          152
+        ],
+        "scale": 1,
+        "nativeScale": 0.36,
+        "sourcePixels": true,
+        "exactSkeletonRuntime": false,
+        "standSource": "First frame of run_up; no authored stand_up",
+        "walk": {
+          "file": "spearman-walk-up.png",
+          "frameWidth": 165,
+          "frameHeight": 162,
+          "frames": 17,
+          "duration": 0.666667,
+          "fps": 25.499999,
+          "loop": true,
+          "origin": [
+            108,
+            152
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.6545454545454545,
+            0.9382716049382716
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        }
+      }
+    },
+    "sourceRole": "enemy",
+    "animationExport": "Original texture pixels with authored transform, color, attachment, draw-order and deform curves; analytic IK stretch/softness; offline raster sampling.",
+    "shadow": {
+      "file": "unit-shadow-original.png",
+      "width": 100,
+      "height": 81,
+      "origin": [
+        50,
+        40.5
+      ],
+      "nativeScale": 0.32
+    }
+  },
+  "archer-2": {
+    "source": "tower1_2",
+    "animation": "stand_down",
+    "file": "archer-2.png",
+    "width": 203,
+    "height": 310,
+    "frameWidth": 203,
+    "frameHeight": 310,
+    "anchor": [
+      0.5172413793103449,
+      0.6870967741935484
+    ],
+    "residualConstraints": [],
+    "origin": [
+      105,
+      213
+    ],
+    "scale": 1,
+    "nativeScale": 0.36,
+    "sourcePixels": true,
+    "exactSkeletonRuntime": false,
+    "shoot": {
+      "file": "archer-2-shoot-down.png",
+      "frameWidth": 203,
+      "frameHeight": 316,
+      "frames": 14,
+      "duration": 0.533333,
+      "fps": 24.374999,
+      "loop": false,
+      "origin": [
+        105,
+        219
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.5172413793103449,
+        0.6930379746835443
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "build": {
+      "file": "archer-2-build-down.png",
+      "frameWidth": 236,
+      "frameHeight": 571,
+      "frames": 18,
+      "duration": 0.666667,
+      "fps": 25.499999,
+      "loop": false,
+      "origin": [
+        115,
+        429
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.4872881355932203,
+        0.7513134851138353
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "upgrade": {
+      "file": "archer-2-upgrade-down.png",
+      "frameWidth": 236,
+      "frameHeight": 378,
+      "frames": 16,
+      "duration": 0.6,
+      "fps": 24.999999,
+      "loop": false,
+      "origin": [
+        122,
+        264
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.5169491525423728,
+        0.6984126984126984
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "towerLevel": 2,
+    "type": "archer",
+    "directions": {
+      "down": {
+        "source": "tower1_2",
+        "animation": "stand_down",
+        "file": "archer-2.png",
+        "width": 203,
+        "height": 310,
+        "frameWidth": 203,
+        "frameHeight": 310,
+        "anchor": [
+          0.5172413793103449,
+          0.6870967741935484
+        ],
+        "residualConstraints": [],
+        "origin": [
+          105,
+          213
+        ],
+        "scale": 1,
+        "nativeScale": 0.36,
+        "sourcePixels": true,
+        "exactSkeletonRuntime": false,
+        "shoot": {
+          "file": "archer-2-shoot-down.png",
+          "frameWidth": 203,
+          "frameHeight": 316,
+          "frames": 14,
+          "duration": 0.533333,
+          "fps": 24.374999,
+          "loop": false,
+          "origin": [
+            105,
+            219
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.5172413793103449,
+            0.6930379746835443
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "build": {
+          "file": "archer-2-build-down.png",
+          "frameWidth": 236,
+          "frameHeight": 571,
+          "frames": 18,
+          "duration": 0.666667,
+          "fps": 25.499999,
+          "loop": false,
+          "origin": [
+            115,
+            429
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.4872881355932203,
+            0.7513134851138353
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "upgrade": {
+          "file": "archer-2-upgrade-down.png",
+          "frameWidth": 236,
+          "frameHeight": 378,
+          "frames": 16,
+          "duration": 0.6,
+          "fps": 24.999999,
+          "loop": false,
+          "origin": [
+            122,
+            264
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.5169491525423728,
+            0.6984126984126984
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        }
+      },
+      "left": {
+        "source": "tower1_2",
+        "animation": "stand_left",
+        "file": "archer-2-stand-left.png",
+        "width": 203,
+        "height": 296,
+        "frameWidth": 203,
+        "frameHeight": 296,
+        "anchor": [
+          0.5172413793103449,
+          0.6722972972972973
+        ],
+        "residualConstraints": [],
+        "origin": [
+          105,
+          199
+        ],
+        "scale": 1,
+        "nativeScale": 0.36,
+        "sourcePixels": true,
+        "exactSkeletonRuntime": false,
+        "shoot": {
+          "file": "archer-2-shoot-left.png",
+          "frameWidth": 203,
+          "frameHeight": 307,
+          "frames": 13,
+          "duration": 0.5,
+          "fps": 24.0,
+          "loop": false,
+          "origin": [
+            105,
+            210
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.5172413793103449,
+            0.6840390879478827
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "build": {
+          "file": "archer-2-build-left.png",
+          "frameWidth": 236,
+          "frameHeight": 561,
+          "frames": 18,
+          "duration": 0.666667,
+          "fps": 25.499999,
+          "loop": false,
+          "origin": [
+            115,
+            420
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.4872881355932203,
+            0.7486631016042781
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "upgrade": {
+          "file": "archer-2-upgrade-left.png",
+          "frameWidth": 220,
+          "frameHeight": 354,
+          "frames": 16,
+          "duration": 0.6,
+          "fps": 24.999999,
+          "loop": false,
+          "origin": [
+            114,
+            250
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.5181818181818182,
+            0.7062146892655368
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        }
+      },
+      "right": {
+        "source": "tower1_2",
+        "animation": "stand_right",
+        "file": "archer-2-stand-right.png",
+        "width": 203,
+        "height": 296,
+        "frameWidth": 203,
+        "frameHeight": 296,
+        "anchor": [
+          0.5172413793103449,
+          0.6722972972972973
+        ],
+        "residualConstraints": [],
+        "origin": [
+          105,
+          199
+        ],
+        "scale": 1,
+        "nativeScale": 0.36,
+        "sourcePixels": true,
+        "exactSkeletonRuntime": false,
+        "shoot": {
+          "file": "archer-2-shoot-right.png",
+          "frameWidth": 203,
+          "frameHeight": 308,
+          "frames": 13,
+          "duration": 0.5,
+          "fps": 24.0,
+          "loop": false,
+          "origin": [
+            105,
+            211
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.5172413793103449,
+            0.685064935064935
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "build": {
+          "file": "archer-2-build-right.png",
+          "frameWidth": 236,
+          "frameHeight": 562,
+          "frames": 18,
+          "duration": 0.666667,
+          "fps": 25.499999,
+          "loop": false,
+          "origin": [
+            115,
+            421
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.4872881355932203,
+            0.7491103202846975
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "upgrade": {
+          "file": "archer-2-upgrade-right.png",
+          "frameWidth": 236,
+          "frameHeight": 364,
+          "frames": 16,
+          "duration": 0.6,
+          "fps": 24.999999,
+          "loop": false,
+          "origin": [
+            122,
+            250
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.5169491525423728,
+            0.6868131868131868
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        }
+      },
+      "up": {
+        "source": "tower1_2",
+        "animation": "stand_up",
+        "file": "archer-2-stand-up.png",
+        "width": 203,
+        "height": 346,
+        "frameWidth": 203,
+        "frameHeight": 346,
+        "anchor": [
+          0.5172413793103449,
+          0.7196531791907514
+        ],
+        "residualConstraints": [],
+        "origin": [
+          105,
+          249
+        ],
+        "scale": 1,
+        "nativeScale": 0.36,
+        "sourcePixels": true,
+        "exactSkeletonRuntime": false,
+        "shoot": {
+          "file": "archer-2-shoot-up.png",
+          "frameWidth": 203,
+          "frameHeight": 347,
+          "frames": 13,
+          "duration": 0.5,
+          "fps": 24.0,
+          "loop": false,
+          "origin": [
+            105,
+            250
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.5172413793103449,
+            0.7204610951008645
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "build": {
+          "file": "archer-2-build-up.png",
+          "frameWidth": 236,
+          "frameHeight": 596,
+          "frames": 18,
+          "duration": 0.666667,
+          "fps": 25.499999,
+          "loop": false,
+          "origin": [
+            115,
+            455
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.4872881355932203,
+            0.7634228187919463
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "upgrade": {
+          "file": "archer-2-upgrade-up.png",
+          "frameWidth": 236,
+          "frameHeight": 429,
+          "frames": 16,
+          "duration": 0.6,
+          "fps": 24.999999,
+          "loop": false,
+          "origin": [
+            122,
+            315
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.5169491525423728,
+            0.7342657342657343
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        }
+      }
+    },
+    "animationExport": "Original texture pixels with authored transform, color, attachment, draw-order and deform curves; analytic IK stretch/softness; offline raster sampling."
+  },
+  "cannon-2": {
+    "source": "tower2_2",
+    "animation": "stand",
+    "file": "cannon-2.png",
+    "width": 212,
+    "height": 270,
+    "frameWidth": 212,
+    "frameHeight": 270,
+    "anchor": [
+      0.5188679245283019,
+      0.5814814814814815
+    ],
+    "residualConstraints": [],
+    "origin": [
+      110,
+      157
+    ],
+    "scale": 1,
+    "nativeScale": 0.36,
+    "sourcePixels": true,
+    "exactSkeletonRuntime": false,
+    "shoot": {
+      "file": "cannon-2-shoot.png",
+      "frameWidth": 474,
+      "frameHeight": 474,
+      "frames": 19,
+      "duration": 0.733333,
+      "fps": 24.545454,
+      "loop": false,
+      "origin": [
+        237,
+        355
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.5,
+        0.7489451476793249
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "build": {
+      "file": "cannon-2-build.png",
+      "frameWidth": 228,
+      "frameHeight": 503,
+      "frames": 13,
+      "duration": 0.5,
+      "fps": 24.0,
+      "loop": false,
+      "origin": [
+        118,
+        349
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.5175438596491229,
+        0.6938369781312127
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "upgrade": {
+      "file": "cannon-2-upgrade.png",
+      "frameWidth": 214,
+      "frameHeight": 338,
+      "frames": 18,
+      "duration": 0.666667,
+      "fps": 25.499999,
+      "loop": false,
+      "origin": [
+        111,
+        225
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.5186915887850467,
+        0.665680473372781
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "towerLevel": 2,
+    "type": "cannon",
+    "directions": {
+      "default": {
+        "source": "tower2_2",
+        "animation": "stand",
+        "file": "cannon-2.png",
+        "width": 212,
+        "height": 270,
+        "frameWidth": 212,
+        "frameHeight": 270,
+        "anchor": [
+          0.5188679245283019,
+          0.5814814814814815
+        ],
+        "residualConstraints": [],
+        "origin": [
+          110,
+          157
+        ],
+        "scale": 1,
+        "nativeScale": 0.36,
+        "sourcePixels": true,
+        "exactSkeletonRuntime": false,
+        "shoot": {
+          "file": "cannon-2-shoot.png",
+          "frameWidth": 474,
+          "frameHeight": 474,
+          "frames": 19,
+          "duration": 0.733333,
+          "fps": 24.545454,
+          "loop": false,
+          "origin": [
+            237,
+            355
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.5,
+            0.7489451476793249
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "build": {
+          "file": "cannon-2-build.png",
+          "frameWidth": 228,
+          "frameHeight": 503,
+          "frames": 13,
+          "duration": 0.5,
+          "fps": 24.0,
+          "loop": false,
+          "origin": [
+            118,
+            349
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.5175438596491229,
+            0.6938369781312127
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "upgrade": {
+          "file": "cannon-2-upgrade.png",
+          "frameWidth": 214,
+          "frameHeight": 338,
+          "frames": 18,
+          "duration": 0.666667,
+          "fps": 25.499999,
+          "loop": false,
+          "origin": [
+            111,
+            225
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.5186915887850467,
+            0.665680473372781
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        }
+      }
+    },
+    "animationExport": "Original texture pixels with authored transform, color, attachment, draw-order and deform curves; analytic IK stretch/softness; offline raster sampling."
+  },
+  "archer-3": {
+    "source": "tower1_3",
+    "animation": "stand_down",
+    "file": "archer-3.png",
+    "width": 204,
+    "height": 344,
+    "frameWidth": 204,
+    "frameHeight": 344,
+    "anchor": [
+      0.5147058823529411,
+      0.7180232558139535
+    ],
+    "residualConstraints": [],
+    "origin": [
+      105,
+      247
+    ],
+    "scale": 1,
+    "nativeScale": 0.36,
+    "sourcePixels": true,
+    "exactSkeletonRuntime": false,
+    "shoot": {
+      "file": "archer-3-shoot-down.png",
+      "frameWidth": 204,
+      "frameHeight": 345,
+      "frames": 15,
+      "duration": 0.566667,
+      "fps": 24.705883,
+      "loop": false,
+      "origin": [
+        105,
+        248
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.5147058823529411,
+        0.7188405797101449
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "build": {
+      "file": "archer-3-build-down.png",
+      "frameWidth": 238,
+      "frameHeight": 595,
+      "frames": 18,
+      "duration": 0.666667,
+      "fps": 25.499999,
+      "loop": false,
+      "origin": [
+        116,
+        453
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.48739495798319327,
+        0.761344537815126
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "upgrade": {
+      "file": "archer-3-upgrade-down.png",
+      "frameWidth": 237,
+      "frameHeight": 422,
+      "frames": 16,
+      "duration": 0.6,
+      "fps": 24.999999,
+      "loop": false,
+      "origin": [
+        122,
+        308
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.5147679324894515,
+        0.7298578199052133
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "towerLevel": 3,
+    "type": "archer",
+    "directions": {
+      "down": {
+        "source": "tower1_3",
+        "animation": "stand_down",
+        "file": "archer-3.png",
+        "width": 204,
+        "height": 344,
+        "frameWidth": 204,
+        "frameHeight": 344,
+        "anchor": [
+          0.5147058823529411,
+          0.7180232558139535
+        ],
+        "residualConstraints": [],
+        "origin": [
+          105,
+          247
+        ],
+        "scale": 1,
+        "nativeScale": 0.36,
+        "sourcePixels": true,
+        "exactSkeletonRuntime": false,
+        "shoot": {
+          "file": "archer-3-shoot-down.png",
+          "frameWidth": 204,
+          "frameHeight": 345,
+          "frames": 15,
+          "duration": 0.566667,
+          "fps": 24.705883,
+          "loop": false,
+          "origin": [
+            105,
+            248
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.5147058823529411,
+            0.7188405797101449
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "build": {
+          "file": "archer-3-build-down.png",
+          "frameWidth": 238,
+          "frameHeight": 595,
+          "frames": 18,
+          "duration": 0.666667,
+          "fps": 25.499999,
+          "loop": false,
+          "origin": [
+            116,
+            453
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.48739495798319327,
+            0.761344537815126
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "upgrade": {
+          "file": "archer-3-upgrade-down.png",
+          "frameWidth": 237,
+          "frameHeight": 422,
+          "frames": 16,
+          "duration": 0.6,
+          "fps": 24.999999,
+          "loop": false,
+          "origin": [
+            122,
+            308
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.5147679324894515,
+            0.7298578199052133
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        }
+      },
+      "left": {
+        "source": "tower1_3",
+        "animation": "stand_left",
+        "file": "archer-3-stand-left.png",
+        "width": 204,
+        "height": 369,
+        "frameWidth": 204,
+        "frameHeight": 369,
+        "anchor": [
+          0.5147058823529411,
+          0.7371273712737128
+        ],
+        "residualConstraints": [],
+        "origin": [
+          105,
+          272
+        ],
+        "scale": 1,
+        "nativeScale": 0.36,
+        "sourcePixels": true,
+        "exactSkeletonRuntime": false,
+        "shoot": {
+          "file": "archer-3-shoot-left.png",
+          "frameWidth": 204,
+          "frameHeight": 369,
+          "frames": 15,
+          "duration": 0.566667,
+          "fps": 24.705883,
+          "loop": false,
+          "origin": [
+            105,
+            272
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.5147058823529411,
+            0.7371273712737128
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "build": {
+          "file": "archer-3-build-left.png",
+          "frameWidth": 238,
+          "frameHeight": 620,
+          "frames": 18,
+          "duration": 0.666667,
+          "fps": 25.499999,
+          "loop": false,
+          "origin": [
+            116,
+            479
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.48739495798319327,
+            0.7725806451612903
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "upgrade": {
+          "file": "archer-3-upgrade-left.png",
+          "frameWidth": 221,
+          "frameHeight": 440,
+          "frames": 16,
+          "duration": 0.6,
+          "fps": 24.999999,
+          "loop": false,
+          "origin": [
+            115,
+            336
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.5203619909502263,
+            0.7636363636363637
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        }
+      },
+      "right": {
+        "source": "tower1_3",
+        "animation": "stand_right",
+        "file": "archer-3-stand-right.png",
+        "width": 204,
+        "height": 369,
+        "frameWidth": 204,
+        "frameHeight": 369,
+        "anchor": [
+          0.5147058823529411,
+          0.7371273712737128
+        ],
+        "residualConstraints": [],
+        "origin": [
+          105,
+          272
+        ],
+        "scale": 1,
+        "nativeScale": 0.36,
+        "sourcePixels": true,
+        "exactSkeletonRuntime": false,
+        "shoot": {
+          "file": "archer-3-shoot-right.png",
+          "frameWidth": 204,
+          "frameHeight": 370,
+          "frames": 15,
+          "duration": 0.566667,
+          "fps": 24.705883,
+          "loop": false,
+          "origin": [
+            105,
+            273
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.5147058823529411,
+            0.7378378378378379
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "build": {
+          "file": "archer-3-build-right.png",
+          "frameWidth": 238,
+          "frameHeight": 620,
+          "frames": 18,
+          "duration": 0.666667,
+          "fps": 25.499999,
+          "loop": false,
+          "origin": [
+            116,
+            479
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.48739495798319327,
+            0.7725806451612903
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "upgrade": {
+          "file": "archer-3-upgrade-right.png",
+          "frameWidth": 237,
+          "frameHeight": 450,
+          "frames": 16,
+          "duration": 0.6,
+          "fps": 24.999999,
+          "loop": false,
+          "origin": [
+            122,
+            336
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.5147679324894515,
+            0.7466666666666667
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        }
+      },
+      "up": {
+        "source": "tower1_3",
+        "animation": "stand_up",
+        "file": "archer-3-stand-up.png",
+        "width": 204,
+        "height": 409,
+        "frameWidth": 204,
+        "frameHeight": 409,
+        "anchor": [
+          0.5147058823529411,
+          0.7628361858190709
+        ],
+        "residualConstraints": [],
+        "origin": [
+          105,
+          312
+        ],
+        "scale": 1,
+        "nativeScale": 0.36,
+        "sourcePixels": true,
+        "exactSkeletonRuntime": false,
+        "shoot": {
+          "file": "archer-3-shoot-up.png",
+          "frameWidth": 204,
+          "frameHeight": 410,
+          "frames": 13,
+          "duration": 0.5,
+          "fps": 24.0,
+          "loop": false,
+          "origin": [
+            105,
+            313
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.5147058823529411,
+            0.7634146341463415
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "build": {
+          "file": "archer-3-build-up.png",
+          "frameWidth": 238,
+          "frameHeight": 665,
+          "frames": 18,
+          "duration": 0.666667,
+          "fps": 25.499999,
+          "loop": false,
+          "origin": [
+            116,
+            524
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.48739495798319327,
+            0.7879699248120301
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "upgrade": {
+          "file": "archer-3-upgrade-up.png",
+          "frameWidth": 237,
+          "frameHeight": 506,
+          "frames": 16,
+          "duration": 0.6,
+          "fps": 24.999999,
+          "loop": false,
+          "origin": [
+            122,
+            392
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.5147679324894515,
+            0.7747035573122529
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        }
+      }
+    },
+    "animationExport": "Original texture pixels with authored transform, color, attachment, draw-order and deform curves; analytic IK stretch/softness; offline raster sampling."
+  },
+  "cannon-3": {
+    "source": "tower2_3",
+    "animation": "stand",
+    "file": "cannon-3.png",
+    "width": 212,
+    "height": 294,
+    "frameWidth": 212,
+    "frameHeight": 294,
+    "anchor": [
+      0.5188679245283019,
+      0.6156462585034014
+    ],
+    "residualConstraints": [],
+    "origin": [
+      110,
+      181
+    ],
+    "scale": 1,
+    "nativeScale": 0.36,
+    "sourcePixels": true,
+    "exactSkeletonRuntime": false,
+    "shoot": {
+      "file": "cannon-3-shoot.png",
+      "frameWidth": 472,
+      "frameHeight": 474,
+      "frames": 19,
+      "duration": 0.733333,
+      "fps": 24.545454,
+      "loop": false,
+      "origin": [
+        236,
+        354
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.5,
+        0.7468354430379747
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "build": {
+      "file": "cannon-3-build.png",
+      "frameWidth": 228,
+      "frameHeight": 532,
+      "frames": 13,
+      "duration": 0.5,
+      "fps": 24.0,
+      "loop": false,
+      "origin": [
+        118,
+        378
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.5175438596491229,
+        0.7105263157894737
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "upgrade": {
+      "file": "cannon-3-upgrade.png",
+      "frameWidth": 214,
+      "frameHeight": 370,
+      "frames": 18,
+      "duration": 0.666667,
+      "fps": 25.499999,
+      "loop": false,
+      "origin": [
+        111,
+        257
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.5186915887850467,
+        0.6945945945945946
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "towerLevel": 3,
+    "type": "cannon",
+    "directions": {
+      "default": {
+        "source": "tower2_3",
+        "animation": "stand",
+        "file": "cannon-3.png",
+        "width": 212,
+        "height": 294,
+        "frameWidth": 212,
+        "frameHeight": 294,
+        "anchor": [
+          0.5188679245283019,
+          0.6156462585034014
+        ],
+        "residualConstraints": [],
+        "origin": [
+          110,
+          181
+        ],
+        "scale": 1,
+        "nativeScale": 0.36,
+        "sourcePixels": true,
+        "exactSkeletonRuntime": false,
+        "shoot": {
+          "file": "cannon-3-shoot.png",
+          "frameWidth": 472,
+          "frameHeight": 474,
+          "frames": 19,
+          "duration": 0.733333,
+          "fps": 24.545454,
+          "loop": false,
+          "origin": [
+            236,
+            354
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.5,
+            0.7468354430379747
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "build": {
+          "file": "cannon-3-build.png",
+          "frameWidth": 228,
+          "frameHeight": 532,
+          "frames": 13,
+          "duration": 0.5,
+          "fps": 24.0,
+          "loop": false,
+          "origin": [
+            118,
+            378
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.5175438596491229,
+            0.7105263157894737
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "upgrade": {
+          "file": "cannon-3-upgrade.png",
+          "frameWidth": 214,
+          "frameHeight": 370,
+          "frames": 18,
+          "duration": 0.666667,
+          "fps": 25.499999,
+          "loop": false,
+          "origin": [
+            111,
+            257
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.5186915887850467,
+            0.6945945945945946
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        }
+      }
+    },
+    "animationExport": "Original texture pixels with authored transform, color, attachment, draw-order and deform curves; analytic IK stretch/softness; offline raster sampling."
+  },
+  "barracks-2": {
+    "source": "tower3_2",
+    "animation": "stand",
+    "file": "barracks-2.png",
+    "width": 204,
+    "height": 297,
+    "frameWidth": 204,
+    "frameHeight": 297,
+    "anchor": [
+      0.5147058823529411,
+      0.6531986531986532
+    ],
+    "residualConstraints": [],
+    "origin": [
+      105,
+      194
+    ],
+    "scale": 1,
+    "nativeScale": 0.36,
+    "sourcePixels": true,
+    "exactSkeletonRuntime": false,
+    "shoot": {
+      "file": "barracks-2-shoot.png",
+      "frameWidth": 238,
+      "frameHeight": 316,
+      "frames": 15,
+      "duration": 0.566667,
+      "fps": 24.705883,
+      "loop": false,
+      "origin": [
+        105,
+        213
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.4411764705882353,
+        0.6740506329113924
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "build": {
+      "file": "barracks-2-build.png",
+      "frameWidth": 251,
+      "frameHeight": 502,
+      "frames": 13,
+      "duration": 0.5,
+      "fps": 24.0,
+      "loop": false,
+      "origin": [
+        130,
+        371
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.5179282868525896,
+        0.7390438247011952
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "upgrade": {
+      "file": "barracks-2-upgrade.png",
+      "frameWidth": 248,
+      "frameHeight": 375,
+      "frames": 18,
+      "duration": 0.666667,
+      "fps": 25.499999,
+      "loop": false,
+      "origin": [
+        128,
+        247
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.5161290322580645,
+        0.6586666666666666
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "towerLevel": 2,
+    "type": "barracks",
+    "directions": {
+      "default": {
+        "source": "tower3_2",
+        "animation": "stand",
+        "file": "barracks-2.png",
+        "width": 204,
+        "height": 297,
+        "frameWidth": 204,
+        "frameHeight": 297,
+        "anchor": [
+          0.5147058823529411,
+          0.6531986531986532
+        ],
+        "residualConstraints": [],
+        "origin": [
+          105,
+          194
+        ],
+        "scale": 1,
+        "nativeScale": 0.36,
+        "sourcePixels": true,
+        "exactSkeletonRuntime": false,
+        "shoot": {
+          "file": "barracks-2-shoot.png",
+          "frameWidth": 238,
+          "frameHeight": 316,
+          "frames": 15,
+          "duration": 0.566667,
+          "fps": 24.705883,
+          "loop": false,
+          "origin": [
+            105,
+            213
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.4411764705882353,
+            0.6740506329113924
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "build": {
+          "file": "barracks-2-build.png",
+          "frameWidth": 251,
+          "frameHeight": 502,
+          "frames": 13,
+          "duration": 0.5,
+          "fps": 24.0,
+          "loop": false,
+          "origin": [
+            130,
+            371
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.5179282868525896,
+            0.7390438247011952
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "upgrade": {
+          "file": "barracks-2-upgrade.png",
+          "frameWidth": 248,
+          "frameHeight": 375,
+          "frames": 18,
+          "duration": 0.666667,
+          "fps": 25.499999,
+          "loop": false,
+          "origin": [
+            128,
+            247
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.5161290322580645,
+            0.6586666666666666
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        }
+      }
+    },
+    "animationExport": "Original texture pixels with authored transform, color, attachment, draw-order and deform curves; analytic IK stretch/softness; offline raster sampling."
+  },
+  "barracks-3": {
+    "source": "tower3_3",
+    "animation": "stand",
+    "file": "barracks-3.png",
+    "width": 256,
+    "height": 342,
+    "frameWidth": 256,
+    "frameHeight": 342,
+    "anchor": [
+      0.4140625,
+      0.7046783625730995
+    ],
+    "residualConstraints": [],
+    "origin": [
+      106,
+      241
+    ],
+    "scale": 1,
+    "nativeScale": 0.36,
+    "sourcePixels": true,
+    "exactSkeletonRuntime": false,
+    "shoot": {
+      "file": "barracks-3-shoot.png",
+      "frameWidth": 284,
+      "frameHeight": 360,
+      "frames": 15,
+      "duration": 0.566667,
+      "fps": 24.705883,
+      "loop": false,
+      "origin": [
+        106,
+        259
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.3732394366197183,
+        0.7194444444444444
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "build": {
+      "file": "barracks-3-build.png",
+      "frameWidth": 313,
+      "frameHeight": 553,
+      "frames": 13,
+      "duration": 0.5,
+      "fps": 24.0,
+      "loop": false,
+      "origin": [
+        130,
+        423
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.41533546325878595,
+        0.7649186256781193
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "upgrade": {
+      "file": "barracks-3-upgrade.png",
+      "frameWidth": 313,
+      "frameHeight": 413,
+      "frames": 18,
+      "duration": 0.7,
+      "fps": 24.285715,
+      "loop": false,
+      "origin": [
+        130,
+        286
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.41533546325878595,
+        0.6924939467312349
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "towerLevel": 3,
+    "type": "barracks",
+    "directions": {
+      "default": {
+        "source": "tower3_3",
+        "animation": "stand",
+        "file": "barracks-3.png",
+        "width": 256,
+        "height": 342,
+        "frameWidth": 256,
+        "frameHeight": 342,
+        "anchor": [
+          0.4140625,
+          0.7046783625730995
+        ],
+        "residualConstraints": [],
+        "origin": [
+          106,
+          241
+        ],
+        "scale": 1,
+        "nativeScale": 0.36,
+        "sourcePixels": true,
+        "exactSkeletonRuntime": false,
+        "shoot": {
+          "file": "barracks-3-shoot.png",
+          "frameWidth": 284,
+          "frameHeight": 360,
+          "frames": 15,
+          "duration": 0.566667,
+          "fps": 24.705883,
+          "loop": false,
+          "origin": [
+            106,
+            259
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.3732394366197183,
+            0.7194444444444444
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "build": {
+          "file": "barracks-3-build.png",
+          "frameWidth": 313,
+          "frameHeight": 553,
+          "frames": 13,
+          "duration": 0.5,
+          "fps": 24.0,
+          "loop": false,
+          "origin": [
+            130,
+            423
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.41533546325878595,
+            0.7649186256781193
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "upgrade": {
+          "file": "barracks-3-upgrade.png",
+          "frameWidth": 313,
+          "frameHeight": 413,
+          "frames": 18,
+          "duration": 0.7,
+          "fps": 24.285715,
+          "loop": false,
+          "origin": [
+            130,
+            286
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.41533546325878595,
+            0.6924939467312349
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        }
+      }
+    },
+    "animationExport": "Original texture pixels with authored transform, color, attachment, draw-order and deform curves; analytic IK stretch/softness; offline raster sampling."
+  },
+  "mage-2": {
+    "source": "tower4_2",
+    "animation": "stand_right",
+    "file": "mage-2.png",
+    "width": 204,
+    "height": 365,
+    "frameWidth": 204,
+    "frameHeight": 365,
+    "anchor": [
+      0.5147058823529411,
+      0.7315068493150685
+    ],
+    "residualConstraints": [],
+    "origin": [
+      105,
+      267
+    ],
+    "scale": 1,
+    "nativeScale": 0.36,
+    "sourcePixels": true,
+    "exactSkeletonRuntime": false,
+    "shoot": {
+      "file": "mage-2-shoot-right.png",
+      "frameWidth": 663,
+      "frameHeight": 692,
+      "frames": 18,
+      "duration": 0.666667,
+      "fps": 25.499999,
+      "loop": false,
+      "origin": [
+        294,
+        586
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.4434389140271493,
+        0.846820809248555
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "build": {
+      "file": "mage-2-build-right.png",
+      "frameWidth": 223,
+      "frameHeight": 610,
+      "frames": 18,
+      "duration": 0.666667,
+      "fps": 25.499999,
+      "loop": false,
+      "origin": [
+        110,
+        499
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.49327354260089684,
+        0.8180327868852459
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "upgrade": {
+      "file": "mage-2-upgrade-right.png",
+      "frameWidth": 217,
+      "frameHeight": 436,
+      "frames": 18,
+      "duration": 0.666667,
+      "fps": 25.499999,
+      "loop": false,
+      "origin": [
+        112,
+        333
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.5161290322580645,
+        0.7637614678899083
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "towerLevel": 2,
+    "type": "mage",
+    "directions": {
+      "left": {
+        "source": "tower4_2",
+        "animation": "stand_left",
+        "file": "mage-2-stand-left.png",
+        "width": 204,
+        "height": 368,
+        "frameWidth": 204,
+        "frameHeight": 368,
+        "anchor": [
+          0.5147058823529411,
+          0.7336956521739131
+        ],
+        "residualConstraints": [],
+        "origin": [
+          105,
+          270
+        ],
+        "scale": 1,
+        "nativeScale": 0.36,
+        "sourcePixels": true,
+        "exactSkeletonRuntime": false,
+        "shoot": {
+          "file": "mage-2-shoot-left.png",
+          "frameWidth": 663,
+          "frameHeight": 692,
+          "frames": 18,
+          "duration": 0.666667,
+          "fps": 25.499999,
+          "loop": false,
+          "origin": [
+            381,
+            586
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.5746606334841629,
+            0.846820809248555
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "build": {
+          "file": "mage-2-build-left.png",
+          "frameWidth": 223,
+          "frameHeight": 616,
+          "frames": 18,
+          "duration": 0.666667,
+          "fps": 25.499999,
+          "loop": false,
+          "origin": [
+            110,
+            505
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.49327354260089684,
+            0.8198051948051948
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "upgrade": {
+          "file": "mage-2-upgrade-left.png",
+          "frameWidth": 217,
+          "frameHeight": 439,
+          "frames": 18,
+          "duration": 0.666667,
+          "fps": 25.499999,
+          "loop": false,
+          "origin": [
+            112,
+            336
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.5161290322580645,
+            0.765375854214123
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        }
+      },
+      "right": {
+        "source": "tower4_2",
+        "animation": "stand_right",
+        "file": "mage-2.png",
+        "width": 204,
+        "height": 365,
+        "frameWidth": 204,
+        "frameHeight": 365,
+        "anchor": [
+          0.5147058823529411,
+          0.7315068493150685
+        ],
+        "residualConstraints": [],
+        "origin": [
+          105,
+          267
+        ],
+        "scale": 1,
+        "nativeScale": 0.36,
+        "sourcePixels": true,
+        "exactSkeletonRuntime": false,
+        "shoot": {
+          "file": "mage-2-shoot-right.png",
+          "frameWidth": 663,
+          "frameHeight": 692,
+          "frames": 18,
+          "duration": 0.666667,
+          "fps": 25.499999,
+          "loop": false,
+          "origin": [
+            294,
+            586
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.4434389140271493,
+            0.846820809248555
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "build": {
+          "file": "mage-2-build-right.png",
+          "frameWidth": 223,
+          "frameHeight": 610,
+          "frames": 18,
+          "duration": 0.666667,
+          "fps": 25.499999,
+          "loop": false,
+          "origin": [
+            110,
+            499
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.49327354260089684,
+            0.8180327868852459
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "upgrade": {
+          "file": "mage-2-upgrade-right.png",
+          "frameWidth": 217,
+          "frameHeight": 436,
+          "frames": 18,
+          "duration": 0.666667,
+          "fps": 25.499999,
+          "loop": false,
+          "origin": [
+            112,
+            333
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.5161290322580645,
+            0.7637614678899083
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        }
+      }
+    },
+    "animationExport": "Original texture pixels with authored transform, color, attachment, draw-order and deform curves; analytic IK stretch/softness; offline raster sampling."
+  },
+  "mage-3": {
+    "source": "tower4_3",
+    "animation": "stand_right",
+    "file": "mage-3.png",
+    "width": 204,
+    "height": 365,
+    "frameWidth": 204,
+    "frameHeight": 365,
+    "anchor": [
+      0.5147058823529411,
+      0.7315068493150685
+    ],
+    "residualConstraints": [],
+    "origin": [
+      105,
+      267
+    ],
+    "scale": 1,
+    "nativeScale": 0.36,
+    "sourcePixels": true,
+    "exactSkeletonRuntime": false,
+    "shoot": {
+      "file": "mage-3-shoot-right.png",
+      "frameWidth": 698,
+      "frameHeight": 730,
+      "frames": 18,
+      "duration": 0.666667,
+      "fps": 25.499999,
+      "loop": false,
+      "origin": [
+        309,
+        624
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.44269340974212035,
+        0.8547945205479452
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "build": {
+      "file": "mage-3-build-right.png",
+      "frameWidth": 240,
+      "frameHeight": 608,
+      "frames": 18,
+      "duration": 0.666667,
+      "fps": 25.499999,
+      "loop": false,
+      "origin": [
+        118,
+        498
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.49166666666666664,
+        0.819078947368421
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "upgrade": {
+      "file": "mage-3-upgrade-right.png",
+      "frameWidth": 217,
+      "frameHeight": 436,
+      "frames": 18,
+      "duration": 0.666667,
+      "fps": 25.499999,
+      "loop": false,
+      "origin": [
+        112,
+        333
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.5161290322580645,
+        0.7637614678899083
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "towerLevel": 3,
+    "type": "mage",
+    "directions": {
+      "left": {
+        "source": "tower4_3",
+        "animation": "stand_left",
+        "file": "mage-3-stand-left.png",
+        "width": 204,
+        "height": 368,
+        "frameWidth": 204,
+        "frameHeight": 368,
+        "anchor": [
+          0.5147058823529411,
+          0.7336956521739131
+        ],
+        "residualConstraints": [],
+        "origin": [
+          105,
+          270
+        ],
+        "scale": 1,
+        "nativeScale": 0.36,
+        "sourcePixels": true,
+        "exactSkeletonRuntime": false,
+        "shoot": {
+          "file": "mage-3-shoot-left.png",
+          "frameWidth": 698,
+          "frameHeight": 723,
+          "frames": 18,
+          "duration": 0.666667,
+          "fps": 25.499999,
+          "loop": false,
+          "origin": [
+            397,
+            617
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.5687679083094556,
+            0.8533886583679114
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "build": {
+          "file": "mage-3-build-left.png",
+          "frameWidth": 240,
+          "frameHeight": 614,
+          "frames": 18,
+          "duration": 0.666667,
+          "fps": 25.499999,
+          "loop": false,
+          "origin": [
+            118,
+            504
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.49166666666666664,
+            0.8208469055374593
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "upgrade": {
+          "file": "mage-3-upgrade-left.png",
+          "frameWidth": 217,
+          "frameHeight": 439,
+          "frames": 18,
+          "duration": 0.666667,
+          "fps": 25.499999,
+          "loop": false,
+          "origin": [
+            112,
+            336
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.5161290322580645,
+            0.765375854214123
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        }
+      },
+      "right": {
+        "source": "tower4_3",
+        "animation": "stand_right",
+        "file": "mage-3.png",
+        "width": 204,
+        "height": 365,
+        "frameWidth": 204,
+        "frameHeight": 365,
+        "anchor": [
+          0.5147058823529411,
+          0.7315068493150685
+        ],
+        "residualConstraints": [],
+        "origin": [
+          105,
+          267
+        ],
+        "scale": 1,
+        "nativeScale": 0.36,
+        "sourcePixels": true,
+        "exactSkeletonRuntime": false,
+        "shoot": {
+          "file": "mage-3-shoot-right.png",
+          "frameWidth": 698,
+          "frameHeight": 730,
+          "frames": 18,
+          "duration": 0.666667,
+          "fps": 25.499999,
+          "loop": false,
+          "origin": [
+            309,
+            624
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.44269340974212035,
+            0.8547945205479452
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "build": {
+          "file": "mage-3-build-right.png",
+          "frameWidth": 240,
+          "frameHeight": 608,
+          "frames": 18,
+          "duration": 0.666667,
+          "fps": 25.499999,
+          "loop": false,
+          "origin": [
+            118,
+            498
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.49166666666666664,
+            0.819078947368421
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "upgrade": {
+          "file": "mage-3-upgrade-right.png",
+          "frameWidth": 217,
+          "frameHeight": 436,
+          "frames": 18,
+          "duration": 0.666667,
+          "fps": 25.499999,
+          "loop": false,
+          "origin": [
+            112,
+            333
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.5161290322580645,
+            0.7637614678899083
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        }
+      }
+    },
+    "animationExport": "Original texture pixels with authored transform, color, attachment, draw-order and deform curves; analytic IK stretch/softness; offline raster sampling."
+  },
+  "soldier-2": {
+    "source": "tower3_2_soldier",
+    "animation": "stand_right",
+    "file": "soldier-2.png",
+    "width": 167,
+    "height": 151,
+    "frameWidth": 167,
+    "frameHeight": 151,
+    "anchor": [
+      0.31736526946107785,
+      0.9139072847682119
+    ],
+    "residualConstraints": [],
+    "origin": [
+      53,
+      138
+    ],
+    "scale": 1,
+    "nativeScale": 0.36,
+    "sourcePixels": true,
+    "exactSkeletonRuntime": false,
+    "walk": {
+      "file": "soldier-2-walk.png",
+      "frameWidth": 170,
+      "frameHeight": 167,
+      "frames": 17,
+      "duration": 0.666667,
+      "fps": 25.499999,
+      "loop": true,
+      "origin": [
+        56,
+        155
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.32941176470588235,
+        0.9281437125748503
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "attack": {
+      "file": "soldier-2-attack.png",
+      "frameWidth": 272,
+      "frameHeight": 153,
+      "frames": 13,
+      "duration": 0.5,
+      "fps": 24.0,
+      "loop": false,
+      "origin": [
+        72,
+        140
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.2647058823529412,
+        0.9150326797385621
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "death": {
+      "file": "soldier-2-death.png",
+      "frameWidth": 253,
+      "frameHeight": 187,
+      "frames": 10,
+      "duration": 0.333333,
+      "fps": 26.999999,
+      "loop": false,
+      "origin": [
+        139,
+        138
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.549407114624506,
+        0.7379679144385026
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "type": "soldier",
+    "directions": {
+      "right": {
+        "source": "tower3_2_soldier",
+        "animation": "stand_right",
+        "file": "soldier-2.png",
+        "width": 167,
+        "height": 151,
+        "frameWidth": 167,
+        "frameHeight": 151,
+        "anchor": [
+          0.31736526946107785,
+          0.9139072847682119
+        ],
+        "residualConstraints": [],
+        "origin": [
+          53,
+          138
+        ],
+        "scale": 1,
+        "nativeScale": 0.36,
+        "sourcePixels": true,
+        "exactSkeletonRuntime": false,
+        "walk": {
+          "file": "soldier-2-walk.png",
+          "frameWidth": 170,
+          "frameHeight": 167,
+          "frames": 17,
+          "duration": 0.666667,
+          "fps": 25.499999,
+          "loop": true,
+          "origin": [
+            56,
+            155
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.32941176470588235,
+            0.9281437125748503
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "attack": {
+          "file": "soldier-2-attack.png",
+          "frameWidth": 272,
+          "frameHeight": 153,
+          "frames": 13,
+          "duration": 0.5,
+          "fps": 24.0,
+          "loop": false,
+          "origin": [
+            72,
+            140
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.2647058823529412,
+            0.9150326797385621
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "death": {
+          "file": "soldier-2-death.png",
+          "frameWidth": 253,
+          "frameHeight": 187,
+          "frames": 10,
+          "duration": 0.333333,
+          "fps": 26.999999,
+          "loop": false,
+          "origin": [
+            139,
+            138
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.549407114624506,
+            0.7379679144385026
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        }
+      },
+      "left": {
+        "source": "tower3_2_soldier",
+        "animation": "stand_left",
+        "file": "soldier-2-stand-left.png",
+        "width": 167,
+        "height": 151,
+        "frameWidth": 167,
+        "frameHeight": 151,
+        "anchor": [
+          0.6826347305389222,
+          0.9139072847682119
+        ],
+        "residualConstraints": [],
+        "origin": [
+          114,
+          138
+        ],
+        "scale": 1,
+        "nativeScale": 0.36,
+        "sourcePixels": true,
+        "exactSkeletonRuntime": false,
+        "walk": {
+          "file": "soldier-2-walk-left.png",
+          "frameWidth": 170,
+          "frameHeight": 167,
+          "frames": 17,
+          "duration": 0.666667,
+          "fps": 25.499999,
+          "loop": true,
+          "origin": [
+            114,
+            155
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.6705882352941176,
+            0.9281437125748503
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "attack": {
+          "file": "soldier-2-attack-left.png",
+          "frameWidth": 272,
+          "frameHeight": 153,
+          "frames": 13,
+          "duration": 0.5,
+          "fps": 24.0,
+          "loop": false,
+          "origin": [
+            200,
+            140
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.7352941176470589,
+            0.9150326797385621
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "death": {
+          "file": "soldier-2-death-left.png",
+          "frameWidth": 251,
+          "frameHeight": 180,
+          "frames": 10,
+          "duration": 0.333333,
+          "fps": 26.999999,
+          "loop": false,
+          "origin": [
+            114,
+            139
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.4541832669322709,
+            0.7722222222222223
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        }
+      }
+    },
+    "sourceRole": "friendly barracks unit",
+    "animationExport": "Original texture pixels with authored transform, color, attachment, draw-order and deform curves; analytic IK stretch/softness; offline raster sampling.",
+    "shadow": {
+      "file": "unit-shadow-original.png",
+      "width": 100,
+      "height": 81,
+      "origin": [
+        50,
+        40.5
+      ],
+      "nativeScale": 0.32
+    },
+    "towerLevel": 2
+  },
+  "soldier-3": {
+    "source": "tower3_3_soldier",
+    "animation": "stand_right",
+    "file": "soldier-3.png",
+    "width": 170,
+    "height": 157,
+    "frameWidth": 170,
+    "frameHeight": 157,
+    "anchor": [
+      0.32941176470588235,
+      0.9171974522292994
+    ],
+    "residualConstraints": [],
+    "origin": [
+      56,
+      144
+    ],
+    "scale": 1,
+    "nativeScale": 0.36,
+    "sourcePixels": true,
+    "exactSkeletonRuntime": false,
+    "walk": {
+      "file": "soldier-3-walk.png",
+      "frameWidth": 176,
+      "frameHeight": 173,
+      "frames": 17,
+      "duration": 0.666667,
+      "fps": 25.499999,
+      "loop": true,
+      "origin": [
+        62,
+        161
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.3522727272727273,
+        0.930635838150289
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "attack": {
+      "file": "soldier-3-attack.png",
+      "frameWidth": 265,
+      "frameHeight": 168,
+      "frames": 13,
+      "duration": 0.5,
+      "fps": 24.0,
+      "loop": false,
+      "origin": [
+        86,
+        152
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.32452830188679244,
+        0.9047619047619048
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "death": {
+      "file": "soldier-3-death.png",
+      "frameWidth": 268,
+      "frameHeight": 200,
+      "frames": 10,
+      "duration": 0.333333,
+      "fps": 26.999999,
+      "loop": false,
+      "origin": [
+        154,
+        144
+      ],
+      "nativeScale": 0.36,
+      "anchor": [
+        0.5746268656716418,
+        0.72
+      ],
+      "residualConstraints": [],
+      "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+    },
+    "type": "soldier",
+    "directions": {
+      "right": {
+        "source": "tower3_3_soldier",
+        "animation": "stand_right",
+        "file": "soldier-3.png",
+        "width": 170,
+        "height": 157,
+        "frameWidth": 170,
+        "frameHeight": 157,
+        "anchor": [
+          0.32941176470588235,
+          0.9171974522292994
+        ],
+        "residualConstraints": [],
+        "origin": [
+          56,
+          144
+        ],
+        "scale": 1,
+        "nativeScale": 0.36,
+        "sourcePixels": true,
+        "exactSkeletonRuntime": false,
+        "walk": {
+          "file": "soldier-3-walk.png",
+          "frameWidth": 176,
+          "frameHeight": 173,
+          "frames": 17,
+          "duration": 0.666667,
+          "fps": 25.499999,
+          "loop": true,
+          "origin": [
+            62,
+            161
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.3522727272727273,
+            0.930635838150289
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "attack": {
+          "file": "soldier-3-attack.png",
+          "frameWidth": 265,
+          "frameHeight": 168,
+          "frames": 13,
+          "duration": 0.5,
+          "fps": 24.0,
+          "loop": false,
+          "origin": [
+            86,
+            152
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.32452830188679244,
+            0.9047619047619048
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "death": {
+          "file": "soldier-3-death.png",
+          "frameWidth": 268,
+          "frameHeight": 200,
+          "frames": 10,
+          "duration": 0.333333,
+          "fps": 26.999999,
+          "loop": false,
+          "origin": [
+            154,
+            144
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.5746268656716418,
+            0.72
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        }
+      },
+      "left": {
+        "source": "tower3_3_soldier",
+        "animation": "stand_left",
+        "file": "soldier-3-stand-left.png",
+        "width": 170,
+        "height": 157,
+        "frameWidth": 170,
+        "frameHeight": 157,
+        "anchor": [
+          0.6705882352941176,
+          0.9171974522292994
+        ],
+        "residualConstraints": [],
+        "origin": [
+          114,
+          144
+        ],
+        "scale": 1,
+        "nativeScale": 0.36,
+        "sourcePixels": true,
+        "exactSkeletonRuntime": false,
+        "walk": {
+          "file": "soldier-3-walk-left.png",
+          "frameWidth": 176,
+          "frameHeight": 173,
+          "frames": 17,
+          "duration": 0.666667,
+          "fps": 25.499999,
+          "loop": true,
+          "origin": [
+            114,
+            161
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.6477272727272727,
+            0.930635838150289
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "attack": {
+          "file": "soldier-3-attack-left.png",
+          "frameWidth": 265,
+          "frameHeight": 168,
+          "frames": 13,
+          "duration": 0.5,
+          "fps": 24.0,
+          "loop": false,
+          "origin": [
+            179,
+            152
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.6754716981132075,
+            0.9047619047619048
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        },
+        "death": {
+          "file": "soldier-3-death-left.png",
+          "frameWidth": 267,
+          "frameHeight": 190,
+          "frames": 10,
+          "duration": 0.333333,
+          "fps": 26.999999,
+          "loop": false,
+          "origin": [
+            114,
+            144
+          ],
+          "nativeScale": 0.36,
+          "anchor": [
+            0.42696629213483145,
+            0.7578947368421053
+          ],
+          "residualConstraints": [],
+          "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK"
+        }
+      }
+    },
+    "sourceRole": "friendly barracks unit",
+    "animationExport": "Original texture pixels with authored transform, color, attachment, draw-order and deform curves; analytic IK stretch/softness; offline raster sampling.",
+    "shadow": {
+      "file": "unit-shadow-original.png",
+      "width": 100,
+      "height": 81,
+      "origin": [
+        50,
+        40.5
+      ],
+      "nativeScale": 0.32
+    },
+    "towerLevel": 3
+  }
+}

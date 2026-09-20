@@ -47,13 +47,13 @@ function fixture(fetchImpl = async () => response(), timeoutMs) {
 
 test('frame client exports pure controller helpers without custom element/browser globals', () => {
   assert.equal(context.customElements, undefined);
-  assert.equal(context.AirvanaPlayableFrame.version, '1.0.1');
+  assert.equal(context.AirvanaPlayableFrame.version, '1.0.5');
   assert.equal(Object.isFrozen(context.AirvanaPlayableFrame), true);
   assert.equal(typeof createController, 'function');
 });
 
-test('only exact same-origin content and preview artifact routes resolve', () => {
-  for (const route of ['/content/game-123_abc', '/preview/game-123_abc', '/content/game?embed=1#intro']) {
+test('only exact same-origin artifact routes and bundled arcade entries resolve', () => {
+  for (const route of ['/content/game-123_abc', '/preview/game-123_abc', '/content/game?embed=1#intro', '/arcade/risk-run/', '/arcade/coin-castle/', '/arcade/lucky-fruit/', '/arcade/htx-quest/', '/arcade/coin-dozer/', '/arcade/city-squad/', '/arcade/niguolaia/', '/arcade/token-harbor/', '/arcade/mini-gp-racers/', '/arcade/street-gold-rush/', '/arcade/star-table/', '/arcade/sud-texas/', '/arcade/kol-town/']) {
     assert.equal(resolveSource(route, baseURL), `${baseURL.slice(0, -1)}${route}`);
     assert.equal(resolveSource(`${baseURL.slice(0, -1)}${route}`, baseURL), `${baseURL.slice(0, -1)}${route}`);
   }
@@ -66,7 +66,7 @@ test('external, script, credential-bearing and non-artifact sources are rejected
     'http://localhost:8082/content/game', '//example.com/content/game',
     'javascript:alert(1)', 'data:text/html,hello', 'file:///content/game',
     'http://user:pass@127.0.0.1:8082/content/game',
-    '/', '/api/feed', '/content/', '/content/game/extra', '/preview/game/',
+    '/', '/api/feed', '/content/', '/content/game/extra', '/preview/game/', '/arcade/', '/arcade/unknown/', '/arcade/coin-dozer/extra',
     '/content/game%2Fextra', '/content/../api', '/content/%2e%2e', ''
   ]) assert.throws(() => resolveSource(source, baseURL), /invalid_source/, source);
 });
@@ -251,8 +251,21 @@ test('iframe load timeout removes its document and ignores later load events', a
   assert.equal(f.state.code, 'timeout');
 });
 
+test('transient about:blank load stays pending until the assigned game document commits', async () => {
+  const f = fixture();
+  await f.controller.start('/arcade/city-squad/');
+  const pendingFrame = f.frame;
+  f.controller.loaded(pendingFrame.token, 'about:blank', true);
+  assert.equal(f.controller.getState(), 'loading');
+  assert.equal(f.frame, pendingFrame);
+  assert.equal(f.timers.size, 1, 'watchdog still protects a navigation that never commits');
+  f.controller.loaded(pendingFrame.token, pendingFrame.url, true);
+  assert.equal(f.controller.getState(), 'ready');
+  assert.equal(f.timers.size, 0);
+});
+
 for (const [actualURL, hasBody] of [
-  ['about:blank', true], ['chrome-error://chromewebdata/', true],
+  ['chrome-error://chromewebdata/', true],
   ['http://example.com/content/game', true], [`${baseURL}content/other`, true],
   [`${baseURL}content/game`, false], [null, false]
 ]) {

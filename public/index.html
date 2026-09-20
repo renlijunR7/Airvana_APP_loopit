@@ -8,7 +8,7 @@
 <link rel="icon" type="image/svg+xml" href="./brand-mark.svg">
 <link rel="apple-touch-icon" href="./logo.png">
 <script src="./boot.js?v=1.0.0"></script>
-  <link rel="stylesheet" href="./airvana-v4.css?v=5.5.85">
+  <link rel="stylesheet" href="./airvana-v4.css?v=5.5.87">
   <link rel="stylesheet" href="./creator-language-workspace.css?v=1.0.14">
     <link rel="stylesheet" href="./global-ai-workspace.css?v=1.0.1">
   <link rel="stylesheet" href="./deep-games-v2.css?v=3.2.0">
@@ -21,7 +21,7 @@
 <script src="./wallet-binding-v1.js?v=1.0.0"></script>
 <script src="./i18n-v1.js?v=1.0.0"></script>
 <script src="./local-api-bridge-v1.js?v=1.0.0"></script>
-<script src="./playable-frame-v1.js?v=1.0.1"></script>
+<script src="./playable-frame-v1.js?v=1.0.5"></script>
 <script src="./game-art-system-v1.js?v=6.0.0-classic"></script>
 <script src="./playable-assets-v3.js?v=5.0.0-classic"></script>
 <script src="./deep-games-v2.js?v=3.2.0-classic"></script>
@@ -29,9 +29,9 @@
 <script src="./complete-games-v3.js?v=4.2.0-classic.2"></script>
 <link rel="stylesheet" href="./physics-arcade-v1.css?v=2.0.0">
 <script src="./vendor/matter-0.20.0.min.js"></script>
-<script src="./physics-art-v2.js?v=2.0.0"></script>
+<script src="./physics-art-v2.js?v=2.0.1"></script>
 <script src="./physics-sling-rope-v1.js?v=1.1.0"></script>
-<script src="./physics-water-v1.js?v=1.1.0"></script>
+<script src="./physics-water-v1.js?v=1.1.1"></script>
 <script src="./physics-fruit-v1.js?v=1.1.0"></script>
 <script src="./physics-arcade-v1.js?v=1.2.0"></script>
 <script src="./reference-action-v1.js?v=1.0.1"></script>
@@ -56,11 +56,11 @@
 </sc-if>
 
 <sc-if value="{{ serverArtifactOverlayVisible }}" hint-placeholder-val="false">
-  <div class="server-artifact-overlay" role="dialog" aria-modal="true" aria-label="服务端作品运行容器" style="position:absolute;inset:0;z-index:120;background:#0E1218;display:flex;flex-direction:column">
+  <div class="server-artifact-overlay" role="dialog" aria-modal="true" aria-label="游戏运行容器" style="position:absolute;inset:0;z-index:120;background:#0E1218;display:flex;flex-direction:column">
     <div style="display:flex;align-items:center;gap:10px;padding:calc(12px + env(safe-area-inset-top,0px)) 16px 10px;color:#F5F7FA">
       <button type="button" aria-label="关闭运行容器" onClick="{{ closeServerArtifactOverlay }}" style="width:34px;height:34px;border-radius:50%;border:0;background:rgba(255,255,255,.14);color:#FFFFFF;font-size:18px;cursor:pointer;flex:none">×</button>
-      <div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ serverArtifactOverlayTitle }}</div><div style="font-size:9px;color:#93A2B8;margin-top:2px">服务端 Artifact · 同源运行容器 · 运行事件协议 v1</div></div>
-      <button type="button" onClick="{{ dmServerArtifactAuthor }}" style="min-height:30px;border-radius:999px;border:1px solid rgba(255,255,255,.28);background:transparent;color:#E8EDF4;font-size:10px;font-weight:900;padding:0 12px;cursor:pointer;flex:none">私信作者</button>
+      <div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ serverArtifactOverlayTitle }}</div><div style="font-size:9px;color:#93A2B8;margin-top:2px">{{ serverArtifactOverlayMeta }}</div></div>
+      <sc-if value="{{ serverArtifactOverlayCanMessage }}" hint-placeholder-val="false"><button type="button" onClick="{{ dmServerArtifactAuthor }}" style="min-height:30px;border-radius:999px;border:1px solid rgba(255,255,255,.28);background:transparent;color:#E8EDF4;font-size:10px;font-weight:900;padding:0 12px;cursor:pointer;flex:none">私信作者</button></sc-if>
       <button type="button" onClick="{{ openServerArtifactNewWindow }}" style="min-height:30px;border-radius:999px;border:1px solid rgba(255,255,255,.28);background:transparent;color:#E8EDF4;font-size:10px;font-weight:900;padding:0 12px;cursor:pointer;flex:none">新窗口</button>
     </div>
     <airvana-playable-frame src="{{ serverArtifactOverlayUrl }}" title="{{ serverArtifactOverlayTitle }}" style="flex:1;width:100%;border-radius:18px 18px 0 0"><button type="button" slot="secondary-action" onClick="{{ closeServerArtifactOverlay }}">返回作品</button></airvana-playable-frame>
@@ -164,7 +164,13 @@
         <div style="position:absolute;inset:0;will-change:transform;transform:{{ feedTransform }};transition:{{ feedTransition }}">
           <sc-for list="{{ sessionSlides }}" as="ss" hint-placeholder-count="2">
             <div class="play-feed__slide {{ ss.windowClass }}" aria-hidden="{{ ss.ariaHidden }}" style="position:absolute;left:0;right:0;height:100%;top:{{ ss.top }};background:{{ ss.bg }};display:flex;flex-direction:column">
-              <sc-if value="{{ ss.hasCover }}" hint-placeholder-val="false"><img class="play-feed__cover" src="{{ ss.cover }}" alt="{{ ss.game }} 游戏封面" loading="{{ ss.loading }}" fetchpriority="{{ ss.fetchPriority }}" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:{{ ss.coverPosition }};z-index:0"><div class="play-feed__cover-shade" style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,8,12,.02) 38%,rgba(5,8,12,.28) 72%,rgba(5,8,12,.74) 100%);z-index:1;pointer-events:none"></div></sc-if>
+              <sc-if value="{{ ss.hasCover }}" hint-placeholder-val="false">
+                <div class="play-feed__cover-stack">
+                  <sc-if value="{{ ss.hasCoverBackdrop }}" hint-placeholder-val="false"><img class="play-feed__cover-backdrop" src="{{ ss.cover }}" alt="" aria-hidden="true" loading="{{ ss.loading }}" decoding="async" style="object-position:{{ ss.coverPosition }}"></sc-if>
+                  <img class="play-feed__cover" src="{{ ss.cover }}" alt="{{ ss.game }} 游戏封面" loading="{{ ss.loading }}" fetchpriority="{{ ss.fetchPriority }}" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:{{ ss.coverFit }};object-position:{{ ss.coverPosition }};transform:translateX({{ ss.coverShiftX }});z-index:1">
+                  <div class="play-feed__cover-shade" style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,8,12,.02) 38%,rgba(5,8,12,.28) 72%,rgba(5,8,12,.74) 100%);z-index:2;pointer-events:none"></div>
+                </div>
+              </sc-if>
               <div class="play-feed__media" style="flex:1;position:relative;z-index:1;display:flex;align-items:center;justify-content:center;min-height:0">
                 <sc-if value="{{ ss.hasScreenshot }}" hint-placeholder-val="false"><airvana-reference-shot game-key="{{ ss.screenshotKey }}" hide-controls onClick="{{ ss.onScreenshotPlay }}"></airvana-reference-shot></sc-if>
                 <sc-if value="{{ ss.isServerArtifact }}" hint-placeholder-val="false">
@@ -255,6 +261,7 @@
                   </section>
                 </sc-if>
                 <sc-if value="{{ ss.hasMiniGameLauncher }}" hint-placeholder-val="false"><button type="button" class="feed-mini-game-launcher" aria-label="重新打开互动游戏" onPointerDown="{{ stopMiniGamePointer }}" onClick="{{ ss.onMiniGameStart }}"><span aria-hidden="true">▶</span> 开始互动</button></sc-if>
+                <sc-if value="{{ ss.hasStandaloneGame }}" hint-placeholder-val="false"><button type="button" class="feed-mini-game-launcher" aria-label="打开 {{ ss.game }} 完整游戏" onPointerDown="{{ stopMiniGamePointer }}" onClick="{{ ss.onStandaloneOpen }}"><span aria-hidden="true">▶</span> 进入完整游戏</button></sc-if>
               </div>
               <div class="play-feed__actions" aria-label="作品信息与上下切换区域" onPointerDown="{{ feedInfoDown }}" onPointerMove="{{ feedInfoMove }}" onPointerUp="{{ feedInfoUp }}" onPointerCancel="{{ feedInfoUp }}" onClick="{{ feedInfoTap }}" style="flex:none;background:#0B0D0C;padding:14px 16px 11px;z-index:2">
                 <div style="display:flex;align-items:center;gap:14px">
@@ -2832,6 +2839,7 @@ class Component extends DCLogic {
   openContent(contentId, mode = 'detail') {
     const content = this.state.sessions.find(item => item.id === contentId);
     if (!content) { this.toast('该内容不存在或已下架'); return; }
+    if (content.standaloneGame) { this.openStandaloneGameRuntime(content); return; }
     this.setState({selectedContentId:contentId,overlay:'content',panel:null,detailMode:mode,detailScore:0,detailManagementOpen:false,videoPlaying:false,videoProgressValue:18,commentInput:''});
   }
   normalizeStartupRoute() {
@@ -3480,7 +3488,16 @@ class Component extends DCLogic {
   openServerArtifactRuntime(item) {
     const url=item.publicUrl||('/content/'+(item.serverContentId||item.id));
     this.recordLocalFeatureEvent('server_artifact_runtime_open',{content_id:item.serverContentId||item.id,server_confirmed:true});
-    this.setState({serverArtifactOverlay:{title:item.game||item.title||'服务端作品',url}});
+    this.setState({serverArtifactOverlay:{title:item.game||item.title||'服务端作品',url,kind:'server'}});
+  }
+  openStandaloneGameRuntime(item) {
+    const url=String(item.standaloneUrl||'');
+    if (!/^\/arcade\/(risk-run|coin-castle|lucky-fruit|htx-quest|coin-dozer|city-squad|niguolaia|token-harbor|mini-gp-racers|street-gold-rush|star-table|sud-texas|kol-town)\/$/.test(url)) {
+      this.toast('该本地游戏入口不可用');
+      return;
+    }
+    this.recordProductEvent('playable_start',item.id,{runtime:'bundled-standalone',entry:url,server_confirmed:false});
+    this.setState({serverArtifactOverlay:{title:item.game||item.title||'完整游戏',url,kind:'standalone'}});
   }
   closeServerArtifactRuntime() {
     this.setState({serverArtifactOverlay:null});
@@ -4213,6 +4230,19 @@ class Component extends DCLogic {
     ],
     sessions: [
       ...(window.AirvanaPhysicsGames ? window.AirvanaPhysicsGames.sessions() : []),
+      {id:132,type:'game',status:'published',game:'Luna 小镇 · KOL Town',icon:'🏘️',cover:'/assets/featured-originals-v2/kol-town-user-20260916-srgb.png',coverPosition:'50% 50%',coverShiftX:'0',coverBackdrop:true,coverFit:'contain',standaloneGame:true,standaloneUrl:'/arcade/kol-town/',agent:'Luna',agentIcon:'🌙',operator:'Luna 小镇',owner:'@airvana.arcade',viewers:0,conversions:0,stage:'完整试玩',settlement:'不适用',resultLabel:'原版功能 · 本机存档',earned:0,likes:0,comments:0,saves:0,desc:'探索 Luna 小镇，完成居民任务、装扮角色，与主理人和街坊共建繁荣街区。',article:'接入现有完整小镇版本，保留拖动地图、道路行走、建筑探索、任务、居民换装、AI 分身、本地钱包与本机进度；砖块和纪念 Token 均为不可兑换的本地游戏数值。',tags:['小镇探索','居民养成','完整试玩'],audience:'公开',bg:'linear-gradient(165deg,#DCD8CD,#93A183 58%,#4B5265)',versions:[{id:'132-v1',label:'小镇 0.16.1',status:'本地评审',time:'刚刚'}]},
+      {id:126,type:'game',status:'published',game:'Risk Run 风险突围',icon:'🧯',cover:'/assets/featured-originals-v2/risk-run-user-20260915-srgb.png',coverPosition:'50% 42%',coverShiftX:'0',coverBackdrop:true,coverFit:'contain',standaloneGame:true,standaloneUrl:'/arcade/risk-run/',agent:'Suke',agentIcon:'🛡️',operator:'Airvana Airdrop',owner:'@airvana.arcade',viewers:0,conversions:0,stage:'完整试玩',settlement:'不适用',resultLabel:'原版功能 · 本机存档',earned:0,likes:0,comments:0,saves:0,desc:'管理能量与护盾，在矩阵雨中接住安全代币并避开炸弹。',article:'直接接入现有 Airvana Airdrop 完整版本，保留 Risk Run 核心玩法、任务、Play、Me 导航、角色、音效、状态、奖励审查说明与本机进度；Campaign points 仅为活动积分。',tags:['风险躲避','Web3 安全','完整试玩'],audience:'公开',bg:'linear-gradient(165deg,#002F21,#082C2A 58%,#07101F)',versions:[{id:'126-v2',label:'新封面接入',status:'本地评审',time:'刚刚'}]},
+      {id:125,type:'game',status:'published',game:'金币城堡 Coin Castle',icon:'🏰',cover:'/assets/featured-originals-v2/coin-castle-user-20260915-srgb.png',coverPosition:'50% 40%',coverShiftX:'0',coverBackdrop:true,coverFit:'contain',standaloneGame:true,standaloneUrl:'/arcade/coin-castle/',agent:'Crown',agentIcon:'👑',operator:'皇家街机',owner:'@airvana.arcade',viewers:0,conversions:0,stage:'完整试玩',settlement:'不适用',resultLabel:'原版功能 · 本机存档',earned:0,likes:0,comments:0,saves:0,desc:'在蓝金城堡推币台瞄准落点，投下金币、推动金币海并收集皇家宝藏。',article:'直接接入现有完整 Three.js 版本，保留触控与长按连投、3D 物理、收藏、强力推、音效、暂停、重开和本机存档；金币仅为本地虚拟游戏数值。',tags:['推金币','皇家城堡','完整试玩'],audience:'公开',bg:'linear-gradient(165deg,#061426,#163E73 58%,#040914)',versions:[{id:'125-v2',label:'新封面接入',status:'本地评审',time:'刚刚'}]},
+      {id:120,type:'game',status:'published',game:'经典水果机 Lucky Arcade',icon:'🍉',cover:'/assets/featured-originals-v2/lucky-fruit-user-20260915-srgb.png',coverPosition:'50% 42%',coverShiftX:'0',coverBackdrop:true,coverFit:'contain',standaloneGame:true,standaloneUrl:'/arcade/lucky-fruit/',agent:'Mochi',agentIcon:'🎨',operator:'好运街机',owner:'@airvana.arcade',viewers:0,conversions:0,stage:'完整试玩',settlement:'不适用',resultLabel:'原版功能 · 本机存档',earned:0,likes:0,comments:0,saves:0,desc:'完整环形水果机：选币、押注、跑灯开奖、Lucky、猜大小、补给和开奖记录。',article:'直接接入现有完整版本，保留触控、音效、规则、虚拟金币和浏览器本地存档。',tags:['经典街机','水果机','完整试玩'],audience:'公开',bg:'linear-gradient(165deg,#291318,#6A2238 58%,#12090C)',versions:[{id:'120-v2',label:'新封面接入',status:'本地演示',time:'刚刚'}]},
+      {id:121,type:'game',status:'published',game:'HTX QUEST 创世云谷',icon:'🏃',cover:'/assets/featured-originals-v2/htx-quest-user-20260915-srgb.png',coverPosition:'50% 38%',coverShiftX:'0',coverBackdrop:true,coverFit:'contain',standaloneGame:true,standaloneUrl:'/arcade/htx-quest/',agent:'Nova',agentIcon:'🦊',operator:'HTX Quest',owner:'@airvana.arcade',viewers:0,conversions:0,stage:'完整试玩',settlement:'不适用',resultLabel:'原版功能 · 本机存档',earned:0,likes:0,comments:0,saves:0,desc:'在悬浮云谷中奔跑、下滑、跳跃、收集代币并完成三段世界关卡。',article:'直接接入现有完整版本，保留角色、世界、触控、音效、关卡进度和本地存档。',tags:['跑酷冒险','关卡挑战','完整试玩'],audience:'公开',bg:'linear-gradient(165deg,#1EAEE5,#8EDDEB 58%,#12304B)',versions:[{id:'121-v2',label:'新封面接入',status:'本地演示',time:'刚刚'}]},
+      {id:122,type:'game',status:'published',game:'Coin Dozer 黄金街机',icon:'🪙',cover:'/assets/featured-originals-v2/coin-dozer-user-20260915-srgb.png',coverPosition:'50% 43%',coverShiftX:'0',coverBackdrop:true,coverFit:'contain',standaloneGame:true,standaloneUrl:'/arcade/coin-dozer/',agent:'Kiko',agentIcon:'🐙',operator:'Golden Arcade',owner:'@airvana.arcade',viewers:0,conversions:0,stage:'完整试玩',settlement:'不适用',resultLabel:'原版功能 · 本机存档',earned:0,likes:0,comments:0,saves:0,desc:'拖动瞄准并轻点或长按投币，推动整台收藏物落入奖励槽。',article:'直接接入现有完整 PWA 版本，保留 3D 物理、Tweaks、道具、收藏、升级和自动存档。',tags:['推金币','物理街机','完整试玩'],audience:'公开',bg:'linear-gradient(165deg,#161513,#4A2C1F 58%,#080808)',versions:[{id:'122-v2',label:'新封面接入',status:'本地演示',time:'刚刚'}]},
+      {id:123,type:'game',status:'published',game:'城市突围 Squad Rush',icon:'🦸',cover:'/assets/featured-originals-v2/city-squad-user-20260915-srgb.png',coverPosition:'50% 40%',coverShiftX:'0',coverBackdrop:true,coverFit:'contain',standaloneGame:true,standaloneUrl:'/arcade/city-squad/',agent:'Rex',agentIcon:'🦖',operator:'Squad Rush',owner:'@airvana.arcade',viewers:0,conversions:0,stage:'完整试玩',settlement:'不适用',resultLabel:'原版功能 · 本机存档',earned:0,likes:0,comments:0,saves:0,desc:'左右拖动小队穿过人数与武器增益门，集结队伍并迎战关底敌人。',article:'直接接入现有完整版本，保留 3D 角色、升级、武器、签到、转盘、音效和本地进度。',tags:['小队集结','城市跑酷','完整试玩'],audience:'公开',bg:'linear-gradient(165deg,#50616A,#8D999E 58%,#172432)',versions:[{id:'123-v2',label:'新封面接入',status:'本地演示',time:'刚刚'}]},
+      {id:127,type:'game',status:'published',game:'Token Harbor 代币港湾',icon:'⚓',cover:'/assets/featured-originals-v2/token-harbor-user-20260915-srgb.png',coverPosition:'50% 42%',coverShiftX:'0',coverBackdrop:true,coverFit:'contain',standaloneGame:true,standaloneUrl:'/arcade/token-harbor/',agent:'Harbor',agentIcon:'🧭',operator:'Token Harbor',owner:'@airvana.arcade',viewers:0,conversions:0,stage:'完整试玩',settlement:'不适用',resultLabel:'原版功能 · 本机存档',earned:0,likes:0,comments:0,saves:0,desc:'拖动角色探索港湾，收集 BTC 并在交易站兑换本地虚拟 USDT。',article:'接入现有完整单页版本，保留寻宝、交换、扩张、任务指引、触控、音效与本机进度；所有代币仅为本地游戏数值，不连接真实链或钱包。',tags:['港湾寻宝','本地代币','完整试玩'],audience:'公开',bg:'linear-gradient(165deg,#79BE55,#EAD8B6 58%,#123A52)',versions:[{id:'127-v1',label:'原版接入',status:'本地评审',time:'刚刚'}]},
+      {id:128,type:'game',status:'published',game:'Mini GP Racers',icon:'🏎️',cover:'/assets/featured-originals-v2/mini-gp-racers-user-20260915-srgb.png',coverPosition:'50% 54%',coverShiftX:'0',coverBackdrop:true,coverFit:'contain',standaloneGame:true,standaloneUrl:'/arcade/mini-gp-racers/',agent:'Comet',agentIcon:'🏁',operator:'Colinas Turbo',owner:'@airvana.arcade',viewers:0,conversions:0,stage:'完整试玩',settlement:'不适用',resultLabel:'原版功能 · 本机存档',earned:0,likes:0,comments:0,saves:0,desc:'驾驶方程式赛车完成发车、超车与计时挑战，收集赛道奖励。',article:'接入现有完整本地赛车版本，保留 3D 赛道、转向、油门、刹车、超车任务、触控和本机记录；赛车币仅为本地街机数值。',tags:['赛车竞速','触控驾驶','完整试玩'],audience:'公开',bg:'linear-gradient(165deg,#080B0D,#223321 58%,#050607)',versions:[{id:'128-v1',label:'原版接入',status:'本地评审',time:'刚刚'}]},
+      {id:129,type:'game',status:'published',game:'街区淘金大冲刺',icon:'🪙',cover:'/assets/featured-originals-v2/street-gold-rush-user-20260915-srgb.png',coverPosition:'50% 48%',coverShiftX:'0',coverBackdrop:true,coverFit:'contain',standaloneGame:true,standaloneUrl:'/arcade/street-gold-rush/',agent:'Goldie',agentIcon:'🐾',operator:'Gold Rush',owner:'@airvana.arcade',viewers:0,conversions:0,stage:'完整试玩',settlement:'不适用',resultLabel:'原版功能 · 本机存档',earned:0,likes:0,comments:0,saves:0,desc:'横移、跳跃和滑铲穿过街区，收集金条、升级树屋并挑战追击者。',article:'接入现有完整本地跑酷版本，保留三线移动、障碍、道具、角色解锁、Boss、触控和本机进度；金条仅为本地虚拟数值。',tags:['街区跑酷','收集升级','完整试玩'],audience:'公开',bg:'linear-gradient(165deg,#55BCE7,#54B849 58%,#3F4A52)',versions:[{id:'129-v1',label:'原版接入',status:'本地评审',time:'刚刚'}]},
+      {id:130,type:'game',status:'published',game:'星桌竞猜 Star Table',icon:'♦️',cover:'/assets/featured-originals-v2/star-table-user-20260915-srgb.png',coverPosition:'50% 38%',coverShiftX:'0',coverBackdrop:true,coverFit:'contain',standaloneGame:true,standaloneUrl:'/arcade/star-table/',agent:'Astra',agentIcon:'⭐',operator:'星桌',owner:'@airvana.arcade',viewers:0,conversions:0,stage:'完整试玩',settlement:'不适用',resultLabel:'原版功能 · 本机存档',earned:0,likes:0,comments:0,saves:0,desc:'选择座位完成六人邀请赛竞猜，观看牌局结算并复盘结果。',article:'接入现有完整本地演示，保留单局竞猜、确定性 AI 牌局、音效、结果记录和本机进度；星币仅为不可兑换的本地游戏数值。',tags:['牌局竞猜','六人邀请赛','完整试玩'],audience:'公开',bg:'linear-gradient(165deg,#062E2D,#0C4B38 58%,#031619)',versions:[{id:'130-v1',label:'原版接入',status:'本地评审',time:'刚刚'}]},
+      {id:131,type:'game',status:'published',game:'SUD 德州扑克',icon:'♠️',cover:'/assets/featured-originals-v2/sud-texas-user-20260915-srgb.png',coverPosition:'50% 46%',coverShiftX:'0',coverBackdrop:true,coverFit:'contain',standaloneGame:true,standaloneUrl:'/arcade/sud-texas/',agent:'Dealer',agentIcon:'🃏',operator:'SUD Table',owner:'@airvana.arcade',viewers:0,conversions:0,stage:'完整试玩',settlement:'不适用',resultLabel:'原版功能 · 本机存档',earned:0,likes:0,comments:0,saves:0,desc:'在本地六人牌桌完成跟注、让牌、加注与弃牌的完整单局流程。',article:'接入现有本地牌局演示，保留完整手牌推进、操作反馈、聊天记录和重开；不接入 SUD SDK、真人网络、现金或可兑换筹码。',tags:['德州扑克','本地牌桌','完整试玩'],audience:'公开',bg:'linear-gradient(165deg,#003F3B,#008A70 58%,#031316)',versions:[{id:'131-v1',label:'原版接入',status:'本地评审',time:'刚刚'}]},
+      {id:124,type:'game',status:'published',game:'你过来呀 · 三国塔防',icon:'🏯',cover:'/assets/featured-originals-v2/niguolaia.png',coverPosition:'50% center',standaloneGame:true,standaloneUrl:'/arcade/niguolaia/',agent:'Mira',agentIcon:'✨',operator:'三国塔防',owner:'@airvana.arcade',viewers:0,conversions:0,stage:'完整试玩',settlement:'不适用',resultLabel:'原版功能 · 本机存档',earned:0,likes:0,comments:0,saves:0,desc:'在三国战场的固定阵位建造并升级防御塔，释放技能抵御连续敌军。',article:'直接接入现有完整版本，保留三关、四类塔、英雄技能、倍速、音效、教程和本地进度；当前仅作本机评审。',tags:['三国塔防','波次策略','完整试玩'],audience:'公开',bg:'linear-gradient(165deg,#4A3127,#8B5A4A 58%,#19100E)',versions:[{id:'124-v1',label:'原版接入',status:'本地评审',time:'刚刚'}]},
       {id:24,type:'game',status:'published',game:'霓虹疾跑 Neon Dash',icon:'🏃',cover:'/assets/games/classic-v1/covers/neon-dash.svg',coverPosition:'50% center',agent:'Nova',agentIcon:'🦊',operator:'Airvana Arcade',owner:'@airvana.arcade',viewers:0,conversions:0,stage:'本地 DEMO',settlement:'不适用',resultLabel:'原创离线互动 · 本地最高分',earned:0,likes:0,comments:0,saves:0,desc:'在三条霓虹跑道间切换，避开能量障碍并完成冲刺。',article:'30 秒点按躲避挑战，含开始、计分、成功、失败与重玩。',tags:['疾跑躲避','原创互动'],audience:'公开',bg:'linear-gradient(165deg,#081E37,#521847 58%,#080A10)',versions:[{id:'24-v1',label:'DEMO v1',status:'本地演示',time:'刚刚'}]},
       {id:25,type:'game',status:'published',game:'节拍熔炉 Pulse Forge',icon:'🥁',cover:'/assets/games/classic-v1/covers/pulse-forge.svg',coverPosition:'50% center',agent:'Mochi',agentIcon:'🎨',operator:'Airvana Arcade',owner:'@airvana.arcade',viewers:0,conversions:0,stage:'本地 DEMO',settlement:'不适用',resultLabel:'原创离线互动 · 本地最高分',earned:0,likes:0,comments:0,saves:0,desc:'跟随发光节拍敲击四枚音垫，累积连击。',article:'节拍点按挑战，音效只在首次互动后播放，可随时静音。',tags:['节奏点按','原创互动'],audience:'公开',bg:'linear-gradient(165deg,#11144B,#5A1760 58%,#090710)',versions:[{id:'25-v1',label:'DEMO v1',status:'本地演示',time:'刚刚'}]},
       {id:26,type:'game',status:'published',game:'天际叠塔 Sky Stack',icon:'🏗️',cover:'/assets/games/classic-v1/covers/sky-stack.svg',coverPosition:'50% center',agent:'BuzzBee',agentIcon:'👩‍🚀',operator:'Airvana Arcade',owner:'@airvana.arcade',viewers:0,conversions:0,stage:'本地 DEMO',settlement:'不适用',resultLabel:'原创离线互动 · 本地最高分',earned:0,likes:0,comments:0,saves:0,desc:'判断移动平台的落点，把云端模块稳稳叠高。',article:'精准叠塔挑战，选中最佳落点即可继续搭建。',tags:['叠塔时机','原创互动'],audience:'公开',bg:'linear-gradient(165deg,#3B8194,#E0A45B 58%,#132431)',versions:[{id:'26-v1',label:'DEMO v1',status:'本地演示',time:'刚刚'}]},
@@ -4421,7 +4451,7 @@ class Component extends DCLogic {
         const seededSessions = Array.isArray(this.state.sessions) ? this.state.sessions : [];
         const restoredSessions = Array.isArray(restored.sessions) ? restored.sessions : [];
         const seededSessionById = new Map(seededSessions.map(item => [Number(item.id), item]));
-        const governedArcadeIds = new Set([1,2,5,6,9,10,12,14,15,16,17,18,19,20,21,22,23,...Array.from({length:21},(_,index)=>index+24),101,102,103,104,105,111,112,113,114,115,116,117,118]);
+        const governedArcadeIds = new Set([1,2,5,6,9,10,12,14,15,16,17,18,19,20,21,22,23,...Array.from({length:21},(_,index)=>index+24),101,102,103,104,105,111,112,113,114,115,116,117,118,120,121,122,123,124,125,126,127,128,129,130,131,132]);
         const sessionsWithCurrentArcadeCatalog = restoredSessions.map(item => {
           const seed = seededSessionById.get(Number(item.id));
           if (!seed || !governedArcadeIds.has(Number(item.id))) return item;
@@ -6438,13 +6468,39 @@ class Component extends DCLogic {
       1:'safety-workshop',2:'stellar-farm',5:'pixel-quest',6:'red-cup-shuffle',9:'magic-choir',10:'paws-stage',12:'puppet-studio',14:'firefly-mail',15:'whisker-escape',16:'coin-journey',17:'jungle-dive',18:'rift-strike',19:'stardust-island',20:'formation-knights',21:'galaxy-toy-shop',22:'city-rush',23:'sky-cannon',24:'neon-dash',25:'pulse-forge',26:'sky-stack',27:'rune-circuit',28:'prism-match',29:'star-cups',30:'deep-catch',31:'ember-bastion',32:'nova-drift',33:'void-squadron',34:'orchard-merge',35:'star-mower',36:'moonlight-tea-shop',37:'microbe-arena',38:'star-deck',39:'crystal-bastion',40:'adventurer-journal',41:'idiom-detective',42:'hex-frontier',43:'studio-wardrobe',44:'garden-renewal'
     };
     Object.entries(casualGameCoverKeys).forEach(([id,key])=>{gameCoverAssets[Number(id)]={src:'/assets/games/classic-v1/covers/'+key+'.svg',position:'50% center'};});
+    const editorialGameCoverKeys={
+      3:'adventurer-journal',
+      4:'neon-dash',
+      7:'sky-stack',
+      8:'safety-workshop',
+      11:'coin-journey',
+      13:'stardust-island'
+    };
+    Object.entries(editorialGameCoverKeys).forEach(([id,key])=>{gameCoverAssets[Number(id)]={src:'/assets/games/classic-v1/covers/'+key+'.svg',position:'50% center'};});
+    const coverKeyForTheme = item => {
+      const source=[item.game,item.title,item.desc,...(item.tags||[])].filter(Boolean).join(' ');
+      if(/安全|钱包|风控|盾|诈骗/.test(source))return 'safety-workshop';
+      if(/收益|归因|金币|经济|结算/.test(source))return 'coin-journey';
+      if(/社区|增长|花园|农场/.test(source))return 'garden-renewal';
+      if(/品牌|造型|角色|创作/.test(source))return 'studio-wardrobe';
+      if(/夜空|星光|宇宙|银河/.test(source))return 'stardust-island';
+      if(/谜题|拼图|匹配|记忆/.test(source))return 'prism-match';
+      return 'adventurer-journal';
+    };
+    const fallbackCoverForItem = item => {
+      const asset=gameCoverAssets[item.id];
+      if(asset)return asset;
+      if(item.cover)return {src:item.cover,position:item.coverPosition||'50% center'};
+      const key=coverKeyForTheme(item);
+      return {src:'/assets/games/classic-v1/covers/'+key+'.svg',position:'50% center'};
+    };
     const withGameCover = item => {
       const reference=window.AirvanaScreenshotReferences?.get(item.id);
       if(reference)return {...item,referenceKey:reference.key,game:reference.title+' · 原图',cover:reference.images[0].src,coverPosition:'center',stage:'静态截图',operator:'用户提供的截图',desc:'直接展示用户提供的原始截图，保留原图素材、色彩与样式。图片中的按钮及数值不是实时游戏；上一版原创互动另设入口。',tags:['原图展示','静态参考'],duration:'静态图片'};
       const physics=window.AirvanaPhysicsGames?.list().find(game=>game.id===Number(item.id)&&game.art==='physics-casual-v2');
       if(physics)return {...item,cover:physics.cover,coverPosition:'center',art:physics.art};
-      const asset = gameCoverAssets[item.id];
-      return asset ? {...item,cover:asset.src,coverPosition:asset.position} : item;
+      const asset=fallbackCoverForItem(item);
+      return {...item,cover:asset.src,coverPosition:asset.position};
     };
     const todayKey = this.localDateKey();
     const obData = [
@@ -6471,13 +6527,25 @@ class Component extends DCLogic {
     ].map(n => {const active=s.screen===n.key;return {...n,active,className:active?'is-active':'',ariaCurrent:active?'page':'false',color:active?ACC:MUT,onClick:()=>{this.stopFeedMusic();this.disposeDeepFeedMiniGame();if(n.key!=='world')this.disposeGlobe();if(n.key==='messages'){this.openMessagesScreen();return;}this.setState({screen:n.key,overlay:null,panel:null,drawerOpen:false,systemModal:null,pendingDeleteAgentId:null,...(n.key==='play'?{playIdx:0,feedMiniGame:this.emptyFeedMiniGameState(),feedMiniGameDismissedContentId:null}:{})});if(n.key==='discover')this.loadServerDiscover();if(n.key==='me')this.loadServerSocial();if(n.key==='world')this.loadServerGrowthNodes();}};});
     const primaryNavActiveIndex=Math.max(0,nav.findIndex(item=>item.active));
     const discoverableSessions = s.sessions.map(withGameCover).filter(x => x.status === 'published' || x.status === 'archived');
-    const featuredInteractiveIds=[111,112,113,114,115,116,117,118,101,102,103,104,105,34,35,36,37,38,39,40,41,42,43,44,24,25,26,27,28,29,30,31,32,33,1,2,5,6,9,10,12,14,15,16,17,18,19,20,21,22,23];
-    const serverFeedSessions=(s.serverDiscoverItems||[]).slice(0,5).map(item=>({
+    const featuredInteractiveIds=[132,122,121,127,125,120,123,128,129,130,131,126,124,111,112,113,114,115,116,117,118,101,102,103,104,105,34,35,36,37,38,39,40,41,42,43,44,24,25,26,27,28,29,30,31,32,33,1,2,5,6,9,10,12,14,15,16,17,18,19,20,21,22,23];
+    const serverCoverForItem = (item,index=0) => {
+      const delivered=String(item.gameBackground||'');
+      if(delivered.includes('security-world'))return '/assets/games/classic-v1/covers/safety-workshop.svg';
+      if(delivered.includes('memory-world')){
+        const memoryKeys=['prism-match','rune-circuit','star-cups'];
+        return '/assets/games/classic-v1/covers/'+memoryKeys[index%memoryKeys.length]+'.svg';
+      }
+      if(delivered.includes('/casual-v1/'))return delivered.replace('/casual-v1/','/classic-v1/').replace(/\.webp$/,'.svg');
+      if(delivered.includes('/classic-v1/'))return delivered;
+      const key=coverKeyForTheme({title:item.title,desc:item.summary,tags:item.tags||[]});
+      return '/assets/games/classic-v1/covers/'+key+'.svg';
+    };
+    const serverFeedSessions=(s.serverDiscoverItems||[]).slice(0,5).map((item,index)=>({
       id:'srv:'+item.id,serverArtifact:true,serverContentId:item.id,publicUrl:item.publicUrl,
       game:item.title,title:item.title,owner:item.authorHandle||'@creator',operator:item.authorName||'创作者',
       status:'published',stage:'可互动',likes:0,comments:0,saves:0,viewers:0,conversions:0,
       desc:item.summary||'开始挑战，完成每一关。',
-      icon:'',bg:'#0B101A',cover:(item.gameBackground||'').replace('/casual-v1/','/classic-v1/').replace(/\.webp$/,'.svg'),
+      icon:'',bg:'#0B101A',cover:serverCoverForItem(item,index),
       resultLabel:'完整游戏 · 即点即玩'
     }));
     const localFeedSessions=[...featuredInteractiveIds.map(id=>discoverableSessions.find(item=>item.id===id)).filter(Boolean),...discoverableSessions.filter(item=>!featuredInteractiveIds.includes(item.id))];
@@ -7912,7 +7980,7 @@ class Component extends DCLogic {
         : s.discoverCat==='latest'
           ? [...discoverPoolBase].sort((a,b)=>b.id-a.id)
           : discoverPoolBase;
-    const homeArcadeDiscoverIds = [111,112,113,114,115,116,117,118,101,102,103,104,105,34,35,36,37,38,39,40,41,42,43,44,24,25,26,27,28,29,30,31,32,33,1,2,5,6,9,10,12,14,15,16,17,18,19,20,21,22,23];
+    const homeArcadeDiscoverIds = [132,122,121,127,125,120,123,128,129,130,131,126,124,111,112,113,114,115,116,117,118,101,102,103,104,105,34,35,36,37,38,39,40,41,42,43,44,24,25,26,27,28,29,30,31,32,33,1,2,5,6,9,10,12,14,15,16,17,18,19,20,21,22,23];
     const toDiscoverItem = item=>({
       id:item.id,icon:item.icon,title:item.game,bg:item.bg||'linear-gradient(145deg,#30262A,#171719)',cover:item.cover||'',coverPosition:item.coverPosition||'center',referenceKey:item.referenceKey||'',hasCover:Boolean(item.cover)&&!item.referenceKey,noCover:!item.cover&&!item.referenceKey,
       status:item.status==='archived'?'可复制':item.stage||'运行中',
@@ -7927,8 +7995,8 @@ class Component extends DCLogic {
       {tag:'社区增长', matchTags:['社区增长','品牌互动']},
       {tag:'效果归因', matchTags:['效果归因','版本实验','资产沉淀']}
     ];
-    const serverDiscoverCards=(s.serverDiscoverItems||[]).map(item=>({
-      id:item.id,icon:'',title:item.title,bg:'linear-gradient(145deg,#1E2A38,#101720)',cover:(item.gameBackground||'').replace('/casual-v1/','/classic-v1/').replace(/\.webp$/,'.svg'),coverPosition:'center',hasCover:!!item.gameBackground,noCover:!item.gameBackground,
+    const serverDiscoverCards=(s.serverDiscoverItems||[]).map((item,index)=>({
+      id:item.id,icon:'',title:item.title,bg:'linear-gradient(145deg,#1E2A38,#101720)',cover:serverCoverForItem(item,index),coverPosition:'center',hasCover:true,noCover:false,
       status:'可互动',avatar:this.avatarFor(item.authorName||item.id),operator:item.authorName||'创作者',
       likes:'—',comments:'—',
       onOpen:()=>this.openServerContent(item)
@@ -8681,6 +8749,8 @@ Airvana正式运营主体及其作为个人信息处理者或数据控制者的�
       aiTwinCustomStageReady:aiTwinCustomSelected&&aiTwinCustomHasAvatar,aiTwinCustomStageEmpty:aiTwinCustomSelected&&!aiTwinCustomHasAvatar,
       showLaunchSplash:!!s.launchVisible,
       serverArtifactOverlayVisible:!!s.serverArtifactOverlay,serverArtifactOverlayTitle:(s.serverArtifactOverlay||{}).title||'',serverArtifactOverlayUrl:(s.serverArtifactOverlay||{}).url||'',
+      serverArtifactOverlayMeta:(s.serverArtifactOverlay||{}).kind==='standalone'?'本地完整游戏 · 原版功能 · 本机存档':'服务端 Artifact · 同源运行容器 · 运行事件协议 v1',
+      serverArtifactOverlayCanMessage:!!s.serverArtifactOverlay&&(s.serverArtifactOverlay||{}).kind!=='standalone',
       closeServerArtifactOverlay:()=>this.closeServerArtifactRuntime(),
       localeCoverageNote:this.i18n?('基准中文 · 英文已覆盖 '+this.i18n.coverage().translatedKeys+' 条关键路径文案；未迁移部分保持中文'):'国际化模块未加载',
       localeOptions:(this.i18n?this.i18n.supported:['zh-CN']).map(code=>{
@@ -8758,12 +8828,12 @@ Airvana正式运营主体及其作为个人信息处理者或数据控制者的�
       playFeedEmptyTitle:'暂无可体验内容',playFeedEmptyDesc:'发布后的 Agentic Playable 会出现在首页沉浸式内容流。',
       sessionViewers: fmt(cur.viewers),
       sessionIdxLabel: (safePlayIdx + 1) + '/' + publishedSessions.length,
-      sessionSlides: publishedSessions.map((x, i) => ({...x,...buildFeedMiniGameView(x), isServerArtifact:!!x.serverArtifact,
+      sessionSlides: publishedSessions.map((x, i) => ({...x,...buildFeedMiniGameView(x), isServerArtifact:!!x.serverArtifact,hasStandaloneGame:!!x.standaloneGame,
         serverGameVisible:!!x.serverArtifact && i===safePlayIdx,
         serverGameUrl:x.serverArtifact?('/content/'+encodeURIComponent(x.serverContentId)+'?embed=1&runtime=3'):null,
-        onServerOpen:e=>{if(e&&e.stopPropagation)e.stopPropagation();this.openServerArtifactRuntime(x);}, contentCaption:x.referenceKey?'用户提供原图 · 静态展示':'运营 Agentic Playable「'+x.game+'」', hasCover:Boolean(x.cover)&&!x.referenceKey, noCover:!x.cover&&!x.serverArtifact&&!x.referenceKey, coverPosition:x.coverPosition||'center', loading:i===safePlayIdx?'eager':'lazy', fetchPriority:i===safePlayIdx?'high':'low', windowClass:i===safePlayIdx?'is-active':'is-buffered', ariaHidden:String(i!==safePlayIdx), avatar:this.avatarFor(x.owner||x.operator||x.id), operator:x.operator||'KOL 运营者',stage:x.stage||'运行中',resultLabel:x.resultLabel||('互动 '+fmt(x.viewers||0)+' · 演示转化 '+fmt(x.conversions||0)),top: (i * 100) + '%',
-        onDispatch: () => x.serverArtifact?this.openServerArtifactRuntime(x):this.openContent(x.id,'interaction'),
-        onOpen: () => x.serverArtifact?this.openServerArtifactRuntime(x):this.openContent(x.id,'detail'),
+        onServerOpen:e=>{if(e&&e.stopPropagation)e.stopPropagation();this.openServerArtifactRuntime(x);},onStandaloneOpen:e=>{if(e&&e.stopPropagation)e.stopPropagation();this.openStandaloneGameRuntime(x);}, contentCaption:x.referenceKey?'用户提供原图 · 静态展示':x.standaloneGame?'完整原版游戏 · 点击进入':('运营 Agentic Playable「'+x.game+'」'), hasCover:Boolean(x.cover)&&!x.referenceKey, hasCoverBackdrop:Boolean(x.cover)&&!x.referenceKey&&x.coverBackdrop===true, noCover:!x.cover&&!x.serverArtifact&&!x.referenceKey, coverPosition:x.coverPosition||'center', coverShiftX:x.coverShiftX||'0', coverFit:x.coverFit||(x.coverBackdrop===true?'contain':'cover'), loading:i===safePlayIdx?'eager':'lazy', fetchPriority:i===safePlayIdx?'high':'low', windowClass:i===safePlayIdx?'is-active':'is-buffered', ariaHidden:String(i!==safePlayIdx), avatar:this.avatarFor(x.owner||x.operator||x.id), operator:x.operator||'KOL 运营者',stage:x.stage||'运行中',resultLabel:x.resultLabel||('互动 '+fmt(x.viewers||0)+' · 演示转化 '+fmt(x.conversions||0)),top: (i * 100) + '%',
+        onDispatch: () => x.serverArtifact?this.openServerArtifactRuntime(x):x.standaloneGame?this.openStandaloneGameRuntime(x):this.openContent(x.id,'interaction'),
+        onOpen: () => x.serverArtifact?this.openServerArtifactRuntime(x):x.standaloneGame?this.openStandaloneGameRuntime(x):this.openContent(x.id,'detail'),
         showFollow:x.owner!=='@kai.builds',
         followIcon:s.followingOwners.includes(x.owner)?'✓':'+',
         followIconSize:s.followingOwners.includes(x.owner)?'12px':'18px',

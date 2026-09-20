@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="dark" />
+  <title>Airvana · Official Mao Single-rig Cubism Runtime</title>
+  <style>
+    :root {
+      color: #eefcff;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: transparent;
+    }
+
+    * { box-sizing: border-box; }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: transparent;
+    }
+
+    html {
+      overscroll-behavior-x: none;
+      touch-action: none;
+    }
+
+    body {
+      position: relative;
+    }
+
+    canvas {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      display: block;
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    .runtime-label {
+      position: absolute;
+      top: max(10px, env(safe-area-inset-top));
+      left: max(10px, env(safe-area-inset-left));
+      z-index: 3;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      max-width: calc(100% - 20px);
+      pointer-events: none;
+    }
+
+    .runtime-label span {
+      min-height: 22px;
+      padding: 5px 9px;
+      border: 1px solid rgba(83, 234, 242, 0.48);
+      border-radius: 999px;
+      background: rgba(3, 17, 35, 0.82);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.24);
+      color: #a8faff;
+      font-size: 9px;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      backdrop-filter: blur(8px);
+    }
+
+    .runtime-label .resource-state {
+      border-color: rgba(255, 194, 89, 0.52);
+      color: #ffdc93;
+    }
+
+    .runtime-footer {
+      position: absolute;
+      right: max(8px, env(safe-area-inset-right));
+      bottom: max(8px, env(safe-area-inset-bottom));
+      z-index: 3;
+      max-width: calc(100% - 16px);
+      padding: 5px 8px;
+      border-radius: 8px;
+      background: rgba(3, 13, 28, 0.72);
+      color: rgba(218, 237, 246, 0.72);
+      font-size: 8px;
+      line-height: 1.35;
+      text-align: right;
+      backdrop-filter: blur(8px);
+    }
+
+    .runtime-footer a {
+      color: #8deef5;
+      pointer-events: auto;
+    }
+
+    /* Host product renders the required identity and licence boundary. */
+    .runtime-label,
+    .runtime-footer { display: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+  <!-- Live2DCubismCore script -->
+  <script src="./Core/live2dcubismcore.min.js"></script>
+  <!-- Build script -->
+  <script type="module" crossorigin src="./assets/index-BgbjLSFP.js"></script>
+</head>
+<body>
+  <div class="runtime-label" aria-label="Official Mao sample runtime identity" data-model-identity="mao">
+    <span>Official sample Mao · not Kai</span>
+    <span class="resource-state">Live2D Free Material sample</span>
+    <span>Single moc3 · head + neck + body</span>
+    <span data-runtime-status>Idle</span>
+  </div>
+
+  <footer class="runtime-footer">
+    Cubism SDK for Web 5-r.5 ·
+    <a href="./legal/licenses/SDK-LICENSE.md" target="_blank" rel="noreferrer">licences</a> ·
+    <a href="./legal/NOTICE.md" target="_blank" rel="noreferrer">notice</a> ·
+    <a href="./README.md" target="_blank" rel="noreferrer">identity and resource guide</a>
+  </footer>
+</body>
+</html>

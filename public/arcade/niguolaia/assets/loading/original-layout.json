@@ -1,0 +1,186 @@
+{
+  "sourcePage": "http://game.zhongyigames.com/niguolaia/",
+  "sourceScene": "http://game.zhongyigames.com/niguolaia/assets/main/import/07/079fe3024.caeac.json",
+  "sourceScript": "http://game.zhongyigames.com/niguolaia/assets/main/index.aaba2.js",
+  "prefab": "LoadingPage",
+  "designSize": [
+    640,
+    1136
+  ],
+  "canvas": {
+    "fitWidth": true,
+    "fitHeight": false,
+    "mask": true
+  },
+  "coordinateConvention": "Center coordinates use a top-left-origin 640×1136 logical canvas. Scale logical units by output width / 640. Percentages based on width are CSS cqw, not vh.",
+  "background": {
+    "file": "loading_bg_big.png",
+    "nativeSize": [
+      439,
+      1024
+    ],
+    "renderedSize": [
+      640,
+      1500
+    ],
+    "center": [
+      320,
+      568
+    ],
+    "cropTopAtDesignHeight": 182,
+    "firstEntryUsesSameSprite": true,
+    "css": {
+      "width": "100cqw",
+      "height": "234.375cqw",
+      "left": "50%",
+      "top": "50%",
+      "transform": "translate(-50%,-50%)",
+      "objectFit": "fill"
+    }
+  },
+  "logo": {
+    "file": "logo.png",
+    "nativeSize": [
+      575,
+      253
+    ],
+    "sourceScale": 0.8,
+    "renderedSize": [
+      460,
+      202.4
+    ],
+    "center": [
+      313,
+      137.553
+    ],
+    "centerFromStageCenter": [
+      -7,
+      -430.447
+    ],
+    "css": {
+      "width": "71.875cqw",
+      "height": "31.625cqw",
+      "left": "48.90625%",
+      "top": "calc(50% - 67.25734375cqw)",
+      "transform": "translate(-50%,-50%)"
+    }
+  },
+  "spring": {
+    "file": "loading_spring_font.png",
+    "size": [
+      48,
+      92
+    ],
+    "center": [
+      558.763,
+      160.965
+    ],
+    "centerFromStageCenter": [
+      238.763,
+      -407.035
+    ],
+    "css": {
+      "width": "7.5cqw",
+      "height": "14.375cqw",
+      "left": "87.30671875%",
+      "top": "calc(50% - 63.59921875cqw)",
+      "transform": "translate(-50%,-50%)"
+    }
+  },
+  "version": {
+    "textPrefix": "ver:",
+    "version": "1.0.22.1",
+    "font": "system font; no custom font in prefab",
+    "fontSize": 20,
+    "lineHeight": 30,
+    "layoutGap": 5,
+    "left": 10.995,
+    "containerHeight": 40,
+    "centerY": 20
+  },
+  "percentage": {
+    "center": [
+      317.8,
+      1021.9
+    ],
+    "bottomCenterDistance": 114.1,
+    "size": [
+      150,
+      60
+    ],
+    "font": "system font; no custom font in prefab",
+    "fontSize": 50,
+    "lineHeight": 60,
+    "format": "(100 * progress).toFixed(1) + \"%\"",
+    "css": {
+      "left": "49.65625%",
+      "bottom": "17.828125cqw",
+      "fontSize": "7.8125cqw",
+      "lineHeight": "9.375cqw",
+      "transform": "translate(-50%,50%)"
+    }
+  },
+  "status": {
+    "text": "进入游戏中",
+    "center": [
+      318,
+      1064
+    ],
+    "bottomCenterDistance": 72,
+    "font": "system font; no custom font in prefab",
+    "fontSize": 20,
+    "lineHeight": 20,
+    "originalNodeHeight": 25.2,
+    "css": {
+      "left": "49.6875%",
+      "bottom": "11.25cqw",
+      "fontSize": "3.125cqw",
+      "lineHeight": "3.125cqw",
+      "transform": "translate(-50%,50%)"
+    }
+  },
+  "health": {
+    "file": "health_advice.png",
+    "size": [
+      471,
+      43
+    ],
+    "center": [
+      320,
+      1106
+    ],
+    "bottom": 8.5,
+    "css": {
+      "width": "73.59375cqw",
+      "height": "6.71875cqw",
+      "left": "50%",
+      "bottom": "1.328125cqw",
+      "transform": "translateX(-50%)"
+    }
+  },
+  "progressBar": {
+    "activeInPrefab": false,
+    "background": "loading_bg.png",
+    "fill": "loading_progress.png",
+    "renderedSize": [
+      490,
+      19
+    ],
+    "center": [
+      320,
+      1066
+    ],
+    "capInsets": [
+      18,
+      0,
+      18,
+      0
+    ],
+    "note": "Original screenshot shows the percentage label. Do not add a visible bar solely because these frame assets exist."
+  },
+  "notes": [
+    "The static BgFirst frame and dynamic Bg both resolve to the same loading_bg_big crop.",
+    "Health warning is an original baked texture, not new text.",
+    "This record describes visual source layout; it does not require reproducing remote account/hot-update logic or fake progress."
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "source": "hero9",
+  "animation": "stand_right",
+  "sampleTime": 0,
+  "width": 424,
+  "height": 470,
+  "anchor": [
+    0.5235849056603774,
+    0.9425531914893617
+  ],
+  "exactSkeletonRuntime": false,
+  "note": "Source Bezier/linear/stepped curves, weighted mesh deformation, original draw order, authored IK stretching and softening evaluated offline. Original game runtime and GPU renderer were not executed; pixel-level runtime parity not certified.",
+  "image": "diaochan-full.png",
+  "scaleFromSource": 2,
+  "sourceUuid": "8bgtTsnupIjqF+xEAH65n5",
+  "sourceRole": "Original guideSpine tutorial character",
+  "licenseVerified": false,
+  "sourceContentSize": [
+    307.2,
+    374.58367919921875
+  ],
+  "sources": [
+    "http://game.zhongyigames.com/niguolaia/assets/resources/native/8b/8b82d4ec-9eea-488e-a17e-c44007eb99f9.9cc47.bin",
+    "http://game.zhongyigames.com/niguolaia/assets/resources/import/8b/8b82d4ec-9eea-488e-a17e-c44007eb99f9.7c4df.json",
+    "http://game.zhongyigames.com/niguolaia/assets/resources/native/f7/f7b5a51b-af8f-47db-a108-edea1ce85aab.614a2.png"
+  ],
+  "decodedBytes": 56336,
+  "sourceFileBytes": 56336,
+  "idle": {
+    "file": "diaochan-idle.png",
+    "frameWidth": 424,
+    "frameHeight": 477,
+    "frames": 6,
+    "duration": 0.833333,
+    "fps": 7.2,
+    "loop": true,
+    "origin": [
+      222,
+      450
+    ],
+    "nativeScale": 0.65,
+    "anchor": [
+      0.5235849056603774,
+      0.9433962264150944
+    ],
+    "residualConstraints": [],
+    "interpolation": "source Bezier/linear/stepped curves; bone, slot, deform and draw order timelines; analytic uniform 2-bone IK with authored stretch/softness, numerical fallback for nonuniform IK",
+    "image": "diaochan-idle.png"
+  },
+  "file": "diaochan-full.png",
+  "frameWidth": 424,
+  "frameHeight": 470,
+  "residualConstraints": [],
+  "origin": [
+    222,
+    443
+  ],
+  "scale": 2,
+  "nativeScale": 0.65,
+  "sourcePixels": true,
+  "previousDimensions": [
+    424,
+    469
+  ]
+}

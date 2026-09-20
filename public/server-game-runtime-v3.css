@@ -92,3 +92,133 @@ button:focus-visible, a:focus-visible { outline: 3px solid #F1C65B; outline-offs
   .overlay .game-error { max-width: 100%; font-size: 11px; padding: 8px 10px; }
 }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+
+/* Versioned presentation for saved decision/memory artifacts. Native canvases
+   keep their own theme and geometry. Controls and text remain real DOM. */
+#game-root[data-presentation=server-casual-v4] {
+  --casual-ink: #193c57;
+  background: #8fded8;
+  color: var(--casual-ink);
+  min-height: 380px;
+}
+[data-presentation=server-casual-v4] .game-scene { object-position: center top; }
+[data-presentation=server-casual-v4] .scene-shade {
+  display: block; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: linear-gradient(180deg,#0733542b 0%,transparent 27%,transparent 50%,#11636b24 100%);
+}
+[data-presentation=server-casual-v4] .toolbar {
+  height: 54px; gap: 7px; padding: 5px 10px; background: transparent; border: 0;
+}
+[data-presentation=server-casual-v4] .toolbar button {
+  min-width: 46px; min-height: 44px; border-radius: 14px; padding: 6px 10px;
+  color: #244361; background: linear-gradient(#fffefa,#e8f2ef);
+  border: 2px solid #fffefa; box-shadow: 0 3px 0 #537d9880,0 4px 7px #1b50702e;
+  font-size: 13px;
+}
+[data-presentation=server-casual-v4] .toolbar button:disabled { opacity: .7; }
+[data-presentation=server-casual-v4] .toolbar .game-title {
+  color: white; text-shadow: 0 1px 3px #154366,0 1px 8px #154366;
+  font-size: 12px; font-weight: 750; padding-left: 3px;
+}
+[data-presentation=server-casual-v4] .overlay { inset: 54px 0 0; padding: 14px 20px 22px; gap: 11px; }
+[data-presentation=server-casual-v4] .overlay[data-screen=intro] { justify-content: safe flex-end; }
+[data-presentation=server-casual-v4] .overlay[data-screen=intro] > :first-child { margin-top: 0; }
+[data-presentation=server-casual-v4] .overlay[data-screen=intro] > :last-child { margin-bottom: 0; }
+[data-presentation=server-casual-v4] .overlay .intro-hero {
+  width: clamp(120px,49vw,206px); height: clamp(128px,29vh,216px);
+  filter: drop-shadow(0 9px 5px #15566b3a); margin-bottom: -6px;
+}
+[data-presentation=server-casual-v4] .overlay h1,
+[data-presentation=server-casual-v4] .overlay h2 {
+  background: none; border: 0; box-shadow: none; padding: 0 4px;
+  color: #fffef4; font-weight: 900; line-height: 1.18;
+  font-size: clamp(24px,7vw,33px); text-wrap: balance;
+  text-shadow: 0 2px 0 #205275,0 3px 0 #205275,0 4px 8px #15446466;
+}
+[data-presentation=server-casual-v4] .overlay p {
+  max-width: 355px; width: 100%; color: #34556a; background: #fffef4ee;
+  font-size: 13px; line-height: 1.6; border: 1px solid #fffdf6;
+  padding: 10px 14px; box-shadow: 0 3px 0 #69988844; border-radius: 16px;
+}
+[data-presentation=server-casual-v4] .primary {
+  min-height: 52px; min-width: 210px; padding: 12px 24px; border-radius: 18px;
+  border: 2px solid #fff0a7; background: linear-gradient(#ffce54 0%,#ffb32f 54%,#fa9e21 100%);
+  box-shadow: inset 0 2px 0 #ffedac,0 5px 0 #c7791e,0 8px 10px #236d653d;
+  color: #fff; font-size: 17px; font-weight: 850; text-shadow: 0 2px #bc731c;
+}
+[data-presentation=server-casual-v4] .primary:active { transform: translateY(3px); box-shadow: inset 0 2px #ffedac,0 2px 0 #c7791e; }
+[data-presentation=server-casual-v4] .game-playfield {
+  height: calc(100% - 54px); justify-content: safe flex-end; padding: 4px 13px 17px;
+  gap: 10px; overflow-y: auto; overscroll-behavior: contain;
+}
+[data-presentation=server-casual-v4] .game-playfield > * { flex-shrink: 0; }
+[data-presentation=server-casual-v4] .game-hud {
+  align-items: center; min-height: 42px; border-radius: 20px;
+  color: #264d65; background: linear-gradient(#fffffc,#edf9f2);
+  border: 2px solid #fffdeb; padding: 5px 10px;
+  box-shadow: 0 4px 0 #649fac88,0 6px 12px #21566424;
+}
+[data-presentation=server-casual-v4] .health-meter { display: flex; align-items: center; gap: 5px; }
+[data-presentation=server-casual-v4] .health-meter .sprite { width: 28px; height: 28px; }
+[data-presentation=server-casual-v4] .game-hud em {
+  color: white; min-width: 55px; text-align: center; padding: 5px 9px;
+  background: #3499c4; border-radius: 14px; box-shadow: inset 0 2px #74c3dc;
+}
+[data-presentation=server-casual-v4] .scene-actors { flex: 1 0 104px; min-height: 104px; padding-top: 3px; }
+[data-presentation=server-casual-v4] .scene-actors .sprite { width: clamp(90px,31vw,154px); height: clamp(100px,32vw,162px); }
+[data-presentation=server-casual-v4] .scene-actors .sprite.center { width: 66px; height: 66px; align-self: flex-end; margin-bottom: 24px; }
+[data-presentation=server-casual-v4] .dialogue {
+  background: linear-gradient(#fffefb,#fff9e9); border: 2px solid #fffefa;
+  color: #254960; border-radius: 20px; padding: 13px 15px;
+  box-shadow: 0 4px 0 #6a999b7d,0 6px 14px #34577022;
+}
+[data-presentation=server-casual-v4] .dialogue h2 { font-size: 18px; margin-bottom: 6px; color: #204865; }
+[data-presentation=server-casual-v4] .dialogue p { font-size: 13px; line-height: 1.55; color: #536d78; }
+[data-presentation=server-casual-v4] .choice {
+  min-height: 100px; border: 2px solid #fffef6; border-radius: 18px;
+  background: linear-gradient(#fffefb,#e7f6f4); color: #244c62; gap: 3px;
+  box-shadow: inset 0 2px white,0 4px 0 #679da9,0 6px 8px #39686633;
+  font-size: 13px; padding: 6px 8px 10px; font-weight: 800;
+}
+[data-presentation=server-casual-v4] .choice .sprite { width: 57px; height: 57px; }
+[data-presentation=server-casual-v4] .choice:disabled { opacity: .82; }
+[data-presentation=server-casual-v4] .choice.correct { background: linear-gradient(#edffd6,#c6efa8); border-color: #fffdd3; opacity: 1; box-shadow: 0 4px #6cb04d; }
+[data-presentation=server-casual-v4] .choice.wrong { background: linear-gradient(#fff4e8,#ffccb9); border-color: #ffede4; opacity: 1; box-shadow: 0 4px #dc9073; }
+[data-presentation=server-casual-v4] .game-choices[data-count="4"] .choice { min-height: 79px; }
+[data-presentation=server-casual-v4] .game-choices[data-count="4"] .sprite { width: 38px; height: 38px; }
+[data-presentation=server-casual-v4] .game-playfield > .primary { align-self: center; }
+[data-presentation=server-casual-v4] .overlay[data-screen=pause],
+[data-presentation=server-casual-v4] .overlay[data-screen=result] {
+  background: #24486588; backdrop-filter: blur(5px); justify-content: center;
+}
+[data-presentation=server-casual-v4] .overlay-actions { width: 100%; max-width: 340px; }
+[data-presentation=server-casual-v4] .overlay-actions .primary { width: 100%; }
+[data-presentation=server-casual-v4] .secondary {
+  min-height: 44px; display: inline-flex; align-items: center; justify-content: center;
+  background: linear-gradient(#fdfef8,#e4f3f5); color: #244c62; border: 2px solid white;
+  font-weight: 750; box-shadow: 0 3px #588395;
+}
+[data-presentation=server-casual-v4][data-game-mode=memory] { background: #846399; }
+[data-presentation=server-casual-v4][data-game-mode=memory] .game-hud em { background: #9971bd; }
+[data-presentation=server-casual-v4] .memory-grid { gap: 10px; max-height: 68%; margin: auto 0; padding: 5px 0; }
+[data-presentation=server-casual-v4] .memory-card {
+  aspect-ratio: .84; border: 3px solid #fff4c5; background: linear-gradient(#fffef9,#fae9bb);
+  box-shadow: inset 0 2px white,0 4px #745e82,0 5px 9px #42225c40; border-radius: 15px;
+}
+[data-presentation=server-casual-v4] .memory-card[data-face=down] { background: linear-gradient(#7bcbed,#397bc2); border-color: #e1edff; }
+[data-presentation=server-casual-v4] .memory-card[data-face=down] .sprite { width: 70%; height: 70%; }
+[data-presentation=server-casual-v4] .memory-card[data-face=matched] { background: #d8f6c0; border-color: #f6ffc6; box-shadow: 0 3px #72aa69; }
+[data-presentation=server-casual-v4] .feedback { border: 2px solid #fffced; box-shadow: 0 3px #75578466; }
+@media (max-height: 570px) {
+  [data-presentation=server-casual-v4] .overlay { padding: 8px 17px 14px; gap: 8px; }
+  [data-presentation=server-casual-v4] .overlay .intro-hero { width: 134px; height: 143px; }
+  [data-presentation=server-casual-v4] .overlay h1 { font-size: 24px; }
+  [data-presentation=server-casual-v4] .game-playfield { gap: 8px; padding-bottom: 13px; }
+  [data-presentation=server-casual-v4] .scene-actors { flex-basis: 77px; min-height: 77px; }
+  [data-presentation=server-casual-v4] .scene-actors .sprite { width: 85px; height: 90px; }
+  [data-presentation=server-casual-v4] .scene-actors .sprite.center { width: 50px; height: 50px; margin-bottom: 12px; }
+  [data-presentation=server-casual-v4] .dialogue { padding: 10px 12px; }
+  [data-presentation=server-casual-v4] .choice { min-height: 85px; font-size: 12px; }
+  [data-presentation=server-casual-v4] .choice .sprite { width: 45px; height: 45px; }
+  [data-presentation=server-casual-v4] .memory-grid { gap: 7px; }
+}

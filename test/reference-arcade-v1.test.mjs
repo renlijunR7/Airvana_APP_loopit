@@ -100,8 +100,8 @@ for(const key of newKeys)test(key+': all 3 actual models mount, render, pause wi
 test('homepage and discovery pin all eight before physics and server content without destroying saved counters',()=>{
  const {window,game}=setup(),seeded=Array.from(window.AirvanaPhysicsGames.sessions());
  const start=indexSource.indexOf('    const discoverableSessions = s.sessions.map(withGameCover)'),end=indexSource.indexOf('    const safePlayIdx',start);
- const feed=new Function('s','withGameCover',indexSource.slice(start,end)+'\nreturn publishedSessions;');
- const result=feed({sessions:[...seeded].reverse(),serverDiscoverItems:[{id:'one',title:'User game'}]},x=>x);
+ const feed=new Function('s','withGameCover','coverKeyForTheme',indexSource.slice(start,end)+'\nreturn publishedSessions;');
+ const result=feed({sessions:[...seeded].reverse(),serverDiscoverItems:[{id:'one',title:'User game'}]},x=>x,()=> 'creator');
  assert.deepEqual(result.slice(0,13).map(x=>x.id),[111,112,113,114,115,116,117,118,101,102,103,104,105]);assert.equal(result[13].serverArtifact,true);
  const a=indexSource.indexOf('        const seededSessions = Array.isArray(this.state.sessions)'),b=indexSource.indexOf('        const profileAvatar',a),restore=new Function('restored',indexSource.slice(a,b)+'\nreturn sessions;');
  const restored=restore.call({state:{sessions:seeded}},{sessions:[{id:111,game:'Old title',likes:42,comments:2},{id:'mine',game:'Unrelated user game'}]});

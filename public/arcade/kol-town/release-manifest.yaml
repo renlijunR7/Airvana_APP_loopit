@@ -1,0 +1,175 @@
+artifact: kol-town-interactive-game
+build_id: kol-town-experience-v0.16.1-20260916
+version: 0.16.1
+contract_version: 0.10.0
+playable_config_version: 0.16.1
+status: NOT_RELEASED
+environment: LOCAL_STATIC_DEMO
+design_source:
+  provider: Claude Design
+  project_title: KOL主题街区互动游戏
+  project_id: 99a17deb-7444-4612-9c03-4261c4c9ec3f
+entrypoint: index.html
+runtime:
+  type: browser_static_h5
+  external_runtime_dependencies: false
+  remote_requests: false
+  same_origin_api: false
+  optional_static_host: server.py
+  dormant_server_database: data/kol-town.db
+  local_storage: true
+controls:
+  server_kill_switch: "python3 server.py --set-kill-switch on|off"
+  query_kill_switch: "?disabled=1"
+  storage_kill_switch: "kol_town_kill_switch=1"
+  cta_state: DISABLED_PENDING_APPROVAL
+  reward_mode: BROWSER_LOCAL_NO_VALUE_DEMO_CARDS
+  airdrop_collectible_mode: BROWSER_LOCAL_NO_VALUE_NOT_A_REWARD
+  brand_campaign_mode: FICTIONAL_EXCHANGE_GROWTH_SANDBOX_ONLY
+  brand_settlement_mode: LOCAL_PROOF_AND_SIMULATED_NO_VALUE_REVENUE_ONLY
+  external_kpi_confirmation: NOT_INTEGRATED_ALWAYS_ZERO
+  kol_chat_mode: LOCAL_RULES_NO_REMOTE_MODEL
+  chat_raw_text_retained: false
+  live2d_runtime: BUNDLED_CUBISM_SDK_FOR_WEB_5_R_5
+  live2d_model: OFFICIAL_SAMPLE_MAO_NOT_LUNA
+  live2d_remote_requests: false
+local_closure:
+  guest_session: VERIFIED_BROWSER_LOCAL
+  alias_pin_registration: BROWSER_ALIAS_ONLY_NOT_PRODUCTION_AUTH
+  login_logout_delete: BROWSER_LOCAL_ONLY
+  server_progress: RETAINED_SERVER_CODE_NOT_ACTIVE_IN_STATIC_FRONTEND
+  event_persistence: BROWSER_MEMORY_ONLY
+  invite_attribution: BROWSER_QUERY_LOCAL_ONLY
+  leaderboard: DETERMINISTIC_LOCAL_DEMO
+  reward_validation: BROWSER_LOCAL_NO_VALUE_ONLY
+  kol_ai_avatar_chat: VERIFIED_LOCAL_RULES
+  chat_progress_context: VERIFIED
+  chat_safety_boundaries: VERIFIED
+  chat_raw_text_non_persistence: VERIFIED
+  product_contained_dialog_layer: VERIFIED
+  live2d_moc3_first_frame: VERIFIED_LOCAL_TRUE_CUBISM
+  live2d_listening_thinking_speaking_greet: VERIFIED_LOCAL
+  authored_visual_system: VERIFIED_LOCAL
+  high_fidelity_avatar_materials: VERIFIED_LOCAL
+  ai_scene_art_removed_from_runtime_css: VERIFIED_LOCAL
+  garden_town_map_with_interactive_overlays: RETAINED_ROLLBACK_NOT_RUNTIME
+  citybuilder_reference_map_with_eight_interactive_hotspots: VERIFIED_LOCAL
+  eight_enterable_layered_25d_interior_scenes: VERIFIED_CHROMIUM_LOCAL
+  interior_tap_dpad_keyboard_navigation: VERIFIED_CHROMIUM_WEBKIT_LOCAL
+  interior_player_depth_and_facing: VERIFIED_CHROMIUM_WEBKIT_LOCAL
+  interior_scene_three_hotspots_each: VERIFIED_LOCAL
+  interior_task_upgrade_and_return_paths: VERIFIED_LOCAL
+  professional_ranking_layout: VERIFIED_LOCAL
+  ranking_portrait_assets: VERIFIED_LOCAL
+  non_overlapping_player_rank_card: VERIFIED_LOCAL
+  expanded_avatar_wardrobe_24_items: VERIFIED_LOCAL
+  wardrobe_presets_and_persistence: VERIFIED_LOCAL
+  avatar_visual_composite_sync: REMOVED_FROM_RUNTIME_V0_10_0
+  curated_complete_looks_9: VERIFIED_LOCAL
+  item_selection_auto_coordinates_complete_look: VERIFIED_LOCAL
+  user_saved_mint_mayor_crystal_complete_portrait: VERIFIED_LOCAL
+  exchange_growth_campaigns_6: VERIFIED_LOCAL
+  lifecycle_stage_filters_5: VERIFIED_LOCAL
+  one_primary_kpi_per_campaign: VERIFIED_LOCAL
+  single_active_brand_campaign_guard: VERIFIED_LOCAL
+  three_decision_scenario_missions: VERIFIED_LOCAL
+  wrong_answer_retry_without_penalty: VERIFIED_LOCAL
+  local_proof_gated_acceptance: VERIFIED_LOCAL
+  local_and_external_evidence_separation: VERIFIED_LOCAL
+  external_kpi_count_fail_closed_zero: VERIFIED_LOCAL
+  separate_business_revenue_reputation_and_ledger: VERIFIED_LOCAL
+  growth_campaign_persistence: VERIFIED_LOCAL
+  exchange_growth_generated_scene_asset: RETAINED_ROLLBACK_NOT_RUNTIME
+  authored_exchange_growth_campus: VERIFIED_CHROMIUM_LOCAL
+  runtime_avif_webp_png_fallbacks: VERIFIED_CHROMIUM_WEBKIT_LOCAL
+  campaign_aware_local_chat: VERIFIED_CHROMIUM_LOCAL
+  contract_locked_field_refusal: VERIFIED_CHROMIUM_LOCAL
+  reduced_motion_and_forced_colors: VERIFIED_CHROMIUM_LOCAL
+  semantic_labels_and_live_regions: VERIFIED_BROWSER_ACCESSIBILITY_TREE
+  dialog_focus_return: VERIFIED_CHROMIUM_LOCAL
+  safe_area_and_viewport_containment: VERIFIED_CHROMIUM_WEBKIT_LOCAL
+  weak_network_1_6_mbps_4x_cpu: VERIFIED_CHROMIUM_SYNTHETIC_4_34_SECONDS
+  android_pixel_touch_emulation: VERIFIED_CHROMIUM_ANDROID_EMULATION
+  webkit_mobile_compatibility: VERIFIED_WEBKIT_EMULATION
+  growth_center_interior_visual_consistency: VERIFIED_CHROMIUM_LOCAL
+  growth_center_interior_avif_delivery: VERIFIED_CHROMIUM_LOCAL
+  volumetric_cloud_layer: VERIFIED_CHROMIUM_LOCAL
+  outdoor_road_graph_current_map_alignment: VERIFIED_CHROMIUM_LOCAL
+  full_body_luna_walk_cycle: VERIFIED_CHROMIUM_LOCAL
+  depth_aware_npc_walk_cycle: VERIFIED_CHROMIUM_LOCAL
+  huobi_theme_plane_three_drop_event: VERIFIED_CHROMIUM_LOCAL
+  huobi_theme_plane_forward_orientation: VERIFIED_CHROMIUM_LOCAL
+  huobi_ht_icon_coin_face_integration: VERIFIED_CHROMIUM_LOCAL_DEMO_BRAND_REVIEW_PENDING
+  airdrop_collectible_touch_claim_and_persistence: VERIFIED_CHROMIUM_LOCAL
+  airdrop_collectible_reward_event_exclusion: VERIFIED_EVENT_LOG
+  airdrop_token_to_wallet_motion: VERIFIED_CHROMIUM_LOCAL
+  airdrop_virtual_brick_credit_and_ledger: VERIFIED_BROWSER_STATE_AND_LEDGER
+  outdoor_actor_road_collision_fail_closed: VERIFIED_ROUTE_SAMPLING
+  all_eight_building_routes_sampled_safe: VERIFIED_ROUTE_SAMPLING
+  player_direction_and_face_alignment: VERIFIED_CHROMIUM_LOCAL
+  directional_face_turn_v0_16_1: PENDING_BROWSER_QA
+  circular_player_marker_without_rectangular_card: VERIFIED_CHROMIUM_LOCAL
+  second_row_avatar_full_head_crop: VERIFIED_CHROMIUM_LOCAL
+  five_stage_resident_task_growth: VERIFIED_BROWSER_ACCESSIBILITY_TREE
+  player_and_kol_identity_separation: VERIFIED_CHROMIUM_LOCAL
+  player_avatar_persistence_without_kol_mutation: VERIFIED_CHROMIUM_LOCAL
+  fixed_kol_and_movable_player_map_roles: VERIFIED_CHROMIUM_LOCAL
+  named_resident_npc_identity_labels: VERIFIED_CHROMIUM_LOCAL
+  read_only_kol_profile_and_campaign_context: VERIFIED_CHROMIUM_LOCAL
+  explicit_ai_twin_identity_disclosure: VERIFIED_BROWSER_ACCESSIBILITY_TREE
+  draggable_expanded_town_canvas: VERIFIED_CHROMIUM_LOCAL
+  expanded_building_spacing_176_percent: VERIFIED_CHROMIUM_LOCAL
+  drag_click_suppression: VERIFIED_CHROMIUM_LOCAL
+  map_pan_bounds_and_recenter: VERIFIED_CHROMIUM_LOCAL
+  keyboard_map_pan_and_home_reset: VERIFIED_BROWSER_ACCESSIBILITY_TREE
+release_gates:
+  brand_authorization: PENDING
+  legal_review: PENDING
+  production_cta: PENDING
+  production_rewards: PENDING
+  huobi_brand_authorization: PENDING
+  production_airdrop_collectible_copy_review: PENDING
+  external_registration_and_identity: PENDING
+  remote_analytics_endpoint: PENDING
+  remote_model_and_production_moderation: PENDING
+  authorized_luna_live2d_model_and_production_license: PENDING
+  production_hosting_tls_secrets_backup_monitoring: PENDING
+  release_owner: PENDING
+  real_brand_marketplace: NOT_IMPLEMENTED
+  real_campaign_entitlements: NOT_IMPLEMENTED
+  real_commercial_settlement: NOT_IMPLEMENTED
+  app_store_or_attribution_install_callback: NOT_IMPLEMENTED
+  exchange_registration_callback: NOT_IMPLEMENTED
+  exchange_first_deposit_callback: NOT_IMPLEMENTED
+  exchange_first_spot_trade_callback: NOT_IMPLEMENTED
+  exchange_d7_and_reactivation_callback: NOT_IMPLEMENTED
+  external_identity_stitching_dedup_and_fraud_controls: NOT_IMPLEMENTED
+  deposit_trade_marketing_legal_compliance_risk_approval: PENDING
+  real_ios_safari_device_qa: PENDING
+  real_android_device_qa: PENDING
+  physical_screen_reader_qa: PENDING
+rollback:
+  target: release-manifest.v0.1.0.yaml
+  action: Enable the SQLite kill switch, stop server.py, and restore the v0.1.0 static artifact.
+  data_note: Current progress can be reset in settings; account deletion removes the local account, progress, invite binding and demo-card claims.
+verified_viewports:
+  - 390x844-v0.16.1-chromium
+  - 360x800-v0.16.1-chromium
+  - 390x844-v0.16.0-chromium
+  - 360x800-v0.16.0-chromium
+  - 390x844-v0.15.1-chromium
+  - 360x800-v0.15.1-chromium
+  - 390x844-v0.15.0-chromium
+  - 360x800-v0.15.0-chromium
+  - 390x844-v0.14.0-chromium
+  - 360x800-v0.14.0-chromium
+  - 390x844-v0.13.1-chromium
+  - 360x800-v0.13.1-chromium
+  - 390x844-v0.13.0-chromium
+  - 360x800-v0.13.0-chromium
+  - 390x844-v0.12.2-chromium
+  - 360x800-v0.12.1-chromium
+  - 390x844-v0.12.1-chromium
+  - 430x932-v0.12.1-chromium
+  - 402x681-v0.12.1-webkit-mobile-emulation
+  - 360x732-v0.12.1-android-pixel-emulation

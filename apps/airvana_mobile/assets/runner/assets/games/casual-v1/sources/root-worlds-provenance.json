@@ -1,0 +1,98 @@
+[
+  {
+    "key": "firefly-mail",
+    "generated_path": "/Users/lijunren/.codex/generated_images/01a07126-4660-7831-aa40-45f89ef45d73/exec-ddacea4d-d8c1-4b13-ad95-46ee48ed9050.png",
+    "project_path": "public/assets/games/casual-v1/environments/firefly-mail.png",
+    "prompt": "public/assets/games/casual-v1/sources/firefly-mail.prompt.txt",
+    "reference_role": "style only",
+    "source": "built-in ImageGen"
+  },
+  {
+    "key": "adventurer-journal",
+    "generated_path": "/Users/lijunren/.codex/generated_images/01a07126-4660-7831-aa40-45f89ef45d73/exec-a40c1527-6e33-48f7-9439-74d96e6e1cb9.png",
+    "project_path": "public/assets/games/casual-v1/environments/adventurer-journal.png",
+    "prompt": "public/assets/games/casual-v1/sources/adventurer-journal.prompt.txt",
+    "reference_role": "style only",
+    "source": "built-in ImageGen"
+  },
+  {
+    "key": "idiom-detective",
+    "generated_path": "/Users/lijunren/.codex/generated_images/01a07126-4660-7831-aa40-45f89ef45d73/exec-5a4af1ba-d564-4329-a649-2bf834812f45.png",
+    "project_path": "public/assets/games/casual-v1/environments/idiom-detective.png",
+    "prompt": "public/assets/games/casual-v1/sources/idiom-detective.prompt.txt",
+    "reference_role": "style only",
+    "source": "built-in ImageGen"
+  },
+  {
+    "key": "whisker-escape",
+    "generated_path": "/Users/lijunren/.codex/generated_images/01a07126-4660-7831-aa40-45f89ef45d73/exec-020a759d-a50e-46a0-869e-c693acd48006.png",
+    "project_path": "public/assets/games/casual-v1/environments/whisker-escape.png",
+    "prompt": "public/assets/games/casual-v1/sources/whisker-escape.prompt.txt",
+    "reference_role": "style only",
+    "source": "built-in ImageGen"
+  },
+  {
+    "key": "coin-journey",
+    "generated_path": "/Users/lijunren/.codex/generated_images/01a07126-4660-7831-aa40-45f89ef45d73/exec-b17f32eb-c180-4303-beea-7f08f3f6cbd3.png",
+    "project_path": "public/assets/games/casual-v1/environments/coin-journey.png",
+    "prompt": "public/assets/games/casual-v1/sources/coin-journey.prompt.txt",
+    "reference_role": "style only",
+    "source": "built-in ImageGen"
+  },
+  {
+    "key": "prism-match",
+    "generated_path": "/Users/lijunren/.codex/generated_images/01a07126-4660-7831-aa40-45f89ef45d73/exec-94a3058a-18f3-4ba3-8a53-622f9d9193d4.png",
+    "project_path": "public/assets/games/casual-v1/environments/prism-match.png",
+    "prompt": "public/assets/games/casual-v1/sources/prism-match.prompt.txt",
+    "reference_role": "style only",
+    "source": "built-in ImageGen"
+  },
+  {
+    "key": "jungle-dive",
+    "generated_path": "/Users/lijunren/.codex/generated_images/01a07126-4660-7831-aa40-45f89ef45d73/exec-056c1559-35b9-4244-8ae1-c070fd655a03.png",
+    "project_path": "public/assets/games/casual-v1/environments/jungle-dive.png",
+    "prompt": "public/assets/games/casual-v1/sources/jungle-dive.prompt.txt",
+    "reference_role": "style only",
+    "source": "built-in ImageGen"
+  },
+  {
+    "key": "deep-catch",
+    "generated_path": "/Users/lijunren/.codex/generated_images/01a07126-4660-7831-aa40-45f89ef45d73/exec-15035891-477f-4770-a47b-be6b38984e15.png",
+    "project_path": "public/assets/games/casual-v1/environments/deep-catch.png",
+    "prompt": "public/assets/games/casual-v1/sources/deep-catch.prompt.txt",
+    "reference_role": "style only",
+    "source": "built-in ImageGen"
+  },
+  {
+    "key": "microbe-arena",
+    "generated_path": "/Users/lijunren/.codex/generated_images/01a07126-4660-7831-aa40-45f89ef45d73/exec-39602d79-b028-444c-9a1c-aaf372caec53.png",
+    "project_path": "public/assets/games/casual-v1/environments/microbe-arena.png",
+    "prompt": "public/assets/games/casual-v1/sources/microbe-arena.prompt.txt",
+    "reference_role": "style only",
+    "source": "built-in ImageGen"
+  },
+  {
+    "key": "rift-strike",
+    "generated_path": "/Users/lijunren/.codex/generated_images/01a07126-4660-7831-aa40-45f89ef45d73/exec-7eee4763-4e18-4557-b452-b7405ed8ff07.png",
+    "project_path": "public/assets/games/casual-v1/environments/rift-strike.png",
+    "prompt": "public/assets/games/casual-v1/sources/rift-strike.prompt.txt",
+    "reference_role": "style only",
+    "source": "built-in ImageGen"
+  },
+  {
+    "key": "void-squadron",
+    "generated_path": "/Users/lijunren/.codex/generated_images/01a07126-4660-7831-aa40-45f89ef45d73/exec-5c0e4937-c268-451b-8867-7b5192bd2ce8.png",
+    "project_path": "public/assets/games/casual-v1/environments/void-squadron.png",
+    "prompt": "public/assets/games/casual-v1/sources/void-squadron.prompt.txt",
+    "reference_role": "style only",
+    "source": "built-in ImageGen"
+  },
+  {
+    "key": "star-mower",
+    "generated_path": "/Users/lijunren/.codex/generated_images/01a07126-4660-7831-aa40-45f89ef45d73/exec-483244f5-c1b4-460c-9847-2f1ca7479ab0.png",
+    "project_path": "public/assets/games/casual-v1/environments/star-mower.png",
+    "prompt": "public/assets/games/casual-v1/sources/star-mower.prompt.txt",
+    "reference_role": "style only",
+    "source": "built-in ImageGen"
+  }
+]

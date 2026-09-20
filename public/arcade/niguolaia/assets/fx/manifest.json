@@ -1,0 +1,4128 @@
+{
+  "version": 1,
+  "source": "http://game.zhongyigames.com/niguolaia/",
+  "coordinateConvention": "Full originalSize canvas, center anchor [0.5,0.5], offset restored from Cocos trim metadata; images are not resized.",
+  "projectiles": {
+    "arrow-1": {
+      "file": "arrow-1.png",
+      "width": 150,
+      "height": 150,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "trimBox": [
+        33,
+        63,
+        123,
+        86
+      ],
+      "originalSpriteFrame": "1",
+      "originalBulletId": 1,
+      "originalIconScale": 0.45,
+      "originalIconBaseScale": 0.27,
+      "originalConfig": {
+        "id": 1,
+        "icon": "1",
+        "iconBaseScale": 2700,
+        "iconScale": 4500,
+        "aimingPoint": 1,
+        "isHitFly": 1,
+        "isLightningChain": 0,
+        "isFollow": 0,
+        "isRoleBelow": 0,
+        "rotationAngle": 1,
+        "orbit": "FFFFFF50",
+        "hitSpin": "0",
+        "roleHitSpin": "tower_bullet_hit",
+        "isPenetrate": 0,
+        "isGyration": 0,
+        "isBoom": 0,
+        "boomHeight": 0,
+        "boomSpin": "tower_bullet01_1_hit",
+        "boomSpinScale": 5000.0,
+        "AnimationName": "tower_bullet01_1_hit",
+        "isAOE": 0,
+        "boomTime": 0,
+        "damageRadius": 30,
+        "damageAngle": 360,
+        "high": 40,
+        "speed": 400,
+        "time": 300,
+        "orbitWidth": 8,
+        "isRotate": 1,
+        "isFlyRotate": 1,
+        "shotAudio": "tower_arrow_attack_one",
+        "bulletAudio": "enemy_attacked",
+        "isShock": 0,
+        "isDestruction": 1
+      },
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "referenceRenderSize": [
+        40.5,
+        40.5
+      ],
+      "referencePeakRenderSize": [
+        67.5,
+        67.5
+      ],
+      "orientation": "right",
+      "scaleBehavior": "GameBullet sets bulletMoveNode.scale=iconBaseScale/10000 and can scale to iconScale/10000 over 0.2 s during flight."
+    },
+    "arrow-2": {
+      "file": "arrow-2.png",
+      "width": 150,
+      "height": 150,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "trimBox": [
+        29,
+        66,
+        133,
+        84
+      ],
+      "originalSpriteFrame": "1_1",
+      "originalBulletId": 2,
+      "originalIconScale": 0.48,
+      "originalIconBaseScale": 0.288,
+      "originalConfig": {
+        "id": 2,
+        "icon": "1_1",
+        "iconBaseScale": 2880,
+        "iconScale": 4800,
+        "aimingPoint": 1,
+        "isHitFly": 1,
+        "isLightningChain": 0,
+        "isFollow": 0,
+        "isRoleBelow": 0,
+        "rotationAngle": 1,
+        "orbit": "FFCA0C64",
+        "hitSpin": "0",
+        "roleHitSpin": "tower_bullet_hit",
+        "isPenetrate": 0,
+        "isGyration": 0,
+        "isBoom": 0,
+        "boomHeight": 0,
+        "boomSpin": "tower_bullet01_2_hit",
+        "boomSpinScale": 5000.0,
+        "AnimationName": "tower_bullet01_1_hit",
+        "isAOE": 0,
+        "boomTime": 0,
+        "damageRadius": 30,
+        "damageAngle": 360,
+        "high": 40,
+        "speed": 400,
+        "time": 300,
+        "orbitWidth": 8,
+        "isRotate": 1,
+        "isFlyRotate": 1,
+        "shotAudio": "tower_arrow_attack_one",
+        "bulletAudio": "enemy_attacked",
+        "isShock": 0,
+        "isDestruction": 1
+      },
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "referenceRenderSize": [
+        43.199999999999996,
+        43.199999999999996
+      ],
+      "referencePeakRenderSize": [
+        72.0,
+        72.0
+      ],
+      "orientation": "right",
+      "scaleBehavior": "GameBullet sets bulletMoveNode.scale=iconBaseScale/10000 and can scale to iconScale/10000 over 0.2 s during flight."
+    },
+    "arrow-3": {
+      "file": "arrow-3.png",
+      "width": 150,
+      "height": 150,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "trimBox": [
+        16,
+        66,
+        133,
+        86
+      ],
+      "originalSpriteFrame": "1_2",
+      "originalBulletId": 3,
+      "originalIconScale": 0.42,
+      "originalIconBaseScale": 0.252,
+      "originalConfig": {
+        "id": 3,
+        "icon": "1_2",
+        "iconBaseScale": 2520,
+        "iconScale": 4200,
+        "aimingPoint": 1,
+        "isHitFly": 1,
+        "isLightningChain": 0,
+        "isFollow": 0,
+        "isRoleBelow": 0,
+        "rotationAngle": 1,
+        "orbit": "FF25FB64",
+        "hitSpin": "0",
+        "roleHitSpin": "tower_bullet_hit",
+        "isPenetrate": 0,
+        "isGyration": 0,
+        "isBoom": 0,
+        "boomHeight": 0,
+        "boomSpin": "tower_bullet01_2_hit",
+        "boomSpinScale": 5000.0,
+        "AnimationName": "tower_bullet01_1_hit",
+        "isAOE": 0,
+        "boomTime": 0,
+        "damageRadius": 30,
+        "damageAngle": 360,
+        "high": 40,
+        "speed": 400,
+        "time": 300,
+        "orbitWidth": 8,
+        "isRotate": 1,
+        "isFlyRotate": 1,
+        "shotAudio": "tower_arrow_attack_one",
+        "bulletAudio": "enemy_attacked",
+        "isShock": 0,
+        "isDestruction": 1
+      },
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "referenceRenderSize": [
+        37.8,
+        37.8
+      ],
+      "referencePeakRenderSize": [
+        63.0,
+        63.0
+      ],
+      "orientation": "right",
+      "scaleBehavior": "GameBullet sets bulletMoveNode.scale=iconBaseScale/10000 and can scale to iconScale/10000 over 0.2 s during flight."
+    },
+    "cannon-1": {
+      "file": "cannon-1.png",
+      "width": 60,
+      "height": 60,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "trimBox": [
+        11,
+        7,
+        49,
+        52
+      ],
+      "originalSpriteFrame": "3",
+      "originalBulletId": 4,
+      "originalIconScale": 0.7,
+      "originalIconBaseScale": 0.7,
+      "originalConfig": {
+        "id": 4,
+        "icon": "3",
+        "iconBaseScale": 7000.0,
+        "iconScale": 7000.0,
+        "aimingPoint": 2,
+        "isHitFly": 1,
+        "isLightningChain": 0,
+        "isFollow": 0,
+        "isRoleBelow": 0,
+        "rotationAngle": 1,
+        "orbit": "8.7878764E7",
+        "cartoon": "bullet_Rotation",
+        "hitSpin": "1",
+        "roleHitSpin": "tower_bullet_hit",
+        "isPenetrate": 0,
+        "isGyration": 0,
+        "isBoom": 0,
+        "boomHeight": 0,
+        "boomSpin": "tower_bullet03_hit",
+        "boomSpinScale": 9000.0,
+        "AnimationName": "tower_bullet03_hit",
+        "isAOE": 1,
+        "boomTime": 100,
+        "damageRadius": 55,
+        "damageAngle": 360,
+        "high": 80,
+        "speed": 600,
+        "time": 300,
+        "orbitWidth": 20,
+        "isRotate": 0,
+        "isFlyRotate": 1,
+        "shotAudio": "tower_mage_attack_one",
+        "bulletAudio": "tower_bullet_bomb",
+        "isShock": 0,
+        "burrowDamageCoefficient": 3000.0,
+        "isDestruction": 1
+      },
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "referenceRenderSize": [
+        42.0,
+        42.0
+      ],
+      "referencePeakRenderSize": [
+        42.0,
+        42.0
+      ],
+      "orientation": "upright",
+      "scaleBehavior": "GameBullet sets bulletMoveNode.scale=iconBaseScale/10000 and can scale to iconScale/10000 over 0.2 s during flight."
+    },
+    "cannon-2": {
+      "file": "cannon-2.png",
+      "width": 60,
+      "height": 60,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "trimBox": [
+        11,
+        9,
+        48,
+        53
+      ],
+      "originalSpriteFrame": "3_1",
+      "originalBulletId": 5,
+      "originalIconScale": 0.73,
+      "originalIconBaseScale": 0.73,
+      "originalConfig": {
+        "id": 5,
+        "icon": "3_1",
+        "iconBaseScale": 7300,
+        "iconScale": 7300,
+        "aimingPoint": 2,
+        "isHitFly": 1,
+        "isLightningChain": 0,
+        "isFollow": 0,
+        "isRoleBelow": 0,
+        "rotationAngle": 1,
+        "orbit": "8.7878764E7",
+        "cartoon": "bullet_Rotation",
+        "hitSpin": "1",
+        "roleHitSpin": "tower_bullet_hit",
+        "isPenetrate": 0,
+        "isGyration": 0,
+        "isBoom": 0,
+        "boomHeight": 0,
+        "boomSpin": "tower_bullet03_hit",
+        "boomSpinScale": 10000.0,
+        "AnimationName": "tower_bullet03_hit",
+        "isAOE": 1,
+        "boomTime": 100,
+        "damageRadius": 62,
+        "damageAngle": 360,
+        "high": 80,
+        "speed": 600,
+        "time": 300,
+        "orbitWidth": 20,
+        "isRotate": 0,
+        "isFlyRotate": 1,
+        "shotAudio": "tower_mage_attack_one",
+        "bulletAudio": "tower_bullet_bomb",
+        "isShock": 0,
+        "burrowDamageCoefficient": 3000.0,
+        "isDestruction": 1
+      },
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "referenceRenderSize": [
+        43.8,
+        43.8
+      ],
+      "referencePeakRenderSize": [
+        43.8,
+        43.8
+      ],
+      "orientation": "upright",
+      "scaleBehavior": "GameBullet sets bulletMoveNode.scale=iconBaseScale/10000 and can scale to iconScale/10000 over 0.2 s during flight."
+    },
+    "cannon-3": {
+      "file": "cannon-3.png",
+      "width": 60,
+      "height": 60,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "trimBox": [
+        11,
+        8,
+        49,
+        53
+      ],
+      "originalSpriteFrame": "3_2",
+      "originalBulletId": 6,
+      "originalIconScale": 0.76,
+      "originalIconBaseScale": 0.76,
+      "originalConfig": {
+        "id": 6,
+        "icon": "3_2",
+        "iconBaseScale": 7600,
+        "iconScale": 7600,
+        "aimingPoint": 2,
+        "isHitFly": 1,
+        "isLightningChain": 0,
+        "isFollow": 0,
+        "isRoleBelow": 0,
+        "rotationAngle": 1,
+        "orbit": "8.7878764E7",
+        "cartoon": "bullet_Rotation",
+        "hitSpin": "1",
+        "roleHitSpin": "tower_bullet_hit",
+        "isPenetrate": 0,
+        "isGyration": 0,
+        "isBoom": 0,
+        "boomHeight": 0,
+        "boomSpin": "tower_bullet03_hit",
+        "boomSpinScale": 11000.0,
+        "AnimationName": "tower_bullet03_hit",
+        "isAOE": 1,
+        "boomTime": 100,
+        "damageRadius": 68,
+        "damageAngle": 360,
+        "high": 80,
+        "speed": 600,
+        "time": 300,
+        "orbitWidth": 20,
+        "isRotate": 0,
+        "isFlyRotate": 1,
+        "shotAudio": "tower_mage_attack_one",
+        "bulletAudio": "tower_bullet_bomb",
+        "isShock": 0,
+        "burrowDamageCoefficient": 3000.0,
+        "isDestruction": 1
+      },
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "referenceRenderSize": [
+        45.6,
+        45.6
+      ],
+      "referencePeakRenderSize": [
+        45.6,
+        45.6
+      ],
+      "orientation": "upright",
+      "scaleBehavior": "GameBullet sets bulletMoveNode.scale=iconBaseScale/10000 and can scale to iconScale/10000 over 0.2 s during flight."
+    },
+    "magic-1": {
+      "file": "magic-1.png",
+      "width": 60,
+      "height": 60,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "trimBox": [
+        1,
+        1,
+        59,
+        59
+      ],
+      "originalSpriteFrame": "2",
+      "originalBulletId": 7,
+      "originalIconScale": 0.65,
+      "originalIconBaseScale": 0.65,
+      "originalConfig": {
+        "id": 7,
+        "icon": "2",
+        "iconBaseScale": 6500,
+        "iconScale": 6500,
+        "aimingPoint": 1,
+        "isHitFly": 1,
+        "isLightningChain": 0,
+        "isFollow": 0,
+        "isRoleBelow": 0,
+        "rotationAngle": 1,
+        "tail": "bullet18_tail",
+        "orbit": "72FFF164",
+        "hitSpin": "0",
+        "roleHitSpin": "tower_bullet02_hit",
+        "isPenetrate": 0,
+        "isGyration": 0,
+        "isBoom": 0,
+        "boomHeight": 0,
+        "boomSpinScale": 5000.0,
+        "isAOE": 0,
+        "boomTime": 0,
+        "damageRadius": 30,
+        "damageAngle": 360,
+        "high": 0,
+        "speed": 500,
+        "time": 300,
+        "orbitWidth": 20,
+        "isRotate": 0,
+        "isFlyRotate": 1,
+        "shotAudio": "tower_fire_attack_one",
+        "bulletAudio": "tower_bullet_magic",
+        "isShock": 0,
+        "isDestruction": 1
+      },
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "referenceRenderSize": [
+        39.0,
+        39.0
+      ],
+      "referencePeakRenderSize": [
+        39.0,
+        39.0
+      ],
+      "orientation": "upright",
+      "scaleBehavior": "GameBullet sets bulletMoveNode.scale=iconBaseScale/10000 and can scale to iconScale/10000 over 0.2 s during flight."
+    },
+    "magic-2": {
+      "file": "magic-2.png",
+      "width": 60,
+      "height": 60,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "trimBox": [
+        6,
+        6,
+        54,
+        54
+      ],
+      "originalSpriteFrame": "2_1",
+      "originalBulletId": 8,
+      "originalIconScale": 0.65,
+      "originalIconBaseScale": 0.65,
+      "originalConfig": {
+        "id": 8,
+        "icon": "2_1",
+        "iconBaseScale": 6500,
+        "iconScale": 6500,
+        "aimingPoint": 1,
+        "isHitFly": 1,
+        "isLightningChain": 0,
+        "isFollow": 0,
+        "isRoleBelow": 0,
+        "rotationAngle": 1,
+        "tail": "bullet18_tail",
+        "orbit": "FFC23364",
+        "hitSpin": "0",
+        "roleHitSpin": "tower_bullet02_1_hit",
+        "isPenetrate": 0,
+        "isGyration": 0,
+        "isBoom": 0,
+        "boomHeight": 0,
+        "boomSpinScale": 5000.0,
+        "isAOE": 0,
+        "boomTime": 0,
+        "damageRadius": 30,
+        "damageAngle": 360,
+        "high": 0,
+        "speed": 500,
+        "time": 300,
+        "orbitWidth": 20,
+        "isRotate": 0,
+        "isFlyRotate": 1,
+        "shotAudio": "tower_fire_attack_one",
+        "bulletAudio": "tower_bullet_magic",
+        "isShock": 0,
+        "isDestruction": 1
+      },
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "referenceRenderSize": [
+        39.0,
+        39.0
+      ],
+      "referencePeakRenderSize": [
+        39.0,
+        39.0
+      ],
+      "orientation": "upright",
+      "scaleBehavior": "GameBullet sets bulletMoveNode.scale=iconBaseScale/10000 and can scale to iconScale/10000 over 0.2 s during flight."
+    },
+    "magic-3": {
+      "file": "magic-3.png",
+      "width": 60,
+      "height": 60,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "trimBox": [
+        1,
+        1,
+        59,
+        59
+      ],
+      "originalSpriteFrame": "2_2",
+      "originalBulletId": 9,
+      "originalIconScale": 0.65,
+      "originalIconBaseScale": 0.65,
+      "originalConfig": {
+        "id": 9,
+        "icon": "2_2",
+        "iconBaseScale": 6500,
+        "iconScale": 6500,
+        "aimingPoint": 1,
+        "isHitFly": 1,
+        "isLightningChain": 0,
+        "isFollow": 0,
+        "isRoleBelow": 0,
+        "rotationAngle": 1,
+        "tail": "bullet18_tail",
+        "orbit": "FF432464",
+        "hitSpin": "0",
+        "roleHitSpin": "tower_bullet02_2_hit",
+        "isPenetrate": 0,
+        "isGyration": 0,
+        "isBoom": 0,
+        "boomHeight": 0,
+        "boomSpinScale": 5000.0,
+        "isAOE": 0,
+        "boomTime": 0,
+        "damageRadius": 30,
+        "damageAngle": 360,
+        "high": 0,
+        "speed": 500,
+        "time": 300,
+        "orbitWidth": 20,
+        "isRotate": 0,
+        "isFlyRotate": 1,
+        "shotAudio": "tower_fire_attack_one",
+        "bulletAudio": "tower_bullet_magic",
+        "isShock": 0,
+        "isDestruction": 1
+      },
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "referenceRenderSize": [
+        39.0,
+        39.0
+      ],
+      "referencePeakRenderSize": [
+        39.0,
+        39.0
+      ],
+      "orientation": "upright",
+      "scaleBehavior": "GameBullet sets bulletMoveNode.scale=iconBaseScale/10000 and can scale to iconScale/10000 over 0.2 s during flight."
+    }
+  },
+  "animations": {
+    "arrow-hit-strip": {
+      "file": "arrow-hit-strip.png",
+      "frameWidth": 90,
+      "frameHeight": 90,
+      "frames": 26,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "fps": 60.0,
+      "effectiveFps": 60.0,
+      "frameTimes": [
+        0,
+        0.016666666666666666,
+        0.03333333333333333,
+        0.05,
+        0.06666666666666667,
+        0.08333333333333333,
+        0.1,
+        0.11666666666666667,
+        0.13333333333333333,
+        0.15,
+        0.16666666666666666,
+        0.18333333333333332,
+        0.2,
+        0.21666666666666667,
+        0.23333333333333334,
+        0.25,
+        0.26666666666666666,
+        0.2833333333333333,
+        0.3,
+        0.31666666666666665,
+        0.3333333333333333,
+        0.35,
+        0.36666666666666664,
+        0.38333333333333336,
+        0.4,
+        0.4166666666666667
+      ],
+      "effectiveFrameTimes": [
+        0.0,
+        0.016666666666666666,
+        0.03333333333333333,
+        0.05,
+        0.06666666666666667,
+        0.08333333333333333,
+        0.1,
+        0.11666666666666667,
+        0.13333333333333333,
+        0.15,
+        0.16666666666666666,
+        0.18333333333333332,
+        0.2,
+        0.21666666666666667,
+        0.23333333333333334,
+        0.25,
+        0.26666666666666666,
+        0.2833333333333333,
+        0.3,
+        0.31666666666666665,
+        0.3333333333333333,
+        0.35,
+        0.36666666666666664,
+        0.38333333333333336,
+        0.4,
+        0.4166666666666667
+      ],
+      "duration": 0.43333333333333335,
+      "clipSpeed": 1,
+      "effectiveDuration": 0.43333333333333335,
+      "originalClip": "tower_bullet_hit",
+      "originalNodePath": "hit",
+      "originalNodeCurves": {},
+      "sequenceOnly": true,
+      "frameNames": [
+        "arrow_hit_00",
+        "arrow_hit_01",
+        "arrow_hit_02",
+        "arrow_hit_03",
+        "arrow_hit_04",
+        "arrow_hit_05",
+        "arrow_hit_06",
+        "arrow_hit_07",
+        "arrow_hit_08",
+        "arrow_hit_09",
+        "arrow_hit_10",
+        "arrow_hit_11",
+        "arrow_hit_12",
+        "arrow_hit_13",
+        "arrow_hit_14",
+        "arrow_hit_15",
+        "arrow_hit_16",
+        "arrow_hit_17",
+        "arrow_hit_18",
+        "arrow_hit_19",
+        "arrow_hit_20",
+        "arrow_hit_21",
+        "arrow_hit_22",
+        "arrow_hit_23",
+        "arrow_hit_24",
+        "arrow_hit_25"
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "referenceNode": {
+        "nodePath": "hit",
+        "positionCocos": [
+          0,
+          0
+        ],
+        "positionCanvas": [
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "contentSize": [
+          90,
+          90
+        ],
+        "referenceRenderSize": [
+          90,
+          90
+        ],
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "sizeMode": 2,
+        "isTrimmedMode": false,
+        "opacity": 255,
+        "color": {
+          "r": 255,
+          "g": 255,
+          "b": 255,
+          "a": 255
+        },
+        "blend": "source-over",
+        "spriteFrameUuid": "507l8l6O9HAZ2i4k/nW4d7"
+      },
+      "referenceRenderSize": [
+        90,
+        90
+      ],
+      "referenceInstances": [
+        {
+          "nodePath": "hit",
+          "positionCocos": [
+            0,
+            0
+          ],
+          "positionCanvas": [
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1
+          ],
+          "contentSize": [
+            90,
+            90
+          ],
+          "referenceRenderSize": [
+            90,
+            90
+          ],
+          "anchor": [
+            0.5,
+            0.5
+          ],
+          "sizeMode": 2,
+          "isTrimmedMode": false,
+          "opacity": 255,
+          "color": {
+            "r": 255,
+            "g": 255,
+            "b": 255,
+            "a": 255
+          },
+          "blend": "source-over",
+          "spriteFrameUuid": "507l8l6O9HAZ2i4k/nW4d7"
+        }
+      ],
+      "sequenceStart": 0,
+      "sequenceEnd": 0.4166666666666667,
+      "timingNote": "Frame times are absolute positions on original clip; clip duration includes other nodes/opacity holds. Do not stretch the frame sequence across the entire effect duration."
+    },
+    "cannon-hit-strip": {
+      "file": "cannon-hit-strip.png",
+      "frameWidth": 120,
+      "frameHeight": 160,
+      "frames": 18,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "fps": 60.0,
+      "effectiveFps": 18.0,
+      "frameTimes": [
+        0,
+        0.016666666666666666,
+        0.03333333333333333,
+        0.05,
+        0.06666666666666667,
+        0.08333333333333333,
+        0.1,
+        0.11666666666666667,
+        0.13333333333333333,
+        0.15,
+        0.16666666666666666,
+        0.18333333333333332,
+        0.2,
+        0.21666666666666667,
+        0.23333333333333334,
+        0.25,
+        0.26666666666666666,
+        0.2833333333333333
+      ],
+      "effectiveFrameTimes": [
+        0.0,
+        0.05555555555555556,
+        0.11111111111111112,
+        0.16666666666666669,
+        0.22222222222222224,
+        0.2777777777777778,
+        0.33333333333333337,
+        0.3888888888888889,
+        0.4444444444444445,
+        0.5,
+        0.5555555555555556,
+        0.611111111111111,
+        0.6666666666666667,
+        0.7222222222222223,
+        0.7777777777777778,
+        0.8333333333333334,
+        0.888888888888889,
+        0.9444444444444444
+      ],
+      "duration": 0.5833333333333334,
+      "clipSpeed": 0.3,
+      "effectiveDuration": 1.9444444444444446,
+      "originalClip": "tower_bullet03_hit",
+      "originalNodePath": "tnt_hit",
+      "originalNodeCurves": {
+        "opacity": [
+          {
+            "frame": 0.2833333333333333,
+            "value": 255
+          },
+          {
+            "frame": 0.3,
+            "value": 0
+          }
+        ]
+      },
+      "sequenceOnly": true,
+      "frameNames": [
+        "tnt_hit_00",
+        "tnt_hit_01",
+        "tnt_hit_02",
+        "tnt_hit_03",
+        "tnt_hit_04",
+        "tnt_hit_05",
+        "tnt_hit_06",
+        "tnt_hit_07",
+        "tnt_hit_08",
+        "tnt_hit_09",
+        "tnt_hit_10",
+        "tnt_hit_11",
+        "tnt_hit_12",
+        "tnt_hit_13",
+        "tnt_hit_14",
+        "tnt_hit_15",
+        "tnt_hit_16",
+        "tnt_hit_17"
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "referenceNode": {
+        "nodePath": "tnt_hit",
+        "positionCocos": [
+          0,
+          26.105
+        ],
+        "positionCanvas": [
+          0,
+          -26.105
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "contentSize": [
+          150,
+          200
+        ],
+        "referenceRenderSize": [
+          150,
+          200
+        ],
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "sizeMode": 0,
+        "isTrimmedMode": false,
+        "opacity": 255,
+        "color": {
+          "r": 255,
+          "g": 255,
+          "b": 255,
+          "a": 255
+        },
+        "blend": "source-over",
+        "spriteFrameUuid": "82eNGhWixCoZRnSZPlJPIK"
+      },
+      "referenceRenderSize": [
+        150,
+        200
+      ],
+      "referenceInstances": [
+        {
+          "nodePath": "tnt_hit",
+          "positionCocos": [
+            0,
+            26.105
+          ],
+          "positionCanvas": [
+            0,
+            -26.105
+          ],
+          "scale": [
+            1,
+            1
+          ],
+          "contentSize": [
+            150,
+            200
+          ],
+          "referenceRenderSize": [
+            150,
+            200
+          ],
+          "anchor": [
+            0.5,
+            0.5
+          ],
+          "sizeMode": 0,
+          "isTrimmedMode": false,
+          "opacity": 255,
+          "color": {
+            "r": 255,
+            "g": 255,
+            "b": 255,
+            "a": 255
+          },
+          "blend": "source-over",
+          "spriteFrameUuid": "82eNGhWixCoZRnSZPlJPIK"
+        }
+      ],
+      "sequenceStart": 0,
+      "sequenceEnd": 0.2833333333333333,
+      "timingNote": "Frame times are absolute positions on original clip; clip duration includes other nodes/opacity holds. Do not stretch the frame sequence across the entire effect duration.",
+      "bulletContainerScale": 0.9,
+      "referenceRenderSizeWithBulletScale": [
+        135,
+        180
+      ]
+    },
+    "lightning-strip": {
+      "file": "lightning-strip.png",
+      "frameWidth": 100,
+      "frameHeight": 166,
+      "frames": 12,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "fps": 60.0,
+      "effectiveFps": 30.0,
+      "frameTimes": [
+        0.016666666666666666,
+        0.03333333333333333,
+        0.05,
+        0.06666666666666667,
+        0.08333333333333333,
+        0.1,
+        0.11666666666666667,
+        0.13333333333333333,
+        0.15,
+        0.16666666666666666,
+        0.18333333333333332,
+        0.2
+      ],
+      "effectiveFrameTimes": [
+        0.03333333333333333,
+        0.06666666666666667,
+        0.1,
+        0.13333333333333333,
+        0.16666666666666666,
+        0.2,
+        0.23333333333333334,
+        0.26666666666666666,
+        0.3,
+        0.3333333333333333,
+        0.36666666666666664,
+        0.4
+      ],
+      "duration": 0.65,
+      "clipSpeed": 0.5,
+      "effectiveDuration": 1.3,
+      "originalClip": "skill_lighting",
+      "originalNodePath": "lighting1",
+      "originalNodeCurves": {
+        "opacity": [
+          {
+            "frame": 0,
+            "value": 0
+          },
+          {
+            "frame": 0.016666666666666666,
+            "value": 255
+          },
+          {
+            "frame": 0.2,
+            "value": 255
+          },
+          {
+            "frame": 0.21666666666666667,
+            "value": 0
+          }
+        ]
+      },
+      "sequenceOnly": true,
+      "frameNames": [
+        "lighting_00",
+        "lighting_01",
+        "lighting_02",
+        "lighting_03",
+        "lighting_04",
+        "lighting_05",
+        "lighting_06",
+        "lighting_07",
+        "lighting_08",
+        "lighting_09",
+        "lighting_10",
+        "lighting_11"
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "referenceNode": {
+        "nodePath": "lighting1",
+        "positionCocos": [
+          -76.052,
+          51.784
+        ],
+        "positionCanvas": [
+          -76.052,
+          -51.784
+        ],
+        "scale": [
+          1.05,
+          1.05
+        ],
+        "contentSize": [
+          143,
+          237
+        ],
+        "referenceRenderSize": [
+          150.15,
+          248.85000000000002
+        ],
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "sizeMode": 0,
+        "isTrimmedMode": false,
+        "opacity": 255,
+        "color": {
+          "r": 255,
+          "g": 255,
+          "b": 255,
+          "a": 255
+        },
+        "blend": "lighter",
+        "spriteFrameUuid": "e1qKQmrv9MT6df3fhcCOSK"
+      },
+      "referenceRenderSize": [
+        150.15,
+        248.85000000000002
+      ],
+      "referenceInstances": [
+        {
+          "nodePath": "lighting1",
+          "positionCocos": [
+            -76.052,
+            51.784
+          ],
+          "positionCanvas": [
+            -76.052,
+            -51.784
+          ],
+          "scale": [
+            1.05,
+            1.05
+          ],
+          "contentSize": [
+            143,
+            237
+          ],
+          "referenceRenderSize": [
+            150.15,
+            248.85000000000002
+          ],
+          "anchor": [
+            0.5,
+            0.5
+          ],
+          "sizeMode": 0,
+          "isTrimmedMode": false,
+          "opacity": 255,
+          "color": {
+            "r": 255,
+            "g": 255,
+            "b": 255,
+            "a": 255
+          },
+          "blend": "lighter",
+          "spriteFrameUuid": "e1qKQmrv9MT6df3fhcCOSK"
+        },
+        {
+          "nodePath": "lighting2",
+          "positionCocos": [
+            -6.45,
+            87.801
+          ],
+          "positionCanvas": [
+            -6.45,
+            -87.801
+          ],
+          "scale": [
+            1.05,
+            1.05
+          ],
+          "contentSize": [
+            143,
+            237
+          ],
+          "referenceRenderSize": [
+            150.15,
+            248.85000000000002
+          ],
+          "anchor": [
+            0.5,
+            0.5
+          ],
+          "sizeMode": 0,
+          "isTrimmedMode": false,
+          "opacity": 255,
+          "color": {
+            "r": 255,
+            "g": 255,
+            "b": 255,
+            "a": 255
+          },
+          "blend": "lighter",
+          "spriteFrameUuid": "e1qKQmrv9MT6df3fhcCOSK"
+        },
+        {
+          "nodePath": "lighting3",
+          "positionCocos": [
+            75.208,
+            51.784
+          ],
+          "positionCanvas": [
+            75.208,
+            -51.784
+          ],
+          "scale": [
+            0.7,
+            1.05
+          ],
+          "contentSize": [
+            143,
+            237
+          ],
+          "referenceRenderSize": [
+            100.1,
+            248.85000000000002
+          ],
+          "anchor": [
+            0.5,
+            0.5
+          ],
+          "sizeMode": 0,
+          "isTrimmedMode": false,
+          "opacity": 255,
+          "color": {
+            "r": 255,
+            "g": 255,
+            "b": 255,
+            "a": 255
+          },
+          "blend": "lighter",
+          "spriteFrameUuid": "e1qKQmrv9MT6df3fhcCOSK"
+        },
+        {
+          "nodePath": "lighting4",
+          "positionCocos": [
+            31.95,
+            100.14
+          ],
+          "positionCanvas": [
+            31.95,
+            -100.14
+          ],
+          "scale": [
+            1.05,
+            0.8
+          ],
+          "contentSize": [
+            143,
+            237
+          ],
+          "referenceRenderSize": [
+            150.15,
+            189.60000000000002
+          ],
+          "anchor": [
+            0.5,
+            0.5
+          ],
+          "sizeMode": 0,
+          "isTrimmedMode": false,
+          "opacity": 255,
+          "color": {
+            "r": 255,
+            "g": 255,
+            "b": 255,
+            "a": 255
+          },
+          "blend": "lighter",
+          "spriteFrameUuid": "e1qKQmrv9MT6df3fhcCOSK"
+        },
+        {
+          "nodePath": "lighting5",
+          "positionCocos": [
+            -38.74,
+            123.228
+          ],
+          "positionCanvas": [
+            -38.74,
+            -123.228
+          ],
+          "scale": [
+            0.5,
+            0.8
+          ],
+          "contentSize": [
+            143,
+            237
+          ],
+          "referenceRenderSize": [
+            71.5,
+            189.60000000000002
+          ],
+          "anchor": [
+            0.5,
+            0.5
+          ],
+          "sizeMode": 0,
+          "isTrimmedMode": false,
+          "opacity": 255,
+          "color": {
+            "r": 255,
+            "g": 255,
+            "b": 255,
+            "a": 255
+          },
+          "blend": "lighter",
+          "spriteFrameUuid": "e1qKQmrv9MT6df3fhcCOSK"
+        }
+      ],
+      "sequenceStart": 0.016666666666666666,
+      "sequenceEnd": 0.2,
+      "timingNote": "Frame times are absolute positions on original clip; clip duration includes other nodes/opacity holds. Do not stretch the frame sequence across the entire effect duration."
+    },
+    "lightning-hit-strip": {
+      "file": "lightning-hit-strip.png",
+      "frameWidth": 133,
+      "frameHeight": 133,
+      "frames": 10,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "fps": 60.0,
+      "effectiveFps": 30.0,
+      "frameTimes": [
+        0.13333333333333333,
+        0.15,
+        0.16666666666666666,
+        0.18333333333333332,
+        0.2,
+        0.21666666666666667,
+        0.23333333333333334,
+        0.25,
+        0.26666666666666666,
+        0.2833333333333333
+      ],
+      "effectiveFrameTimes": [
+        0.26666666666666666,
+        0.3,
+        0.3333333333333333,
+        0.36666666666666664,
+        0.4,
+        0.43333333333333335,
+        0.4666666666666667,
+        0.5,
+        0.5333333333333333,
+        0.5666666666666667
+      ],
+      "duration": 0.65,
+      "clipSpeed": 0.5,
+      "effectiveDuration": 1.3,
+      "originalClip": "skill_lighting",
+      "originalNodePath": "hit1/lighting_hit",
+      "originalNodeCurves": {
+        "opacity": [
+          {
+            "frame": 0.11666666666666667,
+            "value": 0
+          },
+          {
+            "frame": 0.13333333333333333,
+            "value": 255
+          },
+          {
+            "frame": 0.2833333333333333,
+            "value": 255
+          },
+          {
+            "frame": 0.3,
+            "value": 0
+          }
+        ]
+      },
+      "sequenceOnly": true,
+      "frameNames": [
+        "lighting_hit_00",
+        "lighting_hit_01",
+        "lighting_hit_02",
+        "lighting_hit_03",
+        "lighting_hit_04",
+        "lighting_hit_05",
+        "lighting_hit_06",
+        "lighting_hit_07",
+        "lighting_hit_08",
+        "lighting_hit_09"
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "referenceNode": {
+        "nodePath": "hit1/lighting_hit",
+        "positionCocos": [
+          -82.233,
+          -38.849
+        ],
+        "positionCanvas": [
+          -82.233,
+          38.849
+        ],
+        "scale": [
+          1.05,
+          1.05
+        ],
+        "contentSize": [
+          190,
+          190
+        ],
+        "referenceRenderSize": [
+          199.5,
+          199.5
+        ],
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "sizeMode": 0,
+        "isTrimmedMode": false,
+        "opacity": 255,
+        "color": {
+          "r": 255,
+          "g": 255,
+          "b": 255,
+          "a": 255
+        },
+        "blend": "lighter",
+        "spriteFrameUuid": "b3X19w0R5B6rAMIF5N2Q93"
+      },
+      "referenceRenderSize": [
+        199.5,
+        199.5
+      ],
+      "referenceInstances": [
+        {
+          "nodePath": "hit1/lighting_hit",
+          "positionCocos": [
+            -82.233,
+            -38.849
+          ],
+          "positionCanvas": [
+            -82.233,
+            38.849
+          ],
+          "scale": [
+            1.05,
+            1.05
+          ],
+          "contentSize": [
+            190,
+            190
+          ],
+          "referenceRenderSize": [
+            199.5,
+            199.5
+          ],
+          "anchor": [
+            0.5,
+            0.5
+          ],
+          "sizeMode": 0,
+          "isTrimmedMode": false,
+          "opacity": 255,
+          "color": {
+            "r": 255,
+            "g": 255,
+            "b": 255,
+            "a": 255
+          },
+          "blend": "lighter",
+          "spriteFrameUuid": "b3X19w0R5B6rAMIF5N2Q93"
+        },
+        {
+          "nodePath": "hit2/lighting_hit",
+          "positionCocos": [
+            -7.485,
+            -7.822
+          ],
+          "positionCanvas": [
+            -7.485,
+            7.822
+          ],
+          "scale": [
+            0.525,
+            0.525
+          ],
+          "contentSize": [
+            190,
+            190
+          ],
+          "referenceRenderSize": [
+            99.75,
+            99.75
+          ],
+          "anchor": [
+            0.5,
+            0.5
+          ],
+          "sizeMode": 0,
+          "isTrimmedMode": false,
+          "opacity": 255,
+          "color": {
+            "r": 255,
+            "g": 255,
+            "b": 255,
+            "a": 255
+          },
+          "blend": "lighter",
+          "spriteFrameUuid": "b3X19w0R5B6rAMIF5N2Q93"
+        },
+        {
+          "nodePath": "hit3/lighting_hit",
+          "positionCocos": [
+            68.807,
+            -38.849
+          ],
+          "positionCanvas": [
+            68.807,
+            38.849
+          ],
+          "scale": [
+            0.735,
+            0.735
+          ],
+          "contentSize": [
+            190,
+            190
+          ],
+          "referenceRenderSize": [
+            139.65,
+            139.65
+          ],
+          "anchor": [
+            0.5,
+            0.5
+          ],
+          "sizeMode": 0,
+          "isTrimmedMode": false,
+          "opacity": 255,
+          "color": {
+            "r": 255,
+            "g": 255,
+            "b": 255,
+            "a": 255
+          },
+          "blend": "lighter",
+          "spriteFrameUuid": "b3X19w0R5B6rAMIF5N2Q93"
+        },
+        {
+          "nodePath": "hit4/lighting_hit",
+          "positionCocos": [
+            -40.277,
+            49.537
+          ],
+          "positionCanvas": [
+            -40.277,
+            -49.537
+          ],
+          "scale": [
+            0.735,
+            0.735
+          ],
+          "contentSize": [
+            190,
+            190
+          ],
+          "referenceRenderSize": [
+            139.65,
+            139.65
+          ],
+          "anchor": [
+            0.5,
+            0.5
+          ],
+          "sizeMode": 0,
+          "isTrimmedMode": false,
+          "opacity": 255,
+          "color": {
+            "r": 255,
+            "g": 255,
+            "b": 255,
+            "a": 255
+          },
+          "blend": "lighter",
+          "spriteFrameUuid": "b3X19w0R5B6rAMIF5N2Q93"
+        },
+        {
+          "nodePath": "hit5/lighting_hit",
+          "positionCocos": [
+            27.971,
+            28.28
+          ],
+          "positionCanvas": [
+            27.971,
+            -28.28
+          ],
+          "scale": [
+            0.735,
+            0.735
+          ],
+          "contentSize": [
+            190,
+            190
+          ],
+          "referenceRenderSize": [
+            139.65,
+            139.65
+          ],
+          "anchor": [
+            0.5,
+            0.5
+          ],
+          "sizeMode": 0,
+          "isTrimmedMode": false,
+          "opacity": 255,
+          "color": {
+            "r": 255,
+            "g": 255,
+            "b": 255,
+            "a": 255
+          },
+          "blend": "lighter",
+          "spriteFrameUuid": "b3X19w0R5B6rAMIF5N2Q93"
+        }
+      ],
+      "sequenceStart": 0.13333333333333333,
+      "sequenceEnd": 0.2833333333333333,
+      "timingNote": "Frame times are absolute positions on original clip; clip duration includes other nodes/opacity holds. Do not stretch the frame sequence across the entire effect duration."
+    },
+    "explosion-strip": {
+      "file": "explosion-strip.png",
+      "frameWidth": 150,
+      "frameHeight": 150,
+      "frames": 18,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "fps": null,
+      "effectiveFps": null,
+      "frameTimes": [
+        0.08333333333333333,
+        0.1,
+        0.11666666666666667,
+        0.13333333333333333,
+        0.15,
+        0.16666666666666666,
+        0.18333333333333332,
+        0.2,
+        0.23333333333333334,
+        0.26666666666666666,
+        0.3,
+        0.3333333333333333,
+        0.36666666666666664,
+        0.4,
+        0.43333333333333335,
+        0.4666666666666667,
+        0.5,
+        0.5333333333333333
+      ],
+      "effectiveFrameTimes": [
+        0.08333333333333333,
+        0.1,
+        0.11666666666666667,
+        0.13333333333333333,
+        0.15,
+        0.16666666666666666,
+        0.18333333333333332,
+        0.2,
+        0.23333333333333334,
+        0.26666666666666666,
+        0.3,
+        0.3333333333333333,
+        0.36666666666666664,
+        0.4,
+        0.43333333333333335,
+        0.4666666666666667,
+        0.5,
+        0.5333333333333333
+      ],
+      "duration": 0.55,
+      "clipSpeed": 1,
+      "effectiveDuration": 0.55,
+      "originalClip": "skill_boom_hit",
+      "originalNodePath": "boom_bao",
+      "originalNodeCurves": {
+        "opacity": [
+          {
+            "frame": 0.06666666666666667,
+            "value": 0
+          },
+          {
+            "frame": 0.08333333333333333,
+            "value": 255
+          },
+          {
+            "frame": 0.5333333333333333,
+            "value": 255
+          },
+          {
+            "frame": 0.55,
+            "value": 0
+          }
+        ]
+      },
+      "sequenceOnly": true,
+      "frameNames": [
+        "boom_bao_00",
+        "boom_bao_01",
+        "boom_bao_02",
+        "boom_bao_03",
+        "boom_bao_04",
+        "boom_bao_05",
+        "boom_bao_06",
+        "boom_bao_07",
+        "boom_bao_08",
+        "boom_bao_09",
+        "boom_bao_10",
+        "boom_bao_11",
+        "boom_bao_12",
+        "boom_bao_13",
+        "boom_bao_14",
+        "boom_bao_15",
+        "boom_bao_16",
+        "boom_bao_17"
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "referenceNode": {
+        "nodePath": "boom_bao",
+        "positionCocos": [
+          0,
+          0
+        ],
+        "positionCanvas": [
+          0,
+          0
+        ],
+        "scale": [
+          2,
+          2
+        ],
+        "contentSize": [
+          150,
+          150
+        ],
+        "referenceRenderSize": [
+          300,
+          300
+        ],
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "sizeMode": 2,
+        "isTrimmedMode": false,
+        "opacity": 255,
+        "color": {
+          "r": 255,
+          "g": 255,
+          "b": 255,
+          "a": 255
+        },
+        "blend": "source-over",
+        "spriteFrameUuid": "61ByktcIVKUrXznf4/iw5K"
+      },
+      "referenceRenderSize": [
+        300,
+        300
+      ],
+      "referenceInstances": [
+        {
+          "nodePath": "boom_bao",
+          "positionCocos": [
+            0,
+            0
+          ],
+          "positionCanvas": [
+            0,
+            0
+          ],
+          "scale": [
+            2,
+            2
+          ],
+          "contentSize": [
+            150,
+            150
+          ],
+          "referenceRenderSize": [
+            300,
+            300
+          ],
+          "anchor": [
+            0.5,
+            0.5
+          ],
+          "sizeMode": 2,
+          "isTrimmedMode": false,
+          "opacity": 255,
+          "color": {
+            "r": 255,
+            "g": 255,
+            "b": 255,
+            "a": 255
+          },
+          "blend": "source-over",
+          "spriteFrameUuid": "61ByktcIVKUrXznf4/iw5K"
+        }
+      ],
+      "sequenceStart": 0.08333333333333333,
+      "sequenceEnd": 0.5333333333333333,
+      "timingNote": "Frame times are absolute positions on original clip; clip duration includes other nodes/opacity holds. Do not stretch the frame sequence across the entire effect duration."
+    }
+  },
+  "static": {
+    "arrow-stuck": {
+      "file": "arrow-stuck.png",
+      "width": 150,
+      "height": 150,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "trimBox": [
+        33,
+        63,
+        88,
+        86
+      ],
+      "originalSpriteFrame": "1_3",
+      "origin": [
+        0.5,
+        0.5
+      ]
+    },
+    "lightning-ground-bg": {
+      "file": "lightning-ground-bg.png",
+      "width": 170,
+      "height": 170,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "trimBox": [
+        2,
+        2,
+        168,
+        168
+      ],
+      "originalSpriteFrame": "bg",
+      "origin": [
+        0.5,
+        0.5
+      ]
+    },
+    "lightning-ground-rune": {
+      "file": "lightning-ground-rune.png",
+      "width": 170,
+      "height": 170,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "trimBox": [
+        15,
+        19,
+        152,
+        152
+      ],
+      "originalSpriteFrame": "tj",
+      "origin": [
+        0.5,
+        0.5
+      ]
+    },
+    "explosion-scorch": {
+      "file": "explosion-scorch.png",
+      "width": 129,
+      "height": 108,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "trimBox": [
+        0,
+        0,
+        129,
+        108
+      ],
+      "originalSpriteFrame": "boom3",
+      "origin": [
+        0.5,
+        0.5
+      ]
+    },
+    "cannon-scorch": {
+      "file": "cannon-scorch.png",
+      "width": 100,
+      "height": 100,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "trimBox": [
+        8,
+        8,
+        91,
+        92
+      ],
+      "originalSpriteFrame": "down",
+      "origin": [
+        0.5,
+        0.5
+      ]
+    },
+    "lightning-flare": {
+      "file": "lightning-flare.png",
+      "width": 256,
+      "height": 256,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "trimBox": [
+        7,
+        7,
+        250,
+        250
+      ],
+      "originalSpriteFrame": "light ",
+      "origin": [
+        0.5,
+        0.5
+      ]
+    },
+    "lightning-ring": {
+      "file": "lightning-ring.png",
+      "width": 256,
+      "height": 256,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "trimBox": [
+        27,
+        8,
+        211,
+        253
+      ],
+      "originalSpriteFrame": "b2",
+      "origin": [
+        0.5,
+        0.5
+      ]
+    },
+    "lightning-particle": {
+      "file": "lightning-particle.png",
+      "width": 256,
+      "height": 256,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "trimBox": [
+        113,
+        106,
+        142,
+        144
+      ],
+      "originalSpriteFrame": "lizi_00",
+      "origin": [
+        0.5,
+        0.5
+      ]
+    },
+    "lightning-ground-ring": {
+      "file": "lightning-ground-ring.png",
+      "width": 128,
+      "height": 128,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "trimBox": [
+        1,
+        1,
+        127,
+        127
+      ],
+      "originalSpriteFrame": "ring2",
+      "origin": [
+        0.5,
+        0.5
+      ]
+    },
+    "magic-smoke": {
+      "file": "magic-smoke.png",
+      "width": 256,
+      "height": 256,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "trimBox": [
+        13,
+        11,
+        242,
+        230
+      ],
+      "originalSpriteFrame": "1",
+      "origin": [
+        0.5,
+        0.5
+      ]
+    },
+    "tower-build-smoke": {
+      "file": "tower-build-smoke.png",
+      "width": 100,
+      "height": 100,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "originalSpriteFrame": "2",
+      "spriteFrameUuid": "5eXbW1XfBNt4a4x7Mus94W",
+      "trimBox": [
+        0,
+        2,
+        100,
+        100
+      ]
+    }
+  },
+  "notes": [
+    "Original public game resources; no commercial/redistribution license established.",
+    "Sprite-frame sequences are exact. Transform/opacity/tint/blend and child-node arrangements are provided as original data in effect-config.json, and are not baked into the raw strip assets.",
+    "Magic impact and tails use cc.ParticleSystem. Original prefab and particle asset references are provided; no fabricated frame sequence is substituted."
+  ],
+  "referenceNodes": {
+    "tower_bullet01_1_hit": {
+      "yingzi": {
+        "nodePath": "yingzi",
+        "positionCocos": [
+          4.026,
+          0
+        ],
+        "positionCanvas": [
+          4.026,
+          0
+        ],
+        "scale": [
+          0.2,
+          0.5
+        ],
+        "contentSize": [
+          58,
+          58
+        ],
+        "referenceRenderSize": [
+          11.600000000000001,
+          29.0
+        ],
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "sizeMode": 1,
+        "isTrimmedMode": true,
+        "opacity": 80,
+        "color": {
+          "__type__": "cc.Color"
+        },
+        "blend": "source-over",
+        "spriteFrameUuid": "edjHmkThFH+5Qu2fJyKVWJ"
+      },
+      "arrow": {
+        "nodePath": "arrow",
+        "positionCocos": [
+          -7.705,
+          0
+        ],
+        "positionCanvas": [
+          -7.705,
+          0
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "contentSize": [
+          150,
+          150
+        ],
+        "referenceRenderSize": [
+          150,
+          150
+        ],
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "sizeMode": 2,
+        "isTrimmedMode": false,
+        "opacity": 255,
+        "color": {
+          "r": 255,
+          "g": 255,
+          "b": 255,
+          "a": 255
+        },
+        "blend": "source-over",
+        "spriteFrameUuid": "81fiMHwEpEu50HVaGwUKIp"
+      }
+    },
+    "tower_bullet03_hit": {
+      "down": {
+        "nodePath": "down",
+        "positionCocos": [
+          0,
+          -4.681
+        ],
+        "positionCanvas": [
+          0,
+          4.681
+        ],
+        "scale": [
+          2,
+          1.3
+        ],
+        "contentSize": [
+          88,
+          86
+        ],
+        "referenceRenderSize": [
+          176,
+          111.8
+        ],
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "sizeMode": 0,
+        "isTrimmedMode": true,
+        "opacity": 120,
+        "color": {
+          "r": 255,
+          "g": 255,
+          "b": 255,
+          "a": 255
+        },
+        "blend": "source-over",
+        "spriteFrameUuid": "19rWmuRX9A4bsM7xK86LiT"
+      },
+      "tnt_hit": {
+        "nodePath": "tnt_hit",
+        "positionCocos": [
+          0,
+          26.105
+        ],
+        "positionCanvas": [
+          0,
+          -26.105
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "contentSize": [
+          150,
+          200
+        ],
+        "referenceRenderSize": [
+          150,
+          200
+        ],
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "sizeMode": 0,
+        "isTrimmedMode": false,
+        "opacity": 255,
+        "color": {
+          "r": 255,
+          "g": 255,
+          "b": 255,
+          "a": 255
+        },
+        "blend": "source-over",
+        "spriteFrameUuid": "82eNGhWixCoZRnSZPlJPIK"
+      }
+    },
+    "tower_bullet02": {
+      "2": {
+        "nodePath": "2",
+        "positionCocos": [
+          0,
+          0
+        ],
+        "positionCanvas": [
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "contentSize": [
+          60,
+          60
+        ],
+        "referenceRenderSize": [
+          60,
+          60
+        ],
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "sizeMode": 2,
+        "isTrimmedMode": false,
+        "opacity": 255,
+        "color": {
+          "r": 255,
+          "g": 255,
+          "b": 255,
+          "a": 255
+        },
+        "blend": "source-over",
+        "spriteFrameUuid": "edjHmkThFH+5Qu2fJyKVWJ"
+      }
+    },
+    "tower_bullet02_hit": {},
+    "tower_bullet02_1_hit": {},
+    "tower_bullet02_2_hit": {},
+    "skill_lighting": {
+      "lighting1": {
+        "nodePath": "lighting1",
+        "positionCocos": [
+          -76.052,
+          51.784
+        ],
+        "positionCanvas": [
+          -76.052,
+          -51.784
+        ],
+        "scale": [
+          1.05,
+          1.05
+        ],
+        "contentSize": [
+          143,
+          237
+        ],
+        "referenceRenderSize": [
+          150.15,
+          248.85000000000002
+        ],
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "sizeMode": 0,
+        "isTrimmedMode": false,
+        "opacity": 255,
+        "color": {
+          "r": 255,
+          "g": 255,
+          "b": 255,
+          "a": 255
+        },
+        "blend": "lighter",
+        "spriteFrameUuid": "e1qKQmrv9MT6df3fhcCOSK"
+      },
+      "lighting2": {
+        "nodePath": "lighting2",
+        "positionCocos": [
+          -6.45,
+          87.801
+        ],
+        "positionCanvas": [
+          -6.45,
+          -87.801
+        ],
+        "scale": [
+          1.05,
+          1.05
+        ],
+        "contentSize": [
+          143,
+          237
+        ],
+        "referenceRenderSize": [
+          150.15,
+          248.85000000000002
+        ],
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "sizeMode": 0,
+        "isTrimmedMode": false,
+        "opacity": 255,
+        "color": {
+          "r": 255,
+          "g": 255,
+          "b": 255,
+          "a": 255
+        },
+        "blend": "lighter",
+        "spriteFrameUuid": "e1qKQmrv9MT6df3fhcCOSK"
+      },
+      "lighting3": {
+        "nodePath": "lighting3",
+        "positionCocos": [
+          75.208,
+          51.784
+        ],
+        "positionCanvas": [
+          75.208,
+          -51.784
+        ],
+        "scale": [
+          0.7,
+          1.05
+        ],
+        "contentSize": [
+          143,
+          237
+        ],
+        "referenceRenderSize": [
+          100.1,
+          248.85000000000002
+        ],
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "sizeMode": 0,
+        "isTrimmedMode": false,
+        "opacity": 255,
+        "color": {
+          "r": 255,
+          "g": 255,
+          "b": 255,
+          "a": 255
+        },
+        "blend": "lighter",
+        "spriteFrameUuid": "e1qKQmrv9MT6df3fhcCOSK"
+      },
+      "lighting4": {
+        "nodePath": "lighting4",
+        "positionCocos": [
+          31.95,
+          100.14
+        ],
+        "positionCanvas": [
+          31.95,
+          -100.14
+        ],
+        "scale": [
+          1.05,
+          0.8
+        ],
+        "contentSize": [
+          143,
+          237
+        ],
+        "referenceRenderSize": [
+          150.15,
+          189.60000000000002
+        ],
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "sizeMode": 0,
+        "isTrimmedMode": false,
+        "opacity": 255,
+        "color": {
+          "r": 255,
+          "g": 255,
+          "b": 255,
+          "a": 255
+        },
+        "blend": "lighter",
+        "spriteFrameUuid": "e1qKQmrv9MT6df3fhcCOSK"
+      },
+      "lighting5": {
+        "nodePath": "lighting5",
+        "positionCocos": [
+          -38.74,
+          123.228
+        ],
+        "positionCanvas": [
+          -38.74,
+          -123.228
+        ],
+        "scale": [
+          0.5,
+          0.8
+        ],
+        "contentSize": [
+          143,
+          237
+        ],
+        "referenceRenderSize": [
+          71.5,
+          189.60000000000002
+        ],
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "sizeMode": 0,
+        "isTrimmedMode": false,
+        "opacity": 255,
+        "color": {
+          "r": 255,
+          "g": 255,
+          "b": 255,
+          "a": 255
+        },
+        "blend": "lighter",
+        "spriteFrameUuid": "e1qKQmrv9MT6df3fhcCOSK"
+      },
+      "hit1/lighting_hit": {
+        "nodePath": "hit1/lighting_hit",
+        "positionCocos": [
+          -82.233,
+          -38.849
+        ],
+        "positionCanvas": [
+          -82.233,
+          38.849
+        ],
+        "scale": [
+          1.05,
+          1.05
+        ],
+        "contentSize": [
+          190,
+          190
+        ],
+        "referenceRenderSize": [
+          199.5,
+          199.5
+        ],
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "sizeMode": 0,
+        "isTrimmedMode": false,
+        "opacity": 255,
+        "color": {
+          "r": 255,
+          "g": 255,
+          "b": 255,
+          "a": 255
+        },
+        "blend": "lighter",
+        "spriteFrameUuid": "b3X19w0R5B6rAMIF5N2Q93"
+      },
+      "hit1/ring": {
+        "nodePath": "hit1/ring",
+        "positionCocos": [
+          -82.233,
+          -38.849
+        ],
+        "positionCanvas": [
+          -82.233,
+          38.849
+        ],
+        "scale": [
+          1,
+          0.6
+        ],
+        "contentSize": [
+          192,
+          248
+        ],
+        "referenceRenderSize": [
+          192,
+          148.79999999999998
+        ],
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "sizeMode": 0,
+        "isTrimmedMode": true,
+        "opacity": 255,
+        "color": {
+          "__type__": "cc.Color",
+          "r": 255,
+          "g": 155,
+          "b": 82
+        },
+        "blend": "source-over",
+        "spriteFrameUuid": "7cnkmDi9NNsZ/GN9QfhdtP"
+      },
+      "hit1/lizi": {
+        "nodePath": "hit1/lizi",
+        "positionCocos": [
+          -82.233,
+          -38.849
+        ],
+        "positionCanvas": [
+          -82.233,
+          38.849
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "contentSize": [
+          30,
+          40
+        ],
+        "referenceRenderSize": [
+          30,
+          40
+        ],
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "sizeMode": 0,
+        "isTrimmedMode": false,
+        "opacity": 255,
+        "color": {
+          "__type__": "cc.Color",
+          "r": 255,
+          "g": 135,
+          "b": 48
+        },
+        "blend": "lighter",
+        "spriteFrameUuid": "besXXpji5OK6zZMKKyPLX6"
+      },
+      "hit1/light ": {
+        "nodePath": "hit1/light ",
+        "positionCocos": [
+          -82.233,
+          -38.849
+        ],
+        "positionCanvas": [
+          -82.233,
+          38.849
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "contentSize": [
+          244,
+          244
+        ],
+        "referenceRenderSize": [
+          244,
+          244
+        ],
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "sizeMode": 0,
+        "isTrimmedMode": true,
+        "opacity": 255,
+        "color": {
+          "__type__": "cc.Color",
+          "r": 252,
+          "g": 135,
+          "b": 64
+        },
+        "blend": "lighter",
+        "spriteFrameUuid": "3faIdBPbVOf5qXtU5tF1uu"
+      },
+      "hit2/lighting_hit": {
+        "nodePath": "hit2/lighting_hit",
+        "positionCocos": [
+          -7.485,
+          -7.822
+        ],
+        "positionCanvas": [
+          -7.485,
+          7.822
+        ],
+        "scale": [
+          0.525,
+          0.525
+        ],
+        "contentSize": [
+          190,
+          190
+        ],
+        "referenceRenderSize": [
+          99.75,
+          99.75
+        ],
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "sizeMode": 0,
+        "isTrimmedMode": false,
+        "opacity": 255,
+        "color": {
+          "r": 255,
+          "g": 255,
+          "b": 255,
+          "a": 255
+        },
+        "blend": "lighter",
+        "spriteFrameUuid": "b3X19w0R5B6rAMIF5N2Q93"
+      },
+      "hit2/ring": {
+        "nodePath": "hit2/ring",
+        "positionCocos": [
+          -7.485,
+          -7.822
+        ],
+        "positionCanvas": [
+          -7.485,
+          7.822
+        ],
+        "scale": [
+          0.5,
+          0.3
+        ],
+        "contentSize": [
+          192,
+          248
+        ],
+        "referenceRenderSize": [
+          96.0,
+          74.39999999999999
+        ],
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "sizeMode": 0,
+        "isTrimmedMode": true,
+        "opacity": 255,
+        "color": {
+          "__type__": "cc.Color",
+          "r": 255,
+          "g": 196,
+          "b": 82
+        },
+        "blend": "source-over",
+        "spriteFrameUuid": "7cnkmDi9NNsZ/GN9QfhdtP"
+      },
+      "hit2/lizi": {
+        "nodePath": "hit2/lizi",
+        "positionCocos": [
+          -7.485,
+          -7.822
+        ],
+        "positionCanvas": [
+          -7.485,
+          7.822
+        ],
+        "scale": [
+          0.5,
+          0.5
+        ],
+        "contentSize": [
+          30,
+          40
+        ],
+        "referenceRenderSize": [
+          15.0,
+          20.0
+        ],
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "sizeMode": 0,
+        "isTrimmedMode": false,
+        "opacity": 255,
+        "color": {
+          "__type__": "cc.Color",
+          "r": 255,
+          "g": 152,
+          "b": 48
+        },
+        "blend": "lighter",
+        "spriteFrameUuid": "besXXpji5OK6zZMKKyPLX6"
+      },
+      "hit2/light ": {
+        "nodePath": "hit2/light ",
+        "positionCocos": [
+          -7.485,
+          -7.822
+        ],
+        "positionCanvas": [
+          -7.485,
+          7.822
+        ],
+        "scale": [
+          0.5,
+          0.5
+        ],
+        "contentSize": [
+          244,
+          244
+        ],
+        "referenceRenderSize": [
+          122.0,
+          122.0
+        ],
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "sizeMode": 0,
+        "isTrimmedMode": true,
+        "opacity": 255,
+        "color": {
+          "__type__": "cc.Color",
+          "r": 252,
+          "g": 128,
+          "b": 64
+        },
+        "blend": "lighter",
+        "spriteFrameUuid": "3faIdBPbVOf5qXtU5tF1uu"
+      },
+      "hit3/lighting_hit": {
+        "nodePath": "hit3/lighting_hit",
+        "positionCocos": [
+          68.807,
+          -38.849
+        ],
+        "positionCanvas": [
+          68.807,
+          38.849
+        ],
+        "scale": [
+          0.735,
+          0.735
+        ],
+        "contentSize": [
+          190,
+          190
+        ],
+        "referenceRenderSize": [
+          139.65,
+          139.65
+        ],
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "sizeMode": 0,
+        "isTrimmedMode": false,
+        "opacity": 255,
+        "color": {
+          "r": 255,
+          "g": 255,
+          "b": 255,
+          "a": 255
+        },
+        "blend": "lighter",
+        "spriteFrameUuid": "b3X19w0R5B6rAMIF5N2Q93"
+      },
+      "hit3/ring": {
+        "nodePath": "hit3/ring",
+        "positionCocos": [
+          68.807,
+          -38.849
+        ],
+        "positionCanvas": [
+          68.807,
+          38.849
+        ],
+        "scale": [
+          0.7,
+          0.42
+        ],
+        "contentSize": [
+          192,
+          248
+        ],
+        "referenceRenderSize": [
+          134.39999999999998,
+          104.16
+        ],
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "sizeMode": 0,
+        "isTrimmedMode": true,
+        "opacity": 255,
+        "color": {
+          "__type__": "cc.Color",
+          "r": 255,
+          "g": 155,
+          "b": 82
+        },
+        "blend": "source-over",
+        "spriteFrameUuid": "7cnkmDi9NNsZ/GN9QfhdtP"
+      },
+      "hit3/lizi": {
+        "nodePath": "hit3/lizi",
+        "positionCocos": [
+          68.807,
+          -38.849
+        ],
+        "positionCanvas": [
+          68.807,
+          38.849
+        ],
+        "scale": [
+          0.7,
+          0.7
+        ],
+        "contentSize": [
+          30,
+          40
+        ],
+        "referenceRenderSize": [
+          21.0,
+          28.0
+        ],
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "sizeMode": 0,
+        "isTrimmedMode": false,
+        "opacity": 255,
+        "color": {
+          "__type__": "cc.Color",
+          "r": 255,
+          "g": 176,
+          "b": 48
+        },
+        "blend": "lighter",
+        "spriteFrameUuid": "besXXpji5OK6zZMKKyPLX6"
+      },
+      "hit3/light ": {
+        "nodePath": "hit3/light ",
+        "positionCocos": [
+          68.807,
+          -38.849
+        ],
+        "positionCanvas": [
+          68.807,
+          38.849
+        ],
+        "scale": [
+          0.7,
+          0.7
+        ],
+        "contentSize": [
+          244,
+          244
+        ],
+        "referenceRenderSize": [
+          170.79999999999998,
+          170.79999999999998
+        ],
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "sizeMode": 0,
+        "isTrimmedMode": true,
+        "opacity": 255,
+        "color": {
+          "__type__": "cc.Color",
+          "r": 252,
+          "g": 135,
+          "b": 64
+        },
+        "blend": "lighter",
+        "spriteFrameUuid": "3faIdBPbVOf5qXtU5tF1uu"
+      },
+      "hit4/lighting_hit": {
+        "nodePath": "hit4/lighting_hit",
+        "positionCocos": [
+          -40.277,
+          49.537
+        ],
+        "positionCanvas": [
+          -40.277,
+          -49.537
+        ],
+        "scale": [
+          0.735,
+          0.735
+        ],
+        "contentSize": [
+          190,
+          190
+        ],
+        "referenceRenderSize": [
+          139.65,
+          139.65
+        ],
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "sizeMode": 0,
+        "isTrimmedMode": false,
+        "opacity": 255,
+        "color": {
+          "r": 255,
+          "g": 255,
+          "b": 255,
+          "a": 255
+        },
+        "blend": "lighter",
+        "spriteFrameUuid": "b3X19w0R5B6rAMIF5N2Q93"
+      },
+      "hit4/ring": {
+        "nodePath": "hit4/ring",
+        "positionCocos": [
+          -40.277,
+          49.537
+        ],
+        "positionCanvas": [
+          -40.277,
+          -49.537
+        ],
+        "scale": [
+          0.7,
+          0.42
+        ],
+        "contentSize": [
+          192,
+          248
+        ],
+        "referenceRenderSize": [
+          134.39999999999998,
+          104.16
+        ],
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "sizeMode": 0,
+        "isTrimmedMode": true,
+        "opacity": 255,
+        "color": {
+          "__type__": "cc.Color",
+          "r": 255,
+          "g": 182,
+          "b": 82
+        },
+        "blend": "source-over",
+        "spriteFrameUuid": "7cnkmDi9NNsZ/GN9QfhdtP"
+      },
+      "hit4/lizi": {
+        "nodePath": "hit4/lizi",
+        "positionCocos": [
+          -40.277,
+          49.537
+        ],
+        "positionCanvas": [
+          -40.277,
+          -49.537
+        ],
+        "scale": [
+          0.7,
+          0.7
+        ],
+        "contentSize": [
+          30,
+          40
+        ],
+        "referenceRenderSize": [
+          21.0,
+          28.0
+        ],
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "sizeMode": 0,
+        "isTrimmedMode": false,
+        "opacity": 255,
+        "color": {
+          "__type__": "cc.Color",
+          "r": 255,
+          "g": 143,
+          "b": 48
+        },
+        "blend": "lighter",
+        "spriteFrameUuid": "besXXpji5OK6zZMKKyPLX6"
+      },
+      "hit4/light ": {
+        "nodePath": "hit4/light ",
+        "positionCocos": [
+          -40.277,
+          49.537
+        ],
+        "positionCanvas": [
+          -40.277,
+          -49.537
+        ],
+        "scale": [
+          0.7,
+          0.7
+        ],
+        "contentSize": [
+          244,
+          244
+        ],
+        "referenceRenderSize": [
+          170.79999999999998,
+          170.79999999999998
+        ],
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "sizeMode": 0,
+        "isTrimmedMode": true,
+        "opacity": 255,
+        "color": {
+          "__type__": "cc.Color",
+          "r": 252,
+          "g": 135,
+          "b": 64
+        },
+        "blend": "lighter",
+        "spriteFrameUuid": "3faIdBPbVOf5qXtU5tF1uu"
+      },
+      "hit5/lighting_hit": {
+        "nodePath": "hit5/lighting_hit",
+        "positionCocos": [
+          27.971,
+          28.28
+        ],
+        "positionCanvas": [
+          27.971,
+          -28.28
+        ],
+        "scale": [
+          0.735,
+          0.735
+        ],
+        "contentSize": [
+          190,
+          190
+        ],
+        "referenceRenderSize": [
+          139.65,
+          139.65
+        ],
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "sizeMode": 0,
+        "isTrimmedMode": false,
+        "opacity": 255,
+        "color": {
+          "r": 255,
+          "g": 255,
+          "b": 255,
+          "a": 255
+        },
+        "blend": "lighter",
+        "spriteFrameUuid": "b3X19w0R5B6rAMIF5N2Q93"
+      },
+      "hit5/ring": {
+        "nodePath": "hit5/ring",
+        "positionCocos": [
+          27.971,
+          28.28
+        ],
+        "positionCanvas": [
+          27.971,
+          -28.28
+        ],
+        "scale": [
+          0.7,
+          0.42
+        ],
+        "contentSize": [
+          192,
+          248
+        ],
+        "referenceRenderSize": [
+          134.39999999999998,
+          104.16
+        ],
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "sizeMode": 0,
+        "isTrimmedMode": true,
+        "opacity": 255,
+        "color": {
+          "__type__": "cc.Color",
+          "r": 255,
+          "g": 203,
+          "b": 82
+        },
+        "blend": "source-over",
+        "spriteFrameUuid": "7cnkmDi9NNsZ/GN9QfhdtP"
+      },
+      "hit5/lizi": {
+        "nodePath": "hit5/lizi",
+        "positionCocos": [
+          27.971,
+          28.28
+        ],
+        "positionCanvas": [
+          27.971,
+          -28.28
+        ],
+        "scale": [
+          0.7,
+          0.7
+        ],
+        "contentSize": [
+          30,
+          40
+        ],
+        "referenceRenderSize": [
+          21.0,
+          28.0
+        ],
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "sizeMode": 0,
+        "isTrimmedMode": false,
+        "opacity": 255,
+        "color": {
+          "__type__": "cc.Color",
+          "r": 255,
+          "g": 185,
+          "b": 48
+        },
+        "blend": "lighter",
+        "spriteFrameUuid": "besXXpji5OK6zZMKKyPLX6"
+      },
+      "hit5/light ": {
+        "nodePath": "hit5/light ",
+        "positionCocos": [
+          27.971,
+          28.28
+        ],
+        "positionCanvas": [
+          27.971,
+          -28.28
+        ],
+        "scale": [
+          0.7,
+          0.7
+        ],
+        "contentSize": [
+          244,
+          244
+        ],
+        "referenceRenderSize": [
+          170.79999999999998,
+          170.79999999999998
+        ],
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "sizeMode": 0,
+        "isTrimmedMode": true,
+        "opacity": 255,
+        "color": {
+          "__type__": "cc.Color",
+          "r": 252,
+          "g": 166,
+          "b": 64
+        },
+        "blend": "lighter",
+        "spriteFrameUuid": "3faIdBPbVOf5qXtU5tF1uu"
+      },
+      "light_up1 ": {
+        "nodePath": "light_up1 ",
+        "positionCocos": [
+          -63.876,
+          177.651
+        ],
+        "positionCanvas": [
+          -63.876,
+          -177.651
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "contentSize": [
+          244,
+          244
+        ],
+        "referenceRenderSize": [
+          244,
+          244
+        ],
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "sizeMode": 0,
+        "isTrimmedMode": true,
+        "opacity": 255,
+        "color": {
+          "__type__": "cc.Color",
+          "r": 252,
+          "g": 143,
+          "b": 64
+        },
+        "blend": "lighter",
+        "spriteFrameUuid": "3faIdBPbVOf5qXtU5tF1uu"
+      },
+      "light_up2": {
+        "nodePath": "light_up2",
+        "positionCocos": [
+          84.994,
+          177.651
+        ],
+        "positionCanvas": [
+          84.994,
+          -177.651
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "contentSize": [
+          244,
+          244
+        ],
+        "referenceRenderSize": [
+          244,
+          244
+        ],
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "sizeMode": 0,
+        "isTrimmedMode": true,
+        "opacity": 255,
+        "color": {
+          "__type__": "cc.Color",
+          "r": 252,
+          "g": 173,
+          "b": 64
+        },
+        "blend": "lighter",
+        "spriteFrameUuid": "3faIdBPbVOf5qXtU5tF1uu"
+      },
+      "light_up3": {
+        "nodePath": "light_up3",
+        "positionCocos": [
+          44.779,
+          195.123
+        ],
+        "positionCanvas": [
+          44.779,
+          -195.123
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "contentSize": [
+          244,
+          244
+        ],
+        "referenceRenderSize": [
+          244,
+          244
+        ],
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "sizeMode": 0,
+        "isTrimmedMode": true,
+        "opacity": 255,
+        "color": {
+          "__type__": "cc.Color",
+          "r": 252,
+          "g": 150,
+          "b": 64
+        },
+        "blend": "lighter",
+        "spriteFrameUuid": "3faIdBPbVOf5qXtU5tF1uu"
+      },
+      "light_up4": {
+        "nodePath": "light_up4",
+        "positionCocos": [
+          1.099,
+          210.957
+        ],
+        "positionCanvas": [
+          1.099,
+          -210.957
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "contentSize": [
+          244,
+          244
+        ],
+        "referenceRenderSize": [
+          244,
+          244
+        ],
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "sizeMode": 0,
+        "isTrimmedMode": true,
+        "opacity": 255,
+        "color": {
+          "__type__": "cc.Color",
+          "r": 252,
+          "g": 150,
+          "b": 64
+        },
+        "blend": "lighter",
+        "spriteFrameUuid": "3faIdBPbVOf5qXtU5tF1uu"
+      },
+      "light_up5": {
+        "nodePath": "light_up5",
+        "positionCocos": [
+          -34.392,
+          220.785
+        ],
+        "positionCanvas": [
+          -34.392,
+          -220.785
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "contentSize": [
+          244,
+          244
+        ],
+        "referenceRenderSize": [
+          244,
+          244
+        ],
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "sizeMode": 0,
+        "isTrimmedMode": true,
+        "opacity": 255,
+        "color": {
+          "__type__": "cc.Color",
+          "r": 252,
+          "g": 143,
+          "b": 64
+        },
+        "blend": "lighter",
+        "spriteFrameUuid": "3faIdBPbVOf5qXtU5tF1uu"
+      }
+    },
+    "skill_lighting_down": {
+      "light ": {
+        "nodePath": "light ",
+        "positionCocos": [
+          0,
+          0.0
+        ],
+        "positionCanvas": [
+          0,
+          -0.0
+        ],
+        "scale": [
+          3,
+          2.0999999999999996
+        ],
+        "contentSize": [
+          244,
+          244
+        ],
+        "referenceRenderSize": [
+          732,
+          512.3999999999999
+        ],
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "sizeMode": 0,
+        "isTrimmedMode": true,
+        "opacity": 255,
+        "color": {
+          "__type__": "cc.Color",
+          "r": 255,
+          "g": 83,
+          "b": 34
+        },
+        "blend": "source-over",
+        "spriteFrameUuid": "3faIdBPbVOf5qXtU5tF1uu"
+      },
+      "tj": {
+        "nodePath": "tj",
+        "positionCocos": [
+          0,
+          0.0
+        ],
+        "positionCanvas": [
+          0,
+          -0.0
+        ],
+        "scale": [
+          1.3,
+          0.9099999999999999
+        ],
+        "contentSize": [
+          203,
+          199
+        ],
+        "referenceRenderSize": [
+          263.90000000000003,
+          181.08999999999997
+        ],
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "sizeMode": 0,
+        "isTrimmedMode": true,
+        "opacity": 255,
+        "color": {
+          "r": 255,
+          "g": 255,
+          "b": 255,
+          "a": 255
+        },
+        "blend": "lighter",
+        "spriteFrameUuid": "cdLKloxgZLloLtaUO0UCkT"
+      },
+      "bg": {
+        "nodePath": "bg",
+        "positionCocos": [
+          0,
+          0.0
+        ],
+        "positionCanvas": [
+          0,
+          -0.0
+        ],
+        "scale": [
+          1.1,
+          0.77
+        ],
+        "contentSize": [
+          237,
+          237
+        ],
+        "referenceRenderSize": [
+          260.70000000000005,
+          182.49
+        ],
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "sizeMode": 0,
+        "isTrimmedMode": true,
+        "opacity": 255,
+        "color": {
+          "r": 255,
+          "g": 255,
+          "b": 255,
+          "a": 255
+        },
+        "blend": "source-over",
+        "spriteFrameUuid": "69JvOLkxVHWoV9XMOxF72i"
+      },
+      "ring2": {
+        "nodePath": "ring2",
+        "positionCocos": [
+          0,
+          0.0
+        ],
+        "positionCanvas": [
+          0,
+          -0.0
+        ],
+        "scale": [
+          2,
+          1.4
+        ],
+        "contentSize": [
+          126,
+          126
+        ],
+        "referenceRenderSize": [
+          252,
+          176.39999999999998
+        ],
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "sizeMode": 0,
+        "isTrimmedMode": true,
+        "opacity": 255,
+        "color": {
+          "r": 255,
+          "g": 255,
+          "b": 255,
+          "a": 255
+        },
+        "blend": "lighter",
+        "spriteFrameUuid": "30sSJWfI1LP4sASI8EanS4"
+      }
+    },
+    "skill_boom": {
+      "boom3": {
+        "nodePath": "boom3",
+        "positionCocos": [
+          -2.399,
+          -9.596
+        ],
+        "positionCanvas": [
+          -2.399,
+          9.596
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "contentSize": [
+          129,
+          108
+        ],
+        "referenceRenderSize": [
+          129,
+          108
+        ],
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "sizeMode": 1,
+        "isTrimmedMode": true,
+        "opacity": 255,
+        "color": {
+          "r": 255,
+          "g": 255,
+          "b": 255,
+          "a": 255
+        },
+        "blend": "source-over",
+        "spriteFrameUuid": "75tuJ9zWhAsr9e3YZyaktF"
+      },
+      "boom2": {
+        "nodePath": "boom2",
+        "positionCocos": [
+          0,
+          0
+        ],
+        "positionCanvas": [
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "contentSize": [
+          61,
+          62
+        ],
+        "referenceRenderSize": [
+          61,
+          62
+        ],
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "sizeMode": 1,
+        "isTrimmedMode": true,
+        "opacity": 255,
+        "color": {
+          "r": 255,
+          "g": 255,
+          "b": 255,
+          "a": 255
+        },
+        "blend": "source-over",
+        "spriteFrameUuid": "b8wHmlJIpEKriaGQvmjCZQ"
+      },
+      "boom4": {
+        "nodePath": "boom4",
+        "positionCocos": [
+          0,
+          0
+        ],
+        "positionCanvas": [
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "contentSize": [
+          61,
+          62
+        ],
+        "referenceRenderSize": [
+          61,
+          62
+        ],
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "sizeMode": 1,
+        "isTrimmedMode": true,
+        "opacity": 255,
+        "color": {
+          "r": 255,
+          "g": 255,
+          "b": 255,
+          "a": 255
+        },
+        "blend": "source-over",
+        "spriteFrameUuid": "d8x1PxGTFNGq4xWQ2kMwXs"
+      },
+      "bullt_fly/boom1": {
+        "nodePath": "bullt_fly/boom1",
+        "positionCocos": [
+          0,
+          0
+        ],
+        "positionCanvas": [
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "contentSize": [
+          61,
+          62
+        ],
+        "referenceRenderSize": [
+          61,
+          62
+        ],
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "sizeMode": 1,
+        "isTrimmedMode": true,
+        "opacity": 255,
+        "color": {
+          "r": 255,
+          "g": 255,
+          "b": 255,
+          "a": 255
+        },
+        "blend": "source-over",
+        "spriteFrameUuid": "9dZ705CehKkLM9xAm1/+DO"
+      },
+      "smoke": {
+        "nodePath": "smoke",
+        "positionCocos": [
+          0,
+          0
+        ],
+        "positionCanvas": [
+          0,
+          0
+        ],
+        "scale": [
+          2,
+          1.5
+        ],
+        "contentSize": [
+          64,
+          64
+        ],
+        "referenceRenderSize": [
+          128,
+          96.0
+        ],
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "sizeMode": 2,
+        "isTrimmedMode": false,
+        "opacity": 255,
+        "color": {
+          "r": 255,
+          "g": 255,
+          "b": 255,
+          "a": 255
+        },
+        "blend": "source-over",
+        "spriteFrameUuid": "cfJfDAUP5E7r48hSUEJtOa"
+      },
+      "boom_bao": {
+        "nodePath": "boom_bao",
+        "positionCocos": [
+          0,
+          0
+        ],
+        "positionCanvas": [
+          0,
+          0
+        ],
+        "scale": [
+          2,
+          2
+        ],
+        "contentSize": [
+          150,
+          150
+        ],
+        "referenceRenderSize": [
+          300,
+          300
+        ],
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "sizeMode": 2,
+        "isTrimmedMode": false,
+        "opacity": 255,
+        "color": {
+          "r": 255,
+          "g": 255,
+          "b": 255,
+          "a": 255
+        },
+        "blend": "source-over",
+        "spriteFrameUuid": "61ByktcIVKUrXznf4/iw5K"
+      }
+    },
+    "tower_bullet_hit": {
+      "hit": {
+        "nodePath": "hit",
+        "positionCocos": [
+          0,
+          0
+        ],
+        "positionCanvas": [
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "contentSize": [
+          90,
+          90
+        ],
+        "referenceRenderSize": [
+          90,
+          90
+        ],
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "sizeMode": 2,
+        "isTrimmedMode": false,
+        "opacity": 255,
+        "color": {
+          "r": 255,
+          "g": 255,
+          "b": 255,
+          "a": 255
+        },
+        "blend": "source-over",
+        "spriteFrameUuid": "507l8l6O9HAZ2i4k/nW4d7"
+      }
+    },
+    "GameBullet": {
+      "bullet/icon": {
+        "nodePath": "bullet/icon",
+        "positionCocos": [
+          0,
+          0
+        ],
+        "positionCanvas": [
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "contentSize": [
+          60,
+          60
+        ],
+        "referenceRenderSize": [
+          60,
+          60
+        ],
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "sizeMode": 2,
+        "isTrimmedMode": false,
+        "opacity": 255,
+        "color": {
+          "r": 255,
+          "g": 255,
+          "b": 255,
+          "a": 255
+        },
+        "blend": "source-over",
+        "spriteFrameUuid": null
+      }
+    }
+  },
+  "transformAnimations": {
+    "arrow-stuck": {
+      "__type__": "cc.AnimationClip",
+      "_name": "tower_bullet01_1_hit",
+      "_duration": 2.0833333333333335,
+      "curveData": {
+        "props": {
+          "angle": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 0.08333333333333333,
+              "value": 10
+            },
+            {
+              "frame": 0.16666666666666666,
+              "value": -10
+            },
+            {
+              "frame": 0.25,
+              "value": 5
+            },
+            {
+              "frame": 0.3333333333333333,
+              "value": -5
+            },
+            {
+              "frame": 0.4166666666666667,
+              "value": 2
+            },
+            {
+              "frame": 0.5,
+              "value": -2
+            },
+            {
+              "frame": 0.5833333333333334,
+              "value": 0
+            },
+            {
+              "frame": 2,
+              "value": 0
+            }
+          ],
+          "opacity": [
+            {
+              "frame": 2,
+              "value": 255
+            },
+            {
+              "frame": 2.0833333333333335,
+              "value": 0
+            }
+          ]
+        }
+      }
+    },
+    "lightning-ground": {
+      "__type__": "cc.AnimationClip",
+      "_name": "skill_lighting_down",
+      "_duration": 2,
+      "speed": 0.5,
+      "wrapMode": 2,
+      "curveData": {
+        "paths": {
+          "tj": {
+            "props": {
+              "angle": [
+                {
+                  "frame": 0,
+                  "value": 0
+                },
+                {
+                  "frame": 2,
+                  "value": -360
+                }
+              ],
+              "opacity": [
+                {
+                  "frame": 0.08333333333333333,
+                  "value": 255
+                },
+                {
+                  "frame": 0.38333333333333336,
+                  "value": 255
+                }
+              ]
+            }
+          },
+          "bg": {
+            "props": {
+              "angle": [
+                {
+                  "frame": 0,
+                  "value": 0
+                },
+                {
+                  "frame": 2,
+                  "value": 360
+                }
+              ],
+              "opacity": [
+                {
+                  "frame": 0.16666666666666666,
+                  "value": 255
+                },
+                {
+                  "frame": 0.5,
+                  "value": 255
+                }
+              ]
+            }
+          },
+          "light ": {
+            "props": {
+              "opacity": [
+                {
+                  "frame": 0.08333333333333333,
+                  "value": 255
+                },
+                {
+                  "frame": 0.4666666666666667,
+                  "value": 255
+                }
+              ]
+            }
+          },
+          "ring2": {
+            "props": {
+              "scale": [
+                {
+                  "frame": 0,
+                  "value": {
+                    "__type__": "cc.Vec2",
+                    "x": 0.5,
+                    "y": 0.5
+                  }
+                },
+                {
+                  "frame": 0.16666666666666666,
+                  "value": {
+                    "__type__": "cc.Vec2",
+                    "x": 1.5,
+                    "y": 1.5
+                  }
+                },
+                {
+                  "frame": 0.5,
+                  "value": {
+                    "__type__": "cc.Vec2",
+                    "x": 2.5,
+                    "y": 2.5
+                  }
+                },
+                {
+                  "frame": 0.5166666666666667,
+                  "value": {
+                    "__type__": "cc.Vec2",
+                    "x": 0.5,
+                    "y": 0.5
+                  }
+                },
+                {
+                  "frame": 1,
+                  "value": {
+                    "__type__": "cc.Vec2",
+                    "x": 0.5,
+                    "y": 0.5
+                  }
+                },
+                {
+                  "frame": 1.1666666666666667,
+                  "value": {
+                    "__type__": "cc.Vec2",
+                    "x": 1.5,
+                    "y": 1.5
+                  }
+                },
+                {
+                  "frame": 1.5,
+                  "value": {
+                    "__type__": "cc.Vec2",
+                    "x": 2.5,
+                    "y": 2.5
+                  }
+                }
+              ],
+              "opacity": [
+                {
+                  "frame": 0,
+                  "value": 0
+                },
+                {
+                  "frame": 0.16666666666666666,
+                  "value": 80
+                },
+                {
+                  "frame": 0.5,
+                  "value": 0
+                },
+                {
+                  "frame": 1,
+                  "value": 0
+                },
+                {
+                  "frame": 1.1666666666666667,
+                  "value": 80
+                },
+                {
+                  "frame": 1.5,
+                  "value": 0
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "particleEffects": {
+    "magic-hit": {
+      "prefab": "tower_bullet02_hit",
+      "particleParameters": "tower_bullet02_hit",
+      "smokeParameters": "tower_bullet02_hit_smoke",
+      "configFile": "effect-config.json",
+      "nativeSequence": false
+    },
+    "tower-build-smoke": {
+      "textureFile": "tower-build-smoke.png",
+      "configFile": "effect-config.json",
+      "particleParameters": "tower_build_smoke",
+      "particleNode": "tower_build_smoke",
+      "prefab": "GameTower",
+      "nodeLocalPosition": [
+        0,
+        0
+      ],
+      "nodeScale": [
+        1,
+        1
+      ],
+      "duration": 0.1,
+      "cleanupAfter": 1,
+      "maxParticles": 400,
+      "emissionRate": 400,
+      "life": 0.20000000298023224,
+      "lifeVariance": 0.5,
+      "nativeSequence": false,
+      "blend": "source-over",
+      "sourceColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "finishColor": [
+        1,
+        1,
+        1,
+        0
+      ]
+    }
+  }
+}

@@ -11,7 +11,7 @@ CLASSES_DIR="${BUILD_DIR}/classes"
 DEX_DIR="${BUILD_DIR}/dex"
 OUTPUT_DIR="${BUILD_DIR}/outputs"
 CLASSES_JAR="${BUILD_DIR}/classes.jar"
-APK_PATH="${OUTPUT_DIR}/Airvana-v1.1.0-debug.apk"
+APK_PATH="${OUTPUT_DIR}/Airvana-v1.1.2-debug.apk"
 EMBEDDED_INDEX="${BUILD_DIR}/embedded-index.html"
 EMBEDDED_CSS="${BUILD_DIR}/embedded-airvana-v4.css"
 EMBEDDED_SENSOR="${BUILD_DIR}/embedded-sensor-interactions-v1.js"
@@ -43,8 +43,11 @@ fi
 rm -rf "${BUILD_DIR}"
 mkdir -p "${ASSETS_DIR}/www" "${GEN_DIR}" "${CLASSES_DIR}" "${DEX_DIR}" "${OUTPUT_DIR}"
 
-# 可选媒体（HeyGen 样片）不进 APK：Web 端按需加载，壳内自动回退静态身份卡
-rsync -a --exclude 'ai-twin/heygen/**' "${PROJECT_DIR}/public/" "${ASSETS_DIR}/www/"
+# HeyGen 大视频不进 APK，但保留轻量海报；分身角色库和舞台必须有完整静态形象。
+rsync -a \
+  --exclude 'ai-twin/heygen/*.mp4' \
+  --exclude 'ai-twin/heygen/showcase/*.mp4' \
+  "${PROJECT_DIR}/public/" "${ASSETS_DIR}/www/"
 
 "${BUILD_TOOLS_DIR}/aapt2" compile \
   --dir "${WRAPPER_DIR}/app/src/main/res" \
@@ -57,8 +60,8 @@ rsync -a --exclude 'ai-twin/heygen/**' "${PROJECT_DIR}/public/" "${ASSETS_DIR}/w
   --java "${GEN_DIR}" \
   --min-sdk-version 26 \
   --target-sdk-version 35 \
-  --version-code 20 \
-  --version-name 1.1.0 \
+  --version-code 22 \
+  --version-name 1.1.2 \
   --auto-add-overlay \
   -A "${ASSETS_DIR}" \
   "${BUILD_DIR}/compiled-resources.zip"
@@ -168,9 +171,38 @@ for playable_id in plb_star_mower plb_star_deck plb_adventurer_journal plb_idiom
     exit 1
   fi
 done
-if ! rg -q 'const homeArcadeDiscoverIds = \[34,35,36,37,38,39,40,41,42,43,44,24,25,26,27,28,29,30,31,32,33,1,2,5,6,9,10,12,14,15,16,17,18,19,20,21,22,23\]' "${EMBEDDED_INDEX}" \
-  || ! rg -q "tag:'原创新游'" "${EMBEDDED_INDEX}"; then
+if ! rg -q 'const homeArcadeDiscoverIds = \[132,122,121,127,125,120,123,128,129,130,131,126,124,111,112,113,114,115,116,117,118,101,102,103,104,105,34,35,36,37,38,39,40,41,42,43,44,24,25,26,27,28,29,30,31,32,33,1,2,5,6,9,10,12,14,15,16,17,18,19,20,21,22,23\]' "${EMBEDDED_INDEX}" \
+  || ! rg -q "tag:'截图原图与互动游戏'" "${EMBEDDED_INDEX}"; then
   print -u2 "APK verification failed: original arcade Discover gallery is missing"
+  exit 1
+fi
+for game in risk-run coin-castle lucky-fruit htx-quest coin-dozer city-squad niguolaia token-harbor mini-gp-racers street-gold-rush star-table sud-texas kol-town; do
+  if ! rg -q "assets/www/arcade/${game}/index\.html" "${APK_LISTING}"; then
+    print -u2 "APK verification failed: bundled priority game ${game} is missing"
+    exit 1
+  fi
+done
+for cover in coin-dozer htx-quest token-harbor coin-castle lucky-fruit city-squad mini-gp-racers street-gold-rush star-table sud-texas risk-run; do
+  if ! rg -q "assets/www/assets/featured-originals-v2/${cover}-user-20260915-srgb\.png" "${APK_LISTING}"; then
+    print -u2 "APK verification failed: supplied priority cover ${cover} is missing"
+    exit 1
+  fi
+done
+for asset in assets/featured-originals-v2/kol-town-user-20260916-srgb.png arcade/kol-town/game.js arcade/kol-town/styles.css arcade/kol-town/assets/live2d/mao-runtime/index.html; do
+  if ! rg -Fq "assets/www/${asset}" "${APK_LISTING}"; then
+    print -u2 "APK verification failed: KOL Town asset ${asset} is missing"
+    exit 1
+  fi
+done
+for poster in web3-game-kol-poster.webp showcase/brand-kol-poster.jpg showcase/cyber-tech-kol-poster.jpg; do
+  if ! rg -q "assets/www/ai-twin/heygen/${poster}" "${APK_LISTING}"; then
+    print -u2 "APK verification failed: AI twin poster ${poster} is missing"
+    exit 1
+  fi
+done
+if ! rg -q 'playable-frame-v1\.js\?v=1\.0\.5' "${EMBEDDED_INDEX}" \
+  || ! rg -q 'assets/www/playable-frame-v1\.js' "${APK_LISTING}"; then
+  print -u2 "APK verification failed: resilient playable frame runtime is missing"
   exit 1
 fi
 for cover in neon-dash pulse-forge sky-stack rune-circuit prism-match star-cups deep-catch ember-bastion nova-drift void-squadron; do
@@ -221,7 +253,7 @@ if ! rg -q 'class="play-feed__cover"' "${EMBEDDED_INDEX}" \
   print -u2 "APK verification failed: Home arcade cover visibility fix is missing"
   exit 1
 fi
-print "APK embedded UI verified: 通知 / 互动 / 私信 / 38 款完整试玩 / 9 款传感器游戏 / 陀螺仪 / 摇晃 / 吹气 / 触控降级"
+print "APK embedded UI verified: 通知 / 互动 / 私信 / 38 款内置完整试玩 / 13 款优先独立游戏 / 9 款传感器游戏 / 陀螺仪 / 摇晃 / 吹气 / 触控降级"
 
 shasum -a 256 "${APK_PATH}"
 ls -lh "${APK_PATH}"

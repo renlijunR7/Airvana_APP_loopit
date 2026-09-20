@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+ <meta name="theme-color" content="#233329">
+ <meta name="apple-mobile-web-app-capable" content="yes">
+ <title>你过来呀 · 三国塔防</title>
+ <link rel="icon" href="assets/ui/Head_Icon9.png">
+ <link rel="preload" as="image" href="assets/loading/loading_bg_big.png" fetchpriority="high">
+ <link rel="preload" as="image" href="assets/loading/logo.png" fetchpriority="high">
+ <link rel="stylesheet" href="style.css">
+ <link rel="stylesheet" href="tutorial.css">
+ <link rel="stylesheet" href="loading.css">
+</head>
+<body>
+ <main id="game" aria-label="你过来呀塔防游戏" aria-busy="true">
+  <canvas id="battlefield" aria-label="战场：敌人沿道路向下行进，点击空地建造防御塔"></canvas>
+  <div id="slots" aria-label="防御塔位置"></div>
+  <header class="hud">
+   <div class="resources"><div class="counter life"><span id="heart-icon"></span><strong id="life">20</strong></div><div class="counter iron"><span id="iron-icon"></span><strong id="gold">400</strong></div></div>
+   <button id="level-button" class="level-button" aria-label="选择关卡"><span id="level-name">长坂坡</span><span id="wave-dots"></span></button>
+   <div class="top-actions"><button id="sound" class="small-button" aria-label="开启声音"></button><button id="pause" class="small-button" aria-label="暂停游戏"></button></div>
+  </header>
+  <div id="announcement" role="status"></div>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <div id="target-hint" hidden>点击道路，选择施放位置<button id="cancel-target">取消</button></div>
+  <aside id="tower-menu" class="tower-menu" hidden></aside>
+  <div id="guide" class="guide"><div class="guide-seal">军师<br>锦囊</div><div><strong>主公，敌军就要来了！</strong><p>点击 <b>＋</b> 空地建塔，准备好后迎敌。</p></div><button id="guide-close" aria-label="关闭提示">×</button></div>
+  <footer class="controls">
+   <div class="skills"><button id="fire" class="skill-button" aria-label="闪电风暴：点击后选择攻击区域"><span class="skill-art"></span><b>闪电风暴</b><em></em></button><button id="reinforcements" class="skill-button" aria-label="招兵：点击后选择拦截位置"><span class="skill-art"></span><b>招兵</b><em></em></button></div>
+   <div class="battle-actions"><button id="speed" class="speed-button" aria-label="切换战斗速度">1×</button><button id="start-wave" class="gold-button"><span>▶</span><b>开始迎敌</b></button></div>
+  </footer>
+  <div id="modal" class="modal" hidden></div>
+  <div id="loading" aria-label="游戏加载页">
+   <img class="loading-background" src="assets/loading/loading_bg_big.png" alt="" fetchpriority="high" draggable="false">
+   <span class="loading-version">ver: 1.0.22.1</span>
+   <img class="loading-logo" src="assets/loading/logo.png" alt="你过来呀" fetchpriority="high" draggable="false">
+   <img class="loading-spring" src="assets/loading/loading_spring_font.png" alt="春节版" draggable="false">
+   <div id="loading-progress" role="progressbar" aria-label="游戏资源加载进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">0.0%</div>
+   <div id="loading-status" role="status">进入游戏中</div>
+   <button id="loading-retry" hidden>重新加载</button>
+   <img class="loading-health" src="assets/loading/health_advice.png" alt="抵制不良游戏，拒绝盗版游戏。注意自我保护，谨防受骗上当。适度游戏益脑，沉迷游戏伤身。合理安排游戏，享受健康生活。" draggable="false">
+  </div>
+ </main>
+ <script type="module" src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+/* Original LoadingPage positions, scaled from its 640 × 1136 canvas. */
+#loading{position:absolute;inset:0;z-index:60;overflow:hidden;background:#4d61a0;color:#fff;font-family:Arial,"PingFang SC","Microsoft Yahei",sans-serif;font-weight:400;touch-action:none}
+#loading img{position:absolute;max-width:none}
+.loading-background{width:100cqw;height:234.375cqw;left:50%;top:50%;transform:translate(-50%,-50%);object-fit:fill}
+.loading-version{position:absolute;left:1.71875cqw;top:.78125cqw;font-size:3.125cqw;line-height:4.6875cqw;white-space:nowrap}
+.loading-logo{width:71.875cqw;height:31.625cqw;left:48.90625%;top:calc(50% - 67.25734375cqw);transform:translate(-50%,-50%)}
+.loading-spring{width:7.5cqw;height:14.375cqw;left:87.30671875%;top:calc(50% - 63.59921875cqw);transform:translate(-50%,-50%)}
+#loading-progress{position:absolute;left:49.65625%;bottom:17.828125cqw;transform:translate(-50%,50%);font-size:7.8125cqw;line-height:9.375cqw;white-space:nowrap;font-variant-numeric:tabular-nums}
+#loading-status{position:absolute;left:49.6875%;bottom:11.25cqw;transform:translate(-50%,50%);font-size:3.125cqw;line-height:3.125cqw;white-space:nowrap}
+.loading-health{width:73.59375cqw;height:6.71875cqw;left:50%;bottom:1.328125cqw;transform:translateX(-50%)}
+#loading-retry{position:absolute;left:50%;bottom:24cqw;transform:translateX(-50%);min-height:44px;padding:2cqw 5cqw;border:1px solid #fff8;border-radius:1cqw;background:#27355bdb;color:#fff;font:inherit;font-size:3.5cqw;touch-action:manipulation}
+#loading[data-failed="true"] #loading-progress{visibility:hidden}
+#game[aria-busy="true"]>:not(#loading){visibility:hidden}

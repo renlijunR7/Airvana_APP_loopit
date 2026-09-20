@@ -1,0 +1,5924 @@
+{
+  "source": "http://game.zhongyigames.com/niguolaia/",
+  "license": "Publicly served reference-game assets. Reuse and commercial license not verified. Local requested recreation only.",
+  "frames": [
+    {
+      "name": "Battle_Pause",
+      "file": "outputs/game/assets/ui/Battle_Pause.png",
+      "size": [
+        60,
+        63
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Battle_Pause",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          261,
+          895,
+          60,
+          63
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          60,
+          63
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "81774be4b7d808d7b86f63df2b7b804f93437e3b959520be825156f1a33bf32d"
+    },
+    {
+      "name": "Skill_Icon1",
+      "file": "outputs/game/assets/ui/Skill_Icon1.png",
+      "size": [
+        12,
+        17
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Skill_Icon1",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          981,
+          987,
+          12,
+          17
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          12,
+          17
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "4bba23ab83e807d23d6a784b238097a558b7a893e2cebd0d7e680790322f0f4f"
+    },
+    {
+      "name": "Battle_End",
+      "file": "outputs/game/assets/ui/Battle_End.png",
+      "size": [
+        61,
+        56
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Battle_End",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          593,
+          868,
+          61,
+          56
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          61,
+          56
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "4aedfa9001e96ae44f5e5bc7be6077491bd0b9a60dc88882e9b2c6a4a3f0f6c6"
+    },
+    {
+      "name": "Battle_TowerBuilding_icon3",
+      "file": "outputs/game/assets/ui/Battle_TowerBuilding_icon3.png",
+      "size": [
+        83,
+        87
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Battle_TowerBuilding_icon3",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          689,
+          704,
+          83,
+          87
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          83,
+          87
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "e673a446fdcd57bd0973fd9c42035a2f0388ac0a8d1bfc84206d428f8e66d56b"
+    },
+    {
+      "name": "Battle_Icon2",
+      "file": "outputs/game/assets/ui/Battle_Icon2.png",
+      "size": [
+        50,
+        46
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Battle_Icon2",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          719,
+          874,
+          50,
+          46
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          50,
+          46
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "54cbfba1ef5ed7b87af85734c78bb308ab08c5c26889a84d23ef1ec1149119d5"
+    },
+    {
+      "name": "Battle_Begin",
+      "file": "outputs/game/assets/ui/Battle_Begin.png",
+      "size": [
+        96,
+        91
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Battle_Begin",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          473,
+          464,
+          96,
+          91
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          96,
+          91
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "b7aa6b1830a30a08d420f86154e3d30c8c3ce2771d25cb74e22a5466eb1e0580"
+    },
+    {
+      "name": "Battle_TowerBuilding_icon2",
+      "file": "outputs/game/assets/ui/Battle_TowerBuilding_icon2.png",
+      "size": [
+        83,
+        87
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Battle_TowerBuilding_icon2",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          594,
+          783,
+          83,
+          87
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          83,
+          87
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "7a39d16cf571546f30caef44cbb9d8db8063380ad074db418def141a09464202"
+    },
+    {
+      "name": "Battle_TowerBuilding_icon1",
+      "file": "outputs/game/assets/ui/Battle_TowerBuilding_icon1.png",
+      "size": [
+        83,
+        87
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Battle_TowerBuilding_icon1",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          683,
+          789,
+          83,
+          87
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          83,
+          87
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "6121db1bd8ac736de9a4dd0d1d6cd627d5dfd3eed6b7ab2793dc3f5126652c86"
+    },
+    {
+      "name": "Battle_Hole",
+      "file": "outputs/game/assets/ui/Battle_Hole.png",
+      "size": [
+        154,
+        86
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Battle_Hole",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          214,
+          650,
+          154,
+          86
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          154,
+          86
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "b87ad781f0783800cd0d34fee1cdc07383f1fe6969a52c77f4169c970472ffc5"
+    },
+    {
+      "name": "Battle_Icon3",
+      "file": "outputs/game/assets/ui/Battle_Icon3.png",
+      "size": [
+        50,
+        46
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Battle_Icon3",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          370,
+          843,
+          50,
+          46
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          50,
+          46
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "b45d2f70f002485778cb81fe671741661bbfb8364bc9c51b0fc4ca02490ddd13"
+    },
+    {
+      "name": "Battle_EnemyPosition_Arrow",
+      "file": "outputs/game/assets/ui/Battle_EnemyPosition_Arrow.png",
+      "size": [
+        17,
+        22
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Battle_EnemyPosition_Arrow",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          566,
+          543,
+          17,
+          22
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          17,
+          22
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "678d9a9545a52820432e1f9c391723ccef58faef0eec369a38e38fd9f1f8880c"
+    },
+    {
+      "name": "Battle_TowerBuilding_icon4",
+      "file": "outputs/game/assets/ui/Battle_TowerBuilding_icon4.png",
+      "size": [
+        83,
+        87
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Battle_TowerBuilding_icon4",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          600,
+          698,
+          83,
+          87
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          83,
+          87
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "0beb14a7e2de5d82cda970cc897ace6da0b59c5187f8795a27be7387f0f3aa94"
+    },
+    {
+      "name": "logo",
+      "file": "outputs/game/assets/ui/logo.png",
+      "size": [
+        575,
+        253
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/d0/d0c3078e-8ccc-4e5e-89ef-5f6ce5afdb7c.79405.png",
+      "originalFrame": {
+        "name": "logo",
+        "texture": "d0wweOjMxOXonvX2zlr9t8",
+        "rect": [
+          440,
+          0,
+          575,
+          253
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          575,
+          253
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "group": "loading-meta"
+      },
+      "sha256": "84808dc43824f35a8a4ac25061a51dad213cc6aa36cbc854ce336e47d1aed6ae"
+    },
+    {
+      "name": "Head_Icon7",
+      "file": "outputs/game/assets/ui/Head_Icon7.png",
+      "size": [
+        85,
+        116
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/e7/e79fd454-06dd-4d8d-985a-768b4868125d.9adda.png",
+      "originalFrame": {
+        "name": "Head_Icon7",
+        "texture": "e7n9RUBt1NjZhadotIaBJd",
+        "rect": [
+          340,
+          1842,
+          85,
+          116
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          85,
+          116
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "group": "common"
+      },
+      "sha256": "f094d2604331eac8f520fbdb00f11d6c00b61dcebccac5a59fd8730e6390dfee"
+    },
+    {
+      "name": "Head_Icon9",
+      "file": "outputs/game/assets/ui/Head_Icon9.png",
+      "size": [
+        85,
+        116
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/e7/e79fd454-06dd-4d8d-985a-768b4868125d.9adda.png",
+      "originalFrame": {
+        "name": "Head_Icon9",
+        "texture": "e7n9RUBt1NjZhadotIaBJd",
+        "rect": [
+          340,
+          1598,
+          85,
+          116
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          85,
+          116
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "group": "common"
+      },
+      "sha256": "7db928431f1450176a4d4dacf8faf30c67c4878ee254176e466208901801ac34"
+    },
+    {
+      "name": "Icon_Piece_Diao",
+      "file": "outputs/game/assets/ui/Icon_Piece_Diao.png",
+      "size": [
+        106,
+        108
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/e7/e79fd454-06dd-4d8d-985a-768b4868125d.9adda.png",
+      "originalFrame": {
+        "name": "Icon_Piece_Diao",
+        "texture": "e7n9RUBt1NjZhadotIaBJd",
+        "rect": [
+          442,
+          346,
+          106,
+          108
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          106,
+          108
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "group": "common"
+      },
+      "sha256": "0a637e59e4cbc0f499085e0b5d87b3439aeac36d7e708007f6cc3927b3f90234"
+    },
+    {
+      "name": "Skill_Piece1",
+      "file": "outputs/game/assets/ui/Skill_Piece1.png",
+      "size": [
+        106,
+        108
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/8c/8c088d8c-db95-48d4-8a14-483ca9bef6e9.c4a7d.png",
+      "originalFrame": {
+        "name": "Skill_Piece1",
+        "texture": "8cCI2M25VI1IoUSDypvvbp",
+        "rect": [
+          378,
+          216,
+          106,
+          108
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          106,
+          108
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "group": "skill"
+      },
+      "sha256": "ded550876b153253d582c6797c3b097879a276076cbc2ca905e2ca4dc30bc7f3"
+    },
+    {
+      "name": "Skill_Piece3",
+      "file": "outputs/game/assets/ui/Skill_Piece3.png",
+      "size": [
+        106,
+        108
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/8c/8c088d8c-db95-48d4-8a14-483ca9bef6e9.c4a7d.png",
+      "originalFrame": {
+        "name": "Skill_Piece3",
+        "texture": "8cCI2M25VI1IoUSDypvvbp",
+        "rect": [
+          272,
+          245,
+          106,
+          108
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          106,
+          108
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "group": "skill"
+      },
+      "sha256": "a590cc034d60f091747b248bb1c2162938beee05c7105652e8b28e03bc8949f9"
+    },
+    {
+      "name": "Skill_Piece2",
+      "file": "outputs/game/assets/ui/Skill_Piece2.png",
+      "size": [
+        106,
+        108
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/8c/8c088d8c-db95-48d4-8a14-483ca9bef6e9.c4a7d.png",
+      "originalFrame": {
+        "name": "Skill_Piece2",
+        "texture": "8cCI2M25VI1IoUSDypvvbp",
+        "rect": [
+          274,
+          353,
+          106,
+          108
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          106,
+          108
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "group": "skill"
+      },
+      "sha256": "a6423668247b75498e98b702aaf9473d90eeca3d30a648de8e0ee5ba0681b311"
+    },
+    {
+      "name": "HeroSkill_IconBg_Green",
+      "file": "outputs/game/assets/ui/HeroSkill_IconBg_Green.png",
+      "size": [
+        107,
+        110
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/16/1687118d-c74e-433d-b5fb-914751c65261.265d5.png",
+      "originalFrame": {
+        "name": "HeroSkill_IconBg_Green",
+        "texture": "16hxGNx05DPbX7kUdRxlJh",
+        "rect": [
+          124,
+          601,
+          107,
+          110
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          107,
+          110
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "137bb798b2531e0e8bd8ed89fef84f14bc3fd8fc1ce6cf1b820ba83bc69d5bd5"
+    },
+    {
+      "name": "HeroSkill_Icon4",
+      "file": "outputs/game/assets/ui/HeroSkill_Icon4.png",
+      "size": [
+        121,
+        121
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/16/1687118d-c74e-433d-b5fb-914751c65261.265d5.png",
+      "originalFrame": {
+        "name": "HeroSkill_Icon4",
+        "texture": "16hxGNx05DPbX7kUdRxlJh",
+        "rect": [
+          1,
+          731,
+          121,
+          121
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          121,
+          121
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "c670acae5ea0578e141756f707c63066029c205c7e98703925850f07f9c72581"
+    },
+    {
+      "name": "skillName_3208",
+      "file": "outputs/game/assets/ui/skillName_3208.png",
+      "size": [
+        87,
+        25
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/16/1687118d-c74e-433d-b5fb-914751c65261.265d5.png",
+      "originalFrame": {
+        "name": "skillName_3208",
+        "texture": "16hxGNx05DPbX7kUdRxlJh",
+        "rect": [
+          1,
+          977,
+          87,
+          25
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          87,
+          25
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "a749b0470f0901e81801e1fe9f756bef49fc90f20e48db0cc88992ac02e0e0d2"
+    },
+    {
+      "name": "skillName_3207",
+      "file": "outputs/game/assets/ui/skillName_3207.png",
+      "size": [
+        87,
+        25
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/16/1687118d-c74e-433d-b5fb-914751c65261.265d5.png",
+      "originalFrame": {
+        "name": "skillName_3207",
+        "texture": "16hxGNx05DPbX7kUdRxlJh",
+        "rect": [
+          124,
+          933,
+          87,
+          25
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          87,
+          25
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "8accb35463fffebef43bd16c93e8db5cb26140f65f753d2d92eb86bf2fb65938"
+    },
+    {
+      "name": "HeroSkill_Bg",
+      "file": "outputs/game/assets/ui/HeroSkill_Bg.png",
+      "size": [
+        90,
+        90
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/16/1687118d-c74e-433d-b5fb-914751c65261.265d5.png",
+      "originalFrame": {
+        "name": "HeroSkill_Bg",
+        "texture": "16hxGNx05DPbX7kUdRxlJh",
+        "rect": [
+          233,
+          584,
+          90,
+          90
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          90,
+          90
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "405d18cb910028ce077f70d7fe9990fa94d34faedc8917848657bf5281d5080f"
+    },
+    {
+      "name": "HeroSkill_IconBg_Purple",
+      "file": "outputs/game/assets/ui/HeroSkill_IconBg_Purple.png",
+      "size": [
+        107,
+        110
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/16/1687118d-c74e-433d-b5fb-914751c65261.265d5.png",
+      "originalFrame": {
+        "name": "HeroSkill_IconBg_Purple",
+        "texture": "16hxGNx05DPbX7kUdRxlJh",
+        "rect": [
+          124,
+          489,
+          107,
+          110
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          107,
+          110
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "4fe3e00f0aa5368029d8f2fc40a028b49d9faf202b51d89fbf6d0a36d61ee5d2"
+    },
+    {
+      "name": "HeroSkill_Icon_Bg",
+      "file": "outputs/game/assets/ui/HeroSkill_Icon_Bg.png",
+      "size": [
+        90,
+        93
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/16/1687118d-c74e-433d-b5fb-914751c65261.265d5.png",
+      "originalFrame": {
+        "name": "HeroSkill_Icon_Bg",
+        "texture": "16hxGNx05DPbX7kUdRxlJh",
+        "rect": [
+          233,
+          489,
+          90,
+          93
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          90,
+          93
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "7419e9c782247a8713b0f9252623c5daedbfb05840534ec49b8db109ca674304"
+    },
+    {
+      "name": "HeroSkill_Icon3",
+      "file": "outputs/game/assets/ui/HeroSkill_Icon3.png",
+      "size": [
+        121,
+        121
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/16/1687118d-c74e-433d-b5fb-914751c65261.265d5.png",
+      "originalFrame": {
+        "name": "HeroSkill_Icon3",
+        "texture": "16hxGNx05DPbX7kUdRxlJh",
+        "rect": [
+          1,
+          854,
+          121,
+          121
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          121,
+          121
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "d9a92ec34480bdc2bd5f458294535722f24beeaeaf1848d370db7314c100cb39"
+    },
+    {
+      "name": "HeroSkill_Icon7",
+      "file": "outputs/game/assets/ui/HeroSkill_Icon7.png",
+      "size": [
+        121,
+        121
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/16/1687118d-c74e-433d-b5fb-914751c65261.265d5.png",
+      "originalFrame": {
+        "name": "HeroSkill_Icon7",
+        "texture": "16hxGNx05DPbX7kUdRxlJh",
+        "rect": [
+          169,
+          243,
+          121,
+          121
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          121,
+          121
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "dcdeb3610de60b39893093fa22766cecc6120439cba7949a6eac2566cdfb69ea"
+    },
+    {
+      "name": "HeroSkill_Icon6",
+      "file": "outputs/game/assets/ui/HeroSkill_Icon6.png",
+      "size": [
+        121,
+        121
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/16/1687118d-c74e-433d-b5fb-914751c65261.265d5.png",
+      "originalFrame": {
+        "name": "HeroSkill_Icon6",
+        "texture": "16hxGNx05DPbX7kUdRxlJh",
+        "rect": [
+          337,
+          1,
+          121,
+          121
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          121,
+          121
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "614917d71e8c227de9a6ae2ef66785beaa50e8f1faa862d9806d9cb39a08f42c"
+    },
+    {
+      "name": "HeroSkill_Choice",
+      "file": "outputs/game/assets/ui/HeroSkill_Choice.png",
+      "size": [
+        106,
+        106
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/16/1687118d-c74e-433d-b5fb-914751c65261.265d5.png",
+      "originalFrame": {
+        "name": "HeroSkill_Choice",
+        "texture": "16hxGNx05DPbX7kUdRxlJh",
+        "rect": [
+          124,
+          825,
+          106,
+          106
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          106,
+          106
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "79276bb9cb246ef4f62db98e679bb1fc7ad68cf2487c9f73cb01cbb4cecfdf2c"
+    },
+    {
+      "name": "HeroSkill_Icon8",
+      "file": "outputs/game/assets/ui/HeroSkill_Icon8.png",
+      "size": [
+        121,
+        121
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/16/1687118d-c74e-433d-b5fb-914751c65261.265d5.png",
+      "originalFrame": {
+        "name": "HeroSkill_Icon8",
+        "texture": "16hxGNx05DPbX7kUdRxlJh",
+        "rect": [
+          1,
+          485,
+          121,
+          121
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          121,
+          121
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "9933faca0a6885f112e01888cb7b0e3f516a1f59d1459b0a05087e1a042ff01c"
+    },
+    {
+      "name": "skillName_3201",
+      "file": "outputs/game/assets/ui/skillName_3201.png",
+      "size": [
+        87,
+        25
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/16/1687118d-c74e-433d-b5fb-914751c65261.265d5.png",
+      "originalFrame": {
+        "name": "skillName_3201",
+        "texture": "16hxGNx05DPbX7kUdRxlJh",
+        "rect": [
+          396,
+          971,
+          87,
+          25
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          87,
+          25
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "8b313cbf2cd7e2db697cbabf48bffc87a1f82c0fdba7338cc2bf8b7ffda069a1"
+    },
+    {
+      "name": "skillName_3203",
+      "file": "outputs/game/assets/ui/skillName_3203.png",
+      "size": [
+        87,
+        25
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/16/1687118d-c74e-433d-b5fb-914751c65261.265d5.png",
+      "originalFrame": {
+        "name": "skillName_3203",
+        "texture": "16hxGNx05DPbX7kUdRxlJh",
+        "rect": [
+          307,
+          936,
+          87,
+          25
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          87,
+          25
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "8ad6494466b465178f647de119ce08754d150d72bbd64ff10648ce1d5e7e96fd"
+    },
+    {
+      "name": "skillName_3205",
+      "file": "outputs/game/assets/ui/skillName_3205.png",
+      "size": [
+        87,
+        25
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/16/1687118d-c74e-433d-b5fb-914751c65261.265d5.png",
+      "originalFrame": {
+        "name": "skillName_3205",
+        "texture": "16hxGNx05DPbX7kUdRxlJh",
+        "rect": [
+          320,
+          909,
+          87,
+          25
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          87,
+          25
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "a51ad66b6be16b82bd48db42109c3b939ebcb1a8b256fda8f23fd1d992550b7a"
+    },
+    {
+      "name": "Battle_Skill_Lock",
+      "file": "outputs/game/assets/ui/Battle_Skill_Lock.png",
+      "size": [
+        32,
+        44
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/16/1687118d-c74e-433d-b5fb-914751c65261.265d5.png",
+      "originalFrame": {
+        "name": "Battle_Skill_Lock",
+        "texture": "16hxGNx05DPbX7kUdRxlJh",
+        "rect": [
+          273,
+          931,
+          32,
+          44
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          32,
+          44
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "30969b6f120a4f97e5f033f0f446bf227e85ee451a92d4669b9eb342b9413836"
+    },
+    {
+      "name": "HeroSkill_IconBg_Blue",
+      "file": "outputs/game/assets/ui/HeroSkill_IconBg_Blue.png",
+      "size": [
+        107,
+        110
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/16/1687118d-c74e-433d-b5fb-914751c65261.265d5.png",
+      "originalFrame": {
+        "name": "HeroSkill_IconBg_Blue",
+        "texture": "16hxGNx05DPbX7kUdRxlJh",
+        "rect": [
+          124,
+          713,
+          107,
+          110
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          107,
+          110
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "262abcf1ea5c6b9ebda682121e5a7d1d52cd4943172745f59a413d049d691098"
+    },
+    {
+      "name": "skillName_3206",
+      "file": "outputs/game/assets/ui/skillName_3206.png",
+      "size": [
+        87,
+        25
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/16/1687118d-c74e-433d-b5fb-914751c65261.265d5.png",
+      "originalFrame": {
+        "name": "skillName_3206",
+        "texture": "16hxGNx05DPbX7kUdRxlJh",
+        "rect": [
+          292,
+          457,
+          87,
+          25
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          87,
+          25
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "f7b3cae5e409560e082b3d92b2d8c71ee2c2bdd65f1fede4dd7dfafd0c51bb78"
+    },
+    {
+      "name": "HeroSkill_Icon2",
+      "file": "outputs/game/assets/ui/HeroSkill_Icon2.png",
+      "size": [
+        121,
+        121
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/16/1687118d-c74e-433d-b5fb-914751c65261.265d5.png",
+      "originalFrame": {
+        "name": "HeroSkill_Icon2",
+        "texture": "16hxGNx05DPbX7kUdRxlJh",
+        "rect": [
+          169,
+          366,
+          121,
+          121
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          121,
+          121
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "e527f45f69bc5d1bc2953db3ef75dcf55b3e87a2f4c689addda61e844a9fc5a0"
+    },
+    {
+      "name": "skillName_3202",
+      "file": "outputs/game/assets/ui/skillName_3202.png",
+      "size": [
+        87,
+        25
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/16/1687118d-c74e-433d-b5fb-914751c65261.265d5.png",
+      "originalFrame": {
+        "name": "skillName_3202",
+        "texture": "16hxGNx05DPbX7kUdRxlJh",
+        "rect": [
+          307,
+          963,
+          87,
+          25
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          87,
+          25
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "ae3a5fbe256a60558c0531b033e0acf4fa59bab14be44f19ebf131576e00098f"
+    },
+    {
+      "name": "skillName_3204",
+      "file": "outputs/game/assets/ui/skillName_3204.png",
+      "size": [
+        87,
+        25
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/16/1687118d-c74e-433d-b5fb-914751c65261.265d5.png",
+      "originalFrame": {
+        "name": "skillName_3204",
+        "texture": "16hxGNx05DPbX7kUdRxlJh",
+        "rect": [
+          124,
+          960,
+          87,
+          25
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          87,
+          25
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "ac6238cb2009db7f78f83c73a8eef42ae19351a5795f11ba01f73c6b8655e1a0"
+    },
+    {
+      "name": "HeroSkill_Icon1",
+      "file": "outputs/game/assets/ui/HeroSkill_Icon1.png",
+      "size": [
+        121,
+        121
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/16/1687118d-c74e-433d-b5fb-914751c65261.265d5.png",
+      "originalFrame": {
+        "name": "HeroSkill_Icon1",
+        "texture": "16hxGNx05DPbX7kUdRxlJh",
+        "rect": [
+          337,
+          124,
+          121,
+          121
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          121,
+          121
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "5480d10f64d77905676c434de6221b427d72abc3c2f7568799a52a702560ee2a"
+    },
+    {
+      "name": "HeroSkill_Icon5",
+      "file": "outputs/game/assets/ui/HeroSkill_Icon5.png",
+      "size": [
+        121,
+        121
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/16/1687118d-c74e-433d-b5fb-914751c65261.265d5.png",
+      "originalFrame": {
+        "name": "HeroSkill_Icon5",
+        "texture": "16hxGNx05DPbX7kUdRxlJh",
+        "rect": [
+          1,
+          608,
+          121,
+          121
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          121,
+          121
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "38075848738657ef087ae7d9c0d16d3fce861a1a26b23b2a8ff399d11413a4ae"
+    },
+    {
+      "name": "move_lightring",
+      "file": "outputs/game/assets/ui/move_lightring.png",
+      "size": [
+        69,
+        53
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "move_lightring",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          201,
+          840,
+          69,
+          53
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          69,
+          53
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "e1c7a4e0d04aa0d79c00ebeba0a57ac0537a14b02ffe717b039e9a9ac29d6e7e"
+    },
+    {
+      "name": "Battle_TowerBuilding_Move",
+      "file": "outputs/game/assets/ui/Battle_TowerBuilding_Move.png",
+      "size": [
+        75,
+        79
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Battle_TowerBuilding_Move",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          897,
+          607,
+          75,
+          79
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          75,
+          79
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "c75f6193a177adb45ac5fccaf9891a69f7acabca8acda17b9c626a9bf25a8397"
+    },
+    {
+      "name": "Head_Bg_Orange",
+      "file": "outputs/game/assets/ui/Head_Bg_Orange.png",
+      "size": [
+        85,
+        97
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Head_Bg_Orange",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          420,
+          738,
+          85,
+          97
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          85,
+          97
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "fd16fdfddae08a0a5ae3817b137c0b2a520f14efcf4a103d8ab6458e44bde4ec"
+    },
+    {
+      "name": "Battle_EnemyPosition_Icon_Boss",
+      "file": "outputs/game/assets/ui/Battle_EnemyPosition_Icon_Boss.png",
+      "size": [
+        57,
+        64
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Battle_EnemyPosition_Icon_Boss",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          475,
+          896,
+          57,
+          64
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          57,
+          64
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "94d757030dda1b5fe760ab8d45d89562550000967ad4d6a7f03ff133f9f054cf"
+    },
+    {
+      "name": "wave_bg_next",
+      "file": "outputs/game/assets/ui/wave_bg_next.png",
+      "size": [
+        40,
+        40
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "wave_bg_next",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          705,
+          938,
+          40,
+          40
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          40,
+          40
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "a11fabd7e78b10568b52be1e44d137bb38ddb1fc0c1ef541ed9d889a4a4fc648"
+    },
+    {
+      "name": "BuildFunc_HeroQuality_Bg_Green1",
+      "file": "outputs/game/assets/ui/BuildFunc_HeroQuality_Bg_Green1.png",
+      "size": [
+        83,
+        87
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "BuildFunc_HeroQuality_Bg_Green1",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          549,
+          609,
+          83,
+          87
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          83,
+          87
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "b32582fed35e6f7bfa351336023031ab256b98bbaff0a25ff781f4c8986fd984"
+    },
+    {
+      "name": "wave_box_icon",
+      "file": "outputs/game/assets/ui/wave_box_icon.png",
+      "size": [
+        30,
+        37
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "wave_box_icon",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          40,
+          891,
+          30,
+          37
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          30,
+          37
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "7b07312dcddd8c3e687bbda79869098336fbcbb881cd92a4d0e7f256a42e44ac"
+    },
+    {
+      "name": "Battle_End5",
+      "file": "outputs/game/assets/ui/Battle_End5.png",
+      "size": [
+        61,
+        56
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Battle_End5",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          444,
+          955,
+          61,
+          56
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          61,
+          56
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "d9105cf94055d8f997261a1ee98ec24ab72626f195ec267de686bb0579107482"
+    },
+    {
+      "name": "Tower_Upgrade_Arrow",
+      "file": "outputs/game/assets/ui/Tower_Upgrade_Arrow.png",
+      "size": [
+        38,
+        49
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Tower_Upgrade_Arrow",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          549,
+          698,
+          38,
+          49
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          38,
+          49
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "1ab5d005712d53089b75459fd8c2552f3a9dd3ac9a56340059ff1fc201287ca0"
+    },
+    {
+      "name": "Battle_End9",
+      "file": "outputs/game/assets/ui/Battle_End9.png",
+      "size": [
+        61,
+        56
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Battle_End9",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          326,
+          895,
+          61,
+          56
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          61,
+          56
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "1af133461a026381dd0c0d86529ab69603bba3aa96ad808ce42e05eba7b26c4e"
+    },
+    {
+      "name": "Result_Set_Sound",
+      "file": "outputs/game/assets/ui/Result_Set_Sound.png",
+      "size": [
+        61,
+        53
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Result_Set_Sound",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          656,
+          874,
+          61,
+          53
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          61,
+          53
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "e306d773c9e4bb3eab34d2a52a48b03f31e2625c377292a2a06b18fe8ee8c075"
+    },
+    {
+      "name": "Head_Bg_Blue",
+      "file": "outputs/game/assets/ui/Head_Bg_Blue.png",
+      "size": [
+        85,
+        97
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Head_Bg_Blue",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          566,
+          444,
+          85,
+          97
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          85,
+          97
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "accdf0bee0c0ee585bc370c0ca9553f11186cc6d2737a70847ed6c8d6111c9c5"
+    },
+    {
+      "name": "Battle_EnemyWaves_Bg",
+      "file": "outputs/game/assets/ui/Battle_EnemyWaves_Bg.png",
+      "size": [
+        580,
+        37
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Battle_EnemyWaves_Bg",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          1,
+          341,
+          580,
+          37
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          580,
+          37
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          19,
+          0,
+          19
+        ]
+      },
+      "sha256": "9837bec518243c6907307722aedb3ac414331a26c27d2e23237c2b7770ae904d"
+    },
+    {
+      "name": "Tombstone",
+      "file": "outputs/game/assets/ui/Tombstone.png",
+      "size": [
+        50,
+        54
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Tombstone",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          939,
+          315,
+          50,
+          54
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          50,
+          54
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "249acd09cdc6522230e5d8ca7ca1ff3d69b385c154d94c0f0b48e385c73a5e7b"
+    },
+    {
+      "name": "wave_bg_current",
+      "file": "outputs/game/assets/ui/wave_bg_current.png",
+      "size": [
+        61,
+        59
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "wave_bg_current",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          259,
+          959,
+          61,
+          59
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          61,
+          59
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "706ad211d05d86c3e47637560264873b09f64625d40a8f621f374022e29c8942"
+    },
+    {
+      "name": "Battle_UseMoney_Bg",
+      "file": "outputs/game/assets/ui/Battle_UseMoney_Bg.png",
+      "size": [
+        69,
+        24
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Battle_UseMoney_Bg",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          175,
+          814,
+          69,
+          24
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          69,
+          24
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "fb70849f237b2c43c49f86b39d7195310b1f7ae98a0c8769b1aed6da2ce5f42b"
+    },
+    {
+      "name": "SpeedLine",
+      "file": "outputs/game/assets/ui/SpeedLine.png",
+      "size": [
+        50,
+        14
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "SpeedLine",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          719,
+          922,
+          50,
+          14
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          50,
+          14
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "7014a63da10a2bda94aa4e0f10b55c85bc3b9c535329a3986adf0cb7e41456d3"
+    },
+    {
+      "name": "Head_Bg_Purple",
+      "file": "outputs/game/assets/ui/Head_Bg_Purple.png",
+      "size": [
+        85,
+        97
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Head_Bg_Purple",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          1,
+          923,
+          85,
+          97
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          85,
+          97
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "184c2b71aa22a60cd91019619df1e58c44416ae9723007bcc63c71f6e4e4c596"
+    },
+    {
+      "name": "Promote_FightCapacity_Icon2",
+      "file": "outputs/game/assets/ui/Promote_FightCapacity_Icon2.png",
+      "size": [
+        78,
+        89
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Promote_FightCapacity_Icon2",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          747,
+          374,
+          78,
+          89
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          78,
+          89
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "8d2e414aa07bcff0e136e06df08937e3434f507cb883a4df70ae0ab0c6370629"
+    },
+    {
+      "name": "Battle_TowerBuilding_Lock",
+      "file": "outputs/game/assets/ui/Battle_TowerBuilding_Lock.png",
+      "size": [
+        83,
+        87
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Battle_TowerBuilding_Lock",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          772,
+          793,
+          83,
+          87
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          83,
+          87
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "dd87c60b2596be2a561647d6ee99d798a5b0ed006e46b2413b510a735feeab89"
+    },
+    {
+      "name": "speed_02",
+      "file": "outputs/game/assets/ui/speed_02.png",
+      "size": [
+        58,
+        31
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "speed_02",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          771,
+          933,
+          58,
+          31
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          58,
+          31
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "33822cff6d2c8704127f6b5965bec492ff1de92ff9efbab6c66f4d83f58c72b4"
+    },
+    {
+      "name": "BuildFunc_HeroQuality_Bg_Purple1",
+      "file": "outputs/game/assets/ui/BuildFunc_HeroQuality_Bg_Purple1.png",
+      "size": [
+        83,
+        87
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "BuildFunc_HeroQuality_Bg_Purple1",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          653,
+          430,
+          83,
+          87
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          83,
+          87
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "e0f2e668b37a8b6f7fe7b279d2013f4dcab47eb95937c96297f25d750a5eb37d"
+    },
+    {
+      "name": "Battle_EnemyPosition_Bg",
+      "file": "outputs/game/assets/ui/Battle_EnemyPosition_Bg.png",
+      "size": [
+        53,
+        52
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Battle_EnemyPosition_Bg",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          891,
+          949,
+          53,
+          52
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          53,
+          52
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "fe5d11c3d4c4f7ad028ce0c8ac075693f470e5e2337ee7034fc204450a68c2ff"
+    },
+    {
+      "name": "Promote_FightCapacity_Icon4",
+      "file": "outputs/game/assets/ui/Promote_FightCapacity_Icon4.png",
+      "size": [
+        78,
+        89
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Promote_FightCapacity_Icon4",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          858,
+          235,
+          78,
+          89
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          78,
+          89
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "a72d88d0081a696e60df0d0c813fa6df7211d23e6ae1d8b4c26995a259c65247"
+    },
+    {
+      "name": "Battle_TowerBuilding_Sale",
+      "file": "outputs/game/assets/ui/Battle_TowerBuilding_Sale.png",
+      "size": [
+        75,
+        79
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Battle_TowerBuilding_Sale",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          918,
+          526,
+          75,
+          79
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          75,
+          79
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "aa43503c774d5a8c2ebff3b3f9683efa47da9a1d2aefdd51619d5904c2513307"
+    },
+    {
+      "name": "speed_01",
+      "file": "outputs/game/assets/ui/speed_01.png",
+      "size": [
+        58,
+        31
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "speed_01",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          831,
+          949,
+          58,
+          31
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          58,
+          31
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "769c33216fee86c074aac721305a7814f8282f96b1968fe66c949a7761d9f566"
+    },
+    {
+      "name": "Head_Hp",
+      "file": "outputs/game/assets/ui/Head_Hp.png",
+      "size": [
+        15,
+        12
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Head_Hp",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          953,
+          378,
+          15,
+          12
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          15,
+          12
+        ],
+        "rotated": 1,
+        "capInsets": [
+          7,
+          0,
+          7,
+          0
+        ]
+      },
+      "sha256": "06b3de25e959eb602d74efe2107d7214f370404792f6ecd32a4bce844f77a71e"
+    },
+    {
+      "name": "Battle_EnemyPosition_Icon_Cream1",
+      "file": "outputs/game/assets/ui/Battle_EnemyPosition_Icon_Cream1.png",
+      "size": [
+        57,
+        64
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Battle_EnemyPosition_Icon_Cream1",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          594,
+          543,
+          57,
+          64
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          57,
+          64
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "eb939513e499349d61528610eae9be82cddad065b7e0a8fb03d81b03511db2d1"
+    },
+    {
+      "name": "Head_Hp_Bg",
+      "file": "outputs/game/assets/ui/Head_Hp_Bg.png",
+      "size": [
+        15,
+        12
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Head_Hp_Bg",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          939,
+          378,
+          15,
+          12
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          15,
+          12
+        ],
+        "rotated": 1,
+        "capInsets": [
+          7,
+          0,
+          7,
+          0
+        ]
+      },
+      "sha256": "8187e0797936ec35bcf9d2a34cff25b347889f23a4d135567d523dc1ea0394c9"
+    },
+    {
+      "name": "wave_box_bg",
+      "file": "outputs/game/assets/ui/wave_box_bg.png",
+      "size": [
+        48,
+        53
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "wave_box_bg",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          272,
+          840,
+          48,
+          53
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          48,
+          53
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "baaa4419609fc2c857c8ceec2f2e08d0e9e67e75408c58820ee21759a5071392"
+    },
+    {
+      "name": "Battle_LineOfMarch",
+      "file": "outputs/game/assets/ui/Battle_LineOfMarch.png",
+      "size": [
+        25,
+        11
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Battle_LineOfMarch",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          834,
+          878,
+          25,
+          11
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          25,
+          11
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "2f67f6c62b88d12b08363a16b209c6053dd7c822ff69d14436288274ed25dd88"
+    },
+    {
+      "name": "Battle_End7",
+      "file": "outputs/game/assets/ui/Battle_End7.png",
+      "size": [
+        61,
+        56
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Battle_End7",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          386,
+          958,
+          61,
+          56
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          61,
+          56
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "d3fd30fd3a07d230ba4ffea70b0d508aab1dbbfa00d94e716b25409dedf0d018"
+    },
+    {
+      "name": "Attribute_Icon2",
+      "file": "outputs/game/assets/ui/Attribute_Icon2.png",
+      "size": [
+        30,
+        30
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Attribute_Icon2",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          812,
+          982,
+          30,
+          30
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          30,
+          30
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "390c037308517bd0371c65f9c3c18ed653503df60789e328c6e53d03048572c9"
+    },
+    {
+      "name": "Try_Font",
+      "file": "outputs/game/assets/ui/Try_Font.png",
+      "size": [
+        45,
+        48
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Try_Font",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          655,
+          929,
+          45,
+          48
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          45,
+          48
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "05e9dd57f94104845639187ffdec12d32336a3f0d9f90ccddbf2fc4cca4528fc"
+    },
+    {
+      "name": "Free_Arrow",
+      "file": "outputs/game/assets/ui/Free_Arrow.png",
+      "size": [
+        140,
+        34
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Free_Arrow",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          959,
+          45,
+          140,
+          34
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          140,
+          34
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "055727573a9a8bed460db6eaeae90794387773b1507ab6b18dcee1d2e5957a1a"
+    },
+    {
+      "name": "speed_04",
+      "file": "outputs/game/assets/ui/speed_04.png",
+      "size": [
+        58,
+        31
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "speed_04",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          442,
+          895,
+          58,
+          31
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          58,
+          31
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "2b0380c591918abf7cbc6da73faf00937b5f379d98553581b83eb9a002ec794b"
+    },
+    {
+      "name": "Battle_End1",
+      "file": "outputs/game/assets/ui/Battle_End1.png",
+      "size": [
+        61,
+        56
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Battle_End1",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          924,
+          820,
+          61,
+          56
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          61,
+          56
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "94d44cb056408fda66b778ac0a16a0fd54d1936a243676b8d0b6bd06ae8744e5"
+    },
+    {
+      "name": "Battle_Icon_key1",
+      "file": "outputs/game/assets/ui/Battle_Icon_key1.png",
+      "size": [
+        46,
+        49
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Battle_Icon_key1",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          541,
+          896,
+          46,
+          49
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          46,
+          49
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "03c253ac0b89049aef5026a35c68da6210f2f2a2dc01d49c974ca5686f84ad08"
+    },
+    {
+      "name": "hp_self",
+      "file": "outputs/game/assets/ui/hp_self.png",
+      "size": [
+        38,
+        9
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "hp_self",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          370,
+          718,
+          38,
+          9
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          38,
+          9
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "bb4995204dce532956f7bedeee55ce9f7d8140b7088a222e3456e098f2cb4885"
+    },
+    {
+      "name": "hp_normal",
+      "file": "outputs/game/assets/ui/hp_normal.png",
+      "size": [
+        38,
+        9
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "hp_normal",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          939,
+          367,
+          38,
+          9
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          38,
+          9
+        ],
+        "capInsets": [
+          4,
+          3,
+          4,
+          3
+        ]
+      },
+      "sha256": "c2f41cb4c640b271e8ae0ca54920f243425bf445630edb544b71c09599d113c0"
+    },
+    {
+      "name": "BuildFunc_HeroQuality_Bg_Orange",
+      "file": "outputs/game/assets/ui/BuildFunc_HeroQuality_Bg_Orange.png",
+      "size": [
+        83,
+        87
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "BuildFunc_HeroQuality_Bg_Orange",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          738,
+          534,
+          83,
+          87
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          83,
+          87
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "c833c4591e2f5e5e14d42d6595e3543d98d7984f0918c72b701e687366b75d3b"
+    },
+    {
+      "name": "Result_Set_Music",
+      "file": "outputs/game/assets/ui/Result_Set_Music.png",
+      "size": [
+        61,
+        53
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Result_Set_Music",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          834,
+          894,
+          61,
+          53
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          61,
+          53
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "971529f88ea8bb227e88a57a93ec2268b1c6fab3c4adc32cdb1a66a5d37155bb"
+    },
+    {
+      "name": "Battle_SkillTips_Bg_Enemy",
+      "file": "outputs/game/assets/ui/Battle_SkillTips_Bg_Enemy.png",
+      "size": [
+        96,
+        32
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Battle_SkillTips_Bg_Enemy",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          829,
+          480,
+          96,
+          32
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          96,
+          32
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "e8646841a0a8b8555cf2cfe6cfab3b5d70f8b9b7923e883e887c07dc0592fd62"
+    },
+    {
+      "name": "Head_Bg_Black",
+      "file": "outputs/game/assets/ui/Head_Bg_Black.png",
+      "size": [
+        85,
+        97
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Head_Bg_Black",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          658,
+          282,
+          85,
+          97
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          85,
+          97
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "f4dbe6dd79024caa0adef635ff41cad180f2688a5f1725c36f9b16ae4eef4a27"
+    },
+    {
+      "name": "wave_box_icon1",
+      "file": "outputs/game/assets/ui/wave_box_icon1.png",
+      "size": [
+        33,
+        33
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "wave_box_icon1",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          946,
+          987,
+          33,
+          33
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          33,
+          33
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "1ec68e432e4a7c6596b6d760631b0ce9a86f058652a7073e1af6be40f6289f85"
+    },
+    {
+      "name": "Promote_FightCapacity_Icon5",
+      "file": "outputs/game/assets/ui/Promote_FightCapacity_Icon5.png",
+      "size": [
+        78,
+        89
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Promote_FightCapacity_Icon5",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          757,
+          294,
+          78,
+          89
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          78,
+          89
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "e050261cbf937d1cb75099f1e53c3697ea1c9fa60234e644128578c469866e77"
+    },
+    {
+      "name": "Battle_End8",
+      "file": "outputs/game/assets/ui/Battle_End8.png",
+      "size": [
+        61,
+        56
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Battle_End8",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          384,
+          895,
+          61,
+          56
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          61,
+          56
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "369529705e86ca9fbb518ec67a4d5e731cbbe578e2f0858ba46a258872c40458"
+    },
+    {
+      "name": "SpeedCircle",
+      "file": "outputs/game/assets/ui/SpeedCircle.png",
+      "size": [
+        72,
+        60
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "SpeedCircle",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          913,
+          688,
+          72,
+          60
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          72,
+          60
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "5e5348a012d3e6fb5dbf9e61f066a31a75a399754ed22f84780311583edb459e"
+    },
+    {
+      "name": "Free_Head_Tips",
+      "file": "outputs/game/assets/ui/Free_Head_Tips.png",
+      "size": [
+        66,
+        58
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Free_Head_Tips",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          927,
+          466,
+          66,
+          58
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          66,
+          58
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "bcb948fdfdc743d4069adc8c6f77f0c047df22824d394896a85b798ff02070a2"
+    },
+    {
+      "name": "BuildFunc_HeroQuality_Bg_Purple",
+      "file": "outputs/game/assets/ui/BuildFunc_HeroQuality_Bg_Purple.png",
+      "size": [
+        83,
+        87
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "BuildFunc_HeroQuality_Bg_Purple",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          838,
+          395,
+          83,
+          87
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          83,
+          87
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "9d9a48f1485b57deae7d5e42786ee2f03ea53950eb2bfd836033f437c7a63040"
+    },
+    {
+      "name": "speed_03",
+      "file": "outputs/game/assets/ui/speed_03.png",
+      "size": [
+        58,
+        31
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "speed_03",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          951,
+          883,
+          58,
+          31
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          58,
+          31
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "11849c6e1897a5fd14b7d95f5281ca81032470f42e5f4b10ba0277ae5f03d08d"
+    },
+    {
+      "name": "Promote_FightCapacity_Icon3",
+      "file": "outputs/game/assets/ui/Promote_FightCapacity_Icon3.png",
+      "size": [
+        78,
+        89
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Promote_FightCapacity_Icon3",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          848,
+          315,
+          78,
+          89
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          78,
+          89
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "caa37039aebcb59a12d5cad7ca03805c524e08f8ddd4258ea8a587db08a1015b"
+    },
+    {
+      "name": "hp_bg_role",
+      "file": "outputs/game/assets/ui/hp_bg_role.png",
+      "size": [
+        38,
+        9
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "hp_bg_role",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          949,
+          298,
+          38,
+          9
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          38,
+          9
+        ],
+        "capInsets": [
+          19,
+          4,
+          19,
+          4
+        ]
+      },
+      "sha256": "a9c9756fcd05720239e0828d9cd52fbf15eaa923b75ff6d57dc9646fa40d5a1b"
+    },
+    {
+      "name": "Battle_EnemyPosition_Progress",
+      "file": "outputs/game/assets/ui/Battle_EnemyPosition_Progress.png",
+      "size": [
+        53,
+        52
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Battle_EnemyPosition_Progress",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          897,
+          894,
+          53,
+          52
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          53,
+          52
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "75775206a4b76669daea550fe886a44bcb5b768aeb2471343afa7b3e0d94c721"
+    },
+    {
+      "name": "BuildFunc_HeroQuality_Bg_Blue",
+      "file": "outputs/game/assets/ui/BuildFunc_HeroQuality_Bg_Blue.png",
+      "size": [
+        83,
+        87
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "BuildFunc_HeroQuality_Bg_Blue",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          719,
+          619,
+          83,
+          87
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          83,
+          87
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "a06a7f164eb95b85ffd4f93d1535dc358ee6dfe9d4039b754437bb32b7f2d205"
+    },
+    {
+      "name": "move_arrow",
+      "file": "outputs/game/assets/ui/move_arrow.png",
+      "size": [
+        33,
+        35
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "move_arrow",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          570,
+          947,
+          33,
+          35
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          33,
+          35
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "dad60c117bc7a93642c80252fdd541c1503bb10ae08e49ea27a8dc4bce975a9e"
+    },
+    {
+      "name": "BuildFunc_HeroQuality_Bg_Blue1",
+      "file": "outputs/game/assets/ui/BuildFunc_HeroQuality_Bg_Blue1.png",
+      "size": [
+        83,
+        87
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "BuildFunc_HeroQuality_Bg_Blue1",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          634,
+          609,
+          83,
+          87
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          83,
+          87
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "158132e17a836abd37386050e87c458c5332d4f30909ca905ca84e6943056943"
+    },
+    {
+      "name": "Battle_Skill_FeedBack_Bg",
+      "file": "outputs/game/assets/ui/Battle_Skill_FeedBack_Bg.png",
+      "size": [
+        93,
+        51
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Battle_Skill_FeedBack_Bg",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          763,
+          241,
+          93,
+          51
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          93,
+          51
+        ],
+        "capInsets": [
+          44,
+          0,
+          44,
+          0
+        ]
+      },
+      "sha256": "57d9c1455fb378607e9c750f5fbf2c60dc84a9257b2e59a5165bb69321ef444c"
+    },
+    {
+      "name": "enemy_shadow",
+      "file": "outputs/game/assets/ui/enemy_shadow.png",
+      "size": [
+        100,
+        81
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "enemy_shadow",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          565,
+          342,
+          100,
+          81
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          100,
+          81
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "199b93f0fd3b605f48c0ff5e5a67976f4e9f8c648dde644927d696a7ac9e105c"
+    },
+    {
+      "name": "Battle_EnemyPosition_Icon_Cream",
+      "file": "outputs/game/assets/ui/Battle_EnemyPosition_Icon_Cream.png",
+      "size": [
+        57,
+        64
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Battle_EnemyPosition_Icon_Cream",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          320,
+          958,
+          57,
+          64
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          57,
+          64
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "0708056157fcc07587dd3d3ce33ad75884eee4990c6c945d69ac92bf42ecb4d7"
+    },
+    {
+      "name": "Battle_End2",
+      "file": "outputs/game/assets/ui/Battle_End2.png",
+      "size": [
+        61,
+        56
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Battle_End2",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          861,
+          836,
+          61,
+          56
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          61,
+          56
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "f250ca0fa22371d705ffc8c3a29a31180b747166bacd9c8de5986ac220d973da"
+    },
+    {
+      "name": "Battle_End6",
+      "file": "outputs/game/assets/ui/Battle_End6.png",
+      "size": [
+        61,
+        56
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Battle_End6",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          420,
+          837,
+          61,
+          56
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          61,
+          56
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "7375fa87e4f88ed17c4ea3a07eec2a66ce54ef236a88bf94b6035251016af475"
+    },
+    {
+      "name": "Battle_EnemyPosition_Bg1",
+      "file": "outputs/game/assets/ui/Battle_EnemyPosition_Bg1.png",
+      "size": [
+        67,
+        66
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Battle_EnemyPosition_Bg1",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          370,
+          650,
+          67,
+          66
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          67,
+          66
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "d4a5932f91d9086e03dd88b428492266bc79653a19d51fc8c67bf8edcf53bb9f"
+    },
+    {
+      "name": "Head_Choice",
+      "file": "outputs/game/assets/ui/Head_Choice.png",
+      "size": [
+        100,
+        107
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Head_Choice",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          214,
+          738,
+          100,
+          107
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          100,
+          107
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "2cf45b1b13fd0dd7eaf1e9cd9ad5ce30b0381850a25febab8fe641100a95b03d"
+    },
+    {
+      "name": "Choose_Enemy_Circle",
+      "file": "outputs/game/assets/ui/Choose_Enemy_Circle.png",
+      "size": [
+        133,
+        111
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Choose_Enemy_Circle",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          40,
+          778,
+          133,
+          111
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          133,
+          111
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "1501f5383e8d903d4340912c1681d2593e0cf90d94a4b7c433d9ea63a841dc9b"
+    },
+    {
+      "name": "Battle_SkillTips_Bg",
+      "file": "outputs/game/assets/ui/Battle_SkillTips_Bg.png",
+      "size": [
+        114,
+        39
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Battle_SkillTips_Bg",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          647,
+          241,
+          114,
+          39
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          114,
+          39
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "bc06d31f764a2ed58fec6bc20005c38a3ca1b5baa7a0fb8ef59c678d0a1693de"
+    },
+    {
+      "name": "Battle_End3",
+      "file": "outputs/game/assets/ui/Battle_End3.png",
+      "size": [
+        61,
+        56
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Battle_End3",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          913,
+          762,
+          61,
+          56
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          61,
+          56
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "70acff2adb74f1b1e4493c5392690a3b93b88546a5a1653a17f426ee827f4f49"
+    },
+    {
+      "name": "Battle_EnemyPosition_Icon_Boss1",
+      "file": "outputs/game/assets/ui/Battle_EnemyPosition_Icon_Boss1.png",
+      "size": [
+        57,
+        64
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Battle_EnemyPosition_Icon_Boss1",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          483,
+          837,
+          57,
+          64
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          57,
+          64
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "c7aec1cc4b70b23f9ae5a3d18dfc05a6696dd828b6840ebc7de1041a90e8f636"
+    },
+    {
+      "name": "Result_Set_OFF",
+      "file": "outputs/game/assets/ui/Result_Set_OFF.png",
+      "size": [
+        62,
+        34
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Result_Set_OFF",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          959,
+          187,
+          62,
+          34
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          62,
+          34
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "95b28adb6bfea91e83d313d4caacacd6279eceb0c12ed6ddde565724f5013983"
+    },
+    {
+      "name": "BuildFunc_HeroQuality_Bg_Orange1",
+      "file": "outputs/game/assets/ui/BuildFunc_HeroQuality_Bg_Orange1.png",
+      "size": [
+        83,
+        87
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "BuildFunc_HeroQuality_Bg_Orange1",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          653,
+          519,
+          83,
+          87
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          83,
+          87
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "c73ee00dcf08c7dce877006527a88f74b8ae2df8c9c723b56a5892983e9b9617"
+    },
+    {
+      "name": "range_circle_skill",
+      "file": "outputs/game/assets/ui/range_circle_skill.png",
+      "size": [
+        206,
+        206
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "range_circle_skill",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          40,
+          341,
+          206,
+          206
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          206,
+          206
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "57590c65ede954de4ddea4d43405f206590bbf8487d8c5b76e5d5ee9ef57314b"
+    },
+    {
+      "name": "Battle_Quicken1",
+      "file": "outputs/game/assets/ui/Battle_Quicken1.png",
+      "size": [
+        103,
+        95
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Battle_Quicken1",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          323,
+          738,
+          103,
+          95
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          103,
+          95
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "b18202dd42d5eb1fcc072499c801a617873ae74c0c7ce5278fcb75967d6815a8"
+    },
+    {
+      "name": "Head_Bg_Green",
+      "file": "outputs/game/assets/ui/Head_Bg_Green.png",
+      "size": [
+        85,
+        97
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Head_Bg_Green",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          507,
+          738,
+          85,
+          97
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          85,
+          97
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "a6c40b5c62ad22fde86ad35e3236c16d7bcb0954c9b8ab12360710be0907f520"
+    },
+    {
+      "name": "Result_Set_Shake",
+      "file": "outputs/game/assets/ui/Result_Set_Shake.png",
+      "size": [
+        61,
+        53
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Result_Set_Shake",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          771,
+          878,
+          61,
+          53
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          61,
+          53
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "228f039b2b4d55d71ef22a9d3787f09e777d80bda3f3adb9cfdee1a3623ee758"
+    },
+    {
+      "name": "Battle_TowerBuilding_Upgrade",
+      "file": "outputs/game/assets/ui/Battle_TowerBuilding_Upgrade.png",
+      "size": [
+        83,
+        87
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Battle_TowerBuilding_Upgrade",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          778,
+          704,
+          83,
+          87
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          83,
+          87
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "dc754d850146cfe599965fd8fa5ab08cbaa20541abe84016345192df493e7c58"
+    },
+    {
+      "name": "wave_bg_pre",
+      "file": "outputs/game/assets/ui/wave_bg_pre.png",
+      "size": [
+        40,
+        40
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "wave_bg_pre",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          610,
+          977,
+          40,
+          40
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          40,
+          40
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "74921b47cbf21461a8a43f70570c5ba51ca610a8c661929be3671db0e8033064"
+    },
+    {
+      "name": "BuildFunc_HeroQuality_Bg_Green",
+      "file": "outputs/game/assets/ui/BuildFunc_HeroQuality_Bg_Green.png",
+      "size": [
+        83,
+        87
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "BuildFunc_HeroQuality_Bg_Green",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          829,
+          514,
+          83,
+          87
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          83,
+          87
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "804ea536b4a594b504a25d1467e5568a508d4eb9756760abaf53ae0c5b6227be"
+    },
+    {
+      "name": "Battle_End4",
+      "file": "outputs/game/assets/ui/Battle_End4.png",
+      "size": [
+        61,
+        56
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Battle_End4",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          507,
+          955,
+          61,
+          56
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          61,
+          56
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "468cf17fdc67ab11b2f7ac9e49d93a982abbe41354de0b8c45a6282228a0140b"
+    },
+    {
+      "name": "wave_bg_end",
+      "file": "outputs/game/assets/ui/wave_bg_end.png",
+      "size": [
+        61,
+        59
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "wave_bg_end",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          198,
+          959,
+          61,
+          59
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          61,
+          59
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "cb67577115bffef90b0b663f52d2474a4a81964b35246d163c0edbfa2668ae5f"
+    },
+    {
+      "name": "Battle_TowerBuilding_Choose",
+      "file": "outputs/game/assets/ui/Battle_TowerBuilding_Choose.png",
+      "size": [
+        83,
+        87
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Battle_TowerBuilding_Choose",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          808,
+          619,
+          83,
+          87
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          83,
+          87
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "30c9025c01439bd0013f70ea43ee07f0f584fe30c919bdb3d9539e9fecb5dece"
+    },
+    {
+      "name": "Battle_Wrong",
+      "file": "outputs/game/assets/ui/Battle_Wrong.png",
+      "size": [
+        52,
+        53
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Battle_Wrong",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          604,
+          287,
+          52,
+          53
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          52,
+          53
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "4e6dd8a0149d866a1a04ac5ea34db19eea7597ab8862612317c106a447912853"
+    },
+    {
+      "name": "Result_Button",
+      "file": "outputs/game/assets/ui/Result_Button.png",
+      "size": [
+        223,
+        88
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Result_Button",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          214,
+          560,
+          223,
+          88
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          223,
+          88
+        ],
+        "capInsets": [
+          102,
+          0,
+          100,
+          0
+        ]
+      },
+      "sha256": "1ea78accf1d826258e5050eb89269dd432af130ff3aabe1eeb177c38d62cdef5"
+    },
+    {
+      "name": "Result_First_Pass_Font",
+      "file": "outputs/game/assets/ui/Result_First_Pass_Font.png",
+      "size": [
+        48,
+        48
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Result_First_Pass_Font",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          863,
+          786,
+          48,
+          48
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          48,
+          48
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "984c01adadc9b53f877da25bc760df0896524653365f7cb0712b056401225d30"
+    },
+    {
+      "name": "Attribute_Icon6",
+      "file": "outputs/game/assets/ui/Attribute_Icon6.png",
+      "size": [
+        30,
+        30
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Attribute_Icon6",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          684,
+          980,
+          30,
+          30
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          30,
+          30
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "1d94556d528e00391d1fb70a9d8369adfbc091c15964144650e9b9c111f67b5d"
+    },
+    {
+      "name": "Result_Star1",
+      "file": "outputs/game/assets/ui/Result_Star1.png",
+      "size": [
+        108,
+        108
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Result_Star1",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          439,
+          562,
+          108,
+          108
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          108,
+          108
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "14a436e8e0f952a2c29e24761e7da66abdb85bb17714b6b963fb211afefa1a33"
+    },
+    {
+      "name": "Result_Star2",
+      "file": "outputs/game/assets/ui/Result_Star2.png",
+      "size": [
+        108,
+        108
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Result_Star2",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          88,
+          891,
+          108,
+          108
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          108,
+          108
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "9fadba208fcacbf66ebfa7bbc80b915f6f7e8c9fa342fcdab1e2508ed45cdca7"
+    },
+    {
+      "name": "Attribute_Icon7",
+      "file": "outputs/game/assets/ui/Attribute_Icon7.png",
+      "size": [
+        30,
+        30
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Attribute_Icon7",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          652,
+          977,
+          30,
+          30
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          30,
+          30
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "31a34d82be0c178a0e88fa345a9bcd25c718b91039ad7b4f72241b7bc51eb1e4"
+    },
+    {
+      "name": "Promote_FightCapacity_Tips_Bg",
+      "file": "outputs/game/assets/ui/Promote_FightCapacity_Tips_Bg.png",
+      "size": [
+        515,
+        42
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Promote_FightCapacity_Tips_Bg",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          476,
+          1,
+          515,
+          42
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          515,
+          42
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "1cdabbe34e3a7e2bc6c98551451df4221f920d3d5bbafb67f1cae3b0c538ff76"
+    },
+    {
+      "name": "Result_Cry_Icon3",
+      "file": "outputs/game/assets/ui/Result_Cry_Icon3.png",
+      "size": [
+        12,
+        17
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Result_Cry_Icon3",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          974,
+          607,
+          12,
+          17
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          12,
+          17
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "6e626d77468bf8445d0c37da1561dbf20d78f5a1a2cc01a544b8ebef83d5ada5"
+    },
+    {
+      "name": "Result_Lose_Bg",
+      "file": "outputs/game/assets/ui/Result_Lose_Bg.png",
+      "size": [
+        473,
+        168
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Result_Lose_Bg",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          1,
+          171,
+          473,
+          168
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          473,
+          168
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "ff1d4125cb2069b3a537895b054fbc1609c95afd58b762ed67908061a4473c8b"
+    },
+    {
+      "name": "Result_Cry_Icon2",
+      "file": "outputs/game/assets/ui/Result_Cry_Icon2.png",
+      "size": [
+        97,
+        59
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Result_Cry_Icon2",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          648,
+          369,
+          97,
+          59
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          97,
+          59
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "abc8d5750feee638d3e0878faaddd9a3161ab88bc84f8ae3fedb6939dad91060"
+    },
+    {
+      "name": "Result_Cry_Icon5",
+      "file": "outputs/game/assets/ui/Result_Cry_Icon5.png",
+      "size": [
+        80,
+        48
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Result_Cry_Icon5",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          863,
+          704,
+          80,
+          48
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          80,
+          48
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "83275a559992990a01bba850094f3c4bd93e9c065154af7dc02f78c4f2d377eb"
+    },
+    {
+      "name": "Result_Lose",
+      "file": "outputs/game/assets/ui/Result_Lose.png",
+      "size": [
+        209,
+        127
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Result_Lose",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          647,
+          112,
+          209,
+          127
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          209,
+          127
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "ab234279a8e7b282ab1ffa4bd55d1ff7c53753730bee002c18f40d51a10b5a2c"
+    },
+    {
+      "name": "Result_Cry_Icon4",
+      "file": "outputs/game/assets/ui/Result_Cry_Icon4.png",
+      "size": [
+        108,
+        64
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Result_Cry_Icon4",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          439,
+          672,
+          108,
+          64
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          108,
+          64
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "467f9b26f08125f3915959e23f3f14c96d569e33c5afb1db0189f2450a8893e5"
+    },
+    {
+      "name": "Result_Divide",
+      "file": "outputs/game/assets/ui/Result_Divide.png",
+      "size": [
+        46,
+        19
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Result_Divide",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          88,
+          1001,
+          46,
+          19
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          46,
+          19
+        ],
+        "capInsets": [
+          30,
+          0,
+          12,
+          0
+        ]
+      },
+      "sha256": "c7db0950647a98eac747941b24b6373321d732d395d901da534a17e1a9a249ed"
+    },
+    {
+      "name": "Result_Smile_Icon2",
+      "file": "outputs/game/assets/ui/Result_Smile_Icon2.png",
+      "size": [
+        126,
+        53
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Result_Smile_Icon2",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          476,
+          287,
+          126,
+          53
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          126,
+          53
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "efdb305e856b3fae43ef5a7316156fc2cfff41186ac50db4683bad6a9cf08b54"
+    },
+    {
+      "name": "Result_Cry_Icon8",
+      "file": "outputs/game/assets/ui/Result_Cry_Icon8.png",
+      "size": [
+        36,
+        34
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Result_Cry_Icon8",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          946,
+          949,
+          36,
+          34
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          36,
+          34
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "7154ca2015034df4c06e17ce5fbb7c5ff349c3bea92071665188365df1c56703"
+    },
+    {
+      "name": "Result_Smile_Icon3",
+      "file": "outputs/game/assets/ui/Result_Smile_Icon3.png",
+      "size": [
+        104,
+        120
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Result_Smile_Icon3",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          459,
+          342,
+          104,
+          120
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          104,
+          120
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "6f14f8f9fa4d45761cc655d4db7e7bdd337f45bda77232b79ca8b1399ef6c5d9"
+    },
+    {
+      "name": "Result_Win_Bg",
+      "file": "outputs/game/assets/ui/Result_Win_Bg.png",
+      "size": [
+        473,
+        168
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Result_Win_Bg",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          1,
+          1,
+          473,
+          168
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          473,
+          168
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "a501b040e680ea8747682e62922e8b3c39c5d3145a5221faef344cfc97ce7aef"
+    },
+    {
+      "name": "Result_Win",
+      "file": "outputs/game/assets/ui/Result_Win.png",
+      "size": [
+        209,
+        127
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Result_Win",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          248,
+          341,
+          209,
+          127
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          209,
+          127
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "f758a891545b4d2137d9ca729f3136358f672e5f43055bbfb9b36528366aebd0"
+    },
+    {
+      "name": "Result_Cry_Icon7",
+      "file": "outputs/game/assets/ui/Result_Cry_Icon7.png",
+      "size": [
+        42,
+        51
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Result_Cry_Icon7",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          549,
+          837,
+          42,
+          51
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          42,
+          51
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "f761561fbdc4005b5d340af530d2de4d95291f8feed301bcb187b492f3ddeb54"
+    },
+    {
+      "name": "Result_Cry_Icon6",
+      "file": "outputs/game/assets/ui/Result_Cry_Icon6.png",
+      "size": [
+        121,
+        99
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Result_Cry_Icon6",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          858,
+          112,
+          121,
+          99
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          121,
+          99
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "29cf310c428bc3d9464b8fb20cf61a1e36b54d543c0b154dcb6e57eaf6564e73"
+    },
+    {
+      "name": "Result_Cry_Icon1",
+      "file": "outputs/game/assets/ui/Result_Cry_Icon1.png",
+      "size": [
+        169,
+        240
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Result_Cry_Icon1",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          476,
+          45,
+          169,
+          240
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          169,
+          240
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "8591aedbcae5619250b7c22417ffc8573ff64603ba9aae55d71bb4a171c638cf"
+    },
+    {
+      "name": "Result_Smile_Icon1",
+      "file": "outputs/game/assets/ui/Result_Smile_Icon1.png",
+      "size": [
+        172,
+        227
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Result_Smile_Icon1",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          40,
+          549,
+          172,
+          227
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          172,
+          227
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "82c57dd2beb40ef051d7ddb7dba49612323d464b17477d041004dbf439844c64"
+    },
+    {
+      "name": "Ad",
+      "file": "outputs/game/assets/ui/Ad.png",
+      "size": [
+        61,
+        62
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Ad",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          198,
+          895,
+          61,
+          62
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          61,
+          62
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "ad01ed6d9a456d67a50e37d3793cd5f43e5289dda34550be1afcd2ad5d2abc68"
+    },
+    {
+      "name": "Promote_FightCapacity_Bg",
+      "file": "outputs/game/assets/ui/Promote_FightCapacity_Bg.png",
+      "size": [
+        38,
+        38
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Promote_FightCapacity_Bg",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          570,
+          982,
+          38,
+          38
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          38,
+          38
+        ],
+        "capInsets": [
+          17,
+          16,
+          17,
+          17
+        ]
+      },
+      "sha256": "072fc89769d54ea28a3b0bcc75bae93aea5da51639940456d91e87f682fada5a"
+    },
+    {
+      "name": "Promote_FightCapacity_Icon1",
+      "file": "outputs/game/assets/ui/Promote_FightCapacity_Icon1.png",
+      "size": [
+        78,
+        89
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Promote_FightCapacity_Icon1",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          738,
+          454,
+          78,
+          89
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          78,
+          89
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "f93a81253e453be97d89fec383512efafcf5feebbe1be7652e2fae7ce74480f6"
+    },
+    {
+      "name": "Attribute_Bg",
+      "file": "outputs/game/assets/ui/Attribute_Bg.png",
+      "size": [
+        45,
+        44
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Attribute_Bg",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          949,
+          251,
+          45,
+          44
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          45,
+          44
+        ],
+        "rotated": 1,
+        "capInsets": [
+          20,
+          19,
+          20,
+          20
+        ]
+      },
+      "sha256": "d56400b3718b0615d64427e4269b9f915f1819e0196f58f0490ee71280232c36"
+    },
+    {
+      "name": "Battle_Quicken",
+      "file": "outputs/game/assets/ui/Battle_Quicken.png",
+      "size": [
+        66,
+        69
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Battle_Quicken",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          927,
+          395,
+          66,
+          69
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          66,
+          69
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "a544817515c6662ffc0b03f290e9a98776f10e7ddb98dca8d0893877bceddd3d"
+    },
+    {
+      "name": "try",
+      "file": "outputs/game/assets/ui/try.png",
+      "size": [
+        300,
+        65
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "try",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          647,
+          45,
+          300,
+          65
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          300,
+          65
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "86ca57765e8773aa06b62c80c5d24166ed2612b53d83e5f9e0b5ab4c2a7af0aa"
+    },
+    {
+      "name": "Battle_EnemyPosition_Icon",
+      "file": "outputs/game/assets/ui/Battle_EnemyPosition_Icon.png",
+      "size": [
+        37,
+        34
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Battle_EnemyPosition_Icon",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          175,
+          778,
+          37,
+          34
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          37,
+          34
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "a90b1d75a7ba09dcb5d4df596fd8a8176a74efc782a27691123c96811eb394dd"
+    },
+    {
+      "name": "Battle_Icon_Box",
+      "file": "outputs/game/assets/ui/Battle_Icon_Box.png",
+      "size": [
+        50,
+        46
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Battle_Icon_Box",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          322,
+          843,
+          50,
+          46
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          50,
+          46
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "4daa9fb311344f07bb65cee330c061482588270ce4d0c7c8df703a84baa42780"
+    },
+    {
+      "name": "Battle_Icon_key",
+      "file": "outputs/game/assets/ui/Battle_Icon_key.png",
+      "size": [
+        46,
+        49
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Battle_Icon_key",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          607,
+          926,
+          46,
+          49
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          46,
+          49
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "df421571673c9bd054766fb8c624b691263a3ace72ad6f20e7307cdb2c69a1b9"
+    },
+    {
+      "name": "Main_Money_Bg",
+      "file": "outputs/game/assets/ui/Main_Money_Bg.png",
+      "size": [
+        45,
+        39
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Main_Money_Bg",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          549,
+          562,
+          45,
+          39
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          45,
+          39
+        ],
+        "rotated": 1,
+        "capInsets": [
+          16,
+          17,
+          18,
+          16
+        ]
+      },
+      "sha256": "ecde8a34e2d160e6657d46612b3be7626f93d966506add0d0525ef997b27ab96"
+    },
+    {
+      "name": "Result_Button1",
+      "file": "outputs/game/assets/ui/Result_Button1.png",
+      "size": [
+        223,
+        88
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Result_Button1",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          248,
+          470,
+          223,
+          88
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          223,
+          88
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "b9115ed8bbcee962fbd7086335aeb315559b67821335e4f1b4e53f4c6eca0f95"
+    },
+    {
+      "name": "Attribute_Icon4",
+      "file": "outputs/game/assets/ui/Attribute_Icon4.png",
+      "size": [
+        30,
+        30
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Attribute_Icon4",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          748,
+          982,
+          30,
+          30
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          30,
+          30
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "bf6cd660cc4e6e1943d45d298dd6ab48a75096d2a1cee8ec015feb5dd6b398f1"
+    },
+    {
+      "name": "Attribute_Icon3",
+      "file": "outputs/game/assets/ui/Attribute_Icon3.png",
+      "size": [
+        30,
+        30
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Attribute_Icon3",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          780,
+          966,
+          30,
+          30
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          30,
+          30
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "b1bb8d51f54b446e518a1ff555f7368042b8fc8804dafcacad3277952109db0d"
+    },
+    {
+      "name": "Attribute_Icon1",
+      "file": "outputs/game/assets/ui/Attribute_Icon1.png",
+      "size": [
+        30,
+        30
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Attribute_Icon1",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          844,
+          982,
+          30,
+          30
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          30,
+          30
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "2de8676bf760290a52d00944efb1d304a183884bd7d215a1a3967c1cac0000c8"
+    },
+    {
+      "name": "Attribute_Icon5",
+      "file": "outputs/game/assets/ui/Attribute_Icon5.png",
+      "size": [
+        30,
+        30
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Attribute_Icon5",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          716,
+          980,
+          30,
+          30
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          30,
+          30
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "63350495d4ddb33acb604aa967ef93ab598e543fad7f95a2c7659f334e241864"
+    },
+    {
+      "name": "Battle_Circle",
+      "file": "outputs/game/assets/ui/Battle_Circle.png",
+      "size": [
+        189,
+        189
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/2e/2e958b75-c926-451a-bb4d-1ddccf414cf1.74dec.png",
+      "originalFrame": {
+        "name": "Battle_Circle",
+        "texture": "2elYt1ySZFGrtNHdzPQUzx",
+        "rect": [
+          308,
+          2,
+          189,
+          189
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          189,
+          189
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "f3d6848f82bacae45630e0da583a19108cf28434643785e267495c1a9ae3fca9"
+    },
+    {
+      "name": "range_circle_attack",
+      "file": "outputs/game/assets/ui/range_circle_attack.png",
+      "size": [
+        303,
+        251
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/2e/2e958b75-c926-451a-bb4d-1ddccf414cf1.74dec.png",
+      "originalFrame": {
+        "name": "range_circle_attack",
+        "texture": "2elYt1ySZFGrtNHdzPQUzx",
+        "rect": [
+          2,
+          256,
+          303,
+          251
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          303,
+          251
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "3c2c59e6d0803d6b95af5a170fbf0db6928d5f5ff5e63e97436bb75bac266077"
+    },
+    {
+      "name": "range_circle_position",
+      "file": "outputs/game/assets/ui/range_circle_position.png",
+      "size": [
+        303,
+        251
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/2e/2e958b75-c926-451a-bb4d-1ddccf414cf1.74dec.png",
+      "originalFrame": {
+        "name": "range_circle_position",
+        "texture": "2elYt1ySZFGrtNHdzPQUzx",
+        "rect": [
+          2,
+          2,
+          303,
+          251
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          303,
+          251
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "bf06872c622aae6555e584f0e7cb33adb23bead77a93898207f204784cc20ab8"
+    },
+    {
+      "name": "CommonBg_Bg_Left",
+      "file": "outputs/game/assets/ui/CommonBg_Bg_Left.png",
+      "size": [
+        110,
+        512
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/c7/c7d3d611-6b06-4bda-ad31-76367a26563a.8f582.png",
+      "originalFrame": {
+        "name": "CommonBg_Bg_Left",
+        "texture": "c709YRawZL2q0xdjZ6JlY6",
+        "rect": [
+          0,
+          0,
+          110,
+          512
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          110,
+          512
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "70ed1638949d5cea65dd12bf7a8508999bf3309e921ba8f15bd4da2d374f083b"
+    },
+    {
+      "name": "Bg",
+      "file": "outputs/game/assets/ui/Bg.png",
+      "size": [
+        160,
+        374
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/c7/c7d3d611-6b06-4bda-ad31-76367a26563a.8f582.png",
+      "originalFrame": {
+        "name": "Bg",
+        "texture": "c709YRawZL2q0xdjZ6JlY6",
+        "rect": [
+          110,
+          0,
+          160,
+          374
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          160,
+          374
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "12d2cfd99db30883307614dc293ed2fd3dc1a1da5dbfa593cc3c3b5741b10bb5"
+    },
+    {
+      "name": "BattleEnemy_Introduce_Bg",
+      "file": "outputs/game/assets/ui/BattleEnemy_Introduce_Bg.png",
+      "size": [
+        252,
+        321
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/a4/a493598c-6d95-42ac-be95-16007a153aef.69af2.png",
+      "originalFrame": {
+        "name": "BattleEnemy_Introduce_Bg",
+        "texture": "a4k1mMbZVCrL6VFgB6FTrv",
+        "rect": [
+          1,
+          1,
+          252,
+          321
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          252,
+          321
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "5504d220c902a2e1d23671eff87e9cdbe19d66e91732c644989e039a7ca327c9"
+    },
+    {
+      "name": "BattleEnemy_Decoration",
+      "file": "outputs/game/assets/ui/BattleEnemy_Decoration.png",
+      "size": [
+        114,
+        120
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/a4/a493598c-6d95-42ac-be95-16007a153aef.69af2.png",
+      "originalFrame": {
+        "name": "BattleEnemy_Decoration",
+        "texture": "a4k1mMbZVCrL6VFgB6FTrv",
+        "rect": [
+          1,
+          323,
+          114,
+          120
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          114,
+          120
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "6318957edef8e9fd8780f1066b630f0b340c8725a6d6420e1fcc9f4b53f3c772"
+    },
+    {
+      "name": "GuideIntroduce_Title_Bg",
+      "file": "outputs/game/assets/ui/GuideIntroduce_Title_Bg.png",
+      "size": [
+        299,
+        84
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/a4/a493598c-6d95-42ac-be95-16007a153aef.69af2.png",
+      "originalFrame": {
+        "name": "GuideIntroduce_Title_Bg",
+        "texture": "a4k1mMbZVCrL6VFgB6FTrv",
+        "rect": [
+          368,
+          1,
+          299,
+          84
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          299,
+          84
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sha256": "355ba0919be26441c7edc6591cee2daeaa87e3ad8412938f1471b1a159d62512"
+    },
+    {
+      "name": "GuideIntroduce_TowerType_Bg",
+      "file": "outputs/game/assets/ui/GuideIntroduce_TowerType_Bg.png",
+      "size": [
+        26,
+        26
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/a4/a493598c-6d95-42ac-be95-16007a153aef.69af2.png",
+      "originalFrame": {
+        "name": "GuideIntroduce_TowerType_Bg",
+        "texture": "a4k1mMbZVCrL6VFgB6FTrv",
+        "rect": [
+          401,
+          301,
+          26,
+          26
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          26,
+          26
+        ],
+        "capInsets": [
+          11,
+          10,
+          12,
+          11
+        ]
+      },
+      "sha256": "ac625c03c18ed6df436ad718a868fa36de68e203719ff5db423780ea1551d265"
+    },
+    {
+      "name": "build-site-original",
+      "file": "outputs/game/assets/ui/build-site-original.png",
+      "size": [
+        55,
+        33
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/4b/4bdb42b2-8816-4cfb-99e0-e49d4e26134a.5eae0.png",
+      "sourceMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/05/0526c6bbd.5deb3.json",
+      "originalFrame": {
+        "name": "floor_empty",
+        "texture": "4b20KyiBZM+5ng5J1OJhNK",
+        "rect": [
+          501,
+          373,
+          55,
+          33
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          55,
+          33
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sourceRecord": "build-site-original.source.json",
+      "sha256": "05c101b1de9b8a901dc8718baf0921543a3084f690b787ae628593011d3224ef"
+    },
+    {
+      "name": "Main_Money_Bg-110x38",
+      "file": "outputs/game/assets/ui/Main_Money_Bg-110x38.png",
+      "size": [
+        110,
+        38
+      ],
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/8655eca3-8a8c-4b37-b316-889e218578c2.a4395.png",
+      "originalFrame": {
+        "name": "Main_Money_Bg",
+        "texture": "86VeyjioxLN7MWiJ4hhXjC",
+        "rect": [
+          549,
+          562,
+          45,
+          39
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          45,
+          39
+        ],
+        "rotated": 1,
+        "capInsets": [
+          16,
+          17,
+          18,
+          16
+        ]
+      },
+      "derivation": "Nine-slice reconstruction at original GameBattleUI bg node size 110x38; capInsets [left,top,right,bottom] = [16,17,18,16].",
+      "sha256": "3b1df8d36684c3646138f588174efdc271cf0d416c7e2d9522602a43f8194d86"
+    }
+  ],
+  "assetCount": 172,
+  "extraction": "Lossless source-atlas crops with packed-frame rotation restored. Any nine-slice reconstruction is explicitly marked. Original source textures are public game resources; no commercial or redistribution license has been established.",
+  "notes": "SOURCE-NOTES.md",
+  "layout": "original-layout.json"
+}

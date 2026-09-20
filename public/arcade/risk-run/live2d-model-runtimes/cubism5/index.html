@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <link rel="icon" href="data:,">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="dark" />
+  <title>Airvana · Cubism Technical Validation</title>
+  <style>
+    :root {
+      color: #eefcff;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: transparent;
+    }
+
+    * { box-sizing: border-box; }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: transparent;
+    }
+
+    html {
+      overscroll-behavior-x: none;
+      touch-action: none;
+    }
+
+    body {
+      position: relative;
+    }
+
+    canvas {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      display: block;
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    .runtime-label {
+      position: absolute;
+      top: max(10px, env(safe-area-inset-top));
+      left: max(10px, env(safe-area-inset-left));
+      z-index: 3;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      max-width: calc(100% - 20px);
+      pointer-events: none;
+    }
+
+    .runtime-label span {
+      min-height: 22px;
+      padding: 5px 9px;
+      border: 1px solid rgba(83, 234, 242, 0.48);
+      border-radius: 999px;
+      background: rgba(3, 17, 35, 0.82);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.24);
+      color: #a8faff;
+      font-size: 9px;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      backdrop-filter: blur(8px);
+    }
+
+    .runtime-label .not-kai {
+      border-color: rgba(255, 194, 89, 0.52);
+      color: #ffdc93;
+    }
+
+    .runtime-footer {
+      position: absolute;
+      right: max(8px, env(safe-area-inset-right));
+      bottom: max(8px, env(safe-area-inset-bottom));
+      z-index: 3;
+      max-width: calc(100% - 16px);
+      padding: 5px 8px;
+      border-radius: 8px;
+      background: rgba(3, 13, 28, 0.72);
+      color: rgba(218, 237, 246, 0.72);
+      font-size: 8px;
+      line-height: 1.35;
+      text-align: right;
+      backdrop-filter: blur(8px);
+    }
+
+    .runtime-footer a {
+      color: #8deef5;
+      pointer-events: auto;
+    }
+
+    html.embedded .runtime-label,
+    html.embedded .runtime-footer { display: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+  <!-- Live2DCubismCore script -->
+  <script src="./Core/live2dcubismcore.min.js"></script>
+  <!-- Build script -->
+  <script type="module" crossorigin src="./assets/index-CKGhqpfe.js?v=mao-all-actions-stage-1"></script>
+</head>
+<body>
+  <div class="runtime-label" aria-label="Technical validation model identity">
+    <span>Live2D runtime validation</span>
+    <span class="not-kai" data-model-name>Official sample</span>
+    <span data-runtime-status>Idle</span>
+  </div>
+
+  <footer class="runtime-footer">
+    Cubism SDK for Web 5-r.5 ·
+    <a href="./legal/licenses/SDK-LICENSE.md" target="_blank" rel="noreferrer">licences</a> ·
+    <a href="./legal/NOTICE.md" target="_blank" rel="noreferrer">notice</a> ·
+    <a href="https://www.live2d.com/eula/live2d-sample-model-terms_en.html" target="_blank" rel="noreferrer">sample model terms</a>
+  </footer>
+  <script>
+    if (window.parent !== window) document.documentElement.classList.add('embedded');
+    // 透明 iframe 要求宿主与本文档 color-scheme 一致，否则浏览器会画不透明白底。
+    if (window.parent !== window) {
+      try {
+        const hostRoot = window.parent.document.documentElement;
+        const syncColorScheme = () => {
+          document.documentElement.style.colorScheme = hostRoot.dataset.uiTheme === 'light' ? 'light' : 'dark';
+        };
+        syncColorScheme();
+        new MutationObserver(syncColorScheme).observe(hostRoot, { attributes: true, attributeFilter: ['data-ui-theme'] });
+      } catch (_error) { /* 跨源宿主时保持 meta 的 dark 默认值 */ }
+    }
+    const validationModel = new URLSearchParams(location.search).get('model') || 'Zundamon';
+    const modelIds = {
+      Zundamon: 'zundamon',
+      Chitose: 'chitose',
+      Simple: 'simple-model',
+      Mao: 'mao',
+      Natori: 'natori-jin',
+      ReceptionHaru: 'reception-haru',
+      GantzertFelixander: 'gantzert-felixander',
+      Wankoromochi: 'wankoromochi',
+      Miara: 'miara'
+    };
+    const postToHost = message => window.parent.postMessage({
+      source: 'airvana-cubism-runtime',
+      version: 1,
+      ...message
+    }, location.origin === 'null' ? '*' : location.origin);
+    document.querySelector('[data-model-name]').textContent = validationModel;
+    window.__MODEL_CHECK__ = {
+      model: validationModel,
+      canvasFound: false,
+      canvasWidth: 0,
+      canvasHeight: 0,
+      nonTransparentPixels: 0,
+      distinctFrameHashes: 0,
+      rendered: false,
+      animated: false,
+      contentBounds: null,
+      errors: []
+    };
+    window.addEventListener('error', event => {
+      window.__MODEL_CHECK__.errors.push(event.message || String(event.error || 'window error'));
+    });
+    window.addEventListener('unhandledrejection', event => {
+      window.__MODEL_CHECK__.errors.push(String(event.reason || 'unhandled rejection'));
+    });
+    const hashes = new Set();
+    const boundsSamples = [];
+    let boundsSent = false;
+    const median = values => {
+      const sorted = [...values].sort((a, b) => a - b);
+      return sorted[Math.floor(sorted.length / 2)];
+    };
+    const inspectContentBounds = (pixels, width, height) => {
+      const step = Math.max(2, Math.ceil(Math.max(width, height) / 240));
+      let minX = width;
+      let minY = height;
+      let maxX = -1;
+      let maxY = -1;
+      let visibleSamples = 0;
+      for (let y = 0; y < height; y += step) {
+        for (let x = 0; x < width; x += step) {
+          const alpha = pixels[(y * width + x) * 4 + 3];
+          if (alpha <= 12) continue;
+          visibleSamples += 1;
+          minX = Math.min(minX, x);
+          minY = Math.min(minY, y);
+          maxX = Math.max(maxX, x);
+          maxY = Math.max(maxY, y);
+        }
+      }
+      if (visibleSamples < 40 || maxX < minX || maxY < minY) return null;
+      const left = minX / width;
+      const right = Math.min(1, (maxX + step) / width);
+      const top = 1 - Math.min(1, (maxY + step) / height);
+      const bottom = 1 - minY / height;
+      return {
+        left,
+        top,
+        right,
+        bottom,
+        width: right - left,
+        height: bottom - top,
+        centerX: (left + right) / 2,
+        centerY: (top + bottom) / 2
+      };
+    };
+    let maoBoundsAspect = 0;
+    const collectContentBounds = (bounds, origin = 'measured-content-bounds') => {
+      if (!bounds || boundsSent) return;
+      boundsSamples.push(bounds);
+      if (boundsSamples.length < 5) return;
+      const keys = ['left', 'top', 'right', 'bottom', 'width', 'height', 'centerX', 'centerY'];
+      const stableBounds = Object.fromEntries(keys.map(key => [key, Number(median(boundsSamples.map(sample => sample[key])).toFixed(4))]));
+      boundsSent = true;
+      window.__MODEL_CHECK__.contentBounds = stableBounds;
+      // Full authored 7-motion geometry envelope, not a clipped idle screenshot.
+      // X is aspect-dependent; transparent ArtMesh padding may extend beyond the canvas.
+      const canvas = document.querySelector('canvas');
+      const aspect = canvas && canvas.width ? canvas.height / canvas.width : 1;
+      if (validationModel === 'Mao') maoBoundsAspect = aspect;
+      const motionBounds = validationModel === 'Mao' ? {
+        left: .5 - .590368 * aspect / 2 - .012,
+        right: .5 + .363698 * aspect / 2 + .012,
+        top: .012,
+        bottom: .98
+      } : null;
+      if (motionBounds) {
+        motionBounds.width = motionBounds.right - motionBounds.left;
+        motionBounds.height = motionBounds.bottom - motionBounds.top;
+        motionBounds.centerX = (motionBounds.left + motionBounds.right) / 2;
+        motionBounds.centerY = (motionBounds.top + motionBounds.bottom) / 2;
+        window.__MODEL_CHECK__.motionBounds = motionBounds;
+      }
+      if (window.parent !== window) {
+        postToHost({
+          type: 'airvana:cubism-bounds',
+          payload: {
+            modelId: modelIds[validationModel] || validationModel.toLowerCase(),
+            bounds: stableBounds,
+            ...(motionBounds ? { motionBounds } : {}),
+            sampleCount: boundsSamples.length,
+            boundsOrigin: origin,
+            coordinateSpace: 'normalized-css-top-left'
+          }
+        });
+      }
+    };
+    const pendingCaptures = new WeakSet();
+    // Opt-in local QA only: bounded, throttled pixel-edge checks during Mao actions.
+    // Normal previews still stop GPU readback after the five initial bounds samples.
+    const maoFramingQa = validationModel === 'Mao' && new URLSearchParams(location.search).get('maoFramingQa') === '1';
+    const maoAudit = { frames: 0, edgeFrames: 0, horizontalEdgeFrames: 0, verticalEdgeFrames: 0, stageEdgeFrames: 0, maxWidth: 0, maxHeight: 0, left: 1, right: 0, top: 1, bottom: 0 };
+    let maoAuditStarted = 0;
+    let maoAuditLast = 0;
+    const auditMaoBounds = (bounds, canvas, now) => {
+      if (!bounds) return;
+      if (!maoAuditStarted) maoAuditStarted = now;
+      maoAudit.frames += 1;
+      const action = document.documentElement.dataset.maoActiveMotion || 'idle';
+      maoAudit.actions ||= {};
+      const actionAudit = maoAudit.actions[action] ||= { frames: 0, edgeFrames: 0, stageEdgeFrames: 0, left: 1, right: 0, top: 1, bottom: 0 };
+      actionAudit.frames += 1;
+      for (const key of ['left', 'top']) actionAudit[key] = Math.min(actionAudit[key], bounds[key]);
+      for (const key of ['right', 'bottom']) actionAudit[key] = Math.max(actionAudit[key], bounds[key]);
+      const hitEdge = bounds.left < .012 || bounds.right > .988 || bounds.top < .012 || bounds.bottom > .988;
+      if (hitEdge) maoAudit.edgeFrames += 1;
+      if (hitEdge) actionAudit.edgeFrames += 1;
+      if (bounds.left < .012 || bounds.right > .988) maoAudit.horizontalEdgeFrames += 1;
+      if (bounds.top < .012 || bounds.bottom > .988) maoAudit.verticalEdgeFrames += 1;
+      // Audit the final transformed host shot too: canvas containment alone does
+      // not prove that effects stay above the conversation dock or beside the rail.
+      try {
+        const frame = window.frameElement;
+        const chat = frame && frame.closest('.ai-live');
+        const stage = frame && frame.closest('.al-stage');
+        const dock = chat && chat.querySelector('.al-conversation-dock');
+        const header = chat && chat.querySelector('.al-status');
+        const rail = chat && chat.querySelector('.al-rail');
+        if (stage && dock && header && rail) {
+          const f = frame.getBoundingClientRect();
+          const s = stage.getBoundingClientRect();
+          const final = { left: f.left + bounds.left * f.width, right: f.left + bounds.right * f.width, top: f.top + bounds.top * f.height, bottom: f.top + bounds.bottom * f.height };
+          const limits = { left: s.left, right: rail.getBoundingClientRect().left, top: header.getBoundingClientRect().bottom, bottom: dock.getBoundingClientRect().top };
+          const visible = frame.closest('.mao-live2d-avatar').dataset.cubismStatus === 'ready' && getComputedStyle(frame.parentElement).visibility !== 'hidden';
+          if (visible && (final.left < limits.left || final.right > limits.right || final.top < limits.top || final.bottom > limits.bottom)) {
+            maoAudit.stageEdgeFrames += 1;
+            actionAudit.stageEdgeFrames += 1;
+            maoAudit.stageContacts ||= [];
+            if (maoAudit.stageContacts.length < 8) maoAudit.stageContacts.push({ frame: maoAudit.frames, bounds: final, limits, shot: frame.closest('.mao-live2d-avatar').dataset.maoShot, action: document.documentElement.dataset.maoActiveMotion || 'none' });
+          }
+          maoAudit.lastHostBounds = final;
+          maoAudit.shot = frame.closest('.mao-live2d-avatar').dataset.maoShot;
+        }
+      } catch (_error) { /* QA in a standalone or cross-origin runtime has no host geometry. */ }
+      maoAudit.left = Math.min(maoAudit.left, bounds.left);
+      maoAudit.right = Math.max(maoAudit.right, bounds.right);
+      maoAudit.top = Math.min(maoAudit.top, bounds.top);
+      maoAudit.bottom = Math.max(maoAudit.bottom, bounds.bottom);
+      maoAudit.maxWidth = Math.max(maoAudit.maxWidth, bounds.width);
+      maoAudit.maxHeight = Math.max(maoAudit.maxHeight, bounds.height);
+      canvas.dataset.maoFramingAudit = JSON.stringify(maoAudit);
+    };
+    let maoResizeTimer;
+    window.addEventListener('resize', () => {
+      if (validationModel !== 'Mao') return;
+      clearTimeout(maoResizeTimer);
+      maoResizeTimer = setTimeout(() => {
+        const baseline = window.__MODEL_CHECK__.contentBounds;
+        const canvas = document.querySelector('canvas');
+        const nextAspect = canvas && canvas.width ? canvas.height / canvas.width : 0;
+        boundsSamples.length = 0;
+        boundsSent = false;
+        window.__MODEL_CHECK__.contentBounds = null;
+        if (baseline && maoBoundsAspect > 0 && nextAspect > 0) {
+          // Keep the original near-shot baseline even if resized during a special.
+          // Projection Y is fixed; only X changes with the framebuffer aspect.
+          const ratio = nextAspect / maoBoundsAspect;
+          const next = { ...baseline, left: .5 + (baseline.left - .5) * ratio, right: .5 + (baseline.right - .5) * ratio };
+          next.width = next.right - next.left;
+          next.centerX = (next.left + next.right) / 2;
+          for (let i = 0; i < 5; i++) collectContentBounds(next, 'rescaled-idle-baseline');
+        }
+      }, 120);
+    });
+    const captureDrawnFrame = gl => {
+      const now = performance.now();
+      const auditActive = maoFramingQa && (!maoAuditStarted || now - maoAuditStarted < 180000) && now - maoAuditLast >= 180;
+      if ((boundsSent && !auditActive) || pendingCaptures.has(gl)) return;
+      pendingCaptures.add(gl);
+      queueMicrotask(() => {
+        pendingCaptures.delete(gl);
+        if (boundsSent && !auditActive) return;
+        const canvas = gl.canvas;
+        if (!canvas || !canvas.width || !canvas.height) return;
+        try {
+          const pixels = new Uint8Array(canvas.width * canvas.height * 4);
+          gl.readPixels(0, 0, canvas.width, canvas.height, gl.RGBA, gl.UNSIGNED_BYTE, pixels);
+          const bounds = inspectContentBounds(pixels, canvas.width, canvas.height);
+          collectContentBounds(bounds);
+          if (auditActive) {
+            maoAuditLast = now;
+            auditMaoBounds(bounds, canvas, now);
+          }
+        } catch (error) {
+          window.__MODEL_CHECK__.errors.push(`bounds-capture: ${String(error)}`);
+        }
+      });
+    };
+    const installDrawCapture = Context => {
+      if (!Context || !Context.prototype || Context.prototype.__airvanaBoundsCapture) return;
+      const original = Context.prototype.drawElements;
+      if (typeof original !== 'function') return;
+      Object.defineProperty(Context.prototype, '__airvanaBoundsCapture', { value: true });
+      Context.prototype.drawElements = function (...args) {
+        const result = original.apply(this, args);
+        captureDrawnFrame(this);
+        return result;
+      };
+    };
+    installDrawCapture(window.WebGLRenderingContext);
+    installDrawCapture(window.WebGL2RenderingContext);
+    setInterval(() => {
+      const canvas = document.querySelector('canvas');
+      if (!canvas) return;
+      const check = window.__MODEL_CHECK__;
+      check.canvasFound = true;
+      check.canvasWidth = canvas.width;
+      check.canvasHeight = canvas.height;
+      if (boundsSent) return;
+      const gl = canvas.getContext('webgl2') || canvas.getContext('webgl');
+      if (!gl || !canvas.width || !canvas.height) return;
+      const pixels = new Uint8Array(canvas.width * canvas.height * 4);
+      gl.readPixels(0, 0, canvas.width, canvas.height, gl.RGBA, gl.UNSIGNED_BYTE, pixels);
+      let alphaPixels = 0;
+      let hash = 2166136261;
+      for (let i = 3; i < pixels.length; i += 40) {
+        const alpha = pixels[i];
+        if (alpha) alphaPixels++;
+        hash ^= pixels[i - 3] + (pixels[i - 2] << 1) + (pixels[i - 1] << 2) + (alpha << 3);
+        hash = Math.imul(hash, 16777619);
+      }
+      check.nonTransparentPixels = Math.max(check.nonTransparentPixels, alphaPixels);
+      if (alphaPixels > 50) hashes.add(hash >>> 0);
+      check.distinctFrameHashes = hashes.size;
+      check.rendered = check.nonTransparentPixels > 50;
+      check.animated = hashes.size > 1;
+      collectContentBounds(inspectContentBounds(pixels, canvas.width, canvas.height));
+    }, 250);
+  </script>
+</body>
+</html>

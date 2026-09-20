@@ -1,5 +1,6 @@
 import 'package:airvana_mobile/app/providers.dart';
 import 'package:airvana_mobile/design_system/airvana_theme.dart';
+import 'package:airvana_mobile/design_system/generated_cover.dart';
 import 'package:airvana_mobile/design_system/legacy_web_assets.dart';
 import 'package:airvana_mobile/features/shared/data/legacy_demo_catalog.dart';
 import 'package:airvana_mobile/features/shared/data/local_airvana_models.dart';
@@ -39,6 +40,8 @@ enum ProfileSecondaryDestination {
   featureCenter,
   language,
   preferences,
+  signIn,
+  about,
   deleteAccount,
   legacyDraft;
 
@@ -124,6 +127,8 @@ bool _isSettingsParityDestination(ProfileSecondaryDestination destination) =>
     destination == ProfileSecondaryDestination.featureCenter ||
     destination == ProfileSecondaryDestination.language ||
     destination == ProfileSecondaryDestination.preferences ||
+    destination == ProfileSecondaryDestination.signIn ||
+    destination == ProfileSecondaryDestination.about ||
     destination == ProfileSecondaryDestination.deleteAccount;
 
 class _ProfileSecondaryHeader extends StatelessWidget {
@@ -1409,6 +1414,16 @@ _ProfileSecondarySpec _profileSecondarySpec(
     title: '设置',
     description: '管理当前设备的展示、通知与隐私偏好。账号数据导出与注销需在 Web 账号中心完成。',
   ),
+  ProfileSecondaryDestination.signIn => const _ProfileSecondarySpec(
+    icon: Icons.login_rounded,
+    title: '账号与登录',
+    description: '邮箱验证码登录、Google 本地适配器；钱包签名待接入签名器。',
+  ),
+  ProfileSecondaryDestination.about => const _ProfileSecondarySpec(
+    icon: Icons.info_outline_rounded,
+    title: '关于我们',
+    description: 'Agentic Playable 营销智能体平台的产品信息与官方渠道。',
+  ),
   ProfileSecondaryDestination.deleteAccount => const _ProfileSecondarySpec(
     icon: Icons.delete_outline_rounded,
     title: '删除账号',
@@ -2509,6 +2524,12 @@ List<List<_ProfileDrawerItem>> _profileSettingsGroups(
       destination: ProfileSecondaryDestination.language,
     ),
     const _ProfileDrawerItem(
+      icon: Icons.login_rounded,
+      label: '账号与登录',
+      meta: '',
+      destination: ProfileSecondaryDestination.signIn,
+    ),
+    const _ProfileDrawerItem(
       icon: Icons.tune_rounded,
       label: '设置',
       meta: '',
@@ -2638,8 +2659,28 @@ class _ProfileSettingsPage extends ConsumerWidget {
       },
     );
     if (confirmed != true || !context.mounted) return;
+    final messenger = ScaffoldMessenger.of(context);
+    // 退出必须真正销毁服务端会话：此前只清本地头像并跳首页，
+    // 服务端会话仍然有效，等于「没退成」。
+    try {
+      await ref.read(airvanaRepositoryProvider).signOut();
+    } catch (error) {
+      messenger.showSnackBar(SnackBar(content: Text('退出登录未完成：$error')));
+      return;
+    }
     ref.read(profileAvatarSessionProvider.notifier).setBytes(null);
-    context.go('/');
+    // 清掉依赖会话的缓存，避免下一个账号看到上一个账号的数据
+    ref.invalidate(homeProvider);
+    ref.invalidate(accountProvider);
+    ref.invalidate(creatorCenterProvider);
+    ref.invalidate(notificationsProvider);
+    ref.invalidate(accountSessionsProvider);
+    ref.invalidate(supportTicketsProvider);
+    ref.invalidate(signedOutProvider);
+    if (!context.mounted) return;
+    // 退出后进入全屏登录页（Shell 之外，不带底部导航）：此后所有需要服务端
+    // 身份的能力都会显示未登录，必须给一个明确的回去路径，而不是把用户丢回首页。
+    context.go('/signin');
   }
 }
 
@@ -4209,9 +4250,10 @@ class _PlayableGrid extends StatelessWidget {
                 child: Stack(
                   children: [
                     if (entry.coverAsset.isEmpty)
-                      const Positioned.fill(
-                        child: Center(
-                          child: Text('🎮', style: TextStyle(fontSize: 25)),
+                      Positioned.fill(
+                        child: GeneratedCover(
+                          seed: entry.playableId,
+                          title: entry.title,
                         ),
                       ),
                     const Positioned.fill(

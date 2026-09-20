@@ -1,8 +1,12 @@
 import 'package:airvana_mobile/app/providers.dart';
 import 'package:airvana_mobile/design_system/airvana_theme.dart';
 import 'package:airvana_mobile/features/history/presentation/profile_legal_document_screen.dart';
+import 'package:airvana_mobile/features/account/domain/account_service_models.dart';
+import 'package:airvana_mobile/features/account/domain/platform_service_models.dart';
+import 'package:airvana_mobile/features/account/presentation/sign_in_page.dart';
 import 'package:airvana_mobile/features/shared/data/local_airvana_models.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -26,6 +30,8 @@ class ProfileSettingsParityBody extends ConsumerWidget {
     'featureCenter' => const _ProductCenterPage(),
     'language' => const _LanguagePage(),
     'preferences' => const _PreferencesPage(),
+    'signIn' => const SignInPageBody(),
+    'about' => const _AboutPage(),
     'deleteAccount' => const _AccountDeletionPage(),
     _ => const SizedBox.shrink(),
   };
@@ -42,6 +48,10 @@ Future<void> _saveFeatureState(
   if (!context.mounted || message == null) return;
   _showSettingsNotice(context, message);
 }
+
+/// 版本号只在此处声明一次：「版本更新」行与「关于我们」页共用，避免两处漂移。
+const _kAppVersionLabel = 'v1.0.0';
+const _kOfficialWebsite = 'www.airvana.ai';
 
 void _notice(BuildContext context, String message) {
   _showSettingsNotice(context, message);
@@ -128,6 +138,7 @@ class _Surface extends StatelessWidget {
   const _Surface({
     required this.child,
     this.padding = const EdgeInsets.all(16),
+    super.key,
   });
 
   final Widget child;
@@ -421,6 +432,7 @@ class _SubscriptionCenterPageState
       return _PageList(
         keyName: 'subscription-center-parity',
         children: [
+          const _ServerSubscriptionPlans(),
           Container(
             padding: const EdgeInsets.all(18),
             decoration: BoxDecoration(
@@ -1000,6 +1012,12 @@ class _IdentityAndRolesPageState extends ConsumerState<_IdentityAndRolesPage> {
       _notice(context, '请先完成普通节点本地演示状态');
       return;
     }
+    // 创作者资格是真实的商业权限边界：必须走服务端
+    // 申请 → KYC → 平台审核链，本机状态只是演示镜像。
+    if (role == 'creator') {
+      final submitted = await _submitCreatorApplication(context, ref);
+      if (submitted == null || !context.mounted) return;
+    }
     if (role == 'kyc' || role == 'creator') {
       await ref
           .read(airvanaRepositoryProvider)
@@ -1027,7 +1045,134 @@ class _IdentityAndRolesPageState extends ConsumerState<_IdentityAndRolesPage> {
       );
     }
     if (context.mounted) {
-      _notice(context, '状态已推进 · 仅本机演示，不改变真实权限');
+      _notice(
+        context,
+        role == 'creator'
+            ? '创作者资格申请已提交服务端，等待 KYC 与平台审核'
+            : '状态已推进 · 仅本机演示，不改变真实权限',
+      );
+    }
+  }
+
+  /// 收集服务端必需字段并提交创作者资格申请。
+  /// 返回 null 表示用户取消或提交失败——调用方不得继续推进本机状态。
+  Future<CreatorApplication?> _submitCreatorApplication(
+    BuildContext context,
+    WidgetRef ref,
+  ) async {
+    final noteController = TextEditingController();
+    var region = 'CN';
+    var consent = false;
+    final messenger = ScaffoldMessenger.of(context);
+
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (dialogContext) => StatefulBuilder(
+        builder: (builderContext, setLocalState) => AlertDialog(
+          key: const ValueKey('creator-application-dialog'),
+          title: const Text('申请创作者资格', style: TextStyle(fontSize: 16)),
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  '平台会据此判定商业权限。提交后进入 KYC 与人工审核，本机演示状态不代表已获资格。',
+                  style: TextStyle(
+                    fontSize: 11,
+                    color: AirvanaColors.muted,
+                    height: 1.6,
+                  ),
+                ),
+                const SizedBox(height: 12),
+                TextField(
+                  key: const ValueKey('creator-application-note'),
+                  controller: noteController,
+                  maxLines: 3,
+                  onChanged: (_) => setLocalState(() {}),
+                  decoration: const InputDecoration(
+                    labelText: '申请说明（至少 20 个字）',
+                    isDense: true,
+                    border: OutlineInputBorder(),
+                  ),
+                  style: const TextStyle(fontSize: 12),
+                ),
+                const SizedBox(height: 10),
+                DropdownButtonFormField<String>(
+                  key: const ValueKey('creator-application-region'),
+                  value: region,
+                  decoration: const InputDecoration(
+                    labelText: '主要运营地区',
+                    isDense: true,
+                    border: OutlineInputBorder(),
+                  ),
+                  items: const [
+                    DropdownMenuItem(value: 'CN', child: Text('中国大陆')),
+                    DropdownMenuItem(value: 'HK', child: Text('中国香港')),
+                    DropdownMenuItem(value: 'SG', child: Text('新加坡')),
+                    DropdownMenuItem(value: 'US', child: Text('美国')),
+                    DropdownMenuItem(value: 'OTHER', child: Text('其它')),
+                  ],
+                  onChanged: (value) =>
+                      setLocalState(() => region = value ?? 'CN'),
+                ),
+                CheckboxListTile(
+                  key: const ValueKey('creator-application-consent'),
+                  value: consent,
+                  dense: true,
+                  contentPadding: EdgeInsets.zero,
+                  controlAffinity: ListTileControlAffinity.leading,
+                  onChanged: (value) =>
+                      setLocalState(() => consent = value ?? false),
+                  title: const Text(
+                    '同意由合规 KYC 服务商核验身份；平台只保存状态与引用编号，不保存证件原件。',
+                    style: TextStyle(fontSize: 10, height: 1.5),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(dialogContext, false),
+              child: const Text('取消'),
+            ),
+            FilledButton(
+              key: const ValueKey('creator-application-submit'),
+              onPressed: noteController.text.trim().length >= 20 && consent
+                  ? () => Navigator.pop(dialogContext, true)
+                  : null,
+              child: const Text('提交申请'),
+            ),
+          ],
+        ),
+      ),
+    );
+
+    if (confirmed != true) {
+      noteController.dispose();
+      return null;
+    }
+    try {
+      final application = await ref
+          .read(airvanaRepositoryProvider)
+          .submitCreatorApplication(
+            applicationNote: noteController.text.trim(),
+            regionCode: region,
+            kycConsent: consent,
+          );
+      if (application.idempotent) {
+        messenger.showSnackBar(
+          const SnackBar(content: Text('已有进行中的资格申请，未重复提交')),
+        );
+      }
+      return application;
+    } catch (error) {
+      // 资格申请失败必须显式报错：不能让用户以为已经进入审核
+      messenger.showSnackBar(SnackBar(content: Text('资格申请未提交成功：$error')));
+      return null;
+    } finally {
+      noteController.dispose();
     }
   }
 }
@@ -1718,6 +1863,7 @@ class _GovernancePage extends ConsumerWidget {
       return _PageList(
         keyName: 'governance-parity',
         children: [
+          const _ServerAssetLicences(),
           Container(
             padding: const EdgeInsets.all(18),
             decoration: BoxDecoration(
@@ -1981,14 +2127,14 @@ class _FeedbackPageState extends ConsumerState<_FeedbackPage> {
               const _Boundary(title: '隐私提醒', text: '请勿填写密码、验证码、助记词或身份证件等敏感信息。'),
               const SizedBox(height: 12),
               _PrimaryAction(
-                label: '保存意见反馈',
+                label: '提交客服工单',
                 onPressed: _body.text.trim().length >= 8
                     ? () => _submit(context, ref, state)
                     : null,
               ),
               const SizedBox(height: 8),
               const Text(
-                '当前版本仅保存在本设备，不会发送给客服；正式提交需接入后端工单服务。',
+                '提交后进入平台客服工单队列，可在下方「我的工单」查看处理状态与回复；本机同时留一份副本。',
                 style: TextStyle(
                   color: AirvanaColors.muted,
                   fontSize: 9,
@@ -1998,6 +2144,7 @@ class _FeedbackPageState extends ConsumerState<_FeedbackPage> {
             ],
           ),
         ),
+        const _ServerSupportTickets(),
         _Surface(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -2064,15 +2211,519 @@ class _FeedbackPageState extends ConsumerState<_FeedbackPage> {
       'created_at': DateTime.now().toUtc().toIso8601String(),
       'status': 'local-record',
     };
+    // 工单是用户以为「已经提交给客服」的动作：服务端失败必须显式报错，
+    // 不能只存本机就宣称提交成功。
+    // 提前取用，避免跨 await 使用 BuildContext
+    final messenger = ScaffoldMessenger.of(context);
+    String message;
+    try {
+      final created = await ref
+          .read(airvanaRepositoryProvider)
+          .createSupportTicket(
+            category: _serverCategory(_category),
+            subject: '${labels[_category] ?? '反馈'}·移动端',
+            body: [
+              _body.text.trim(),
+              if (_contact.text.trim().isNotEmpty)
+                '联系方式：${_contact.text.trim()}',
+            ].join('\n'),
+          );
+      ticket['status'] = 'server:${created.status}';
+      ticket['server_id'] = created.id;
+      message = '工单已提交客服（编号 ${created.id}）';
+      ref.invalidate(supportTicketsProvider);
+    } catch (error) {
+      messenger
+        ..hideCurrentSnackBar()
+        ..showSnackBar(SnackBar(content: Text('工单提交失败，未发送给客服：$error')));
+      return;
+    }
+
+    if (!context.mounted) return;
     await _saveFeatureState(
       context,
       ref,
       state.copyWith(feedbackTickets: [ticket, ...state.feedbackTickets]),
-      message: '意见反馈已保存到当前设备',
+      message: message,
     );
     _body.clear();
     _contact.clear();
     if (mounted) setState(() {});
+  }
+
+  /// 前端分类映射到服务端白名单（服务端只接受
+  /// account/content/points/campaign/bug/other）。
+  static String _serverCategory(String category) => switch (category) {
+    'bug' => 'bug',
+    'content' => 'content',
+    'account' => 'account',
+    _ => 'other',
+  };
+}
+
+/// 「我的工单」：服务端权威的工单状态与平台回复。
+/// 登录会话管理：列出服务端仍然有效的会话并可逐个撤销。
+class _AccountSessionsCard extends ConsumerWidget {
+  const _AccountSessionsCard();
+
+  static String _fmt(DateTime? value) {
+    if (value == null) return '—';
+    final local = value.toLocal();
+    return '${local.year}-${local.month.toString().padLeft(2, '0')}-${local.day.toString().padLeft(2, '0')} '
+        '${local.hour.toString().padLeft(2, '0')}:${local.minute.toString().padLeft(2, '0')}';
+  }
+
+  Future<void> _revoke(
+    BuildContext context,
+    WidgetRef ref,
+    String sessionId,
+  ) async {
+    final messenger = ScaffoldMessenger.of(context);
+    try {
+      await ref.read(airvanaRepositoryProvider).revokeAccountSession(sessionId);
+      ref.invalidate(accountSessionsProvider);
+      messenger.showSnackBar(const SnackBar(content: Text('该登录会话已撤销')));
+    } catch (error) {
+      // 撤销是安全动作，失败必须让用户知道会话仍然有效
+      messenger.showSnackBar(SnackBar(content: Text('撤销失败，会话仍然有效：$error')));
+    }
+  }
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final sessions = ref.watch(accountSessionsProvider);
+    return _SettingsSurface(
+      key: const ValueKey('settings-sessions-surface'),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(15, 13, 15, 13),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const _SectionTitle('登录设备', subtitle: '服务端仍然有效的会话，可逐个撤销'),
+            const SizedBox(height: 8),
+            sessions.when(
+              loading: () => const Padding(
+                padding: EdgeInsets.symmetric(vertical: 8),
+                child: SizedBox(
+                  width: 18,
+                  height: 18,
+                  child: CircularProgressIndicator(strokeWidth: 2),
+                ),
+              ),
+              error: (error, _) => const Text(
+                '暂时无法读取登录会话。',
+                style: TextStyle(fontSize: 11, color: AirvanaColors.muted),
+              ),
+              data: (items) => items.isEmpty
+                  ? const Text(
+                      '没有其它有效会话。',
+                      style: TextStyle(
+                        fontSize: 11,
+                        color: AirvanaColors.muted,
+                      ),
+                    )
+                  : Column(
+                      children: [
+                        for (final session in items)
+                          Padding(
+                            key: ValueKey('account-session-${session.id}'),
+                            padding: const EdgeInsets.only(top: 6),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        '会话 ${session.id}',
+                                        style: const TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w800,
+                                        ),
+                                      ),
+                                      Text(
+                                        '登录于 ${_fmt(session.createdAt)} · 到期 ${_fmt(session.expiresAt)}',
+                                        style: const TextStyle(
+                                          fontSize: 9,
+                                          color: AirvanaColors.muted,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                TextButton(
+                                  key: ValueKey(
+                                    'account-session-revoke-${session.id}',
+                                  ),
+                                  onPressed: () =>
+                                      _revoke(context, ref, session.id),
+                                  child: const Text(
+                                    '撤销',
+                                    style: TextStyle(fontSize: 11),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                      ],
+                    ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/// 服务端订阅计划目录。
+///
+/// 价格状态由服务端给出：`priceStatus` 不是 available 时**不提供购买入口**，
+/// 界面也不得暗示可以下单。订阅只增加功能与周期额度，永不直接发放 AIP / AIT。
+class _ServerSubscriptionPlans extends ConsumerWidget {
+  const _ServerSubscriptionPlans();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final plans = ref.watch(subscriptionPlansProvider);
+    return _Surface(
+      key: const ValueKey('subscription-plans-server'),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const _SectionTitle('平台订阅计划', subtitle: '服务端目录与价格状态'),
+          const SizedBox(height: 10),
+          plans.when(
+            loading: () => const _InlineSpinner(),
+            error: (error, _) => const Text(
+              '暂时无法读取订阅计划。',
+              style: TextStyle(fontSize: 11, color: AirvanaColors.muted),
+            ),
+            data: (items) => items.isEmpty
+                ? const Text(
+                    '服务端未返回可用计划。',
+                    style: TextStyle(fontSize: 11, color: AirvanaColors.muted),
+                  )
+                : Column(
+                    children: [
+                      for (final plan in items)
+                        Padding(
+                          key: ValueKey(
+                            'subscription-plan-server-${plan.planKey}',
+                          ),
+                          padding: const EdgeInsets.only(bottom: 9),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      plan.name,
+                                      style: const TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w900,
+                                      ),
+                                    ),
+                                    Text(
+                                      plan.audience,
+                                      style: const TextStyle(
+                                        fontSize: 9,
+                                        color: AirvanaColors.muted,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              _StatusPill(
+                                plan.purchasable ? '可订阅' : '价格待审批',
+                                good: plan.purchasable,
+                              ),
+                            ],
+                          ),
+                        ),
+                    ],
+                  ),
+          ),
+          const SizedBox(height: 8),
+          const Text(
+            '订阅只增加功能与周期额度，不直接发放 AIP 或 AIT。价格未经商业审批前不提供下单入口。',
+            style: TextStyle(
+              fontSize: 9,
+              color: AirvanaColors.muted,
+              height: 1.7,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// 素材授权登记表：撤销或到期会直接阻止引用它的内容发布，
+/// 因此放在「发布与治理」里而不是单独的素材库。
+class _ServerAssetLicences extends ConsumerWidget {
+  const _ServerAssetLicences();
+
+  static const _licenseLabels = {
+    'original': '原创',
+    'licensed': '第三方授权',
+    'brand_supplied': '品牌提供',
+    'cc0': 'CC0',
+  };
+
+  Future<void> _revoke(
+    BuildContext context,
+    WidgetRef ref,
+    CreatorAsset asset,
+  ) async {
+    final messenger = ScaffoldMessenger.of(context);
+    try {
+      await ref.read(airvanaRepositoryProvider).revokeAsset(asset.id);
+      ref.invalidate(creatorAssetsProvider);
+      messenger.showSnackBar(
+        SnackBar(content: Text('已撤销「${asset.name}」的授权；引用它的内容将无法发布')),
+      );
+    } catch (error) {
+      messenger.showSnackBar(SnackBar(content: Text('撤销失败，授权仍然有效：$error')));
+    }
+  }
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final assets = ref.watch(creatorAssetsProvider);
+    return _Surface(
+      key: const ValueKey('asset-licences-server'),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const _SectionTitle('素材授权', subtitle: '撤销或到期即阻止引用它的内容发布'),
+          const SizedBox(height: 10),
+          assets.when(
+            loading: () => const _InlineSpinner(),
+            error: (error, _) => const Text(
+              '暂时无法读取素材授权。',
+              style: TextStyle(fontSize: 11, color: AirvanaColors.muted),
+            ),
+            data: (items) => items.isEmpty
+                ? const Text(
+                    '还没有登记过素材授权。',
+                    style: TextStyle(fontSize: 11, color: AirvanaColors.muted),
+                  )
+                : Column(
+                    children: [
+                      for (final asset in items.take(10))
+                        Padding(
+                          key: ValueKey('asset-${asset.id}'),
+                          padding: const EdgeInsets.only(bottom: 6),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      asset.name,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: const TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w800,
+                                      ),
+                                    ),
+                                    Text(
+                                      '${_licenseLabels[asset.licenseType] ?? asset.licenseType} · ${asset.kind}',
+                                      style: const TextStyle(
+                                        fontSize: 9,
+                                        color: AirvanaColors.muted,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              if (asset.authorized)
+                                TextButton(
+                                  key: ValueKey('asset-revoke-${asset.id}'),
+                                  onPressed: () => _revoke(context, ref, asset),
+                                  child: const Text(
+                                    '撤销',
+                                    style: TextStyle(fontSize: 11),
+                                  ),
+                                )
+                              else
+                                const _StatusPill('已撤销', warning: true),
+                            ],
+                          ),
+                        ),
+                    ],
+                  ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// 未成年人模式策略：平台配置、客户端执行。
+/// 未配置时如实显示「未配置」，不自行编造限制。
+class _ServerMinorModePolicy extends ConsumerWidget {
+  const _ServerMinorModePolicy();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final policy = ref.watch(minorModePolicyProvider);
+    return _Surface(
+      key: const ValueKey('minor-mode-policy-server'),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const _SectionTitle('未成年人模式', subtitle: '由平台配置，客户端强制执行'),
+          const SizedBox(height: 10),
+          policy.when(
+            loading: () => const _InlineSpinner(),
+            error: (error, _) => const Text(
+              '暂时无法读取策略。',
+              style: TextStyle(fontSize: 11, color: AirvanaColors.muted),
+            ),
+            data: (value) => !value.enabled
+                ? Text(
+                    value.note.isEmpty ? '平台尚未启用未成年人模式。' : value.note,
+                    style: const TextStyle(
+                      fontSize: 11,
+                      color: AirvanaColors.muted,
+                      height: 1.7,
+                    ),
+                  )
+                : Column(
+                    key: const ValueKey('minor-mode-enabled'),
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      for (final line in [
+                        '每日可用时长：${value.dailyMinutes} 分钟',
+                        if (value.curfew.isNotEmpty) '宵禁时段：${value.curfew}',
+                        if (value.paymentsBlocked) '已拦截支付与对外分发',
+                        if (value.socialRestricted) '已限制社交互动',
+                      ])
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 4),
+                          child: Text(
+                            line,
+                            style: const TextStyle(
+                              fontSize: 11,
+                              color: AirvanaColors.muted,
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _InlineSpinner extends StatelessWidget {
+  const _InlineSpinner();
+
+  @override
+  Widget build(BuildContext context) => const Padding(
+    padding: EdgeInsets.symmetric(vertical: 10),
+    child: SizedBox(
+      width: 18,
+      height: 18,
+      child: CircularProgressIndicator(strokeWidth: 2),
+    ),
+  );
+}
+
+class _ServerSupportTickets extends ConsumerWidget {
+  const _ServerSupportTickets();
+
+  static const _statusLabels = {
+    'open': '待处理',
+    'answered': '已回复',
+    'closed': '已关闭',
+  };
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final tickets = ref.watch(supportTicketsProvider);
+    return _Surface(
+      key: const ValueKey('support-tickets-server'),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const _SectionTitle('我的工单', subtitle: '服务端状态与平台回复'),
+          const SizedBox(height: 10),
+          tickets.when(
+            loading: () => const Padding(
+              padding: EdgeInsets.symmetric(vertical: 10),
+              child: SizedBox(
+                width: 18,
+                height: 18,
+                child: CircularProgressIndicator(strokeWidth: 2),
+              ),
+            ),
+            // 读取失败如实说明，不用本机副本冒充服务端状态
+            error: (error, _) => const Text(
+              '暂时无法读取服务端工单状态。',
+              style: TextStyle(fontSize: 11, color: AirvanaColors.muted),
+            ),
+            data: (items) => items.isEmpty
+                ? const Text(
+                    '还没有提交过工单。',
+                    style: TextStyle(fontSize: 11, color: AirvanaColors.muted),
+                  )
+                : Column(
+                    children: [
+                      for (final ticket in items.take(8))
+                        Padding(
+                          key: ValueKey('support-ticket-${ticket.id}'),
+                          padding: const EdgeInsets.only(bottom: 10),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      ticket.subject,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: const TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w900,
+                                      ),
+                                    ),
+                                  ),
+                                  _StatusPill(
+                                    _statusLabels[ticket.status] ??
+                                        ticket.status,
+                                    good: ticket.answered,
+                                  ),
+                                ],
+                              ),
+                              if (ticket.answered) ...[
+                                const SizedBox(height: 4),
+                                Text(
+                                  '平台回复：${ticket.replyBody}',
+                                  style: const TextStyle(
+                                    fontSize: 10,
+                                    color: AirvanaColors.muted,
+                                    height: 1.6,
+                                  ),
+                                ),
+                              ],
+                            ],
+                          ),
+                        ),
+                    ],
+                  ),
+          ),
+        ],
+      ),
+    );
   }
 }
 
@@ -2483,6 +3134,7 @@ class _PreferencesPage extends ConsumerWidget {
     builder: (context, ref, state) => _PageList(
       keyName: 'preferences-parity',
       children: [
+        const _ServerMinorModePolicy(),
         _SettingsSurface(
           key: const ValueKey('settings-display-surface'),
           child: Column(
@@ -2549,22 +3201,19 @@ class _PreferencesPage extends ConsumerWidget {
               _SettingsLink(
                 icon: Icons.sync_rounded,
                 label: '版本更新',
-                trailing: 'v1.0.0',
-                onTap: () => _notice(context, '当前已是最新版本 v1.0.0'),
+                trailing: _kAppVersionLabel,
+                onTap: () => _notice(context, '当前已是最新版本 $_kAppVersionLabel'),
               ),
               _SettingsLink(
                 icon: Icons.info_outline_rounded,
                 label: '关于我们',
                 last: true,
-                onTap: () => _showInfo(
-                  context,
-                  '关于 Airvana',
-                  '让每一个 KOL 创作并运营属于自己的 Agentic Playable。',
-                ),
+                onTap: () => context.push('/profile/secondary/about'),
               ),
             ],
           ),
         ),
+        const _AccountSessionsCard(),
         _SettingsSurface(
           key: const ValueKey('settings-delete-surface'),
           child: _SettingsLink(
@@ -2579,21 +3228,6 @@ class _PreferencesPage extends ConsumerWidget {
       ],
     ),
   );
-
-  Future<void> _showInfo(BuildContext context, String title, String body) =>
-      showDialog<void>(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: Text(title),
-          content: Text(body),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text('知道了'),
-            ),
-          ],
-        ),
-      );
 }
 
 class _SettingsSurface extends StatelessWidget {
@@ -2857,6 +3491,133 @@ class _ThemeModeOption extends StatelessWidget {
   );
 }
 
+/// 「关于我们」独立二级页：与 Web 端同一份信息结构（产品定位、版本、官方渠道、安全提示）。
+///
+/// 官方媒体渠道尚未开通，一律显示「即将开放」并在点击时如实说明，不放假链接。
+class _AboutPage extends StatelessWidget {
+  const _AboutPage();
+
+  @override
+  Widget build(BuildContext context) => _PageList(
+    keyName: 'about-parity',
+    children: [
+      _Surface(
+        key: const ValueKey('about-hero'),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Container(
+                  width: 44,
+                  height: 44,
+                  decoration: BoxDecoration(
+                    color: AirvanaColors.accent,
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                  alignment: Alignment.center,
+                  child: const Text(
+                    'A',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                const Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Airvana',
+                        style: TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                      SizedBox(height: 3),
+                      Text(
+                        'Agentic Playable 营销智能体平台',
+                        style: TextStyle(
+                          color: AirvanaColors.muted,
+                          fontSize: 10,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const _StatusPill(_kAppVersionLabel),
+              ],
+            ),
+            const SizedBox(height: 13),
+            const Text(
+              '让每一位 KOL 创作并运营属于自己的 Agentic Playable，连接内容生成、互动转化、效果归因、商业结算与数字资产沉淀。',
+              style: TextStyle(
+                color: AirvanaColors.muted,
+                fontSize: 11,
+                height: 1.75,
+              ),
+            ),
+          ],
+        ),
+      ),
+      const _SectionTitle('官方渠道', subtitle: '获取产品更新、社区公告与活动信息'),
+      _Surface(
+        key: const ValueKey('about-website'),
+        padding: EdgeInsets.zero,
+        child: _SettingsLink(
+          icon: Icons.public_rounded,
+          label: '官方网站',
+          trailing: _kOfficialWebsite,
+          last: true,
+          onTap: () => _copyOfficialLink(context),
+        ),
+      ),
+      const _SectionTitle('官方媒体渠道', subtitle: '开通后将在此处公布，请勿通过其他来源添加'),
+      _Surface(
+        key: const ValueKey('about-channels'),
+        padding: EdgeInsets.zero,
+        child: Column(
+          children: [
+            for (final channel in _officialChannels)
+              _SettingsLink(
+                key: ValueKey('about-channel-${channel.$1}'),
+                icon: channel.$3,
+                label: channel.$2,
+                trailing: '即将开放',
+                last: channel.$1 == _officialChannels.last.$1,
+                onTap: () => _notice(context, '${channel.$2} 官方渠道即将开放'),
+              ),
+          ],
+        ),
+      ),
+      const _Boundary(
+        title: '安全提示',
+        text: '官方人员不会索取助记词、私钥或验证码。请仅通过此处公布的官方链接访问社区；任何其他来源的“客服”或“空投”均非官方渠道。',
+      ),
+    ],
+  );
+
+  static Future<void> _copyOfficialLink(BuildContext context) async {
+    await Clipboard.setData(
+      const ClipboardData(text: 'https://$_kOfficialWebsite'),
+    );
+    if (!context.mounted) return;
+    _notice(context, '官方网站地址已复制：$_kOfficialWebsite');
+  }
+}
+
+/// (key, 展示名, 图标)。URL 未开通前不在此处存放任何链接。
+const _officialChannels = <(String, String, IconData)>[
+  ('facebook', 'Facebook', Icons.facebook),
+  ('telegram', 'Telegram', Icons.send_rounded),
+  ('x', 'X', Icons.alternate_email_rounded),
+  ('discord', 'Discord', Icons.forum_rounded),
+];
+
 class _AccountDeletionPage extends StatelessWidget {
   const _AccountDeletionPage();
 
@@ -2943,12 +3704,170 @@ class _AccountDeletionPage extends StatelessWidget {
           style: TextStyle(color: Color(0xFF636366), fontSize: 11, height: 1.7),
         ),
       ),
+      const _AccountDeletionAction(),
       const _Boundary(
-        title: '当前为前端演示模式',
-        text: '不会在本机伪造删除申请。连接账号服务后，才会显示数据导出、确认输入和真实提交入口。',
+        title: '边界',
+        text: '删除申请与取消都由服务端记录并进入审计；到期删除由服务端执行。Airvana 不会也无法删除你的外部数字钱包或链上记录。',
       ),
     ],
   );
+}
+
+/// 删除账号的真实提交区：状态、二次确认、提交与取消全部走服务端。
+class _AccountDeletionAction extends ConsumerStatefulWidget {
+  const _AccountDeletionAction();
+
+  @override
+  ConsumerState<_AccountDeletionAction> createState() =>
+      _AccountDeletionActionState();
+}
+
+class _AccountDeletionActionState
+    extends ConsumerState<_AccountDeletionAction> {
+  static const _confirmPhrase = '删除账号';
+  final _controller = TextEditingController();
+  bool _busy = false;
+  String? _error;
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  Future<void> _run(Future<String> Function() action) async {
+    setState(() {
+      _busy = true;
+      _error = null;
+    });
+    final messenger = ScaffoldMessenger.of(context);
+    try {
+      final message = await action();
+      ref.invalidate(accountDeletionProvider);
+      _controller.clear();
+      if (!mounted) return;
+      messenger.showSnackBar(SnackBar(content: Text(message)));
+    } catch (error) {
+      // 写入类动作失败必须显式报错：不能让用户以为已经提交。
+      if (!mounted) return;
+      setState(() => _error = '$error');
+    } finally {
+      if (mounted) setState(() => _busy = false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final request = ref.watch(accountDeletionProvider);
+    return _Surface(
+      key: const ValueKey('delete-account-action'),
+      child: request.when(
+        loading: () => const Center(
+          child: Padding(
+            padding: EdgeInsets.all(12),
+            child: SizedBox(
+              width: 18,
+              height: 18,
+              child: CircularProgressIndicator(strokeWidth: 2),
+            ),
+          ),
+        ),
+        error: (error, _) => Text(
+          '无法读取删除申请状态：$error',
+          style: const TextStyle(fontSize: 11, color: AirvanaColors.muted),
+        ),
+        data: (pending) =>
+            pending != null ? _pendingView(pending) : _submitView(),
+      ),
+    );
+  }
+
+  Widget _pendingView(AccountDeletionRequest pending) => Column(
+    key: const ValueKey('delete-account-pending'),
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      const _SectionTitle('删除申请处理中', subtitle: '冷静期内账号与数据仍然保留'),
+      const SizedBox(height: 10),
+      Text(
+        '计划删除时间：${pending.scheduledFor.isEmpty ? '—' : pending.scheduledFor}',
+        style: const TextStyle(fontSize: 11, color: AirvanaColors.muted),
+      ),
+      if (_error != null) ...[
+        const SizedBox(height: 8),
+        Text(
+          _error!,
+          style: const TextStyle(fontSize: 11, color: Color(0xFFC62836)),
+        ),
+      ],
+      const SizedBox(height: 12),
+      SizedBox(
+        width: double.infinity,
+        child: OutlinedButton(
+          key: const ValueKey('delete-account-cancel'),
+          onPressed: _busy
+              ? null
+              : () => _run(() async {
+                  await ref
+                      .read(airvanaRepositoryProvider)
+                      .cancelAccountDeletion(pending.id);
+                  return '删除申请已取消，账号继续保留';
+                }),
+          child: Text(_busy ? '处理中…' : '取消删除申请'),
+        ),
+      ),
+    ],
+  );
+
+  Widget _submitView() {
+    final ready = _controller.text.trim() == _confirmPhrase;
+    return Column(
+      key: const ValueKey('delete-account-submit'),
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const _SectionTitle('提交删除申请', subtitle: '输入「删除账号」以二次确认'),
+        const SizedBox(height: 10),
+        TextField(
+          key: const ValueKey('delete-account-confirm-input'),
+          controller: _controller,
+          onChanged: (_) => setState(() {}),
+          decoration: const InputDecoration(
+            hintText: _confirmPhrase,
+            isDense: true,
+            border: OutlineInputBorder(),
+          ),
+          style: const TextStyle(fontSize: 13),
+        ),
+        if (_error != null) ...[
+          const SizedBox(height: 8),
+          Text(
+            _error!,
+            style: const TextStyle(fontSize: 11, color: Color(0xFFC62836)),
+          ),
+        ],
+        const SizedBox(height: 12),
+        SizedBox(
+          width: double.infinity,
+          child: FilledButton(
+            key: const ValueKey('delete-account-submit-button'),
+            style: FilledButton.styleFrom(
+              backgroundColor: const Color(0xFFC62836),
+            ),
+            onPressed: !ready || _busy
+                ? null
+                : () => _run(() async {
+                    final result = await ref
+                        .read(airvanaRepositoryProvider)
+                        .requestAccountDeletion();
+                    return result.idempotent
+                        ? '已有待处理的删除申请，未重复提交'
+                        : '删除申请已提交，30 天内可随时取消';
+                  }),
+            child: Text(_busy ? '正在提交…' : '提交删除申请'),
+          ),
+        ),
+      ],
+    );
+  }
 }
 
 class _SettingsLink extends StatelessWidget {
@@ -2960,6 +3879,7 @@ class _SettingsLink extends StatelessWidget {
     this.trailing,
     this.last = false,
     this.danger = false,
+    super.key,
   });
 
   final IconData icon;

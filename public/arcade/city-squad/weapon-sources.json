@@ -1,0 +1,133 @@
+{
+  "weapons": [
+    {
+      "name": "Pistol",
+      "file": "original-models/original-pistol.glb",
+      "bytes": 68652,
+      "sourcePage": "http://game.zhongyigames.com/jizhan/",
+      "meshIndex": 300,
+      "meshSource": "http://game.zhongyigames.com/jizhan/assets/Game/native/99/9927c986-8a7c-4416-9a22-5208d8b7895d@491c0.bin",
+      "materialIndex": 183,
+      "imageIndex": 241,
+      "imageSource": "http://game.zhongyigames.com/jizhan/assets/Game/native/71/716179cc-fb03-468d-bbb7-7386e0f273e1.png",
+      "vertices": 1158,
+      "triangles": 386,
+      "bounds": {
+        "min": [
+          -0.039259959012269974,
+          -0.09175758063793182,
+          -0.13295774161815643
+        ],
+        "max": [
+          0.03805534541606903,
+          0.1651480495929718,
+          0.1930006593465805
+        ]
+      },
+      "uvConvention": "Original UV; no V flip",
+      "prefabRootTransform": "identity",
+      "socket": {
+        "position": [
+          0.06,
+          0.214,
+          -0.01
+        ],
+        "cocosEulerDegrees": [
+          -70.233,
+          -97.281,
+          30.254
+        ],
+        "eulerOrder": "YZX",
+        "scale": 1.5
+      },
+      "originalVertexShaderRotation": "Apply X, then Y, then Z; matrix Rz*Ry*Rx; Three Euler ZYX",
+      "conversion": "Mesh and texture format conversion; original vertices, UVs, normals and tangents preserved"
+    },
+    {
+      "name": "MachineGun",
+      "file": "original-models/original-machinegun.glb",
+      "bytes": 88488,
+      "sourcePage": "http://game.zhongyigames.com/jizhan/",
+      "meshIndex": 251,
+      "meshSource": "http://game.zhongyigames.com/jizhan/assets/Game/native/72/7236fa5b-4f87-41e9-8d44-bf6236ba6bf2@73688.bin",
+      "materialIndex": 275,
+      "imageIndex": 428,
+      "imageSource": "http://game.zhongyigames.com/jizhan/assets/Game/native/ed/ed89ab71-7926-43ed-b711-3356548c4df2.png",
+      "vertices": 982,
+      "triangles": 848,
+      "bounds": {
+        "min": [
+          -0.15892542898654938,
+          -0.13840697705745697,
+          -0.3985268771648407
+        ],
+        "max": [
+          0.33467766642570496,
+          0.1770828366279602,
+          0.6252021193504333
+        ]
+      },
+      "uvConvention": "Original UV; no V flip",
+      "prefabRootTransform": "identity",
+      "socket": {
+        "position": [
+          0.06,
+          0.214,
+          -0.01
+        ],
+        "cocosEulerDegrees": [
+          -70.233,
+          -97.281,
+          30.254
+        ],
+        "eulerOrder": "YZX",
+        "scale": 1.2
+      },
+      "originalVertexShaderRotation": "Apply X, then Y, then Z; matrix Rz*Ry*Rx; Three Euler ZYX",
+      "conversion": "Mesh and texture format conversion; original vertices, UVs, normals and tangents preserved"
+    },
+    {
+      "name": "Shotgun",
+      "file": "original-models/original-shotgun.glb",
+      "bytes": 54764,
+      "sourcePage": "http://game.zhongyigames.com/jizhan/",
+      "meshIndex": 315,
+      "meshSource": "http://game.zhongyigames.com/jizhan/assets/Game/native/9d/9db005ab-5780-4562-9178-83997ebcfa91@b5f1d.bin",
+      "materialIndex": 156,
+      "imageIndex": 162,
+      "imageSource": "http://game.zhongyigames.com/jizhan/assets/Game/native/26/26b389c0-7571-484c-a610-0bfd5da4cc22.png",
+      "vertices": 692,
+      "triangles": 553,
+      "bounds": {
+        "min": [
+          -0.07873646914958954,
+          -0.08808106184005737,
+          -0.21536849439144135
+        ],
+        "max": [
+          0.07889474183320999,
+          0.1462751030921936,
+          0.5886623859405518
+        ]
+      },
+      "uvConvention": "Original UV; no V flip",
+      "prefabRootTransform": "identity",
+      "socket": {
+        "position": [
+          0.06,
+          0.214,
+          -0.01
+        ],
+        "cocosEulerDegrees": [
+          -70.233,
+          -97.281,
+          30.254
+        ],
+        "eulerOrder": "YZX",
+        "scale": 1.2
+      },
+      "originalVertexShaderRotation": "Apply X, then Y, then Z; matrix Rz*Ry*Rx; Three Euler ZYX",
+      "conversion": "Mesh and texture format conversion; original vertices, UVs, normals and tangents preserved"
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "source": "http://game.zhongyigames.com/niguolaia/",
+  "files": [
+    {
+      "name": "tower_buliding_common",
+      "file": "tower_buliding_common.mp3",
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/6e/6efb4a32-651d-4c50-8a7b-df4d5f4b9d51.e60f0.mp3",
+      "duration": 1.253878,
+      "bytes": 5243
+    },
+    {
+      "name": "tower_star_upgrade",
+      "file": "tower_star_upgrade.mp3",
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/31/31c3ad2e-2853-4436-95ea-79e2b011276f.139ca.mp3",
+      "duration": 2.821224,
+      "bytes": 11512
+    },
+    {
+      "name": "game_win",
+      "file": "game_win.mp3",
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/66/66f3b203-4b95-4776-bb06-898215f0eccb.f77d0.mp3",
+      "duration": 3.291429,
+      "bytes": 13393
+    },
+    {
+      "name": "game_lose",
+      "file": "game_lose.mp3",
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/45/450b2f62-3727-476f-bcbb-0ac7812bdb7f.38ae8.mp3",
+      "duration": 3.213061,
+      "bytes": 13079
+    },
+    {
+      "name": "player_skill_zhaomu",
+      "file": "player_skill_zhaomu.mp3",
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/76/764e585d-429c-4afe-a27d-7d2fcdf7030c.1e72c.mp3",
+      "duration": 0.888163,
+      "bytes": 3780
+    },
+    {
+      "name": "tower_environment_thunder",
+      "file": "tower_environment_thunder.mp3",
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/3e/3e5848ae-d728-4c3e-a7ea-3e3def7fbfbe.f2e1e.mp3",
+      "duration": 4.832653,
+      "bytes": 19558
+    },
+    {
+      "name": "bgm_chapter01",
+      "file": "bgm_chapter01.mp3",
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/bf/bf24997c-2b0e-4ff8-a303-e621d8ddd0c0.de082.mp3",
+      "duration": 32,
+      "bytes": 128227
+    },
+    {
+      "name": "tower_arrow_attack_one",
+      "file": "tower_arrow_attack_one.mp3",
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/e9/e97d3723-1794-4180-bfe4-4d125dc937b0.b6fd8.mp3",
+      "duration": 0.235102,
+      "bytes": 1167
+    },
+    {
+      "name": "tower_mage_attack_one",
+      "file": "tower_mage_attack_one.mp3",
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/75/7563031d-23b5-478b-8622-e59ad76977c0.ce7ea.mp3",
+      "duration": 0.940408,
+      "bytes": 3989
+    },
+    {
+      "name": "tower_bullet_bomb",
+      "file": "tower_bullet_bomb.mp3",
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/e9/e9ad0162-a9aa-45f0-b7c0-79f2601b47af.8aa30.mp3",
+      "duration": 1.018776,
+      "bytes": 4302
+    },
+    {
+      "name": "tower_enemy_dead",
+      "file": "tower_enemy_dead.mp3",
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/79/795c7043-e27a-4f25-a575-dfbe2bf562d6.5ded5.mp3",
+      "duration": 0.835918,
+      "bytes": 3571
+    },
+    {
+      "name": "tower_sale_common",
+      "file": "tower_sale_common.mp3",
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/d3/d3cff0a0-cb7d-4b0f-bf8b-98c4951af889.ccbf4.mp3",
+      "duration": 0.757551,
+      "bytes": 3257
+    }
+  ]
+}

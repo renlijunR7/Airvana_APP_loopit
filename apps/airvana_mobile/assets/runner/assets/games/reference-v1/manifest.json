@@ -1,0 +1,71 @@
+{
+  "version": "1.0.0",
+  "source": "ORIGINAL_CODE_NATIVE_SVG",
+  "referencePolicy": "Screenshots inform themes only; no source screenshot pixels, third-party logos, named characters or licensed game assets copied.",
+  "entries": [
+    {
+      "key": "sky-raid",
+      "file": "sky-raid.svg",
+      "width": 720,
+      "height": 1120,
+      "authoring": "Original procedural vector illustration",
+      "runtime": "public/reference-action-v1.js"
+    },
+    {
+      "key": "harvest-lane",
+      "file": "harvest-lane.svg",
+      "width": 720,
+      "height": 1120,
+      "authoring": "Original procedural vector illustration",
+      "runtime": "public/reference-worlds-v1.js"
+    },
+    {
+      "key": "island-sling",
+      "file": "island-sling.svg",
+      "width": 720,
+      "height": 1120,
+      "authoring": "Original procedural vector illustration",
+      "runtime": "public/reference-action-v1.js"
+    },
+    {
+      "key": "pocket-city",
+      "file": "pocket-city.svg",
+      "width": 720,
+      "height": 1120,
+      "authoring": "Original procedural vector illustration",
+      "runtime": "public/reference-worlds-v1.js"
+    },
+    {
+      "key": "gem-blocks",
+      "file": "gem-blocks.svg",
+      "width": 720,
+      "height": 1120,
+      "authoring": "Original procedural vector illustration",
+      "runtime": "public/reference-puzzles-v1.js"
+    },
+    {
+      "key": "dice-voyage",
+      "file": "dice-voyage.svg",
+      "width": 720,
+      "height": 1120,
+      "authoring": "Original procedural vector illustration",
+      "runtime": "public/reference-worlds-v1.js"
+    },
+    {
+      "key": "cloud-solitaire",
+      "file": "cloud-solitaire.svg",
+      "width": 720,
+      "height": 1120,
+      "authoring": "Original procedural vector illustration",
+      "runtime": "public/reference-puzzles-v1.js"
+    },
+    {
+      "key": "buddy-flip",
+      "file": "buddy-flip.svg",
+      "width": 720,
+      "height": 1120,
+      "authoring": "Original procedural vector illustration",
+      "runtime": "public/reference-puzzles-v1.js"
+    }
+  ]
+}

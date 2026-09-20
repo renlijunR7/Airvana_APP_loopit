@@ -96,15 +96,21 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   test(
-    'all 38 native covers use the current reference-guided casual art pack',
+    'the 38 classic covers stay on the reference-guided casual art pack',
     () {
+      // 物理（101-105）与截图原作（111-118）各自带独立美术包，
+      // 这条断言只锁 38 款经典游戏仍统一使用 casual-v1 封面。
       final playables = LegacyDemoCatalog.legacyWebPlayables;
-      expect(playables, hasLength(38));
+      expect(playables, hasLength(51));
+      final classic = playables
+          .where(
+            (item) => item.coverAsset.startsWith(
+              'assets/runner/assets/games/casual-v1/covers-png/',
+            ),
+          )
+          .toList();
+      expect(classic, hasLength(38));
       for (final playable in playables) {
-        expect(
-          playable.coverAsset,
-          startsWith('assets/runner/assets/games/casual-v1/covers-png/'),
-        );
         expect(
           File(playable.coverAsset).existsSync(),
           isTrue,

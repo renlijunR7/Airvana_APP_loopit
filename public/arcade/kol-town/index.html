@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="zh-Hans" data-theme="luna">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' 'unsafe-inline'; script-src 'self'; img-src 'self' data:; connect-src 'none'; frame-src 'self'; font-src 'self'; form-action 'none'; base-uri 'none'">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="KOL 小镇 · 本地演示 H5（DEMO / LOCAL）">
+<title>KOL 小镇 · DEMO / LOCAL</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%237357f5'/%3E%3Cpath d='M16 40 32 14l16 26-16 10z' fill='%23ffbf5b'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="styles.css?v=0.16.1-20260916">
+</head>
+<body>
+<div id="app" class="app" data-fsm="intro">
+  <span class="global-demo-badge" aria-label="演示标识 DEMO / LOCAL">DEMO / LOCAL</span>
+
+  <!-- ============ 顶部状态栏（常驻玩家身份） ============ -->
+  <header class="topbar" id="topbar">
+    <div class="topbar-row">
+      <button type="button" class="chip chip-town" id="btn-town-chip" aria-label="当前居民，打开我的居民形象">
+        <span class="chip-avatar" id="topbar-avatar" aria-hidden="true"><span class="avatar-face-art" id="topbar-avatar-art"></span><span class="resident-role-mark">住</span></span>
+        <span class="chip-text">
+          <span class="chip-title" id="topbar-town">新居民</span>
+          <span class="chip-sub mono" id="topbar-season">Lv.1 · Luna 小镇</span>
+        </span>
+      </button>
+      <span class="demo-badge" id="demo-badge" role="note" aria-label="演示标识 DEMO / LOCAL">DEMO / LOCAL</span>
+      <div class="topbar-right">
+        <button type="button" class="chip chip-bricks" id="btn-bricks" aria-label="砖块余额，打开钱包">
+          <svg class="ico-brick" viewBox="0 0 14 11" aria-hidden="true"><rect x="0.5" y="0.5" width="13" height="10" rx="2"/><path d="M0.5 5.5H13.5M7 0.5V5.5M4 5.5V10.5M10 5.5V10.5"/></svg>
+          <span class="mono" id="topbar-bricks">0</span>
+        </button>
+        <button type="button" class="icon-btn" id="btn-settings" aria-label="设置" aria-haspopup="dialog">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="goal-strip" id="goal-strip" aria-live="polite">
+      <span class="goal-label">今日目标</span>
+      <span class="goal-text mono" id="goal-text">任务 0/3 · 繁荣度 0/100</span>
+      <span class="goal-bar" aria-hidden="true"><span class="goal-bar-fill" id="goal-bar-fill"></span></span>
+      <span class="goal-level mono" id="goal-level">Lv.1</span>
+    </div>
+  </header>
+
+  <!-- ============ 屏幕容器 ============ -->
+  <main id="screens" class="screens">
+
+    <!-- 本地身份入口：游客优先，不采集邮箱、手机号或真实身份 -->
+    <section class="screen screen-access" id="screen-access" data-screen="access" hidden>
+      <div class="access-hero" aria-hidden="true"></div>
+      <div class="access-content">
+        <div class="access-brand">
+          <span class="access-avatar" aria-hidden="true"></span>
+          <div><div class="kicker mono on-dark">KOL TOWN · LOCAL</div><h1 class="access-title" tabindex="-1">进入 Luna 小镇</h1></div>
+        </div>
+        <p class="access-copy">以游客身份进入。游戏进度、榜单演示与邀请码绑定只保存在当前浏览器，不会发送到任何服务。</p>
+        <button type="button" class="btn btn-accent btn-block access-guest" id="access-guest">游客进入 · 无需注册</button>
+        <div class="access-divider"><span>本地静态演示</span></div>
+        <div class="seg access-tabs" role="tablist" aria-label="登录或注册" id="access-tabs">
+          <button type="button" role="tab" class="seg-btn" data-access-tab="register" aria-selected="true" id="access-tab-register">创建账号</button>
+          <button type="button" role="tab" class="seg-btn" data-access-tab="login" aria-selected="false" id="access-tab-login" tabindex="-1">已有账号</button>
+        </div>
+        <form class="access-form" id="register-form" aria-labelledby="access-tab-register">
+          <label class="field"><span>演示别名</span><input id="register-alias" name="alias" autocomplete="username" minlength="2" maxlength="24" pattern="[A-Za-z0-9_\-\u3400-\u9fff]{2,24}" placeholder="例如 LunaFan" required></label>
+          <label class="field"><span>本地 PIN</span><input id="register-pin" name="pin" type="password" inputmode="numeric" autocomplete="new-password" minlength="4" maxlength="12" pattern="[0-9]{4,12}" placeholder="4–12 位数字" required></label>
+          <label class="consent-row"><input id="register-consent" type="checkbox" required><span>账号入口在纯静态演示中停用；请勿输入真实信息。游戏不会提交邮箱、手机号、钱包或 KYC。</span></label>
+          <button type="submit" class="btn btn-primary btn-block" id="register-submit">创建并进入</button>
+        </form>
+        <form class="access-form" id="login-form" aria-labelledby="access-tab-login" hidden>
+          <label class="field"><span>演示别名</span><input id="login-alias" name="alias" autocomplete="username" minlength="2" maxlength="24" placeholder="输入已创建的别名" required></label>
+          <label class="field"><span>本地 PIN</span><input id="login-pin" name="pin" type="password" inputmode="numeric" autocomplete="current-password" minlength="4" maxlength="12" pattern="[0-9]{4,12}" placeholder="输入本地 PIN" required></label>
+          <button type="submit" class="btn btn-primary btn-block" id="login-submit">登录并继续</button>
+        </form>
+        <p class="access-status mono" id="access-server-status" role="status" aria-live="polite">离线静态模式 · 无网络请求</p>
+        <p class="access-legal">DEMO / LOCAL · 只在当前浏览器运行。砖块为虚拟游戏积分，无现金或投资价值。</p>
+      </div>
+    </section>
+
+    <!-- 停用页 -->
+    <section class="screen screen-disabled" id="screen-disabled" data-screen="disabled" hidden>
+      <div class="disabled-card">
+        <h1 class="h1" tabindex="-1">活动暂时关闭</h1>
+        <p class="body">该本地演示已被 kill switch 停用（<code>?disabled=1</code> 或 <code>kol_town_kill_switch=1</code>）。</p>
+        <p class="body muted">砖块为虚拟游戏积分，无现金或投资价值。</p>
+        <span class="demo-badge inline">DEMO / LOCAL</span>
+      </div>
+    </section>
+
+    <!-- 1a 新手引导 · 主理人对话式 -->
+    <section class="screen screen-onboarding" id="screen-onboarding" data-screen="onboarding" hidden>
+      <div class="onb-glow" aria-hidden="true"></div>
+      <div class="onb-top">
+        <button type="button" class="ghost-pill" id="onb-skip">跳过</button>
+      </div>
+      <div class="onb-hero">
+        <div class="mayor-illust" id="onb-mayor" aria-hidden="true"></div>
+        <div class="onb-kicker mono">· 主理人带你逛小镇 ·</div>
+        <h1 class="onb-title" tabindex="-1" id="onb-title">欢迎来到 <em class="serif" id="onb-kol">Luna</em> 小镇</h1>
+      </div>
+      <div class="onb-card" role="group" aria-labelledby="onb-speaker">
+        <div class="onb-speaker mono" id="onb-speaker">主理人 LUNA · KOL</div>
+        <p class="onb-body" id="onb-body"></p>
+        <div class="btn-row">
+          <button type="button" class="btn btn-primary" id="onb-next">好呀，出发</button>
+          <button type="button" class="btn btn-ghost" id="onb-self">自己逛逛</button>
+        </div>
+      </div>
+      <div class="onb-dots" id="onb-dots" aria-hidden="true"><span class="on"></span><span></span><span></span></div>
+      <div class="onb-step mono" id="onb-step">第 1/3 步 · 稍后可体验演示邀请码</div>
+      <p class="onb-disclosure">砖块为虚拟游戏积分，无现金或投资价值。</p>
+    </section>
+
+    <!-- 1b 小镇主界面 · 沉浸式地图 -->
+    <section class="screen screen-town" id="screen-town" data-screen="town" hidden>
+      <h1 class="sr-only" tabindex="-1">小镇地图</h1>
+      <div class="map-wrap" id="map-wrap">
+        <div class="map-sky" aria-hidden="true"><span class="cloud c1"></span><span class="cloud c2"></span><span class="cloud c3"></span><span class="cloud c4"></span></div>
+        <div class="map-pan-tools" role="group" aria-label="地图视野控制">
+          <span class="map-pan-hint" id="map-pan-hint"><span aria-hidden="true">↔</span> 按住拖动探索</span>
+          <button type="button" class="map-center-btn" id="map-center-btn" aria-label="回到地图中心"><span aria-hidden="true">◎</span></button>
+        </div>
+        <div class="airdrop-layer" id="airdrop-layer" aria-label="带 HT 图标的火币主题纪念 Token 空投活动"></div>
+        <div class="airdrop-hud" id="airdrop-hud" aria-live="polite">
+          <span class="airdrop-hud-dot" aria-hidden="true"></span>
+          <span><b>火币主题空投</b><small>HT 纪念 Token · DEMO</small></span>
+          <strong id="airdrop-count">0</strong>
+        </div>
+        <p class="sr-only" id="airdrop-status" role="status" aria-live="polite"></p>
+        <p class="sr-only" id="map-pan-status" role="status" aria-live="polite"></p>
+        <div class="map" id="map" role="group" tabindex="0" aria-label="可拖动的等距小镇地图，共 8 栋建筑" aria-describedby="map-pan-hint">
+          <picture class="town-scene-picture" aria-hidden="true">
+            <source srcset="assets/optimized/luna-town-citybuilder-v3-npc-720.avif" type="image/avif">
+            <source srcset="assets/optimized/luna-town-citybuilder-v3-npc-720.webp" type="image/webp">
+            <img class="town-scene-art" src="assets/generated/luna-town-citybuilder-v3-npc.png" alt="" draggable="false" decoding="async">
+          </picture>
+          <svg class="map-bg" id="map-bg" viewBox="0 0 390 600" aria-hidden="true" focusable="false"></svg>
+          <div class="town-npcs" id="town-npcs" aria-hidden="true"></div>
+          <div class="map-buildings" id="map-buildings"></div>
+          <button type="button" class="mayor-pin" id="mayor-pin" aria-label="查看主理人 Luna 档案"><span class="mayor-pin-role">KOL</span><span class="map-role-label">主理人 Luna</span></button>
+          <div class="player-pin" id="player-pin" role="img" aria-label="当前玩家，新居民" style="left:49%;top:43.4%"><span class="player-map-art" id="player-map-art" aria-hidden="true"></span><span class="player-pin-role">我</span><span class="map-role-label" id="player-map-label">我 · 新居民</span></div>
+        </div>
+      </div>
+      <div class="mayor-card" id="mayor-card" role="region" aria-label="Luna AI 分身任务提示">
+        <button type="button" class="mayor-card-avatar" id="mayor-card-avatar" aria-label="和 Luna AI 分身聊聊"><span class="chat-ping" aria-hidden="true">AI</span></button>
+        <div class="mayor-card-body grow">
+          <div class="mayor-card-meta mono" id="mayor-card-meta">LUNA AI 分身 · 本地规则</div>
+          <p class="mayor-card-text" id="mayor-card-text"></p>
+          <div class="btn-row compact">
+            <button type="button" class="btn btn-dark btn-sm" id="mayor-go">去做任务</button>
+            <button type="button" class="btn btn-primary btn-sm" id="mayor-chat">和 AI 分身聊聊</button>
+            <button type="button" class="btn btn-ghost btn-sm" id="mayor-profile">主理人档案</button>
+          </div>
+        </div>
+        <button type="button" class="mayor-dismiss" id="mayor-later" aria-label="收起 AI 分身提示">稍后</button>
+      </div>
+      <button type="button" class="mayor-mini" id="mayor-mini" hidden aria-label="展开 AI 分身提示">AI 提示</button>
+      <div class="success-banner" id="success-banner" hidden>
+        <span>本轮目标已达成 🎉</span>
+        <button type="button" class="btn btn-sm btn-primary" id="success-banner-btn">查看结算</button>
+      </div>
+    </section>
+
+    <!-- 1c 建筑内部 · 八栋建筑独立可导航 2.5D 场景 -->
+    <section class="screen screen-building-interior" id="screen-building_interior" data-screen="building_interior" hidden>
+      <h1 class="sr-only" id="interior-heading" tabindex="-1">建筑内部</h1>
+      <div class="interior-stage" id="interior-stage" tabindex="0" aria-describedby="interior-help">
+        <div class="interior-world" id="interior-world">
+          <picture class="interior-scene-picture" id="interior-scene-picture">
+            <source id="interior-scene-source-avif" type="image/avif">
+            <source id="interior-scene-source" type="image/webp">
+            <img class="interior-scene-art" id="interior-scene-art" src="assets/generated/interior-growth-center-v2.png" alt="" draggable="false" decoding="async" loading="lazy">
+          </picture>
+          <div class="interior-depth-layer interior-depth-back" aria-hidden="true"></div>
+          <div class="interior-hotspots" id="interior-hotspots" aria-label="室内可互动区域"></div>
+          <div class="interior-player" id="interior-player" role="img" aria-label="当前玩家，位于场景入口" data-facing="right">
+            <span class="interior-player-avatar" id="interior-player-art" aria-hidden="true"></span>
+            <span class="interior-player-shadow" aria-hidden="true"></span>
+          </div>
+          <div class="interior-depth-layer interior-depth-front" aria-hidden="true"></div>
+        </div>
+        <div class="interior-vignette" aria-hidden="true"></div>
+        <button type="button" class="interior-back" id="interior-back" data-back aria-label="返回小镇地图">
+          <span aria-hidden="true">←</span><span>返回小镇</span>
+        </button>
+        <div class="interior-location" aria-hidden="true">
+          <span class="interior-location-icon" id="interior-icon">H</span>
+          <span><b id="interior-title">旗舰楼</b><small id="interior-level">建筑等级 Lv.1</small></span>
+        </div>
+        <div class="interior-controls" role="group" aria-label="场景移动方向">
+          <button type="button" data-interior-move="up" aria-label="向前移动">↑</button>
+          <button type="button" data-interior-move="left" aria-label="向左移动">←</button>
+          <button type="button" data-interior-move="right" aria-label="向右移动">→</button>
+          <button type="button" data-interior-move="down" aria-label="向后移动">↓</button>
+        </div>
+        <p class="interior-help" id="interior-help">点地面或方向键移动，走到编号地点自动互动</p>
+        <p class="sr-only" id="interior-status" role="status" aria-live="polite"></p>
+      </div>
+      <aside class="interior-panel" aria-labelledby="interior-panel-title">
+        <div class="interior-panel-copy">
+          <span class="interior-kicker mono" id="interior-kicker">FLAGSHIP · INTERIOR</span>
+          <h2 class="h2" id="interior-panel-title">旗舰楼内部</h2>
+          <p class="body-sm" id="interior-description">探索创作者总部的接待厅、演播控制台与策划空间。</p>
+        </div>
+        <div class="interior-actions">
+          <button type="button" class="btn btn-primary" id="interior-primary">进入旗舰服务</button>
+          <button type="button" class="btn btn-ghost" id="interior-upgrade">升级建筑</button>
+        </div>
+        <p class="interior-legal">独立本地游戏场景 · 砖块无现金或投资价值</p>
+      </aside>
+    </section>
+
+    <!-- 1d 任务与积分中心 -->
+    <section class="screen screen-page" id="screen-task_center" data-screen="task_center" hidden>
+      <header class="page-head">
+        <h1 class="h1" tabindex="-1">任务中心</h1>
+        <span class="chip chip-static"><svg class="ico-brick" viewBox="0 0 14 11" aria-hidden="true"><rect x="0.5" y="0.5" width="13" height="10" rx="2"/><path d="M0.5 5.5H13.5M7 0.5V5.5M4 5.5V10.5M10 5.5V10.5"/></svg><span class="mono bricks-live">0</span></span>
+      </header>
+      <div class="page-body">
+        <div class="page-visual page-visual-town" role="img" aria-label="Luna 云端小镇完整街区场景">
+          <span class="page-visual-kicker mono">LUNA TOWN · TODAY</span>
+          <strong>从一张真实场景图开始今天的建设</strong>
+        </div>
+        <section class="card streak-card" aria-labelledby="streak-title">
+          <div class="card-head">
+            <h2 class="h3" id="streak-title">连续签到</h2>
+            <span class="mono accent-text" id="streak-meta">DAY 0 · +10 砖块</span>
+          </div>
+          <div class="streak-days" id="streak-days"></div>
+          <button type="button" class="btn btn-accent btn-block" id="btn-checkin">今日签到 +10 砖块</button>
+          <p class="hint" id="streak-hint">每个自然日可签到一次，连续 3 天解锁 Luna 联名发型。</p>
+        </section>
+        <section class="card resident-growth-card" aria-labelledby="resident-growth-title">
+          <div class="resident-growth-head">
+            <div><span class="kicker mono">RESIDENT JOURNEY</span><h2 class="h3" id="resident-growth-title">居民任务成长线</h2></div>
+            <span class="resident-growth-current" id="resident-growth-current">新手探索</span>
+          </div>
+          <div class="resident-growth-summary"><strong id="resident-growth-progress">0%</strong><span id="resident-growth-next">完成首个建筑任务</span></div>
+          <span class="resident-growth-bar" aria-hidden="true"><span id="resident-growth-fill"></span></span>
+          <div class="resident-growth-track" id="resident-growth-track" role="list" aria-label="五阶段居民任务成长路线"></div>
+          <p class="resident-growth-note">任务推进居民等级、繁荣度、建筑专精与本地 Campaign 运营；真实下载、注册、入金、交易等 KPI 仍必须由批准的外部服务确认。</p>
+        </section>
+        <div class="seg" role="tablist" aria-label="任务分类" id="task-tabs">
+          <button type="button" role="tab" class="seg-btn" data-tab="daily" aria-selected="true" id="tab-daily">每日</button>
+          <button type="button" role="tab" class="seg-btn" data-tab="growth" aria-selected="false" id="tab-growth" tabindex="-1">成长</button>
+          <button type="button" role="tab" class="seg-btn" data-tab="done" aria-selected="false" id="tab-done" tabindex="-1">已完成</button>
+        </div>
+        <div id="task-list" class="task-list" role="tabpanel" aria-labelledby="tab-daily"></div>
+        <p class="legal-inline">砖块为虚拟游戏积分，无现金或投资价值。</p>
+      </div>
+    </section>
+
+    <!-- 1e 榜单 · 3 Tab -->
+    <section class="screen screen-page" id="screen-ranking" data-screen="ranking" hidden>
+      <header class="page-head">
+        <h1 class="h1" tabindex="-1">小镇榜单</h1>
+        <span class="pill-soft mono" id="rank-source">S1 · 本地榜单</span>
+      </header>
+      <div class="page-body">
+        <div class="page-visual page-visual-ranking" role="img" aria-label="Luna 小镇排行榜街区场景">
+          <span class="page-visual-kicker mono">SEASON 1 · LOCAL</span>
+          <strong>每一次互动，都在点亮这座小镇</strong>
+        </div>
+        <div class="seg" role="tablist" aria-label="榜单类型" id="rank-tabs">
+          <button type="button" role="tab" class="seg-btn" data-tab="total" aria-selected="true" id="rtab-total">贡献总榜</button>
+          <button type="button" role="tab" class="seg-btn" data-tab="weekly" aria-selected="false" id="rtab-weekly" tabindex="-1">周榜</button>
+          <button type="button" role="tab" class="seg-btn" data-tab="invite" aria-selected="false" id="rtab-invite" tabindex="-1">邀请榜</button>
+        </div>
+        <div id="rank-panel" role="tabpanel" aria-labelledby="rtab-total"></div>
+        <section class="rank-self" aria-labelledby="rank-self-title">
+          <div class="rank-self-head">
+            <span class="kicker" id="rank-self-title">我的排名</span>
+            <span class="rank-self-status">本机进度</span>
+          </div>
+          <div class="me-row" id="rank-me"></div>
+        </section>
+        <div class="grid-2">
+          <button type="button" class="card card-btn" id="rank-to-predict">
+            <span class="kicker mono">更多榜单</span>
+            <span class="h3">预测胜率 →</span>
+            <span class="hint" id="rank-predict-stat">你的胜率 — · 未参与</span>
+          </button>
+          <button type="button" class="card card-btn" id="rank-to-memorial">
+            <span class="kicker mono">共建地标</span>
+            <span class="h3" id="rank-memorial-title">纪念广场 0% →</span>
+            <span class="bar" aria-hidden="true"><span class="bar-fill" id="rank-memorial-fill"></span></span>
+          </button>
+        </div>
+        <p class="hint center" id="rank-note">本地演示榜单；不代表公开或商业排名。</p>
+      </div>
+    </section>
+
+    <!-- 1f 玩家居民形象定制 -->
+    <section class="screen screen-page" id="screen-avatar" data-screen="avatar" hidden>
+      <header class="page-head">
+        <h1 class="h1" tabindex="-1">我的居民</h1>
+        <span class="pill-pink mono" id="avatar-system-pill">LUNA 联名造型</span>
+      </header>
+      <div class="page-body">
+        <section class="resident-identity-note" aria-label="玩家身份说明">
+          <span class="resident-identity-icon" aria-hidden="true">住</span>
+          <span><strong id="resident-profile-name">新居民 · 玩家</strong><small>这是你的居民身份；Luna 是小镇主理人，换装不会改变她。</small></span>
+          <button type="button" class="link-btn" id="avatar-open-host">查看 Luna</button>
+        </section>
+        <div class="avatar-hero" id="avatar-hero">
+          <div class="avatar-preview" id="avatar-preview" role="img" aria-label="完整造型预览"><span class="avatar-look-art" id="avatar-look-art" aria-hidden="true"></span></div>
+          <div class="avatar-hero-copy">
+            <div class="h3" id="avatar-hero-title">紫晶正装 <span class="tag-dark" id="avatar-equipped-tag">已装备</span></div>
+            <p class="hint" id="avatar-hero-desc">居民完整造型已加载。选择任一单品会自动切换整套联名造型。</p>
+            <div class="avatar-art-meta"><span>玩家居民造型</span><span class="mono">LOCAL</span></div>
+          </div>
+        </div>
+        <section class="avatar-lookbook" aria-labelledby="avatar-lookbook-title">
+          <div class="avatar-lookbook-head">
+            <div>
+              <span class="kicker">LOOKBOOK</span>
+              <h2 class="h3" id="avatar-lookbook-title">推荐搭配</h2>
+            </div>
+            <span>选择任一单品 · 自动成套</span>
+          </div>
+          <div class="avatar-presets" id="avatar-presets"></div>
+        </section>
+        <div id="avatar-groups"></div>
+        <div class="sticky-cta">
+          <button type="button" class="btn btn-primary btn-block" id="avatar-save" disabled>保存居民形象</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 1f-2 KOL 主理人档案（只读） -->
+    <section class="screen screen-page" id="screen-host_profile" data-screen="host_profile" hidden>
+      <header class="page-head with-back">
+        <button type="button" class="icon-btn back" data-back aria-label="返回小镇"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
+        <h1 class="h1" tabindex="-1">主理人档案</h1>
+        <span class="pill-soft mono">只读 · KOL</span>
+      </header>
+      <div class="page-body host-profile-page">
+        <section class="host-profile-hero" aria-labelledby="host-profile-name">
+          <div class="host-profile-portrait" role="img" aria-label="小镇主理人 Luna"><span>KOL</span></div>
+          <div class="host-profile-copy">
+            <span class="kicker mono">LUNA 小镇主理人</span>
+            <h2 class="h2" id="host-profile-name">Luna</h2>
+            <p class="body-sm">Luna 是这座小镇的创作者、所有者和运营者，负责发布本季故事与 Campaign；你以居民身份参与任务和共建。</p>
+            <div class="host-profile-tags"><span>主理人</span><span>KOL</span><span>身份演示</span></div>
+          </div>
+        </section>
+        <section class="relationship-card" aria-labelledby="relationship-title">
+          <div class="section-title-row"><div><span class="kicker mono">你与 LUNA</span><h2 class="h3" id="relationship-title">居民关系</h2></div><strong id="relationship-level">初识 Lv.1</strong></div>
+          <p class="body-sm" id="relationship-copy">完成小镇任务，与 Luna 一起推进本季共建。</p>
+          <div class="relationship-track" role="progressbar" aria-label="与 Luna 的居民关系进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="relationship-fill"></span></div>
+          <div class="relationship-stats"><span><b id="relationship-tasks">0</b><small>共同任务</small></span><span><b id="relationship-prosperity">0</b><small>贡献繁荣</small></span><span><b id="relationship-chapter">序章</b><small>当前章节</small></span></div>
+        </section>
+        <section class="host-campaign-card" aria-labelledby="host-campaign-title">
+          <span class="kicker mono">CURRENT CAMPAIGN · DEMO</span>
+          <h2 class="h3" id="host-campaign-title">本季：点亮 Luna 小镇</h2>
+          <p class="body-sm">由 Luna 发布，玩家负责探索、答题、直播互动与共建。外部下载、注册、入金或交易不会由本地任务自动确认。</p>
+          <dl class="host-campaign-meta"><div><dt>发布者</dt><dd>主理人 Luna</dd></div><div><dt>执行者</dt><dd id="host-campaign-player">新居民</dd></div><div><dt>确认方式</dt><dd>本地玩法证据</dd></div></dl>
+        </section>
+        <section class="host-updates" aria-labelledby="host-updates-title">
+          <div class="section-title-row"><div><span class="kicker mono">主理人动态</span><h2 class="h3" id="host-updates-title">Luna 的小镇公告</h2></div><span>只读</span></div>
+          <article><time>今天</time><p>欢迎新居民。先完成一项建筑任务，再来找 AI 分身查看下一步。</p></article>
+          <article><time>本季</time><p>纪念广场记录共同建设，不展示入金金额、交易量或敏感账户数据。</p></article>
+        </section>
+        <div class="btn-row host-profile-actions">
+          <button type="button" class="btn btn-primary" id="host-profile-chat">和 Luna AI 分身聊聊</button>
+          <button type="button" class="btn btn-dark" id="host-profile-tasks">查看居民任务</button>
+        </div>
+        <p class="legal-inline">主理人档案只读。AI 分身不是 Luna 本人实时在线，也不能修改 Campaign Contract 锁定字段。</p>
+      </div>
+    </section>
+
+    <!-- 1g 交易所增长中心 · 本地经营模拟 -->
+    <section class="screen screen-page" id="screen-flagship" data-screen="flagship" hidden>
+      <header class="page-head with-back">
+        <button type="button" class="icon-btn back" data-back aria-label="返回小镇"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
+        <h1 class="h1" tabindex="-1">增长中心 · Campaign Lab</h1>
+        <span class="demo-badge inline">交易所沙盒</span>
+      </header>
+      <div class="page-body">
+        <figure class="growth-campus" aria-labelledby="growth-campus-caption">
+          <div class="growth-campus-world">
+            <img src="assets/authored/growth-campus-v1.svg?v=0.12.1b" alt="" aria-hidden="true" draggable="false" decoding="async">
+            <button type="button" class="growth-campus-stop stop-acquisition" data-growth-stage-map="acquisition"><span>01</span><b>拉新站</b><small>下载</small></button>
+            <button type="button" class="growth-campus-stop stop-conversion" data-growth-stage-map="conversion"><span>02</span><b>转化站</b><small>注册</small></button>
+            <button type="button" class="growth-campus-stop stop-activation" data-growth-stage-map="activation"><span>03</span><b>激活站</b><small>入金 · 交易</small></button>
+            <button type="button" class="growth-campus-stop stop-retention" data-growth-stage-map="retention"><span>04</span><b>留存站</b><small>D7 回访</small></button>
+            <button type="button" class="growth-campus-stop stop-reactivation" data-growth-stage-map="reactivation"><span>05</span><b>召回站</b><small>回流会话</small></button>
+            <span class="growth-campus-avatar" aria-hidden="true"></span>
+          </div>
+          <figcaption>
+            <span class="page-visual-kicker mono">GROWTH ROUTE · LOCAL</span>
+            <strong id="growth-campus-caption">一座园区，对应五个营销阶段</strong>
+            <small id="growth-campus-status">点击建筑筛选 Campaign · 本地 KPI 沙盒</small>
+          </figcaption>
+        </figure>
+
+        <section class="brand-account" aria-labelledby="brand-account-title">
+          <div class="section-title-row">
+            <div><span class="kicker mono">增长驾驶舱</span><h2 class="h2" id="brand-account-title">Luna Growth Studio</h2></div>
+            <span class="local-seal">LOCAL</span>
+          </div>
+          <div class="brand-metrics growth-metrics">
+            <div><span>模拟经营金</span><strong class="mono" id="business-revenue">0</strong><small>不可提现</small></div>
+            <div><span>运营评级</span><strong class="mono" id="brand-reputation">0</strong><small>/100</small></div>
+            <div><span>本地交付</span><strong class="mono" id="brand-settled-count">0</strong><small>/6 项</small></div>
+            <div><span>外部确认</span><strong class="mono" id="growth-external-count">0</strong><small>未接入</small></div>
+          </div>
+        </section>
+
+        <section class="growth-proof-card" aria-labelledby="growth-proof-title">
+          <div class="growth-proof-icon" aria-hidden="true">✓</div>
+          <div><span class="kicker mono">MEASUREMENT RULE</span><h2 class="h3" id="growth-proof-title">游戏行为 ≠ 交易所真实 KPI</h2><p>本地只验证任务、点击和交付；下载、注册、首次入金、首次现货交易必须由批准的交易所服务端回传。</p></div>
+        </section>
+
+        <section class="growth-funnel-panel" aria-labelledby="growth-funnel-title">
+          <div class="section-title-row"><div><span class="kicker mono">FULL FUNNEL</span><h2 class="h2" id="growth-funnel-title">增长阶段地图</h2></div><span class="market-count">一单一主 KPI</span></div>
+          <div class="growth-route" aria-label="拉新、转化、促活、留存和召回五个营销阶段">
+            <div><b>01</b><strong>拉新</strong><small>下载</small></div>
+            <i aria-hidden="true"></i>
+            <div><b>02</b><strong>转化</strong><small>注册</small></div>
+            <i aria-hidden="true"></i>
+            <div><b>03</b><strong>促活</strong><small>入金 · 交易</small></div>
+            <i aria-hidden="true"></i>
+            <div><b>04</b><strong>留存</strong><small>D7 回访</small></div>
+            <i aria-hidden="true"></i>
+            <div><b>05</b><strong>召回</strong><small>回流会话</small></div>
+          </div>
+        </section>
+
+        <section class="brand-active-panel" aria-labelledby="brand-active-title">
+          <div class="section-title-row"><div><span class="kicker mono">CURRENT RUN</span><h2 class="h2" id="brand-active-title">执行中的增长 Campaign</h2></div></div>
+          <div id="brand-active"></div>
+        </section>
+
+        <section aria-labelledby="brand-market-title">
+          <div class="section-title-row"><div><span class="kicker mono">CAMPAIGN BOARD</span><h2 class="h2" id="brand-market-title">营销任务库</h2></div><span class="market-count" id="brand-market-count">6 个 KPI 任务</span></div>
+          <div class="seg growth-stage-tabs" id="growth-stage-tabs" role="tablist" aria-label="营销阶段筛选">
+            <button type="button" role="tab" aria-selected="true" data-tab="all">全部</button>
+            <button type="button" role="tab" aria-selected="false" tabindex="-1" data-tab="acquisition">拉新</button>
+            <button type="button" role="tab" aria-selected="false" tabindex="-1" data-tab="conversion">转化</button>
+            <button type="button" role="tab" aria-selected="false" tabindex="-1" data-tab="activation">促活</button>
+            <button type="button" role="tab" aria-selected="false" tabindex="-1" data-tab="retention">留存</button>
+            <button type="button" role="tab" aria-selected="false" tabindex="-1" data-tab="reactivation">召回</button>
+          </div>
+          <div class="brand-order-list" id="brand-order-list"></div>
+        </section>
+
+        <section class="business-ledger-panel" aria-labelledby="business-ledger-title">
+          <div class="section-title-row"><div><span class="kicker mono">审计记录</span><h2 class="h2" id="business-ledger-title">经营账本</h2></div><span class="market-count">仅本机</span></div>
+          <div id="business-ledger"></div>
+        </section>
+
+        <details class="local-service-tools">
+          <summary><span><b>本地演示服务</b><small>邀请码与无价值权益卡</small></span><span aria-hidden="true">＋</span></summary>
+          <div class="local-service-body">
+            <section class="dark-card" aria-labelledby="flag-title">
+              <div class="dark-card-glow" aria-hidden="true"></div>
+              <div class="row gap-12">
+                <span class="logo-box" aria-hidden="true">LOCAL</span>
+                <div>
+                  <h2 class="h3 on-dark" id="flag-title">新人登记处（演示）</h2>
+                  <p class="hint on-dark">邀请码只记录在当前浏览器，不关联真实注册、交易平台或品牌账号。</p>
+                </div>
+              </div>
+              <div class="code-row">
+                <output class="code-box mono" id="invite-code" aria-label="演示邀请码">LUNA2026</output>
+                <button type="button" class="btn btn-accent" id="btn-copy-code">复制</button>
+              </div>
+              <div class="btn-row"><button type="button" class="btn btn-onDark btn-block" id="btn-bind-code">模拟绑定邀请码</button></div>
+              <p class="hint on-dark" id="bind-status">未绑定 · 绑定后解锁「新人礼包（演示卡）」</p>
+            </section>
+            <h2 class="kicker mono">砖块兑换 · 演示权益卡</h2>
+            <div id="perk-list" class="list"></div>
+            <button type="button" class="card card-btn row gap-12 soft" id="flag-to-tg">
+              <span class="ico-box"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4z"/></svg></span>
+              <span class="grow"><span class="h3 primary-text">去社群会所串门</span><span class="hint">本地场景，不会打开外部链接</span></span>
+            </button>
+          </div>
+        </details>
+        <p class="legal-inline">所有交易所、Campaign、KPI、预算、验收和经营收入均为本地模拟。不连接真实 App、账户、KYC、钱包、入金或交易系统。</p>
+      </div>
+    </section>
+
+    <!-- 1i 钱包 · 权益卡包（模拟） -->
+    <section class="screen screen-page" id="screen-wallet" data-screen="wallet" hidden>
+      <header class="page-head">
+        <h1 class="h1" tabindex="-1">钱包 · 卡包（模拟）</h1>
+        <span class="demo-badge inline">DEMO</span>
+      </header>
+      <div class="page-body">
+        <div class="page-visual page-visual-wallet" role="img" aria-label="Luna 云端小镇权益街区场景">
+          <span class="page-visual-kicker mono">LOCAL WALLET</span>
+          <strong>所有砖块与卡片仅属于本地游戏</strong>
+        </div>
+        <section class="balance-card" aria-labelledby="bal-title">
+          <div class="balance-glow" aria-hidden="true"></div>
+          <div class="kicker mono on-dark" id="bal-title">砖块余额 · BRICK（虚拟积分）</div>
+          <div class="balance-row"><span class="balance mono bricks-live">0</span><span class="mono on-dark-soft" id="bal-earned">累计获得 0</span></div>
+          <div class="btn-row">
+            <button type="button" class="btn btn-onLight" id="wallet-to-flagship">去兑换演示卡</button>
+            <button type="button" class="btn btn-onDark" id="wallet-to-tasks">赚砖块</button>
+          </div>
+        </section>
+        <section class="card token-wallet-card" aria-labelledby="token-wallet-title">
+          <span class="token-wallet-icon" aria-hidden="true"><img src="assets/vendor/web3icons/HT.svg" alt="" draggable="false" decoding="async"></span>
+          <div class="grow">
+            <div class="kicker mono" id="token-wallet-title">HT 主题纪念收藏</div>
+            <div class="token-wallet-count"><strong id="wallet-airdrop-count">0</strong><span>枚 Token</span><span class="token-wallet-credit" id="wallet-airdrop-credit">累计带来 +0 虚拟砖块</span></div>
+            <p>飞机活动收藏物；领取时同步增加 5 枚本地虚拟砖块。</p>
+          </div>
+          <span class="pill-soft mono">LOCAL</span>
+        </section>
+        <p class="hint token-wallet-disclosure">纪念 Token 与砖块均无现金、数字货币、提现、转让或兑换价值，也不代表火币或 HTX 的真实空投。</p>
+        <section class="card row gap-12" aria-labelledby="wallet-conn-title">
+          <span class="ico-box green" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 7h18v12H3z"/><path d="M3 7l3-3h12l3 3"/><circle cx="17" cy="13" r="1.5"/></svg></span>
+          <div class="grow">
+            <div class="h3" id="wallet-conn-title">模拟钱包连接 <span class="status-dot" id="wallet-dot" aria-hidden="true"></span></div>
+            <div class="hint mono" id="wallet-addr">未连接 · 仅为界面演示</div>
+          </div>
+          <button type="button" class="btn btn-sm btn-ghost" id="wallet-connect" aria-pressed="false">模拟连接</button>
+        </section>
+        <p class="hint">不会请求真实钱包地址、私钥、助记词、KYC 或任何联系方式。</p>
+        <h2 class="kicker mono">权益卡包（演示卡）</h2>
+        <div class="card-scroller" id="card-pack"></div>
+        <button type="button" class="btn btn-ghost btn-block" id="wallet-reward-notice">查看奖励说明</button>
+        <h2 class="kicker mono">砖块记录</h2>
+        <div id="ledger" class="list"></div>
+        <p class="legal-inline">砖块为虚拟游戏积分，无现金或投资价值。不可兑换现金或数字资产，不可转让。</p>
+      </div>
+    </section>
+
+    <!-- 1j 换皮演示 -->
+    <section class="screen screen-page" id="screen-reskin" data-screen="reskin" hidden>
+      <header class="page-head with-back">
+        <button type="button" class="icon-btn back" data-back aria-label="返回"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
+        <h1 class="h1" tabindex="-1">换皮演示</h1>
+        <span class="pill-soft mono">同一界面 · 两套 KOL 配置</span>
+      </header>
+      <div class="page-body">
+        <div class="page-visual page-visual-theme" role="img" aria-label="Luna 云端小镇主题全景">
+          <span class="page-visual-kicker mono">VISUAL SYSTEM</span>
+          <strong>同一玩法，切换整座小镇的视觉气质</strong>
+        </div>
+        <p class="body">换皮只替换配置对象：主理人、小镇名、口头禅、邀请码、主题色与建筑配色。玩家居民身份与主理人身份始终分离。</p>
+        <div id="theme-cards" class="theme-cards" role="radiogroup" aria-label="选择主题"></div>
+        <div class="mini-map-wrap card">
+          <div class="kicker mono">当前主题地图预览</div>
+          <svg class="mini-map" id="mini-map" viewBox="0 0 390 600" aria-hidden="true" focusable="false"></svg>
+        </div>
+        <p class="hint">主题选择会保存在本地浏览器中。</p>
+      </div>
+    </section>
+
+    <!-- 成功结算 -->
+    <section class="screen screen-success" id="screen-success" data-screen="success" hidden>
+      <div class="confetti" id="confetti" aria-hidden="true"></div>
+      <div class="success-card">
+        <div class="kicker mono">SETTLEMENT · 本地结算</div>
+        <div class="success-avatar" id="success-avatar" aria-hidden="true"></div>
+        <h1 class="h1 center" tabindex="-1">小镇今日繁荣度达成！</h1>
+        <p class="body center" id="success-line"></p>
+        <dl class="stats" id="success-stats"></dl>
+        <div class="btn-row">
+          <button type="button" class="btn btn-primary" id="success-replay">再玩一轮</button>
+          <button type="button" class="btn btn-dark" id="success-share">分享战绩</button>
+        </div>
+        <div class="btn-row">
+          <button type="button" class="btn btn-ghost" id="success-cta">DEMO：查看活动说明</button>
+          <button type="button" class="btn btn-ghost" id="success-reward">查看奖励说明</button>
+        </div>
+        <button type="button" class="link-btn" id="success-back">回到小镇继续建设</button>
+        <p class="legal-inline">砖块为虚拟游戏积分，无现金、投资或转让价值。本地演示不提供真实奖励。</p>
+      </div>
+    </section>
+
+    <!-- 失败 / 重试 -->
+    <section class="screen screen-failure" id="screen-failure" data-screen="failure" hidden>
+      <div class="failure-card">
+        <div class="kicker mono">RETRY · 不造成任何真实损失</div>
+        <div class="fail-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg></div>
+        <h1 class="h1 center" tabindex="-1">差一点，再试一次</h1>
+        <p class="body center" id="failure-reason"></p>
+        <div class="btn-row">
+          <button type="button" class="btn btn-primary" id="failure-retry">立即重试</button>
+          <button type="button" class="btn btn-ghost" id="failure-back">回到小镇</button>
+        </div>
+        <p class="legal-inline" id="failure-legal">仅为互动玩法，不构成投资建议。砖块为虚拟游戏积分，无现金或投资价值。</p>
+      </div>
+    </section>
+
+    <!-- 分享卡预览 -->
+    <section class="screen screen-page" id="screen-share" data-screen="share" hidden>
+      <header class="page-head with-back">
+        <button type="button" class="icon-btn back" id="share-back" aria-label="返回"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
+        <h1 class="h1" tabindex="-1">分享卡预览</h1>
+        <span class="demo-badge inline">DEMO</span>
+      </header>
+      <div class="page-body">
+        <div class="share-card" id="share-card" role="img" aria-label="分享卡片预览"></div>
+        <button type="button" class="btn btn-primary btn-block" id="share-copy">复制分享文案（本地）</button>
+        <p class="hint center">演示版不会打开任何外部应用或链接；文案仅复制到本机剪贴板。</p>
+        <pre class="share-text mono" id="share-text"></pre>
+      </div>
+    </section>
+
+    <!-- 退出 -->
+    <section class="screen screen-failure" id="screen-exit" data-screen="exit" hidden>
+      <div class="failure-card">
+        <div class="kicker mono">SESSION END · 本地会话结束</div>
+        <h1 class="h1 center" tabindex="-1">今天先到这里</h1>
+        <p class="body center" id="exit-summary"></p>
+        <div class="btn-row">
+          <button type="button" class="btn btn-primary" id="exit-resume">继续建设（保留进度）</button>
+          <button type="button" class="btn btn-ghost" id="exit-cta">DEMO：查看活动说明</button>
+        </div>
+        <p class="legal-inline">砖块为虚拟游戏积分，无现金或投资价值。</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ 底部导航 ============ -->
+  <nav class="bottom-nav" id="bottom-nav" aria-label="主导航">
+    <button type="button" class="nav-btn" data-nav="town" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/><path d="M3 18l9 5 9-5"/></svg><span>小镇</span></button>
+    <button type="button" class="nav-btn" data-nav="task_center"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg><span>任务</span><span class="nav-dot" id="nav-task-dot" aria-hidden="true"></span></button>
+    <button type="button" class="nav-btn" data-nav="ranking"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7l4 4 5-7 5 7 4-4v11H3z"/></svg><span>榜单</span></button>
+    <button type="button" class="nav-btn" data-nav="wallet"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h18v12H3z"/><path d="M3 7l3-3h12l3 3"/><circle cx="17" cy="13" r="1.5"/></svg><span>钱包</span></button>
+    <button type="button" class="nav-btn" data-nav="avatar"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg><span>居民</span></button>
+  </nav>
+  <p class="legal-strip" id="legal-strip">砖块为虚拟游戏积分，无现金或投资价值。</p>
+
+  <!-- ============ 弹层 ============ -->
+  <div class="dialog-scrim" id="dialog-scrim" aria-hidden="true" hidden></div>
+  <!-- KOL AI 分身：本地规则对话，原文不落库 -->
+  <dialog class="sheet chat-sheet" id="dlg-chat" aria-labelledby="chat-title">
+    <div class="sheet-handle" aria-hidden="true"></div>
+    <div class="sheet-head chat-head">
+      <span class="chat-head-avatar" id="chat-avatar" aria-hidden="true"></span>
+      <div class="grow">
+        <h2 class="h3" id="chat-title">和 Luna AI 分身聊聊</h2>
+        <p class="hint"><span class="ai-online-dot" aria-hidden="true"></span>本地规则对话 · 不连接远程模型</p>
+      </div>
+      <button type="button" class="icon-btn close" data-close aria-label="关闭对话"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </div>
+    <section class="chat-live2d-stage" id="live2d-stage" data-live2d-state="loading" aria-label="Live2D 客服虚拟人技术预览">
+      <iframe class="live2d-frame" id="live2d-frame" data-src="assets/live2d/mao-runtime/index.html" title="Live2D 官方示例 Mao 客服虚拟人" tabindex="-1"></iframe>
+      <div class="live2d-fallback" id="live2d-fallback" aria-hidden="true"></div>
+      <div class="live2d-stage-glow" aria-hidden="true"></div>
+      <div class="live2d-stage-top">
+        <span class="live2d-chip"><i aria-hidden="true"></i><span id="live2d-status">正在加载 Live2D…</span></span>
+        <button type="button" class="live2d-sound" id="live2d-sound" aria-pressed="false" aria-label="开启虚拟人语音">声音关闭</button>
+      </div>
+      <div class="live2d-stage-bottom">
+        <div><strong>Live2D 客服动效预览</strong><span id="live2d-identity">官方示例 Mao · 非 Luna 数字孪生</span></div>
+        <button type="button" class="live2d-greet" id="live2d-greet">和她打招呼</button>
+      </div>
+    </section>
+    <div class="chat-disclosure" role="note"><strong>AI 分身</strong> · 非本人实时发言。聊天原文只用于本次回答，不持久化，也不会发送到网络。</div>
+    <div class="chat-log" id="chat-log" role="log" aria-live="polite" aria-relevant="additions"></div>
+    <div class="chat-quick" id="chat-quick" aria-label="快捷提问">
+      <button type="button" data-chat-prompt="我当前的 Campaign 是什么？">当前 Campaign</button>
+      <button type="button" data-chat-prompt="这个 Campaign 的主 KPI 和确认源是什么？">KPI 来源</button>
+      <button type="button" data-chat-prompt="我下一步应该做什么？">下一步</button>
+      <button type="button" data-chat-prompt="哪些 Campaign 字段不能修改？">锁定字段</button>
+    </div>
+    <p class="chat-privacy" id="chat-privacy">仅限本次会话 · 不保存聊天原文</p>
+    <form class="chat-compose" id="chat-form">
+      <label class="sr-only" for="chat-input">发送给 Luna AI 分身</label>
+      <input id="chat-input" maxlength="240" autocomplete="off" enterkeyhint="send" placeholder="问当前 Campaign、主 KPI、确认源或下一步…" required>
+      <button type="submit" class="chat-send" id="chat-send" aria-label="发送消息"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12L20 4l-5 16-3-6-8-2zM12 14l8-10"/></svg></button>
+    </form>
+  </dialog>
+
+  <!-- 1c 建筑抽屉 -->
+  <dialog class="sheet" id="dlg-building" aria-labelledby="bld-title">
+    <div class="sheet-handle" aria-hidden="true"></div>
+    <div class="sheet-head">
+      <span class="ico-box" id="bld-ico" aria-hidden="true"></span>
+      <div class="grow">
+        <h2 class="h3" id="bld-title">建筑</h2>
+        <p class="hint" id="bld-sub"></p>
+      </div>
+      <button type="button" class="icon-btn close" data-close aria-label="关闭"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </div>
+    <div class="sheet-body" id="bld-body"></div>
+  </dialog>
+
+  <!-- 1h 首次升级 CTA 弹窗 -->
+  <dialog class="modal" id="dlg-first-upgrade" aria-labelledby="fu-title">
+    <div class="kicker mono center">TRIGGER · 首次升级建筑后</div>
+    <div class="fu-ico" id="fu-ico" aria-hidden="true"></div>
+    <h2 class="h2 center" id="fu-title">建筑升级成功！</h2>
+    <p class="body center" id="fu-body"></p>
+    <div class="soft-box row gap-10">
+      <span class="logo-box small" aria-hidden="true">BRAND</span>
+      <p class="body-sm" id="fu-cta-text">到旗舰大楼看看演示邀请码与演示权益卡（全部本地模拟）。</p>
+    </div>
+    <div class="btn-row">
+      <button type="button" class="btn btn-accent" id="fu-go">去旗舰楼看看</button>
+      <button type="button" class="btn btn-ghost" id="fu-later">稍后</button>
+    </div>
+    <p class="hint center">每轮最多弹出 1 次 · 本地演示 · 仅为互动玩法，不构成投资建议。</p>
+  </dialog>
+
+  <!-- CTA 说明 -->
+  <dialog class="modal" id="dlg-cta" aria-labelledby="cta-title">
+    <div class="kicker mono center">CTA · DEMO</div>
+    <h2 class="h2 center" id="cta-title">活动说明（演示）</h2>
+    <p class="body">这是一个本地全栈互动原型。真实 CTA 落地页尚未获批（<span class="mono">DISABLED_PENDING_APPROVAL</span>），因此这里不会跳转任何外部页面。</p>
+    <ul class="bullets">
+      <li>砖块为虚拟游戏积分，无现金或投资价值。</li>
+      <li>行情预测仅为互动玩法，不构成投资建议。</li>
+      <li>不采集钱包地址、私钥、KYC 或联系方式；只向本机服务写入演示进度和事件。</li>
+    </ul>
+    <button type="button" class="btn btn-primary btn-block" data-close>我知道了</button>
+  </dialog>
+
+  <!-- 任务交互层：答题 / 预测 / 直播 / 剧情 / 收集 -->
+  <dialog class="modal task-dialog" id="dlg-task" aria-labelledby="task-dialog-title">
+    <div class="sheet-head">
+      <div class="grow">
+        <div class="kicker mono" id="task-dialog-kicker">LEVEL · LOCAL</div>
+        <h2 class="h2" id="task-dialog-title">街区任务</h2>
+      </div>
+      <button type="button" class="icon-btn close" id="task-dialog-close" aria-label="退出任务"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </div>
+    <div class="task-stage" id="task-dialog-body"></div>
+    <p class="legal-inline" id="task-dialog-legal">砖块为虚拟游戏积分，无现金或投资价值。</p>
+  </dialog>
+
+  <dialog class="modal growth-run-dialog" id="dlg-growth-run" aria-labelledby="growth-run-title">
+    <div class="task-dialog-head">
+      <div><div class="kicker mono" id="growth-run-kicker">GROWTH MISSION · LOCAL</div><h2 class="h2" id="growth-run-title">增长航线演练</h2></div>
+      <button type="button" class="icon-btn close" data-close aria-label="退出增长任务"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </div>
+    <div class="growth-run-body" id="growth-run-body"></div>
+    <p class="task-legal">仅验证本地营销玩法。不会下载 App、创建交易所账户、提交 KYC、连接钱包、入金或下单。</p>
+  </dialog>
+
+  <!-- 通用提示 -->
+  <dialog class="modal" id="dlg-notice" aria-labelledby="notice-title">
+    <h2 class="h2" id="notice-title">提示</h2>
+    <div class="body" id="notice-body"></div>
+    <div class="btn-row" id="notice-actions">
+      <button type="button" class="btn btn-primary btn-block" data-close>好的</button>
+    </div>
+  </dialog>
+
+  <!-- 确认 -->
+  <dialog class="modal" id="dlg-confirm" aria-labelledby="confirm-title">
+    <h2 class="h2" id="confirm-title">确认操作</h2>
+    <p class="body" id="confirm-body"></p>
+    <div class="btn-row">
+      <button type="button" class="btn btn-danger" id="confirm-ok">确认</button>
+      <button type="button" class="btn btn-ghost" data-close>取消</button>
+    </div>
+  </dialog>
+
+  <!-- 设置 -->
+  <dialog class="sheet" id="dlg-settings" aria-labelledby="settings-title">
+    <div class="sheet-handle" aria-hidden="true"></div>
+    <div class="sheet-head">
+        <div class="grow"><h2 class="h3" id="settings-title">设置</h2><p class="hint mono" id="settings-build">DEMO / LOCAL · v0.5.0</p></div>
+      <button type="button" class="icon-btn close" data-close aria-label="关闭"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </div>
+    <div class="sheet-body">
+      <section class="account-card" aria-labelledby="account-title">
+        <div class="row gap-12">
+          <span class="account-avatar" aria-hidden="true"></span>
+          <span class="grow"><span class="h3" id="account-title">游客身份</span><span class="hint" id="account-subtitle">进度正在保存到本机游客会话</span></span>
+          <span class="sync-pill mono ok" id="server-sync-status">仅本机</span>
+        </div>
+        <div class="btn-row account-actions">
+          <button type="button" class="btn btn-sm btn-primary" id="settings-account-action" hidden>注册 / 登录</button>
+          <button type="button" class="btn btn-sm btn-ghost" id="settings-logout" hidden>退出账号</button>
+          <button type="button" class="btn btn-sm btn-ghost danger-text" id="settings-delete-account" hidden>删除账号</button>
+        </div>
+        <p class="hint" id="account-role-note">玩家身份 · KOL 资格与商业权限未开放</p>
+      </section>
+      <div class="setting-row">
+        <div class="grow"><div class="h3">主题 / KOL 配置</div><div class="hint">Luna 紫晶 · Vera 霓虹</div></div>
+        <div class="seg small" role="group" aria-label="主题">
+          <button type="button" class="seg-btn" data-theme-pick="luna" aria-pressed="true">Luna</button>
+          <button type="button" class="seg-btn" data-theme-pick="vera" aria-pressed="false">Vera</button>
+        </div>
+      </div>
+      <button type="button" class="setting-row as-btn" id="settings-reskin">
+        <span class="grow"><span class="h3">打开换皮演示</span><span class="hint">同一界面的第二套 KOL 配置</span></span>
+        <svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
+      <div class="setting-row">
+        <div class="grow"><div class="h3">减少动态效果</div><div class="hint">跟随系统偏好，也可手动开启</div></div>
+        <button type="button" class="switch" id="settings-motion" role="switch" aria-checked="false" aria-label="减少动态效果"><span class="knob"></span></button>
+      </div>
+      <button type="button" class="setting-row as-btn" id="settings-events" aria-expanded="false" aria-controls="event-log">
+        <span class="grow"><span class="h3">事件日志（当前页面）</span><span class="hint" id="events-count">0 条 · 仅保存在内存</span></span>
+        <svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <pre class="event-log mono" id="event-log" hidden></pre>
+      <button type="button" class="setting-row as-btn" id="settings-exit">
+        <span class="grow"><span class="h3">结束本次会话</span><span class="hint">进入结束页，进度保留</span></span>
+        <svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
+      <button type="button" class="setting-row as-btn danger" id="settings-reset">
+        <span class="grow"><span class="h3">重置当前进度</span><span class="hint">清空当前游客或账号的砖块、建筑等级与形象</span></span>
+        <svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
+      <p class="legal-inline">DEMO / LOCAL · 砖块为虚拟游戏积分，无现金或投资价值。行情预测仅为互动玩法，不构成投资建议。</p>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="reward-fx" id="reward-fx" aria-hidden="true"></div>
+</div>
+<script src="game.js?v=0.16.1-20260916"></script>
+</body>
+</html>

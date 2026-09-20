@@ -1,0 +1,3907 @@
+{
+  "sourcePage": "http://game.zhongyigames.com/niguolaia/",
+  "licenseStatus": "No redistribution or commercial reuse license established.",
+  "assets": {
+    "arrow-1.png": {
+      "spriteFrameUuid": "2agPzb++tMTrBRAaVOEk72",
+      "name": "1",
+      "frame": {
+        "name": "1",
+        "texture": "34jkJqrQVNaZTfyM2s0YfZ",
+        "rect": [
+          100,
+          262,
+          90,
+          24
+        ],
+        "offset": [
+          3,
+          1
+        ],
+        "originalSize": [
+          150,
+          150
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/34/348e426a-ad05-4d69-94df-c8cdacd187d9.02256.png",
+      "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/2a/2a80fcdb-fbeb-4c4e-b051-01a54e124ef6.09e14.json",
+      "sha256": "931a177694bd755515d3d46bb96be5230bd0b5790364f711fa1c8d6302dcf12b"
+    },
+    "arrow-2.png": {
+      "spriteFrameUuid": "92Rap3EUtFf6DZODTvAVBE",
+      "name": "1_1",
+      "frame": {
+        "name": "1_1",
+        "texture": "34jkJqrQVNaZTfyM2s0YfZ",
+        "rect": [
+          2,
+          238,
+          104,
+          18
+        ],
+        "offset": [
+          6,
+          0
+        ],
+        "originalSize": [
+          150,
+          150
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/34/348e426a-ad05-4d69-94df-c8cdacd187d9.02256.png",
+      "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/92/9245aa77-114b-457f-a0d9-3834ef015044.59d21.json",
+      "sha256": "9c45f6c1a341f6bcddd9bd2057865e0468837037bddbec4010434c9990a20e66"
+    },
+    "arrow-3.png": {
+      "spriteFrameUuid": "419JPdQH1Bp7dN1PJwDjMW",
+      "name": "1_2",
+      "frame": {
+        "name": "1_2",
+        "texture": "34jkJqrQVNaZTfyM2s0YfZ",
+        "rect": [
+          142,
+          112,
+          118,
+          20
+        ],
+        "offset": [
+          -1,
+          -1
+        ],
+        "originalSize": [
+          150,
+          150
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/34/348e426a-ad05-4d69-94df-c8cdacd187d9.02256.png",
+      "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/41/41f493dd-407d-41a7-b74d-d4f2700e3316.367ae.json",
+      "sha256": "8e6ac9371b7834ff3790afa2bc7780887fb4fb6581178904d2e4adf5cf0813e5"
+    },
+    "cannon-1.png": {
+      "spriteFrameUuid": "ferNRSGM9HkZbmHDByOfIA",
+      "name": "3",
+      "frame": {
+        "name": "3",
+        "texture": "34jkJqrQVNaZTfyM2s0YfZ",
+        "rect": [
+          370,
+          346,
+          38,
+          46
+        ],
+        "offset": [
+          0,
+          1
+        ],
+        "originalSize": [
+          60,
+          60
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/34/348e426a-ad05-4d69-94df-c8cdacd187d9.02256.png",
+      "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/fe/feacd452-18cf-4791-96e6-1c307239f200.6c958.json",
+      "sha256": "905182df453801e6bd48dbada0f5bb27dcd1bdb250fd215caf79e9a6c520cb00"
+    },
+    "cannon-2.png": {
+      "spriteFrameUuid": "24mMOzTp5P9IJ+sduh6MG+",
+      "name": "3_1",
+      "frame": {
+        "name": "3_1",
+        "texture": "34jkJqrQVNaZTfyM2s0YfZ",
+        "rect": [
+          341,
+          386,
+          38,
+          44
+        ],
+        "offset": [
+          -1,
+          -1
+        ],
+        "originalSize": [
+          60,
+          60
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/34/348e426a-ad05-4d69-94df-c8cdacd187d9.02256.png",
+      "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/24/2498c3b3-4e9e-4ff4-827e-b1dba1e8c1be.5e0f5.json",
+      "sha256": "afaba8dbee0c36bf1bf361e40d9055ecbf0efc7975e7bf0ea2c772961cc0408c"
+    },
+    "cannon-3.png": {
+      "spriteFrameUuid": "9e7SUy9FtJl4VX/Vm54BWW",
+      "name": "3_2",
+      "frame": {
+        "name": "3_2",
+        "texture": "34jkJqrQVNaZTfyM2s0YfZ",
+        "rect": [
+          320,
+          240,
+          38,
+          46
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          60,
+          60
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/34/348e426a-ad05-4d69-94df-c8cdacd187d9.02256.png",
+      "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/9e/9eed2532-f45b-4997-8557-fd59b9e01596.830ea.json",
+      "sha256": "84defbb9b27b5847915cb84ea54121b707f2ebc5ffb0e30dfb9aba005bda50a7"
+    },
+    "magic-1.png": {
+      "spriteFrameUuid": "edjHmkThFH+5Qu2fJyKVWJ",
+      "name": "2",
+      "frame": {
+        "name": "2",
+        "texture": "34jkJqrQVNaZTfyM2s0YfZ",
+        "rect": [
+          370,
+          240,
+          58,
+          58
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          60,
+          60
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/34/348e426a-ad05-4d69-94df-c8cdacd187d9.02256.png",
+      "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/ed/ed8c79a4-4e11-47fb-942e-d9f272295589.463b6.json",
+      "sha256": "68e5c9843f61878d7a968414aa7763211dac267dd07fa614ab745a2db418924b"
+    },
+    "magic-2.png": {
+      "spriteFrameUuid": "f3NBfhRyFPdpVDWf3g1RLT",
+      "name": "2_1",
+      "frame": {
+        "name": "2_1",
+        "texture": "34jkJqrQVNaZTfyM2s0YfZ",
+        "rect": [
+          176,
+          304,
+          48,
+          48
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          60,
+          60
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/34/348e426a-ad05-4d69-94df-c8cdacd187d9.02256.png",
+      "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/f3/f33417e1-4721-4f76-9543-59fde0d512d3.01292.json",
+      "sha256": "208fa1ed6a7d5f7ec272fc4b7802825c313fef18d6b7607e5b40ce9d8b759f33"
+    },
+    "magic-3.png": {
+      "spriteFrameUuid": "2428lzfWZAuYoL5fnQmT9H",
+      "name": "2_2",
+      "frame": {
+        "name": "2_2",
+        "texture": "34jkJqrQVNaZTfyM2s0YfZ",
+        "rect": [
+          281,
+          354,
+          58,
+          58
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          60,
+          60
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/34/348e426a-ad05-4d69-94df-c8cdacd187d9.02256.png",
+      "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/24/24dbc973-7d66-40b9-8a0b-e5f9d0993f47.e381b.json",
+      "sha256": "e2c5b0ab8a995b0a868fccb14b6e73af5f654fb702e9a6d8557b03c4eb57913f"
+    },
+    "arrow-hit-strip.png": {
+      "originalClip": "tower_bullet_hit",
+      "originalNodePath": "hit",
+      "frames": [
+        {
+          "spriteFrameUuid": "507l8l6O9HAZ2i4k/nW4d7",
+          "name": "arrow_hit_00",
+          "frame": {
+            "name": "arrow_hit_00",
+            "texture": "f1Af3aelJOnbkxMMUV8hlY",
+            "rect": [
+              50,
+              168,
+              24,
+              32
+            ],
+            "offset": [
+              0,
+              4
+            ],
+            "originalSize": [
+              90,
+              90
+            ],
+            "rotated": 1,
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/f1/f101fdda-7a52-4e9d-b931-30c515f21958.07401.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/09/0987b04aa.e6516.json"
+        },
+        {
+          "spriteFrameUuid": "e9xqZxH5xBFbAUK44dSShe",
+          "name": "arrow_hit_01",
+          "frame": {
+            "name": "arrow_hit_01",
+            "texture": "f1Af3aelJOnbkxMMUV8hlY",
+            "rect": [
+              212,
+              110,
+              28,
+              40
+            ],
+            "offset": [
+              1,
+              4
+            ],
+            "originalSize": [
+              90,
+              90
+            ],
+            "rotated": 1,
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/f1/f101fdda-7a52-4e9d-b931-30c515f21958.07401.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/09/0987b04aa.e6516.json"
+        },
+        {
+          "spriteFrameUuid": "081rO6wJRCpKDoDzFtudD8",
+          "name": "arrow_hit_02",
+          "frame": {
+            "name": "arrow_hit_02",
+            "texture": "f1Af3aelJOnbkxMMUV8hlY",
+            "rect": [
+              50,
+              120,
+              34,
+              46
+            ],
+            "offset": [
+              1,
+              4
+            ],
+            "originalSize": [
+              90,
+              90
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/f1/f101fdda-7a52-4e9d-b931-30c515f21958.07401.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/09/0987b04aa.e6516.json"
+        },
+        {
+          "spriteFrameUuid": "85RB5ZEzJICpw+S6lgcaBt",
+          "name": "arrow_hit_03",
+          "frame": {
+            "name": "arrow_hit_03",
+            "texture": "f1Af3aelJOnbkxMMUV8hlY",
+            "rect": [
+              50,
+              196,
+              36,
+              48
+            ],
+            "offset": [
+              2,
+              5
+            ],
+            "originalSize": [
+              90,
+              90
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/f1/f101fdda-7a52-4e9d-b931-30c515f21958.07401.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/09/0987b04aa.e6516.json"
+        },
+        {
+          "spriteFrameUuid": "2brfh3POBCRJcz757og/52",
+          "name": "arrow_hit_04",
+          "frame": {
+            "name": "arrow_hit_04",
+            "texture": "f1Af3aelJOnbkxMMUV8hlY",
+            "rect": [
+              212,
+              58,
+              40,
+              50
+            ],
+            "offset": [
+              2,
+              7
+            ],
+            "originalSize": [
+              90,
+              90
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/f1/f101fdda-7a52-4e9d-b931-30c515f21958.07401.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/09/0987b04aa.e6516.json"
+        },
+        {
+          "spriteFrameUuid": "f0XfRwp2lNMbtqgmyD0qVX",
+          "name": "arrow_hit_05",
+          "frame": {
+            "name": "arrow_hit_05",
+            "texture": "f1Af3aelJOnbkxMMUV8hlY",
+            "rect": [
+              86,
+              136,
+              44,
+              54
+            ],
+            "offset": [
+              2,
+              8
+            ],
+            "originalSize": [
+              90,
+              90
+            ],
+            "rotated": 1,
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/f1/f101fdda-7a52-4e9d-b931-30c515f21958.07401.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/09/0987b04aa.e6516.json"
+        },
+        {
+          "spriteFrameUuid": "98M6I0gYxMgY5CVv+Mfey7",
+          "name": "arrow_hit_06",
+          "frame": {
+            "name": "arrow_hit_06",
+            "texture": "f1Af3aelJOnbkxMMUV8hlY",
+            "rect": [
+              154,
+              36,
+              46,
+              56
+            ],
+            "offset": [
+              2,
+              9
+            ],
+            "originalSize": [
+              90,
+              90
+            ],
+            "rotated": 1,
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/f1/f101fdda-7a52-4e9d-b931-30c515f21958.07401.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/09/0987b04aa.e6516.json"
+        },
+        {
+          "spriteFrameUuid": "43se2/n+5CjbFJAasv9K3E",
+          "name": "arrow_hit_07",
+          "frame": {
+            "name": "arrow_hit_07",
+            "texture": "f1Af3aelJOnbkxMMUV8hlY",
+            "rect": [
+              86,
+              88,
+              46,
+              58
+            ],
+            "offset": [
+              1,
+              10
+            ],
+            "originalSize": [
+              90,
+              90
+            ],
+            "rotated": 1,
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/f1/f101fdda-7a52-4e9d-b931-30c515f21958.07401.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/09/0987b04aa.e6516.json"
+        },
+        {
+          "spriteFrameUuid": "ccNNbonoNKI5Dgbmjfnw4+",
+          "name": "arrow_hit_08",
+          "frame": {
+            "name": "arrow_hit_08",
+            "texture": "f1Af3aelJOnbkxMMUV8hlY",
+            "rect": [
+              36,
+              58,
+              48,
+              60
+            ],
+            "offset": [
+              1,
+              11
+            ],
+            "originalSize": [
+              90,
+              90
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/f1/f101fdda-7a52-4e9d-b931-30c515f21958.07401.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/09/0987b04aa.e6516.json"
+        },
+        {
+          "spriteFrameUuid": "187NFw9ChA9aQDpSphscXf",
+          "name": "arrow_hit_09",
+          "frame": {
+            "name": "arrow_hit_09",
+            "texture": "f1Af3aelJOnbkxMMUV8hlY",
+            "rect": [
+              206,
+              140,
+              48,
+              54
+            ],
+            "offset": [
+              3,
+              15
+            ],
+            "originalSize": [
+              90,
+              90
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/f1/f101fdda-7a52-4e9d-b931-30c515f21958.07401.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/09/0987b04aa.e6516.json"
+        },
+        {
+          "spriteFrameUuid": "f4X/ptuFtOoIfshCotwddM",
+          "name": "arrow_hit_10",
+          "frame": {
+            "name": "arrow_hit_10",
+            "texture": "f1Af3aelJOnbkxMMUV8hlY",
+            "rect": [
+              94,
+              36,
+              50,
+              58
+            ],
+            "offset": [
+              3,
+              15
+            ],
+            "originalSize": [
+              90,
+              90
+            ],
+            "rotated": 1,
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/f1/f101fdda-7a52-4e9d-b931-30c515f21958.07401.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/09/0987b04aa.e6516.json"
+        },
+        {
+          "spriteFrameUuid": "14RUX3KU5GCox7mg7u10Zz",
+          "name": "arrow_hit_11",
+          "frame": {
+            "name": "arrow_hit_11",
+            "texture": "f1Af3aelJOnbkxMMUV8hlY",
+            "rect": [
+              212,
+              2,
+              54,
+              42
+            ],
+            "offset": [
+              3,
+              6
+            ],
+            "originalSize": [
+              90,
+              90
+            ],
+            "rotated": 1,
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/f1/f101fdda-7a52-4e9d-b931-30c515f21958.07401.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/09/0987b04aa.e6516.json"
+        },
+        {
+          "spriteFrameUuid": "75+RY0IIpOjabXFcB5iPFz",
+          "name": "arrow_hit_12",
+          "frame": {
+            "name": "arrow_hit_12",
+            "texture": "f1Af3aelJOnbkxMMUV8hlY",
+            "rect": [
+              154,
+              84,
+              56,
+              44
+            ],
+            "offset": [
+              3,
+              6
+            ],
+            "originalSize": [
+              90,
+              90
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/f1/f101fdda-7a52-4e9d-b931-30c515f21958.07401.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/09/0987b04aa.e6516.json"
+        },
+        {
+          "spriteFrameUuid": "4ctCFoqUFKLbl7lxCuoVMs",
+          "name": "arrow_hit_13",
+          "frame": {
+            "name": "arrow_hit_13",
+            "texture": "f1Af3aelJOnbkxMMUV8hlY",
+            "rect": [
+              146,
+              130,
+              58,
+              44
+            ],
+            "offset": [
+              4,
+              5
+            ],
+            "originalSize": [
+              90,
+              90
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/f1/f101fdda-7a52-4e9d-b931-30c515f21958.07401.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/09/0987b04aa.e6516.json"
+        },
+        {
+          "spriteFrameUuid": "2awA5ORMZO3bqeyfzSBO2E",
+          "name": "arrow_hit_14",
+          "frame": {
+            "name": "arrow_hit_14",
+            "texture": "f1Af3aelJOnbkxMMUV8hlY",
+            "rect": [
+              2,
+              188,
+              60,
+              46
+            ],
+            "offset": [
+              4,
+              5
+            ],
+            "originalSize": [
+              90,
+              90
+            ],
+            "rotated": 1,
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/f1/f101fdda-7a52-4e9d-b931-30c515f21958.07401.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/09/0987b04aa.e6516.json"
+        },
+        {
+          "spriteFrameUuid": "9a4SCKXI9LxYc8ginbAKNp",
+          "name": "arrow_hit_15",
+          "frame": {
+            "name": "arrow_hit_15",
+            "texture": "f1Af3aelJOnbkxMMUV8hlY",
+            "rect": [
+              2,
+              124,
+              62,
+              46
+            ],
+            "offset": [
+              4,
+              4
+            ],
+            "originalSize": [
+              90,
+              90
+            ],
+            "rotated": 1,
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/f1/f101fdda-7a52-4e9d-b931-30c515f21958.07401.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/09/0987b04aa.e6516.json"
+        },
+        {
+          "spriteFrameUuid": "4eTRn+G5ZNJ6S59brszLq0",
+          "name": "arrow_hit_16",
+          "frame": {
+            "name": "arrow_hit_16",
+            "texture": "f1Af3aelJOnbkxMMUV8hlY",
+            "rect": [
+              2,
+              58,
+              64,
+              32
+            ],
+            "offset": [
+              4,
+              12
+            ],
+            "originalSize": [
+              90,
+              90
+            ],
+            "rotated": 1,
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/f1/f101fdda-7a52-4e9d-b931-30c515f21958.07401.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/09/0987b04aa.e6516.json"
+        },
+        {
+          "spriteFrameUuid": "94xho9QJFH5JUmgBb7TRXF",
+          "name": "arrow_hit_17",
+          "frame": {
+            "name": "arrow_hit_17",
+            "texture": "f1Af3aelJOnbkxMMUV8hlY",
+            "rect": [
+              144,
+              2,
+              66,
+              32
+            ],
+            "offset": [
+              5,
+              11
+            ],
+            "originalSize": [
+              90,
+              90
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/f1/f101fdda-7a52-4e9d-b931-30c515f21958.07401.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/09/0987b04aa.e6516.json"
+        },
+        {
+          "spriteFrameUuid": "5dTgJt5GJNCLLWkNWlbwte",
+          "name": "arrow_hit_18",
+          "frame": {
+            "name": "arrow_hit_18",
+            "texture": "f1Af3aelJOnbkxMMUV8hlY",
+            "rect": [
+              74,
+              2,
+              68,
+              32
+            ],
+            "offset": [
+              5,
+              10
+            ],
+            "originalSize": [
+              90,
+              90
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/f1/f101fdda-7a52-4e9d-b931-30c515f21958.07401.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/09/0987b04aa.e6516.json"
+        },
+        {
+          "spriteFrameUuid": "bco9wCFtxJ2paLp0qZQuhf",
+          "name": "arrow_hit_19",
+          "frame": {
+            "name": "arrow_hit_19",
+            "texture": "f1Af3aelJOnbkxMMUV8hlY",
+            "rect": [
+              2,
+              2,
+              70,
+              32
+            ],
+            "offset": [
+              5,
+              9
+            ],
+            "originalSize": [
+              90,
+              90
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/f1/f101fdda-7a52-4e9d-b931-30c515f21958.07401.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/09/0987b04aa.e6516.json"
+        },
+        {
+          "spriteFrameUuid": "a7Sh8x4D5MeJbb8b4CjmcT",
+          "name": "arrow_hit_20",
+          "frame": {
+            "name": "arrow_hit_20",
+            "texture": "f1Af3aelJOnbkxMMUV8hlY",
+            "rect": [
+              2,
+              36,
+              64,
+              20
+            ],
+            "offset": [
+              2,
+              14
+            ],
+            "originalSize": [
+              90,
+              90
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/f1/f101fdda-7a52-4e9d-b931-30c515f21958.07401.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/09/0987b04aa.e6516.json"
+        },
+        {
+          "spriteFrameUuid": "921JixG65Nw6Xo/TLD0IW7",
+          "name": "arrow_hit_21",
+          "frame": {
+            "name": "arrow_hit_21",
+            "texture": "f1Af3aelJOnbkxMMUV8hlY",
+            "rect": [
+              88,
+              196,
+              10,
+              18
+            ],
+            "offset": [
+              -26,
+              11
+            ],
+            "originalSize": [
+              90,
+              90
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/f1/f101fdda-7a52-4e9d-b931-30c515f21958.07401.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/09/0987b04aa.e6516.json"
+        },
+        {
+          "spriteFrameUuid": "e4O22gNN5K44MuW2mHxX6f",
+          "name": "arrow_hit_22",
+          "frame": {
+            "name": "arrow_hit_22",
+            "texture": "f1Af3aelJOnbkxMMUV8hlY",
+            "rect": [
+              84,
+              182,
+              10,
+              18
+            ],
+            "offset": [
+              -26,
+              10
+            ],
+            "originalSize": [
+              90,
+              90
+            ],
+            "rotated": 1,
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/f1/f101fdda-7a52-4e9d-b931-30c515f21958.07401.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/09/0987b04aa.e6516.json"
+        },
+        {
+          "spriteFrameUuid": "8b3+ap5ntDoomkFdjo9INa",
+          "name": "arrow_hit_23",
+          "frame": {
+            "name": "arrow_hit_23",
+            "texture": "f1Af3aelJOnbkxMMUV8hlY",
+            "rect": [
+              82,
+              36,
+              10,
+              18
+            ],
+            "offset": [
+              -27,
+              8
+            ],
+            "originalSize": [
+              90,
+              90
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/f1/f101fdda-7a52-4e9d-b931-30c515f21958.07401.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/09/0987b04aa.e6516.json"
+        },
+        {
+          "spriteFrameUuid": "af2KUIgyVMq6M2DDm1Uy1T",
+          "name": "arrow_hit_24",
+          "frame": {
+            "name": "arrow_hit_24",
+            "texture": "f1Af3aelJOnbkxMMUV8hlY",
+            "rect": [
+              68,
+              36,
+              12,
+              20
+            ],
+            "offset": [
+              -28,
+              7
+            ],
+            "originalSize": [
+              90,
+              90
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/f1/f101fdda-7a52-4e9d-b931-30c515f21958.07401.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/09/0987b04aa.e6516.json"
+        },
+        {
+          "spriteFrameUuid": "9dWeEEYmlEj5KfSSfwxrEX",
+          "name": "arrow_hit_25",
+          "frame": {
+            "name": "arrow_hit_25",
+            "texture": "f1Af3aelJOnbkxMMUV8hlY",
+            "rect": [
+              36,
+              120,
+              2,
+              2
+            ],
+            "offset": [
+              -24,
+              15
+            ],
+            "originalSize": [
+              90,
+              90
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/f1/f101fdda-7a52-4e9d-b931-30c515f21958.07401.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/09/0987b04aa.e6516.json"
+        }
+      ],
+      "sha256": "68baaa02a78c23b1f7bab2153b889a6e4889ab49f3cab98df1afb2c60f165cee"
+    },
+    "cannon-hit-strip.png": {
+      "originalClip": "tower_bullet03_hit",
+      "originalNodePath": "tnt_hit",
+      "frames": [
+        {
+          "spriteFrameUuid": "82eNGhWixCoZRnSZPlJPIK",
+          "name": "tnt_hit_00",
+          "frame": {
+            "name": "tnt_hit_00",
+            "texture": "e5RW/MRxRAt5Ejr/qozwhk",
+            "rect": [
+              260,
+              246,
+              94,
+              88
+            ],
+            "offset": [
+              -3,
+              -20
+            ],
+            "originalSize": [
+              120,
+              160
+            ],
+            "rotated": 1,
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/e5/e5456fcc-4714-40b7-9123-affaa8cf0864.0bd51.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/04/041487c39.bba29.json"
+        },
+        {
+          "spriteFrameUuid": "71Nud6Z7JIz42q1lSCrv6U",
+          "name": "tnt_hit_01",
+          "frame": {
+            "name": "tnt_hit_01",
+            "texture": "e5RW/MRxRAt5Ejr/qozwhk",
+            "rect": [
+              184,
+              372,
+              112,
+              110
+            ],
+            "offset": [
+              -2,
+              -14
+            ],
+            "originalSize": [
+              120,
+              160
+            ],
+            "rotated": 1,
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/e5/e5456fcc-4714-40b7-9123-affaa8cf0864.0bd51.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/04/041487c39.bba29.json"
+        },
+        {
+          "spriteFrameUuid": "9f79/hNHlE7bXKkCczJxO3",
+          "name": "tnt_hit_02",
+          "frame": {
+            "name": "tnt_hit_02",
+            "texture": "e5RW/MRxRAt5Ejr/qozwhk",
+            "rect": [
+              324,
+              2,
+              104,
+              116
+            ],
+            "offset": [
+              -2,
+              -12
+            ],
+            "originalSize": [
+              120,
+              160
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/e5/e5456fcc-4714-40b7-9123-affaa8cf0864.0bd51.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/04/041487c39.bba29.json"
+        },
+        {
+          "spriteFrameUuid": "abwJNdQfFGLJIpsWgx35Nv",
+          "name": "tnt_hit_03",
+          "frame": {
+            "name": "tnt_hit_03",
+            "texture": "e5RW/MRxRAt5Ejr/qozwhk",
+            "rect": [
+              258,
+              126,
+              98,
+              118
+            ],
+            "offset": [
+              -3,
+              -11
+            ],
+            "originalSize": [
+              120,
+              160
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/e5/e5456fcc-4714-40b7-9123-affaa8cf0864.0bd51.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/04/041487c39.bba29.json"
+        },
+        {
+          "spriteFrameUuid": "0emVlnlMNNWpy1tszTHwxM",
+          "name": "tnt_hit_04",
+          "frame": {
+            "name": "tnt_hit_04",
+            "texture": "e5RW/MRxRAt5Ejr/qozwhk",
+            "rect": [
+              2,
+              390,
+              98,
+              120
+            ],
+            "offset": [
+              -4,
+              -10
+            ],
+            "originalSize": [
+              120,
+              160
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/e5/e5456fcc-4714-40b7-9123-affaa8cf0864.0bd51.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/04/041487c39.bba29.json"
+        },
+        {
+          "spriteFrameUuid": "b9C8qhh3VKUrobwbHMi1e1",
+          "name": "tnt_hit_05",
+          "frame": {
+            "name": "tnt_hit_05",
+            "texture": "e5RW/MRxRAt5Ejr/qozwhk",
+            "rect": [
+              68,
+              130,
+              96,
+              122
+            ],
+            "offset": [
+              -4,
+              -9
+            ],
+            "originalSize": [
+              120,
+              160
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/e5/e5456fcc-4714-40b7-9123-affaa8cf0864.0bd51.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/04/041487c39.bba29.json"
+        },
+        {
+          "spriteFrameUuid": "94aj4GWglGBbET7pQNlRNh",
+          "name": "tnt_hit_06",
+          "frame": {
+            "name": "tnt_hit_06",
+            "texture": "e5RW/MRxRAt5Ejr/qozwhk",
+            "rect": [
+              144,
+              2,
+              94,
+              122
+            ],
+            "offset": [
+              -5,
+              -8
+            ],
+            "originalSize": [
+              120,
+              160
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/e5/e5456fcc-4714-40b7-9123-affaa8cf0864.0bd51.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/04/041487c39.bba29.json"
+        },
+        {
+          "spriteFrameUuid": "05NZ2izaJEpI8pJ+n4jDio",
+          "name": "tnt_hit_07",
+          "frame": {
+            "name": "tnt_hit_07",
+            "texture": "e5RW/MRxRAt5Ejr/qozwhk",
+            "rect": [
+              82,
+              254,
+              92,
+              122
+            ],
+            "offset": [
+              -6,
+              -7
+            ],
+            "originalSize": [
+              120,
+              160
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/e5/e5456fcc-4714-40b7-9123-affaa8cf0864.0bd51.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/04/041487c39.bba29.json"
+        },
+        {
+          "spriteFrameUuid": "68HNciA4lK8ruTre7IXGGi",
+          "name": "tnt_hit_08",
+          "frame": {
+            "name": "tnt_hit_08",
+            "texture": "e5RW/MRxRAt5Ejr/qozwhk",
+            "rect": [
+              166,
+              126,
+              90,
+              122
+            ],
+            "offset": [
+              -6,
+              -5
+            ],
+            "originalSize": [
+              120,
+              160
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/e5/e5456fcc-4714-40b7-9123-affaa8cf0864.0bd51.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/04/041487c39.bba29.json"
+        },
+        {
+          "spriteFrameUuid": "b9cOT2vJ9IHbVuQtAIYJIy",
+          "name": "tnt_hit_09",
+          "frame": {
+            "name": "tnt_hit_09",
+            "texture": "e5RW/MRxRAt5Ejr/qozwhk",
+            "rect": [
+              240,
+              2,
+              82,
+              122
+            ],
+            "offset": [
+              -3,
+              -2
+            ],
+            "originalSize": [
+              120,
+              160
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/e5/e5456fcc-4714-40b7-9123-affaa8cf0864.0bd51.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/04/041487c39.bba29.json"
+        },
+        {
+          "spriteFrameUuid": "6878IpmZRK66JZUeQhEyWH",
+          "name": "tnt_hit_10",
+          "frame": {
+            "name": "tnt_hit_10",
+            "texture": "e5RW/MRxRAt5Ejr/qozwhk",
+            "rect": [
+              176,
+              250,
+              82,
+              120
+            ],
+            "offset": [
+              -3,
+              3
+            ],
+            "originalSize": [
+              120,
+              160
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/e5/e5456fcc-4714-40b7-9123-affaa8cf0864.0bd51.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/04/041487c39.bba29.json"
+        },
+        {
+          "spriteFrameUuid": "bbHH7G8ApPZK0utCOXtG3P",
+          "name": "tnt_hit_11",
+          "frame": {
+            "name": "tnt_hit_11",
+            "texture": "e5RW/MRxRAt5Ejr/qozwhk",
+            "rect": [
+              102,
+              378,
+              80,
+              122
+            ],
+            "offset": [
+              -3,
+              5
+            ],
+            "originalSize": [
+              120,
+              160
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/e5/e5456fcc-4714-40b7-9123-affaa8cf0864.0bd51.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/04/041487c39.bba29.json"
+        },
+        {
+          "spriteFrameUuid": "83bDiUefxF34iRo5mHee/W",
+          "name": "tnt_hit_12",
+          "frame": {
+            "name": "tnt_hit_12",
+            "texture": "e5RW/MRxRAt5Ejr/qozwhk",
+            "rect": [
+              2,
+              264,
+              78,
+              124
+            ],
+            "offset": [
+              -2,
+              6
+            ],
+            "originalSize": [
+              120,
+              160
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/e5/e5456fcc-4714-40b7-9123-affaa8cf0864.0bd51.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/04/041487c39.bba29.json"
+        },
+        {
+          "spriteFrameUuid": "c89YuWofpHeJl3DnXxgYdb",
+          "name": "tnt_hit_13",
+          "frame": {
+            "name": "tnt_hit_13",
+            "texture": "e5RW/MRxRAt5Ejr/qozwhk",
+            "rect": [
+              66,
+              2,
+              76,
+              126
+            ],
+            "offset": [
+              -2,
+              8
+            ],
+            "originalSize": [
+              120,
+              160
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/e5/e5456fcc-4714-40b7-9123-affaa8cf0864.0bd51.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/04/041487c39.bba29.json"
+        },
+        {
+          "spriteFrameUuid": "c8FmOFZ1BPZK3gK6dHW08d",
+          "name": "tnt_hit_14",
+          "frame": {
+            "name": "tnt_hit_14",
+            "texture": "e5RW/MRxRAt5Ejr/qozwhk",
+            "rect": [
+              2,
+              134,
+              64,
+              128
+            ],
+            "offset": [
+              -7,
+              10
+            ],
+            "originalSize": [
+              120,
+              160
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/e5/e5456fcc-4714-40b7-9123-affaa8cf0864.0bd51.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/04/041487c39.bba29.json"
+        },
+        {
+          "spriteFrameUuid": "18rJNzNz1AR5pfwoOiwNsb",
+          "name": "tnt_hit_15",
+          "frame": {
+            "name": "tnt_hit_15",
+            "texture": "e5RW/MRxRAt5Ejr/qozwhk",
+            "rect": [
+              2,
+              2,
+              62,
+              130
+            ],
+            "offset": [
+              -7,
+              12
+            ],
+            "originalSize": [
+              120,
+              160
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/e5/e5456fcc-4714-40b7-9123-affaa8cf0864.0bd51.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/04/041487c39.bba29.json"
+        },
+        {
+          "spriteFrameUuid": "32rCbtlRdBh75wT+6KIzeG",
+          "name": "tnt_hit_16",
+          "frame": {
+            "name": "tnt_hit_16",
+            "texture": "e5RW/MRxRAt5Ejr/qozwhk",
+            "rect": [
+              430,
+              2,
+              30,
+              76
+            ],
+            "offset": [
+              -2,
+              42
+            ],
+            "originalSize": [
+              120,
+              160
+            ],
+            "rotated": 1,
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/e5/e5456fcc-4714-40b7-9123-affaa8cf0864.0bd51.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/04/041487c39.bba29.json"
+        },
+        {
+          "spriteFrameUuid": "50MqF9szVBvbBNDlVktlYo",
+          "name": "tnt_hit_17",
+          "frame": {
+            "name": "tnt_hit_17",
+            "texture": "e5RW/MRxRAt5Ejr/qozwhk",
+            "rect": [
+              184,
+              486,
+              28,
+              12
+            ],
+            "offset": [
+              -2,
+              58
+            ],
+            "originalSize": [
+              120,
+              160
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/e5/e5456fcc-4714-40b7-9123-affaa8cf0864.0bd51.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/04/041487c39.bba29.json"
+        }
+      ],
+      "sha256": "20630aa65679eaa71c9cc16ee2d56093828fb72e575b9910e01d5f59f5289baf"
+    },
+    "lightning-strip.png": {
+      "originalClip": "skill_lighting",
+      "originalNodePath": "lighting1",
+      "frames": [
+        {
+          "spriteFrameUuid": "e3tp5sVgpKULPDqlyQnYIS",
+          "name": "lighting_00",
+          "frame": {
+            "name": "lighting_00",
+            "texture": "8arQ1TTZlEqq2JlgdiGsUp",
+            "rect": [
+              280,
+              202,
+              58,
+              88
+            ],
+            "offset": [
+              2,
+              39
+            ],
+            "originalSize": [
+              100,
+              166
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/8a/8aad0d53-4d99-44aa-ad89-9607621ac529.e129e.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/0e/0e5074fd3.bf21d.json"
+        },
+        {
+          "spriteFrameUuid": "47ZbBEDVpAf5/3W76IfIXM",
+          "name": "lighting_01",
+          "frame": {
+            "name": "lighting_01",
+            "texture": "8arQ1TTZlEqq2JlgdiGsUp",
+            "rect": [
+              425,
+              202,
+              82,
+              114
+            ],
+            "offset": [
+              9,
+              26
+            ],
+            "originalSize": [
+              100,
+              166
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/8a/8aad0d53-4d99-44aa-ad89-9607621ac529.e129e.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/0e/0e5074fd3.bf21d.json"
+        },
+        {
+          "spriteFrameUuid": "be2LGBC/RK+ajo2Milr3Ie",
+          "name": "lighting_02",
+          "frame": {
+            "name": "lighting_02",
+            "texture": "8arQ1TTZlEqq2JlgdiGsUp",
+            "rect": [
+              250,
+              292,
+              84,
+              138
+            ],
+            "offset": [
+              5,
+              14
+            ],
+            "originalSize": [
+              100,
+              166
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/8a/8aad0d53-4d99-44aa-ad89-9607621ac529.e129e.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/0e/0e5074fd3.bf21d.json"
+        },
+        {
+          "spriteFrameUuid": "e1qKQmrv9MT6df3fhcCOSK",
+          "name": "lighting_03",
+          "frame": {
+            "name": "lighting_03",
+            "texture": "8arQ1TTZlEqq2JlgdiGsUp",
+            "rect": [
+              2,
+              336,
+              70,
+              162
+            ],
+            "offset": [
+              -6,
+              2
+            ],
+            "originalSize": [
+              100,
+              166
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/8a/8aad0d53-4d99-44aa-ad89-9607621ac529.e129e.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/0e/0e5074fd3.bf21d.json"
+        },
+        {
+          "spriteFrameUuid": "f3CsMY10RPtrXMD+HYodbp",
+          "name": "lighting_04",
+          "frame": {
+            "name": "lighting_04",
+            "texture": "8arQ1TTZlEqq2JlgdiGsUp",
+            "rect": [
+              2,
+              170,
+              66,
+              164
+            ],
+            "offset": [
+              -4,
+              1
+            ],
+            "originalSize": [
+              100,
+              166
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/8a/8aad0d53-4d99-44aa-ad89-9607621ac529.e129e.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/0e/0e5074fd3.bf21d.json"
+        },
+        {
+          "spriteFrameUuid": "81CL9CgjxBsqEVukDJHa7v",
+          "name": "lighting_05",
+          "frame": {
+            "name": "lighting_05",
+            "texture": "8arQ1TTZlEqq2JlgdiGsUp",
+            "rect": [
+              70,
+              170,
+              58,
+              162
+            ],
+            "offset": [
+              -2,
+              2
+            ],
+            "originalSize": [
+              100,
+              166
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/8a/8aad0d53-4d99-44aa-ad89-9607621ac529.e129e.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/0e/0e5074fd3.bf21d.json"
+        },
+        {
+          "spriteFrameUuid": "5c37P1+EtEPbKSSlFPm5ib",
+          "name": "lighting_06",
+          "frame": {
+            "name": "lighting_06",
+            "texture": "8arQ1TTZlEqq2JlgdiGsUp",
+            "rect": [
+              74,
+              334,
+              68,
+              156
+            ],
+            "offset": [
+              -8,
+              5
+            ],
+            "originalSize": [
+              100,
+              166
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/8a/8aad0d53-4d99-44aa-ad89-9607621ac529.e129e.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/0e/0e5074fd3.bf21d.json"
+        },
+        {
+          "spriteFrameUuid": "141rSGXglMO5U3XNYrjqHe",
+          "name": "lighting_07",
+          "frame": {
+            "name": "lighting_07",
+            "texture": "8arQ1TTZlEqq2JlgdiGsUp",
+            "rect": [
+              130,
+              170,
+              54,
+              152
+            ],
+            "offset": [
+              -3,
+              7
+            ],
+            "originalSize": [
+              100,
+              166
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/8a/8aad0d53-4d99-44aa-ad89-9607621ac529.e129e.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/0e/0e5074fd3.bf21d.json"
+        },
+        {
+          "spriteFrameUuid": "fetfCnARFAEoB7ker5oBZq",
+          "name": "lighting_08",
+          "frame": {
+            "name": "lighting_08",
+            "texture": "8arQ1TTZlEqq2JlgdiGsUp",
+            "rect": [
+              186,
+              148,
+              52,
+              144
+            ],
+            "offset": [
+              -5,
+              11
+            ],
+            "originalSize": [
+              100,
+              166
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/8a/8aad0d53-4d99-44aa-ad89-9607621ac529.e129e.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/0e/0e5074fd3.bf21d.json"
+        },
+        {
+          "spriteFrameUuid": "9fkpVBPOZFX79i0YWtJ6tj",
+          "name": "lighting_09",
+          "frame": {
+            "name": "lighting_09",
+            "texture": "8arQ1TTZlEqq2JlgdiGsUp",
+            "rect": [
+              200,
+              323,
+              48,
+              144
+            ],
+            "offset": [
+              -14,
+              11
+            ],
+            "originalSize": [
+              100,
+              166
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/8a/8aad0d53-4d99-44aa-ad89-9607621ac529.e129e.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/0e/0e5074fd3.bf21d.json"
+        },
+        {
+          "spriteFrameUuid": "aajxl00lJH55IPF5Z7DM+e",
+          "name": "lighting_10",
+          "frame": {
+            "name": "lighting_10",
+            "texture": "8arQ1TTZlEqq2JlgdiGsUp",
+            "rect": [
+              144,
+              324,
+              54,
+              144
+            ],
+            "offset": [
+              -5,
+              11
+            ],
+            "originalSize": [
+              100,
+              166
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/8a/8aad0d53-4d99-44aa-ad89-9607621ac529.e129e.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/0e/0e5074fd3.bf21d.json"
+        },
+        {
+          "spriteFrameUuid": "d7qRNz0EVN2KMmI5hymDdy",
+          "name": "lighting_11",
+          "frame": {
+            "name": "lighting_11",
+            "texture": "8arQ1TTZlEqq2JlgdiGsUp",
+            "rect": [
+              240,
+              148,
+              38,
+              142
+            ],
+            "offset": [
+              -6,
+              12
+            ],
+            "originalSize": [
+              100,
+              166
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/8a/8aad0d53-4d99-44aa-ad89-9607621ac529.e129e.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/0e/0e5074fd3.bf21d.json"
+        }
+      ],
+      "sha256": "8dbdd763abc0c5707d92d23e1d3e41703b5ee178962d4852f3ac383ab9202437"
+    },
+    "lightning-hit-strip.png": {
+      "originalClip": "skill_lighting",
+      "originalNodePath": "hit1/lighting_hit",
+      "frames": [
+        {
+          "spriteFrameUuid": "b3X19w0R5B6rAMIF5N2Q93",
+          "name": "lighting_hit_00",
+          "frame": {
+            "name": "lighting_hit_00",
+            "texture": "8arQ1TTZlEqq2JlgdiGsUp",
+            "rect": [
+              340,
+              200,
+              101,
+              83
+            ],
+            "offset": [
+              6,
+              15
+            ],
+            "originalSize": [
+              133,
+              133
+            ],
+            "rotated": 1,
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/8a/8aad0d53-4d99-44aa-ad89-9607621ac529.e129e.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/0e/0e5074fd3.bf21d.json"
+        },
+        {
+          "spriteFrameUuid": "83WUpix/lGJL8hhDxJ0SpQ",
+          "name": "lighting_hit_01",
+          "frame": {
+            "name": "lighting_hit_01",
+            "texture": "8arQ1TTZlEqq2JlgdiGsUp",
+            "rect": [
+              310,
+              432,
+              121,
+              77
+            ],
+            "offset": [
+              -5,
+              18
+            ],
+            "originalSize": [
+              133,
+              133
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/8a/8aad0d53-4d99-44aa-ad89-9607621ac529.e129e.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/0e/0e5074fd3.bf21d.json"
+        },
+        {
+          "spriteFrameUuid": "06X7eogIVNZaDm2I4UNKVW",
+          "name": "lighting_hit_02",
+          "frame": {
+            "name": "lighting_hit_02",
+            "texture": "8arQ1TTZlEqq2JlgdiGsUp",
+            "rect": [
+              312,
+              2,
+              119,
+              73
+            ],
+            "offset": [
+              7,
+              16
+            ],
+            "originalSize": [
+              133,
+              133
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/8a/8aad0d53-4d99-44aa-ad89-9607621ac529.e129e.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/0e/0e5074fd3.bf21d.json"
+        },
+        {
+          "spriteFrameUuid": "c271aLg79P4J/PDhtitcPw",
+          "name": "lighting_hit_03",
+          "frame": {
+            "name": "lighting_hit_03",
+            "texture": "8arQ1TTZlEqq2JlgdiGsUp",
+            "rect": [
+              312,
+              77,
+              121,
+              65
+            ],
+            "offset": [
+              -2,
+              12
+            ],
+            "originalSize": [
+              133,
+              133
+            ],
+            "rotated": 1,
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/8a/8aad0d53-4d99-44aa-ad89-9607621ac529.e129e.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/0e/0e5074fd3.bf21d.json"
+        },
+        {
+          "spriteFrameUuid": "eaDAeh7IZHP5fTv/vjwSIx",
+          "name": "lighting_hit_04",
+          "frame": {
+            "name": "lighting_hit_04",
+            "texture": "8arQ1TTZlEqq2JlgdiGsUp",
+            "rect": [
+              433,
+              2,
+              115,
+              77
+            ],
+            "offset": [
+              3,
+              -3
+            ],
+            "originalSize": [
+              133,
+              133
+            ],
+            "rotated": 1,
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/8a/8aad0d53-4d99-44aa-ad89-9607621ac529.e129e.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/0e/0e5074fd3.bf21d.json"
+        },
+        {
+          "spriteFrameUuid": "58gWHsv1RDuouR4W/jM+Fg",
+          "name": "lighting_hit_05",
+          "frame": {
+            "name": "lighting_hit_05",
+            "texture": "8arQ1TTZlEqq2JlgdiGsUp",
+            "rect": [
+              433,
+              119,
+              81,
+              73
+            ],
+            "offset": [
+              24,
+              -10
+            ],
+            "originalSize": [
+              133,
+              133
+            ],
+            "rotated": 1,
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/8a/8aad0d53-4d99-44aa-ad89-9607621ac529.e129e.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/0e/0e5074fd3.bf21d.json"
+        },
+        {
+          "spriteFrameUuid": "e5mcFz6dhI+7Lf74XZcUX7",
+          "name": "lighting_hit_06",
+          "frame": {
+            "name": "lighting_hit_06",
+            "texture": "8arQ1TTZlEqq2JlgdiGsUp",
+            "rect": [
+              379,
+              77,
+              85,
+              47
+            ],
+            "offset": [
+              18,
+              8
+            ],
+            "originalSize": [
+              133,
+              133
+            ],
+            "rotated": 1,
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/8a/8aad0d53-4d99-44aa-ad89-9607621ac529.e129e.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/0e/0e5074fd3.bf21d.json"
+        },
+        {
+          "spriteFrameUuid": "8aJUlMumlHQrgq+dHi6vC9",
+          "name": "lighting_hit_07",
+          "frame": {
+            "name": "lighting_hit_07",
+            "texture": "8arQ1TTZlEqq2JlgdiGsUp",
+            "rect": [
+              229,
+              469,
+              79,
+              41
+            ],
+            "offset": [
+              21,
+              10
+            ],
+            "originalSize": [
+              133,
+              133
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/8a/8aad0d53-4d99-44aa-ad89-9607621ac529.e129e.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/0e/0e5074fd3.bf21d.json"
+        },
+        {
+          "spriteFrameUuid": "98D1f8j3FCKLgCyapQQRFb",
+          "name": "lighting_hit_08",
+          "frame": {
+            "name": "lighting_hit_08",
+            "texture": "8arQ1TTZlEqq2JlgdiGsUp",
+            "rect": [
+              144,
+              470,
+              83,
+              39
+            ],
+            "offset": [
+              24,
+              10
+            ],
+            "originalSize": [
+              133,
+              133
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/8a/8aad0d53-4d99-44aa-ad89-9607621ac529.e129e.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/0e/0e5074fd3.bf21d.json"
+        },
+        {
+          "spriteFrameUuid": "25x8HoswpAJpKjO+Hq6DLb",
+          "name": "lighting_hit_09",
+          "frame": {
+            "name": "lighting_hit_09",
+            "texture": "8arQ1TTZlEqq2JlgdiGsUp",
+            "rect": [
+              186,
+              294,
+              33,
+              27
+            ],
+            "offset": [
+              37,
+              4
+            ],
+            "originalSize": [
+              133,
+              133
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/8a/8aad0d53-4d99-44aa-ad89-9607621ac529.e129e.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/0e/0e5074fd3.bf21d.json"
+        }
+      ],
+      "sha256": "43f242a8e107d7d6868b18139f4d2ea2d72c624964bca1f26d87cbf2faefb053"
+    },
+    "explosion-strip.png": {
+      "originalClip": "skill_boom_hit",
+      "originalNodePath": "boom_bao",
+      "frames": [
+        {
+          "spriteFrameUuid": "61ByktcIVKUrXznf4/iw5K",
+          "name": "boom_bao_00",
+          "frame": {
+            "name": "boom_bao_00",
+            "texture": "d1uJEX/ylMFJqnUus7PqZ2",
+            "rect": [
+              578,
+              200,
+              50,
+              32
+            ],
+            "offset": [
+              2,
+              1
+            ],
+            "originalSize": [
+              150,
+              150
+            ],
+            "rotated": 1,
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/d1/d1b89117-ff29-4c14-9aa7-52eb3b3ea676.5a2d0.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/0a/0aa8c2715.8a5c8.json"
+        },
+        {
+          "spriteFrameUuid": "439IsZL5pMsqPrXI7mDyLb",
+          "name": "boom_bao_01",
+          "frame": {
+            "name": "boom_bao_01",
+            "texture": "d1uJEX/ylMFJqnUus7PqZ2",
+            "rect": [
+              2,
+              154,
+              132,
+              98
+            ],
+            "offset": [
+              -1,
+              5
+            ],
+            "originalSize": [
+              150,
+              150
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/d1/d1b89117-ff29-4c14-9aa7-52eb3b3ea676.5a2d0.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/0a/0aa8c2715.8a5c8.json"
+        },
+        {
+          "spriteFrameUuid": "21wBO9hWVMCa4tWMniX1aj",
+          "name": "boom_bao_02",
+          "frame": {
+            "name": "boom_bao_02",
+            "texture": "d1uJEX/ylMFJqnUus7PqZ2",
+            "rect": [
+              150,
+              2,
+              150,
+              146
+            ],
+            "offset": [
+              0,
+              -2
+            ],
+            "originalSize": [
+              150,
+              150
+            ],
+            "rotated": 1,
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/d1/d1b89117-ff29-4c14-9aa7-52eb3b3ea676.5a2d0.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/0a/0aa8c2715.8a5c8.json"
+        },
+        {
+          "spriteFrameUuid": "53/uKhyuREZpsx8Fnm60Ln",
+          "name": "boom_bao_03",
+          "frame": {
+            "name": "boom_bao_03",
+            "texture": "d1uJEX/ylMFJqnUus7PqZ2",
+            "rect": [
+              2,
+              2,
+              150,
+              146
+            ],
+            "offset": [
+              0,
+              -2
+            ],
+            "originalSize": [
+              150,
+              150
+            ],
+            "rotated": 1,
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/d1/d1b89117-ff29-4c14-9aa7-52eb3b3ea676.5a2d0.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/0a/0aa8c2715.8a5c8.json"
+        },
+        {
+          "spriteFrameUuid": "bdxdzqsklNiJD/DYkz5p/b",
+          "name": "boom_bao_04",
+          "frame": {
+            "name": "boom_bao_04",
+            "texture": "d1uJEX/ylMFJqnUus7PqZ2",
+            "rect": [
+              444,
+              2,
+              150,
+              144
+            ],
+            "offset": [
+              0,
+              -3
+            ],
+            "originalSize": [
+              150,
+              150
+            ],
+            "rotated": 1,
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/d1/d1b89117-ff29-4c14-9aa7-52eb3b3ea676.5a2d0.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/0a/0aa8c2715.8a5c8.json"
+        },
+        {
+          "spriteFrameUuid": "8ap4ox3mJFb4y6480OR5CW",
+          "name": "boom_bao_05",
+          "frame": {
+            "name": "boom_bao_05",
+            "texture": "d1uJEX/ylMFJqnUus7PqZ2",
+            "rect": [
+              298,
+              2,
+              150,
+              144
+            ],
+            "offset": [
+              0,
+              -3
+            ],
+            "originalSize": [
+              150,
+              150
+            ],
+            "rotated": 1,
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/d1/d1b89117-ff29-4c14-9aa7-52eb3b3ea676.5a2d0.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/0a/0aa8c2715.8a5c8.json"
+        },
+        {
+          "spriteFrameUuid": "c6alFkAVBC96WWTzVT976r",
+          "name": "boom_bao_06",
+          "frame": {
+            "name": "boom_bao_06",
+            "texture": "d1uJEX/ylMFJqnUus7PqZ2",
+            "rect": [
+              432,
+              154,
+              88,
+              96
+            ],
+            "offset": [
+              -1,
+              12
+            ],
+            "originalSize": [
+              150,
+              150
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/d1/d1b89117-ff29-4c14-9aa7-52eb3b3ea676.5a2d0.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/0a/0aa8c2715.8a5c8.json"
+        },
+        {
+          "spriteFrameUuid": "f5EZzHIWhBxIuKZPgIhzgG",
+          "name": "boom_bao_07",
+          "frame": {
+            "name": "boom_bao_07",
+            "texture": "d1uJEX/ylMFJqnUus7PqZ2",
+            "rect": [
+              342,
+              154,
+              88,
+              98
+            ],
+            "offset": [
+              -3,
+              12
+            ],
+            "originalSize": [
+              150,
+              150
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/d1/d1b89117-ff29-4c14-9aa7-52eb3b3ea676.5a2d0.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/0a/0aa8c2715.8a5c8.json"
+        },
+        {
+          "spriteFrameUuid": "b2BP79QqBBd6y+0lFG4NYs",
+          "name": "boom_bao_08",
+          "frame": {
+            "name": "boom_bao_08",
+            "texture": "d1uJEX/ylMFJqnUus7PqZ2",
+            "rect": [
+              240,
+              154,
+              92,
+              100
+            ],
+            "offset": [
+              -3,
+              12
+            ],
+            "originalSize": [
+              150,
+              150
+            ],
+            "rotated": 1,
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/d1/d1b89117-ff29-4c14-9aa7-52eb3b3ea676.5a2d0.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/0a/0aa8c2715.8a5c8.json"
+        },
+        {
+          "spriteFrameUuid": "84LUXax0tIq54jlMX8JBFZ",
+          "name": "boom_bao_09",
+          "frame": {
+            "name": "boom_bao_09",
+            "texture": "d1uJEX/ylMFJqnUus7PqZ2",
+            "rect": [
+              136,
+              154,
+              96,
+              102
+            ],
+            "offset": [
+              -3,
+              11
+            ],
+            "originalSize": [
+              150,
+              150
+            ],
+            "rotated": 1,
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/d1/d1b89117-ff29-4c14-9aa7-52eb3b3ea676.5a2d0.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/0a/0aa8c2715.8a5c8.json"
+        },
+        {
+          "spriteFrameUuid": "24M8FgkwVOSJRQR3nspDYm",
+          "name": "boom_bao_10",
+          "frame": {
+            "name": "boom_bao_10",
+            "texture": "d1uJEX/ylMFJqnUus7PqZ2",
+            "rect": [
+              956,
+              110,
+              100,
+              104
+            ],
+            "offset": [
+              -3,
+              11
+            ],
+            "originalSize": [
+              150,
+              150
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/d1/d1b89117-ff29-4c14-9aa7-52eb3b3ea676.5a2d0.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/0a/0aa8c2715.8a5c8.json"
+        },
+        {
+          "spriteFrameUuid": "f8HflUfllBKZ8J39J/MS0S",
+          "name": "boom_bao_11",
+          "frame": {
+            "name": "boom_bao_11",
+            "texture": "d1uJEX/ylMFJqnUus7PqZ2",
+            "rect": [
+              920,
+              2,
+              104,
+              106
+            ],
+            "offset": [
+              -4,
+              11
+            ],
+            "originalSize": [
+              150,
+              150
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/d1/d1b89117-ff29-4c14-9aa7-52eb3b3ea676.5a2d0.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/0a/0aa8c2715.8a5c8.json"
+        },
+        {
+          "spriteFrameUuid": "47dPGIrg1CK4NdamsfpBAi",
+          "name": "boom_bao_12",
+          "frame": {
+            "name": "boom_bao_12",
+            "texture": "d1uJEX/ylMFJqnUus7PqZ2",
+            "rect": [
+              812,
+              2,
+              108,
+              106
+            ],
+            "offset": [
+              -4,
+              10
+            ],
+            "originalSize": [
+              150,
+              150
+            ],
+            "rotated": 1,
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/d1/d1b89117-ff29-4c14-9aa7-52eb3b3ea676.5a2d0.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/0a/0aa8c2715.8a5c8.json"
+        },
+        {
+          "spriteFrameUuid": "66eNyPjVRA+a9Ya9AiH77T",
+          "name": "boom_bao_13",
+          "frame": {
+            "name": "boom_bao_13",
+            "texture": "d1uJEX/ylMFJqnUus7PqZ2",
+            "rect": [
+              700,
+              2,
+              110,
+              110
+            ],
+            "offset": [
+              -3,
+              10
+            ],
+            "originalSize": [
+              150,
+              150
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/d1/d1b89117-ff29-4c14-9aa7-52eb3b3ea676.5a2d0.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/0a/0aa8c2715.8a5c8.json"
+        },
+        {
+          "spriteFrameUuid": "a0Zhj3Y01LCpHwvtdyJ1bs",
+          "name": "boom_bao_14",
+          "frame": {
+            "name": "boom_bao_14",
+            "texture": "d1uJEX/ylMFJqnUus7PqZ2",
+            "rect": [
+              634,
+              133,
+              114,
+              110
+            ],
+            "offset": [
+              -3,
+              9
+            ],
+            "originalSize": [
+              150,
+              150
+            ],
+            "rotated": 1,
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/d1/d1b89117-ff29-4c14-9aa7-52eb3b3ea676.5a2d0.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/0a/0aa8c2715.8a5c8.json"
+        },
+        {
+          "spriteFrameUuid": "111WKQafVOWKK49zpJUcSx",
+          "name": "boom_bao_15",
+          "frame": {
+            "name": "boom_bao_15",
+            "texture": "d1uJEX/ylMFJqnUus7PqZ2",
+            "rect": [
+              852,
+              112,
+              102,
+              112
+            ],
+            "offset": [
+              -12,
+              9
+            ],
+            "originalSize": [
+              150,
+              150
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/d1/d1b89117-ff29-4c14-9aa7-52eb3b3ea676.5a2d0.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/0a/0aa8c2715.8a5c8.json"
+        },
+        {
+          "spriteFrameUuid": "29bhR4ltZODpTSvypmH/fC",
+          "name": "boom_bao_16",
+          "frame": {
+            "name": "boom_bao_16",
+            "texture": "d1uJEX/ylMFJqnUus7PqZ2",
+            "rect": [
+              746,
+              114,
+              104,
+              114
+            ],
+            "offset": [
+              -12,
+              9
+            ],
+            "originalSize": [
+              150,
+              150
+            ],
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/d1/d1b89117-ff29-4c14-9aa7-52eb3b3ea676.5a2d0.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/0a/0aa8c2715.8a5c8.json"
+        },
+        {
+          "spriteFrameUuid": "73RmeJhXJNcokrsRbEaTD1",
+          "name": "boom_bao_17",
+          "frame": {
+            "name": "boom_bao_17",
+            "texture": "d1uJEX/ylMFJqnUus7PqZ2",
+            "rect": [
+              522,
+              154,
+              44,
+              110
+            ],
+            "offset": [
+              10,
+              11
+            ],
+            "originalSize": [
+              150,
+              150
+            ],
+            "rotated": 1,
+            "capInsets": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/d1/d1b89117-ff29-4c14-9aa7-52eb3b3ea676.5a2d0.png",
+          "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/0a/0aa8c2715.8a5c8.json"
+        }
+      ],
+      "sha256": "5d8c965543ce77a2e9c34722988714e236e81c3e911dc7d1361ab1259e10cc1b"
+    },
+    "arrow-stuck.png": {
+      "spriteFrameUuid": "81fiMHwEpEu50HVaGwUKIp",
+      "name": "1_3",
+      "frame": {
+        "name": "1_3",
+        "texture": "34jkJqrQVNaZTfyM2s0YfZ",
+        "rect": [
+          72,
+          357,
+          56,
+          24
+        ],
+        "offset": [
+          -15,
+          1
+        ],
+        "originalSize": [
+          150,
+          150
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/34/348e426a-ad05-4d69-94df-c8cdacd187d9.02256.png",
+      "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/81/817e2307-c04a-44bb-9d07-55a1b050a229.be166.json",
+      "sha256": "38bd4993de929766dbf349cc88024e09bfdea7e557e8e0cad17feb312b8caaa9"
+    },
+    "lightning-ground-bg.png": {
+      "spriteFrameUuid": "69JvOLkxVHWoV9XMOxF72i",
+      "name": "bg",
+      "frame": {
+        "name": "bg",
+        "texture": "8arQ1TTZlEqq2JlgdiGsUp",
+        "rect": [
+          2,
+          2,
+          166,
+          166
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          170,
+          170
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/8a/8aad0d53-4d99-44aa-ad89-9607621ac529.e129e.png",
+      "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/0f/0fd9b82c5.9f609.json",
+      "sha256": "db32109a6b0d10b56db5f093dacd1baecfcc272beac32689281b86a1eefcfa80"
+    },
+    "lightning-ground-rune.png": {
+      "spriteFrameUuid": "cdLKloxgZLloLtaUO0UCkT",
+      "name": "tj",
+      "frame": {
+        "name": "tj",
+        "texture": "8arQ1TTZlEqq2JlgdiGsUp",
+        "rect": [
+          170,
+          2,
+          144,
+          140
+        ],
+        "offset": [
+          -2,
+          -1
+        ],
+        "originalSize": [
+          170,
+          170
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/8a/8aad0d53-4d99-44aa-ad89-9607621ac529.e129e.png",
+      "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/0f/0fd9b82c5.9f609.json",
+      "sha256": "d235e8d643142615e0f26b58d9594f4b7cb117efd1cf7ab55d6feb34580e8a98"
+    },
+    "explosion-scorch.png": {
+      "spriteFrameUuid": "75tuJ9zWhAsr9e3YZyaktF",
+      "name": "boom3",
+      "frame": {
+        "name": "boom3",
+        "texture": "d1uJEX/ylMFJqnUus7PqZ2",
+        "rect": [
+          590,
+          2,
+          129,
+          108
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          129,
+          108
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/d1/d1b89117-ff29-4c14-9aa7-52eb3b3ea676.5a2d0.png",
+      "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/02/026a5e219.e8ed9.json",
+      "sha256": "dbd0d6336de175652fc73b2a97a0be265efbbdd5fe589e6e545e9cb7bb035665"
+    },
+    "cannon-scorch.png": {
+      "spriteFrameUuid": "19rWmuRX9A4bsM7xK86LiT",
+      "name": "down",
+      "frame": {
+        "name": "down",
+        "texture": "e5RW/MRxRAt5Ejr/qozwhk",
+        "rect": [
+          358,
+          120,
+          88,
+          86
+        ],
+        "offset": [
+          -1,
+          0
+        ],
+        "originalSize": [
+          100,
+          100
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/e5/e5456fcc-4714-40b7-9123-affaa8cf0864.0bd51.png",
+      "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/19/19ad69ae-457f-40e1-bb0c-ef12bce8b893.25e84.json",
+      "sha256": "ef18f3d1c32d8b557a0959c5de103dc332a7327beb35d661d12d755e61fa6e54"
+    },
+    "lightning-flare.png": {
+      "spriteFrameUuid": "3faIdBPbVOf5qXtU5tF1uu",
+      "name": "light ",
+      "frame": {
+        "name": "light ",
+        "texture": "f5drO/oZpMsY0Ql908jGTJ",
+        "rect": [
+          2,
+          2,
+          244,
+          244
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          256,
+          256
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/f5/f576b3bf-a19a-4cb1-8d10-97dd3c8c64c9.06a71.png",
+      "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/3f/3f688741-3db5-4e7f-9a97-b54e6d175bae.880e7.json",
+      "sha256": "9b7f7e621b9a7ece6cab1700f360c9c7c75c070ac0adddf8c6d2f236eb403e2b"
+    },
+    "lightning-ring.png": {
+      "spriteFrameUuid": "7cnkmDi9NNsZ/GN9QfhdtP",
+      "name": "b2",
+      "frame": {
+        "name": "b2",
+        "texture": "16IdE1dI1H7YeCJ+YDiDaz",
+        "rect": [
+          2,
+          2,
+          192,
+          248
+        ],
+        "offset": [
+          -5,
+          -2
+        ],
+        "originalSize": [
+          256,
+          256
+        ],
+        "rotated": 1,
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/16/1621d135-748d-47ed-8782-27e6038836b3.99604.png",
+      "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/7c/7c9e4983-8bd3-4db1-9fc6-37d41f85db4f.98bda.json",
+      "sha256": "cce3bf75a0c8a32970ca3d06cceedc34ead6db85e3cb40068b594e66fa3b0527"
+    },
+    "lightning-particle.png": {
+      "spriteFrameUuid": "besXXpji5OK6zZMKKyPLX6",
+      "name": "lizi_00",
+      "frame": {
+        "name": "lizi_00",
+        "texture": "16IdE1dI1H7YeCJ+YDiDaz",
+        "rect": [
+          480,
+          188,
+          30,
+          40
+        ],
+        "offset": [
+          -1,
+          3
+        ],
+        "originalSize": [
+          256,
+          256
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/16/1621d135-748d-47ed-8782-27e6038836b3.99604.png",
+      "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/be/beb175e9-8e2e-4e2b-acd9-30a2b23cb5fa.569ac.json",
+      "sha256": "6c998738636bcf3758490995b9ba2bdfe3f6b3af3ef930236a0bb0415c35c815"
+    },
+    "lightning-ground-ring.png": {
+      "spriteFrameUuid": "30sSJWfI1LP4sASI8EanS4",
+      "name": "ring2",
+      "frame": {
+        "name": "ring2",
+        "texture": "05amX3EqdJOKcpnQvO8e6t",
+        "rect": [
+          130,
+          258,
+          126,
+          126
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          128,
+          128
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/05/056a65f7-12a7-4938-a729-9d0bcef1eead.99833.png",
+      "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/30/30b12256-7c8d-4b3f-8b00-488f046a74b8.669fc.json",
+      "sha256": "af8746278e32e88b5dc412d68c41a98bca6c34b0efc85360e17c6ff7ca73e65d"
+    },
+    "magic-smoke.png": {
+      "spriteFrameUuid": "7fu93BQmpG5Yk8VQL+TlwB",
+      "name": "1",
+      "frame": {
+        "name": "1",
+        "texture": "b77uxFxY1If5iijyVt2kj4",
+        "rect": [
+          2,
+          260,
+          230,
+          226
+        ],
+        "offset": [
+          -1,
+          4
+        ],
+        "originalSize": [
+          256,
+          256
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/b7/b7eeec45-c58d-487f-98a2-8f256dda48f8.b86f8.png",
+      "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/7f/7fbbddc1-426a-46e5-893c-5502fe4e5c01.130c7.json",
+      "sha256": "89585fa0c65630719f15bc2913d85f2aa8fc2e514715336271cdc847e065c1ef"
+    },
+    "tower-build-smoke.png": {
+      "file": "tower-build-smoke.png",
+      "sourcePage": "http://game.zhongyigames.com/niguolaia/",
+      "originalSpriteFrameName": "2",
+      "spriteFrameUuid": "5eXbW1XfBNt4a4x7Mus94W",
+      "particleAssetUuid": "e8Zn0bc41ILLhLepAymyvn",
+      "originalParticleAssetName": "build_smoke",
+      "prefabNode": "GameTower/tower_build_smoke",
+      "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/b7/b7eeec45-c58d-487f-98a2-8f256dda48f8.b86f8.png",
+      "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/5e/5e5db5b5-5df0-4db7-86b8-c7b32eb3de16.2dfe2.json",
+      "particleMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/main/import/09/09c3c5dca.7ab70.json",
+      "particleNativeUrl": "http://game.zhongyigames.com/niguolaia/assets/main/native/e8/e8667d1b-738d-482c-b84b-7a90329b2be7.54619.plist",
+      "frame": {
+        "name": "2",
+        "texture": "b77uxFxY1If5iijyVt2kj4",
+        "rect": [
+          350,
+          2,
+          100,
+          100
+        ],
+        "offset": [
+          0,
+          0
+        ],
+        "originalSize": [
+          100,
+          100
+        ],
+        "capInsets": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "width": 100,
+      "height": 100,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "nodeLocalPosition": [
+        0,
+        0
+      ],
+      "nodeScale": [
+        1,
+        1
+      ],
+      "spriteRendering": "Individual particles determine size, opacity and rotation; this is the original texture rather than a baked effect animation.",
+      "runtimeLifecycle": "GameTower.showTowerCreateEffect sets node.active=true, resetSystem(), then after 1 second stopSystem() and node.active=false. Both buildTower and upgradeTower without a hero-tower argument call showTowerCreateEffect.",
+      "extraction": "Exact RGBA rectangular atlas crop; no resizing or redrawing.",
+      "sha256": "204f5798baef28f233e39659d86eff8a276d8d658e9e5b892eda6ccce16c23a2",
+      "licenseStatus": "Publicly served original resource; no commercial or redistribution permission established."
+    }
+  },
+  "references": [
+    {
+      "index": 1656,
+      "uuid": "05NZ2izaJEpI8pJ+n4jDio",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/04/041487c39.bba29.json"
+    },
+    {
+      "index": 1657,
+      "uuid": "05O+aD7mlOBIcFG/BTg80Q",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/05/053be683-ee69-4e04-8705-1bf05383cd10.fab9c.json"
+    },
+    {
+      "index": 1675,
+      "uuid": "06X7eogIVNZaDm2I4UNKVW",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/0e/0e5074fd3.bf21d.json"
+    },
+    {
+      "index": 1710,
+      "uuid": "081rO6wJRCpKDoDzFtudD8",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/09/0987b04aa.e6516.json"
+    },
+    {
+      "index": 1748,
+      "uuid": "0b3WAHh0tN8KNX4H+HD0FF",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/05/0502f7fe5.0120a.json"
+    },
+    {
+      "index": 1812,
+      "uuid": "111WKQafVOWKK49zpJUcSx",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/0a/0aa8c2715.8a5c8.json"
+    },
+    {
+      "index": 1846,
+      "uuid": "13sFx0pGNB/KHZGY25WBNj",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/13/13b05c74-a463-41fc-a1d9-198db9581363.28d5f.json"
+    },
+    {
+      "index": 1913,
+      "uuid": "19P1Q8ya1Pt6AcvqtI+gki",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/05/058983e64.1718e.json"
+    },
+    {
+      "index": 1936,
+      "uuid": "1apfd7kQ9Fg6eFH8HIbUhr",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/1a/1aa5f77b-910f-4583-a785-1fc1c86d486b.c36ba.json"
+    },
+    {
+      "index": 2063,
+      "uuid": "2428lzfWZAuYoL5fnQmT9H",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/24/24dbc973-7d66-40b9-8a0b-e5f9d0993f47.e381b.json"
+    },
+    {
+      "index": 2054,
+      "uuid": "24mMOzTp5P9IJ+sduh6MG+",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/24/2498c3b3-4e9e-4ff4-827e-b1dba1e8c1be.5e0f5.json"
+    },
+    {
+      "index": 2103,
+      "uuid": "285qmgUMVMYZDipnzlnb+0",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/28/28e6a9a0-50c5-4c61-90e2-a67ce59dbfb4.46628.json"
+    },
+    {
+      "index": 2128,
+      "uuid": "2agPzb++tMTrBRAaVOEk72",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/2a/2a80fcdb-fbeb-4c4e-b051-01a54e124ef6.09e14.json"
+    },
+    {
+      "index": 2129,
+      "uuid": "2antyL7yJE05sI0MfdIhBw",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/2a/2a9edc8b-ef22-44d3-9b08-d0c7dd221070.ca208.json"
+    },
+    {
+      "index": 2145,
+      "uuid": "2brlsUDdhPRo3boUCC9Fka",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/0c/0c41a321f.b4a36.json"
+    },
+    {
+      "index": 2240,
+      "uuid": "34fNfsNMVM8pPFxsrKJ+9G",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/0d/0df4e4629.731cb.json"
+    },
+    {
+      "index": 2348,
+      "uuid": "3eMMdvq05NpIMv+UZY67HR",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/3e/3e30c76f-ab4e-4da4-832f-f94658ebb1d1.5314b.json"
+    },
+    {
+      "index": 2395,
+      "uuid": "419JPdQH1Bp7dN1PJwDjMW",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/41/41f493dd-407d-41a7-b74d-d4f2700e3316.367ae.json"
+    },
+    {
+      "index": 2487,
+      "uuid": "48nkv1X6FEmKBaLSSwGkg3",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/0f/0f1aa0e1c.dce53.json"
+    },
+    {
+      "index": 2607,
+      "uuid": "51EffdZadP6pCsX1VmylZU",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/03/03762fcc9.e7f2e.json"
+    },
+    {
+      "index": 2680,
+      "uuid": "56uQSjDERMZYwNYwmx4UWL",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/03/031cb5edf.0862f.json"
+    },
+    {
+      "index": 2785,
+      "uuid": "5e/7i+NwxCN5TbaEniml2B",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/5e/5effb8be-370c-4237-94db-6849e29a5d81.809a5.json"
+    },
+    {
+      "index": 2778,
+      "uuid": "5eTf2RcIJPfK9qwhc4dnbI",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/5e/5e4dfd91-7082-4f7c-af6a-c217387676c8.97015.json"
+    },
+    {
+      "index": 2888,
+      "uuid": "69JvOLkxVHWoV9XMOxF72i",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/0f/0fd9b82c5.9f609.json"
+    },
+    {
+      "index": 2953,
+      "uuid": "6eHKrw7+NIprIsmNG3T1A7",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/6e/6e1caaf0-efe3-48a6-b22c-98d1b74f503b.a2bb3.json"
+    },
+    {
+      "index": 3044,
+      "uuid": "75tuJ9zWhAsr9e3YZyaktF",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/02/026a5e219.e8ed9.json"
+    },
+    {
+      "index": 3201,
+      "uuid": "81fiMHwEpEu50HVaGwUKIp",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/81/817e2307-c04a-44bb-9d07-55a1b050a229.be166.json"
+    },
+    {
+      "index": 3283,
+      "uuid": "88tXCrhFZA/4s4zW557Uhv",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/88/88b570ab-8456-40ff-8b38-cd6e79ed486f.51d7e.json"
+    },
+    {
+      "index": 3408,
+      "uuid": "92Rap3EUtFf6DZODTvAVBE",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/92/9245aa77-114b-457f-a0d9-3834ef015044.59d21.json"
+    },
+    {
+      "index": 3425,
+      "uuid": "93VbzphjxAr4PUng4v67BN",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/93/9355bce9-863c-40af-83d4-9e0e2febb04d.a8f73.json"
+    },
+    {
+      "index": 3492,
+      "uuid": "99GLYLX8tFHps+VrFyQFS+",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/99/9918b60b-5fcb-451e-9b3e-56b1724054be.f2b72.json"
+    },
+    {
+      "index": 3507,
+      "uuid": "9a6Xrb/LpMdZVZE1idNTAi",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/9a/9ae97adb-fcba-4c75-9559-13589d353022.3651a.json"
+    },
+    {
+      "index": 3551,
+      "uuid": "9e7SUy9FtJl4VX/Vm54BWW",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/9e/9eed2532-f45b-4997-8557-fd59b9e01596.830ea.json"
+    },
+    {
+      "index": 3741,
+      "uuid": "adg00rcEpCLJAa7ADaEVNP",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/ad/ad834d2b-704a-422c-901a-ec00da11534f.3c3f5.json"
+    },
+    {
+      "index": 3818,
+      "uuid": "b4x9ztm1ZLv47erW/nWYtk",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/b4/b4c7dced-9b56-4bbf-8ede-ad6fe7598b64.7f572.json"
+    },
+    {
+      "index": 3955,
+      "uuid": "besXXpji5OK6zZMKKyPLX6",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/be/beb175e9-8e2e-4e2b-acd9-30a2b23cb5fa.569ac.json"
+    },
+    {
+      "index": 3963,
+      "uuid": "bfNTX+xJ5IaK3kr2U5ko9h",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/bf/bf3535fe-c49e-4868-ade4-af6539928f61.81295.json"
+    },
+    {
+      "index": 4068,
+      "uuid": "c7amcsye1HLbXGfu5V3rd3",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/c7/c76a672c-c9ed-472d-b5c6-7eee55deb777.3e60c.json"
+    },
+    {
+      "index": 4098,
+      "uuid": "caEXHgeU9JPL2Phg8OJl9T",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/ca/ca1171e0-794f-493c-bd8f-860f0e265f53.04bb6.json"
+    },
+    {
+      "index": 4174,
+      "uuid": "d0Walf28RCzLOJkdnPNFI8",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/d0/d059a95f-dbc4-42cc-b389-91d9cf34523c.a280c.json"
+    },
+    {
+      "index": 4236,
+      "uuid": "d5FEJO5NpMvqrXG1U65yPX",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/d5/d514424e-e4da-4cbe-aad7-1b553ae723d7.ee6b1.json"
+    },
+    {
+      "index": 4588,
+      "uuid": "d82tYRQqVAzo76cES77N3C",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/d8/d8dad611-42a5-40ce-8efa-7044bbecddc2.918f9.json"
+    },
+    {
+      "index": 4874,
+      "uuid": "edjHmkThFH+5Qu2fJyKVWJ",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/ed/ed8c79a4-4e11-47fb-942e-d9f272295589.463b6.json"
+    },
+    {
+      "index": 4954,
+      "uuid": "f3NBfhRyFPdpVDWf3g1RLT",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/f3/f33417e1-4721-4f76-9543-59fde0d512d3.01292.json"
+    },
+    {
+      "index": 5043,
+      "uuid": "f9o8Dz2m1Ixas4b6b5wTdR",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/f9/f9a3c0f3-da6d-48c5-ab38-6fa6f9c13751.2f2c0.json"
+    },
+    {
+      "index": 5059,
+      "uuid": "fa3UjEBnJPN5hq7an1D0cc",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/fa/fadd48c4-0672-4f37-986a-eda9f50f471c.851ec.json"
+    },
+    {
+      "index": 5110,
+      "uuid": "ferNRSGM9HkZbmHDByOfIA",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/fe/feacd452-18cf-4791-96e6-1c307239f200.6c958.json"
+    },
+    {
+      "index": 4322,
+      "uuid": "e5RW/MRxRAt5Ejr/qozwhk",
+      "path": [
+        "effect/battle/tower_bullte/tower_bullet_tnt_hit",
+        1
+      ],
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/native/e5/e5456fcc-4714-40b7-9123-affaa8cf0864.0bd51.png"
+    },
+    {
+      "index": 4365,
+      "uuid": "f1Af3aelJOnbkxMMUV8hlY",
+      "path": [
+        "effect/battle/tower_bullte/tower_bullet_hit",
+        1
+      ],
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/native/f1/f101fdda-7a52-4e9d-b931-30c515f21958.07401.png"
+    },
+    {
+      "index": 81,
+      "uuid": "16IdE1dI1H7YeCJ+YDiDaz",
+      "path": [
+        "effect/battle/tower_bullte/hero1_skill1_hit",
+        1
+      ],
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/native/16/1621d135-748d-47ed-8782-27e6038836b3.99604.png"
+    },
+    {
+      "index": 218,
+      "uuid": "34jkJqrQVNaZTfyM2s0YfZ",
+      "path": [
+        "effect/battle/tower_bullte/tower_bullet",
+        1
+      ],
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/native/34/348e426a-ad05-4d69-94df-c8cdacd187d9.02256.png"
+    },
+    {
+      "index": 841,
+      "uuid": "d1uJEX/ylMFJqnUus7PqZ2",
+      "path": [
+        "effect/battle/tower_bullte/skill_boom",
+        1
+      ],
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/native/d1/d1b89117-ff29-4c14-9aa7-52eb3b3ea676.5a2d0.png"
+    },
+    {
+      "index": 546,
+      "uuid": "8arQ1TTZlEqq2JlgdiGsUp",
+      "path": [
+        "effect/battle/tower_bullte/skill_lighting",
+        1
+      ],
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/native/8a/8aad0d53-4d99-44aa-ad89-9607621ac529.e129e.png"
+    },
+    {
+      "index": 967,
+      "uuid": "1a7Lg+S/1Mw4xRz19XSBDB",
+      "path": [
+        "prefab/effectPrefab/battle/bullet/skill_boom_small",
+        8
+      ],
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/07/0753feff2.f8d44.json"
+    },
+    {
+      "index": 1023,
+      "uuid": "2dKvw4Y3NEA6l9ZoorO7C3",
+      "path": [
+        "prefab/effectPrefab/battle/bullet/skill_lighting",
+        8
+      ],
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/2d/2d2afc38-6373-4403-a97d-668a2b3bb0b7.c6d2e.json"
+    },
+    {
+      "index": 1087,
+      "uuid": "40hjmM6wVGjZ1myNBcSM8m",
+      "path": [
+        "prefab/effectPrefab/battle/bullet/tower_bullet02_3_sputtering",
+        8
+      ],
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/02/02f3ac711.a4d0c.json"
+    },
+    {
+      "index": 1142,
+      "uuid": "53yUytkj5K2boH+9XO02VT",
+      "path": [
+        "prefab/effectPrefab/battle/bullet/skill_lighting - 001",
+        8
+      ],
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/53/53c94cad-923e-4ad9-ba07-fbd5ced36553.3771c.json"
+    },
+    {
+      "index": 1144,
+      "uuid": "54OLkq1pRNMIq0y2rGPO89",
+      "path": [
+        "prefab/effectPrefab/battle/bullet/tower_bullet01_1_hit",
+        8
+      ],
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/54/5438b92a-d694-4d30-8ab4-cb6ac63cef3d.f24df.json"
+    },
+    {
+      "index": 1199,
+      "uuid": "65d6Je9K1H87DcpC0aWQ+I",
+      "path": [
+        "prefab/effectPrefab/battle/bullet/tower_bullet02",
+        8
+      ],
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/65/6577a25e-f4ad-47f3-b0dc-a42d1a590f88.8c0dc.json"
+    },
+    {
+      "index": 1202,
+      "uuid": "66WoY2zCFBvLlwJpzcpl7Y",
+      "path": [
+        "prefab/effectPrefab/battle/bullet/tower_bullet02_1_hit",
+        8
+      ],
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/66/665a8636-cc21-41bc-b970-269cdca65ed8.1fc2c.json"
+    },
+    {
+      "index": 1372,
+      "uuid": "990Gg+xD1Du5dQdK9I+JE8",
+      "path": [
+        "prefab/effectPrefab/battle/bullet/tower_bullet02_hit",
+        8
+      ],
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/99/99d0683e-c43d-43bb-9750-74af48f8913c.440ca.json"
+    },
+    {
+      "index": 1400,
+      "uuid": "a0ootBLctCnb/BZqSSj89V",
+      "path": [
+        "prefab/effectPrefab/battle/bullet/skill_boom",
+        8
+      ],
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/01/015463140.e0b17.json"
+    },
+    {
+      "index": 1443,
+      "uuid": "aegYeu63dLdbzH4U8Z4ZW+",
+      "path": [
+        "prefab/effectPrefab/battle/bullet/skill_lighting_down",
+        8
+      ],
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/0a/0a0d7fad7.fab90.json"
+    },
+    {
+      "index": 1521,
+      "uuid": "c26b1z2+ZLkK0dKIssyV6F",
+      "path": [
+        "prefab/effectPrefab/battle/bullet/tower_bullet03_hit",
+        8
+      ],
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/c2/c2e9bd73-dbe6-4b90-ad1d-288b2cc95e85.df24d.json"
+    },
+    {
+      "index": 1526,
+      "uuid": "c3z8+eic1B0acXcnu+Z/Fc",
+      "path": [
+        "prefab/effectPrefab/battle/bullet/tower_bullet02_2_hit",
+        8
+      ],
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/c3/c3cfcf9e-89cd-41d1-a717-727bbe67f15c.52101.json"
+    },
+    {
+      "index": 4474,
+      "uuid": "e5J3cn2R5Nb5yhrGf+nBGQ",
+      "path": [
+        "prefab/effectPrefab/battle/bullet/tower_bullet02_3",
+        8
+      ],
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/e5/e5277727-d91e-4d6f-9ca1-ac67fe9c1190.96d01.json"
+    },
+    {
+      "index": 4487,
+      "uuid": "e8aHk+56RELZ5YKmd7cxf7",
+      "path": [
+        "prefab/effectPrefab/battle/bullet/tower_bullet02_2",
+        8
+      ],
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/e8/e868793e-e7a4-442d-9e58-2a677b7317fb.a6ead.json"
+    },
+    {
+      "index": 875,
+      "uuid": "05amX3EqdJOKcpnQvO8e6t",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/native/05/056a65f7-12a7-4938-a729-9d0bcef1eead.99833.png"
+    },
+    {
+      "index": 4386,
+      "uuid": "f5drO/oZpMsY0Ql908jGTJ",
+      "path": [
+        "effect/battle/tower_bullte/hero1_skill",
+        1
+      ],
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/native/f5/f576b3bf-a19a-4cb1-8d10-97dd3c8c64c9.06a71.png"
+    },
+    {
+      "index": 1473,
+      "uuid": "b77uxFxY1If5iijyVt2kj4",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/native/b7/b7eeec45-c58d-487f-98a2-8f256dda48f8.b86f8.png"
+    },
+    {
+      "index": 883,
+      "uuid": "06n5HcTalJM4NCnZ81uD0J",
+      "path": "effect/battle/tower_bullte/tower_bullet_hit",
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/06/069f91dc-4da9-4933-8342-9d9f35b83d09.5bad7.json"
+    },
+    {
+      "index": 1562,
+      "uuid": "cdMx63TrhHoIS7SHCiXD6s",
+      "path": "effect/battle/tower_bullte/skill_lighting",
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/cd/cd331eb7-4eb8-47a0-84bb-4870a25c3eac.85fe1.json"
+    },
+    {
+      "index": 1128,
+      "uuid": "4e2oeiShNCbqalC12J3Sk4",
+      "path": "effect/battle/tower_bullte/skill_boom",
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/4e/4eda87a2-4a13-426e-a6a5-0b5d89dd2938.62cc9.json"
+    },
+    {
+      "index": 983,
+      "uuid": "20zWXcF1JJ2pNUB/X6UAEK",
+      "path": "effect/battle/tower_bullte/tower_bullet01_1_hit",
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/20/20cd65dc-1752-49da-9354-07f5fa50010a.3521a.json"
+    },
+    {
+      "index": 1494,
+      "uuid": "bbs37iE61F37nHxCHgd0Qw",
+      "path": "effect/battle/tower_bullte/tower_bullet03_hit",
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/bb/bbb37ee2-13ad-45df-b9c7-c421e0774430.9c904.json"
+    },
+    {
+      "index": 1133,
+      "uuid": "50ajor4kNBz5LkL7t3Ng/r",
+      "path": "effect/battle/tower_bullte/skill_lighting",
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/50/506a3a2b-e243-41cf-92e4-2fbb77360feb.56179.json"
+    },
+    {
+      "index": 1564,
+      "uuid": "cdzkSaXbpDyqiuC/chXCPG",
+      "path": "effect/battle/tower_bullte/skill_boom_hit",
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/cd/cdce449a-5dba-43ca-a8ae-0bf7215c23c6.35c70.json"
+    },
+    {
+      "index": 3182,
+      "uuid": "7fu93BQmpG5Yk8VQL+TlwB",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/7f/7fbbddc1-426a-46e5-893c-5502fe4e5c01.130c7.json"
+    },
+    {
+      "index": 2357,
+      "uuid": "3faIdBPbVOf5qXtU5tF1uu",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/3f/3f688741-3db5-4e7f-9a97-b54e6d175bae.880e7.json"
+    },
+    {
+      "index": 3145,
+      "uuid": "7cnkmDi9NNsZ/GN9QfhdtP",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/7c/7c9e4983-8bd3-4db1-9fc6-37d41f85db4f.98bda.json"
+    },
+    {
+      "index": 2779,
+      "uuid": "5eXbW1XfBNt4a4x7Mus94W",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/5e/5e5db5b5-5df0-4db7-86b8-c7b32eb3de16.2dfe2.json"
+    },
+    {
+      "index": 1919,
+      "uuid": "19rWmuRX9A4bsM7xK86LiT",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/19/19ad69ae-457f-40e1-bb0c-ef12bce8b893.25e84.json"
+    },
+    {
+      "index": 2199,
+      "uuid": "30sSJWfI1LP4sASI8EanS4",
+      "path": null,
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/30/30b12256-7c8d-4b3f-8b00-488f046a74b8.669fc.json"
+    },
+    {
+      "index": 472,
+      "uuid": "77NIgtHpZIi41tNjr4PPr3",
+      "path": [
+        "effect/battle/tower_bullte/tower_bullet02_3_tail",
+        6
+      ],
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/77/7734882d-1e96-488b-8d6d-363af83cfaf7.2c2f7.json"
+    },
+    {
+      "index": 482,
+      "uuid": "7bRWyeu1lF/J3BY7xNp8Cq",
+      "path": [
+        "effect/battle/tower_bullte/tower_bullet02_hit",
+        6
+      ],
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/7b/7b456c9e-bb59-45fc-9dc1-63bc4da7c0aa.7a5c4.json"
+    },
+    {
+      "index": 775,
+      "uuid": "c2V2PBA7FN447Cbz+ts41N",
+      "path": [
+        "effect/battle/tower_bullte/tower_bullet02_hit_smoke",
+        6
+      ],
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/c2/c25763c1-03b1-4de3-8ec2-6f3fadb38d4d.da41b.json"
+    },
+    {
+      "index": 842,
+      "uuid": "d1xLfBrpRBFpaqlrT+xfNy",
+      "path": [
+        "effect/battle/tower_bullte/tower_bullet02_tail",
+        6
+      ],
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/d1/d1c4b7c1-ae94-4116-96aa-96b4fec5f372.6704f.json"
+    },
+    {
+      "index": 1186,
+      "uuid": "61M9WU6URNXbX+exNLWWaG",
+      "path": [
+        "effect/battle/tower_bullte/tower_bullet_hit",
+        3
+      ],
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/61/6133d594-e944-4d5d-b5fe-7b134b596686.37be6.json"
+    },
+    {
+      "index": 472,
+      "uuid": "77NIgtHpZIi41tNjr4PPr3",
+      "path": [
+        "effect/battle/tower_bullte/tower_bullet02_3_tail",
+        6
+      ],
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/native/77/7734882d-1e96-488b-8d6d-363af83cfaf7.1b89c.plist"
+    },
+    {
+      "index": 482,
+      "uuid": "7bRWyeu1lF/J3BY7xNp8Cq",
+      "path": [
+        "effect/battle/tower_bullte/tower_bullet02_hit",
+        6
+      ],
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/native/7b/7b456c9e-bb59-45fc-9dc1-63bc4da7c0aa.7a41d.plist"
+    },
+    {
+      "index": 775,
+      "uuid": "c2V2PBA7FN447Cbz+ts41N",
+      "path": [
+        "effect/battle/tower_bullte/tower_bullet02_hit_smoke",
+        6
+      ],
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/native/c2/c25763c1-03b1-4de3-8ec2-6f3fadb38d4d.c3336.plist"
+    },
+    {
+      "index": 842,
+      "uuid": "d1xLfBrpRBFpaqlrT+xfNy",
+      "path": [
+        "effect/battle/tower_bullte/tower_bullet02_tail",
+        6
+      ],
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/native/d1/d1c4b7c1-ae94-4116-96aa-96b4fec5f372.2a4bc.plist"
+    },
+    {
+      "index": 1218,
+      "uuid": "6bT7EEd+pJwY2fcz8cJslC",
+      "path": [
+        "prefab/effectPrefab/battle/bullet/tower_bullet_hit",
+        8
+      ],
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/import/6b/6b4fb104-77ea-49c1-8d9f-733f1c26c942.d3486.json"
+    },
+    {
+      "index": 26,
+      "bundle": "main",
+      "uuid": "e8Zn0bc41ILLhLepAymyvn",
+      "path": "tower_build_smoke",
+      "url": "http://game.zhongyigames.com/niguolaia/assets/main/native/e8/e8667d1b-738d-482c-b84b-7a90329b2be7.54619.plist"
+    }
+  ]
+}

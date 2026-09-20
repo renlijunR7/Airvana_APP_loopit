@@ -797,8 +797,7 @@ class LocalAirvanaStore {
     final ledgers = Map<String, int>.from(snapshot.gameCoinLedgers);
     ledgers[playableId] = (ledgers[playableId] ?? 0) + (coins > 0 ? coins : 0);
 
-    final alreadyRewarded =
-        snapshot.lastGameRewardDates[playableId] == dateKey;
+    final alreadyRewarded = snapshot.lastGameRewardDates[playableId] == dateKey;
     const playReward = 5;
     var reward = snapshot.rewardState;
     var txns = snapshot.walletTxns;

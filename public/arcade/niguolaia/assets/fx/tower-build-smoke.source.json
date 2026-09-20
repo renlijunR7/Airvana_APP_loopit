@@ -1,0 +1,60 @@
+{
+  "file": "tower-build-smoke.png",
+  "sourcePage": "http://game.zhongyigames.com/niguolaia/",
+  "originalSpriteFrameName": "2",
+  "spriteFrameUuid": "5eXbW1XfBNt4a4x7Mus94W",
+  "particleAssetUuid": "e8Zn0bc41ILLhLepAymyvn",
+  "originalParticleAssetName": "build_smoke",
+  "prefabNode": "GameTower/tower_build_smoke",
+  "textureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/b7/b7eeec45-c58d-487f-98a2-8f256dda48f8.b86f8.png",
+  "frameMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/5e/5e5db5b5-5df0-4db7-86b8-c7b32eb3de16.2dfe2.json",
+  "particleMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/main/import/09/09c3c5dca.7ab70.json",
+  "particleNativeUrl": "http://game.zhongyigames.com/niguolaia/assets/main/native/e8/e8667d1b-738d-482c-b84b-7a90329b2be7.54619.plist",
+  "frame": {
+    "name": "2",
+    "texture": "b77uxFxY1If5iijyVt2kj4",
+    "rect": [
+      350,
+      2,
+      100,
+      100
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      100,
+      100
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "width": 100,
+  "height": 100,
+  "origin": [
+    0.5,
+    0.5
+  ],
+  "anchor": [
+    0.5,
+    0.5
+  ],
+  "nodeLocalPosition": [
+    0,
+    0
+  ],
+  "nodeScale": [
+    1,
+    1
+  ],
+  "spriteRendering": "Individual particles determine size, opacity and rotation; this is the original texture rather than a baked effect animation.",
+  "runtimeLifecycle": "GameTower.showTowerCreateEffect sets node.active=true, resetSystem(), then after 1 second stopSystem() and node.active=false. Both buildTower and upgradeTower without a hero-tower argument call showTowerCreateEffect.",
+  "extraction": "Exact RGBA rectangular atlas crop; no resizing or redrawing.",
+  "sha256": "204f5798baef28f233e39659d86eff8a276d8d658e9e5b892eda6ccce16c23a2",
+  "licenseStatus": "Publicly served original resource; no commercial or redistribution permission established."
+}

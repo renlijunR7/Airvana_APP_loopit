@@ -1,5 +1,6 @@
 import 'package:airvana_mobile/app/providers.dart';
 import 'package:airvana_mobile/design_system/airvana_theme.dart';
+import 'package:airvana_mobile/design_system/generated_cover.dart';
 import 'package:airvana_mobile/design_system/app_state_view.dart';
 import 'package:airvana_mobile/features/shared/domain/airvana_models.dart';
 import 'package:flutter/material.dart';
@@ -207,21 +208,21 @@ class _ConnectedDiscoverScreenState
               description: '用互动故事解释产品价值，并保留 KOL 链接、版本与归因证据。',
               cards: const [
                 _LegacyStaticCard(
-                  icon: '🧭',
+                  cover: '$_coverRoot/product-exploration.png',
                   title: '产品探索路径',
                   author: 'Sora',
                   likes: '640',
                   comments: '52',
                 ),
                 _LegacyStaticCard(
-                  icon: '🛡️',
+                  cover: '$_coverRoot/safety-workshop.jpg',
                   title: '钱包安全体检报告',
                   author: 'Wren',
                   likes: '940',
                   comments: '76',
                 ),
                 _LegacyStaticCard(
-                  icon: '🧮',
+                  cover: '$_coverRoot/coin-journey.jpg',
                   title: '创作者收益计算器',
                   author: 'TomNo',
                   likes: '520',
@@ -235,14 +236,14 @@ class _ConnectedDiscoverScreenState
               description: '已完成一次 Campaign，保留内容、版本、归因与运营学习用于新项目复制。',
               cards: const [
                 _LegacyStaticCard(
-                  icon: '🌃',
+                  cover: '$_coverRoot/neon-dash.jpg',
                   title: '霓虹城市品牌解谜',
                   author: 'Leo',
                   likes: '284',
                   comments: '19',
                 ),
                 _LegacyStaticCard(
-                  icon: '🧱',
+                  cover: '$_coverRoot/sky-stack.jpg',
                   title: '完美叠叠塔 Perfect Block Tower',
                   author: 'Jaspe',
                   likes: '28,500',
@@ -512,39 +513,90 @@ class _LegacyDiscoverPlayableCard extends StatelessWidget {
     likes: '$likeCount',
     comments: '${playable.comments}',
     onTap: onTap,
-    cover: playable.coverAsset.isNotEmpty
-        ? Image.asset(
+    // 没有随包封面的内容（服务端生成的 artifact）用确定性生成封面，
+    // 不借用其它作品的美术。
+    cover: playable.coverAsset.isEmpty
+        ? GeneratedCover(
+            seed: playable.id,
+            title: playable.title,
+            contentType: playable.contentType,
+          )
+        : Image.asset(
             playable.coverAsset,
             fit: BoxFit.cover,
-            errorBuilder: (_, __, ___) => const ColoredBox(
-              color: Color(0xFF18251F),
-              child: Center(
-                child: Icon(Icons.sports_esports, color: Colors.white54),
-              ),
-            ),
-          )
-        : const ColoredBox(
-            color: Color(0xFF18251F),
-            child: Center(
-              child: Icon(Icons.sports_esports, color: Colors.white54),
+            errorBuilder: (_, _, _) => GeneratedCover(
+              seed: playable.id,
+              title: playable.title,
+              contentType: playable.contentType,
             ),
           ),
   );
 }
 
+/// 卡片封面。资源缺失时回落到品牌底色而不是空白，
+/// 并保留一个中性图标——不冒充成某个具体作品。
+class _CoverImage extends StatelessWidget {
+  const _CoverImage({required this.asset});
+
+  final String asset;
+
+  @override
+  Widget build(BuildContext context) => Image.asset(
+    asset,
+    fit: BoxFit.cover,
+    errorBuilder: (_, _, _) => const DecoratedBox(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [Color(0xFF273047), Color(0xFF121522)],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+      ),
+      child: Center(
+        child: Icon(Icons.image_not_supported_outlined, color: Colors.white38),
+      ),
+    ),
+  );
+}
+
 class _LegacyArtifact {
-  const _LegacyArtifact(this.title, this.author);
+  const _LegacyArtifact(this.title, this.author, this.cover);
 
   final String title;
   final String author;
+
+  /// 按标题主题选定的封面，取自已随包发布的 `assets/legacy/covers/`。
+  final String cover;
 }
 
+const _coverRoot = 'assets/legacy/covers';
+
 const _legacyServerArtifacts = <_LegacyArtifact>[
-  _LegacyArtifact('灰度投放实测内容', 'Kai Creator · 服务端 Artifact'),
-  _LegacyArtifact('[演示] 钱包签名安全挑战', 'Kai Creator · 服务端 Artifact'),
-  _LegacyArtifact('KOL 品牌互动挑战', 'e2e.flow · 服务端 Artifact'),
-  _LegacyArtifact('[演示] 钱包签名安全挑战', 'Kai Creator · 服务端 Artifact'),
-  _LegacyArtifact('浏览器验收：钱包安全互动', 'Kai Creator · 服务端 Artifact'),
+  _LegacyArtifact(
+    '灰度投放实测内容',
+    'Kai Creator · 服务端 Artifact',
+    '$_coverRoot/prism-match.jpg',
+  ),
+  _LegacyArtifact(
+    '[演示] 钱包签名安全挑战',
+    'Kai Creator · 服务端 Artifact',
+    '$_coverRoot/crystal-bastion.jpg',
+  ),
+  _LegacyArtifact(
+    'KOL 品牌互动挑战',
+    'e2e.flow · 服务端 Artifact',
+    '$_coverRoot/star-deck.jpg',
+  ),
+  _LegacyArtifact(
+    '[演示] 钱包签名安全挑战',
+    'Kai Creator · 服务端 Artifact',
+    '$_coverRoot/rune-circuit.jpg',
+  ),
+  _LegacyArtifact(
+    '浏览器验收：钱包安全互动',
+    'Kai Creator · 服务端 Artifact',
+    '$_coverRoot/safety-workshop.jpg',
+  ),
 ];
 
 class _LegacyArtifactCard extends StatelessWidget {
@@ -555,35 +607,27 @@ class _LegacyArtifactCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => _LegacyDiscoverCardFrame(
-    semanticLabel: '🛰 ${item.title} ${item.author} — —',
+    semanticLabel: '${item.title} 封面 ${item.title} ${item.author} — —',
     title: item.title,
     author: item.author,
     likes: '—',
     comments: '—',
     onTap: onTap,
-    cover: const DecoratedBox(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [Color(0xFF172537), Color(0xFF0C1118)],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-      ),
-      child: Center(child: Text('🛰', style: TextStyle(fontSize: 28))),
-    ),
+    cover: _CoverImage(asset: item.cover),
   );
 }
 
 class _LegacyStaticCard extends StatelessWidget {
   const _LegacyStaticCard({
-    required this.icon,
+    required this.cover,
     required this.title,
     required this.author,
     required this.likes,
     required this.comments,
   });
 
-  final String icon;
+  /// 按标题主题选定的封面资源路径。
+  final String cover;
   final String title;
   final String author;
   final String likes;
@@ -591,7 +635,7 @@ class _LegacyStaticCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => _LegacyDiscoverCardFrame(
-    semanticLabel: '$icon $title $author $likes $comments',
+    semanticLabel: '$title 封面 $title $author $likes $comments',
     title: title,
     author: author,
     likes: likes,
@@ -599,16 +643,7 @@ class _LegacyStaticCard extends StatelessWidget {
     onTap: () => ScaffoldMessenger.of(
       context,
     ).showSnackBar(SnackBar(content: Text('“$title”为 Web 基准中的本地内容演示。'))),
-    cover: DecoratedBox(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          colors: [Color(0xFF273047), Color(0xFF121522)],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-      ),
-      child: Center(child: Text(icon, style: const TextStyle(fontSize: 30))),
-    ),
+    cover: _CoverImage(asset: cover),
   );
 }
 

@@ -186,7 +186,7 @@ public final class MainActivity extends Activity {
         setContentView(webView);
         webView.requestApplyInsets();
         if (localServerPort > 0) {
-            webView.loadUrl("http://127.0.0.1:" + localServerPort + "/?native-shell=1&app-version=20");
+            webView.loadUrl("http://127.0.0.1:" + localServerPort + "/?native-shell=1&app-version=22");
         } else {
             webView.loadData("<h2>Airvana 本地资源启动失败</h2><p>请完全退出应用后重试。</p>", "text/html; charset=utf-8", "UTF-8");
         }

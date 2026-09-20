@@ -9,7 +9,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   testWidgets(
-    'legacy feed keeps all 38 entries ordered, bilingual and launchable',
+    'legacy feed keeps all 51 entries ordered, bilingual and launchable',
     (tester) async {
       tester.view.physicalSize = const Size(430, 932);
       tester.view.devicePixelRatio = 1;
@@ -38,16 +38,16 @@ void main() {
       final pager = tester.widget<PageView>(
         find.byKey(const ValueKey('legacy-feed-pager')),
       );
-      expect(pager.childrenDelegate.estimatedChildCount, 38);
-      expect(find.textContaining('Orchard Merge'), findsWidgets);
+      expect(pager.childrenDelegate.estimatedChildCount, 51);
+      expect(find.textContaining('赤翼突围'), findsWidgets);
       expect(find.textContaining('AIRVANA ORIGINAL'), findsWidgets);
       expect(find.textContaining('本地互动 DEMO'), findsWidgets);
       expect(
-        find.byKey(const ValueKey('feed-author-plb_orchard_merge')),
+        find.byKey(const ValueKey('feed-author-plb_sky_raid')),
         findsOneWidget,
       );
       expect(
-        find.byKey(const ValueKey('play-plb_orchard_merge')),
+        find.byKey(const ValueKey('play-plb_sky_raid')),
         findsOneWidget,
       );
       expect(

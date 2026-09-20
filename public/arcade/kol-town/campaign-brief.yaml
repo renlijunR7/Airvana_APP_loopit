@@ -1,0 +1,184 @@
+brief_version: "0.10.0"
+brief_status: "prototype"
+project:
+  name: "KOL主题街区互动游戏 · 交易所增长航线"
+  source_design_project_id: "99a17deb-7444-4612-9c03-4261c4c9ec3f"
+  source_design_file: "KOL小镇 设计稿 v2.dc.html"
+  delivery_boundary: "LOCAL_INTEGRATED_DEMO"
+  prior_brief: "campaign-brief.v0.1.0.yaml"
+
+ownership:
+  brand_legal_entity: "【待人工录入】"
+  business_owner: "【待人工录入】"
+  operations_owner: "【待人工录入】"
+  approval_owner: "【待人工录入】"
+  kill_switch_owner: "【待人工录入】"
+
+objective:
+  primary: "registration"
+  primary_success_event: "registration_complete"
+  primary_kpi: "交易所账户服务端确认的有效注册转化率"
+  secondary:
+    - "应用商店或归因平台确认的 App 下载数"
+    - "交易所账务系统确认的首次入金数"
+    - "交易所订单系统确认的首次现货交易数"
+    - "交易所用户服务端确认的 D7 有效回访率"
+    - "交易所用户服务端确认的召回后有效会话数"
+    - "本地增长任务完成率与本地 Campaign 验收率"
+  target_value: "【待人工录入】"
+  target_window: "【待人工录入】"
+  funnel_boundary: "外部目标漏斗为下载 → 注册 → 首次入金 → 首次现货交易 → D7 回访 → 召回会话。本地游戏只形成情景决策与交付证据；没有批准的外部服务端回传时，真实 KPI 必须保持为 0。"
+
+audience:
+  included_regions: ["HK"]
+  region_status: "ASSUMPTION，仅用于原型验证，正式投放前必须由法务和合规复核"
+  excluded_regions: []
+  languages: ["zh-Hans"]
+  minimum_age: 18
+  minimum_age_status: "ASSUMPTION，不构成交易所准入结论"
+  lifecycle:
+    - "prospect · 潜在新用户"
+    - "new_user · 已下载/注册用户"
+    - "active_user · 已激活用户"
+    - "lapsed_user · 沉睡用户"
+  accessibility:
+    - "支持键盘和触控"
+    - "可见焦点"
+    - "支持减少动态效果偏好"
+    - "颜色不作为唯一状态提示"
+
+channels:
+  - type: "kol"
+    channel_id: "local_integrated_http"
+    kol_id: "kol_demo_luna"
+    link_id: "local_demo"
+    placement: "127.0.0.1 本地 H5"
+    attribution: "本机事件仅验证玩法；不得用于真实转化或结算"
+
+brand:
+  legal_entity: "【待人工录入】"
+  sandbox_brand: "NOVA X 沙盒（虚构）"
+  approved_assets: "Claude Design 视觉稿仅用于本地原型参照；JanaChumi 等距城镇素材为已核验 CC0；新增长中心场景由 OpenAI ImageGen 为本项目生成；用户提供 Luna 形象的公开发布授权待确认。"
+  approved_claims: []
+  prohibited_claims:
+    - "收益保证、稳赚、保本或投资回报承诺"
+    - "真实代币或可兑现奖励暗示"
+    - "把本地点击、别名注册或任务过关描述成交易所真实下载、注册、入金、交易、D7 留存或召回"
+    - "未经审批的入金或交易量激励"
+    - "虚假稀缺、亏损恐惧或强制跳转"
+  required_disclosures:
+    - "DEMO / LOCAL"
+    - "本地玩法证据与交易所真实 KPI 分离"
+    - "未接入应用商店、归因平台、交易所账户、账务或订单系统"
+    - "不执行真实 App 下载、开户、KYC、钱包、入金或交易"
+    - "砖块与经营金无现金、投资、提现、转让或兑付价值"
+    - "行情预测仅为互动玩法，不构成投资建议"
+
+gameplay:
+  recommended_mechanic: "scenario_choice + lifecycle_progression"
+  objective_fit: "把不同营销阶段拆成独立 Campaign；每关只有一个主 KPI、三个可重选决策、本地证据和外部确认源，便于教育 KOL、运营和品牌团队理解测量与合规边界。"
+  fallback_mechanic: "quiz + three-step challenge"
+  fantasy: "Luna 经营一座交易所增长中心，为虚构 NOVA X 沙盒规划从拉新到召回的六条增长航线。"
+  campaign_lanes:
+    - {id: "nova-download", stage: "拉新", primary_kpi: "已确认 App 下载", external_source: "应用商店 / 归因平台", local_proof: "下载路径演练完成"}
+    - {id: "nova-register", stage: "转化", primary_kpi: "有效注册", external_source: "交易所账户服务端", local_proof: "注册教育演练完成"}
+    - {id: "nova-deposit", stage: "促活", primary_kpi: "首次入金", external_source: "交易所账务系统", local_proof: "安全入金演练完成"}
+    - {id: "nova-trade", stage: "促活", primary_kpi: "首次现货交易", external_source: "交易所订单系统", local_proof: "现货下单演练完成"}
+    - {id: "nova-retention", stage: "留存", primary_kpi: "D7 有效回访", external_source: "交易所用户服务端", local_proof: "D7 任务设计完成"}
+    - {id: "nova-reactivate", stage: "召回", primary_kpi: "召回后有效会话", external_source: "交易所用户服务端", local_proof: "召回旅程演练完成"}
+  core_loop:
+    - "进入交易所增长中心"
+    - "按拉新、转化、促活、留存或召回筛选 Campaign"
+    - "只启动一个单主 KPI Campaign"
+    - "完成三步合规、隐私和测量口径决策；答错可重选且不扣分"
+    - "生成本地玩法证据"
+    - "提交本地验收，获得不可提现模拟经营金与运营评级"
+    - "确认外部 KPI 仍为未接入/0，并查看本机审计账本"
+    - "选择下一营销阶段"
+  target_duration_seconds: 240
+  rounds: 6
+  difficulty: "1-5，默认 2；仅影响本地任务"
+  success: "一个 Campaign 的三道决策全部完成并提交本地验收"
+  failure: "答错后显示原因并允许重选；不造成真实资产、账户或 KPI 变化"
+
+screens:
+  - "游客 / 本地账号入口"
+  - "新手引导 · 市长对话式"
+  - "小镇主界面 · 沉浸式地图"
+  - "Luna AI 分身 · 会话级本地规则对话 + 官方 Mao Live2D 技术预览"
+  - "八栋独立 3D 建筑场景"
+  - "增长中心 · Campaign Lab"
+  - "增长阶段筛选、单主 KPI 任务卡、本地/外部证据分栏"
+  - "三步情景决策弹层"
+  - "本地验收与经营账本"
+  - "任务中心、榜单、形象、钱包/演示权益卡"
+
+identity:
+  guest_first: true
+  registration_fields: ["local_demo_alias", "local_pin"]
+  local_registration_boundary: "本地 registration_complete 只表示演示别名创建成功，必须排除在交易所有效注册 KPI 之外"
+  credential_storage: "PBKDF2-SHA256 hash + random salt；不保存明文 PIN"
+  session: "HttpOnly、SameSite=Strict、本机 Cookie；有效期 7 天"
+  account_role: "player"
+  kol_qualification: "NOT_IMPLEMENTED；需独立审核与服务端权限"
+
+cta:
+  type: "none"
+  label: "DEMO：查看活动说明"
+  destination: "DISABLED_PENDING_APPROVAL"
+
+reward:
+  type: "none"
+  value: "无真实奖励；砖块、经营金、运营评级与演示卡只存在于本地演示状态"
+  fulfillment: "NOT_APPLICABLE"
+
+compliance:
+  legal_review: "pending"
+  privacy: "不采集邮箱、手机号、真实姓名、钱包地址、私钥、助记词、KYC 文件、入金凭证、订单或联系方式。"
+  deposit_trade_marketing: "BLOCKED_PENDING_LEGAL_COMPLIANCE_RISK_APPROVAL"
+  manual_review_required: true
+
+data:
+  local_database: "data/kol-town.db"
+  source_of_truth_local: "本机 SQLite events 与 progress，仅用于玩法和本地验收"
+  source_of_truth_external:
+    app_install: "应用商店或批准的归因平台；NOT_INTEGRATED"
+    registration: "交易所账户服务端；NOT_INTEGRATED"
+    first_deposit: "交易所账务系统；NOT_INTEGRATED"
+    first_spot_trade: "交易所订单系统；NOT_INTEGRATED"
+    d7_return: "交易所用户服务端；NOT_INTEGRATED"
+    reactivation: "交易所用户服务端；NOT_INTEGRATED"
+  prohibited_fields: ["email", "phone", "real_name", "wallet_address", "private_key", "seed_phrase", "raw_kyc_document", "government_id", "deposit_receipt", "order_details"]
+  retention_days: 30
+  deletion: "设置内删除账号，同时删除账号进度、邀请码绑定与演示卡领取记录"
+
+measurement:
+  external_kpi_state: "0 / NOT_INTEGRATED"
+  local_event_deduplication: "event_id 唯一约束"
+  external_deduplication: "待品牌、交易所、法务、风控共同确认 user_id、event_id、Campaign、时间窗、地区、账户状态、撤销/冲正与异常行为排除规则"
+  required_dimensions: ["campaign_id", "creative_id", "channel_id", "kol_id", "link_id", "session_id", "build_id", "brand_campaign_id", "lifecycle_stage", "growth_kpi", "local_proof_complete", "external_confirmation"]
+
+commercial:
+  currency: "USD"
+  build_budget_cap: "【待人工录入】"
+  media_budget_cap: "【待人工录入】"
+  reward_budget_cap: "【待人工录入】"
+  kol_settlement_budget_cap: "【待人工录入】"
+  settlement: "NOT_APPLICABLE_IN_LOCAL_DEMO"
+
+release:
+  target: "web_h5 local"
+  launch_window: "【待人工录入】"
+  release_owner: "【待人工录入】"
+  kill_switch_owner: "【待人工录入】"
+  kill_switch: "SQLite server_config.kill_switch；另保留 ?disabled=1 与 localStorage 备用开关"
+  rollback_target: "release-manifest.v0.1.0.yaml 对应静态构建"
+
+open_items:
+  - "真实交易所与品牌法律主体、推广地区、年龄和合规资格"
+  - "六个外部 KPI 的事件定义、回传 API、身份拼接、归因窗、去重与异常排除"
+  - "真实 App Store 目的地、深链、注册/KYC/入金/交易页面和用户退出路径"
+  - "首次入金、首次现货交易 Campaign 的法务、合规、风控与适当性审批"
+  - "真实预算、奖励、库存、履约、KOL 商业权限与结算规则"
+  - "品牌、设计稿、用户形象和 Luna Live2D 的公开发布授权"
+  - "生产托管、TLS、密钥管理、备份、监控、告警和 Kill Switch 负责人"

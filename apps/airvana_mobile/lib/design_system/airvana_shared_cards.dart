@@ -14,10 +14,22 @@ class StatusPill extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final (bg, fg) = switch (tone) {
-      AirvanaStatusTone.demo => (const Color(0xFFF2F2F7), const Color(0xFF636366)),
-      AirvanaStatusTone.pending => (const Color(0xFFFFF4DF), const Color(0xFF8B5B00)),
-      AirvanaStatusTone.confirmed => (const Color(0xFFEAF8EF), const Color(0xFF147542)),
-      AirvanaStatusTone.alert => (const Color(0xFFFFF1F2), const Color(0xFFC62836)),
+      AirvanaStatusTone.demo => (
+        const Color(0xFFF2F2F7),
+        const Color(0xFF636366),
+      ),
+      AirvanaStatusTone.pending => (
+        const Color(0xFFFFF4DF),
+        const Color(0xFF8B5B00),
+      ),
+      AirvanaStatusTone.confirmed => (
+        const Color(0xFFEAF8EF),
+        const Color(0xFF147542),
+      ),
+      AirvanaStatusTone.alert => (
+        const Color(0xFFFFF1F2),
+        const Color(0xFFC62836),
+      ),
     };
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),

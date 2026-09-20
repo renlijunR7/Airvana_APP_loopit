@@ -87,6 +87,23 @@ test('public GET and HEAD expose matching same-origin runtime headers, with an e
   assert.equal(head.response.headers.get('vary'), 'Cookie');
 });
 
+test('the thirteen bundled arcade entries are same-origin embeddable while ordinary static pages stay blocked', async () => {
+  for (const route of ['/arcade/risk-run/', '/arcade/coin-castle/', '/arcade/lucky-fruit/', '/arcade/htx-quest/', '/arcade/coin-dozer/', '/arcade/city-squad/', '/arcade/niguolaia/', '/arcade/token-harbor/', '/arcade/mini-gp-racers/', '/arcade/street-gold-rush/', '/arcade/star-table/', '/arcade/sud-texas/', '/arcade/kol-town/']) {
+    const { response, text } = await request(route, { method: 'HEAD' });
+    assert.equal(response.status, 200, route);
+    assert.equal(text, '', route);
+    assert.equal(response.headers.get('x-frame-options'), 'SAMEORIGIN', route);
+    assert.match(response.headers.get('content-security-policy'), /frame-ancestors 'self'/, route);
+    assert.match(response.headers.get('content-security-policy'), /connect-src 'self' blob:/, route);
+    if (route === '/arcade/token-harbor/') {
+      assert.match(response.headers.get('content-security-policy'), /script-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob:/, route);
+    }
+    assert.match(response.headers.get('content-type'), /^text\/html;/, route);
+  }
+  const ordinary = await request('/terms.html', { method: 'HEAD' });
+  assertNotEmbeddable(ordinary.response);
+});
+
 test('authenticated HEAD probes never assign an experiment or mutate the stored artifact; GET still delivers exactly once', async () => {
   const now = new Date().toISOString();
   app.db.prepare(`INSERT INTO experiments (id,content_id,name,hypothesis,variant_field,control_value,variant_value,rollout_percent,status,created_by,created_at,updated_at)

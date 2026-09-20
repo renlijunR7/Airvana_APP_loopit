@@ -86,10 +86,10 @@ test('homepage keeps the five physics games first even after server-feed items a
   const { game, window } = setup(); const seeded = Array.from(window.AirvanaPhysicsGames.sessions());
   const start = indexSource.indexOf('    const discoverableSessions = s.sessions.map(withGameCover)'), end = indexSource.indexOf('    const safePlayIdx', start);
   assert.ok(start >= 0 && end > start);
-  const feed = new Function('s', 'withGameCover', indexSource.slice(start, end) + '\nreturn publishedSessions;');
+  const feed = new Function('s', 'withGameCover', 'coverKeyForTheme', indexSource.slice(start, end) + '\nreturn publishedSessions;');
   for (const count of [0, 1, 8]) {
     const state = { sessions: [{ id: 34, status: 'published' }, { id: 1, status: 'published' }, ...seeded.reverse(), { id: 999, status: 'draft' }], serverDiscoverItems: Array.from({ length: count }, (_, i) => ({ id: 'server-' + i, title: 'Server ' + i })) };
-    const result = feed(state, x => x); assert.deepEqual(result.slice(0, 5).map(x => x.id), [101, 102, 103, 104, 105]);
+    const result = feed(state, x => x, () => 'creator'); assert.deepEqual(result.slice(0, 5).map(x => x.id), [101, 102, 103, 104, 105]);
     assert.equal(result.filter(x => x.serverArtifact).length, Math.min(count, 5)); assert.ok(!result.some(x => x.id === 999));
   }
   game.destroy();

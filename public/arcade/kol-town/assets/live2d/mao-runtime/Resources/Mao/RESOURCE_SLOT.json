@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "status": "AUTHORIZED",
+  "model_id": "mao",
+  "display_name": "Official sample Mao · not Kai",
+  "role": "official-free-material-sample",
+  "model3_url": "./Resources/Mao/Mao.model3.json",
+  "asset_manifest_url": "./Resources/Mao/Mao.asset-manifest.json",
+  "asset_manifest_sha256": "76b41ae8b98012df6bcddf71a1bcdad50039de201f4d7e1b242e4f25f1b2707a",
+  "authorization": {
+    "status": "APPROVED_SAMPLE_USE",
+    "rights_confirmed": true,
+    "evidence": "Bundled in CubismSdkForWeb-5-r.5/Samples/Resources/Mao and identified by the SDK LICENSE.md as Free Material subject to the Free Material License and sample model terms.",
+    "scope": "local integration preview; production use remains subject to all applicable Live2D licences and release requirements"
+  },
+  "identity_boundary": {
+    "is_kai": false,
+    "may_be_presented_as_kai": false,
+    "required_ui_label": "Official sample Mao · not Kai"
+  },
+  "host_renderer_contract": {
+    "authorized_status": "AUTHORIZED",
+    "model_id": "mao",
+    "role": "official-free-material-sample",
+    "model3_file": "Mao.model3.json",
+    "moc3_file": "Mao.moc3",
+    "asset_manifest_file": "Mao.asset-manifest.json",
+    "asset_manifest_algorithm": "SHA-256",
+    "asset_manifest_sha256_format": "64 lowercase hexadecimal characters",
+    "physics_required": true,
+    "motion_groups_min": 1,
+    "expressions_min": 1,
+    "required_parameter_groups": ["EyeBlink", "LipSync"],
+    "required_lip_sync_parameter_ids": ["ParamA"],
+    "ready_requires_first_frame": true,
+    "single_model_rig_required": true,
+    "rig_mode": "single-moc3",
+    "model_instances": 1,
+    "canvas_count": 1,
+    "overlay_layers": 0,
+    "head_parameters": ["ParamAngleX", "ParamAngleY", "ParamAngleZ"],
+    "body_parameters": ["ParamBodyAngleX", "ParamBodyAngleY", "ParamBodyAngleZ", "ParamBreath", "ParamLeftShoulderUp", "ParamRightShoulderUp"],
+    "arm_parameters": ["ParamArmLA01", "ParamArmLA02", "ParamArmLA03", "ParamHandLA", "ParamArmRA01", "ParamArmRA02", "ParamArmRA03", "ParamHandRA", "ParamArmLB01", "ParamArmLB02", "ParamArmLB03", "ParamHandLB", "ParamArmRB01", "ParamArmRB02", "ParamArmRB02Y", "ParamArmRB03", "ParamHandRB"],
+    "neck_mode": "shared-deformer-graph",
+    "explicit_neck_parameter": false,
+    "response_probe_required": true
+  }
+}

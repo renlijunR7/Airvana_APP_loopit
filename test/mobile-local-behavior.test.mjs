@@ -248,6 +248,19 @@ test('mobile settings drawer touch fallback scrolls a short viewport without tri
 
 test('mobile Home keeps every seeded playable while rendering only the active feed window', () => {
   const additions = [
+    [132, 'Luna 小镇 · KOL Town', '/assets/featured-originals-v2/kol-town-user-20260916-srgb.png'],
+    [122, 'Coin Dozer 黄金街机', '/assets/featured-originals-v2/coin-dozer-user-20260915-srgb.png'],
+    [121, 'HTX QUEST 创世云谷', '/assets/featured-originals-v2/htx-quest-user-20260915-srgb.png'],
+    [127, 'Token Harbor 代币港湾', '/assets/featured-originals-v2/token-harbor-user-20260915-srgb.png'],
+    [125, '金币城堡 Coin Castle', '/assets/featured-originals-v2/coin-castle-user-20260915-srgb.png'],
+    [120, '经典水果机 Lucky Arcade', '/assets/featured-originals-v2/lucky-fruit-user-20260915-srgb.png'],
+    [123, '城市突围 Squad Rush', '/assets/featured-originals-v2/city-squad-user-20260915-srgb.png'],
+    [128, 'Mini GP Racers', '/assets/featured-originals-v2/mini-gp-racers-user-20260915-srgb.png'],
+    [129, '街区淘金大冲刺', '/assets/featured-originals-v2/street-gold-rush-user-20260915-srgb.png'],
+    [130, '星桌竞猜 Star Table', '/assets/featured-originals-v2/star-table-user-20260915-srgb.png'],
+    [131, 'SUD 德州扑克', '/assets/featured-originals-v2/sud-texas-user-20260915-srgb.png'],
+    [126, 'Risk Run 风险突围', '/assets/featured-originals-v2/risk-run-user-20260915-srgb.png'],
+    [124, '你过来呀 · 三国塔防', '/assets/featured-originals-v2/niguolaia.png'],
     [34, '果园合合塔 Orchard Merge', '/assets/game-covers/store-fidelity-v4/orchard-merge.jpg'],
     [35, '星尘割草 Star Mower', '/assets/game-covers/store-fidelity-v4/star-mower.jpg'],
     [36, '月光奶茶铺 Moonlight Tea Shop', '/assets/game-covers/store-fidelity-v4/moonlight-tea-shop.jpg'],
@@ -282,20 +295,21 @@ test('mobile Home keeps every seeded playable while rendering only the active fe
   const {component} = createMobileComponent();
   let slides = component.renderVals().sessionSlides;
   assert.equal(slides.length, 2);
-  assert.deepEqual(Array.from(slides, item=>item.id), [34,35]);
+  assert.deepEqual(Array.from(slides, item=>item.id), [132,122]);
   assert.equal(slides[0].windowClass, 'is-active');
   assert.equal(slides[0].ariaHidden, 'false');
   assert.equal(slides[1].windowClass, 'is-buffered');
   assert.equal(slides[1].ariaHidden, 'true');
   component.setState({playIdx:2});
   slides = component.renderVals().sessionSlides;
-  assert.deepEqual(Array.from(slides, item=>item.id), [35,36,37]);
+  assert.deepEqual(Array.from(slides, item=>item.id), [122,121,127]);
   assert.equal(slides[1].windowClass, 'is-active');
-  for (const [id, title] of additions) {
+  for (const [id, title, cover] of additions) {
     const playable = component.state.sessions.find(item => item.id === id);
     assert.ok(playable, `missing Home playable: ${title}`);
     assert.equal(playable.game, title);
-    assert.ok(playable.cover, `missing seeded cover: ${title}`);
+    if (id >= 120) assert.equal(playable.cover, cover, `wrong seeded cover: ${title}`);
+    else assert.ok(playable.cover, `missing seeded cover: ${title}`);
   }
   component.setState({playIdx:component.state.sessions.filter(item=>item.status==='published'||item.status==='archived').length-1});
   slides = component.renderVals().sessionSlides;
@@ -315,6 +329,43 @@ test('mobile Home keeps every seeded playable while rendering only the active fe
   assert.equal(migratedStarMower.versions[0].id,'35-v3');
   assert.equal(migratedStarMower.likes,17,'catalog migration should preserve local engagement metrics');
   restored.unmount();
+});
+
+test('mobile Home opens the thirteen priority games in their complete bundled runtimes', () => {
+  const expected = [
+    [132, '/arcade/kol-town/'],
+    [122, '/arcade/coin-dozer/'],
+    [121, '/arcade/htx-quest/'],
+    [127, '/arcade/token-harbor/'],
+    [125, '/arcade/coin-castle/'],
+    [120, '/arcade/lucky-fruit/'],
+    [123, '/arcade/city-squad/'],
+    [128, '/arcade/mini-gp-racers/'],
+    [129, '/arcade/street-gold-rush/'],
+    [130, '/arcade/star-table/'],
+    [131, '/arcade/sud-texas/'],
+    [126, '/arcade/risk-run/'],
+    [124, '/arcade/niguolaia/']
+  ];
+  const {component} = createMobileComponent();
+
+  assert.deepEqual(Array.from(component.renderVals().sessionSlides, item=>item.id), [132,122]);
+  assert.equal(component.renderVals().sessionSlides[0].hasStandaloneGame, true);
+  assert.equal(typeof component.renderVals().sessionSlides[0].onStandaloneOpen, 'function');
+  for (const [id, url] of expected) {
+    const item = component.state.sessions.find(session=>session.id===id);
+    assert.ok(item);
+    assert.equal(item.standaloneGame, true);
+    assert.equal(item.standaloneUrl, url);
+    assert.equal(item.stage, '完整试玩');
+    component.openContent(id, 'detail');
+    assert.equal(component.state.serverArtifactOverlay.url, url);
+    assert.equal(component.state.serverArtifactOverlay.kind, 'standalone');
+    const values=component.renderVals();
+    assert.equal(values.serverArtifactOverlayMeta, '本地完整游戏 · 原版功能 · 本机存档');
+    assert.equal(values.serverArtifactOverlayCanMessage, false);
+    values.closeServerArtifactOverlay();
+  }
 });
 
 test('mobile Home runs safety, farm and cup games through success, failure and replay states', () => {
@@ -458,15 +509,46 @@ test('mobile Home runs all eleven category demos through complete local replay l
   assert.match(component.state.sessions.find(item=>item.id===42).article,/确定性本地逻辑，不是真人联机/);
 });
 
-test('mobile Discover synchronizes all 38 complete original games into the first gallery section', () => {
+test('mobile Discover synchronizes all 50 complete original and bundled games into the first gallery section', () => {
   const {component}=createMobileComponent();
   component.setState({screen:'discover',discoverCat:'recommend'});
   const values=component.renderVals();
   assert.equal(values.discoverSections[0].tag,'截图原图与互动游戏');
-  assert.deepEqual(Array.from(values.discoverSections[0].items,item=>item.id),[34,35,36,37,38,39,40,41,42,43,44,24,25,26,27,28,29,30,31,32,33,1,2,5,6,9,10,12,14,15,16,17,18,19,20,21,22,23]);
+  assert.deepEqual(Array.from(values.discoverSections[0].items,item=>item.id),[132,122,121,127,125,120,123,128,129,130,131,126,124,34,35,36,37,38,39,40,41,42,43,44,24,25,26,27,28,29,30,31,32,33,1,2,5,6,9,10,12,14,15,16,17,18,19,20,21,22,23]);
   assert.ok(values.discoverSections[0].items.every(item=>item.hasCover));
   assert.equal(values.discoverSections[0].items.filter(item=>/\/classic-v1\/covers\//.test(item.cover)).length,38);
   assert.ok(values.discoverSections[0].items.every(item=>typeof item.onOpen==='function'));
+});
+
+test('mobile Discover fills local and server game covers with theme-matched classic artwork', () => {
+  const {component}=createMobileComponent();
+  component.setState({
+    screen:'discover',
+    discoverCat:'recommend',
+    serverDiscoverItems:[
+      {id:'memory-a',title:'P2 推广测试内容',summary:'记忆配对挑战',authorName:'Kai Creator',gameBackground:'/assets/server-casual-v4/memory-world.png'},
+      {id:'memory-b',title:'灰度投放实测内容',summary:'记忆配对挑战',authorName:'Kai Creator',gameBackground:'/assets/server-casual-v4/memory-world.png'},
+      {id:'security-a',title:'钱包签名安全挑战',summary:'钱包安全判断',authorName:'Kai Creator',gameBackground:'/assets/server-casual-v4/security-world.png'},
+      {id:'missing-a',title:'社区拼图挑战',summary:'完成社区拼图',authorName:'Kai Creator',gameBackground:null}
+    ]
+  });
+  const values=component.renderVals();
+  const creatorSection=Array.from(values.discoverSections).find(section=>section.tag==='创作者游戏');
+  assert.ok(creatorSection);
+  assert.ok(Array.from(creatorSection.items).every(item=>item.hasCover&&!item.noCover));
+  assert.deepEqual(Array.from(creatorSection.items,item=>item.cover),[
+    '/assets/games/classic-v1/covers/prism-match.svg',
+    '/assets/games/classic-v1/covers/rune-circuit.svg',
+    '/assets/games/classic-v1/covers/safety-workshop.svg',
+    '/assets/games/classic-v1/covers/garden-renewal.svg'
+  ]);
+  assert.ok(Array.from(values.discoverSections).flatMap(section=>Array.from(section.items)).every(item=>item.hasCover||item.referenceKey));
+  for (const [id,key] of [[3,'adventurer-journal'],[4,'neon-dash'],[7,'sky-stack'],[8,'safety-workshop'],[11,'coin-journey'],[13,'stardust-island']]) {
+    const item=component.state.sessions.map(session=>session.id===id?session:null).find(Boolean);
+    const resolved=component.renderVals().discoverSections.flatMap(section=>section.items).find(entry=>entry.id===id);
+    assert.ok(item);
+    assert.equal(resolved?.cover,'/assets/games/classic-v1/covers/'+key+'.svg');
+  }
 });
 
 test('mobile Home clears active mini-game state when the feed moves to another work', () => {
@@ -723,7 +805,7 @@ test('Playable detail starts the selected complete local game on the Home feed',
 
   assert.equal(component.state.screen, 'play');
   assert.equal(component.state.overlay, null);
-  assert.equal(component.state.playIdx, 1);
+  assert.equal(component.renderVals().sessionSlides.find(item=>item.windowClass==='is-active').id, 35);
   assert.equal(component.state.feedMiniGame.contentId, 35);
   assert.equal(component.state.feedMiniGame.status, 'playing');
 });

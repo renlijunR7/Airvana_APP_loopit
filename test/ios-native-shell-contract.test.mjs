@@ -11,6 +11,9 @@ const mobileEntry = fs.readFileSync(path.join(root, 'public/index.html'), 'utf8'
   + fs.readFileSync(path.join(root, 'public/boot.js'), 'utf8');
 const mobileCss = fs.readFileSync(path.join(root, 'public/airvana-v4.css'), 'utf8');
 const infoPlist = fs.readFileSync(path.join(root, 'ios-demo/AirvanaDemo/Info.plist'), 'utf8');
+const flutterMain = fs.readFileSync(path.join(root, 'apps/airvana_mobile/lib/main.dart'), 'utf8');
+const parityShell = fs.readFileSync(path.join(root, 'apps/airvana_mobile/lib/features/web_parity/presentation/ios_android_parity_shell.dart'), 'utf8');
+const flutterIosProject = fs.readFileSync(path.join(root, 'apps/airvana_mobile/ios/Runner.xcodeproj/project.pbxproj'), 'utf8');
 
 test('iOS native shell removes the gray input assistant and keeps the keyboard until an explicit outside tap', () => {
   assert.match(webContainer, /inputAssistantItem\.leadingBarButtonGroups = \[\]/);
@@ -47,4 +50,15 @@ test('iOS native shell tightens the physical-device top and bottom spacing only'
 test('iOS My screen paints the home-indicator safe area white without changing dark mode', () => {
   assert.match(mobileEntry, /s\.screen==='me'\?'is-secondary-screen is-me-screen':'is-secondary-screen'/);
   assert.match(mobileCss, /html\.native-app-shell \.app-shell\.is-me-screen:not\(\.theme-dark\)::before\s*\{[^}]*height:\s*var\(--safe-bottom\);[^}]*background:\s*#fff;/);
+});
+
+test('current Flutter iOS builds copy and serve the same public Home bundle as Android', () => {
+  assert.match(flutterMain, /defaultTargetPlatform == TargetPlatform\.iOS/);
+  assert.match(flutterMain, /runApp\(const IosAndroidParityApp\(\)\)/);
+  assert.match(flutterIosProject, /name = "Sync Android Web Baseline"/);
+  assert.match(flutterIosProject, /WEB_SOURCE=\\"\$\{PROJECT_DIR\}\/\.\.\/\.\.\/\.\.\/public\\"/);
+  assert.match(flutterIosProject, /rsync -a --delete/);
+  assert.match(parityShell, /Directory\('\$\{executableDirectory\.path\}\/www'\)/);
+  assert.match(parityShell, /www\/index\.html/);
+  assert.match(parityShell, /web-parity=1/);
 });

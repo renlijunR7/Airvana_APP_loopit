@@ -9,10 +9,23 @@ void main() {
     TestWidgetsFlutterBinding.ensureInitialized();
   });
 
-  test('legacy Web catalog keeps all 38 playables in its exact order', () {
+  test('legacy Web catalog keeps all 51 playables in its exact order', () {
     final playables = LegacyDemoCatalog.legacyWebPlayables;
-    expect(playables, hasLength(38));
+    expect(playables, hasLength(51));
     expect(playables.map((item) => item.id), const [
+      'plb_sky_raid',
+      'plb_harvest_lane',
+      'plb_island_sling',
+      'plb_pocket_city',
+      'plb_gem_blocks',
+      'plb_dice_voyage',
+      'plb_cloud_solitaire',
+      'plb_buddy_flip',
+      'plb_cloud_sling',
+      'plb_candy_swing',
+      'plb_happy_cup',
+      'plb_spring_dig',
+      'plb_fruit_drop',
       'plb_orchard_merge',
       'plb_star_mower',
       'plb_moonlight_tea_shop',
@@ -57,6 +70,19 @@ void main() {
   test('legacy Web discover covers and categories stay exact and complete', () {
     final playables = LegacyDemoCatalog.legacyWebPlayables;
     expect(playables.map((item) => item.coverAsset), const [
+      'assets/runner/assets/games/reference-screenshots-v1/sky-raid.jpg',
+      'assets/runner/assets/games/reference-screenshots-v1/harvest-lane.jpg',
+      'assets/runner/assets/games/reference-screenshots-v1/island-sling.jpg',
+      'assets/runner/assets/games/reference-screenshots-v1/pocket-city.jpg',
+      'assets/runner/assets/games/reference-screenshots-v1/gem-blocks.jpg',
+      'assets/runner/assets/games/reference-screenshots-v1/dice-voyage.jpg',
+      'assets/runner/assets/games/reference-screenshots-v1/cloud-solitaire.jpg',
+      'assets/runner/assets/games/reference-screenshots-v1/buddy-flip.jpg',
+      'assets/runner/assets/games/physics-casual-v2/cloud-sling.png',
+      'assets/runner/assets/games/physics-casual-v2/candy-swing.png',
+      'assets/runner/assets/games/physics-casual-v2/happy-cup.png',
+      'assets/runner/assets/games/physics-casual-v2/spring-dig.png',
+      'assets/runner/assets/games/physics-casual-v2/fruit-drop.png',
       'assets/runner/assets/games/casual-v1/covers-png/orchard-merge.png',
       'assets/runner/assets/games/casual-v1/covers-png/star-mower.png',
       'assets/runner/assets/games/casual-v1/covers-png/moonlight-tea-shop.png',
@@ -97,6 +123,19 @@ void main() {
       'assets/runner/assets/games/casual-v1/covers-png/star-cups.png',
     ]);
     expect(playables.map((item) => item.category), const [
+      '原创小游戏',
+      '原创小游戏',
+      '原创小游戏',
+      '原创小游戏',
+      '原创小游戏',
+      '原创小游戏',
+      '原创小游戏',
+      '原创小游戏',
+      '原创小游戏',
+      '原创小游戏',
+      '原创小游戏',
+      '原创小游戏',
+      '原创小游戏',
       '休闲益智',
       '实时生存',
       '模拟经营',
@@ -160,7 +199,7 @@ void main() {
   );
 
   testWidgets(
-    'discover renders all 38 legacy games and provides working local filters and search',
+    'discover renders all 51 legacy games and provides working local filters and search',
     (tester) async {
       tester.view.physicalSize = const Size(430, 932);
       tester.view.devicePixelRatio = 1;
@@ -175,21 +214,21 @@ void main() {
       );
       await tester.pump();
 
-      expect(find.text('38 / 38'), findsOneWidget);
-      expect(find.textContaining('LOCAL DEMO · 38 款原创离线游戏'), findsOneWidget);
+      expect(find.text('51 / 51'), findsOneWidget);
+      expect(find.textContaining('LOCAL DEMO · 51 款原创离线游戏'), findsOneWidget);
       expect(
-        find.byKey(const ValueKey('discover-card-plb_orchard_merge')),
+        find.byKey(const ValueKey('discover-card-plb_sky_raid')),
         findsOneWidget,
       );
       expect(
-        find.byKey(const ValueKey('discover-cover-plb_orchard_merge')),
+        find.byKey(const ValueKey('discover-cover-plb_sky_raid')),
         findsOneWidget,
       );
       expect(
-        find.byKey(const ValueKey('discover-category-plb_orchard_merge')),
+        find.byKey(const ValueKey('discover-category-plb_sky_raid')),
         findsOneWidget,
       );
-      expect(find.text('休闲益智'), findsOneWidget);
+      expect(find.text('原创小游戏'), findsWidgets);
       for (final section in ['safety', 'community', 'attribution']) {
         expect(
           find.byKey(ValueKey('discover-showcase-section-$section')),
@@ -329,7 +368,7 @@ void main() {
       );
       await tester.tap(find.text('关注'));
       await tester.pump();
-      expect(find.text('0 / 38'), findsOneWidget);
+      expect(find.text('0 / 51'), findsOneWidget);
       expect(find.text('暂无关注作品'), findsOneWidget);
       expect(find.textContaining('关注创作者后'), findsOneWidget);
       expect(find.text('#安全教育'), findsNothing);
@@ -363,7 +402,7 @@ void main() {
         '果园',
       );
       await tester.pump();
-      expect(find.text('搜索结果 · 1'), findsOneWidget);
+      expect(find.text('搜索结果 · 2'), findsOneWidget);
       expect(
         find.byKey(const ValueKey('discover-search-plb_orchard_merge')),
         findsOneWidget,

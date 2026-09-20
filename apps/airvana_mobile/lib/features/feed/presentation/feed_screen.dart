@@ -2,11 +2,13 @@ import 'dart:async';
 
 import 'package:airvana_mobile/app/providers.dart';
 import 'package:airvana_mobile/design_system/airvana_theme.dart';
+import 'package:airvana_mobile/design_system/generated_cover.dart';
 import 'package:airvana_mobile/design_system/app_state_view.dart';
 import 'package:airvana_mobile/features/runtime/presentation/h5_game_runtime.dart';
 import 'package:airvana_mobile/features/shared/data/airvana_repository.dart';
 import 'package:airvana_mobile/features/shared/data/legacy_demo_catalog.dart';
 import 'package:airvana_mobile/features/shared/domain/airvana_models.dart';
+import 'package:airvana_mobile/features/shared/presentation/content_report_sheet.dart';
 import 'package:airvana_mobile/features/shared/presentation/playable_social_sheets.dart';
 import 'package:airvana_mobile/shared/presentation/airvana_logo.dart';
 import 'package:flutter/material.dart';
@@ -173,7 +175,7 @@ class _LegacyFeedPagerState extends ConsumerState<_LegacyFeedPager> {
         _showMessage(context, '已记录“不感兴趣”本地意图');
         return;
       case AirvanaShareChoice.report:
-        _showMessage(context, '举报已记录为本地演示，尚未发送到服务端');
+        await showContentReportSheet(context, ref, playable);
         return;
       case AirvanaShareChoice.block:
         _showMessage(context, '屏蔽作者已记录为本地演示，尚未发送到服务端');
@@ -2039,22 +2041,12 @@ class _FeedCoverFallback extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DecoratedBox(
+    // 服务端生成的内容没有随包封面，用确定性生成封面而不是一个通用手柄图标。
+    return GeneratedCover(
       key: ValueKey('feed-cover-fallback-${playable.id}'),
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          colors: [Color(0xFF253830), Color(0xFF080D0B)],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-      ),
-      child: Center(
-        child: Icon(
-          Icons.sports_esports_rounded,
-          size: 88,
-          color: Colors.white.withValues(alpha: .18),
-        ),
-      ),
+      seed: playable.id,
+      title: playable.title,
+      contentType: playable.contentType,
     );
   }
 }

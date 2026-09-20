@@ -32,11 +32,45 @@
 <body>
 <div id="stage"><canvas id="game" width="360" height="560"></canvas></div>
 <div id="boot-error"></div>
+<script>
+// 少数引擎（physics-art-v2、reference-screenshots-v1）用裸绝对路径引用素材。
+// 引擎文件必须与 Web 源逐字节一致，所以在这里做运行时映射：
+// /assets/games/… → 相对于本页的 assets/games/…（即 bundle 内 assets/runner/assets/games/）。
+(function () {
+  var base = new URL('./', document.baseURI).href;
+  var proto = window.HTMLImageElement && window.HTMLImageElement.prototype;
+  var desc = proto && Object.getOwnPropertyDescriptor(proto, 'src');
+  if (!desc || !desc.set) return;
+  Object.defineProperty(proto, 'src', {
+    configurable: true,
+    enumerable: desc.enumerable,
+    get: desc.get,
+    set: function (value) {
+      var next = value;
+      if (typeof next === 'string' && next.indexOf('/assets/games/') === 0) {
+        next = base + next.slice(1);
+      }
+      desc.set.call(this, next);
+    }
+  });
+})();
+</script>
 <script src="sensor-interactions-v1.js"></script>
 <script src="game-art-system-v1.js"></script>
 <script src="playable-assets-v3.js"></script>
 <script src="complete-games-v3.js"></script>
 <script src="deep-games-v2.js"></script>
+<script src="matter-0.20.0.min.js"></script>
+<script src="physics-art-v2.js"></script>
+<script src="physics-sling-rope-v1.js"></script>
+<script src="physics-water-v1.js"></script>
+<script src="physics-fruit-v1.js"></script>
+<script src="physics-arcade-v1.js"></script>
+<script src="reference-action-v1.js"></script>
+<script src="reference-worlds-v1.js"></script>
+<script src="reference-puzzles-v1.js"></script>
+<script src="reference-arcade-v1.js"></script>
+<script src="reference-screenshots-v1.js"></script>
 <script>
 (function () {
   'use strict';
@@ -65,6 +99,9 @@
   fitCanvas();
 
   function engineFor(key) {
+    // 物理与 reference 玩法（101-105、111-118）都注册进 AirvanaPhysicsGames 容器，
+    // 按注册表判断而不是维护一份 key 清单，避免与 Web 端漂移。
+    if (window.AirvanaPhysicsGames && window.AirvanaPhysicsGames.has(key)) return window.AirvanaPhysicsGames;
     if (DEEP_KEYS.indexOf(key) >= 0) return window.AirvanaDeepGames;
     return window.AirvanaCompleteGames;
   }
@@ -127,7 +164,7 @@
     destroy: function () { if (session && session.destroy) { try { session.destroy(); } catch (e) {} session = null; } }
   };
 
-  post({type: 'boot', complete: !!window.AirvanaCompleteGames, deep: !!window.AirvanaDeepGames});
+  post({type: 'boot', complete: !!window.AirvanaCompleteGames, deep: !!window.AirvanaDeepGames, physics: !!window.AirvanaPhysicsGames});
 })();
 </script>
 </body>

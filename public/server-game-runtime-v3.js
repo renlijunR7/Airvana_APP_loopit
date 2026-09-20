@@ -2,6 +2,22 @@
   'use strict';
   const copy = value => JSON.parse(JSON.stringify(value));
   const shuffle = (values, random) => { const list = values.slice(); for (let i = list.length - 1; i > 0; i--) { const j = Math.floor(random() * (i + 1)); [list[i], list[j]] = [list[j], list[i]]; } return list; };
+  let artScriptPromise = null;
+  function loadCasualArt(document) {
+    if (root.AirvanaServerCasualArtV4) return Promise.resolve(root.AirvanaServerCasualArtV4);
+    if (artScriptPromise) return artScriptPromise;
+    artScriptPromise = new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      let timer;
+      const fail = () => { root.clearTimeout?.(timer); script.remove?.(); artScriptPromise = null; reject(new Error('场景组件暂未加载，请点击开始重试。')); };
+      script.src = '/server-casual-art-v4.js?v=4.0.0'; script.async = true;
+      script.onload = () => { root.clearTimeout?.(timer); root.AirvanaServerCasualArtV4 ? resolve(root.AirvanaServerCasualArtV4) : fail(); };
+      script.onerror = fail;
+      timer = root.setTimeout?.(fail, 12000);
+      if (document.head) document.head.append(script); else fail();
+    });
+    return artScriptPromise;
+  }
 
   class DecisionGame {
     constructor(config, options = {}) {
@@ -54,9 +70,13 @@
 
   function mount(container, data, options = {}) {
     const document = container.ownerDocument; const game = copy(data.game); game.title = data.title;
-    // Historical artifacts retain metadata; rendering uses the active original vector pack.
-    if (game.background && game.background.startsWith('/assets/games/casual-v1/scenes/')) game.background = game.background.replace('/casual-v1/','/classic-v1/').replace(/\.webp$/,'.svg');
+    // Only presentation is migrated; saved content, answers and event policy stay intact.
+    const casual = game.mode === 'decision' || game.mode === 'memory';
+    if (casual) game.background = '/assets/games/server-casual-v4/' + (game.mode === 'decision' ? 'security-world' : 'memory-world') + '.png';
+    else if (game.background && game.background.startsWith('/assets/games/casual-v1/scenes/')) game.background = game.background.replace('/casual-v1/','/classic-v1/').replace(/\.webp$/,'.svg');
     container.dataset.gameKey = game.gameKey;
+    container.dataset.gameMode = game.mode;
+    container.dataset.presentation = casual ? 'server-casual-v4' : 'native';
     const themedRuntime = game.runtime === 'deep-games-v2' ? root.AirvanaDeepGames : root.AirvanaCompleteGames;
     const theme = themedRuntime?.uiTheme?.(game.gameKey) || (game.gameKey === 'rune-circuit'
       ? {hud:'#467B78',rim:'#CAB58A',badge:'#B99349',paper:'#F2E8D3',frame:'#6F5941',field:'#ABA079'}
@@ -69,9 +89,10 @@
       else { const indices = value.split(/[,，\s]+/).map(value => Number.parseInt(value, 10) - 1).filter(index => index >= 0 && index < game.rounds.length); if (indices.length) game.rounds = [...new Set(indices), ...game.rounds.map((_, index) => index).filter(index => !indices.includes(index))].map(index => game.rounds[index]); }
     }
     const assets = root.AirvanaPlayableAssetsV3;
+    let casualArt = root.AirvanaServerCasualArtV4, destroyed = false;
     let model = null, engine = null, active = false, paused = false, busy = false, syncFailed = false, checkpoint = false, token = null, sequence = 1, runId = 0, eventChain = Promise.resolve();
     const element = (tag, className, text) => { const node = document.createElement(tag); if (className) node.className = className; if (text != null) node.textContent = text; return node; };
-    const sprite = (key, extra = '') => { const node = element('span', `sprite ${extra}`); node.setAttribute('aria-hidden', 'true'); if (assets?.css) Object.assign(node.style, assets.css(key)); return node; };
+    const sprite = (key, extra = '') => { const node = element('span', `sprite ${extra}`); node.setAttribute('aria-hidden', 'true'); node.dataset.sprite = key; const style = casual ? casualArt?.css(key) : assets?.css?.(key); if (style) Object.assign(node.style, style); return node; };
     const button = (text, className, handler) => { const node = element('button', className, text); node.type = 'button'; if (handler) node.addEventListener('click', handler); return node; };
     const bridge = (type, payload = {}) => { try { root.AirvanaBridge?.postMessage(JSON.stringify({ version: 1, type, payload })); } catch (_) {} };
     const api = async (path, body) => {
@@ -87,6 +108,7 @@
         if (targetRun !== runId) throw new Error('本局已结束');
         const sentSequence = sequence;
         const result = await api('/api/runtime/events', { sessionToken: targetToken, sequence: sentSequence, eventType, payload });
+        if (destroyed || targetRun !== runId) throw new Error('本局已结束');
         if (result.accepted !== true) throw new Error('服务器尚未接受本次游戏事件');
         bridge('runtime_event_accepted', { eventType, sequence: sentSequence, accepted: result.accepted === true, points: Number(result.points || 0), rewardStatus: result.rewardStatus || 'not_applicable' });
         if (targetRun === runId) sequence++; return result;
@@ -95,10 +117,14 @@
     };
     const progress = payload => {
       if (checkpoint || syncFailed) return;
+      const targetRun = runId;
       checkpoint = true;
-      send('step_complete', payload).catch(error => { syncFailed = true; errorBox.textContent = `进度尚未保存：${error.message}`; });
+      send('step_complete', payload).catch(error => { if (destroyed || targetRun !== runId) return; syncFailed = true; errorBox.textContent = `进度尚未保存：${error.message}`; });
     };
     const background = element('img', 'game-scene'); background.src = game.background; background.alt = '';
+    background.decoding = 'async';
+    background.addEventListener('load', () => { container.dataset.sceneReady = 'true'; });
+    background.addEventListener('error', () => { container.dataset.sceneReady = 'false'; });
     container.replaceChildren(background, element('div', 'scene-shade'));
     const toolbar = element('nav', 'toolbar'); toolbar.setAttribute('aria-label', '游戏控制');
     const pauseButton = button('暂停', '', () => togglePause()); pauseButton.disabled = true;
@@ -107,30 +133,41 @@
     const field = element('section', 'game-playfield'); container.append(field); field.hidden = true;
     const overlay = element('section', 'overlay'); overlay.setAttribute('aria-live', 'polite'); container.append(overlay);
     const errorBox = element('div', 'game-error'); errorBox.setAttribute('role', 'alert');
+    async function prepareArt(retry = false) {
+      if (!casual) { if (!assets) throw new Error('游戏素材组件未能加载，请刷新页面。'); await assets.load(); if (!assets.ready() && assets.retry) await assets.retry(); if (!assets.ready()) throw new Error('游戏素材未能完整加载，请重试。'); return; }
+      casualArt = await loadCasualArt(document);
+      const ready = await (retry ? casualArt.retry() : casualArt.load());
+      if (!ready) throw new Error('角色素材未能完整加载，请点击开始重试。');
+      container.dataset.artReady = 'true';
+    }
 
     function resetIntro() {
       runId++;
       engine?.destroy(); engine = null; model = null; active = false; paused = false; pauseButton.disabled = true; pauseButton.textContent = '暂停';
       field.hidden = true; field.replaceChildren(); overlay.hidden = false; errorBox.textContent = '';
-      overlay.replaceChildren(sprite(game.art[0]), element('h1', '', game.title), element('p', '', game.instructions));
+      container.dataset.gameState = 'intro'; overlay.dataset.screen = 'intro';
+      overlay.replaceChildren(sprite(casual ? game.mode === 'decision' ? 'guardian' : 'treasure' : game.art[0], 'intro-hero'), element('h1', '', game.title), element('p', 'instructions', game.instructions));
       const startButton = button('开始挑战', 'primary', () => start(startButton));
       overlay.append(startButton, errorBox);
     }
     async function start(startButton) {
       if (busy) return; busy = true; startButton.disabled = true; errorBox.textContent = '';
+      const startingRun = runId;
+      const current = () => !destroyed && startingRun === runId;
       try {
-        if (!assets) throw new Error('游戏素材组件未能加载，请刷新页面。');
-        await assets.load();
-        if (!assets.ready() && assets.retry) await assets.retry();
-        if (!assets.ready()) throw new Error('游戏素材未能完整加载，请重试。');
+        await prepareArt(true);
+        if (!current()) return;
         const query = new URLSearchParams(location.search);
         const session = await api('/api/runtime/sessions', { contentId: data.contentId, campaignId: query.get('campaign'), ref: query.get('ref') });
+        if (!current()) return;
         token = session.sessionToken; sequence = 1; checkpoint = false; syncFailed = false; eventChain = Promise.resolve();
         await send('playable_start', { artifactVersion: data.version, runtime: 'server-game-v3', mechanic: game.mode });
+        if (!current()) return;
         overlay.hidden = true; field.hidden = false; pauseButton.disabled = false; active = true;
+        container.dataset.gameState = 'playing';
         if (game.mode === 'native') mountNative();
         else { model = game.mode === 'decision' ? new DecisionGame(game, options) : new MemoryGame(game, options); render(); }
-      } catch (error) { active = false; pauseButton.disabled = true; overlay.hidden = false; field.hidden = true; errorBox.textContent = error.message; startButton.disabled = false; }
+      } catch (error) { if (!current()) return; active = false; pauseButton.disabled = true; overlay.hidden = false; field.hidden = true; container.dataset.gameState = 'intro'; errorBox.textContent = error.message; startButton.disabled = false; }
       finally { busy = false; }
     }
     function mountNative() {
@@ -147,17 +184,21 @@
       field.classList.remove('native-field'); field.replaceChildren();
       const state = model.snapshot();
       const hud = element('div', 'game-hud');
-      if (game.mode === 'decision') hud.append(element('span', '', `护盾 ${state.health} / ${options.difficulty >= 3 ? 2 : 3}`), element('em', '', `${Math.min(state.round + 1, state.rounds)} / ${state.rounds}`));
+      if (game.mode === 'decision') {
+        const health = element('span', 'health-meter'); health.append(sprite('shield'), element('span', '', `护盾 ${state.health} / ${options.difficulty >= 3 ? 2 : 3}`));
+        hud.append(health, element('em', '', `${Math.min(state.round + 1, state.rounds)} / ${state.rounds}`));
+      }
       else hud.append(element('span', '', `收集 ${state.matched} / ${state.pairs} · 剩余 ${state.moves} 次`), element('em', '', `${state.stage} / 3`));
       field.append(hud);
+      container.dataset.gameState = model.last ? 'feedback' : 'playing';
       if (game.mode === 'decision') renderDecision(); else renderMemory();
       field.append(errorBox);
     }
     function renderDecision() {
       const round = model.rounds[model.round]; if (!round) return;
-      const actors = element('div', `scene-actors${model.last ? ' feedback-actors' : ''}`); actors.append(sprite('guardian'), sprite(round.art, 'center'), sprite(model.last?.correct ? 'crystal' : 'raider')); field.append(actors);
+      const actors = element('div', `scene-actors${model.last ? ' feedback-actors' : ''}`); actors.append(sprite('guardian', 'actor-guardian'), sprite(round.art, 'center'), sprite(model.last?.correct ? 'crystal' : 'raider', 'actor-opponent')); field.append(actors);
       const dialogue = element('div', 'dialogue'); dialogue.append(element('h2', '', model.last ? model.last.correct ? '防御成功' : '护盾受损' : round.title), element('p', '', model.last ? model.last.explanation : round.body)); field.append(dialogue);
-      const choices = element('div', 'game-choices');
+      const choices = element('div', 'game-choices'); choices.dataset.count = round.choices.length;
       round.choices.forEach((choice, index) => {
         const node = button('', `choice${model.last?.index === index ? model.last.correct ? ' correct' : ' wrong' : ''}`, () => {
           const result = model.choose(index); if (!result) return;
@@ -197,11 +238,12 @@
       if (!active) return;
       if (engine) { paused = engine.togglePause(); pauseButton.textContent = paused ? '继续' : '暂停'; return; }
       paused = !paused; model.paused = paused; pauseButton.textContent = paused ? '继续' : '暂停';
-      if (paused) { overlay.hidden = false; overlay.replaceChildren(sprite('shield'), element('h2', '', '已暂停'), button('继续游戏', 'primary', togglePause)); }
+      if (paused) { container.dataset.gameState = 'paused'; overlay.dataset.screen = 'pause'; overlay.hidden = false; overlay.replaceChildren(sprite('shield'), element('h2', '', '已暂停'), button('继续游戏', 'primary', togglePause)); }
       else { overlay.hidden = true; render(); }
     }
     async function finish(success, score, summary) {
       if (!active) return; active = false; pauseButton.disabled = true; overlay.hidden = false;
+      container.dataset.gameState = success ? 'success' : 'failure'; overlay.dataset.screen = 'result'; field.hidden = true;
       overlay.replaceChildren(sprite(success ? 'treasure' : 'shield'), element('h2', '', success ? '挑战完成' : '再试一次'), element('p', '', summary), element('p', '', `得分 ${Math.max(0, Math.round(score || 0))}`));
       const status = element('p', 'status', success ? '正在保存成绩…' : '本局未通关。'); overlay.append(status);
       const actions = element('div', 'overlay-actions');
@@ -221,9 +263,9 @@
     }
     const visibility = () => { if (document.hidden && active && !paused) togglePause(); };
     document.addEventListener('visibilitychange', visibility);
-    resetIntro(); assets?.load()?.then(() => { if (!active && !busy) resetIntro(); }).catch(() => { errorBox.textContent = '部分素材未加载，开始游戏时会重新尝试。'; });
+    resetIntro(); prepareArt().then(() => { if (!destroyed && !active && !busy) resetIntro(); }).catch(error => { if (!destroyed) errorBox.textContent = error.message; });
     bridge('runtime_ready', { contentId: data.contentId, version: data.version });
-    return { inspect: () => ({ active, paused, checkpoint, sequence, syncFailed, ...(model?.snapshot() || engine?.inspect() || {}) }), destroy() { engine?.destroy(); document.removeEventListener('visibilitychange', visibility); container.replaceChildren(); } };
+    return { inspect: () => ({ active, paused, checkpoint, sequence, syncFailed, ...(model?.snapshot() || engine?.inspect() || {}) }), destroy() { destroyed = true; active = false; paused = false; runId++; engine?.destroy(); document.removeEventListener('visibilitychange', visibility); container.replaceChildren(); } };
   }
-  root.AirvanaServerGameV3 = Object.freeze({ version: '3.0.0', DecisionGame, MemoryGame, mount });
+  root.AirvanaServerGameV3 = Object.freeze({ version: '4.0.0', DecisionGame, MemoryGame, mount });
 })(typeof globalThis !== 'undefined' ? globalThis : window);

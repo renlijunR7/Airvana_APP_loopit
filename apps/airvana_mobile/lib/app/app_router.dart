@@ -1,4 +1,5 @@
 import 'package:airvana_mobile/app/providers.dart';
+import 'package:airvana_mobile/features/account/presentation/sign_in_screen.dart';
 import 'package:airvana_mobile/design_system/app_state_view.dart';
 import 'package:airvana_mobile/features/create/application/create_route_state.dart';
 import 'package:airvana_mobile/features/create/presentation/create_playable_screen.dart';
@@ -75,6 +76,9 @@ GoRouter buildAirvanaRouter({String? initialLocation}) {
           },
         ),
       ),
+      // 登录页在 Shell 之外：未登录时不应看到底部导航，
+      // 也不该被算作某个主标签的子页面。
+      GoRoute(path: '/signin', builder: (_, _) => const SignInScreen()),
       GoRoute(
         path: '/profile/secondary/:destination',
         builder: (_, state) {

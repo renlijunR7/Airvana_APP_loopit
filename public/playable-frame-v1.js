@@ -4,8 +4,10 @@
   // The parent owns connection recovery; game logic, sessions and rewards stay in the artifact.
   function resolveSource(source, base) {
     const url = new URL(source, base);
+    const isServerArtifact = /^\/(content|preview)\/[a-zA-Z0-9_-]+$/.test(url.pathname);
+    const isBundledArcade = /^\/arcade\/(risk-run|coin-castle|lucky-fruit|htx-quest|coin-dozer|city-squad|niguolaia|token-harbor|mini-gp-racers|street-gold-rush|star-table|sud-texas|kol-town)\/?$/.test(url.pathname);
     if (!/^https?:$/.test(url.protocol) || url.origin !== new URL(base).origin ||
-        url.username || url.password || !/^\/(content|preview)\/[a-zA-Z0-9_-]+$/.test(url.pathname)) {
+        url.username || url.password || (!isServerArtifact && !isBundledArcade)) {
       throw new Error('invalid_source');
     }
     return url.href;
@@ -61,6 +63,10 @@
     }
     function loaded(token, actualURL, hasBody) {
       if (token !== generation || (phase !== 'loading' && phase !== 'ready')) return;
+      // Some embedded browsers emit an initial about:blank load before committing
+      // the assigned same-origin URL. Keep the watchdog active and wait for the
+      // real navigation instead of showing a false document error.
+      if (actualURL === 'about:blank' && activeURL !== actualURL) return;
       // iframe load also fires on Chrome error pages. Never treat it alone as success.
       if (!hasBody || actualURL !== activeURL) { fail(token, 'document'); return; }
       clearWork(); emit('ready');
@@ -68,7 +74,7 @@
     return { start, loaded, failed: token => fail(token, 'document'), dispose, getState: () => phase };
   }
 
-  root.AirvanaPlayableFrame = Object.freeze({ version: '1.0.1', resolveSource, failureCopy, createController });
+  root.AirvanaPlayableFrame = Object.freeze({ version: '1.0.5', resolveSource, failureCopy, createController });
   if (!root.customElements || root.customElements.get('airvana-playable-frame')) return;
 
   class PlayableFrame extends HTMLElement {

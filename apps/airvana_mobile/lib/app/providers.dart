@@ -1,4 +1,7 @@
 import 'dart:typed_data';
+import 'package:airvana_mobile/features/account/domain/account_service_models.dart';
+import 'package:airvana_mobile/features/account/domain/platform_service_models.dart';
+import 'package:airvana_mobile/features/creator_center/domain/creator_center_snapshot.dart';
 
 import 'package:airvana_mobile/core/config/app_environment.dart';
 import 'package:airvana_mobile/core/network/airvana_api_client.dart';
@@ -33,6 +36,44 @@ final createWorkflowRepositoryProvider = Provider<CreateWorkflowRepository>((
   ref,
 ) {
   return AirvanaCreateWorkflowRepository(ref.watch(airvanaRepositoryProvider));
+});
+
+final creatorAssetsProvider = FutureProvider<List<CreatorAsset>>((ref) {
+  return ref.watch(airvanaRepositoryProvider).loadAssets();
+});
+
+final serverAiTwinProvider = FutureProvider<ServerAiTwin?>((ref) {
+  return ref.watch(airvanaRepositoryProvider).loadServerAiTwin();
+});
+
+final subscriptionPlansProvider = FutureProvider<List<SubscriptionPlan>>((ref) {
+  return ref.watch(airvanaRepositoryProvider).loadSubscriptionPlans();
+});
+
+final minorModePolicyProvider = FutureProvider<MinorModePolicy>((ref) {
+  return ref.watch(airvanaRepositoryProvider).loadMinorModePolicy();
+});
+
+/// 用户是否主动退出了服务端登录。本地演示内容不受影响，
+/// 但所有需要服务端身份的能力都应显示「未登录」并给出去登录入口。
+final signedOutProvider = FutureProvider<bool>((ref) {
+  return ref.watch(airvanaRepositoryProvider).signedOut;
+});
+
+final accountDeletionProvider = FutureProvider<AccountDeletionRequest?>((ref) {
+  return ref.watch(airvanaRepositoryProvider).loadAccountDeletionRequest();
+});
+
+final supportTicketsProvider = FutureProvider<List<SupportTicket>>((ref) {
+  return ref.watch(airvanaRepositoryProvider).loadSupportTickets();
+});
+
+final accountSessionsProvider = FutureProvider<List<AccountSession>>((ref) {
+  return ref.watch(airvanaRepositoryProvider).loadAccountSessions();
+});
+
+final creatorCenterProvider = FutureProvider<CreatorCenterSnapshot>((ref) {
+  return ref.watch(airvanaRepositoryProvider).loadCreatorCenter();
 });
 
 final homeProvider = FutureProvider<HomeSnapshot>((ref) {

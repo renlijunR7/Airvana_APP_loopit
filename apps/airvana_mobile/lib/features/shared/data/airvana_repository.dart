@@ -3,6 +3,11 @@ import 'dart:async';
 import 'package:airvana_mobile/core/config/app_environment.dart';
 import 'package:airvana_mobile/core/network/airvana_api_client.dart';
 import 'package:airvana_mobile/features/shared/data/legacy_demo_catalog.dart';
+import 'package:airvana_mobile/features/account/domain/account_service_models.dart';
+import 'package:airvana_mobile/features/account/domain/auth_models.dart';
+import 'package:airvana_mobile/features/account/domain/platform_service_models.dart';
+import 'package:airvana_mobile/features/creator_center/domain/creator_center_snapshot.dart';
+import 'package:airvana_mobile/features/runtime/domain/server_runtime_proof.dart';
 import 'package:airvana_mobile/features/shared/data/local_airvana_models.dart';
 import 'package:airvana_mobile/features/shared/data/local_airvana_store.dart';
 import 'package:airvana_mobile/features/shared/domain/airvana_models.dart';
@@ -135,9 +140,29 @@ class AirvanaRepository {
     );
   }
 
+  /// 内存缓存的「已主动退出」标记，避免每次请求都读一次本地存储。
+  bool? _signedOutCache;
+
+  /// 用户是否主动退出过服务端登录。
+  Future<bool> get signedOut async => _signedOutCache ??=
+      (await _localStore.loadProfileFeatureState()).serverSignedOut;
+
+  Future<void> _setSignedOut(bool value) async {
+    _signedOutCache = value;
+    final state = await _localStore.loadProfileFeatureState();
+    await _localStore.saveProfileFeatureState(
+      state.copyWith(serverSignedOut: value),
+    );
+  }
+
   Future<void> _ensureLocalDemoSession() async {
-    if (!environment.demoLoginEnabled) return;
     if (await api.sessionCookie != null) return;
+    // 用户主动退出后绝不自动登回去。否则「退出登录」会被下一个
+    // 服务端请求立刻撤销——用户完全看不出退出生效过。
+    if (await signedOut) {
+      throw const SignedOutException();
+    }
+    if (!environment.demoLoginEnabled) return;
     await api.postJson('/api/auth/demo', {
       'role': 'creator',
       'persona': 'flutter-mobile',
@@ -428,6 +453,527 @@ class AirvanaRepository {
   Future<void> recallMessage(String messageId) async {
     await _ensureLocalDemoSession();
     await api.postJson('/api/dm/messages/$messageId/recall', const {});
+  }
+
+  /// 创作者中心聚合：一次 `/api/bootstrap` 派生周报、成长任务、挑战与激励。
+  ///
+  /// 服务端不可用时返回 [CreatorCenterSnapshot.offline]——界面显示「未接入」，
+  /// 不用本地演示值冒充服务端数据。
+  ///
+  /// 与其它 load 方法不同，这里**不看** `preferLocalData`：创作者中心的五个模块
+  /// 只在有服务端真实记录时才有意义，本地演示内容替代不了。因此始终尝试服务端，
+  /// 失败就静默降级为「未接入」，不影响其它页面继续使用本地演示数据。
+  // ===== P2 平台能力 =====
+
+  /// 用 AIP 兑换 24 小时发现加权。写入类：失败必须抛出，
+  /// 否则用户会以为已扣费并生效。
+  Future<BoostResult> boostContent(String contentId) async {
+    await _ensureLocalDemoSession();
+    final response = await api.postJson(
+      '/api/contents/$contentId/boost',
+      const {},
+    );
+    return BoostResult.fromJson(response);
+  }
+
+  /// 我登记过的素材授权。读取类：失败静默返回空。
+  Future<List<CreatorAsset>> loadAssets() async {
+    try {
+      await _ensureLocalDemoSession();
+      final response = await api.getJson('/api/assets');
+      return _assets(response['assets']);
+    } catch (_) {
+      return const [];
+    }
+  }
+
+  /// 某个内容实际引用的素材及其授权状态。
+  Future<List<CreatorAsset>> loadContentAssets(String contentId) async {
+    try {
+      await _ensureLocalDemoSession();
+      final response = await api.getJson('/api/contents/$contentId/assets');
+      return _assets(response['assets']);
+    } catch (_) {
+      return const [];
+    }
+  }
+
+  List<CreatorAsset> _assets(Object? raw) => raw is List
+      ? raw
+            .whereType<Map<String, dynamic>>()
+            .map(CreatorAsset.fromJson)
+            .toList(growable: false)
+      : const [];
+
+  /// 登记素材授权。服务端强制：必须声明授权类型与 checksum；
+  /// 第三方 / 品牌素材还必须给出授权凭证引用。
+  Future<CreatorAsset> registerAsset({
+    required String name,
+    required String kind,
+    required String licenseType,
+    required String checksum,
+    String? licenseRef,
+    String? source,
+  }) async {
+    await _ensureLocalDemoSession();
+    final response = await api.postJson('/api/assets', {
+      'name': name,
+      'kind': kind,
+      'licenseType': licenseType,
+      'checksum': checksum,
+      if (licenseRef != null && licenseRef.trim().isNotEmpty)
+        'licenseRef': licenseRef.trim(),
+      if (source != null && source.trim().isNotEmpty) 'source': source.trim(),
+    });
+    final asset = response['asset'];
+    return CreatorAsset.fromJson(
+      asset is Map<String, dynamic> ? asset : response,
+    );
+  }
+
+  /// 撤销素材授权。撤销后引用它的内容会被阻止发布。
+  Future<void> revokeAsset(String assetId) async {
+    await _ensureLocalDemoSession();
+    await api.postJson('/api/assets/$assetId/revoke', const {});
+  }
+
+  /// 服务端 AI 分身。
+  Future<ServerAiTwin?> loadServerAiTwin() async {
+    try {
+      await _ensureLocalDemoSession();
+      final response = await api.getJson('/api/ai-twin');
+      final twin = response['twin'];
+      return twin is Map<String, dynamic> ? ServerAiTwin.fromJson(twin) : null;
+    } catch (_) {
+      return null;
+    }
+  }
+
+  /// 创建或更新 AI 分身；每次保存服务端版本号递增。
+  Future<ServerAiTwin> saveServerAiTwin({
+    required String displayName,
+    Map<String, Object?> persona = const {},
+    bool voiceConsent = false,
+    bool likenessConsent = false,
+  }) async {
+    await _ensureLocalDemoSession();
+    final response = await api.postJson('/api/ai-twin', {
+      'displayName': displayName,
+      'persona': persona,
+      'voiceConsent': voiceConsent,
+      'likenessConsent': likenessConsent,
+    });
+    final twin = response['twin'];
+    return ServerAiTwin.fromJson(
+      twin is Map<String, dynamic> ? twin : response,
+    );
+  }
+
+  /// 订阅计划目录。价格状态由服务端给出，客户端不得自行判定可购买。
+  Future<List<SubscriptionPlan>> loadSubscriptionPlans() async {
+    try {
+      await _ensureLocalDemoSession();
+      final response = await api.getJson('/api/economy/plans');
+      final raw = response['plans'];
+      return raw is List
+          ? raw
+                .whereType<Map<String, dynamic>>()
+                .map(SubscriptionPlan.fromJson)
+                .toList(growable: false)
+          : const [];
+    } catch (_) {
+      return const [];
+    }
+  }
+
+  /// 到期不续订（不是立即退款，也不是立即失效）。
+  Future<DateTime?> cancelSubscriptionAtPeriodEnd() async {
+    await _ensureLocalDemoSession();
+    final response = await api.postJson(
+      '/api/economy/subscription/cancel',
+      const {},
+    );
+    return DateTime.tryParse('${response['endsAt']}');
+  }
+
+  /// 校验钱包地址格式与校验和。**不涉及签名**，因此可以在移动端真实完成；
+  /// 真正的绑定需要设备侧签名器，目前未接入。
+  Future<WalletAddressCheck> validateWalletAddress({
+    required String address,
+    int chainId = 1,
+  }) async {
+    final response = await api.postJson(
+      '/api/wallet-bindings/validate-address',
+      {'address': address.trim(), 'chainId': chainId},
+    );
+    return WalletAddressCheck(
+      address: '${response['address'] ?? ''}',
+      normalized: '${response['normalized'] ?? ''}',
+    );
+  }
+
+  /// 平台配置的未成年人模式策略。读取失败按「未配置」处理，
+  /// 不得自行编造限制。
+  Future<MinorModePolicy> loadMinorModePolicy() async {
+    try {
+      await _ensureLocalDemoSession();
+      final response = await api.getJson('/api/policies/minor-mode');
+      final policy = response['policy'];
+      return policy is Map<String, dynamic>
+          ? MinorModePolicy.fromJson(policy)
+          : MinorModePolicy.unconfigured;
+    } catch (_) {
+      return MinorModePolicy.unconfigured;
+    }
+  }
+
+  // ===== 真实登录 =====
+  //
+  // 全部为写入/会话类动作，一律不静默降级：登录失败必须让用户看到原因，
+  // 绝不能退回 demo 登录冒充成功。
+
+  /// 请求邮箱登录验证码。
+  Future<EmailLoginChallenge> requestEmailLoginCode(String email) async {
+    final response = await api.postJson('/api/auth/email/challenge', {
+      'email': email.trim(),
+    });
+    return EmailLoginChallenge(
+      sent: response['sent'] == true,
+      expiresInMinutes: (response['expiresInMinutes'] as num?)?.toInt() ?? 10,
+      delivery: '${response['delivery'] ?? 'deferred_no_provider'}',
+      demoCode: response['demoCode'] is String
+          ? response['demoCode'] as String
+          : null,
+    );
+  }
+
+  /// 用验证码完成邮箱登录，服务端签发会话 Cookie。
+  Future<SignedInIdentity> verifyEmailLoginCode({
+    required String email,
+    required String code,
+  }) async {
+    final response = await api.postJson('/api/auth/email/verify', {
+      'email': email.trim(),
+      'code': code.trim(),
+    });
+    final identity = _signedIn(response, 'email');
+    await _setSignedOut(false);
+    return identity;
+  }
+
+  /// Google **本地适配器**登录。不是真实 OAuth——界面必须如实标注。
+  Future<SignedInIdentity> signInWithGoogleLocalAdapter({
+    required String email,
+    String? displayName,
+  }) async {
+    final response = await api.postJson('/api/auth/google/local', {
+      'email': email.trim(),
+      if (displayName != null && displayName.trim().isNotEmpty)
+        'displayName': displayName.trim(),
+    });
+    final identity = _signedIn(response, 'google_local');
+    await _setSignedOut(false);
+    return identity;
+  }
+
+  SignedInIdentity _signedIn(Map<String, dynamic> response, String method) {
+    final me = response['me'];
+    final map = me is Map<String, dynamic> ? me : const <String, dynamic>{};
+    if ('${map['id'] ?? ''}'.isEmpty) {
+      throw ApiException('服务端未返回登录用户');
+    }
+    return SignedInIdentity(
+      userId: '${map['id']}',
+      displayName: '${map['displayName'] ?? ''}',
+      role: '${map['role'] ?? 'player'}',
+      created: response['created'] == true,
+      method: method,
+    );
+  }
+
+  /// 退出登录：服务端销毁会话，本地清除 Cookie。
+  ///
+  /// 服务端失败也要清本地凭证——否则用户以为已退出、设备上却还留着可用会话。
+  Future<void> signOut() async {
+    try {
+      await api.postJson('/api/auth/logout', const {});
+    } finally {
+      // 顺序要紧：先落「已退出」标记再清 Cookie。否则两步之间的任何
+      // 请求都会看到「没有 Cookie 且未标记退出」而自动登回去。
+      await _setSignedOut(true);
+      await api.clearSession();
+    }
+  }
+
+  // ===== 账号与治理：此前只有界面、不落服务端的能力 =====
+  //
+  // 这几个方法一律**不做静默降级**：删除账号、举报、工单、资格申请都是用户
+  // 以为「已经提交」的动作，失败必须抛出让界面显式报错。把它们降级成本地成功
+  // 才是真正的危险——桥接降级只适用于展示类读取，不适用于这种有后果的写入。
+
+  /// 当前待处理的账号删除申请；没有则返回 null。
+  ///
+  /// 读取类接口：服务端不可用时静默返回 null（界面按「无申请」呈现），
+  /// 与下面的写入类接口刻意不同。
+  Future<AccountDeletionRequest?> loadAccountDeletionRequest() async {
+    try {
+      await _ensureLocalDemoSession();
+      final bootstrap = await api.getJson('/api/bootstrap');
+      final raw = bootstrap['deletionRequest'];
+      if (raw is! Map<String, dynamic>) return null;
+      final status = '${raw['status'] ?? ''}';
+      if (status != 'pending') return null;
+      return AccountDeletionRequest(
+        id: '${raw['id'] ?? ''}',
+        status: status,
+        scheduledFor: '${raw['scheduledFor'] ?? ''}',
+        idempotent: true,
+      );
+    } catch (_) {
+      return null;
+    }
+  }
+
+  /// 提交账号删除申请（30 天冷静期）。服务端对同一账号幂等。
+  Future<AccountDeletionRequest> requestAccountDeletion({
+    String? reason,
+  }) async {
+    await _ensureLocalDemoSession();
+    final response = await api.postJson('/api/account/deletion-request', {
+      if (reason != null && reason.trim().isNotEmpty) 'reason': reason.trim(),
+    });
+    return AccountDeletionRequest(
+      id: '${response['id'] ?? ''}',
+      status: '${response['status'] ?? 'pending'}',
+      scheduledFor: '${response['scheduledFor'] ?? ''}',
+      idempotent: response['idempotent'] == true,
+    );
+  }
+
+  /// 取消账号删除申请。
+  Future<String> cancelAccountDeletion(String requestId) async {
+    await _ensureLocalDemoSession();
+    final response = await api.postJson(
+      '/api/account/deletion-request/$requestId/cancel',
+      const {},
+    );
+    return '${response['status'] ?? 'cancelled'}';
+  }
+
+  /// 当前账号仍然有效的登录会话。
+  Future<List<AccountSession>> loadAccountSessions() async {
+    await _ensureLocalDemoSession();
+    final response = await api.getJson('/api/account/sessions');
+    final raw = response['sessions'];
+    if (raw is! List) return const [];
+    return raw
+        .whereType<Map<String, dynamic>>()
+        .map(
+          (item) => AccountSession(
+            id: '${item['id'] ?? ''}',
+            createdAt: DateTime.tryParse('${item['createdAt']}'),
+            expiresAt: DateTime.tryParse('${item['expiresAt']}'),
+          ),
+        )
+        .toList(growable: false);
+  }
+
+  /// 撤销指定登录会话。
+  Future<void> revokeAccountSession(String sessionId) async {
+    await _ensureLocalDemoSession();
+    await api.postJson('/api/account/sessions/$sessionId/revoke', const {});
+  }
+
+  /// 把一个试玩解析成**服务端内容 id**。
+  ///
+  /// 服务端作品的 id 本身就是 contentId；本地试玩需要先幂等登记。
+  /// 解析不出来返回 null，调用方不得凭空构造 id。
+  Future<String?> resolveServerContentId({
+    required String playableKey,
+    required String title,
+  }) async {
+    if (playableKey.startsWith('content_')) return playableKey;
+    final registered = await api.postJson('/api/demo/mobile-playables', {
+      'playables': [
+        {'key': playableKey, 'title': title},
+      ],
+    });
+    final mapping = registered['mapping'];
+    final contentId = mapping is Map<String, dynamic>
+        ? mapping[playableKey]
+        : null;
+    return contentId is String && contentId.isNotEmpty ? contentId : null;
+  }
+
+  /// 举报已发布内容，进入平台治理队列。
+  Future<ContentReportResult> reportContent({
+    required String playableKey,
+    required String title,
+    required String reason,
+    String? details,
+  }) async {
+    await _ensureLocalDemoSession();
+    final contentId = await resolveServerContentId(
+      playableKey: playableKey,
+      title: title,
+    );
+    if (contentId == null) {
+      throw ApiException('该作品在服务端没有对应内容，无法提交举报');
+    }
+    final response = await api.postJson('/api/content-reports', {
+      'contentId': contentId,
+      'reason': reason,
+      if (details != null && details.trim().isNotEmpty)
+        'details': details.trim(),
+    });
+    return ContentReportResult(status: '${response['status'] ?? 'open'}');
+  }
+
+  /// 客服工单列表（当前账号）。
+  Future<List<SupportTicket>> loadSupportTickets() async {
+    await _ensureLocalDemoSession();
+    final response = await api.getJson('/api/support-tickets');
+    final raw = response['tickets'];
+    if (raw is! List) return const [];
+    return raw
+        .whereType<Map<String, dynamic>>()
+        .map(_supportTicket)
+        .toList(growable: false);
+  }
+
+  /// 提交客服工单。
+  Future<SupportTicket> createSupportTicket({
+    required String category,
+    required String subject,
+    required String body,
+  }) async {
+    await _ensureLocalDemoSession();
+    final response = await api.postJson('/api/support-tickets', {
+      'category': category,
+      'subject': subject,
+      'body': body,
+    });
+    final ticket = response['ticket'];
+    return _supportTicket(
+      ticket is Map<String, dynamic> ? ticket : const <String, dynamic>{},
+    );
+  }
+
+  SupportTicket _supportTicket(Map<String, dynamic> item) => SupportTicket(
+    id: '${item['id'] ?? ''}',
+    category: '${item['category'] ?? 'other'}',
+    subject: '${item['subject'] ?? ''}',
+    body: '${item['body'] ?? ''}',
+    status: '${item['status'] ?? 'open'}',
+    createdAt: DateTime.tryParse('${item['createdAt']}'),
+    replyBody: item['replyBody'] is String ? item['replyBody'] as String : null,
+  );
+
+  /// 提交创作者资格申请（进入 KYC → 平台审核链）。
+  Future<CreatorApplication> submitCreatorApplication({
+    required String applicationNote,
+    required String regionCode,
+    required bool kycConsent,
+  }) async {
+    await _ensureLocalDemoSession();
+    final response = await api.postJson('/api/creator-applications', {
+      'applicationNote': applicationNote,
+      'regionCode': regionCode,
+      'kycConsent': kycConsent,
+    });
+    final application = response['application'];
+    final map = application is Map<String, dynamic>
+        ? application
+        : const <String, dynamic>{};
+    return CreatorApplication(
+      id: '${map['id'] ?? ''}',
+      status: '${map['status'] ?? 'submitted'}',
+      idempotent: response['idempotent'] == true,
+    );
+  }
+
+  /// 游戏真正开始时调用：登记本地试玩为服务端内容（幂等）、开运行会话、
+  /// 发出 `playable_start`。服务端以该事件时间为计时起点。
+  ///
+  /// 失败返回 null 并静默降级；调用方继续本地演示，不得伪造服务端确认。
+  /// 这里**不看** `preferLocalData`——玩家实际玩的就是本地试玩，
+  /// 运行证明必须能为它产生真实记录。
+  Future<RuntimeProofHandle?> openRuntimeProof({
+    required String playableKey,
+    required String title,
+  }) async {
+    try {
+      await _ensureLocalDemoSession();
+      final contentId = await resolveServerContentId(
+        playableKey: playableKey,
+        title: title,
+      );
+      if (contentId == null) return null;
+
+      final session = await api.postJson('/api/runtime/sessions', {
+        'contentId': contentId,
+      });
+      final token = session['sessionToken'];
+      if (token is! String || token.isEmpty) return null;
+
+      await api.postJson('/api/runtime/events', {
+        'sessionToken': token,
+        'sequence': 1,
+        'eventType': 'playable_start',
+      });
+      return RuntimeProofHandle(
+        contentId: contentId,
+        sessionToken: token,
+        rewardEligible: session['rewardEligible'] == true,
+      );
+    } catch (_) {
+      return null;
+    }
+  }
+
+  /// 游戏有效完成时调用：补 `step_complete` 后发 `playable_complete`，
+  /// 返回服务端权威的奖励结果。失败静默降级为 null。
+  Future<ServerRuntimeProof?> completeRuntimeProof(
+    RuntimeProofHandle handle, {
+    int score = 0,
+  }) async {
+    try {
+      await api.postJson('/api/runtime/events', {
+        'sessionToken': handle.sessionToken,
+        'sequence': 2,
+        'eventType': 'step_complete',
+      });
+      final completed = await api.postJson('/api/runtime/events', {
+        'sessionToken': handle.sessionToken,
+        'sequence': 3,
+        'eventType': 'playable_complete',
+        'payload': {'score': score},
+      });
+      return ServerRuntimeProof(
+        contentId: handle.contentId,
+        rewardEligible: handle.rewardEligible,
+        rewardStatus: '${completed['rewardStatus'] ?? 'unknown'}',
+        points: (completed['points'] as num?)?.toInt() ?? 0,
+      );
+    } catch (_) {
+      return null;
+    }
+  }
+
+  Future<CreatorCenterSnapshot> loadCreatorCenter({DateTime? now}) async {
+    try {
+      await _ensureLocalDemoSession();
+      final bootstrap = await api.getJson('/api/bootstrap');
+      return CreatorCenterSnapshot.fromBootstrap(bootstrap, now: now);
+    } catch (_) {
+      return CreatorCenterSnapshot.offline;
+    }
+  }
+
+  /// 报名品牌 Campaign：真实写入 campaign_participants，由服务端判定资格。
+  Future<void> applyToCampaign(String campaignId) async {
+    await _ensureLocalDemoSession();
+    await api.postJson('/api/campaigns/$campaignId/apply', const {});
   }
 
   Future<AccountSnapshot> loadAccount() async {

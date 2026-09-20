@@ -308,7 +308,7 @@ class _LocalDiscoverScreenState extends State<LocalDiscoverScreen> {
                         ),
                         const Spacer(),
                         Text(
-                          '${items.length} / 38',
+                          '${items.length} / ${LegacyDemoCatalog.legacyWebPlayables.length}',
                           key: const ValueKey('discover-visible-count'),
                           style: const TextStyle(
                             color: AirvanaColors.muted,
@@ -320,10 +320,10 @@ class _LocalDiscoverScreenState extends State<LocalDiscoverScreen> {
                     ),
                   ),
                   const SizedBox(height: 4),
-                  const Padding(
-                    padding: EdgeInsets.only(right: 20),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 20),
                     child: Text(
-                      'LOCAL DEMO · 38 款原创离线游戏 · 全部具备三阶段玩法与重玩闭环',
+                      'LOCAL DEMO · ${LegacyDemoCatalog.legacyWebPlayables.length} 款原创离线游戏 · 全部具备三阶段玩法与重玩闭环',
                       style: TextStyle(
                         color: AirvanaColors.muted,
                         fontSize: 11,

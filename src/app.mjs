@@ -6,6 +6,7 @@ import { openDatabase, closeDatabase, transaction } from './db.mjs';
 import { createAiService } from './ai.mjs';
 import { createWorker } from './worker.mjs';
 import { saveArtifact } from './artifact.mjs';
+import { serverCasualBackground, upgradeServerGameRuntimeReferences } from './game-artifact-v3.mjs';
 import { assertOptimizable, assignVariant, assignmentCounts, resolveContentVariant } from './experiments.mjs';
 import {
   AIP_REWARD_RULES, ECONOMY_VERSION, activateSubscription, awardAipRule, completePaymentSettlement,
@@ -334,7 +335,11 @@ function serializeFeedContent(db, row) {
     FROM engagement_events WHERE content_id=?`).get(row.id) || {};
   const comments = Number(db.prepare(`SELECT COUNT(*) n FROM content_comments WHERE content_id=? AND status='visible'`).get(row.id)?.n || 0);
   const currentArt = safeJson(db.prepare("SELECT manifest_json FROM content_artifacts WHERE content_id=? AND version=? AND status='ready'").get(row.id, row.current_version)?.manifest_json || '{}');
-  const gameBackground = typeof currentArt.background === 'string' && /^\/assets\/games\/casual-v1\/scenes\/[a-z-]+\.webp$/.test(currentArt.background) ? currentArt.background : null;
+  const deliveredBackground = row.content_type === 'game' && currentArt.runtime === 'server-game-v3'
+    ? serverCasualBackground(currentArt.mechanic) || currentArt.background : currentArt.background;
+  const gameBackground = typeof deliveredBackground === 'string'
+    && (/^\/assets\/games\/casual-v1\/scenes\/[a-z-]+\.webp$/.test(deliveredBackground)
+      || /^\/assets\/games\/server-casual-v4\/(?:security-world|memory-world)\.png$/.test(deliveredBackground)) ? deliveredBackground : null;
   return {
     ...mapContent(row),
     authorName: row.author_name,
@@ -534,7 +539,7 @@ function validateAgentForTask(agent, contentType) {
 }
 
 function serveStatic(publicDir, pathname, res) {
-  const requested = pathname === '/' ? '/index.html' : pathname;
+  const requested = pathname === '/' ? '/index.html' : pathname.endsWith('/') ? pathname + 'index.html' : pathname;
   const decoded = decodeURIComponent(requested);
   const file = path.resolve(publicDir, `.${decoded}`);
   if (!file.startsWith(path.resolve(publicDir) + path.sep) && file !== path.join(path.resolve(publicDir), 'index.html')) return false;
@@ -604,9 +609,15 @@ export function createApp(options = {}) {
       // Sensor Playables may request the microphone from this same-origin shell
       // after a deliberate user action. Camera and location stay unavailable.
       res.setHeader('Permissions-Policy', 'camera=(), microphone=(self), geolocation=()');
-      res.setHeader('X-Frame-Options', 'DENY');
+      const tokenHarborArcade = /^\/arcade\/token-harbor(?:\/|$)/.test(pathname);
+      const bundledArcade = /^\/arcade\/(risk-run|coin-castle|lucky-fruit|htx-quest|coin-dozer|city-squad|niguolaia|token-harbor|mini-gp-racers|street-gold-rush|star-table|sud-texas|kol-town)(?:\/|$)/.test(pathname);
+      res.setHeader('X-Frame-Options', bundledArcade ? 'SAMEORIGIN' : 'DENY');
       const mobileShell = pathname === '/' || pathname === '/index.html';
-      res.setHeader('Content-Security-Policy', mobileShell
+      res.setHeader('Content-Security-Policy', tokenHarborArcade
+        ? "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob:; style-src 'self' 'unsafe-inline'; connect-src 'self' blob:; img-src 'self' data: blob:; media-src 'self' blob:; worker-src 'self' blob:; frame-ancestors 'self'; base-uri 'self'; form-action 'self'"
+        : bundledArcade
+        ? "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; connect-src 'self' blob:; img-src 'self' data: blob:; media-src 'self' blob:; worker-src 'self' blob:; frame-ancestors 'self'; base-uri 'self'; form-action 'self'"
+        : mobileShell
         ? "default-src 'self'; script-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; connect-src 'self'; img-src 'self' data:; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
         : "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self'; img-src 'self' data:; frame-ancestors 'none'; base-uri 'self'; form-action 'self'");
       if (Date.now() - lastCleanup > 3_600_000) {
@@ -2870,7 +2881,7 @@ export function createApp(options = {}) {
         // HEAD is a read-only availability probe, not a delivered experiment exposure.
         const viewer = req.method === 'GET' ? getSessionUser(db, req) : null;
         const variant = running && req.method === 'GET' ? resolveContentVariant(db, content.id, viewer?.id || null) : null;
-        let html = artifact.html_text;
+        let html = upgradeServerGameRuntimeReferences(artifact.html_text);
         if (variant && artifactVariantAware(db, content.id)) {
           const payload = jsonString(variant).replaceAll('<', '\\u003c').replaceAll('>', '\\u003e').replaceAll('&', '\\u0026');
           html = html.replace('<body>', `<body><script>globalThis.__AIRVANA_VARIANT__=${payload};</script>`);
@@ -2891,7 +2902,7 @@ export function createApp(options = {}) {
         res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store',
           // Only the authenticated owner's successful preview may run in the same-origin shell.
           'X-Frame-Options': 'SAMEORIGIN', 'X-Content-Type-Options': 'nosniff', 'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src 'self'; img-src 'self' data:; frame-ancestors 'self'" });
-        return res.end(req.method === 'HEAD' ? '' : artifact.html_text);
+        return res.end(req.method === 'HEAD' ? '' : upgradeServerGameRuntimeReferences(artifact.html_text));
       }
 
       if (pathname.startsWith('/api/')) throw new HttpError(404, '接口不存在', 'not_found');

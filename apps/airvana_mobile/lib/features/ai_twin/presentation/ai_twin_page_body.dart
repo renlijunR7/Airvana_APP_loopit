@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:airvana_mobile/app/providers.dart';
 import 'package:airvana_mobile/design_system/airvana_shared_cards.dart';
 import 'package:airvana_mobile/design_system/airvana_theme.dart';
+import 'package:airvana_mobile/features/account/domain/platform_service_models.dart';
 import 'package:airvana_mobile/features/shared/data/local_airvana_models.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -151,6 +152,8 @@ class _AiTwinPageBodyState extends ConsumerState<AiTwinPageBody> {
           key: const ValueKey('ai-twin-scroll'),
           padding: const EdgeInsets.fromLTRB(20, 12, 20, 30),
           children: [
+            const _ServerAiTwinCard(),
+            const SizedBox(height: 14),
             _Panel(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -284,19 +287,9 @@ class _AiTwinPageBodyState extends ConsumerState<AiTwinPageBody> {
         children: [
           for (final (index, title, desc, ready) in [
             ('1', '公开身份', '姓名、简介与公开创作领域', state.name.trim().isNotEmpty),
-            (
-              '2',
-              '人格与边界',
-              '表达语气、擅长话题和拒答范围',
-              state.status != 'not_created',
-            ),
+            ('2', '人格与边界', '表达语气、擅长话题和拒答范围', state.status != 'not_created'),
             ('3', '知识授权', '公开资料、作品与 Contract 约束（待迁移）', false),
-            (
-              '4',
-              '测试与启用',
-              '本地沙盒、AI 标识与人工接管',
-              state.status == 'active_demo',
-            ),
+            ('4', '测试与启用', '本地沙盒、AI 标识与人工接管', state.status == 'active_demo'),
           ])
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 6),
@@ -359,14 +352,24 @@ class _AiTwinPageBodyState extends ConsumerState<AiTwinPageBody> {
       child: Column(
         children: [
           for (final field in [
-            ('ai-twin-name', '名称', state.name, (String v) => state.copyWith(name: v)),
+            (
+              'ai-twin-name',
+              '名称',
+              state.name,
+              (String v) => state.copyWith(name: v),
+            ),
             (
               'ai-twin-tagline',
               '标语',
               state.tagline,
               (String v) => state.copyWith(tagline: v),
             ),
-            ('ai-twin-tone', '语气', state.tone, (String v) => state.copyWith(tone: v)),
+            (
+              'ai-twin-tone',
+              '语气',
+              state.tone,
+              (String v) => state.copyWith(tone: v),
+            ),
             (
               'ai-twin-topics',
               '擅长话题',
@@ -384,10 +387,9 @@ class _AiTwinPageBodyState extends ConsumerState<AiTwinPageBody> {
               padding: const EdgeInsets.only(bottom: 10),
               child: TextField(
                 key: ValueKey(field.$1),
-                controller: TextEditingController(text: field.$3)
-                  ..selection = TextSelection.collapsed(
-                    offset: field.$3.length,
-                  ),
+                controller: TextEditingController(
+                  text: field.$3,
+                )..selection = TextSelection.collapsed(offset: field.$3.length),
                 decoration: InputDecoration(labelText: field.$2),
                 onSubmitted: (value) => _save(
                   field.$4(value.trim()),
@@ -406,35 +408,36 @@ class _AiTwinPageBodyState extends ConsumerState<AiTwinPageBody> {
   ];
 
   /// 预置场景：切换时整组替换人格、话术并落审计与版本（对齐 Web scenes Tab）。
-  static const _sceneCatalog = <(String, String, String, String, String, String, String)>[
-    (
-      'default',
-      '通用创作者',
-      '日常创作与互动答疑',
-      'Kai 分身',
-      '运营可持续创作、互动、归因与转化的 Agentic Playable。',
-      '友好、专业、直接',
-      'Agentic Playable 创作、互动增长、安全教育',
-    ),
-    (
-      'brand',
-      '品牌讲解',
-      'Campaign 品牌合作场景',
-      'Kai · 品牌讲解人',
-      '以获批 Campaign Contract 为边界的品牌互动讲解。',
-      '克制、准确、合规优先',
-      '品牌合作流程、Contract 边界、互动转化',
-    ),
-    (
-      'community',
-      '社区答疑',
-      '增长网络与节点社区',
-      'Kai · 社区伙伴',
-      '帮助社区成员理解玩法、成长体系与安全边界。',
-      '轻松、耐心、鼓励',
-      '玩法答疑、成长体系、节点协作',
-    ),
-  ];
+  static const _sceneCatalog =
+      <(String, String, String, String, String, String, String)>[
+        (
+          'default',
+          '通用创作者',
+          '日常创作与互动答疑',
+          'Kai 分身',
+          '运营可持续创作、互动、归因与转化的 Agentic Playable。',
+          '友好、专业、直接',
+          'Agentic Playable 创作、互动增长、安全教育',
+        ),
+        (
+          'brand',
+          '品牌讲解',
+          'Campaign 品牌合作场景',
+          'Kai · 品牌讲解人',
+          '以获批 Campaign Contract 为边界的品牌互动讲解。',
+          '克制、准确、合规优先',
+          '品牌合作流程、Contract 边界、互动转化',
+        ),
+        (
+          'community',
+          '社区答疑',
+          '增长网络与节点社区',
+          'Kai · 社区伙伴',
+          '帮助社区成员理解玩法、成长体系与安全边界。',
+          '轻松、耐心、鼓励',
+          '玩法答疑、成长体系、节点协作',
+        ),
+      ];
 
   List<Widget> _scenes(LocalAiTwinState state) => [
     _Panel(
@@ -541,7 +544,10 @@ class _AiTwinPageBodyState extends ConsumerState<AiTwinPageBody> {
           Wrap(
             spacing: 8,
             children: [
-              for (final (code, label) in const [('zh', '简体中文'), ('en', 'English')])
+              for (final (code, label) in const [
+                ('zh', '简体中文'),
+                ('en', 'English'),
+              ])
                 ChoiceChip(
                   key: ValueKey('ai-twin-language-$code'),
                   label: Text(label),
@@ -568,9 +574,10 @@ class _AiTwinPageBodyState extends ConsumerState<AiTwinPageBody> {
     final subtitle = switch (_voiceState) {
       'listening' => '（正在聆听你的问题）',
       'thinking' => '（正在组织讲解思路）',
-      'speaking' => state.language == 'en'
-          ? 'Hi, I am the AI twin of ${state.name.isEmpty ? 'this creator' : state.name}. All key actions still need human confirmation.'
-          : '大家好，我是${state.name.isEmpty ? '这位创作者' : state.name}的 AI 分身。所有关键动作仍需本人确认。',
+      'speaking' =>
+        state.language == 'en'
+            ? 'Hi, I am the AI twin of ${state.name.isEmpty ? 'this creator' : state.name}. All key actions still need human confirmation.'
+            : '大家好，我是${state.name.isEmpty ? '这位创作者' : state.name}的 AI 分身。所有关键动作仍需本人确认。',
       _ => '点击「自由讲解」开始语音状态流演示。',
     };
     return [
@@ -676,8 +683,7 @@ class _AiTwinPageBodyState extends ConsumerState<AiTwinPageBody> {
                 ),
                 OutlinedButton(
                   key: const ValueKey('ai-twin-mute-toggle'),
-                  onPressed: () =>
-                      setState(() => _voiceMuted = !_voiceMuted),
+                  onPressed: () => setState(() => _voiceMuted = !_voiceMuted),
                   child: Text(_voiceMuted ? '取消静音' : '静音'),
                 ),
                 OutlinedButton(
@@ -804,14 +810,12 @@ class _AiTwinPageBodyState extends ConsumerState<AiTwinPageBody> {
         .any(text.contains);
     setState(() {
       _sandbox.add((fromUser: true, text: text));
-      _sandbox.add(
-        (
-          fromUser: false,
-          text: blocked
-              ? '【AI 分身 · 安全拦截】这个话题在拒答范围内，我不能回答。你可以调整拒答范围后再测试。'
-              : '【AI 分身 · 演示】收到。我会用「${state.tone}」的语气围绕擅长话题回应；真实回复需服务端模型接入。',
-        ),
-      );
+      _sandbox.add((
+        fromUser: false,
+        text: blocked
+            ? '【AI 分身 · 安全拦截】这个话题在拒答范围内，我不能回答。你可以调整拒答范围后再测试。'
+            : '【AI 分身 · 演示】收到。我会用「${state.tone}」的语气围绕擅长话题回应；真实回复需服务端模型接入。',
+      ));
       _sandboxInput.clear();
     });
   }
@@ -980,4 +984,128 @@ class _Panel extends StatelessWidget {
     ),
     child: child,
   );
+}
+
+/// 服务端 AI 分身注册表。
+///
+/// 与本页上方的本地概念配置不同：这里是服务端权威对象，
+/// 人设每次保存版本号递增，声音 / 形象授权时间戳由服务端落。
+class _ServerAiTwinCard extends ConsumerStatefulWidget {
+  const _ServerAiTwinCard();
+
+  @override
+  ConsumerState<_ServerAiTwinCard> createState() => _ServerAiTwinCardState();
+}
+
+class _ServerAiTwinCardState extends ConsumerState<_ServerAiTwinCard> {
+  bool _busy = false;
+
+  Future<void> _save(ServerAiTwin? existing) async {
+    setState(() => _busy = true);
+    final messenger = ScaffoldMessenger.of(context);
+    try {
+      final saved = await ref
+          .read(airvanaRepositoryProvider)
+          .saveServerAiTwin(
+            displayName: existing?.displayName.isNotEmpty == true
+                ? existing!.displayName
+                : '我的 AI 分身',
+            persona: const {'tone': '专业友好', 'scope': '互动内容运营'},
+            voiceConsent: existing?.voiceConsent ?? false,
+            likenessConsent: existing?.likenessConsent ?? false,
+          );
+      ref.invalidate(serverAiTwinProvider);
+      messenger.showSnackBar(
+        SnackBar(content: Text('已保存到服务端 · 版本 v${saved.version}')),
+      );
+    } catch (error) {
+      // 写入失败必须报错，不能让本地配置假装已同步
+      messenger.showSnackBar(SnackBar(content: Text('保存到服务端失败：$error')));
+    } finally {
+      if (mounted) setState(() => _busy = false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final twin = ref.watch(serverAiTwinProvider);
+    return Container(
+      key: const ValueKey('ai-twin-server'),
+      width: double.infinity,
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: AirvanaColors.line),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            '服务端分身注册表',
+            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w900),
+          ),
+          const SizedBox(height: 4),
+          const Text(
+            '上方为本机概念配置；这里是服务端权威对象，保存后版本号递增，'
+            '声音与形象授权时间戳由服务端记录。',
+            style: TextStyle(
+              fontSize: 9,
+              color: AirvanaColors.muted,
+              height: 1.7,
+            ),
+          ),
+          const SizedBox(height: 12),
+          twin.when(
+            loading: () => const SizedBox(
+              width: 18,
+              height: 18,
+              child: CircularProgressIndicator(strokeWidth: 2),
+            ),
+            error: (error, _) => const Text(
+              '暂时无法读取服务端分身。',
+              style: TextStyle(fontSize: 11, color: AirvanaColors.muted),
+            ),
+            data: (value) => Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  value == null
+                      ? '服务端还没有分身记录。'
+                      : '${value.displayName} · v${value.version} · ${value.status}',
+                  style: const TextStyle(fontSize: 12),
+                ),
+                if (value != null) ...[
+                  const SizedBox(height: 3),
+                  Text(
+                    '声音授权：${value.voiceConsent ? '已记录' : '未授权'}'
+                    ' · 形象授权：${value.likenessConsent ? '已记录' : '未授权'}',
+                    style: const TextStyle(
+                      fontSize: 9,
+                      color: AirvanaColors.muted,
+                    ),
+                  ),
+                ],
+                const SizedBox(height: 12),
+                SizedBox(
+                  width: double.infinity,
+                  child: FilledButton(
+                    key: const ValueKey('ai-twin-server-save'),
+                    onPressed: _busy ? null : () => _save(value),
+                    child: Text(
+                      _busy
+                          ? '保存中…'
+                          : value == null
+                          ? '在服务端创建分身'
+                          : '保存到服务端（版本 +1）',
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }

@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+    <meta name="theme-color" content="#082c2f" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230d6f60'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-size='34' fill='white'%3E%E2%99%A0%3C/text%3E%3C/svg%3E" />
+    <title>SUD 德州扑克 · 移动端复刻</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="device-shell" aria-label="SUD 德州扑克复刻">
+      <section class="game-screen" id="gameScreen">
+        <div class="felt-grain" aria-hidden="true"></div>
+        <div class="table-stitch" aria-hidden="true"></div>
+
+        <header class="status-bar" aria-label="设备状态栏">
+          <img class="sud-logo" src="./assets/sud-logo.png" alt="SUD" />
+          <div class="device-status" aria-label="网络良好，电量 70%">
+            <span class="signal" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+            <span class="wifi" aria-hidden="true"></span>
+            <span class="battery"><b>70%</b><i></i></span>
+          </div>
+        </header>
+
+        <section class="room-header" aria-label="房间信息">
+          <div class="room-copy">
+            <strong>小白专场22</strong>
+            <span>房间号 12922&nbsp;&nbsp;<i class="tiny-person">●</i> <b id="roomPlayerCount">2</b></span>
+          </div>
+          <div class="room-actions">
+            <button id="pauseButton" class="pause-button" type="button">挂起游戏</button>
+            <button id="gamePickerButton" class="picker-button" type="button" aria-expanded="false">选择游戏 <span>▼</span></button>
+            <button id="moreButton" class="more-button" type="button" aria-label="更多选项">•••</button>
+          </div>
+        </section>
+
+        <div class="ping" aria-label="网络延迟 6 毫秒">6ms</div>
+
+        <button class="round-tool medal-tool" id="recordButton" type="button" aria-label="战绩">
+          <span></span>
+        </button>
+        <button class="list-tool" id="rulesButton" type="button" aria-label="游戏规则">
+          <i></i><i></i><i></i>
+        </button>
+
+        <div class="seat seat-top-left" data-player="xian" data-seat-index="5">
+          <span class="ready-tag" hidden>已准备</span><span class="seat-action" hidden></span>
+          <div class="avatar-wrap"><img src="./assets/avatar-xian.png" alt="闲俊喆头像" /></div>
+          <span class="player-name">闲俊喆</span>
+          <span class="stack">0</span>
+          <span class="opponent-cards" hidden></span><span class="seat-bet" hidden><i class="chip-dot"></i><b>0</b></span>
+        </div>
+
+        <div class="seat seat-top-right" data-player="sa" data-seat-index="4">
+          <span class="ready-tag" hidden>已准备</span><span class="seat-action" hidden></span>
+          <div class="avatar-wrap"><img src="./assets/avatar-sa.png" alt="萨静煜头像" /></div>
+          <span class="player-name">萨静煜</span>
+          <span class="stack">0</span>
+          <span class="opponent-cards" hidden></span><span class="seat-bet" hidden><i class="chip-dot"></i><b>0</b></span>
+        </div>
+
+        <div class="seat seat-left-upper active-player" data-player="dorothy" data-seat-index="6">
+          <span class="ready-tag" hidden>已准备</span><span class="seat-action" hidden></span>
+          <span class="action-tag">加注</span>
+          <div class="avatar-wrap"><img src="./assets/avatar-dorothy.png" alt="多萝西头像" /></div>
+          <span class="player-name">多萝西</span>
+          <span class="stack" data-stack="dorothy">36</span>
+          <span class="opponent-cards" hidden></span>
+          <span class="seat-bet"><i class="chip-dot"></i><b data-bet="dorothy">22</b></span>
+        </div>
+
+        <button class="seat empty-seat seat-left-middle" type="button" data-empty-seat="1" data-seat-index="7" aria-label="邀请玩家入座">
+          <span class="ready-tag" hidden>已准备</span><span class="seat-action" hidden></span>
+          <span class="invite-icon"><i></i><b>+</b></span>
+          <span class="avatar-wrap filled-avatar" hidden><img alt="玩家头像" /></span><span class="player-name" hidden></span><span class="stack" hidden>0</span>
+          <span class="opponent-cards" hidden></span><span class="seat-bet" hidden><i class="chip-dot"></i><b>0</b></span>
+        </button>
+        <button class="seat empty-seat seat-left-lower" type="button" data-empty-seat="2" data-seat-index="8" aria-label="邀请玩家入座">
+          <span class="ready-tag" hidden>已准备</span><span class="seat-action" hidden></span>
+          <span class="invite-icon"><i></i><b>+</b></span>
+          <span class="avatar-wrap filled-avatar" hidden><img alt="玩家头像" /></span><span class="player-name" hidden></span><span class="stack" hidden>0</span>
+          <span class="opponent-cards" hidden></span><span class="seat-bet" hidden><i class="chip-dot"></i><b>0</b></span>
+        </button>
+
+        <div class="seat seat-right-upper" data-player="zhan" data-seat-index="3">
+          <span class="ready-tag" hidden>已准备</span><span class="seat-action" hidden></span>
+          <div class="avatar-wrap"><img src="./assets/avatar-zhan.png" alt="占利头像" /></div>
+          <span class="player-name">占利</span>
+          <span class="stack">0</span>
+          <span class="opponent-cards" hidden></span><span class="seat-bet" hidden><i class="chip-dot"></i><b>0</b></span>
+        </div>
+
+        <div class="seat seat-right-middle" data-player="lv" data-seat-index="2">
+          <span class="ready-tag" hidden>已准备</span><span class="seat-action" hidden></span>
+          <div class="avatar-wrap"><img src="./assets/avatar-lv.png" alt="吕元旋头像" /></div>
+          <span class="player-name">吕元旋</span>
+          <span class="stack">0</span>
+          <span class="opponent-cards" hidden></span><span class="seat-bet" hidden><i class="chip-dot"></i><b>0</b></span>
+        </div>
+
+        <div class="seat seat-right-lower" data-player="hei" data-seat-index="1">
+          <span class="ready-tag" hidden>已准备</span><span class="seat-action" hidden></span>
+          <div class="avatar-wrap"><img src="./assets/avatar-hei.png" alt="黑智渊头像" /></div>
+          <span class="player-name">黑智渊</span>
+          <span class="stack">0</span>
+          <span class="opponent-cards" hidden></span><span class="seat-bet" hidden><i class="chip-dot"></i><b>0</b></span>
+        </div>
+
+        <section class="pot-area" aria-live="polite">
+          <strong id="potValue">0</strong>
+          <span>底池</span>
+          <i></i>
+          <small id="blindLabel">小盲/大盲&nbsp;&nbsp;1/2</small>
+          <div class="side-pots" id="sidePots" hidden></div>
+        </section>
+
+        <section class="community-cards" id="communityCards" aria-label="公共牌"></section>
+        <span class="phase-badge" id="phaseBadge" hidden></span>
+
+        <button class="hero-zone" id="heroZone" type="button" data-seat-index="0" aria-label="我的座位，点击进入完整牌局">
+          <div class="hero-cards" id="heroCards" aria-label="手牌：梅花 2，黑桃 4">
+            <span class="playing-card black-card" data-card="2C">
+              <b>2</b><i>♣</i><em>♣</em>
+            </span>
+            <span class="playing-card black-card" data-card="4S">
+              <b>4</b><i>♠</i><em>♠</em>
+            </span>
+          </div>
+          <span class="hero-bet"><i class="chip-dot"></i><b data-bet="hero">44</b></span>
+          <span class="hero-avatar"><b>北</b><i>D</i></span>
+          <span class="turn-clock" id="turnClock" hidden><b>15</b></span>
+          <span class="action-tag hero-action-tag">加注</span>
+          <span class="player-name">陌北</span>
+          <span class="stack" data-stack="hero">94</span>
+        </button>
+
+        <section class="decision-panel" id="decisionPanel" aria-label="下注操作" hidden>
+          <div class="quick-bets" id="quickBets">
+            <button type="button" data-quick="2"><small>2</small><b>大盲</b></button>
+            <button type="button" data-quick="3"><small>3</small><b>大盲</b></button>
+            <button type="button" data-quick="5"><small>5</small><b>大盲</b></button>
+          </div>
+          <div class="decision-buttons">
+            <button class="fold-action" type="button" data-action="fold"><span>×</span><b>弃牌</b></button>
+            <button class="call-action" type="button" data-action="call"><span id="callGlyph">✓</span><b id="callLabel">跟注 2</b></button>
+            <button class="raise-action" type="button" data-action="raise"><span>+</span><b>加注</b></button>
+          </div>
+        </section>
+
+        <section class="lobby-panel" id="lobbyPanel" aria-label="牌桌准备大厅" hidden>
+          <div class="lobby-count">游戏人数：<strong id="lobbyCount">6</strong>/9</div>
+          <div class="lobby-config">
+            <span>参赛人数</span>
+            <div><button type="button" id="removePlayer" aria-label="减少玩家">−</button><b id="playerCountValue">6</b><button type="button" id="addPlayer" aria-label="增加玩家">＋</button></div>
+            <small>2–9 人 · 本地智能对手</small>
+          </div>
+          <button class="start-game-button" id="startGameButton" type="button"><span>开始游戏</span><small>盲注 1/2 · 带入 200</small></button>
+          <p id="readySummary">6 位玩家已准备</p>
+        </section>
+
+        <section class="round-message" id="roundMessage" aria-live="polite" hidden></section>
+
+        <button class="prediction-button" id="predictionButton" type="button" aria-pressed="false">
+          <span class="coin-star">✦</span>
+          <strong>x200</strong>
+          <b>猜自己赢</b>
+        </button>
+
+        <section class="game-log" id="gameLog" aria-live="polite">
+          <small>v1.0.0_381</small>
+          <p>多萝西 进入了房间</p>
+          <p class="manager">小管家：游戏开始。</p>
+          <p class="manager">小管家：游戏结束啦！</p>
+          <p class="manager">小管家：游戏开始。</p>
+        </section>
+
+        <footer class="bottom-dock">
+          <button class="mute-button" id="muteButton" type="button" aria-label="取消静音"><span></span></button>
+          <form class="chat-box" id="chatForm">
+            <input id="chatInput" type="text" maxlength="28" inputmode="text" placeholder="聊一聊～" aria-label="聊天内容" />
+          </form>
+          <button class="gift-button" id="giftButton" type="button" aria-label="送礼物"><span>◆</span></button>
+          <div class="home-indicator" aria-hidden="true"></div>
+        </footer>
+
+        <div class="floating-coins" id="floatingCoins" aria-hidden="true"></div>
+
+        <div class="popover game-picker" id="gamePicker" hidden>
+          <button type="button" class="selected">德州扑克 <span>✓</span></button>
+          <button type="button" disabled>黑白棋</button>
+          <button type="button" disabled>你画我猜</button>
+        </div>
+
+        <div class="popover more-menu" id="moreMenu" hidden>
+          <button type="button" data-menu="lobby">新建牌局</button>
+          <button type="button" data-menu="restart">重新本局</button>
+          <button type="button" data-menu="record">查看战绩</button>
+          <button type="button" data-menu="sound">声音设置</button>
+        </div>
+
+        <div class="modal-backdrop" id="modalBackdrop" hidden></div>
+
+        <section class="game-modal rules-modal" id="rulesModal" role="dialog" aria-modal="true" aria-labelledby="rulesTitle" hidden>
+          <header><h2 id="rulesTitle">游戏规则</h2><button type="button" data-close-modal aria-label="关闭">×</button></header>
+          <div class="modal-body">
+            <p>每人 2 张底牌，与 5 张公共牌组合，选出最大的 5 张牌型。</p>
+            <ol>
+              <li>行动：弃牌、跟注/让牌或加注。</li>
+              <li>流程：翻牌 → 转牌 → 河牌 → 摊牌。</li>
+              <li>牌型从高到低：皇家同花顺、同花顺、四条、葫芦、同花、顺子、三条、两对、一对、高牌。</li>
+            </ol>
+          </div>
+        </section>
+
+        <section class="game-modal raise-modal" id="raiseModal" role="dialog" aria-modal="true" aria-labelledby="raiseTitle" hidden>
+          <header><h2 id="raiseTitle">加注</h2><button type="button" data-close-modal aria-label="关闭">×</button></header>
+          <div class="raise-content">
+            <strong id="raiseAmount">48</strong>
+            <input id="raiseSlider" type="range" min="48" max="94" value="48" step="2" orient="vertical" aria-label="加注金额" />
+            <div class="chip-stack" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+          </div>
+          <div class="raise-actions">
+            <button type="button" class="cancel-raise" data-close-modal>×</button>
+            <button type="button" class="all-in-raise" id="allInRaise"><small>ALL</small><b>IN</b></button>
+            <button type="button" class="confirm-raise" id="confirmRaise">✓</button>
+          </div>
+        </section>
+
+        <section class="game-modal record-modal" id="recordModal" role="dialog" aria-modal="true" aria-labelledby="recordTitle" hidden>
+          <header><h2 id="recordTitle">战绩</h2><button type="button" data-close-modal aria-label="关闭">×</button></header>
+          <div class="record-mode">
+            <h3>模式</h3>
+            <div><b>1/2<small>小盲/大盲</small></b><b>138<small>带入值</small></b><b>0<small>前注</small></b><b>0.50h<small>牌桌时长</small></b></div>
+          </div>
+          <div class="record-result">
+            <h3>输赢</h3>
+            <strong id="recordDelta">+0</strong>
+          </div>
+          <div class="record-hand">
+            <div class="record-columns"><b>手牌</b><b>公共牌</b><b>共参与 <span id="handCount">1</span> 局</b></div>
+            <div class="record-cards" id="recordCards"></div>
+            <span class="hand-rank" id="handRank">等待结算</span>
+          </div>
+          <div class="hand-history" id="handHistory"></div>
+        </section>
+
+        <section class="game-modal result-modal" id="resultModal" role="dialog" aria-modal="true" aria-labelledby="resultTitle" hidden>
+          <header><h2 id="resultTitle">本局结算</h2><button type="button" data-close-modal aria-label="关闭">×</button></header>
+          <div class="result-content">
+            <span id="resultMedal">♠</span>
+            <h3 id="resultHeadline">等待摊牌</h3>
+            <p id="resultDetail"></p>
+            <div class="pot-awards" id="potAwards"></div>
+            <strong id="resultDelta">+0</strong>
+            <button type="button" id="nextHandButton">再来一局</button>
+          </div>
+        </section>
+      </section>
+    </main>
+    <script type="module" src="./js/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,146 @@
+/* v62: theme only. Do not filter model textures, logos, tokens or canvases. */
+.twk-theme-help { margin:4px 0 16px; font-size:11px; line-height:1.5; color:#526b7d; }
+html[data-ui-theme="dark"] .twk-theme-help { color:#aac0d1; }
+html[data-ui-theme="light"] {
+  color-scheme: light;
+  --bg-0: #edf6f7; --bg-1: #f5fbff;
+  --panel: #ffffff; --panel-2: #edf5fa; --line: #c9dce5;
+  --ink: #183247; --ink-dim: #526b7d; --ink-faint: #62788a;
+  --matcha: #087b51; --matcha-deep: #35b982; --matcha-glow: rgba(28,157,109,.18);
+  --cyan: #087d96; --gold: #946000; --magenta: #a62b82; --violet: #7250c0;
+  --shadow: 0 16px 42px -16px rgba(31,72,91,.24);
+}
+html[data-ui-theme="light"] #stage {
+  --scene-light-top: #e3f4fb; --scene-light-bottom: #f4fbf9;
+  background: linear-gradient(160deg,var(--scene-light-top),#f9fcff 52%,var(--scene-light-bottom));
+}
+html[data-ui-theme="light"] #stage[data-bg="matrix"] { --scene-light-top:#dcf5e8; --scene-light-bottom:#f1fbf6; }
+html[data-ui-theme="light"] #stage[data-bg="ocean"] { --scene-light-top:#dff4fc; --scene-light-bottom:#dff7f6; }
+html[data-ui-theme="light"] #stage[data-bg="space"],
+html[data-ui-theme="light"] #stage[data-bg="aurora"] { --scene-light-top:#e8e8fb; --scene-light-bottom:#e1f7f1; }
+html[data-ui-theme="light"] #stage[data-bg="tech"],
+html[data-ui-theme="light"] #stage[data-bg="city"] { --scene-light-top:#e0effb; --scene-light-bottom:#edf5fc; }
+html[data-ui-theme="light"] #stage[data-bg="vault"],
+html[data-ui-theme="light"] #stage[data-bg="sunset"] { --scene-light-top:#fff0d4; --scene-light-bottom:#fdf5ee; }
+html[data-ui-theme="light"] #stage[data-bg="trading"] { --scene-light-top:#e0f5f0; --scene-light-bottom:#effaf4; }
+html[data-ui-theme="light"] #stage::before {
+  background-image:linear-gradient(rgba(22,101,120,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(22,101,120,.045) 1px,transparent 1px);
+  background-size:32px 32px; opacity:.7;
+}
+html[data-ui-theme="light"] #stage::after { opacity:.12; }
+html[data-ui-theme="light"] .scene { opacity:.35; mix-blend-mode:multiply; }
+html[data-ui-theme="light"] .mx-col text { fill:#16825b; }
+html[data-ui-theme="light"] :is(.wallet-donut .wd-center b,.wallet-side .ws-label) { color:var(--ink); text-shadow:none; }
+html[data-ui-theme="light"] .wallet-donut .wd-track { stroke:#c5e5d8; }
+html[data-ui-theme="light"] :is(.version-panel,.hail,.kol-bubble,.speech-bubble,.toast,.proof-ticker) {
+  color:var(--ink); background:rgba(255,255,255,.95); border-color:#b9d7e1;
+  box-shadow:0 8px 24px rgba(35,86,106,.12);
+}
+html[data-ui-theme="light"] .version-panel { --version-ink:color-mix(in srgb,var(--version-accent),#173448 68%); }
+html[data-ui-theme="light"] :is(.version-title b,.version-live-command b,.version-quiz>b,.risk-stats b,.scanner-panel>b,.version-meter-top b,.campaign-stock b,.gas-auction-stats b,.boss-stats b) { color:var(--ink); }
+html[data-ui-theme="light"] :is(.version-priority,.route-line span.on,.route-line span.done,.bridge-target b,.battle-board strong) { color:var(--version-ink); }
+html[data-ui-theme="light"] :is(.risk-stats span,.guard-stats span,.gas-auction-stats span,.boss-stats span,.battle-board>div,.version-actions button) { background:#edf5f9; }
+html[data-ui-theme="light"] .version-actions button.on { color:#155964; background:#d9f1ee; }
+html[data-ui-theme="light"] :is(.risk-stats .good b,.guard-stats .good b) { color:#087b51; }
+html[data-ui-theme="light"] :is(.risk-stats .bad b,.guard-stats .bad b) { color:#b32f45; }
+html[data-ui-theme="light"] .version-meter-track { background:#d9e6eb; }
+html[data-ui-theme="light"] .version-meter-track i { background:linear-gradient(90deg,#28a587,var(--version-accent)); }
+html[data-ui-theme="light"] :is(.campaign-warning,.invite-chip .ic-meta b) { color:#8c5707; }
+html[data-ui-theme="light"] .coin .tag { color:#28415a; text-shadow:none; background:rgba(255,255,255,.9); border:1px solid #d5e4eb; border-radius:6px; padding:1px 5px; }
+html[data-ui-theme="light"] .coin.hazard .tag { color:#ab233b; background:#fff0f2; border-color:#ecc4cd; }
+html[data-ui-theme="light"] .coin.shield-pickup .tag { color:#076d90; background:#eafaff; }
+html[data-ui-theme="light"] .coin.gas-pickup .tag { color:#8b5c00; background:#fff7df; }
+html[data-ui-theme="light"] .pop { text-shadow:0 1px 3px #fff; }
+html[data-ui-theme="light"] :is(.wallet-side .ws-withdraw,.btn-primary,.task-card .tk-cta) { background:linear-gradient(135deg,#5ce3a2,#31b482); color:#082d20; }
+html[data-ui-theme="light"] .wallet-side .ws-withdraw:disabled { background:#edf2f5; color:#62788a; filter:none; }
+html[data-ui-theme="light"] :is(.scene-audio-toggle,.scene-audio-toggle.muted) { color:#156479; background:#f9fdff; border-color:#bddbe5; box-shadow:0 3px 10px rgba(18,77,96,.1); }
+html[data-ui-theme="light"] #stage .app-bottom-nav { background:rgba(255,255,255,.97); border-color:#c7dde5; box-shadow:0 7px 24px rgba(26,77,94,.13); }
+html[data-ui-theme="light"] #stage .app-bottom-nav button { color:#5f788a; }
+html[data-ui-theme="light"] #stage .app-bottom-nav button.active { color:#086c61; background:#dbf3eb; }
+html[data-ui-theme="light"] :is(.sheet-mask,.al-social-mask) { background:rgba(41,66,85,.25); }
+html[data-ui-theme="light"] :is(.invite-box,.steps .n,.btn-ghost) { background:#edf5f9; color:var(--ink); border-color:var(--line); }
+
+/* KOL view: the stage, header and conversation dock share one light palette. */
+html[data-ui-theme="light"] .ai-live {
+  --chat-accent:#087b94;
+  color:var(--ink); background:radial-gradient(120% 78% at 50% 0%,#def1fc 0%,#f0f8fc 56%,#f8fcfa 100%);
+}
+html[data-ui-theme="light"] .ai-live[data-chat-style="neon"] { --chat-accent:#097752; background:linear-gradient(160deg,#dff5e9,#f6fcfa); }
+html[data-ui-theme="light"] .ai-live[data-chat-style="armor"] { --chat-accent:#856018; background:linear-gradient(160deg,#eef0fa,#fff7e7); }
+html[data-ui-theme="light"] .ai-live .al-scrim { background:linear-gradient(180deg,rgba(241,249,253,.25),transparent 26%,transparent 55%,rgba(246,251,251,.55)); }
+html[data-ui-theme="light"] .chat-style-art { opacity:.12; }
+html[data-ui-theme="light"] .ai-live :is(.al-id,.al-close,.al-status,.al-style-tag,.al-field,.al-quick button,.al-msg.bot,.al-answer-state button,.al-action .ai-ic,.al-social-card,.al-social-close) {
+  color:var(--ink); background:rgba(255,255,255,.94); border-color:#c2dbe5; box-shadow:none;
+}
+html[data-ui-theme="light"] .ai-live :is(.al-id .al-name span,.al-status span,.al-answer-state span,.al-foot,.al-social-copy,.al-social-head p,.al-social-card footer) { color:#526b7d; }
+html[data-ui-theme="light"] .ai-live :is(.al-status b,.al-action,.al-field input) { color:var(--ink); }
+html[data-ui-theme="light"] .ai-live .al-field input::placeholder { color:#62788a; }
+html[data-ui-theme="light"] .ai-live .al-action span:last-child { text-shadow:none; }
+html[data-ui-theme="light"] .ai-live .al-action.al-social-entry .ai-ic { color:#087b94; }
+html[data-ui-theme="light"] .ai-live :is(.al-status div,.al-answer-state) { border-color:#d2e3e9; }
+html[data-ui-theme="light"] .ai-live :is(.al-voice-toggle,.al-voice-toggle:not(.on)) { color:#126e53; background:#e8f7ef; border-color:#b6decf; }
+html[data-ui-theme="light"] .ai-live .al-msg-nm { color:var(--chat-accent); }
+html[data-ui-theme="light"] .ai-live .al-msg.me { color:#123a2e; background:linear-gradient(135deg,#a5efc9,#6cd6ac); }
+html[data-ui-theme="light"] .ai-live .al-msg.responding .al-answer-state span { color:#096781; }
+html[data-ui-theme="light"] .ai-live .al-conversation-dock { background:linear-gradient(180deg,rgba(241,249,252,.95),#f8fcfa); border-color:#d0e3e9; }
+html[data-ui-theme="light"] .ai-live .al-send { color:#fff; background:linear-gradient(135deg,#128cab,#7362c6); box-shadow:0 5px 14px rgba(45,117,153,.2); }
+html[data-ui-theme="light"] .ai-live :is(.al-social-eyebrow,.al-social-channel.linked>small) { color:#077a70; }
+html[data-ui-theme="light"] .ai-live :is(.al-social-status,.al-social-channel,.al-social-channel>small) { color:#596b79; background:#f2f7fa; border-color:#d1dee7; }
+html[data-ui-theme="light"] .ai-live .al-social-channel.linked { color:#096d7a; background:#e4f6f2; }
+html[data-ui-theme="light"] .ai-live :is(.l2d-demo-badge,.l2d-runtime-badge,.l2d-runtime-status) { color:#225f70; background:#f4fafc; border-color:#bad8e1; }
+html[data-ui-theme="light"] .ai-live :is(.l2d-state,.l2d-caption) { color:#526b7d; }
+html[data-ui-theme="light"] .ai-live .l2d-full-figure { background:transparent; border:0; box-shadow:none; }
+html[data-ui-theme="light"] .ai-live .l2d-full-viseme::after { background:none; }
+html[data-ui-theme="light"] .ai-live .l2d-full-scan { opacity:.18; }
+
+/* Utility screens already use tokens; theme their headers and dark-mode surfaces too. */
+html[data-ui-theme="light"] :is(.campaign-quest-header,.campaign-player-card) { color:#183247; background:linear-gradient(135deg,#effaff,#def3ed); border-color:#c2dbe5; box-shadow:0 6px 18px rgba(31,72,91,.1); }
+html[data-ui-theme="light"] :is(.campaign-quest-header h1,.campaign-player-card h1,.campaign-quest-meta b) { color:#183247; text-shadow:none; }
+html[data-ui-theme="light"] :is(.campaign-kicker,.campaign-quest-meta small) { color:#107469; }
+html[data-ui-theme="light"] :is(.campaign-quest-header p,.campaign-player-card p) { color:#526b7d; }
+html[data-ui-theme="light"] .campaign-quest-meta>span { background:rgba(255,255,255,.72); border-color:#c8dfdf; }
+html[data-ui-theme="light"] .campaign-player-card :is(.campaign-profile-level,.campaign-profile-aip) { color:#17483f; background:#dff3ee; border-color:#b9dbd3; }
+html[data-ui-theme="light"] .campaign-player-card :is(.campaign-profile-level small,.campaign-profile-aip small) { color:#42695f; }
+html[data-ui-theme="light"] .campaign-player-card :is(.campaign-profile-level b,.campaign-profile-level strong,.campaign-profile-aip b) { color:#096952; }
+html[data-ui-theme="dark"] { color-scheme:dark; }
+html[data-ui-theme="dark"] body { background:radial-gradient(90% 70% at 50% 18%,#172839,#101a27 60%,#0b121e); }
+html[data-ui-theme="dark"] #stage:is([data-active-tab="tasks"],[data-active-tab="me"]) { background:#091522!important; }
+html[data-ui-theme="dark"] .campaign-view { --utility-bg:#091522; --utility-card:#112439; --utility-text:#e1edf7; --utility-muted:#a1b8ca; --utility-line:#2b4257; --utility-soft:#1b3043; --utility-accent:#46d8b3; --utility-accent-dark:#8ce9d0; }
+html[data-ui-theme="dark"] :is(.campaign-quest-stats>span,.campaign-quest-meta>span) { background:#132c3d; border-color:#2c485b; }
+html[data-ui-theme="dark"] .campaign-quest-stats small { color:#a1b8ca; }
+html[data-ui-theme="dark"] .campaign-quest-stats b { color:#8ce9d0; }
+html[data-ui-theme="dark"] #stage .app-bottom-nav { background:rgba(5,18,29,.96); border-color:#284659; }
+html[data-ui-theme="dark"] #stage .app-bottom-nav button { color:#91adc2; }
+html[data-ui-theme="dark"] #stage .app-bottom-nav button.active { color:#eaffff; background:#103743; }
+html[data-ui-theme="light"] .twk-launch { color:#1e586b; background:rgba(250,254,255,.95); border-color:#bfd7e1; box-shadow:0 4px 16px rgba(33,84,107,.16); }
+html[data-ui-theme="dark"] .twk-panel { color:#e1edf7; background:rgba(18,32,48,.98); border-color:#385268; }
+html[data-ui-theme="dark"] :is(.twk-lbl,.twk-val,.twk-sect,.twk-x,.twk-num-lbl,.twk-num-unit) { color:#aac0d1; }
+html[data-ui-theme="dark"] :is(.twk-field,.twk-num) { background-color:#20354a; border-color:#385268; color:#e1edf7; }
+html[data-ui-theme="dark"] .twk-field option { color:#e1edf7; background:#172b3e; }
+html[data-ui-theme="dark"] .twk-seg { background:#0b1c2b; }
+html[data-ui-theme="dark"] .twk-seg-thumb { background:#34526c; }
+html[data-ui-theme="light"] :is(button,input,select):focus-visible { outline:2px solid #087b94; outline-offset:3px; }
+html[data-ui-theme="light"] .kol-bubble .kb-tail { background:#fff; border-color:#b9d7e1; }
+html[data-ui-theme="light"] .ai-live :is(.kai-hybrid-status,.mao-live2d-identity,.mao-live2d-rig,.mao-live2d-status,.presenter-model-chip) { color:#255b70; background:#f5fbfe; border-color:#b9d7e1; }
+html[data-ui-theme="light"] .ai-live .kai-hybrid-avatar[data-cubism-status="failed"] .kai-hybrid-status { color:#825a08; background:#fff8e4; border-color:#e2cd97; }
+html[data-ui-theme="light"] .ai-live .live2d-model-placeholder { background:#edf6fa; color:var(--ink); }
+html[data-ui-theme="light"] .ai-live .live2d-model-placeholder b { color:var(--ink); text-shadow:none; }
+html[data-ui-theme="light"] .ai-live .live2d-model-placeholder span { color:var(--ink-dim); }
+html[data-ui-theme="light"] .ai-live .al-guide { background:#f0eafa; border-color:#cdbdde; }
+html[data-ui-theme="light"] .ai-live :is(.al-guide .go,.al-guide .gt p) { color:#614189; }
+html[data-ui-theme="light"] .ai-live iframe { color-scheme:light; }
+html[data-ui-theme="light"] .campaign-task-card { background:linear-gradient(140deg,#fff,#eaf6fa); border-color:#b9d7e1; }
+html[data-ui-theme="light"] .campaign-task-card:not(.status-rejected):not(.status-revoked) .campaign-task-title-row h3 { color:#183247; }
+html[data-ui-theme="light"] .campaign-task-card:not(.status-rejected):not(.status-revoked) .campaign-task-title-row strong { color:#895d09; }
+html[data-ui-theme="light"] .campaign-task-card:not(.status-rejected):not(.status-revoked) .campaign-task-main>p { color:#526b7d; }
+html[data-ui-theme="light"] .campaign-task-card:not(.status-rejected):not(.status-revoked) .campaign-task-detail { color:#526b7d; background:#edf5f9; }
+html[data-ui-theme="light"] .campaign-quest-ribbon { background:#dbf0ef; border-color:#c2dddf; }
+html[data-ui-theme="light"] .campaign-quest-ribbon span { color:#116b67; }
+html[data-ui-theme="light"] .campaign-quest-ribbon i { color:#895d09; }
+html[data-ui-theme="dark"] :is(.campaign-reward-orbit,.campaign-reward-milestones>div,.campaign-task-detail,.campaign-reward-flow) { background:#142c3e; border-color:#2c485b; color:#a1b8ca; }
+html[data-ui-theme="dark"] .campaign-reward-ring::before { background:#132a3c; }
+html[data-ui-theme="dark"] :is(.campaign-reward-ring strong,.campaign-reward-milestones b) { color:#d8f3f5; }
+html[data-ui-theme="dark"] :is(.campaign-reward-ring small,.campaign-reward-ring span,.campaign-reward-orbit-heading small,.campaign-kol-affinity span) { color:#a1b8ca; }
+html[data-ui-theme="dark"] .campaign-reward-milestones>div.unlocked { background:#163d3b; border-color:#2c7563; }
+html[data-ui-theme="dark"] .campaign-reward-milestones>div.unlocked strong { color:#8ce9d0; }
+html[data-ui-theme="dark"] .campaign-reward-disclosure { color:#e5c67e; }

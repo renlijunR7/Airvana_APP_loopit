@@ -22,15 +22,16 @@ test('Android package version advances for an unambiguous in-place update', () =
   const code = Number(/--version-code (\d+)/.exec(buildScript)?.[1]);
   const name = /--version-name (\d+\.\d+\.\d+)/.exec(buildScript)?.[1];
   const artifact = /Airvana-v(\d+\.\d+\.\d+)-debug\.apk/.exec(buildScript)?.[1];
-  assert.ok(code >= 20, `versionCode 必须 >= 20（当前 ${code}），不得回退`);
+  assert.ok(code >= 21, `versionCode 必须 >= 21（当前 ${code}），不得回退`);
   assert.equal(artifact, name, '产物文件名与 versionName 必须一致');
+  assert.equal(Number(/app-version=(\d+)/.exec(mainActivity)?.[1]), code, 'WebView 缓存版本与 APK versionCode 必须一致');
   assert.doesNotMatch(buildScript, /Airvana-Demo-v1\.0\.0-debug\.apk/);
 });
 
 test('Android wrapper always reloads packaged UI and verifies all three message tabs', () => {
   assert.match(mainActivity, /setCacheMode\(WebSettings\.LOAD_NO_CACHE\)/);
   assert.match(mainActivity, /clearCache\(true\)/);
-  assert.match(mainActivity, /native-shell=1&app-version=20/);
+  assert.match(mainActivity, /native-shell=1&app-version=\d+/);
   assert.match(mainActivity, /new LocalAssetServer\(getAssets\(\), 0\)/);
   assert.match(mainActivity, /localServerPort = localServer\.getPort\(\)/);
   assert.match(localAssetServer, /int getPort\(\)/);
@@ -153,7 +154,7 @@ test('Android activity draws behind a transparent navigation bar and passes its 
   assert.match(mainActivity, /setNavigationBarColor\(Color\.TRANSPARENT\)/);
   assert.match(mainActivity, /View\.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION/);
   assert.match(mainActivity, /View\.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN/);
-  assert.match(mainActivity, /loadUrl\("http:\/\/127\.0\.0\.1:" \+ localServerPort \+ "\/\?native-shell=1&app-version=20"\)/);
+  assert.match(mainActivity, /loadUrl\("http:\/\/127\.0\.0\.1:" \+ localServerPort \+ "\/\?native-shell=1&app-version=\d+"\)/);
   assert.match(mainActivity, /getSystemWindowInsetBottom\(\)/);
   assert.match(mainActivity, /getSystemWindowInsetTop\(\)/);
   assert.match(mainActivity, /getInsetsIgnoringVisibility\(WindowInsets\.Type\.navigationBars\(\)\)/);

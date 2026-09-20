@@ -1,5 +1,5 @@
 import { isoNow, jsonString, sha256, uid } from './utils.mjs';
-import { gameArtifactHtml, resolveGameConfig } from './game-artifact-v3.mjs';
+import { gameArtifactHtml, resolveGameConfig, SERVER_GAME_DELIVERY_VERSION } from './game-artifact-v3.mjs';
 
 const escapeHtml = value => String(value ?? '').replace(/[&<>'"]/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[ch]));
 const safeData = value => JSON.stringify(value).replaceAll('<', '\\u003c').replaceAll('>', '\\u003e').replaceAll('&', '\\u0026');
@@ -43,13 +43,16 @@ export function buildArtifact({ content, payload, version }) {
   const validation = { passed: checks.every(check => check.passed), checks };
   if (type === 'game') {
     const game = resolveGameConfig(content, payload);
-    Object.assign(manifest, { runtime: 'server-game-v3', runtimeVersion: '3.2.0', gameKey: game.gameKey, mechanic: game.mode, background: game.background,
-      gameplayAssetPack: 'classic-v1', artDirection: 'original-classic-flat-2d', assetOrigin: 'same-origin', productionStatus: 'LOCAL_DEMO',
+    Object.assign(manifest, { runtime: 'server-game-v3', runtimeVersion: SERVER_GAME_DELIVERY_VERSION, gameKey: game.gameKey, mechanic: game.mode, background: game.background,
+      gameplayAssetPack: game.mode === 'native' ? 'classic-v1' : 'server-casual-v4',
+      artDirection: game.mode === 'native' ? 'original-classic-flat-2d' : 'polished-casual-mobile-2.5d',
+      shellAssetPack: 'server-casual-v4', artUpgradeScope: game.mode === 'native' ? 'server-shell-only-native-gameplay-unchanged' : 'decision-and-memory-gameplay',
+      assetOrigin: 'same-origin', productionStatus: 'LOCAL_DEMO',
       gameplayStates: ['intro', 'playing', 'paused', 'success', 'failure', 'retry'],
       authoredChoices: game.authoredChoices || false, stages: game.mode === 'decision' ? game.rounds.length : 3 });
     manifest.optimizableFields = ['title', 'hook', 'coverStyle', ...(game.mode === 'native' ? [] : ['difficulty']), ...(game.mode === 'decision' ? ['interactionOrder'] : [])];
     manifest.standalone = false;
-    manifest.runtimeDependencies = ['/server-game-runtime-v3.js', '/server-game-runtime-v3.css', '/playable-assets-v3.js'];
+    manifest.runtimeDependencies = ['/server-game-runtime-v3.js', '/server-game-runtime-v3.css', '/server-casual-art-v4.js', '/playable-assets-v3.js'];
     checks.find(check => check.id === 'external-scripts').note = 'Versioned same-origin runtime scripts only; no third-party scripts';
     return { html: gameArtifactHtml({ content, payload, version, config: game }), manifest, validation };
   }

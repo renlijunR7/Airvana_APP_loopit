@@ -1,0 +1,272 @@
+[
+  {
+    "index": 435,
+    "name": "Scene-Road-Road",
+    "path": "/Users/lijunren/Documents/Codex/2026-09-08/http-game-zhongyigames-com-jizhan-http/work/original-city/Scene-Road-Road.glb",
+    "source": "http://game.zhongyigames.com/jizhan/assets/Game/native/f3/f3d0ce96-7abb-44aa-95a8-256baa215883@cc680.bin",
+    "texture": "SceneGraph.png",
+    "min": [
+      -5.000000953674316,
+      -0.8604846000671387,
+      -5.000280857086182
+    ],
+    "max": [
+      5.000000953674316,
+      0.1946510523557663,
+      5.000280857086182
+    ],
+    "bytes": 67944
+  },
+  {
+    "index": 401,
+    "name": "Scene-Architecture_A-Architecture_A",
+    "path": "/Users/lijunren/Documents/Codex/2026-09-08/http-game-zhongyigames-com-jizhan-http/work/original-city/Scene-Architecture_A-Architecture_A.glb",
+    "source": "http://game.zhongyigames.com/jizhan/assets/Game/native/d2/d24279c1-5ebd-483b-9359-34197aeb3bcc@b26ac.bin",
+    "texture": "SceneGraph.png",
+    "min": [
+      -2.9346251487731934,
+      -0.12324342876672745,
+      -2.0553319454193115
+    ],
+    "max": [
+      2.934621572494507,
+      2.1908459663391113,
+      2.0206058025360107
+    ],
+    "bytes": 110112
+  },
+  {
+    "index": 158,
+    "name": "Scene-Architecture_B-Architecture_B",
+    "path": "/Users/lijunren/Documents/Codex/2026-09-08/http-game-zhongyigames-com-jizhan-http/work/original-city/Scene-Architecture_B-Architecture_B.glb",
+    "source": "http://game.zhongyigames.com/jizhan/assets/Game/native/1f/1fdfa037-eeeb-4d9e-b508-e082314c61d8@d22d8.bin",
+    "texture": "SceneGraph.png",
+    "min": [
+      -2.1870243549346924,
+      -0.1426732838153839,
+      -2.187021017074585
+    ],
+    "max": [
+      2.1870334148406982,
+      3.634300470352173,
+      2.1870222091674805
+    ],
+    "bytes": 66500
+  },
+  {
+    "index": 166,
+    "name": "Scene-Architecture_D-Architecture_D",
+    "path": "/Users/lijunren/Documents/Codex/2026-09-08/http-game-zhongyigames-com-jizhan-http/work/original-city/Scene-Architecture_D-Architecture_D.glb",
+    "source": "http://game.zhongyigames.com/jizhan/assets/Game/native/28/28e75676-a466-4e9c-bb26-fd5b14a1f810@fbc26.bin",
+    "texture": "SceneGraph.png",
+    "min": [
+      -1.8901077508926392,
+      -0.1610497534275055,
+      -1.8901084661483765
+    ],
+    "max": [
+      1.89011812210083,
+      7.8443217277526855,
+      1.8901112079620361
+    ],
+    "bytes": 152712
+  },
+  {
+    "index": 325,
+    "name": "Scene-Architecture_C-Architecture_C",
+    "path": "/Users/lijunren/Documents/Codex/2026-09-08/http-game-zhongyigames-com-jizhan-http/work/original-city/Scene-Architecture_C-Architecture_C.glb",
+    "source": "http://game.zhongyigames.com/jizhan/assets/Game/native/a4/a444d342-76a9-4cb9-80b0-69d5eaf9facf@d6a09.bin",
+    "texture": "SceneGraph.png",
+    "min": [
+      -2.870800495147705,
+      -0.17383840680122375,
+      -2.8708086013793945
+    ],
+    "max": [
+      2.87081241607666,
+      7.750442981719971,
+      2.8708107471466064
+    ],
+    "bytes": 224284
+  },
+  {
+    "index": 376,
+    "name": "Scene-Architecture_E-Architecture_E",
+    "path": "/Users/lijunren/Documents/Codex/2026-09-08/http-game-zhongyigames-com-jizhan-http/work/original-city/Scene-Architecture_E-Architecture_E.glb",
+    "source": "http://game.zhongyigames.com/jizhan/assets/Game/native/c8/c840ee79-e1b1-4259-858c-514d6c5f15ca@d8502.bin",
+    "texture": "SceneGraph.png",
+    "min": [
+      -2.3950366973876953,
+      -0.15033817291259766,
+      -2.3950297832489014
+    ],
+    "max": [
+      2.395028829574585,
+      6.982173442840576,
+      2.395035743713379
+    ],
+    "bytes": 213124
+  },
+  {
+    "index": 425,
+    "name": "Scene-Decorate_A-Decorate_A",
+    "path": "/Users/lijunren/Documents/Codex/2026-09-08/http-game-zhongyigames-com-jizhan-http/work/original-city/Scene-Decorate_A-Decorate_A.glb",
+    "source": "http://game.zhongyigames.com/jizhan/assets/Game/native/ea/ead90d9d-540d-4133-b244-dcc5fd7d332f@7b587.bin",
+    "texture": "SceneGraph.png",
+    "min": [
+      -5.000000953674316,
+      -0.8678587079048157,
+      -5.000000476837158
+    ],
+    "max": [
+      5.000000953674316,
+      0.7622674703598022,
+      5.000000953674316
+    ],
+    "bytes": 109372
+  },
+  {
+    "index": 421,
+    "name": "Scene-Decorate_D-Decorate_D",
+    "path": "/Users/lijunren/Documents/Codex/2026-09-08/http-game-zhongyigames-com-jizhan-http/work/original-city/Scene-Decorate_D-Decorate_D.glb",
+    "source": "http://game.zhongyigames.com/jizhan/assets/Game/native/e9/e9cd928b-2c8a-4f32-8b05-ec8a16a0857b@20f47.bin",
+    "texture": "SceneGraph.png",
+    "min": [
+      -5.000000953674316,
+      -0.8678589463233948,
+      -5.000000476837158
+    ],
+    "max": [
+      5.000000953674316,
+      0.7622678279876709,
+      5.000000953674316
+    ],
+    "bytes": 91104
+  },
+  {
+    "index": 223,
+    "name": "Scene-Decorate_E-Decorate_E",
+    "path": "/Users/lijunren/Documents/Codex/2026-09-08/http-game-zhongyigames-com-jizhan-http/work/original-city/Scene-Decorate_E-Decorate_E.glb",
+    "source": "http://game.zhongyigames.com/jizhan/assets/Game/native/60/607df907-a8b3-4284-a728-627ed5053296@c2000.bin",
+    "texture": "SceneGraph.png",
+    "min": [
+      -5.000000953674316,
+      -0.8678587079048157,
+      -5.000000476837158
+    ],
+    "max": [
+      5.000000953674316,
+      0.7622677087783813,
+      5.000000953674316
+    ],
+    "bytes": 114076
+  },
+  {
+    "index": 190,
+    "name": "Scene-Decorate_Turning_A-Decorate_Turning",
+    "path": "/Users/lijunren/Documents/Codex/2026-09-08/http-game-zhongyigames-com-jizhan-http/work/original-city/Scene-Decorate_Turning_A-Decorate_Turning.glb",
+    "source": "http://game.zhongyigames.com/jizhan/assets/Game/native/3e/3e79307e-c494-44dc-9450-51534c478f7c@57d3d.bin",
+    "texture": "SceneGraph.png",
+    "min": [
+      -5.000001907348633,
+      -0.8678580522537231,
+      -5.000001907348633
+    ],
+    "max": [
+      5.000001430511475,
+      0.7622675895690918,
+      5.000001907348633
+    ],
+    "bytes": 169572
+  },
+  {
+    "index": 381,
+    "name": "Props-ElectricSaw-ElectricSaw",
+    "path": "/Users/lijunren/Documents/Codex/2026-09-08/http-game-zhongyigames-com-jizhan-http/work/original-city/Props-ElectricSaw-ElectricSaw.glb",
+    "source": "http://game.zhongyigames.com/jizhan/assets/Game/native/c9/c950aed4-85e6-4497-b559-649c8ea5cb80@b0f67.bin",
+    "texture": "StageProperty.png",
+    "min": [
+      -1.1197787523269653,
+      0.04271900653839111,
+      -1.1321454048156738
+    ],
+    "max": [
+      1.1478781700134277,
+      0.21947860717773438,
+      1.1355103254318237
+    ],
+    "bytes": 89400
+  },
+  {
+    "index": 384,
+    "name": "Props-Hammer-Hammer",
+    "path": "/Users/lijunren/Documents/Codex/2026-09-08/http-game-zhongyigames-com-jizhan-http/work/original-city/Props-Hammer-Hammer.glb",
+    "source": "http://game.zhongyigames.com/jizhan/assets/Game/native/cb/cb787489-1a02-4e4b-843d-a5b847c2afad@17318.bin",
+    "texture": "StageProperty.png",
+    "min": [
+      -1.1449676752090454,
+      -0.30920106172561646,
+      -1.4579182863235474
+    ],
+    "max": [
+      1.1357134580612183,
+      5.396438121795654,
+      1.4579176902770996
+    ],
+    "bytes": 92164
+  },
+  {
+    "index": 387,
+    "name": "Props-Hammer-Foundation",
+    "path": "/Users/lijunren/Documents/Codex/2026-09-08/http-game-zhongyigames-com-jizhan-http/work/original-city/Props-Hammer-Foundation.glb",
+    "source": "http://game.zhongyigames.com/jizhan/assets/Game/native/cb/cb787489-1a02-4e4b-843d-a5b847c2afad@cafeb.bin",
+    "texture": "StageProperty.png",
+    "min": [
+      -0.7940009236335754,
+      -0.14385899901390076,
+      -1.264708399772644
+    ],
+    "max": [
+      0.7940009236335754,
+      1.4924582242965698,
+      1.2647085189819336
+    ],
+    "bytes": 73472
+  },
+  {
+    "index": 232,
+    "name": "Props-Panels_Blue-Panels_Blue",
+    "path": "/Users/lijunren/Documents/Codex/2026-09-08/http-game-zhongyigames-com-jizhan-http/work/original-city/Props-Panels_Blue-Panels_Blue.glb",
+    "source": "http://game.zhongyigames.com/jizhan/assets/Game/native/6e/6e4698fd-f26d-4cc9-9fc2-52447a0043d8@21a22.bin",
+    "texture": "StageProperty.png",
+    "min": [
+      -2.3129937648773193,
+      -0.041188567876815796,
+      -0.13963578641414642
+    ],
+    "max": [
+      2.3319473266601562,
+      2.7017199993133545,
+      0.1396358758211136
+    ],
+    "bytes": 69884
+  },
+  {
+    "index": 233,
+    "name": "Props-Panels_Blue-Panels_Blue_1",
+    "path": "/Users/lijunren/Documents/Codex/2026-09-08/http-game-zhongyigames-com-jizhan-http/work/original-city/Props-Panels_Blue-Panels_Blue_1.glb",
+    "source": "http://game.zhongyigames.com/jizhan/assets/Game/native/6e/6e4698fd-f26d-4cc9-9fc2-52447a0043d8@780b8.bin",
+    "texture": "StageProperty.png",
+    "min": [
+      -2.059755563735962,
+      0.19004972279071808,
+      -1.0822943607990965e-07
+    ],
+    "max": [
+      2.082542657852173,
+      2.284585952758789,
+      3.2456898679811275e-07
+    ],
+    "bytes": 65440
+  }
+]

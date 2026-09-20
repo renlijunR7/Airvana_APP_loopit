@@ -44,7 +44,7 @@ class MemorySessionStore implements SessionStore {
 }
 
 class ApiException implements Exception {
-  ApiException(this.message, {this.statusCode, this.code});
+  const ApiException(this.message, {this.statusCode, this.code});
 
   final String message;
   final int? statusCode;
@@ -69,6 +69,9 @@ class AirvanaApiClient {
   final Duration requestTimeout;
 
   Future<String?> get sessionCookie => _sessionStore.readCookie();
+
+  /// 清除本地会话凭证（退出登录时使用）。
+  Future<void> clearSession() => _sessionStore.clear();
 
   Future<Map<String, dynamic>> getJson(String path) => _request('GET', path);
 
@@ -151,4 +154,12 @@ class AirvanaApiClient {
     }
     return decoded;
   }
+}
+
+/// 用户已主动退出登录，当前操作需要服务端身份。
+///
+/// 与普通 [ApiException] 区分开，界面据此给出「去登录」入口，
+/// 而不是笼统地报「请求失败」。
+class SignedOutException extends ApiException {
+  const SignedOutException() : super('已退出登录，该操作需要先登录');
 }

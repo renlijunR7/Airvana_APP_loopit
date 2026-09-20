@@ -2,6 +2,7 @@ import 'package:airvana_mobile/app/app_router.dart';
 import 'package:airvana_mobile/app/providers.dart';
 import 'package:airvana_mobile/design_system/airvana_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -55,6 +56,11 @@ void main() {
           find.byKey(const ValueKey('preferences-parity')),
           find.byKey(const ValueKey('settings-push-toggle')),
         ],
+        'about': [
+          find.byKey(const ValueKey('about-parity')),
+          find.byKey(const ValueKey('about-hero')),
+          find.byKey(const ValueKey('about-channels')),
+        ],
         'deleteAccount': [
           find.byKey(const ValueKey('delete-account-parity')),
           find.byKey(const ValueKey('delete-account-hero')),
@@ -75,6 +81,62 @@ void main() {
       }
     },
   );
+
+  testWidgets('about opens a full secondary page instead of a dialog', (
+    tester,
+  ) async {
+    final harness = TestCreateWorkflowHarness();
+    _usePhoneViewport(tester);
+    await _pumpRoute(tester, harness, 'preferences');
+
+    final aboutRow = find.text('关于我们');
+    await _expectOnPage(tester, aboutRow, reason: '设置页缺少「关于我们」入口');
+    await tester.tap(aboutRow);
+    await tester.pumpAndSettle();
+
+    // 必须是独立二级页：有自己的返回头 + 完整内容区
+    expect(
+      find.byKey(const ValueKey('profile-secondary-about')),
+      findsOneWidget,
+      reason: '「关于我们」应进入独立二级页',
+    );
+    expect(find.byKey(const ValueKey('about-parity')), findsOneWidget);
+    expect(find.byKey(const ValueKey('about-hero')), findsOneWidget);
+    expect(find.byKey(const ValueKey('about-website')), findsOneWidget);
+    expect(find.byKey(const ValueKey('about-channels')), findsOneWidget);
+
+    // 不得退回弹窗实现
+    expect(find.byType(AlertDialog), findsNothing, reason: '不允许使用弹窗');
+    expect(find.text('知道了'), findsNothing);
+
+    // 未开通的官方渠道如实标注，不放假链接
+    expect(find.text('即将开放'), findsNWidgets(4));
+
+    // 未开通的渠道点击后如实说明，不跳转也不伪装成已开通
+    await tester.tap(find.text('Telegram'));
+    await tester.pumpAndSettle();
+    expect(find.text('Telegram 官方渠道即将开放'), findsOneWidget);
+
+    // 应用未引入 url_launcher，官方网站只复制地址，不假装已打开外部浏览器
+    final clipboardCalls = <MethodCall>[];
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+        .setMockMethodCallHandler(SystemChannels.platform, (call) async {
+          if (call.method == 'Clipboard.setData') clipboardCalls.add(call);
+          return null;
+        });
+    await tester.tap(find.text('官方网站'));
+    await tester.pumpAndSettle();
+    expect(clipboardCalls, hasLength(1));
+    expect(
+      (clipboardCalls.single.arguments as Map)['text'],
+      'https://www.airvana.ai',
+    );
+    expect(find.textContaining('官方网站地址已复制'), findsOneWidget);
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+        .setMockMethodCallHandler(SystemChannels.platform, null);
+
+    expect(tester.takeException(), isNull);
+  });
 
   testWidgets(
     'settings actions persist subscription campaign and feedback state',
@@ -118,13 +180,20 @@ void main() {
         '希望增加设置页面的完整功能验证。',
       );
       await tester.pump();
-      final saveFeedback = find.text('保存意见反馈');
-      await _expectOnPage(tester, saveFeedback, reason: '反馈保存按钮未渲染');
-      await tester.tap(saveFeedback);
+      // 反馈已接服务端工单：按钮口径与落库状态都必须反映真实提交
+      final submitTicket = find.text('提交客服工单');
+      await _expectOnPage(tester, submitTicket, reason: '客服工单提交按钮未渲染');
+      expect(find.text('保存意见反馈'), findsNothing, reason: '已接服务端，不得保留「只存本机」的旧口径');
+      await tester.tap(submitTicket);
       await tester.pumpAndSettle();
       final feature = await harness.repository.loadLocalProfileFeatureState();
       expect(feature.feedbackTickets, hasLength(1));
-      expect(feature.feedbackTickets.single['status'], 'local-record');
+      expect(
+        '${feature.feedbackTickets.single['status']}',
+        startsWith('server:'),
+        reason: '本机副本要记录服务端返回的状态，而不是 local-record',
+      );
+      expect(feature.feedbackTickets.single['server_id'], isNotNull);
     },
   );
 
@@ -318,8 +387,42 @@ void main() {
     );
     expect(find.text('申请删除 Airvana 账号'), findsOneWidget);
     expect(find.textContaining('提交前请确认'), findsOneWidget);
-    expect(find.textContaining('当前为前端演示模式'), findsOneWidget);
     expect(find.byType(AlertDialog), findsNothing);
+
+    // 删除账号已接服务端：必须有真实提交区与二次确认，且不得退回演示占位
+    await _expectOnPage(
+      tester,
+      find.byKey(const ValueKey('delete-account-action')),
+      reason: '删除账号页缺少真实提交区',
+    );
+    expect(
+      find.textContaining('当前为前端演示模式'),
+      findsNothing,
+      reason: '能力已落地，不得保留「不会伪造删除申请」的旧口径',
+    );
+    expect(
+      find.byKey(const ValueKey('delete-account-confirm-input')),
+      findsOneWidget,
+    );
+    final submit = tester.widget<FilledButton>(
+      find.byKey(const ValueKey('delete-account-submit-button')),
+    );
+    expect(submit.onPressed, isNull, reason: '未输入确认短语前不得可提交');
+
+    await tester.enterText(
+      find.byKey(const ValueKey('delete-account-confirm-input')),
+      '删除账号',
+    );
+    await tester.pumpAndSettle();
+    expect(
+      tester
+          .widget<FilledButton>(
+            find.byKey(const ValueKey('delete-account-submit-button')),
+          )
+          .onPressed,
+      isNotNull,
+      reason: '输入确认短语后方可提交',
+    );
   });
 
   testWidgets(
