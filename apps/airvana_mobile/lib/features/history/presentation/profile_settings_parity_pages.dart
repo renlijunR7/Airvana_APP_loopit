@@ -1182,14 +1182,15 @@ class _IdentityAndRolesPageState extends ConsumerState<_IdentityAndRolesPage> {
 class _CampaignWorkbenchPage extends ConsumerWidget {
   const _CampaignWorkbenchPage();
 
+  // 与 Web 的 campaignStageLabels 逐字一致，避免两版对同一状态给出不同说法。
   static const _stages = [
-    'Brief 待确认',
-    '创作中',
-    '品牌审核中',
-    '交付已批准 · 演示',
-    '归因待确认',
+    '待确认合作与执行规则',
+    'Playable 已就绪 · 待提交',
+    '交付已提交 · 待品牌审核',
+    '交付已批准 · 待确认归因',
+    '归因已确认 · 待提交结算',
     '结算复核中',
-    '本地流程完成',
+    '流程完成 · 已沉淀',
   ];
 
   static const _actions = [

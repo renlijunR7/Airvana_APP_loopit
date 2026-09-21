@@ -3,7 +3,13 @@ import 'package:flutter/material.dart';
 
 /// 复刻旧版 Web 的 systemModal 家族。Web 用一个统一容器承载版本更新、
 /// 每日任务与三种风险提示；这里保持同一套文案与操作语义。
-enum AirvanaSystemModal { version, riskWeakNetwork, riskOffline, riskChinaRegion }
+enum AirvanaSystemModal {
+  version,
+  daily,
+  riskWeakNetwork,
+  riskOffline,
+  riskChinaRegion,
+}
 
 class AirvanaSystemModalSpec {
   const AirvanaSystemModalSpec({
@@ -33,6 +39,14 @@ const _specs = <AirvanaSystemModal, AirvanaSystemModalSpec>{
         '• 修复预约发布、签到跨日与弹窗键盘操作',
     note: '版本检查为本机演示；不会真正下载或安装安装包。',
     primaryLabel: '立即更新',
+    secondaryLabel: '稍后再说',
+  ),
+  AirvanaSystemModal.daily: AirvanaSystemModalSpec(
+    eyebrow: '每日推荐任务',
+    title: '完成今日推荐体验',
+    body: '体验一款推荐 Playable 并走完一次完整流程，即可领取今日奖励。',
+    note: 'AIP 仅记录本地内容互动贡献，不代表现金、收入或已验证商业转化。',
+    primaryLabel: '领取 +20 AIP',
     secondaryLabel: '稍后再说',
   ),
   AirvanaSystemModal.riskWeakNetwork: AirvanaSystemModalSpec(
