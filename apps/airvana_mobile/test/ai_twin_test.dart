@@ -107,6 +107,12 @@ void main() {
       expect(find.textContaining('AI 分身不会直接发布作品、确认 Campaign'), findsOneWidget);
 
       // 沙盒：拒答范围触发安全拦截
+      // 补齐「知识」tab 后 tab 条更长，先滚动再点击靠后的项。
+      await tester.drag(
+        find.byKey(const ValueKey('ai-twin-tab-scroll')),
+        const Offset(-260, 0),
+      );
+      await tester.pumpAndSettle();
       await tester.tap(find.byKey(const ValueKey('ai-twin-tab-test')));
       await tester.pumpAndSettle();
       await tester.enterText(

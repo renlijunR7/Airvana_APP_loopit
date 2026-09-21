@@ -85,7 +85,15 @@ void main() {
       // 创作灵感挑战置顶，且未接入时不编造话题热度
       expect(find.byKey(const ValueKey('creator-challenges')), findsOneWidget);
       expect(find.textContaining('灵感挑战需要服务端数据'), findsOneWidget);
-      await tester.scrollUntilVisible(find.text('灵感转 Brief'), 200);
+      // 建议分类 tab 行也是 Scrollable，滚动时必须指名纵向列表。
+      await tester.scrollUntilVisible(
+        find.text('灵感转 Brief'),
+        200,
+        scrollable: find.descendant(
+          of: find.byKey(const ValueKey('creator-center-scroll')),
+          matching: find.byType(Scrollable),
+        ).first,
+      );
       expect(find.text('灵感转 Brief'), findsOneWidget);
 
       // 增长体系：阶段免责声明 + 里程碑 + 机会申请状态本地记录

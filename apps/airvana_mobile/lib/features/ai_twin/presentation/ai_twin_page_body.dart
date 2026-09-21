@@ -241,6 +241,7 @@ class _AiTwinPageBodyState extends ConsumerState<AiTwinPageBody> {
                     ('persona', '资料'),
                     ('scenes', '场景'),
                     ('languages', '语言'),
+                    ('knowledge', '知识'),
                     ('stage', '舞台'),
                     ('test', '测试'),
                     ('channels', '渠道'),
@@ -264,6 +265,7 @@ class _AiTwinPageBodyState extends ConsumerState<AiTwinPageBody> {
             if (_tab == 'persona') ..._persona(state),
             if (_tab == 'scenes') ..._scenes(state),
             if (_tab == 'languages') ..._languages(state),
+            if (_tab == 'knowledge') ..._knowledge(),
             if (_tab == 'stage') ..._stageDemo(state),
             if (_tab == 'versions') ..._versions(state),
             if (_tab == 'test') ..._test(state),
@@ -523,6 +525,132 @@ class _AiTwinPageBodyState extends ConsumerState<AiTwinPageBody> {
             ),
         ],
       ),
+    ),
+  ];
+
+  Widget _knowledgeHeading(String title, String subtitle, String trailing) =>
+      Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+                const SizedBox(height: 3),
+                Text(
+                  subtitle,
+                  style: const TextStyle(
+                    fontSize: 10,
+                    color: AirvanaColors.muted,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Text(
+            trailing,
+            style: const TextStyle(
+              fontSize: 10,
+              fontWeight: FontWeight.w800,
+              color: AirvanaColors.muted,
+            ),
+          ),
+        ],
+      );
+
+  /// Web 的「知识」tab：已授权知识 + Campaign 知识域隔离。
+  /// 口径保持一致——只索引公开内容与获批的 Contract 字段。
+  List<Widget> _knowledge() => [
+    _knowledgeHeading('已授权知识', '只索引公开内容与获批 Contract 字段', '3 项'),
+    const SizedBox(height: 10),
+    for (final row in const [
+      ('公开创作档案', '仅使用公开、可撤销授权的数据', '已授权', false),
+      ('已发布作品与版本', '仅使用公开、可撤销授权的数据', '已授权', false),
+      ('Campaign 锁定字段', '只读取获批且未过期的锁定字段', '受 Contract 约束', true),
+    ])
+      Container(
+        key: ValueKey('ai-twin-knowledge-${row.$1}'),
+        margin: const EdgeInsets.only(bottom: 9),
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(14),
+          border: Border.all(color: AirvanaColors.line),
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    row.$1,
+                    style: const TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    row.$2,
+                    style: const TextStyle(
+                      fontSize: 10,
+                      color: AirvanaColors.muted,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(width: 8),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              decoration: BoxDecoration(
+                color: row.$4 ? const Color(0xFFFFF3D6) : const Color(0xFFEAF8EF),
+                borderRadius: BorderRadius.circular(999),
+              ),
+              child: Text(
+                row.$3,
+                style: TextStyle(
+                  fontSize: 9,
+                  fontWeight: FontWeight.w800,
+                  color: row.$4
+                      ? const Color(0xFF8B5B00)
+                      : const Color(0xFF147542),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    OutlinedButton(
+      key: const ValueKey('ai-twin-knowledge-add'),
+      onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('真实公开链接需要服务端抓取、来源校验与撤销机制'),
+        ),
+      ),
+      child: const Text('＋ 添加公开链接（演示）'),
+    ),
+    const SizedBox(height: 14),
+    _knowledgeHeading(
+      'Campaign 知识与权限隔离',
+      '只向绑定场景开放获批字段，不跨品牌共享',
+      '3 个知识域',
+    ),
+    const SizedBox(height: 10),
+    const BoundaryCard(
+      key: ValueKey('ai-twin-knowledge-boundary'),
+      title: '知识边界',
+      body:
+          '分身只读取公开资料与获批的 Contract 字段；授权可随时撤销，'
+          '撤销后立即停止索引；不同品牌的知识域相互隔离，不跨 Campaign 共享。',
     ),
   ];
 

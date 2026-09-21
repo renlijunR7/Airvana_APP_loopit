@@ -23,6 +23,8 @@ class CreatorCenterPageBody extends ConsumerStatefulWidget {
 
 class _CreatorCenterPageBodyState extends ConsumerState<CreatorCenterPageBody> {
   String _tab = 'operations';
+  // Web 的运营建议按四类分流，默认「优先处理」。
+  String _adviceCategory = 'priority';
   String _period = '7d';
   final Set<String> _appliedOpportunities = {};
 
@@ -409,8 +411,34 @@ class _CreatorCenterPageBodyState extends ConsumerState<CreatorCenterPageBody> {
 
   // ---------- Tab 2 运营建议 ----------
 
+  static const _adviceTabs = <(String, String)>[
+    ('priority', '优先处理'),
+    ('content', '内容优化'),
+    ('funnel', '漏斗与归因'),
+    ('compliance', '资格与合规'),
+  ];
+
   List<Widget> _advice(BuildContext context) => [
     CreatorChallengesCard(snapshot: _server),
+    const SizedBox(height: 14),
+    SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: [
+          for (final tab in _adviceTabs)
+            Padding(
+              padding: const EdgeInsets.only(right: 8),
+              child: ChoiceChip(
+                key: ValueKey('creator-advice-tab-${tab.$1}'),
+                label: Text(tab.$2, style: const TextStyle(fontSize: 11)),
+                selected: _adviceCategory == tab.$1,
+                onSelected: (_) =>
+                    setState(() => _adviceCategory = tab.$1),
+              ),
+            ),
+        ],
+      ),
+    ),
     const SizedBox(height: 14),
     _Panel(
       child: Row(
