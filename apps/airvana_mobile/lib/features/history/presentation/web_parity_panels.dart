@@ -1,5 +1,7 @@
 import 'package:airvana_mobile/design_system/airvana_theme.dart';
 import 'package:airvana_mobile/features/shared/domain/airvana_models.dart';
+import 'package:airvana_mobile/features/shared/presentation/playable_detail_screen.dart';
+import 'package:airvana_mobile/features/shared/presentation/player_publish_sheet.dart';
 import 'package:flutter/material.dart';
 
 /// 复刻旧版 Web 的 `globalSearch` panel（4 个分类 tab + 搜索历史 + 结果列表）。
@@ -593,6 +595,37 @@ class _PlayableLibraryPageBodyState extends State<PlayableLibraryPageBody> {
               ),
           ],
         ),
+        const SizedBox(height: 10),
+        SizedBox(
+          height: 44,
+          child: OutlinedButton.icon(
+            key: const ValueKey('library-player-publish'),
+            onPressed: () async {
+              final draft = await showModalBottomSheet<PlayerPostDraft>(
+                context: context,
+                isScrollControlled: true,
+                backgroundColor: Colors.white,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(20),
+                  ),
+                ),
+                builder: (_) =>
+                    const PlayerPublishSheet(displayName: 'Kai Chen'),
+              );
+              if (draft == null || !context.mounted) return;
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(
+                    '已保存到本机：${draft.type} · ${draft.visibility}',
+                  ),
+                ),
+              );
+            },
+            icon: const Icon(Icons.edit_outlined, size: 17),
+            label: const Text('发布图文内容'),
+          ),
+        ),
         const SizedBox(height: 12),
         Text(
           '${items.length} 个 Agentic Playable · 本机演示数据',
@@ -611,8 +644,18 @@ class _PlayableLibraryPageBodyState extends State<PlayableLibraryPageBody> {
           )
         else
           for (final item in items)
-            Container(
+            GestureDetector(
               key: ValueKey('library-item-${item.id}'),
+              onTap: () => Navigator.of(context).push(
+                MaterialPageRoute<void>(
+                  builder: (_) => PlayableDetailScreen(
+                    playable: item,
+                    // 作品库里的都是自己的作品，进入所有者视图。
+                    ownerView: true,
+                  ),
+                ),
+              ),
+              child: Container(
               margin: const EdgeInsets.only(bottom: 9),
               padding: const EdgeInsets.all(9),
               decoration: BoxDecoration(
@@ -674,6 +717,7 @@ class _PlayableLibraryPageBodyState extends State<PlayableLibraryPageBody> {
                   ),
                 ],
               ),
+            ),
             ),
       ],
     );
