@@ -1279,6 +1279,176 @@ class _CreatePlayableScreenState extends State<CreatePlayableScreen> {
     r'(允许|可以|可)(索取|收集|提交).{0,12}(助记词|私钥|验证码)|(允许|可以|可)(承诺|保证).{0,12}(收益|保本|获批|通过)|(无需|不必|取消|删除).{0,12}(退出|重试|举报)',
   ).hasMatch(value.trim());
 
+  /// 生成前的必备条件；与 Web 的预检口径一致——缺项只提示，不清空已有输入。
+  List<(String, String, String)> _preflightIssues() {
+    final issues = <(String, String, String)>[];
+    if (_ideaController.text.trim().isEmpty) {
+      issues.add(('创意描述', '待补充', '用一句话说明这个 Playable 要让玩家做什么。'));
+    }
+    if (_selectedPowerIds.isEmpty) {
+      issues.add(('能力组合', '待选择', '至少选择一项能力，生成结果才有可执行的玩法结构。'));
+    }
+    return issues;
+  }
+
+  /// Web 的 `preflight` sheet：生成前检查未通过时逐项列出问题。
+  /// 与 Web 一致——只提示不清空，已输入的创意、目标与素材都保留。
+  Future<void> _openPreflightComposer(List<(String, String, String)> issues) {
+    return showModalBottomSheet<void>(
+      context: context,
+      useRootNavigator: true,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (_) => _ComposerSheetFrame(
+        key: const ValueKey('composer-preflight-sheet'),
+        title: '生成前检查未通过',
+        subtitle: '逐项修复后重新点击主按钮；不会清空已输入的创意、目标或素材。',
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            for (final issue in issues)
+              Container(
+                key: ValueKey('preflight-issue-${issue.$1}'),
+                margin: const EdgeInsets.only(bottom: 9),
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(14),
+                  border: Border.all(color: AirvanaColors.line),
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            issue.$1,
+                            style: const TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w900,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            issue.$3,
+                            style: const TextStyle(
+                              fontSize: 10,
+                              height: 1.6,
+                              color: AirvanaColors.muted,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      issue.$2,
+                      style: const TextStyle(
+                        fontSize: 10,
+                        fontWeight: FontWeight.w800,
+                        color: Color(0xFFC62836),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// Web 的 `confirm` sheet：逐项复核创作方案，任意项可返回修改。
+  Future<void> _openConfirmComposer(List<(String, String)> rows) {
+    return showModalBottomSheet<void>(
+      context: context,
+      useRootNavigator: true,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (sheetContext) => _ComposerSheetFrame(
+        key: const ValueKey('composer-confirm-sheet'),
+        title: '检查你的创作方案',
+        subtitle: '逐项确认语言描述、问答、Power 与素材；点击任意项目可返回修改。',
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'REVIEW YOUR ANSWERS · LOCAL ONLY',
+              style: TextStyle(
+                fontSize: 10,
+                fontWeight: FontWeight.w800,
+                letterSpacing: .6,
+                color: AirvanaColors.accent,
+              ),
+            ),
+            const SizedBox(height: 12),
+            for (var i = 0; i < rows.length; i += 1)
+              Container(
+                key: ValueKey('confirm-row-${rows[i].$1}'),
+                margin: const EdgeInsets.only(bottom: 9),
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(14),
+                  border: Border.all(color: AirvanaColors.line),
+                ),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 20,
+                      height: 20,
+                      alignment: Alignment.center,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: AirvanaColors.canvas,
+                      ),
+                      child: Text(
+                        '${i + 1}',
+                        style: const TextStyle(
+                          fontSize: 9,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            rows[i].$1,
+                            style: const TextStyle(
+                              fontSize: 11,
+                              color: AirvanaColors.muted,
+                            ),
+                          ),
+                          const SizedBox(height: 3),
+                          Text(
+                            rows[i].$2,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w800,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () => Navigator.of(sheetContext).pop(),
+                      child: const Text('编辑 ›'),
+                    ),
+                  ],
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+
   Future<String?> _openComplianceComposer(String initialValue) async {
     var restrictions = initialValue;
     return showModalBottomSheet<String>(
@@ -3446,12 +3616,36 @@ class _CreatePlayableScreenState extends State<CreatePlayableScreen> {
           ),
         ),
         const SizedBox(height: 8),
-        FilledButton(
-          key: const ValueKey('confirm-generate'),
-          onPressed: _generationRequestInFlight
-              ? null
-              : () => _startGeneration(),
-          child: Text(_deepMode ? '确认 Brief 并生成 Contract 草案' : '确认并开始创作'),
+        Row(
+          children: [
+            Expanded(
+              child: OutlinedButton(
+                key: const ValueKey('open-confirm-sheet'),
+                onPressed: () => _openConfirmComposer(entries),
+                child: const Text('逐项复核'),
+              ),
+            ),
+            const SizedBox(width: 9),
+            Expanded(
+              child: FilledButton(
+                key: const ValueKey('confirm-generate'),
+                onPressed: _generationRequestInFlight
+                    ? null
+                    : () {
+                        // 与 Web 一致：生成前先跑预检，未通过时列出问题而不清空输入。
+                        final issues = _preflightIssues();
+                        if (issues.isNotEmpty) {
+                          unawaited(_openPreflightComposer(issues));
+                          return;
+                        }
+                        unawaited(_startGeneration());
+                      },
+                child: Text(
+                  _deepMode ? '确认 Brief 并生成 Contract 草案' : '确认并开始创作',
+                ),
+              ),
+            ),
+          ],
         ),
       ],
     );
