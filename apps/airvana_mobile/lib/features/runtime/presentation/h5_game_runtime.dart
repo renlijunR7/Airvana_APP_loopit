@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:airvana_mobile/features/runtime/data/game_webview_controller.dart';
 import 'package:airvana_mobile/design_system/airvana_theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -62,7 +63,7 @@ class _H5GameRuntimeState extends State<H5GameRuntime> {
   @override
   void initState() {
     super.initState();
-    _controller = WebViewController()
+    _controller = createGameWebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setBackgroundColor(const Color(0xFF0B0A10))
       ..addJavaScriptChannel('GameBridge', onMessageReceived: _onBridgeMessage)

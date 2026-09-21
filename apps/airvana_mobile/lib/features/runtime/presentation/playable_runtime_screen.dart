@@ -513,9 +513,8 @@ class _PlayableRuntimeScreenState extends ConsumerState<PlayableRuntimeScreen> {
                     StandaloneGameRuntime(
                       key: ValueKey('standalone-${playable.id}-$_runId'),
                       asset: playable.standaloneAsset,
-                      onLoadError: (_) => setState(
-                        () => _standaloneFallbackToChoices = true,
-                      ),
+                      onLoadError: (_) =>
+                          setState(() => _standaloneFallbackToChoices = true),
                     ),
                   if (_started && !_complete && _useH5Runtime)
                     H5GameRuntime(

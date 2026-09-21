@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:airvana_mobile/features/runtime/data/game_webview_controller.dart';
 import 'package:airvana_mobile/design_system/airvana_theme.dart';
 import 'package:airvana_mobile/features/runtime/data/standalone_asset_server.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +43,7 @@ class _StandaloneGameRuntimeState extends State<StandaloneGameRuntime> {
       _controller = WebViewController();
       return;
     }
-    _controller = WebViewController()
+    _controller = createGameWebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setBackgroundColor(const Color(0xFF0B0A10));
     unawaited(_load());

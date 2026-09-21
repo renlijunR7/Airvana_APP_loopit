@@ -196,7 +196,6 @@
 				97C146EA1CF9000F007C117D /* Sources */,
 				97C146EB1CF9000F007C117D /* Frameworks */,
 				97C146EC1CF9000F007C117D /* Resources */,
-				A17A1A1A2D00000100000001 /* Sync Android Web Baseline */,
 				9705A1C41CF9048500538489 /* Embed Frameworks */,
 				3B06AD1E1E4923F5004D2608 /* Thin Binary */,
 				DF8F4FE69B0C8D7A23E740EC /* [CP] Embed Pods Frameworks */,
@@ -271,23 +270,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		A17A1A1A2D00000100000001 /* Sync Android Web Baseline */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PROJECT_DIR}/../../../public/index.html",
-			);
-			name = "Sync Android Web Baseline";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/www/index.html",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\nWEB_SOURCE=\"${PROJECT_DIR}/../../../public\"\nWEB_DESTINATION=\"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/www\"\nif [ ! -f \"${WEB_SOURCE}/index.html\" ]; then\n  echo \"error: Android Web baseline is missing: ${WEB_SOURCE}/index.html\" >&2\n  exit 1\nfi\nmkdir -p \"${WEB_DESTINATION}\"\nrsync -a --delete --exclude 'ai-twin/heygen/*.mp4' --exclude 'ai-twin/heygen/showcase/*.mp4' \"${WEB_SOURCE}/\" \"${WEB_DESTINATION}/\"\n";
-		};
 		3B06AD1E1E4923F5004D2608 /* Thin Binary */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;

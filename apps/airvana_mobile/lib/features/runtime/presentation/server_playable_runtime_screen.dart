@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:airvana_mobile/features/runtime/data/game_webview_controller.dart';
 import 'package:airvana_mobile/app/providers.dart';
 import 'package:airvana_mobile/design_system/airvana_theme.dart';
 import 'package:airvana_mobile/features/runtime/domain/runtime_bridge.dart';
@@ -86,7 +87,7 @@ class _ServerPlayableRuntimeScreenState
         ),
       );
 
-      final controller = WebViewController();
+      final controller = createGameWebViewController();
       await controller.setJavaScriptMode(JavaScriptMode.unrestricted);
       await controller.setBackgroundColor(const Color(0xFF0E120F));
       await controller.addJavaScriptChannel(

@@ -54,12 +54,32 @@ class StandaloneAssetServer {
         return;
       }
       final data = await rootBundle.load('assets/$relative');
+      final bytes = data.buffer.asUint8List(
+        data.offsetInBytes,
+        data.lengthInBytes,
+      );
       request.response.headers.contentType = _contentTypeFor(relative);
       request.response.headers.set('Cache-Control', 'no-store');
+      // iOS 的 <audio>/<video> 走 AVFoundation，会先发 Range 探测并要求 206；
+      // 拿到 200 + chunked 时常判定为不可播放。Android 的 Chromium 不挑，
+      // 所以这一段在只跑 Android 时看不出问题。
+      request.response.headers.set('Accept-Ranges', 'bytes');
+      final range = _parseRange(request.headers.value('range'), bytes.length);
+      if (range == null) {
+        request.response.headers.contentLength = bytes.length;
+        if (request.method == 'GET') request.response.add(bytes);
+        await request.response.close();
+        return;
+      }
+      final (start, end) = range;
+      request.response.statusCode = HttpStatus.partialContent;
+      request.response.headers.set(
+        'Content-Range',
+        'bytes $start-$end/${bytes.length}',
+      );
+      request.response.headers.contentLength = end - start + 1;
       if (request.method == 'GET') {
-        request.response.add(
-          data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes),
-        );
+        request.response.add(Uint8List.sublistView(bytes, start, end + 1));
       }
       await request.response.close();
     } on Object {
@@ -70,6 +90,32 @@ class StandaloneAssetServer {
         // 连接已断开：忽略。
       }
     }
+  }
+
+  /// 解析 `bytes=start-end`。只支持单段；解析不出或越界时返回 null 走整文件 200。
+  (int, int)? _parseRange(String? header, int length) {
+    if (header == null || length == 0) return null;
+    final match = RegExp(r'^bytes=(\d*)-(\d*)$').firstMatch(header.trim());
+    if (match == null) return null;
+    final rawStart = match.group(1) ?? '';
+    final rawEnd = match.group(2) ?? '';
+    if (rawStart.isEmpty && rawEnd.isEmpty) return null;
+    int start;
+    int end;
+    if (rawStart.isEmpty) {
+      // `bytes=-N`：最后 N 字节。
+      final suffix = int.parse(rawEnd);
+      if (suffix <= 0) return null;
+      start = suffix >= length ? 0 : length - suffix;
+      end = length - 1;
+    } else {
+      start = int.parse(rawStart);
+      end = rawEnd.isEmpty ? length - 1 : int.parse(rawEnd);
+    }
+    if (start < 0 || start >= length) return null;
+    if (end >= length) end = length - 1;
+    if (end < start) return null;
+    return (start, end);
   }
 
   ContentType _contentTypeFor(String path) {
