@@ -9,6 +9,7 @@ import 'package:airvana_mobile/features/ai_twin/presentation/ai_twin_page_body.d
 import 'package:airvana_mobile/features/creator_center/presentation/creator_center_page_body.dart';
 import 'package:airvana_mobile/features/history/presentation/profile_settings_parity_pages.dart';
 import 'package:airvana_mobile/features/wallet/presentation/wallet_page_body.dart';
+import 'package:airvana_mobile/features/history/presentation/kol_activation_page.dart';
 import 'package:airvana_mobile/features/history/presentation/web_parity_panels.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -98,6 +99,14 @@ class ProfileSecondaryScreen extends ConsumerWidget {
                   ? LeaderboardPageBody(playables: _catalogPlayables(ref))
                   : destination == ProfileSecondaryDestination.library
                   ? PlayableLibraryPageBody(playables: _catalogPlayables(ref))
+                  : destination == ProfileSecondaryDestination.kolActivation
+                  ? const KolActivationPageBody()
+                  : destination == ProfileSecondaryDestination.recordManager
+                  ? const RecordManagerPageBody()
+                  : destination == ProfileSecondaryDestination.invite
+                  ? const InvitePageBody()
+                  : destination == ProfileSecondaryDestination.aiWorkspace
+                  ? const AiWorkspacePageBody()
                   : destination == ProfileSecondaryDestination.attribution
                   ? AttributionPageBody(playables: _catalogPlayables(ref))
                   : destination == ProfileSecondaryDestination.settlement
