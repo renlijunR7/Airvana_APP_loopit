@@ -9,6 +9,7 @@ import 'package:airvana_mobile/features/ai_twin/presentation/ai_twin_page_body.d
 import 'package:airvana_mobile/features/creator_center/presentation/creator_center_page_body.dart';
 import 'package:airvana_mobile/features/history/presentation/profile_settings_parity_pages.dart';
 import 'package:airvana_mobile/features/wallet/presentation/wallet_page_body.dart';
+import 'package:airvana_mobile/features/history/presentation/web_parity_panels.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -43,7 +44,17 @@ enum ProfileSecondaryDestination {
   signIn,
   about,
   deleteAccount,
-  legacyDraft;
+  legacyDraft,
+  // Web 基准里作为独立 panel 存在的入口，这里补齐为同名二级页。
+  globalSearch,
+  leaderboard,
+  library,
+  attribution,
+  settlement,
+  invite,
+  recordManager,
+  kolActivation,
+  aiWorkspace;
 
   static ProfileSecondaryDestination? fromSlug(String slug) {
     for (final destination in values) {
@@ -80,7 +91,18 @@ class ProfileSecondaryScreen extends ConsumerWidget {
               title: statsDestination ? '互动关系' : spec.title,
             ),
             Expanded(
-              child: destination == ProfileSecondaryDestination.settings
+              child:
+                  destination == ProfileSecondaryDestination.globalSearch
+                  ? GlobalSearchPageBody(playables: _catalogPlayables(ref))
+                  : destination == ProfileSecondaryDestination.leaderboard
+                  ? LeaderboardPageBody(playables: _catalogPlayables(ref))
+                  : destination == ProfileSecondaryDestination.library
+                  ? PlayableLibraryPageBody(playables: _catalogPlayables(ref))
+                  : destination == ProfileSecondaryDestination.attribution
+                  ? AttributionPageBody(playables: _catalogPlayables(ref))
+                  : destination == ProfileSecondaryDestination.settlement
+                  ? const SettlementPageBody()
+                  : destination == ProfileSecondaryDestination.settings
                   ? _ProfileSettingsPage(account: account)
                   : destination == ProfileSecondaryDestination.checkIn
                   ? const SingleChildScrollView(
@@ -111,6 +133,11 @@ class ProfileSecondaryScreen extends ConsumerWidget {
     );
   }
 }
+
+/// 这三个 Web 面板都以首页作品目录为数据源；服务端未接入时回落到本机目录。
+List<Playable> _catalogPlayables(WidgetRef ref) =>
+    ref.watch(homeProvider).value?.playables ??
+    LegacyDemoCatalog.legacyWebPlayables;
 
 bool _isProfileStatsDestination(ProfileSecondaryDestination destination) =>
     destination == ProfileSecondaryDestination.likes ||
@@ -1289,6 +1316,51 @@ _ProfileSecondarySpec _profileSecondarySpec(
   ProfileSecondaryDestination destination,
   AccountSnapshot? account,
 ) => switch (destination) {
+  ProfileSecondaryDestination.attribution => const _ProfileSecondarySpec(
+    icon: Icons.insights_outlined,
+    title: '效果归因',
+    description: '本机运行时事件构成的归因证据链。',
+  ),
+  ProfileSecondaryDestination.settlement => const _ProfileSecondarySpec(
+    icon: Icons.account_balance_outlined,
+    title: '商业结算',
+    description: '三账本分离与结算流程状态。',
+  ),
+  ProfileSecondaryDestination.invite => const _ProfileSecondarySpec(
+    icon: Icons.person_add_alt_1_outlined,
+    title: '邀请好友',
+    description: '邀请码、邀请进度与合格规则。',
+  ),
+  ProfileSecondaryDestination.recordManager => const _ProfileSecondarySpec(
+    icon: Icons.inventory_2_outlined,
+    title: '记录管理',
+    description: '收藏、体验记录、草稿与最近删除。',
+  ),
+  ProfileSecondaryDestination.kolActivation => const _ProfileSecondarySpec(
+    icon: Icons.workspace_premium_outlined,
+    title: '开通 KOL',
+    description: '五步完成创作者身份与首个 Campaign。',
+  ),
+  ProfileSecondaryDestination.aiWorkspace => const _ProfileSecondarySpec(
+    icon: Icons.auto_awesome_outlined,
+    title: 'AI 分身工作台',
+    description: '草稿续写、作品管理与分身协作入口。',
+  ),
+  ProfileSecondaryDestination.globalSearch => const _ProfileSecondarySpec(
+    icon: Icons.search_rounded,
+    title: '全局搜索',
+    description: '按作品、创作者与 Campaign 检索站内内容。',
+  ),
+  ProfileSecondaryDestination.leaderboard => const _ProfileSecondarySpec(
+    icon: Icons.emoji_events_outlined,
+    title: '排行榜',
+    description: '热度、营收与原力三个本地榜单。',
+  ),
+  ProfileSecondaryDestination.library => const _ProfileSecondarySpec(
+    icon: Icons.grid_view_rounded,
+    title: '我的 Agentic Playables',
+    description: '按运行状态筛选自己的作品。',
+  ),
   ProfileSecondaryDestination.checkIn => const _ProfileSecondarySpec(
     icon: Icons.event_available_outlined,
     title: '获取积分',
