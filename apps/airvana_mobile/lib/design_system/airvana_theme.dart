@@ -26,7 +26,10 @@ abstract final class AirvanaMetrics {
   static const navLensWidth = 46.0;
   static const navLensHeight = 38.0;
   static const createButtonSize = 39.0;
-  static const feedFooterHeight = 210.0;
+
+  /// 播放页底部信息区高度。作者行与浮动导航之间原本留出约 51 逻辑 px 的空档，
+  /// 按比例收窄后约 29 px，多出的高度还给作品画面。
+  static const feedFooterHeight = 188.0;
   static const cardRadius = 18.0;
 }
 

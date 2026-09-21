@@ -2,7 +2,6 @@ import 'dart:math' as math;
 
 import 'package:airvana_mobile/design_system/airvana_theme.dart';
 import 'package:airvana_mobile/design_system/legacy_web_assets.dart';
-import 'package:airvana_mobile/features/network/presentation/growth_narrative.dart';
 import 'package:airvana_mobile/features/network/presentation/growth_network_detail_screen.dart';
 import 'package:airvana_mobile/features/shared/data/legacy_demo_catalog.dart';
 import 'package:airvana_mobile/features/shared/domain/airvana_models.dart';
@@ -69,9 +68,6 @@ class _LegacyPageHeader extends StatelessWidget {
 
 class _LocalNetworkScreenState extends State<LocalNetworkScreen> {
   int _filter = 0;
-
-  /// Web 的 growthNetwork panel 分四个 tab，本机版与服务端版共用同一套。
-  String _tab = 'network';
 
   static const _perfectBlockTower = Playable(
     id: 'plb_perfect_block_tower',
@@ -217,103 +213,78 @@ class _LocalNetworkScreenState extends State<LocalNetworkScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      for (final tab in kGrowthTabs)
-                        Padding(
-                          padding: const EdgeInsets.only(right: 8),
-                          child: ChoiceChip(
-                            key: ValueKey('growth-tab-${tab.$1}'),
-                            label: Text(
-                              tab.$2,
-                              style: const TextStyle(fontSize: 11),
-                            ),
-                            selected: _tab == tab.$1,
-                            onSelected: (_) => setState(() => _tab = tab.$1),
-                          ),
+                Row(
+                  children: List.generate(4, (index) {
+                    const labels = ['推荐', '运行中', '增长最快', '品牌合作'];
+                    return Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.only(right: index == 3 ? 0 : 6),
+                        child: _FilterChip(
+                          key: ValueKey('network-filter-$index'),
+                          label: labels[index],
+                          selected: _filter == index,
+                          onTap: () => setState(() => _filter = index),
                         ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 12),
-                if (_tab != 'network')
-                  GrowthNarrative(tab: _tab, shrinkWrap: true)
-                else ...[
-                  Row(
-                    children: List.generate(4, (index) {
-                      const labels = ['推荐', '运行中', '增长最快', '品牌合作'];
-                      return Expanded(
-                        child: Padding(
-                          padding: EdgeInsets.only(right: index == 3 ? 0 : 6),
-                          child: _FilterChip(
-                            key: ValueKey('network-filter-$index'),
-                            label: labels[index],
-                            selected: _filter == index,
-                            onTap: () => setState(() => _filter = index),
-                          ),
-                        ),
-                      );
-                    }),
-                  ),
-                  const SizedBox(height: 15),
-                  const Text(
-                    '正在增长的 Agentic Playables',
-                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.w900),
-                  ),
-                  const SizedBox(height: 3),
-                  const Text(
-                    'Playable 是营销智能体，KOL 是运营者',
-                    style: TextStyle(fontSize: 10, color: AirvanaColors.muted),
-                  ),
-                  const SizedBox(height: 10),
-                  ...playables.map(
-                    (item) => Padding(
-                      padding: const EdgeInsets.only(bottom: 9),
-                      child: _NetworkPlayableCard(
-                        playable: item.playable,
-                        metrics: item.metrics,
                       ),
+                    );
+                  }),
+                ),
+                const SizedBox(height: 15),
+                const Text(
+                  '正在增长的 Agentic Playables',
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w900),
+                ),
+                const SizedBox(height: 3),
+                const Text(
+                  'Playable 是营销智能体，KOL 是运营者',
+                  style: TextStyle(fontSize: 10, color: AirvanaColors.muted),
+                ),
+                const SizedBox(height: 10),
+                ...playables.map(
+                  (item) => Padding(
+                    padding: const EdgeInsets.only(bottom: 9),
+                    child: _NetworkPlayableCard(
+                      playable: item.playable,
+                      metrics: item.metrics,
                     ),
                   ),
-                  const SizedBox(height: 6),
-                  const Row(
-                    children: [
-                      Text(
-                        '网络最新动态',
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w900,
-                        ),
+                ),
+                const SizedBox(height: 6),
+                const Row(
+                  children: [
+                    Text(
+                      '网络最新动态',
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w900,
                       ),
-                      Spacer(),
-                      Text(
-                        '版本、增长与里程碑',
-                        style: TextStyle(
-                          fontSize: 10,
-                          color: AirvanaColors.muted,
-                        ),
+                    ),
+                    Spacer(),
+                    Text(
+                      '版本、增长与里程碑',
+                      style: TextStyle(
+                        fontSize: 10,
+                        color: AirvanaColors.muted,
                       ),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                  const _NetworkActivity(
-                    title: 'Kai Chen',
-                    body: '发布「Crypto City 安全挑战」v2',
-                    value: '运行中',
-                  ),
-                  const _NetworkActivity(
-                    title: 'Pixel_Mind',
-                    body: '完成 18 个演示转化',
-                    value: '待结算',
-                  ),
-                  const _NetworkActivity(
-                    title: 'Nina',
-                    body: '为社区版本启动新一轮互动实验',
-                    value: 'v3',
-                  ),
-                ],
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                const _NetworkActivity(
+                  title: 'Kai Chen',
+                  body: '发布「Crypto City 安全挑战」v2',
+                  value: '运行中',
+                ),
+                const _NetworkActivity(
+                  title: 'Pixel_Mind',
+                  body: '完成 18 个演示转化',
+                  value: '待结算',
+                ),
+                const _NetworkActivity(
+                  title: 'Nina',
+                  body: '为社区版本启动新一轮互动实验',
+                  value: 'v3',
+                ),
               ],
             ),
           ),

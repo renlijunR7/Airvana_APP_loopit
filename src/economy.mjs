@@ -15,13 +15,15 @@ export const CREATION_COSTS = Object.freeze({
 
 export const AIP_REWARD_RULES = Object.freeze({
   registration_first_play: { amount: 100, expiryDays: 365 },
-  daily_login: { amount: 5, expiryDays: 365 },
+  // 签到口径以 Web 为准：第 N 天发放 20 + (N-1) x 10 AIP，第 7 天起封顶 80。
+  // daily_login 是每天的基础额，streak_day_N 是当天的连签加成，两者相加等于 Web 金额。
+  daily_login: { amount: 20, expiryDays: 365 },
   streak_day_2: { amount: 10, expiryDays: 365 },
-  streak_day_3: { amount: 15, expiryDays: 365 },
-  streak_day_4: { amount: 20, expiryDays: 365 },
-  streak_day_5: { amount: 20, expiryDays: 365 },
-  streak_day_6: { amount: 25, expiryDays: 365 },
-  streak_day_7: { amount: 30, expiryDays: 365 },
+  streak_day_3: { amount: 20, expiryDays: 365 },
+  streak_day_4: { amount: 30, expiryDays: 365 },
+  streak_day_5: { amount: 40, expiryDays: 365 },
+  streak_day_6: { amount: 50, expiryDays: 365 },
+  streak_day_7: { amount: 60, expiryDays: 365 },
   playable_complete: { amount: 5, expiryDays: 365 },
   daily_recommendation: { amount: 20, expiryDays: 365 },
   qualified_invitation: { amount: 100, expiryDays: 365 },

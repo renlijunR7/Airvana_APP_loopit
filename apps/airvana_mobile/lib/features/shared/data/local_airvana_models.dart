@@ -407,7 +407,10 @@ class LocalRewardState {
   /// 形如 2026-08-31 的本地日期键；空串表示从未签到。
   final String lastCheckInDate;
 
-  int get nextCheckInReward => 20 + checkInStreak * 10;
+  /// 与 Web 一致：第 N 天发 20 + (N-1) x 10 AIP，第 7 天起封顶 80，
+  /// 服务端 daily_login + streak_day_N 相加得到同一金额。
+  int get nextCheckInReward =>
+      20 + (checkInStreak > 6 ? 6 : checkInStreak) * 10;
 
   bool isCheckedInOn(String dateKey) => lastCheckInDate == dateKey;
 

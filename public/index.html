@@ -4309,7 +4309,7 @@ class Component extends DCLogic {
     txns: [
       {id:1,title:'Playable v2 · 有效互动贡献', time:'演示 · 今天 17:42', amt:'+64 AIP', currency:'AIP', amount:64, color:'#FF3B4A'},
       {id:2,title:'Campaign 交付贡献', time:'演示 · 今天 09:15', amt:'+2.4 AIT', currency:'AIT', amount:2.4, color:'#FF3B4A'},
-      {id:3,title:'每日签到', time:'演示 · 今天 08:02', amt:'+40 AIP', currency:'AIP', amount:40, color:'#FF3B4A'},
+      {id:3,title:'每日签到', time:'演示 · 今天 08:02', amt:'+50 AIP', currency:'AIP', amount:50, color:'#FF3B4A'},
       {id:4,title:'Playable 版本优化贡献', time:'演示 · 昨天 22:10', amt:'+180 AIP', currency:'AIP', amount:180, color:'#FF3B4A'}
     ],
     notifications: [
@@ -8892,17 +8892,17 @@ Airvana正式运营主体及其作为个人信息处理者或数据控制者的�
         {rank:'3', rankColor:'#D9A066', avatar:this.avatarFor('@nina'), name:'Nina', owner:'@nina', kind:'4 个版本持续优化', week:'198'}
       ],
       streak: s.streak, checkDays: days,
-      checkBtnLabel: s.lastCheckInDate===todayKey ? '今日已签到 ✓' : '签到领 ' + (20 + s.streak * 10) + ' AIP',
+      checkBtnLabel: s.lastCheckInDate===todayKey ? '今日已签到 ✓' : '签到领 ' + (20 + Math.min(s.streak, 6) * 10) + ' AIP',
       checkBtnBg: s.lastCheckInDate===todayKey ? '#F1F1F6' : ACC, checkBtnColor: s.lastCheckInDate===todayKey ? MUT : '#FFFFFF',
       checkBtnColor2: s.lastCheckInDate===todayKey ? MUT : ACC,
       openCheckinModal: () => this.setState({systemModal:'checkin', systemModalQueue:[]}),
       openEarnTasks: () => this.setState({panel:'earnTasks'}),
       earnTaskRows: [
-        {path:'M4 5.5h16v15H4z M8 3.5v4M16 3.5v4M4 10h16M8.5 15l2 2 4.5-4.5', label:'每日签到', meta:s.lastCheckInDate===todayKey ? '今日已签到 ✓' : '签到领 ' + (20 + s.streak * 10) + ' AIP', onPick:()=>{if(this.state.systemModal==='checkin')return;this.setState({systemModal:'checkin',systemModalQueue:[]});}},
+        {path:'M4 5.5h16v15H4z M8 3.5v4M16 3.5v4M4 10h16M8.5 15l2 2 4.5-4.5', label:'每日签到', meta:s.lastCheckInDate===todayKey ? '今日已签到 ✓' : '签到领 ' + (20 + Math.min(s.streak, 6) * 10) + ' AIP', onPick:()=>{if(this.state.systemModal==='checkin')return;this.setState({systemModal:'checkin',systemModalQueue:[]});}},
         {path:'M12 5v14M5 12h14', label:'创作 Agentic Playable', meta:'发布游戏即可获得 AIP', onPick:()=>beginRoleGameCreate('earn_task_game_create')},
         {path:'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2 M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z M19 8v6M22 11h-6', label:'邀请好友', meta:'好友完成注册并配置 Agent 后领取奖励', onPick:()=>this.setState({panel:'invite',panelReturn:'earnTasks'})}
       ].map((row,i,arr)=>({...row,border:i===arr.length-1?'transparent':'var(--border-subtle,#F1F1F6)'})),
-      checkIn: () => { if (s.lastCheckInDate===todayKey) { this.setState({systemModal:null,systemModalQueue:[]}); return; } const amount=20+s.streak*10; const txn={id:Date.now(),title:'每日签到',time:'刚刚',amt:'+'+amount+' AIP',currency:'AIP',amount,color:ACC}; this.setState(st => ({checkedIn:true,lastCheckInDate:todayKey,aip:st.aip+amount,streak:st.streak+1,txns:[txn,...st.txns],systemModal:null,systemModalQueue:[]})); this.toast('签到成功 +'+amount+' AIP'); if(this.localApi&&this.localApi.ready)this.localApi.checkIn().then(r=>{if(r&&r.batch&&!r.idempotent){this.recordLocalFeatureEvent('server_check_in_posted',{amount:r.batch.original_amount,streak:r.streak,server_confirmed:true});this.toast('服务端签到已入账 +'+r.batch.original_amount+' AIP（连签 '+r.streak+' 天）');}}).catch(()=>{}); },
+      checkIn: () => { if (s.lastCheckInDate===todayKey) { this.setState({systemModal:null,systemModalQueue:[]}); return; } const amount=20+Math.min(s.streak,6)*10; const txn={id:Date.now(),title:'每日签到',time:'刚刚',amt:'+'+amount+' AIP',currency:'AIP',amount,color:ACC}; this.setState(st => ({checkedIn:true,lastCheckInDate:todayKey,aip:st.aip+amount,streak:st.streak+1,txns:[txn,...st.txns],systemModal:null,systemModalQueue:[]})); this.toast('签到成功 +'+amount+' AIP'); if(this.localApi&&this.localApi.ready)this.localApi.checkIn().then(r=>{if(r&&r.batch&&!r.idempotent){this.recordLocalFeatureEvent('server_check_in_posted',{amount:r.batch.original_amount,streak:r.streak,server_confirmed:true});this.toast('服务端签到已入账 +'+r.batch.original_amount+' AIP（连签 '+r.streak+' 天）');}}).catch(()=>{}); },
       quests,campaignCenterMeta:campaignStageLabels[campaignStage]+' · 全程保留证据',
       creatorCenterTabs,creatorCenterIsOperations:creatorCenterTabKey==='operations',creatorCenterIsAdvice:creatorCenterTabKey==='advice',creatorCenterIsGrowth:creatorCenterTabKey==='growth',
       creatorKycLabel:s.identityKycStatus==='verified_demo'?'KYC 已验证 · 演示':s.identityKycStatus==='pending_demo'?'KYC 审核中 · 演示':'KYC 待认证',creatorRoleStatusMeta:creatorEntitled?'KOL 创作者 · 本地演示':'玩家视角 · KOL 资格待完成',creatorStatusLabel:creatorEntitled?'创作者已开通':'创作者未开通',creatorStatusClass:creatorEntitled?'is-ready':'',creatorActivationPending:creatorEntitled&&!s.kolActivationCompleted,resumeKolActivation:()=>this.setState({overlay:'kolActivation',panel:null,kolActivationStep:s.kolActivationStep||'welcome'}),openCreatorIdentity:()=>this.setState({panel:'identity',identityDetailRole:'creator'}),

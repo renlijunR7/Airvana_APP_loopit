@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { openDatabase, closeDatabase } from '../src/db.mjs';
+import { AIP_REWARD_RULES } from '../src/economy.mjs';
 import {
   activateSubscription, awardAipRule, completePaymentSettlement, consumeCreation,
   createAitEntitlement, economySnapshot, ensureEconomyAccount, grantAip,
@@ -85,4 +86,19 @@ test('AIT requires an approved locked Campaign Contract and settles through a se
     assert.equal(completePaymentSettlement(f.db, { settlementId: payment.id, reviewerId: 'admin', paymentReference: 'provider:payment-1', receiptReference: 'receipt:payment-1' }).record.status, 'paid');
     assert.equal(economySnapshot(f.db, f.player).ait.settled, 100);
   } finally { f.close(); }
+});
+
+
+test('签到阶梯与 Web 一致：第 N 天 20 + (N-1)*10，第 7 天起封顶 80', () => {
+  // 服务端把每天的签到拆成 daily_login（基础额）+ streak_day_N（当天加成），
+  // 两者相加必须等于 Web 的 20 + (N-1)*10。
+  const expected = { 1: 20, 2: 30, 3: 40, 4: 50, 5: 60, 6: 70, 7: 80 };
+  for (const [day, amount] of Object.entries(expected)) {
+    const bonus = AIP_REWARD_RULES[`streak_day_${day}`];
+    const total = AIP_REWARD_RULES.daily_login.amount + (bonus ? bonus.amount : 0);
+    assert.equal(total, amount, `第 ${day} 天应发 ${amount} AIP`);
+  }
+  // 第 8 天起 src/app.mjs 用 Math.min(streak, 7) 取规则，因此仍是 80。
+  assert.equal(AIP_REWARD_RULES.streak_day_1, undefined);
+  assert.equal(AIP_REWARD_RULES.daily_login.amount + AIP_REWARD_RULES.streak_day_7.amount, 80);
 });

@@ -51,14 +51,20 @@
 数据表：`invite_profiles`（邀请码）、`invite_redemptions`（invitee 唯一，registered→qualified）。
 
 ## 已有接口（移动端其余模块直接对接）
-- 签到：`POST /api/economy/check-in`（daily_login 5 + streak_day_N 加成）
+- 签到：`POST /api/economy/check-in`（daily_login 20 + streak_day_N 加成，合计 = 第 N 天 20 + (N-1)×10，第 7 天起封顶 80）
 - 钱包绑定：`POST /api/wallet-bindings/{validate-address|challenge|verify}`
 - 订阅/额度/创作扣费：`GET /api/economy`、`GET /api/economy/plans`、`POST /api/economy/creation/consume`
 - 创作者身份：`POST /api/creator-applications`
 - KOL 分身：`GET|POST /api/ai-twin`、`/api/ai-twin/scenes`
 
-## 已知口径差异（待产品定夺）
-移动端/旧版 Web 前端本地签到公式为 `20 + streak×10`（连签 4 → 60 AIP）；服务端经济 v1 为 `daily_login 5 + streak_day_N（10~30）`（连签 4 → 25 AIP）。两套口径目前并存（前端本地记账 + 服务端独立入账），上线前需统一为其中一种。
+## 签到口径（已统一）
+以 Web 为准：第 N 天发放 `20 + (N-1)×10` AIP，第 7 天起封顶 80。
+
+| 连签天数 | 1 | 2 | 3 | 4 | 5 | 6 | 7 及以后 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| AIP | 20 | 30 | 40 | 50 | 60 | 70 | 80 |
+
+服务端把这笔金额拆成两条事件入账：`daily_login`（固定 20）+ `streak_day_N`（当天加成 0/10/20/30/40/50/60），相加等于上表金额；`src/app.mjs` 的连签回溯循环最多数到 7 天，因此第 8 天起仍按 80 发放。Web（`public/index.html`）与移动端本机记账用同一个公式并同样封顶。
 
 ## 测试
 `test/game-loop-invites-api.test.mjs`（HTTP 级，覆盖金币隔离、每日 AIP 幂等、失败不入账、邀请绑定/合格/幂等/换绑防护）。全量后端测试 319/319 通过。

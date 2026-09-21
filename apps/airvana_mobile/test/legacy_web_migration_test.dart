@@ -232,7 +232,7 @@ void main() {
       expect(AirvanaMetrics.navLensWidth, 46);
       expect(AirvanaMetrics.navLensHeight, 38);
       expect(AirvanaMetrics.createButtonSize, 39);
-      expect(AirvanaMetrics.feedFooterHeight, 210);
+      expect(AirvanaMetrics.feedFooterHeight, 188);
       expect(AirvanaMetrics.cardRadius, 18);
     },
   );
