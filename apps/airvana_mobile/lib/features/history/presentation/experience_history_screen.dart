@@ -9,6 +9,8 @@ import 'package:airvana_mobile/features/ai_twin/presentation/ai_twin_page_body.d
 import 'package:airvana_mobile/features/creator_center/presentation/creator_center_page_body.dart';
 import 'package:airvana_mobile/features/history/presentation/profile_settings_parity_pages.dart';
 import 'package:airvana_mobile/features/wallet/presentation/wallet_page_body.dart';
+import 'package:airvana_mobile/shared/presentation/destructive_confirm.dart';
+import 'package:airvana_mobile/features/history/presentation/agent_manager_page.dart';
 import 'package:airvana_mobile/features/history/presentation/kol_activation_page.dart';
 import 'package:airvana_mobile/features/history/presentation/web_parity_panels.dart';
 import 'package:flutter/material.dart';
@@ -55,7 +57,8 @@ enum ProfileSecondaryDestination {
   invite,
   recordManager,
   kolActivation,
-  aiWorkspace;
+  aiWorkspace,
+  agentManager;
 
   static ProfileSecondaryDestination? fromSlug(String slug) {
     for (final destination in values) {
@@ -99,6 +102,8 @@ class ProfileSecondaryScreen extends ConsumerWidget {
                   ? LeaderboardPageBody(playables: _catalogPlayables(ref))
                   : destination == ProfileSecondaryDestination.library
                   ? PlayableLibraryPageBody(playables: _catalogPlayables(ref))
+                  : destination == ProfileSecondaryDestination.agentManager
+                  ? const AgentManagerPageBody()
                   : destination == ProfileSecondaryDestination.kolActivation
                   ? const KolActivationPageBody()
                   : destination == ProfileSecondaryDestination.recordManager
@@ -977,7 +982,13 @@ class _ProfileEditPageState extends ConsumerState<_ProfileEditPage> {
     }
   }
 
-  void _clearAvatar() {
+  Future<void> _clearAvatar() async {
+    // 与 Web 一致：移除头像走统一的破坏性确认层。
+    final confirmed = await confirmDestructiveAction(
+      context,
+      DestructiveAction.removeProfileAvatar,
+    );
+    if (!confirmed || !mounted) return;
     ref.read(profileAvatarSessionProvider.notifier).setBytes(null);
     setState(() => _avatarError = null);
   }
@@ -1354,6 +1365,11 @@ _ProfileSecondarySpec _profileSecondarySpec(
     icon: Icons.auto_awesome_outlined,
     title: 'AI 分身工作台',
     description: '草稿续写、作品管理与分身协作入口。',
+  ),
+  ProfileSecondaryDestination.agentManager => const _ProfileSecondarySpec(
+    icon: Icons.smart_toy_outlined,
+    title: 'AI 运营策略',
+    description: 'Agent 列表、权限范围与运营任务。',
   ),
   ProfileSecondaryDestination.globalSearch => const _ProfileSecondarySpec(
     icon: Icons.search_rounded,
@@ -2627,6 +2643,12 @@ List<List<_ProfileDrawerItem>> _profileSettingsGroups(
       label: '我的 Agentic Playables',
       meta: '',
       destination: ProfileSecondaryDestination.library,
+    ),
+    const _ProfileDrawerItem(
+      icon: Icons.smart_toy_outlined,
+      label: 'AI 运营策略',
+      meta: '3 个 Agent',
+      destination: ProfileSecondaryDestination.agentManager,
     ),
     const _ProfileDrawerItem(
       icon: Icons.auto_awesome_outlined,

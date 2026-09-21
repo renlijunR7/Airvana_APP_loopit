@@ -5,6 +5,7 @@ import 'package:airvana_mobile/features/account/domain/account_service_models.da
 import 'package:airvana_mobile/features/account/domain/platform_service_models.dart';
 import 'package:airvana_mobile/features/account/presentation/sign_in_page.dart';
 import 'package:airvana_mobile/features/shared/data/local_airvana_models.dart';
+import 'package:airvana_mobile/shared/presentation/destructive_confirm.dart';
 import 'package:airvana_mobile/shared/presentation/system_modals.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -3908,14 +3909,22 @@ class _AccountDeletionActionState
             ),
             onPressed: !ready || _busy
                 ? null
-                : () => _run(() async {
-                    final result = await ref
-                        .read(airvanaRepositoryProvider)
-                        .requestAccountDeletion();
-                    return result.idempotent
-                        ? '已有待处理的删除申请，未重复提交'
-                        : '删除申请已提交，30 天内可随时取消';
-                  }),
+                : () async {
+                    // 输入短语之后仍走统一确认层，与 Web 的双重确认一致。
+                    final confirmed = await confirmDestructiveAction(
+                      context,
+                      DestructiveAction.requestAccountDeletion,
+                    );
+                    if (!confirmed || !context.mounted) return;
+                    await _run(() async {
+                      final result = await ref
+                          .read(airvanaRepositoryProvider)
+                          .requestAccountDeletion();
+                      return result.idempotent
+                          ? '已有待处理的删除申请，未重复提交'
+                          : '删除申请已提交，30 天内可随时取消';
+                    });
+                  },
             child: Text(_busy ? '正在提交…' : '提交删除申请'),
           ),
         ),

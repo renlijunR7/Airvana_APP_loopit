@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:airvana_mobile/design_system/airvana_theme.dart';
 import 'package:airvana_mobile/design_system/legacy_web_assets.dart';
 import 'package:airvana_mobile/features/shared/domain/airvana_models.dart';
+import 'package:airvana_mobile/shared/presentation/destructive_confirm.dart';
 import 'package:flutter/material.dart';
 
 enum AirvanaShareChoice {
@@ -544,8 +545,14 @@ class _AirvanaLocalCommentSheetState extends State<AirvanaLocalCommentSheet> {
                           ? _liked.remove(index)
                           : _liked.add(index);
                     }),
-                    onAction: () {
+                    onAction: () async {
                       if (!comment.owned) return;
+                      // 删除评论会同步更新本地互动计数，走统一确认层。
+                      final confirmed = await confirmDestructiveAction(
+                        context,
+                        DestructiveAction.deleteComment,
+                      );
+                      if (!confirmed || !mounted) return;
                       setState(() => _comments.removeAt(index));
                     },
                   );
