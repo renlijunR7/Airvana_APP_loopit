@@ -5,6 +5,7 @@ import 'package:airvana_mobile/features/account/domain/account_service_models.da
 import 'package:airvana_mobile/features/account/domain/platform_service_models.dart';
 import 'package:airvana_mobile/features/account/presentation/sign_in_page.dart';
 import 'package:airvana_mobile/features/shared/data/local_airvana_models.dart';
+import 'package:airvana_mobile/shared/presentation/system_modals.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -3001,12 +3002,25 @@ class _ProductCenterPageState extends ConsumerState<_ProductCenterPage> {
                     ],
                     selected: {state.networkProfile},
                     onSelectionChanged: state.frontendEnvironment == 'test'
-                        ? (value) => _saveFeatureState(
-                            context,
-                            ref,
-                            state.copyWith(networkProfile: value.first),
-                            message: '网络模拟已更新',
-                          )
+                        ? (value) async {
+                            final next = value.first;
+                            await _saveFeatureState(
+                              context,
+                              ref,
+                              state.copyWith(networkProfile: next),
+                              message: '网络模拟已更新',
+                            );
+                            if (!context.mounted) return;
+                            // Web 在切到弱网/离线时会弹对应风险提示。
+                            final modal = switch (next) {
+                              'weak' => AirvanaSystemModal.riskWeakNetwork,
+                              'offline' => AirvanaSystemModal.riskOffline,
+                              _ => null,
+                            };
+                            if (modal != null) {
+                              await showAirvanaSystemModal(context, modal);
+                            }
+                          }
                         : null,
                   ),
                 ],
@@ -3135,6 +3149,32 @@ class _PreferencesPage extends ConsumerWidget {
       keyName: 'preferences-parity',
       children: [
         const _ServerMinorModePolicy(),
+        _Surface(
+          child: SwitchListTile.adaptive(
+            key: const ValueKey('minor-mode-local-switch'),
+            contentPadding: EdgeInsets.zero,
+            value: state.minorModeEnabled,
+            title: const Text(
+              '在本机启用未成年人模式',
+              style: TextStyle(fontSize: 13, fontWeight: FontWeight.w800),
+            ),
+            subtitle: const Text(
+              '开启后本机隐藏钱包、结算与 Token 奖励入口。'
+              '平台若已下发策略，以平台策略为准且不可在此关闭。',
+              style: TextStyle(
+                fontSize: 11,
+                height: 1.6,
+                color: AirvanaColors.muted,
+              ),
+            ),
+            onChanged: (value) => _saveFeatureState(
+              context,
+              ref,
+              state.copyWith(minorModeEnabled: value),
+              message: value ? '本机已启用未成年人模式' : '本机已关闭未成年人模式',
+            ),
+          ),
+        ),
         _SettingsSurface(
           key: const ValueKey('settings-display-surface'),
           child: Column(
@@ -3202,7 +3242,21 @@ class _PreferencesPage extends ConsumerWidget {
                 icon: Icons.sync_rounded,
                 label: '版本更新',
                 trailing: _kAppVersionLabel,
-                onTap: () => _notice(context, '当前已是最新版本 $_kAppVersionLabel'),
+                onTap: () async {
+                  // 与 Web 一致：版本检查走 systemModal，而不是一条提示条。
+                  final update = await showAirvanaSystemModal(
+                    context,
+                    AirvanaSystemModal.version,
+                    versionName: _kAppVersionLabel,
+                  );
+                  if (!context.mounted) return;
+                  _notice(
+                    context,
+                    update == true
+                        ? '本机演示：已记录更新意向，不会真正下载安装包'
+                        : '已保持当前版本 $_kAppVersionLabel',
+                  );
+                },
               ),
               _SettingsLink(
                 icon: Icons.info_outline_rounded,

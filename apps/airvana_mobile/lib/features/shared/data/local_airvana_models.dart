@@ -728,6 +728,7 @@ class LocalProfileFeatureState {
     this.networkProfile = 'normal',
     this.regionProfile = 'global',
     this.nonFinancialMode = false,
+    this.minorModeEnabled = false,
     this.serverSignedOut = false,
     this.popupStates = const {
       'version': true,
@@ -799,6 +800,7 @@ class LocalProfileFeatureState {
           : 'normal',
       regionProfile: '${json['region_profile'] ?? 'global'}',
       nonFinancialMode: json['non_financial_mode'] == true,
+      minorModeEnabled: json['minor_mode_enabled'] == true,
       serverSignedOut: json['server_signed_out'] == true,
       popupStates: rawPopupStates is Map
           ? Map<String, bool>.unmodifiable(
@@ -833,6 +835,9 @@ class LocalProfileFeatureState {
   final String regionProfile;
   final bool nonFinancialMode;
 
+  /// Web 允许本机自行开启未成年人模式；平台策略仍然优先。
+  final bool minorModeEnabled;
+
   /// 用户是否**主动退出**了服务端登录。
   ///
   /// 用来区分「从没登录过」和「刚刚退出」：前者可以自动建演示会话，
@@ -863,6 +868,7 @@ class LocalProfileFeatureState {
     String? networkProfile,
     String? regionProfile,
     bool? nonFinancialMode,
+    bool? minorModeEnabled,
     bool? serverSignedOut,
     Map<String, bool>? popupStates,
   }) => LocalProfileFeatureState(
@@ -890,6 +896,7 @@ class LocalProfileFeatureState {
     networkProfile: networkProfile ?? this.networkProfile,
     regionProfile: regionProfile ?? this.regionProfile,
     nonFinancialMode: nonFinancialMode ?? this.nonFinancialMode,
+    minorModeEnabled: minorModeEnabled ?? this.minorModeEnabled,
     serverSignedOut: serverSignedOut ?? this.serverSignedOut,
     popupStates: popupStates ?? this.popupStates,
   );
@@ -917,6 +924,7 @@ class LocalProfileFeatureState {
     'network_profile': networkProfile,
     'region_profile': regionProfile,
     'non_financial_mode': nonFinancialMode,
+    'minor_mode_enabled': minorModeEnabled,
     'server_signed_out': serverSignedOut,
     'popup_states': popupStates,
   };

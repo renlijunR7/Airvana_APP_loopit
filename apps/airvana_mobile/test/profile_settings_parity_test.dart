@@ -296,7 +296,16 @@ void main() {
     expect(themeDecoration.border!.top.width, 1);
 
     await tester.tap(find.text('版本更新'));
-    await tester.pump();
+    await tester.pumpAndSettle();
+    // 与 Web 一致：版本检查先弹 systemModal，关闭后才落提示条。
+    expect(
+      find.byKey(const ValueKey('system-modal-version')),
+      findsOneWidget,
+    );
+    await tester.tap(
+      find.byKey(const ValueKey('system-modal-version-primary')),
+    );
+    await tester.pumpAndSettle();
     final noticeFinder = find.byKey(const ValueKey('settings-floating-notice'));
     expect(noticeFinder, findsOneWidget);
     final notice = tester.widget<SnackBar>(noticeFinder);
@@ -314,7 +323,7 @@ void main() {
       find.byKey(const ValueKey('settings-floating-notice-icon')),
       findsNothing,
     );
-    expect(find.text('当前已是最新版本 v1.0.0'), findsOneWidget);
+    expect(find.text('本机演示：已记录更新意向，不会真正下载安装包'), findsOneWidget);
   });
 
   testWidgets('legal entries open the Web parity full-screen documents', (
