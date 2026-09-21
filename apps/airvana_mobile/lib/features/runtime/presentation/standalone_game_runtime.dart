@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:airvana_mobile/design_system/airvana_theme.dart';
+import 'package:airvana_mobile/features/runtime/data/standalone_asset_server.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -41,7 +44,24 @@ class _StandaloneGameRuntimeState extends State<StandaloneGameRuntime> {
     }
     _controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..setBackgroundColor(const Color(0xFF0B0A10))
+      ..setBackgroundColor(const Color(0xFF0B0A10));
+    unawaited(_load());
+  }
+
+  Future<void> _load() async {
+    final Uri root;
+    try {
+      root = await StandaloneAssetServer.instance.ensureRunning();
+    } on Object catch (error) {
+      if (!mounted) return;
+      setState(() => _error = '$error');
+      widget.onLoadError?.call('$error');
+      return;
+    }
+    if (!mounted) return;
+    // assets/arcade/<slug>/index.html → <root>arcade/<slug>/index.html
+    final target = root.resolve(widget.asset.substring('assets/'.length));
+    _controller
       ..setNavigationDelegate(
         NavigationDelegate(
           onPageFinished: (_) {
@@ -55,15 +75,17 @@ class _StandaloneGameRuntimeState extends State<StandaloneGameRuntime> {
             setState(() => _error = error.description);
             widget.onLoadError?.call(error.description);
           },
-          // 只允许停留在安装包内的资产页，外部导航一律拦截。
-          onNavigationRequest: (request) =>
-              request.url.startsWith('http') &&
-                  !request.url.contains('flutter_assets')
-              ? NavigationDecision.prevent
-              : NavigationDecision.navigate,
+          // 只允许停留在本机资产服务上，外部导航一律拦截。
+          onNavigationRequest: (request) {
+            final uri = Uri.tryParse(request.url);
+            if (uri == null) return NavigationDecision.prevent;
+            return uri.host == root.host && uri.port == root.port
+                ? NavigationDecision.navigate
+                : NavigationDecision.prevent;
+          },
         ),
       )
-      ..loadFlutterAsset(widget.asset);
+      ..loadRequest(target);
   }
 
   @override

@@ -673,14 +673,29 @@ class _LegacyDiscoverCardFrame extends StatelessWidget {
     child: InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(13),
-      child: SizedBox(
-        width: 148,
+      child: Builder(
+        builder: (context) {
+          // 一行正好排 3 张：减去左右页边距和两条 10px 间隔后三等分。
+          final width =
+              (MediaQuery.sizeOf(context).width -
+                  AirvanaMetrics.pageGutter * 2 -
+                  20) /
+              3;
+          // 封面沿用原 148:226 的比例，避免换算后变形。
+          final coverHeight = width * 226 / 148;
+          return SizedBox(
+        width: width,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(13),
-              child: SizedBox(width: 148, height: 226, child: cover),
+              child: SizedBox(
+                key: const ValueKey('discover-rail-cover'),
+                width: width,
+                height: coverHeight,
+                child: cover,
+              ),
             ),
             const SizedBox(height: 8),
             ExcludeSemantics(
@@ -737,6 +752,8 @@ class _LegacyDiscoverCardFrame extends StatelessWidget {
             ),
           ],
         ),
+          );
+        },
       ),
     ),
   );
