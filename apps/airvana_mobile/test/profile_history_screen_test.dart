@@ -271,6 +271,7 @@ void main() {
       expect(tester.getSize(settings), const Size(430, 932));
       expect(find.byType(BottomSheet), findsNothing);
       expect(find.byKey(const ValueKey('primary-navigation')), findsNothing);
+      // 补齐 Web 的运营与检索入口后抽屉更长，底部项需要滚动才会构建。
       for (final label in [
         '我的钱包',
         '订阅与额度',
@@ -281,17 +282,36 @@ void main() {
         '创作者权益',
         '发布与治理',
         '意见反馈',
+        '效果归因',
+        '商业结算',
+        '开通 KOL',
+        '全局搜索',
+        '排行榜',
+        '我的 Agentic Playables',
+        'AI 分身工作台',
+        '记录管理',
+        '邀请好友',
         '全项目功能中心',
         '切换语言',
         '设置',
         '退出登录',
       ]) {
-        expect(
-          find.descendant(of: settings, matching: find.text(label)),
-          findsOneWidget,
+        final target = find.descendant(
+          of: settings,
+          matching: find.text(label),
         );
+        if (target.evaluate().isEmpty) {
+          await tester.scrollUntilVisible(target, 240);
+        }
+        expect(target, findsOneWidget);
       }
 
+      // 上面为校验底部项滚到了列表末尾，先回到顶部再点第一项。
+      for (var round = 0; round < 4; round += 1) {
+        await tester.drag(settings, const Offset(0, 900));
+        await tester.pump();
+      }
+      await tester.pumpAndSettle();
       await tester.tap(find.text('我的钱包'));
       await tester.pumpAndSettle();
       final wallet = find.byKey(const ValueKey('profile-secondary-wallet'));

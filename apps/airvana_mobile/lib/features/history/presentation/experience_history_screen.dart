@@ -2590,8 +2590,62 @@ List<List<_ProfileDrawerItem>> _profileSettingsGroups(
           : '${featureState.feedbackTickets.length} 条记录',
       destination: ProfileSecondaryDestination.feedback,
     ),
+    const _ProfileDrawerItem(
+      icon: Icons.insights_outlined,
+      label: '效果归因',
+      meta: '',
+      destination: ProfileSecondaryDestination.attribution,
+    ),
+    const _ProfileDrawerItem(
+      icon: Icons.account_balance_outlined,
+      label: '商业结算',
+      meta: '',
+      destination: ProfileSecondaryDestination.settlement,
+    ),
+    const _ProfileDrawerItem(
+      icon: Icons.workspace_premium_outlined,
+      label: '开通 KOL',
+      meta: '5 步',
+      destination: ProfileSecondaryDestination.kolActivation,
+    ),
   ];
   final system = <_ProfileDrawerItem>[
+    const _ProfileDrawerItem(
+      icon: Icons.search_rounded,
+      label: '全局搜索',
+      meta: '',
+      destination: ProfileSecondaryDestination.globalSearch,
+    ),
+    const _ProfileDrawerItem(
+      icon: Icons.emoji_events_outlined,
+      label: '排行榜',
+      meta: '热度 / 营收 / 原力',
+      destination: ProfileSecondaryDestination.leaderboard,
+    ),
+    const _ProfileDrawerItem(
+      icon: Icons.collections_bookmark_outlined,
+      label: '我的 Agentic Playables',
+      meta: '',
+      destination: ProfileSecondaryDestination.library,
+    ),
+    const _ProfileDrawerItem(
+      icon: Icons.auto_awesome_outlined,
+      label: 'AI 分身工作台',
+      meta: '',
+      destination: ProfileSecondaryDestination.aiWorkspace,
+    ),
+    const _ProfileDrawerItem(
+      icon: Icons.inventory_2_outlined,
+      label: '记录管理',
+      meta: '',
+      destination: ProfileSecondaryDestination.recordManager,
+    ),
+    const _ProfileDrawerItem(
+      icon: Icons.person_add_alt_1_outlined,
+      label: '邀请好友',
+      meta: '',
+      destination: ProfileSecondaryDestination.invite,
+    ),
     const _ProfileDrawerItem(
       icon: Icons.grid_view_rounded,
       label: '全项目功能中心',
