@@ -89,10 +89,22 @@ class _LegacyFeedPagerState extends ConsumerState<_LegacyFeedPager> {
       if (engagements.contains('share')) _shared.add(playable.id);
       _likeCounts[playable.id] = playable.likes;
       _saveCounts[playable.id] = playable.saves;
+      // 本机作品的计数来自静态目录，不含本人这一次；否则冷启动后会出现
+      // 「图标已点亮但计数是 0」的自相矛盾。服务端作品的计数已含本人。
+      if (playable.localDemo) {
+        if (engagements.contains('like')) {
+          _likeCounts.update(playable.id, (value) => value + 1);
+        }
+        if (engagements.contains('save')) {
+          _saveCounts.update(playable.id, (value) => value + 1);
+        }
+      }
     }
     // Preserve the exact frozen Web LOCAL DEMO initial relationship without
-    // applying it to server-authoritative content.
+    // applying it to server-authoritative content. 只在用户还没有任何本机
+    // 互动记录时铺这份种子，否则会把用户取消的点赞又加回来。
     if (widget.snapshot.localDemo &&
+        widget.snapshot.engagementsByContent.isEmpty &&
         widget.snapshot.playables.any(
           (item) => item.id == 'plb_orchard_merge',
         )) {
