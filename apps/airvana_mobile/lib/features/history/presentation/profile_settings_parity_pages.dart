@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:airvana_mobile/features/identity/presentation/kyc_document_wizard.dart';
 import 'package:airvana_mobile/features/history/presentation/experience_history_screen.dart';
 import 'package:airvana_mobile/app/providers.dart';
 import 'package:airvana_mobile/design_system/airvana_theme.dart';
@@ -254,6 +255,7 @@ class _SectionTitle extends StatelessWidget {
 
 class _PrimaryAction extends StatelessWidget {
   const _PrimaryAction({
+    super.key,
     required this.label,
     required this.onPressed,
     this.outlined = false,
@@ -1005,6 +1007,22 @@ class _IdentityAndRolesPageState extends ConsumerState<_IdentityAndRolesPage> {
           ),
         ),
         _Boundary(title: '权限边界', text: boundary),
+        // Web 的 KYC 详情里有完整的证件上传向导，不是一个按钮就跳走。
+        if (role == 'kyc' && !active)
+          _PrimaryAction(
+            key: const ValueKey('identity-open-kyc-wizard'),
+            label: '上传身份证明',
+            outlined: true,
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute<void>(
+                builder: (_) => Scaffold(
+                  backgroundColor: AirvanaColors.canvas,
+                  appBar: AppBar(title: const Text('上传身份证明')),
+                  body: const KycDocumentWizard(),
+                ),
+              ),
+            ),
+          ),
         _PrimaryAction(
           label: active ? '当前状态已生效 · 本机演示' : '推进本地演示状态',
           onPressed: active
