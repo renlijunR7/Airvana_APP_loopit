@@ -226,15 +226,25 @@ class _LegacyFeedPagerState extends ConsumerState<_LegacyFeedPager> {
         counts.update(playable.id, (value) => value + 1, ifAbsent: () => 1);
       }
     });
-    if (!_isServerPlayable(playable)) return;
     try {
-      await ref
-          .read(airvanaRepositoryProvider)
-          .setEngagement(
-            contentId: playable.id,
-            eventType: eventType,
-            active: !wasActive,
-          );
+      if (_isServerPlayable(playable)) {
+        await ref
+            .read(airvanaRepositoryProvider)
+            .setEngagement(
+              contentId: playable.id,
+              eventType: eventType,
+              active: !wasActive,
+            );
+      } else {
+        // 本机作品同样要落盘，否则「我的 → 收藏」永远是空的。
+        await ref
+            .read(airvanaRepositoryProvider)
+            .setLocalEngagement(
+              playableId: playable.id,
+              eventType: eventType,
+              active: !wasActive,
+            );
+      }
     } on Object catch (error) {
       if (!mounted) return;
       setState(() {

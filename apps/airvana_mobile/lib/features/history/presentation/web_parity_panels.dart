@@ -162,29 +162,29 @@ class _GlobalSearchPageBodyState extends State<GlobalSearchPageBody> {
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
-          children: [
-            for (final tab in _tabs)
-              Padding(
-                padding: const EdgeInsets.only(right: 18),
-                child: GestureDetector(
-                  key: ValueKey('global-search-tab-${tab.$1}'),
-                  onTap: () => setState(() => _category = tab.$1),
-                  child: Text(
-                    tab.$2,
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: _category == tab.$1
-                          ? FontWeight.w900
-                          : FontWeight.w700,
-                      color: _category == tab.$1
-                          ? AirvanaColors.accent
-                          : AirvanaColors.muted,
+            children: [
+              for (final tab in _tabs)
+                Padding(
+                  padding: const EdgeInsets.only(right: 18),
+                  child: GestureDetector(
+                    key: ValueKey('global-search-tab-${tab.$1}'),
+                    onTap: () => setState(() => _category = tab.$1),
+                    child: Text(
+                      tab.$2,
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: _category == tab.$1
+                            ? FontWeight.w900
+                            : FontWeight.w700,
+                        color: _category == tab.$1
+                            ? AirvanaColors.accent
+                            : AirvanaColors.muted,
+                      ),
                     ),
                   ),
                 ),
-              ),
-          ],
-        ),
+            ],
+          ),
         ),
         const SizedBox(height: 12),
         Row(
@@ -196,10 +196,7 @@ class _GlobalSearchPageBodyState extends State<GlobalSearchPageBody> {
             const SizedBox(width: 8),
             Text(
               '${rows.length} 个匹配结果',
-              style: const TextStyle(
-                fontSize: 10,
-                color: AirvanaColors.muted,
-              ),
+              style: const TextStyle(fontSize: 10, color: AirvanaColors.muted),
             ),
           ],
         ),
@@ -325,9 +322,8 @@ class _LeaderboardPageBodyState extends State<LeaderboardPageBody> {
     if (_tab == 'heat') {
       final sorted = [...widget.playables]
         ..sort(
-          (a, b) => (b.likes + b.comments * 2).compareTo(
-            a.likes + a.comments * 2,
-          ),
+          (a, b) =>
+              (b.likes + b.comments * 2).compareTo(a.likes + a.comments * 2),
         );
       return sorted
           .take(10)
@@ -397,41 +393,41 @@ class _LeaderboardPageBodyState extends State<LeaderboardPageBody> {
       SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Row(
-        children: [
-          for (final tab in _tabs)
-            Padding(
-              padding: const EdgeInsets.only(right: 24),
-              child: GestureDetector(
-                key: ValueKey('leaderboard-tab-${tab.$1}'),
-                onTap: () => setState(() => _tab = tab.$1),
-                child: Column(
-                  children: [
-                    Text(
-                      tab.$2,
-                      style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: _tab == tab.$1
-                            ? FontWeight.w900
-                            : FontWeight.w700,
-                        color: _tab == tab.$1
-                            ? AirvanaColors.ink
-                            : AirvanaColors.muted,
+          children: [
+            for (final tab in _tabs)
+              Padding(
+                padding: const EdgeInsets.only(right: 24),
+                child: GestureDetector(
+                  key: ValueKey('leaderboard-tab-${tab.$1}'),
+                  onTap: () => setState(() => _tab = tab.$1),
+                  child: Column(
+                    children: [
+                      Text(
+                        tab.$2,
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: _tab == tab.$1
+                              ? FontWeight.w900
+                              : FontWeight.w700,
+                          color: _tab == tab.$1
+                              ? AirvanaColors.ink
+                              : AirvanaColors.muted,
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 4),
-                    Container(
-                      width: 22,
-                      height: 2,
-                      color: _tab == tab.$1
-                          ? AirvanaColors.accent
-                          : Colors.transparent,
-                    ),
-                  ],
+                      const SizedBox(height: 4),
+                      Container(
+                        width: 22,
+                        height: 2,
+                        color: _tab == tab.$1
+                            ? AirvanaColors.accent
+                            : Colors.transparent,
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-        ],
-      ),
+          ],
+        ),
       ),
       const SizedBox(height: 12),
       Text(
@@ -537,8 +533,7 @@ class _Aggregate {
   int saves = 0;
   int count = 0;
 
-  double get force =>
-      saves * 2 + likes * 0.05 + comments * 0.1 + count * 20;
+  double get force => saves * 2 + likes * 0.05 + comments * 0.1 + count * 20;
 }
 
 /// 复刻 Web 的 `library` panel：我的 Agentic Playables，6 个筛选。
@@ -606,9 +601,7 @@ class _PlayableLibraryPageBodyState extends State<PlayableLibraryPageBody> {
                 isScrollControlled: true,
                 backgroundColor: Colors.white,
                 shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(20),
-                  ),
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
                 ),
                 builder: (_) =>
                     const PlayerPublishSheet(displayName: 'Kai Chen'),
@@ -616,9 +609,7 @@ class _PlayableLibraryPageBodyState extends State<PlayableLibraryPageBody> {
               if (draft == null || !context.mounted) return;
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: Text(
-                    '已保存到本机：${draft.type} · ${draft.visibility}',
-                  ),
+                  content: Text('已保存到本机：${draft.type} · ${draft.visibility}'),
                 ),
               );
             },
@@ -656,68 +647,68 @@ class _PlayableLibraryPageBodyState extends State<PlayableLibraryPageBody> {
                 ),
               ),
               child: Container(
-              margin: const EdgeInsets.only(bottom: 9),
-              padding: const EdgeInsets.all(9),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(15),
-                border: Border.all(color: AirvanaColors.line),
-              ),
-              child: Row(
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(11),
-                    child: Image.asset(
-                      item.coverAsset,
-                      width: 54,
-                      height: 68,
-                      fit: BoxFit.cover,
-                      errorBuilder: (_, __, ___) => const SizedBox(
+                margin: const EdgeInsets.only(bottom: 9),
+                padding: const EdgeInsets.all(9),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(15),
+                  border: Border.all(color: AirvanaColors.line),
+                ),
+                child: Row(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(11),
+                      child: Image.asset(
+                        item.coverAsset,
                         width: 54,
                         height: 68,
-                        child: ColoredBox(color: AirvanaColors.line),
+                        fit: BoxFit.cover,
+                        errorBuilder: (_, __, ___) => const SizedBox(
+                          width: 54,
+                          height: 68,
+                          child: ColoredBox(color: AirvanaColors.line),
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(width: 11),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          item.title,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w900,
+                    const SizedBox(width: 11),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            item.title,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w900,
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 5),
-                        Text(
-                          '${item.authorName} · ${item.category}',
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                            fontSize: 10,
-                            color: AirvanaColors.muted,
+                          const SizedBox(height: 5),
+                          Text(
+                            '${item.authorName} · ${item.category}',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                              fontSize: 10,
+                              color: AirvanaColors.muted,
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 6),
-                        Text(
-                          item.stage,
-                          style: const TextStyle(
-                            fontSize: 9,
-                            fontWeight: FontWeight.w800,
-                            color: AirvanaColors.accent,
+                          const SizedBox(height: 6),
+                          Text(
+                            item.stage,
+                            style: const TextStyle(
+                              fontSize: 9,
+                              fontWeight: FontWeight.w800,
+                              color: AirvanaColors.accent,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
             ),
       ],
     );
@@ -802,9 +793,7 @@ class AttributionPageBody extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 12),
-        const _BoundaryNote(
-          text: '本页只展示本机归因过程；不代表广告投放效果、结算依据或已验证收益。',
-        ),
+        const _BoundaryNote(text: '本页只展示本机归因过程；不代表广告投放效果、结算依据或已验证收益。'),
       ],
     );
   }
@@ -846,10 +835,7 @@ class AttributionPageBody extends StatelessWidget {
           children: [
             Text(
               title,
-              style: const TextStyle(
-                fontSize: 13,
-                fontWeight: FontWeight.w800,
-              ),
+              style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w800),
             ),
             const SizedBox(height: 8),
             for (final line in lines)
@@ -1008,9 +994,7 @@ class SettlementPageBody extends StatelessWidget {
         ),
       ),
       const SizedBox(height: 12),
-      const _BoundaryNote(
-        text: '页面只展示流程状态，不把演示数值作为真实收入、可提现余额或结算承诺。',
-      ),
+      const _BoundaryNote(text: '页面只展示流程状态，不把演示数值作为真实收入、可提现余额或结算承诺。'),
     ],
   );
 }

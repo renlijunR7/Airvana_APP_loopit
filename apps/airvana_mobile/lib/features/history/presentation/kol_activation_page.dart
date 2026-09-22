@@ -24,7 +24,10 @@ class _KolActivationPageBodyState extends State<KolActivationPageBody> {
     'profile': ('完善 KOL 商业档案', '让品牌了解你的内容方向、受众和合作偏好。'),
     'agreement': ('确认创作者协议', '明确内容责任、数据边界、收益复核与平台治理规则。'),
     'channels': ('设置发布与运营渠道', '这里只记录渠道意向；外部连接仍需单独授权和人工审核。'),
-    'campaign': ('创建首个 Campaign', '先建立 Campaign Brief，再由受控流程生成 Campaign Contract。'),
+    'campaign': (
+      '创建首个 Campaign',
+      '先建立 Campaign Brief，再由受控流程生成 Campaign Contract。',
+    ),
   };
 
   static const _channels = <(String, String, String)>[
@@ -56,9 +59,12 @@ class _KolActivationPageBodyState extends State<KolActivationPageBody> {
   void _advance() {
     final key = _steps[_index].$1;
     if (key == 'profile' &&
-        [_category, _audience, _languages, _collaboration].any(
-          (c) => c.text.trim().isEmpty,
-        )) {
+        [
+          _category,
+          _audience,
+          _languages,
+          _collaboration,
+        ].any((c) => c.text.trim().isEmpty)) {
       setState(() => _error = '请完整填写内容类型、受众、语言和合作方向。');
       return;
     }
@@ -169,9 +175,7 @@ class _KolActivationPageBodyState extends State<KolActivationPageBody> {
             child: FilledButton(
               key: const ValueKey('kol-activation-next'),
               onPressed: _advance,
-              child: Text(
-                _index == _steps.length - 1 ? '完成开通' : '下一步',
-              ),
+              child: Text(_index == _steps.length - 1 ? '完成开通' : '下一步'),
             ),
           ),
       ],
@@ -207,10 +211,7 @@ class _KolActivationPageBodyState extends State<KolActivationPageBody> {
         value: _agreementAccepted,
         onChanged: (value) =>
             setState(() => _agreementAccepted = value ?? false),
-        title: const Text(
-          '我已阅读并同意《创作者协议》',
-          style: TextStyle(fontSize: 12),
-        ),
+        title: const Text('我已阅读并同意《创作者协议》', style: TextStyle(fontSize: 12)),
       ),
     ],
     'channels' => [
@@ -405,7 +406,11 @@ class InvitePageBody extends StatelessWidget {
             SizedBox(height: 6),
             Text(
               '好友完成注册并配置 Agent 后，奖励才会入账。',
-              style: TextStyle(fontSize: 11, height: 1.6, color: Colors.white70),
+              style: TextStyle(
+                fontSize: 11,
+                height: 1.6,
+                color: Colors.white70,
+              ),
             ),
           ],
         ),
@@ -427,10 +432,7 @@ class InvitePageBody extends StatelessWidget {
                 children: [
                   Text(
                     '我的邀请码',
-                    style: TextStyle(
-                      fontSize: 10,
-                      color: AirvanaColors.muted,
-                    ),
+                    style: TextStyle(fontSize: 10, color: AirvanaColors.muted),
                   ),
                   SizedBox(height: 5),
                   Text(
@@ -446,9 +448,9 @@ class InvitePageBody extends StatelessWidget {
             ),
             OutlinedButton(
               key: const ValueKey('invite-page-copy'),
-              onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('邀请码已复制')),
-              ),
+              onPressed: () => ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(const SnackBar(content: Text('邀请码已复制'))),
               child: const Text('复制'),
             ),
           ],
@@ -489,66 +491,3 @@ class InvitePageBody extends StatelessWidget {
 
 /// 复刻 Web 的 `globalAi` panel：AI 分身工作台入口卡片。
 /// 注意与「我的 AI 分身」（aiTwin，9 个 tab）是两个不同入口。
-class AiWorkspacePageBody extends StatelessWidget {
-  const AiWorkspacePageBody({super.key});
-
-  static const _cards = <(String, String)>[
-    ('继续创作草稿', '从最近的创作流阶段继续，保留已填写的目标与能力组合。'),
-    ('我的 Agentic Playable', '查看本机作品、运行状态与版本记录。'),
-    ('分身协作记录', '分身参与过的场景、语言与授权变更都会留痕。'),
-  ];
-
-  @override
-  Widget build(BuildContext context) => ListView(
-    key: const ValueKey('ai-workspace-body'),
-    padding: const EdgeInsets.fromLTRB(18, 14, 18, 40),
-    children: [
-      const Text(
-        'AI 分身工作台',
-        style: TextStyle(fontSize: 19, fontWeight: FontWeight.w900),
-      ),
-      const SizedBox(height: 6),
-      const Text(
-        '分身只在你确认后执行动作；不会自动发布作品或改变结算状态。',
-        style: TextStyle(
-          fontSize: 11,
-          height: 1.6,
-          color: AirvanaColors.muted,
-        ),
-      ),
-      const SizedBox(height: 14),
-      for (final card in _cards)
-        Container(
-          key: ValueKey('ai-workspace-${card.$1}'),
-          margin: const EdgeInsets.only(bottom: 10),
-          padding: const EdgeInsets.all(14),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: AirvanaColors.line),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                card.$1,
-                style: const TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w900,
-                ),
-              ),
-              const SizedBox(height: 6),
-              Text(
-                card.$2,
-                style: const TextStyle(
-                  fontSize: 11,
-                  height: 1.6,
-                  color: AirvanaColors.muted,
-                ),
-              ),
-            ],
-          ),
-        ),
-    ],
-  );
-}

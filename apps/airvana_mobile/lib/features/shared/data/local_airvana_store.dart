@@ -673,6 +673,105 @@ class LocalAirvanaStore {
     return social;
   });
 
+  /// 本机作品的收藏 / 点赞：与 Web 的 savedContentIds、likedContentIds 同口径，
+  /// 写进 socialState 持久化，而不是只留在页面状态里。
+  Future<LocalSocialState> setEngagement({
+    required String playableId,
+    required String eventType,
+    required bool active,
+  }) => _serial(() async {
+    final normalized = playableId.trim();
+    if (normalized.isEmpty) {
+      throw const LocalStoreException('缺少作品 id');
+    }
+    if (eventType != 'save' && eventType != 'like') {
+      throw LocalStoreException('不支持的互动类型：$eventType');
+    }
+    final snapshot = await _readWorkspaceUnlocked();
+    final current = snapshot.socialState;
+    final ids = [
+      ...(eventType == 'save'
+          ? current.savedPlayableIds
+          : current.likedPlayableIds),
+    ];
+    ids.remove(normalized);
+    if (active) ids.add(normalized);
+    final social = eventType == 'save'
+        ? current.copyWith(savedPlayableIds: ids)
+        : current.copyWith(likedPlayableIds: ids);
+    await _writeWorkspaceUnlocked(snapshot.copyWith(socialState: social));
+    return social;
+  });
+
+  Future<List<LocalMessageThread>> loadMessageThreads() async {
+    final snapshot = await loadWorkspace();
+    return snapshot.messageThreads;
+  }
+
+  /// 本机私信：发送只写本机，与 Web 的 sendMessageDemo 同口径。
+  Future<List<LocalMessageThread>> appendMessage({
+    required String threadId,
+    required String text,
+  }) => _serial(() async {
+    final body = text.trim();
+    if (body.isEmpty) {
+      throw const LocalStoreException('消息内容不能为空');
+    }
+    if (body.length > 1000) {
+      throw const LocalStoreException('单条消息最多 1000 字');
+    }
+    final snapshot = await _readWorkspaceUnlocked();
+    final threads = [...snapshot.messageThreads];
+    final index = threads.indexWhere((item) => item.id == threadId);
+    if (index < 0) {
+      throw LocalStoreException('找不到对话：$threadId');
+    }
+    final thread = threads[index];
+    threads[index] = thread.copyWith(
+      unread: 0,
+      messages: [
+        ...thread.messages,
+        LocalMessageEntry(
+          id: _ids.next('msg'),
+          role: 'me',
+          text: body,
+          time: '刚刚',
+        ),
+      ],
+    );
+    await _writeWorkspaceUnlocked(snapshot.copyWith(messageThreads: threads));
+    return threads;
+  });
+
+  Future<List<LocalMessageThread>> markThreadRead(String threadId) => _serial(
+    () async {
+      final snapshot = await _readWorkspaceUnlocked();
+      final threads = [...snapshot.messageThreads];
+      final index = threads.indexWhere((item) => item.id == threadId);
+      if (index < 0) return snapshot.messageThreads;
+      if (threads[index].unread == 0) return snapshot.messageThreads;
+      threads[index] = threads[index].copyWith(unread: 0);
+      await _writeWorkspaceUnlocked(snapshot.copyWith(messageThreads: threads));
+      return threads;
+    },
+  );
+
+  /// 「转由本人处理」：只在本机留痕，不触发任何对外动作。
+  Future<List<LocalMessageThread>> requestHumanHandoff(String threadId) =>
+      _serial(() async {
+        final snapshot = await _readWorkspaceUnlocked();
+        final threads = [...snapshot.messageThreads];
+        final index = threads.indexWhere((item) => item.id == threadId);
+        if (index < 0) {
+          throw LocalStoreException('找不到对话：$threadId');
+        }
+        threads[index] = threads[index].copyWith(handoffRequested: true);
+        await _writeWorkspaceUnlocked(
+          snapshot.copyWith(messageThreads: threads),
+        );
+        return threads;
+      });
+
   /// 每日签到：同一天重复调用保持幂等（earned 为 0）。
   Future<LocalCheckInResult> checkInDaily() => _serial(() async {
     final snapshot = await _readWorkspaceUnlocked();

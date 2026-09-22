@@ -6,6 +6,7 @@ import 'package:airvana_mobile/design_system/app_state_view.dart';
 import 'package:airvana_mobile/design_system/legacy_web_assets.dart';
 import 'package:airvana_mobile/features/shared/data/airvana_repository.dart';
 import 'package:airvana_mobile/features/shared/domain/airvana_models.dart';
+import 'package:airvana_mobile/features/messages/presentation/local_chat_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -72,8 +73,16 @@ class _ConnectedMessagesScreenState
   }
 
   Widget _legacyBuild() {
+    if (_tab == 2) return _legacyThreads();
     final notificationBadges = _legacyReadAll ? 0 : 2;
-    final badges = [notificationBadges, 0, 1];
+    final threadUnread = ref
+        .watch(localMessageThreadsProvider)
+        .maybeWhen(
+          data: (threads) =>
+              threads.fold<int>(0, (total, item) => total + item.unread),
+          orElse: () => 0,
+        );
+    final badges = [notificationBadges, 0, threadUnread];
     final items = switch (_tab) {
       0 => _legacyNotifications,
       1 => _legacyInteractions,
@@ -125,6 +134,84 @@ class _ConnectedMessagesScreenState
         ],
       ),
     );
+  }
+
+  /// 私信 Tab 走本机线程：可以点开会话、发送并落盘，而不是只弹只读说明。
+  Widget _legacyThreads() {
+    final threads = ref.watch(localMessageThreadsProvider);
+    final notificationBadges = _legacyReadAll ? 0 : 2;
+    return SafeArea(
+      bottom: false,
+      child: Column(
+        children: [
+          const _LegacyMessagesTitle(),
+          _MessageTabs(
+            selected: _tab,
+            badges: [
+              notificationBadges,
+              0,
+              threads.maybeWhen(
+                data: (items) =>
+                    items.fold<int>(0, (total, item) => total + item.unread),
+                orElse: () => 0,
+              ),
+            ],
+            onSelected: (index) => setState(() => _tab = index),
+          ),
+          Expanded(
+            child: threads.when(
+              loading: () => const Center(child: CircularProgressIndicator()),
+              error: (error, _) => AppStateView(
+                icon: Icons.forum_outlined,
+                title: '私信读取失败',
+                message: '$error',
+              ),
+              data: (items) => items.isEmpty
+                  ? const AppStateView(
+                      icon: Icons.forum_outlined,
+                      title: '还没有私信',
+                      message: '从作品创作者入口发起对话后，会话会显示在这里。',
+                    )
+                  : ListView.builder(
+                      key: const ValueKey('legacy-thread-list'),
+                      padding: const EdgeInsets.only(bottom: 110),
+                      itemCount: items.length,
+                      itemBuilder: (context, index) {
+                        final thread = items[index];
+                        final last = thread.messages.isEmpty
+                            ? null
+                            : thread.messages.last;
+                        return _LegacyMessageRow(
+                          key: ValueKey('legacy-thread-${thread.id}'),
+                          item: _LegacyMessage(
+                            title: thread.name,
+                            body: last?.text ?? '开始一段新对话',
+                            meta: thread.unread > 0
+                                ? '${thread.handle} · ${thread.unread} 条未读'
+                                : thread.handle,
+                            avatarSeed: thread.avatarSeed,
+                            unread: thread.unread > 0,
+                            icon: Icons.forum_outlined,
+                          ),
+                          forceRead: false,
+                          onTap: () => _openThread(thread.id),
+                        );
+                      },
+                    ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _openThread(String threadId) async {
+    await Navigator.of(context, rootNavigator: true).push<void>(
+      MaterialPageRoute<void>(
+        builder: (_) => LocalChatScreen(threadId: threadId),
+      ),
+    );
+    if (mounted) ref.invalidate(localMessageThreadsProvider);
   }
 
   Future<void> _openLegacyMessage(
@@ -495,6 +582,7 @@ class _LegacyMessageSectionHeader extends StatelessWidget {
 
 class _LegacyMessageRow extends StatelessWidget {
   const _LegacyMessageRow({
+    super.key,
     required this.item,
     required this.forceRead,
     required this.onTap,

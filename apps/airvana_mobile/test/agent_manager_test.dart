@@ -53,8 +53,12 @@ void main() {
     await tester.tap(find.byKey(const ValueKey('agent-delete-2')));
     await tester.pumpAndSettle();
 
-    expect(find.text('移除“Kiko”？'), findsOneWidget);
-    await tester.tap(find.byKey(const ValueKey('destructive-removePower-cancel')));
+    // 删 Agent 不可恢复，文案必须与「移除能力」区分开。
+    expect(find.text('删除“Kiko”？'), findsOneWidget);
+    expect(find.text('删除后无法恢复；执行中的 Agent 必须先取消任务。'), findsOneWidget);
+    await tester.tap(
+      find.byKey(const ValueKey('destructive-deleteAgent-cancel')),
+    );
     await tester.pumpAndSettle();
     // 取消后仍在详情页，Agent 未被移除。
     expect(find.byKey(const ValueKey('agent-detail-2')), findsOneWidget);
@@ -62,7 +66,7 @@ void main() {
     await tester.tap(find.byKey(const ValueKey('agent-delete-2')));
     await tester.pumpAndSettle();
     await tester.tap(
-      find.byKey(const ValueKey('destructive-removePower-confirm')),
+      find.byKey(const ValueKey('destructive-deleteAgent-confirm')),
     );
     await tester.pumpAndSettle();
     expect(find.byKey(const ValueKey('agent-row-2')), findsNothing);

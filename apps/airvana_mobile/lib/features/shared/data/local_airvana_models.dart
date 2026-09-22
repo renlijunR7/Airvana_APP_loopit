@@ -680,26 +680,215 @@ class LocalProfileState {
 }
 
 /// 当前设备保存的关注关系。粉丝是旧版 Web 的演示入站关系，关注可编辑。
+/// 本机私信线程。与 Web 的 messageThreads 同一口径：消息只保存在本机，
+/// AI 只提供建议、不代表本人发送，客服通道尚未接入。
+class LocalMessageEntry {
+  const LocalMessageEntry({
+    required this.id,
+    required this.role,
+    required this.text,
+    required this.time,
+  });
+
+  factory LocalMessageEntry.fromJson(Map<String, dynamic> json) =>
+      LocalMessageEntry(
+        id: '${json['id'] ?? ''}',
+        role: '${json['role'] ?? 'other'}',
+        text: '${json['text'] ?? ''}',
+        time: '${json['time'] ?? ''}',
+      );
+
+  /// me / other / assistant，与 Web 的 role 取值一致。
+  final String id;
+  final String role;
+  final String text;
+  final String time;
+
+  bool get mine => role == 'me';
+
+  Map<String, dynamic> toJson() => {
+    'id': id,
+    'role': role,
+    'text': text,
+    'time': time,
+  };
+}
+
+class LocalMessageThread {
+  const LocalMessageThread({
+    required this.id,
+    required this.name,
+    required this.handle,
+    required this.avatarSeed,
+    this.unread = 0,
+    this.messages = const [],
+    this.handoffRequested = false,
+  });
+
+  factory LocalMessageThread.fromJson(Map<String, dynamic> json) =>
+      LocalMessageThread(
+        id: '${json['id'] ?? ''}',
+        name: '${json['name'] ?? ''}',
+        handle: '${json['handle'] ?? ''}',
+        avatarSeed: '${json['avatar_seed'] ?? ''}',
+        unread: (json['unread'] as num?)?.toInt() ?? 0,
+        messages: (json['messages'] as List<dynamic>? ?? const [])
+            .whereType<Map<String, dynamic>>()
+            .map(LocalMessageEntry.fromJson)
+            .toList(growable: false),
+        handoffRequested: json['handoff_requested'] == true,
+      );
+
+  final String id;
+  final String name;
+  final String handle;
+  final String avatarSeed;
+  final int unread;
+  final List<LocalMessageEntry> messages;
+
+  /// 「转由本人处理」只是本机标记，不会触发任何对外动作。
+  final bool handoffRequested;
+
+  /// Web 里只有 AI 分身线程能转人工。
+  bool get canHandoff => id == 'ai-twin';
+
+  bool get isSupport => id == 'support';
+
+  LocalMessageThread copyWith({
+    int? unread,
+    List<LocalMessageEntry>? messages,
+    bool? handoffRequested,
+  }) => LocalMessageThread(
+    id: id,
+    name: name,
+    handle: handle,
+    avatarSeed: avatarSeed,
+    unread: unread ?? this.unread,
+    messages: messages ?? this.messages,
+    handoffRequested: handoffRequested ?? this.handoffRequested,
+  );
+
+  Map<String, dynamic> toJson() => {
+    'id': id,
+    'name': name,
+    'handle': handle,
+    'avatar_seed': avatarSeed,
+    'unread': unread,
+    'messages': messages.map((item) => item.toJson()).toList(growable: false),
+    'handoff_requested': handoffRequested,
+  };
+}
+
+/// 与 Web 的 messageThreads 初始值逐条对齐。
+const kLocalMessageThreadSeeds = <LocalMessageThread>[
+  LocalMessageThread(
+    id: 'support',
+    name: 'Airvana 客服',
+    handle: '客服助手 · 本地演示',
+    avatarSeed: 'support',
+    messages: [
+      LocalMessageEntry(
+        id: 's1',
+        role: 'assistant',
+        text:
+            '你好，当前是客服对话演示。正式客服通道尚未接入；你可以先在意见反馈页保存问题，'
+            '我们会在服务端上线后同步处理流程。',
+        time: '刚刚',
+      ),
+    ],
+  ),
+  LocalMessageThread(
+    id: 'ai-twin',
+    name: 'Kai 的 AI 分身',
+    handle: 'AI 辅助 · 本地演示',
+    avatarSeed: 'ai',
+    unread: 1,
+    messages: [
+      LocalMessageEntry(
+        id: 'a1',
+        role: 'assistant',
+        text: '有一条访客问题需要你确认后回复。',
+        time: '刚刚',
+      ),
+    ],
+  ),
+  LocalMessageThread(
+    id: 'nina',
+    name: 'Nina',
+    handle: '@nina · 相互关注',
+    avatarSeed: '@nina',
+    messages: [
+      LocalMessageEntry(
+        id: 'n1',
+        role: 'other',
+        text: '星际农场 v3 的版本说明已更新。',
+        time: '今天 18:20',
+      ),
+    ],
+  ),
+  LocalMessageThread(
+    id: 'leo',
+    name: 'Leo',
+    handle: '@leo.art · 已关注',
+    avatarSeed: '@leo.art',
+    messages: [
+      LocalMessageEntry(
+        id: 'l1',
+        role: 'other',
+        text: '霓虹城市的可复制资产已经整理好了。',
+        time: '昨天',
+      ),
+    ],
+  ),
+];
+
 class LocalSocialState {
   const LocalSocialState({
     this.followerOwners = const ['@nina', '@leo.art'],
     this.followingOwners = const ['@leo.art'],
+    this.savedPlayableIds = const [],
+    this.likedPlayableIds = const [],
   });
 
   factory LocalSocialState.fromJson(Map<String, dynamic> json) =>
       LocalSocialState(
         followerOwners: _strings(json['follower_owners']),
         followingOwners: _strings(json['following_owners']),
+        savedPlayableIds: _strings(json['saved_playable_ids']),
+        likedPlayableIds: _strings(json['liked_playable_ids']),
       );
 
   final List<String> followerOwners;
   final List<String> followingOwners;
 
+  /// 与 Web 的 savedContentIds / likedContentIds 同一口径：按作品 id 记录，
+  /// 本机持久化，退出页面或冷启动后仍然保留。
+  final List<String> savedPlayableIds;
+  final List<String> likedPlayableIds;
+
   bool follows(String owner) => followingOwners.contains(owner);
+
+  bool hasSaved(String playableId) => savedPlayableIds.contains(playableId);
+
+  bool hasLiked(String playableId) => likedPlayableIds.contains(playableId);
+
+  LocalSocialState copyWith({
+    List<String>? followerOwners,
+    List<String>? followingOwners,
+    List<String>? savedPlayableIds,
+    List<String>? likedPlayableIds,
+  }) => LocalSocialState(
+    followerOwners: followerOwners ?? this.followerOwners,
+    followingOwners: followingOwners ?? this.followingOwners,
+    savedPlayableIds: savedPlayableIds ?? this.savedPlayableIds,
+    likedPlayableIds: likedPlayableIds ?? this.likedPlayableIds,
+  );
 
   Map<String, dynamic> toJson() => {
     'follower_owners': followerOwners,
     'following_owners': followingOwners,
+    'saved_playable_ids': savedPlayableIds,
+    'liked_playable_ids': likedPlayableIds,
   };
 }
 
@@ -948,6 +1137,7 @@ class LocalWorkspaceSnapshot {
     this.identityState = const LocalIdentityState(),
     this.profileState = const LocalProfileState(),
     this.socialState = const LocalSocialState(),
+    this.messageThreads = kLocalMessageThreadSeeds,
     this.profileFeatureState = const LocalProfileFeatureState(),
     this.lastGameRewardDates = const {},
   });
@@ -1003,6 +1193,11 @@ class LocalWorkspaceSnapshot {
                 Map<String, dynamic>.from(json['social_state'] as Map),
               )
             : const LocalSocialState(),
+        messageThreads: json['message_threads'] is List
+            ? _maps(
+                json['message_threads'],
+              ).map(LocalMessageThread.fromJson).toList(growable: false)
+            : kLocalMessageThreadSeeds,
         profileFeatureState: json['profile_feature_state'] is Map
             ? LocalProfileFeatureState.fromJson(
                 Map<String, dynamic>.from(json['profile_feature_state'] as Map),
@@ -1040,6 +1235,7 @@ class LocalWorkspaceSnapshot {
   /// 当前设备上的个人资料与互动关系。
   final LocalProfileState profileState;
   final LocalSocialState socialState;
+  final List<LocalMessageThread> messageThreads;
   final LocalProfileFeatureState profileFeatureState;
 
   /// 每个 playable 最近一次发放游玩 AIP 的日期键（每作品每日一次 5 AIP）。
@@ -1059,6 +1255,7 @@ class LocalWorkspaceSnapshot {
     LocalIdentityState? identityState,
     LocalProfileState? profileState,
     LocalSocialState? socialState,
+    List<LocalMessageThread>? messageThreads,
     LocalProfileFeatureState? profileFeatureState,
     Map<String, String>? lastGameRewardDates,
   }) => LocalWorkspaceSnapshot(
@@ -1075,6 +1272,7 @@ class LocalWorkspaceSnapshot {
     identityState: identityState ?? this.identityState,
     profileState: profileState ?? this.profileState,
     socialState: socialState ?? this.socialState,
+    messageThreads: messageThreads ?? this.messageThreads,
     profileFeatureState: profileFeatureState ?? this.profileFeatureState,
     lastGameRewardDates: lastGameRewardDates ?? this.lastGameRewardDates,
   );
@@ -1096,6 +1294,9 @@ class LocalWorkspaceSnapshot {
     'identity_state': identityState.toJson(),
     'profile_state': profileState.toJson(),
     'social_state': socialState.toJson(),
+    'message_threads': messageThreads
+        .map((item) => item.toJson())
+        .toList(growable: false),
     'profile_feature_state': profileFeatureState.toJson(),
     'last_game_reward_dates': lastGameRewardDates,
   };

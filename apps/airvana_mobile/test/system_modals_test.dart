@@ -28,15 +28,16 @@ void main() {
       await tester.pumpAndSettle();
 
       final spec = systemModalSpec(modal);
-      expect(find.byKey(ValueKey('system-modal-${modal.name}')), findsOneWidget);
+      expect(
+        find.byKey(ValueKey('system-modal-${modal.name}')),
+        findsOneWidget,
+      );
       expect(find.text(spec.eyebrow), findsOneWidget);
       expect(find.text(spec.note), findsOneWidget);
       // 离线提示只有单一出口，其余三个都保留次要操作。
       expect(
         find.byKey(ValueKey('system-modal-${modal.name}-secondary')),
-        modal == AirvanaSystemModal.riskOffline
-            ? findsNothing
-            : findsOneWidget,
+        modal == AirvanaSystemModal.riskOffline ? findsNothing : findsOneWidget,
       );
 
       await tester.tap(
@@ -48,7 +49,12 @@ void main() {
   });
 
   test('destructive confirm covers the seventeen Web actions', () {
-    expect(DestructiveAction.values, hasLength(17));
+    // Web 的 configs 表是 17 条，deleteAgent 是 Web 里的独立一层，额外补上。
+    expect(DestructiveAction.values, hasLength(18));
+    expect(
+      destructiveSpec(DestructiveAction.deleteAgent, subject: 'Nova').message,
+      '删除后无法恢复；执行中的 Agent 必须先取消任务。',
+    );
     for (final action in DestructiveAction.values) {
       final spec = destructiveSpec(action);
       expect(spec.title, isNotEmpty, reason: action.name);

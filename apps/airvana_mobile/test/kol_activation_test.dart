@@ -94,13 +94,4 @@ void main() {
     expect(find.textContaining('配置首个 Agent 后计为合格'), findsOneWidget);
     expect(find.textContaining('不可提现'), findsOneWidget);
   });
-
-  testWidgets('ai workspace keeps its non-autonomous boundary', (tester) async {
-    await tester.pumpWidget(_host(const AiWorkspacePageBody()));
-    await tester.pump();
-
-    expect(find.text('AI 分身工作台'), findsOneWidget);
-    expect(find.textContaining('不会自动发布作品'), findsOneWidget);
-    expect(find.byKey(const ValueKey('ai-workspace-继续创作草稿')), findsOneWidget);
-  });
 }

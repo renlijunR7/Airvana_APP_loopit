@@ -53,11 +53,22 @@ class AirvanaRepository {
           })
           .map(_domainPlayable)
           .toList(growable: false);
+      // 收藏 / 点赞与 Web 一样按作品 id 持久化，冷启动后仍然保留。
+      final social = workspace.socialState;
+      final engagements = <String, Set<String>>{};
+      for (final id in social.savedPlayableIds) {
+        (engagements[id] ??= <String>{}).add('save');
+      }
+      for (final id in social.likedPlayableIds) {
+        (engagements[id] ??= <String>{}).add('like');
+      }
       return HomeSnapshot(
         user: LegacyDemoCatalog.user,
         playables: [...persisted, ...LegacyDemoCatalog.legacyWebPlayables],
         localDemo: true,
         account: _localAccount,
+        engagementsByContent: engagements,
+        followingUserIds: social.followingOwners.toSet(),
       );
     } on Object {
       // Unsupported secure-storage hosts keep the labelled legacy demo usable.
@@ -1281,6 +1292,31 @@ class AirvanaRepository {
     required String owner,
     required bool active,
   }) => _localStore.setFollowing(owner: owner, active: active);
+
+  Future<List<LocalMessageThread>> loadLocalMessageThreads() =>
+      _localStore.loadMessageThreads();
+
+  Future<List<LocalMessageThread>> sendLocalMessage({
+    required String threadId,
+    required String text,
+  }) => _localStore.appendMessage(threadId: threadId, text: text);
+
+  Future<List<LocalMessageThread>> markLocalThreadRead(String threadId) =>
+      _localStore.markThreadRead(threadId);
+
+  Future<List<LocalMessageThread>> requestLocalHumanHandoff(String threadId) =>
+      _localStore.requestHumanHandoff(threadId);
+
+  /// 本机作品的收藏 / 点赞落盘。服务端作品仍走 setEngagement 的 API 分支。
+  Future<LocalSocialState> setLocalEngagement({
+    required String playableId,
+    required String eventType,
+    required bool active,
+  }) => _localStore.setEngagement(
+    playableId: playableId,
+    eventType: eventType,
+    active: active,
+  );
 
   /// AIP 流水：本地闭环直接读本地账本；服务端模式把 bootstrap ledger 中
   /// 已入账（posted）的事件映射为流水行。

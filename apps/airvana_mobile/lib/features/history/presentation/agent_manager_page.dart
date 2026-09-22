@@ -132,11 +132,7 @@ class _AgentManagerPageBodyState extends State<AgentManagerPageBody> {
       const SizedBox(height: 8),
       const Text(
         'Agent 用于驱动内容生成、优化与运营。默认只能生成草稿，发布始终需要人工确认。',
-        style: TextStyle(
-          fontSize: 11,
-          height: 1.7,
-          color: AirvanaColors.muted,
-        ),
+        style: TextStyle(fontSize: 11, height: 1.7, color: AirvanaColors.muted),
       ),
       const SizedBox(height: 14),
       for (final agent in _agents)
@@ -187,7 +183,8 @@ class _AgentManagerPageBodyState extends State<AgentManagerPageBody> {
       const BoundaryCard(
         key: ValueKey('agent-manager-boundary'),
         title: 'Agent 边界',
-        body: '本机 Agent 只产出草稿与报告；发布、结算与对外分发都需要人工确认，'
+        body:
+            '本机 Agent 只产出草稿与报告；发布、结算与对外分发都需要人工确认，'
             '不会自动执行。',
       ),
     ],
@@ -282,7 +279,7 @@ class _AgentManagerPageBodyState extends State<AgentManagerPageBody> {
           onPressed: () async {
             final confirmed = await confirmDestructiveAction(
               context,
-              DestructiveAction.removePower,
+              DestructiveAction.deleteAgent,
               subject: agent.name,
             );
             if (!confirmed || !mounted) return;

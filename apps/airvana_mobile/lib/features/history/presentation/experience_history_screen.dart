@@ -1,3 +1,4 @@
+import 'package:airvana_mobile/features/history/presentation/ai_workspace_page.dart';
 import 'package:airvana_mobile/app/providers.dart';
 import 'package:airvana_mobile/design_system/airvana_theme.dart';
 import 'package:airvana_mobile/design_system/generated_cover.dart';
@@ -95,8 +96,7 @@ class ProfileSecondaryScreen extends ConsumerWidget {
               title: statsDestination ? '互动关系' : spec.title,
             ),
             Expanded(
-              child:
-                  destination == ProfileSecondaryDestination.globalSearch
+              child: destination == ProfileSecondaryDestination.globalSearch
                   ? GlobalSearchPageBody(playables: _catalogPlayables(ref))
                   : destination == ProfileSecondaryDestination.leaderboard
                   ? LeaderboardPageBody(playables: _catalogPlayables(ref))
@@ -3994,12 +3994,49 @@ class _TabBody extends StatelessWidget {
     if (index == 3) return _history(context);
     if (index == 0) return _works(context);
     if (index == 1) return _drafts(context);
-    return _InlineHistoryState(
-      icon: Icons.favorite_border_rounded,
-      title: '还没有收藏',
-      message: '在发现页收藏喜欢的 Agentic Playable。',
-      actionLabel: '去发现',
-      onAction: () => context.go('/discover'),
+    return _saved(context);
+  }
+
+  /// 收藏列表来自 HomeSnapshot 的 engagementsByContent（本机与服务端同一口径），
+  /// 而不是只读一句空态。
+  Widget _saved(BuildContext context) {
+    return home.when(
+      loading: () => const _HistoryLoadingList(),
+      error: (error, _) => _InlineHistoryState(
+        icon: Icons.sync_problem_rounded,
+        title: '收藏读取失败',
+        message: '$error',
+      ),
+      data: (snapshot) {
+        final savedIds = <String>{
+          for (final entry in snapshot.engagementsByContent.entries)
+            if (entry.value.contains('save')) entry.key,
+        };
+        final items = snapshot.playables
+            .where((playable) => savedIds.contains(playable.id))
+            .map(
+              (playable) => _GridEntry(
+                playableId: playable.id,
+                title: playable.title,
+                subtitle: '${playable.authorName} · v${playable.version}',
+                statusLabel: '已收藏',
+                localDemo: playable.localDemo,
+                coverAsset: playable.coverAsset,
+                onTap: () => onOpenPlayable(playable.id),
+              ),
+            )
+            .toList(growable: false);
+        if (items.isEmpty) {
+          return _InlineHistoryState(
+            icon: Icons.favorite_border_rounded,
+            title: '还没有收藏',
+            message: '在发现页收藏喜欢的 Agentic Playable。',
+            actionLabel: '去发现',
+            onAction: () => context.go('/discover'),
+          );
+        }
+        return _PlayableGrid(items: items);
+      },
     );
   }
 

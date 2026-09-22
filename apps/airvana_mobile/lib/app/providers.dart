@@ -173,3 +173,9 @@ final profileAvatarPickerProvider = Provider<ProfileAvatarPicker>((ref) {
 final localSocialStateProvider = FutureProvider<LocalSocialState>((ref) {
   return ref.watch(airvanaRepositoryProvider).loadLocalSocialState();
 });
+
+final localMessageThreadsProvider = FutureProvider<List<LocalMessageThread>>((
+  ref,
+) {
+  return ref.watch(airvanaRepositoryProvider).loadLocalMessageThreads();
+});

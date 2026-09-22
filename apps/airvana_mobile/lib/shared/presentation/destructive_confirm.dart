@@ -21,6 +21,10 @@ enum DestructiveAction {
   clearAllRuns,
   requestAccountDeletion,
   clearLocalBusiness,
+
+  /// Web 删 Agent 走的是独立一层（index.html:2096），不在 17 条 configs 表里，
+  /// 但承诺与它们相反——不可恢复——所以必须单列，不能复用 removePower。
+  deleteAgent,
 }
 
 class DestructiveSpec {
@@ -47,6 +51,11 @@ DestructiveSpec destructiveSpec(DestructiveAction action, {String? subject}) =>
         title: '清空全部能力？',
         message: '已选择的能力组合将被清空，其他创作内容不会改变。',
         label: '确认清空',
+      ),
+      DestructiveAction.deleteAgent => DestructiveSpec(
+        title: '删除“${subject ?? '此 Agent'}”？',
+        message: '删除后无法恢复；执行中的 Agent 必须先取消任务。',
+        label: '确认删除',
       ),
       DestructiveAction.removePower => DestructiveSpec(
         title: '移除“${subject ?? '此能力'}”？',
@@ -159,9 +168,7 @@ Future<bool> confirmDestructiveAction(
         ),
         FilledButton(
           key: ValueKey('destructive-${action.name}-confirm'),
-          style: FilledButton.styleFrom(
-            backgroundColor: AirvanaColors.accent,
-          ),
+          style: FilledButton.styleFrom(backgroundColor: AirvanaColors.accent),
           onPressed: () => Navigator.of(context).pop(true),
           child: Text(spec.label),
         ),
