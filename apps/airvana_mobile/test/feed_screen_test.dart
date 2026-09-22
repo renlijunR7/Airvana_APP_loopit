@@ -38,18 +38,20 @@ void main() {
       final pager = tester.widget<PageView>(
         find.byKey(const ValueKey('legacy-feed-pager')),
       );
-      expect(pager.childrenDelegate.estimatedChildCount, 64);
-      expect(find.textContaining('Luna 小镇'), findsWidgets);
-      expect(find.textContaining('AIRVANA ORIGINAL'), findsWidgets);
-      expect(find.textContaining('本地互动 DEMO'), findsWidgets);
+      expect(pager.childrenDelegate.estimatedChildCount, 65);
+      // 首条现在是项目自有新增作品，Web 基线的 64 条紧随其后（由下方循环逐条校验）。
+      const first = 'plb_christmas_tree_gesture';
+      expect(find.textContaining('圣诞树手势互动'), findsWidgets);
+      // 左上角的 AIRVANA ORIGINAL 徽标已按产品要求移除。
+      expect(find.textContaining('AIRVANA ORIGINAL'), findsNothing);
+      // 作品区里的大标题、摘要与边界说明已按产品要求移除，只留试玩按钮。
+      expect(find.textContaining('本地互动 DEMO'), findsNothing);
       expect(
-        find.byKey(const ValueKey('feed-author-plb_kol_town')),
+        find.byKey(const ValueKey('feed-fullscreen-$first')),
         findsOneWidget,
       );
-      expect(
-        find.byKey(const ValueKey('play-plb_kol_town')),
-        findsOneWidget,
-      );
+      expect(find.byKey(const ValueKey('feed-author-$first')), findsOneWidget);
+      expect(find.byKey(const ValueKey('play-$first')), findsOneWidget);
       expect(
         tester
             .getSize(find.byKey(const ValueKey('feed-bottom-nav-reserve')))
@@ -116,7 +118,8 @@ void main() {
         ),
         findsOneWidget,
       );
-      expect(find.text('无封面本机作品'), findsOneWidget);
+      // 标题不再叠在封面上，回退态只验证占位块本身。
+      expect(find.text('无封面本机作品'), findsNothing);
       expect(tester.takeException(), isNull);
     },
   );

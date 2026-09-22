@@ -41,12 +41,14 @@ void main() {
 
       // 运营数据（默认）：身份卡 + 周期切换 + 指标口径 + 免责声明
       expect(find.text('创作者中心'), findsOneWidget);
-      // 创作周报置顶：服务端未接入时如实显示未接入，不给任何数字
+      // 创作周报置顶：服务端未接入时用本地演示占位，并标明是占位值。
       expect(
         find.byKey(const ValueKey('creator-weekly-report')),
         findsOneWidget,
       );
-      expect(find.textContaining('创作周报需要服务端数据'), findsOneWidget);
+      expect(find.textContaining('创作周报需要服务端数据'), findsNothing);
+      expect(find.textContaining('本地演示 · 服务端接入后替换'), findsWidgets);
+      expect(find.textContaining('不代表真实账本'), findsWidgets);
       await tester.scrollUntilVisible(find.text('创作者已开通 · 演示'), 200);
       expect(find.text('创作者已开通 · 演示'), findsOneWidget);
       await tester.scrollUntilVisible(find.text('互动完成 · 演示'), 200);
@@ -90,12 +92,36 @@ void main() {
       await tester.tap(find.byKey(const ValueKey('creator-center-tab-advice')));
       await tester.pumpAndSettle();
       expect(find.text('本周诊断摘要'), findsOneWidget);
-      expect(find.text('依据'), findsNWidgets(3));
-      expect(find.text('假设'), findsNWidgets(3));
-      expect(find.text('目标'), findsNWidgets(3));
-      // 创作灵感挑战置顶，且未接入时不编造话题热度
+      // 灵感挑战卡填入占位内容后变高，第三条建议要滚动才会构建。
+      await tester.scrollUntilVisible(
+        find.text('把发布时间移到 20:00-22:00'),
+        200,
+        scrollable: find
+            .descendant(
+              of: find.byKey(const ValueKey('creator-center-scroll')),
+              matching: find.byType(Scrollable),
+            )
+            .first,
+      );
+      await tester.pumpAndSettle();
+      expect(find.text('依据'), findsWidgets);
+      expect(find.text('假设'), findsWidgets);
+      expect(find.text('目标'), findsWidgets);
+      // 创作灵感挑战置顶；未接入时用 Web 的机会种子做占位。滚过之后要回到顶部。
+      await tester.scrollUntilVisible(
+        find.byKey(const ValueKey('creator-challenges')),
+        -200,
+        scrollable: find
+            .descendant(
+              of: find.byKey(const ValueKey('creator-center-scroll')),
+              matching: find.byType(Scrollable),
+            )
+            .first,
+      );
+      await tester.pumpAndSettle();
       expect(find.byKey(const ValueKey('creator-challenges')), findsOneWidget);
-      expect(find.textContaining('灵感挑战需要服务端数据'), findsOneWidget);
+      expect(find.textContaining('灵感挑战需要服务端数据'), findsNothing);
+      expect(find.text('Crypto City 安全教育 Campaign'), findsOneWidget);
       // 建议分类 tab 行也是 Scrollable，滚动时必须指名纵向列表。
       await tester.scrollUntilVisible(
         find.text('灵感转 Brief'),

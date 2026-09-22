@@ -67,6 +67,12 @@ class _TestController extends PlatformWebViewController {
   Future<void> runJavaScript(String javaScript) async {
     scripts.add(javaScript);
   }
+
+  /// 手势类作品需要摄像头授权回调；基类默认抛未实现，这里按无操作处理。
+  @override
+  Future<void> setOnPlatformPermissionRequest(
+    void Function(PlatformWebViewPermissionRequest request) onPermissionRequest,
+  ) async {}
 }
 
 class _TestNavigation extends PlatformNavigationDelegate {
@@ -95,39 +101,37 @@ class _TestWebViewWidget extends PlatformWebViewWidget {
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  test(
-    'the 38 classic covers stay on the reference-guided casual art pack',
-    () {
-      // 物理（101-105）与截图原作（111-118）各自带独立美术包，
-      // 这条断言只锁 38 款经典游戏仍统一使用 casual-v1 封面。
-      final playables = LegacyDemoCatalog.legacyWebPlayables;
-      expect(playables, hasLength(64));
-      final classic = playables
-          .where(
-            (item) => item.coverAsset.startsWith(
-              'assets/runner/assets/games/casual-v1/covers-png/',
-            ),
-          )
-          .toList();
-      expect(classic, hasLength(38));
-      for (final playable in playables) {
-        expect(
-          File(playable.coverAsset).existsSync(),
-          isTrue,
-          reason: playable.id,
-        );
-      }
-      final manifest =
-          jsonDecode(
-                File(
-                  'assets/runner/assets/games/casual-v1/covers-png/manifest.json',
-                ).readAsStringSync(),
-              )
-              as Map;
-      expect(manifest['source'], 'REFERENCE_GUIDED_CASUAL_2_5D');
-      expect(manifest['entries'], hasLength(38));
-    },
-  );
+  test('the 38 classic covers stay on the reference-guided casual art pack', () {
+    // 物理（101-105）与截图原作（111-118）各自带独立美术包，
+    // 这条断言只锁 38 款经典游戏仍统一使用 casual-v1 封面。
+    final playables = LegacyDemoCatalog.legacyWebPlayables;
+    // Web 基线 64 条 + 项目自有新增 1 条。
+    expect(playables, hasLength(65));
+    final classic = playables
+        .where(
+          (item) => item.coverAsset.startsWith(
+            'assets/runner/assets/games/casual-v1/covers-png/',
+          ),
+        )
+        .toList();
+    expect(classic, hasLength(38));
+    for (final playable in playables) {
+      expect(
+        File(playable.coverAsset).existsSync(),
+        isTrue,
+        reason: playable.id,
+      );
+    }
+    final manifest =
+        jsonDecode(
+              File(
+                'assets/runner/assets/games/casual-v1/covers-png/manifest.json',
+              ).readAsStringSync(),
+            )
+            as Map;
+    expect(manifest['source'], 'REFERENCE_GUIDED_CASUAL_2_5D');
+    expect(manifest['entries'], hasLength(38));
+  });
 
   testWidgets(
     'existing H5 engine responds to mute, pause, restart and completion without restarting on mute',

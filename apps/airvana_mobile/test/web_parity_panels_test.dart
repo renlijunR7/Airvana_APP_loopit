@@ -29,7 +29,10 @@ void main() {
     );
     await tester.pump();
     expect(find.text('搜索结果'), findsOneWidget);
-    expect(find.byKey(const ValueKey('global-search-row-果园合合塔 Orchard Merge')), findsOneWidget);
+    expect(
+      find.byKey(const ValueKey('global-search-row-果园合合塔 Orchard Merge')),
+      findsOneWidget,
+    );
 
     // 提交后进入搜索历史，清空词条时历史 chip 才显示。
     await tester.testTextInput.receiveAction(TextInputAction.done);
@@ -88,11 +91,17 @@ void main() {
     ]) {
       expect(find.byKey(ValueKey('library-filter-$key')), findsOneWidget);
     }
-    expect(find.textContaining('${playables.length} 个 Agentic Playable'), findsOneWidget);
+    expect(
+      find.textContaining('${playables.length} 个 Agentic Playable'),
+      findsOneWidget,
+    );
 
     await tester.tap(find.byKey(const ValueKey('library-filter-published')));
     await tester.pump();
-    expect(find.textContaining('${playables.length} 个 Agentic Playable'), findsNothing);
+    expect(
+      find.textContaining('${playables.length} 个 Agentic Playable'),
+      findsNothing,
+    );
   });
 
   testWidgets('attribution and settlement keep their boundary statements', (

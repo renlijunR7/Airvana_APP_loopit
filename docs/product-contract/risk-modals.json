@@ -1,0 +1,30 @@
+{
+  "contractVersion": "1.0.0",
+  "description": "弱网 / 离线 / 地区风控三个弹窗的完整文案。正文是产品承诺，不是装饰，不得改写或降级为附注。",
+  "modals": {
+    "riskWeakNetwork": {
+      "eyebrow": "NETWORK DEGRADED · 本地模拟",
+      "title": "当前网络连接较慢",
+      "body": "内容加载和提交可能出现延迟。你的输入和本地草稿会被保留，可以继续使用已缓存内容或重新检测连接。",
+      "note": "弱网模拟会为联网入口增加 1.2 秒演示延迟；不会修改系统网络、浏览器设置或生产服务。",
+      "primaryLabel": "继续使用",
+      "secondaryLabel": "重新检测"
+    },
+    "riskOffline": {
+      "eyebrow": "OFFLINE · 本地模拟",
+      "title": "当前无法连接网络",
+      "body": "需要服务器确认的登录、发布、钱包、归因和结算操作已暂停。本地草稿、离线游戏和已缓存内容仍可使用。",
+      "note": "离线状态采用 Fail closed：不会把本地结果伪装成服务器已确认状态。",
+      "primaryLabel": "使用离线功能",
+      "secondaryLabel": "重新连接"
+    },
+    "riskChinaRegion": {
+      "eyebrow": "REGION RISK · CN 模拟",
+      "title": "当前访问可能来自中国大陆",
+      "body": "根据当前地区风控策略，钱包连接、代币相关功能、Web3 营销发布及结算暂不可用。IP 仅作为风险信号，最终权限仍由账号、KYC、Campaign Contract 与服务端策略确认。",
+      "note": "当前设备已进入非金融模式；普通浏览、本地草稿和不含 Token 奖励的互动体验保持可用。",
+      "primaryLabel": "进入非金融模式",
+      "secondaryLabel": "查看限制范围"
+    }
+  }
+}

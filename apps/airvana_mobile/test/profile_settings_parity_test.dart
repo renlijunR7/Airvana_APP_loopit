@@ -298,10 +298,7 @@ void main() {
     await tester.tap(find.text('版本更新'));
     await tester.pumpAndSettle();
     // 与 Web 一致：版本检查先弹 systemModal，关闭后才落提示条。
-    expect(
-      find.byKey(const ValueKey('system-modal-version')),
-      findsOneWidget,
-    );
+    expect(find.byKey(const ValueKey('system-modal-version')), findsOneWidget);
     await tester.tap(
       find.byKey(const ValueKey('system-modal-version-primary')),
     );

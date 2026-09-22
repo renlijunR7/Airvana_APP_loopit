@@ -181,7 +181,8 @@ void main() {
       await tester.pumpAndSettle();
 
       final destinations = <(int, String)>[
-        (0, 'Luna 小镇'),
+        // 首页首条已换成项目自有新增作品。
+        (0, '圣诞树手势互动'),
         (1, '#原创新游'),
         (2, '增长网络'),
         (3, '消息'),
@@ -335,12 +336,20 @@ void main() {
       await tester.pumpWidget(_testAirvanaApp(harness));
       await tester.pumpAndSettle();
 
+      // 首条已是项目自有新增作品，这条用例验证的是 Web 基线那张卡，先滑过去。
+      await tester.drag(
+        find.byKey(const ValueKey('legacy-feed-pager')),
+        const Offset(0, -620),
+      );
+      await tester.pumpAndSettle();
       expect(
         find.text('运营 Agentic Playable「Luna 小镇 · KOL Town」'),
         findsOneWidget,
       );
-      expect(find.bySemanticsLabel('退出当前作品'), findsOneWidget);
-      for (final label in ['开启作品音效', '退出当前作品']) {
+      // 未开始播放时右上角是「全屏体验」，退出口只在游戏跑起来后出现。
+      expect(find.bySemanticsLabel('退出当前作品'), findsNothing);
+      expect(find.bySemanticsLabel('全屏体验'), findsOneWidget);
+      for (final label in ['开启作品音效', '全屏体验']) {
         expect(
           tester
               .getSemantics(find.bySemanticsLabel(label))
@@ -354,8 +363,7 @@ void main() {
 
       await tester.tap(find.byKey(const ValueKey('play-plb_kol_town')));
       await tester.pumpAndSettle();
-      // 首条是 Web 顺序里的 132 Luna 小镇；测试环境无 WebView，
-      // 独立打包游戏落到通用内联兜底。
+      // 测试环境无 WebView，独立打包游戏落到通用内联兜底。
       expect(
         find.byKey(const ValueKey('feed-inline-game-plb_kol_town')),
         findsOneWidget,

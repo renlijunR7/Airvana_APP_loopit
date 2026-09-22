@@ -15,8 +15,10 @@ void main() {
 
   test('legacy Web catalog keeps all 64 playables in its exact order', () {
     final playables = LegacyDemoCatalog.legacyWebPlayables;
-    expect(playables, hasLength(64));
-    expect(playables.map((item) => item.id), const [
+    // 项目自有新增作品排在最前，Web 基线的 64 条保持原顺序。
+    expect(playables, hasLength(65));
+    expect(playables.first.id, 'plb_christmas_tree_gesture');
+    expect(playables.skip(1).map((item) => item.id), const [
       'plb_kol_town',
       'plb_coin_dozer',
       'plb_htx_quest',
@@ -86,10 +88,16 @@ void main() {
 
   test('legacy Web discover covers and categories stay exact and complete', () {
     final playables = LegacyDemoCatalog.legacyWebPlayables;
-    expect(playables.map((item) => item.coverAsset), const [
+    // 首条是项目自有新增作品，其后才是 Web 基线的封面清单。
+    expect(
+      playables.first.coverAsset,
+      'assets/featured-originals-v2/christmas-tree-gesture.png',
+    );
+    expect(playables.skip(1).map((item) => item.coverAsset), const [
       'assets/featured-originals-v2/kol-town-user-20260916-srgb.png',
       'assets/featured-originals-v2/coin-dozer-user-20260915-srgb.png',
-      'assets/featured-originals-v2/htx-quest-user-20260915-srgb.png',
+      // HTX Quest 改用实际跑图画面，不再是关卡选择页截图。
+      'assets/featured-originals-v2/htx-quest.png',
       'assets/featured-originals-v2/token-harbor-user-20260915-srgb.png',
       'assets/featured-originals-v2/coin-castle-user-20260915-srgb.png',
       'assets/featured-originals-v2/lucky-fruit-user-20260915-srgb.png',
@@ -152,7 +160,8 @@ void main() {
       'assets/runner/assets/games/casual-v1/covers-png/prism-match.png',
       'assets/runner/assets/games/casual-v1/covers-png/star-cups.png',
     ]);
-    expect(playables.map((item) => item.category), const [
+    expect(playables.first.category, '独立打包游戏');
+    expect(playables.skip(1).map((item) => item.category), const [
       '独立打包游戏',
       '独立打包游戏',
       '独立打包游戏',
@@ -232,7 +241,8 @@ void main() {
       expect(AirvanaMetrics.navDockWidth, 365.5);
       expect(AirvanaMetrics.navCapsuleHeight, 54);
       expect(AirvanaMetrics.navItemSize, 36);
-      expect(AirvanaMetrics.navIconSize, 23);
+      // Web 原值 23，移动端实机偏小，放大到 26。
+      expect(AirvanaMetrics.navIconSize, 26);
       expect(AirvanaMetrics.navLensWidth, 46);
       expect(AirvanaMetrics.navLensHeight, 38);
       expect(AirvanaMetrics.createButtonSize, 39);
