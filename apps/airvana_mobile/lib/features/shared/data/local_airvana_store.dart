@@ -674,6 +674,19 @@ class LocalAirvanaStore {
     return social;
   });
 
+  /// 清除本机业务数据：只清业务对象，不动个人资料与身份状态。
+  Future<void> clearBusinessData() => _serial(() async {
+    final snapshot = await _readWorkspaceUnlocked();
+    await _writeWorkspaceUnlocked(
+      LocalWorkspaceSnapshot(
+        rewardState: snapshot.rewardState,
+        profileState: snapshot.profileState,
+        identityState: snapshot.identityState,
+        profileFeatureState: snapshot.profileFeatureState,
+      ),
+    );
+  });
+
   Future<LocalGrowthNodeState> loadGrowthNode() async {
     final snapshot = await loadWorkspace();
     return snapshot.growthNode;

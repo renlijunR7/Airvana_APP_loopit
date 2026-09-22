@@ -1294,6 +1294,10 @@ class AirvanaRepository {
     required bool active,
   }) => _localStore.setFollowing(owner: owner, active: active);
 
+  /// 清除本机业务数据：草稿、运行记录、发布与收藏关系全部回到初始状态，
+  /// 与 Web 的 clear-local-business 同口径（不动登录态与个人资料）。
+  Future<void> clearLocalBusinessData() => _localStore.clearBusinessData();
+
   Future<LocalGrowthNodeState> loadLocalGrowthNode() =>
       _localStore.loadGrowthNode();
 

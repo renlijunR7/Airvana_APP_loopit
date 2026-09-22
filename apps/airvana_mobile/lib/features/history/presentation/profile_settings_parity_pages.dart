@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:airvana_mobile/features/history/presentation/experience_history_screen.dart';
 import 'package:airvana_mobile/app/providers.dart';
 import 'package:airvana_mobile/design_system/airvana_theme.dart';
 import 'package:airvana_mobile/features/history/presentation/profile_legal_document_screen.dart';
@@ -3108,6 +3111,11 @@ class _ProductCenterPageState extends ConsumerState<_ProductCenterPage> {
                     : null,
               ),
             ),
+            _IdentitySimulator(state: state),
+            _NetworkProbeCard(enabled: state.frontendEnvironment == 'test'),
+            _RiskPreviewCard(enabled: state.frontendEnvironment == 'test'),
+            _StartupPopupCard(state: state),
+            _LocalDataFoundationCard(state: state),
           ],
         ],
       );
@@ -4084,5 +4092,609 @@ class _SettingsLink extends StatelessWidget {
           color: AirvanaColors.line,
         ),
     ],
+  );
+}
+
+/// 身份状态模拟器，对应 Web 演示控制里的同名卡片。
+/// 只修改当前设备的本地演示状态，不代表真实认证、审核或服务端授权。
+class _IdentitySimulator extends ConsumerWidget {
+  const _IdentitySimulator({required this.state});
+
+  final LocalProfileFeatureState state;
+
+  static const kycOptions = <(String, String)>[
+    ('unverified', '未认证'),
+    ('consent', '待授权'),
+    ('document_demo', '待上传'),
+    ('pending_demo', '审核中'),
+    ('verified_demo', '已认证'),
+    ('rejected_demo', '未通过'),
+    ('expired_demo', '已过期'),
+  ];
+
+  static const creatorOptions = <(String, String)>[
+    ('not_applied', '未申请'),
+    ('awaiting_kyc_demo', '待 KYC'),
+    ('pending_demo', '审核中'),
+    ('active_demo', '已开通'),
+    ('rejected_demo', '未通过'),
+    ('suspended_demo', '已暂停'),
+  ];
+
+  /// 与 Web 的 identityPermissionRows 同一套判定。
+  static List<(String, String, String, bool)> permissionRows({
+    required bool kycVerified,
+    required bool creatorEntitled,
+  }) => [
+    ('player', '基础体验与站内创作', '体验、互动、收藏、评论和 APP 内游戏创作', true),
+    ('kyc', '身份依赖入口', '钱包复核、创作者审核与受限身份操作', kycVerified),
+    ('creator', 'KOL 深度创作与创作者中心', '需要 KYC 有效且创作者身份已开通', creatorEntitled),
+    (
+      'campaign',
+      'Campaign、外部分发与结算',
+      '本地可演示；真实结果仍需合同、审核与服务端确认',
+      creatorEntitled,
+    ),
+    (
+      'node',
+      '增长网络节点申请',
+      '需要 KYC、创作者身份、成员签署和服务端复核',
+      kycVerified && creatorEntitled,
+    ),
+  ];
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final identity = ref.watch(identityStateProvider);
+    return identity.when(
+      loading: () => const SizedBox.shrink(),
+      error: (_, _) => const SizedBox.shrink(),
+      data: (value) {
+        final kycVerified = value.kycStatus == 'verified_demo';
+        final creatorEntitled = value.creatorEntitled;
+        final rows = permissionRows(
+          kycVerified: kycVerified,
+          creatorEntitled: creatorEntitled,
+        );
+        final editable = state.frontendEnvironment == 'test';
+        return _Surface(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const _SectionTitle(
+                '身份状态模拟器',
+                subtitle: '切换 KYC 与创作者状态，立即验证功能权限',
+              ),
+              const SizedBox(height: 4),
+              const Text(
+                '仅修改当前设备的本地演示状态，不代表真实认证、审核或服务端授权。',
+                style: TextStyle(fontSize: 9, color: AirvanaColors.muted),
+              ),
+              const SizedBox(height: 10),
+              const Text(
+                'KYC 状态',
+                style: TextStyle(fontSize: 10, fontWeight: FontWeight.w900),
+              ),
+              const SizedBox(height: 6),
+              Wrap(
+                spacing: 6,
+                runSpacing: 6,
+                children: [
+                  for (final option in kycOptions)
+                    ChoiceChip(
+                      key: ValueKey('identity-sim-kyc-${option.$1}'),
+                      label: Text(
+                        option.$2,
+                        style: const TextStyle(fontSize: 10),
+                      ),
+                      selected: value.kycStatus == option.$1,
+                      onSelected: editable
+                          ? (_) async {
+                              await ref
+                                  .read(airvanaRepositoryProvider)
+                                  .saveIdentityState(
+                                    LocalIdentityState(
+                                      creatorStatus: value.creatorStatus,
+                                      kycStatus: option.$1,
+                                    ),
+                                  );
+                              ref.invalidate(identityStateProvider);
+                            }
+                          : null,
+                    ),
+                ],
+              ),
+              const SizedBox(height: 10),
+              const Text(
+                '创作者状态',
+                style: TextStyle(fontSize: 10, fontWeight: FontWeight.w900),
+              ),
+              const SizedBox(height: 6),
+              Wrap(
+                spacing: 6,
+                runSpacing: 6,
+                children: [
+                  for (final option in creatorOptions)
+                    ChoiceChip(
+                      key: ValueKey('identity-sim-creator-${option.$1}'),
+                      label: Text(
+                        option.$2,
+                        style: const TextStyle(fontSize: 10),
+                      ),
+                      selected: value.creatorStatus == option.$1,
+                      onSelected: editable
+                          ? (_) async {
+                              await ref
+                                  .read(airvanaRepositoryProvider)
+                                  .saveIdentityState(
+                                    LocalIdentityState(
+                                      creatorStatus: option.$1,
+                                      kycStatus: value.kycStatus,
+                                    ),
+                                  );
+                              ref.invalidate(identityStateProvider);
+                            }
+                          : null,
+                    ),
+                ],
+              ),
+              const SizedBox(height: 12),
+              Row(
+                children: [
+                  const Expanded(
+                    child: Text(
+                      '当前有效权限',
+                      style: TextStyle(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                  ),
+                  Text(
+                    creatorEntitled ? 'KOL 权限 · 本地演示' : '玩家权限',
+                    key: const ValueKey('identity-effective-role'),
+                    style: const TextStyle(
+                      fontSize: 9,
+                      color: AirvanaColors.muted,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8),
+              for (final row in rows)
+                Padding(
+                  key: ValueKey('identity-permission-${row.$1}'),
+                  padding: const EdgeInsets.only(bottom: 7),
+                  child: Row(
+                    children: [
+                      Text(
+                        row.$4 ? '✓' : '×',
+                        style: TextStyle(
+                          fontSize: 11,
+                          fontWeight: FontWeight.w900,
+                          color: row.$4
+                              ? AirvanaColors.success
+                              : AirvanaColors.muted,
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              row.$2,
+                              style: const TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.w900,
+                              ),
+                            ),
+                            Text(
+                              row.$3,
+                              style: const TextStyle(
+                                fontSize: 9,
+                                color: AirvanaColors.muted,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Text(
+                        row.$4 ? (row.$1 == 'player' ? '可用' : '演示可用') : '已锁定',
+                        style: const TextStyle(
+                          fontSize: 9,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+}
+
+/// 请求检测：Web 的 runNetworkSimulationProbe，1.2 秒演示延迟。
+class _NetworkProbeCard extends StatefulWidget {
+  const _NetworkProbeCard({required this.enabled});
+
+  final bool enabled;
+
+  @override
+  State<_NetworkProbeCard> createState() => _NetworkProbeCardState();
+}
+
+class _NetworkProbeCardState extends State<_NetworkProbeCard> {
+  String _status = '尚未检测';
+  bool _busy = false;
+
+  Future<void> _run() async {
+    setState(() {
+      _busy = true;
+      _status = '检测中…';
+    });
+    await Future<void>.delayed(const Duration(milliseconds: 1200));
+    if (!mounted) return;
+    setState(() {
+      _busy = false;
+      _status = '本机回环可达 · 未连接生产服务';
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) => _Surface(
+    child: Row(
+      children: [
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                '请求检测',
+                style: TextStyle(fontSize: 11, fontWeight: FontWeight.w900),
+              ),
+              const SizedBox(height: 3),
+              Text(
+                _status,
+                key: const ValueKey('network-probe-status'),
+                style: const TextStyle(fontSize: 9, color: AirvanaColors.muted),
+              ),
+            ],
+          ),
+        ),
+        OutlinedButton(
+          key: const ValueKey('network-probe-run'),
+          onPressed: widget.enabled && !_busy ? _run : null,
+          child: Text(_busy ? '检测中…' : '运行检测'),
+        ),
+      ],
+    ),
+  );
+}
+
+/// 风险弹窗预览：弱网、无网络和中国大陆访问三类提醒。
+class _RiskPreviewCard extends StatelessWidget {
+  const _RiskPreviewCard({required this.enabled});
+
+  final bool enabled;
+
+  static const rows = <(String, String, String, String, AirvanaSystemModal)>[
+    ('weak', '⌁', '弱网提醒', '降级 · 不阻断', AirvanaSystemModal.riskWeakNetwork),
+    (
+      'offline',
+      '×',
+      '无网络提醒',
+      '阻断 · Fail closed',
+      AirvanaSystemModal.riskOffline,
+    ),
+    (
+      'region',
+      '!',
+      '中国大陆访问提醒',
+      '地区策略 · 人工复核',
+      AirvanaSystemModal.riskChinaRegion,
+    ),
+  ];
+
+  @override
+  Widget build(BuildContext context) => _Surface(
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const _SectionTitle('风险弹窗预览', subtitle: '弱网、无网络和中国大陆访问三类提醒。'),
+        const SizedBox(height: 8),
+        for (final row in rows)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 7),
+            child: Row(
+              children: [
+                Text(row.$2, style: const TextStyle(fontSize: 12)),
+                const SizedBox(width: 9),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        row.$3,
+                        style: const TextStyle(
+                          fontSize: 10,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                      Text(
+                        row.$4,
+                        style: const TextStyle(
+                          fontSize: 9,
+                          color: AirvanaColors.muted,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                OutlinedButton(
+                  key: ValueKey('risk-preview-${row.$1}'),
+                  onPressed: enabled
+                      ? () => showAirvanaSystemModal(context, row.$5)
+                      : null,
+                  child: const Text('预览'),
+                ),
+              ],
+            ),
+          ),
+      ],
+    ),
+  );
+}
+
+/// 启动弹窗开关与预览，对应 Web 的 demoPopupDefs 四条。
+class _StartupPopupCard extends ConsumerWidget {
+  const _StartupPopupCard({required this.state});
+
+  final LocalProfileFeatureState state;
+
+  static const defs = <(String, String, String, String)>[
+    ('version', '↻', '版本升级弹窗', '启动时提示可用的新版本与本地更新说明。'),
+    ('operations', '◎', '运营任务弹窗', '启动时展示每日推荐任务与站内贡献入口。'),
+    ('message', '□', '消息提醒弹窗', '启动时展示未读消息摘要；仍受消息提醒总开关控制。'),
+    ('aitSettlement', '✓', 'AIT 结算通过通知', '模拟结算复核通过后的顶部站内推送；3 秒自动关闭，不代表真实付款。'),
+  ];
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isTest = state.frontendEnvironment == 'test';
+    final enabledCount = defs
+        .where((item) => isTest && (state.popupStates[item.$1] ?? false))
+        .length;
+    return _Surface(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _SectionTitle(
+            '启动弹窗',
+            subtitle: isTest ? '可单独开关并立即预览' : '生产环境统一停用；测试配置会保留',
+            trailing: isTest ? '$enabledCount / ${defs.length} 开启' : '全部停用',
+          ),
+          const SizedBox(height: 8),
+          for (final def in defs)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 6),
+              child: Row(
+                children: [
+                  Text(def.$2, style: const TextStyle(fontSize: 12)),
+                  const SizedBox(width: 9),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          def.$3,
+                          style: const TextStyle(
+                            fontSize: 10,
+                            fontWeight: FontWeight.w900,
+                          ),
+                        ),
+                        Text(
+                          def.$4,
+                          style: const TextStyle(
+                            fontSize: 9,
+                            height: 1.5,
+                            color: AirvanaColors.muted,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  if (def.$1 == 'version')
+                    TextButton(
+                      key: const ValueKey('startup-popup-preview-version'),
+                      onPressed: isTest
+                          ? () => showAirvanaSystemModal(
+                              context,
+                              AirvanaSystemModal.version,
+                            )
+                          : null,
+                      child: const Text('预览'),
+                    )
+                  else if (def.$1 == 'operations')
+                    TextButton(
+                      key: const ValueKey('startup-popup-preview-operations'),
+                      onPressed: isTest
+                          ? () => showAirvanaSystemModal(
+                              context,
+                              AirvanaSystemModal.daily,
+                            )
+                          : null,
+                      child: const Text('预览'),
+                    ),
+                  Switch.adaptive(
+                    key: ValueKey('startup-popup-switch-${def.$1}'),
+                    value: isTest && (state.popupStates[def.$1] ?? false),
+                    onChanged: isTest
+                        ? (value) {
+                            final next = {...state.popupStates};
+                            next[def.$1] = value;
+                            _saveFeatureState(
+                              context,
+                              ref,
+                              state.copyWith(popupStates: next),
+                              message: '启动弹窗设置已更新',
+                            );
+                          }
+                        : null,
+                  ),
+                ],
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+}
+
+/// 移动端状态底座：本机数据概览与导出 / 恢复默认 / 清除。
+class _LocalDataFoundationCard extends ConsumerWidget {
+  const _LocalDataFoundationCard({required this.state});
+
+  final LocalProfileFeatureState state;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final workspace = ref.watch(profileLocalWorkspaceProvider);
+    return _Surface(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const _SectionTitle(
+            '移动端状态底座',
+            subtitle: '版本化存储、统一身份权限、对象 ID、审计与公共状态。',
+          ),
+          const SizedBox(height: 9),
+          workspace.when(
+            loading: () => const Text(
+              '读取本机数据…',
+              style: TextStyle(fontSize: 9, color: AirvanaColors.muted),
+            ),
+            error: (error, _) => Text(
+              '本机数据读取失败：$error',
+              style: const TextStyle(fontSize: 9, color: AirvanaColors.muted),
+            ),
+            data: (data) => Row(
+              children: [
+                _FoundationMetric(label: '草稿', value: '${data.drafts.length}'),
+                _FoundationMetric(
+                  label: '游戏运行',
+                  value: '${data.experienceRecords.length}',
+                ),
+                _FoundationMetric(
+                  label: '发布记录',
+                  value: '${data.releases.length}',
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 11),
+          Row(
+            children: [
+              Expanded(
+                child: OutlinedButton(
+                  key: const ValueKey('local-data-export'),
+                  onPressed: () async {
+                    final data = await ref
+                        .read(airvanaRepositoryProvider)
+                        .loadLocalWorkspace();
+                    if (!context.mounted) return;
+                    await Clipboard.setData(
+                      ClipboardData(text: jsonEncode(data.toJson())),
+                    );
+                    if (context.mounted) {
+                      _notice(context, '本机数据已复制为 JSON');
+                    }
+                  },
+                  child: const Text('导出本机数据'),
+                ),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: OutlinedButton(
+                  key: const ValueKey('local-data-restore-default'),
+                  onPressed: () => _saveFeatureState(
+                    context,
+                    ref,
+                    state.copyWith(
+                      frontendEnvironment: 'test',
+                      networkProfile: 'normal',
+                      regionProfile: 'global',
+                      nonFinancialMode: false,
+                    ),
+                    message: '已恢复默认演示环境',
+                  ),
+                  child: const Text('恢复默认环境'),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          SizedBox(
+            width: double.infinity,
+            child: OutlinedButton(
+              key: const ValueKey('local-data-clear'),
+              style: OutlinedButton.styleFrom(
+                foregroundColor: const Color(0xFFC62836),
+              ),
+              onPressed: () async {
+                final ok = await confirmDestructiveAction(
+                  context,
+                  DestructiveAction.clearLocalBusiness,
+                );
+                if (!ok || !context.mounted) return;
+                await ref
+                    .read(airvanaRepositoryProvider)
+                    .clearLocalBusinessData();
+                ref.invalidate(profileLocalWorkspaceProvider);
+                ref.invalidate(homeProvider);
+                if (context.mounted) _notice(context, '本机业务数据已清除');
+              },
+              child: const Text('清除本机业务数据'),
+            ),
+          ),
+          const SizedBox(height: 8),
+          const Text(
+            '环境开关只作用于当前设备的前端演示；不会连接生产服务、切换服务器凭证，'
+            '也不会绕过 Campaign Contract 与人工审批。',
+            style: TextStyle(
+              fontSize: 9,
+              height: 1.6,
+              color: AirvanaColors.muted,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _FoundationMetric extends StatelessWidget {
+  const _FoundationMetric({required this.label, required this.value});
+
+  final String label;
+  final String value;
+
+  @override
+  Widget build(BuildContext context) => Expanded(
+    child: Column(
+      children: [
+        Text(
+          value,
+          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w900),
+        ),
+        Text(
+          label,
+          style: const TextStyle(fontSize: 9, color: AirvanaColors.muted),
+        ),
+      ],
+    ),
   );
 }
