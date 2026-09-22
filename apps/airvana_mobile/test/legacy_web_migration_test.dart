@@ -257,7 +257,8 @@ void main() {
     );
 
     expect(find.text('增长网络'), findsOneWidget);
-    expect(find.text('演示网络数据 · 不代表真实 AIP、AIT 或商业结算'), findsNothing);
+    // Web 在三项指标下方有这句边界声明，早前没搬过来，现在按 Web 补齐。
+    expect(find.text('演示网络数据 · 不代表真实 AIP、AIT 或商业结算'), findsOneWidget);
     expect(
       tester
           .getSize(find.byKey(const ValueKey('network-metrics-content-gap')))
@@ -452,5 +453,4 @@ void main() {
     expect(find.text('红杯速配 Red Cup Shuffle'), findsOneWidget);
     expect(find.text('翻照片做玩偶 Make Your Photo Playable'), findsOneWidget);
   });
-
 }

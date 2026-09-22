@@ -56,8 +56,8 @@ const _specs = <AirvanaSystemModal, AirvanaSystemModalSpec>{
         '内容加载和提交可能出现延迟。你的输入和本地草稿会被保留，'
         '可以继续使用已缓存内容或重新检测连接。',
     note: '弱网模拟会为联网入口增加 1.2 秒演示延迟；不会修改系统网络、浏览器设置或生产服务。',
-    primaryLabel: '重新检测连接',
-    secondaryLabel: '继续使用缓存',
+    primaryLabel: '继续使用',
+    secondaryLabel: '重新检测',
   ),
   AirvanaSystemModal.riskOffline: AirvanaSystemModalSpec(
     eyebrow: 'OFFLINE · 本地模拟',
@@ -67,14 +67,16 @@ const _specs = <AirvanaSystemModal, AirvanaSystemModalSpec>{
         '本地草稿、离线游戏和已缓存内容仍可使用。',
     note: '离线状态采用 Fail closed：不会把本地结果伪装成服务器已确认状态。',
     primaryLabel: '使用离线功能',
+    secondaryLabel: '重新连接',
   ),
   AirvanaSystemModal.riskChinaRegion: AirvanaSystemModalSpec(
     eyebrow: 'REGION RISK · CN 模拟',
     title: '当前访问可能来自中国大陆',
+    // 这段是 Web 的风控口径原文，不能替换成自造文案。
     body:
-        '当前设备已进入非金融模式；普通浏览、本地草稿和不含 Token 奖励的'
-        '互动体验保持可用。',
-    note: '非金融模式下，钱包、结算与 Token 奖励入口在本机一律关闭。',
+        '根据当前地区风控策略，钱包连接、代币相关功能、Web3 营销发布及结算暂不可用。'
+        'IP 仅作为风险信号，最终权限仍由账号、KYC、Campaign Contract 与服务端策略确认。',
+    note: '当前设备已进入非金融模式；普通浏览、本地草稿和不含 Token 奖励的互动体验保持可用。',
     primaryLabel: '进入非金融模式',
     secondaryLabel: '查看限制范围',
   ),
@@ -99,9 +101,7 @@ Future<bool?> showAirvanaSystemModal(
     builder: (context) => Dialog(
       key: ValueKey('system-modal-${modal.name}'),
       backgroundColor: Colors.white,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(22),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(22)),
       insetPadding: const EdgeInsets.symmetric(horizontal: 28),
       child: Padding(
         padding: const EdgeInsets.fromLTRB(20, 20, 20, 16),
@@ -121,16 +121,10 @@ Future<bool?> showAirvanaSystemModal(
             const SizedBox(height: 8),
             Text(
               title,
-              style: const TextStyle(
-                fontSize: 17,
-                fontWeight: FontWeight.w900,
-              ),
+              style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w900),
             ),
             const SizedBox(height: 10),
-            Text(
-              spec.body,
-              style: const TextStyle(fontSize: 12, height: 1.7),
-            ),
+            Text(spec.body, style: const TextStyle(fontSize: 12, height: 1.7)),
             const SizedBox(height: 12),
             Container(
               padding: const EdgeInsets.all(11),

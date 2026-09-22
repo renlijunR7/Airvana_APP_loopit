@@ -34,10 +34,10 @@ void main() {
       );
       expect(find.text(spec.eyebrow), findsOneWidget);
       expect(find.text(spec.note), findsOneWidget);
-      // 离线提示只有单一出口，其余三个都保留次要操作。
+      // Web 的四个弹窗都有次要操作，离线是「重新连接」。
       expect(
         find.byKey(ValueKey('system-modal-${modal.name}-secondary')),
-        modal == AirvanaSystemModal.riskOffline ? findsNothing : findsOneWidget,
+        findsOneWidget,
       );
 
       await tester.tap(

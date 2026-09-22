@@ -642,17 +642,24 @@ class _SubscriptionCenterPageState
                 _PrimaryAction(
                   label: '重置订阅演示',
                   outlined: true,
-                  onPressed: () => _saveFeatureState(
-                    context,
-                    ref,
-                    state.copyWith(
-                      subscriptionPlanKey: 'free',
-                      subscriptionStatus: 'active',
-                      subscriptionCancelAtPeriodEnd: false,
-                      subscriptionHistory: const [],
-                    ),
-                    message: '订阅演示已重置为 Free',
-                  ),
+                  onPressed: () async {
+                    final confirmed = await confirmDestructiveAction(
+                      context,
+                      DestructiveAction.resetSubscription,
+                    );
+                    if (!confirmed || !context.mounted) return;
+                    await _saveFeatureState(
+                      context,
+                      ref,
+                      state.copyWith(
+                        subscriptionPlanKey: 'free',
+                        subscriptionStatus: 'active',
+                        subscriptionCancelAtPeriodEnd: false,
+                        subscriptionHistory: const [],
+                      ),
+                      message: '订阅演示已重置为 Free',
+                    );
+                  },
                 ),
               ],
             ),
@@ -856,6 +863,12 @@ class _IdentityAndRolesPageState extends ConsumerState<_IdentityAndRolesPage> {
           label: '重置本地演示状态',
           outlined: true,
           onPressed: () async {
+            // Web 的重置走统一确认层，这里不能直接执行。
+            final confirmed = await confirmDestructiveAction(
+              context,
+              DestructiveAction.resetIdentity,
+            );
+            if (!confirmed || !context.mounted) return;
             await ref
                 .read(airvanaRepositoryProvider)
                 .saveIdentityState(
@@ -3021,6 +3034,52 @@ class _ProductCenterPageState extends ConsumerState<_ProductCenterPage> {
                             };
                             if (modal != null) {
                               await showAirvanaSystemModal(context, modal);
+                            }
+                          }
+                        : null,
+                  ),
+                ],
+              ),
+            ),
+            _Surface(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const _SectionTitle(
+                    '地区模拟',
+                    subtitle: 'IP 仅作为风险信号，最终权限仍由服务端策略确认',
+                  ),
+                  const SizedBox(height: 8),
+                  SegmentedButton<String>(
+                    key: const ValueKey('region-simulation'),
+                    segments: const [
+                      ButtonSegment(value: 'global', label: Text('全球')),
+                      ButtonSegment(value: 'cn-mainland', label: Text('中国大陆')),
+                    ],
+                    selected: {state.regionProfile},
+                    onSelectionChanged: state.frontendEnvironment == 'test'
+                        ? (value) async {
+                            final next = value.first;
+                            // Web：切到 cn-mainland 时同时置为非金融模式并弹风控提示。
+                            await _saveFeatureState(
+                              context,
+                              ref,
+                              state.copyWith(
+                                regionProfile: next,
+                                nonFinancialMode: next == 'cn-mainland'
+                                    ? true
+                                    : state.nonFinancialMode,
+                              ),
+                              message: next == 'cn-mainland'
+                                  ? '地区模拟已切换为中国大陆'
+                                  : '已恢复全球默认地区模拟',
+                            );
+                            if (!context.mounted) return;
+                            if (next == 'cn-mainland') {
+                              await showAirvanaSystemModal(
+                                context,
+                                AirvanaSystemModal.riskChinaRegion,
+                              );
                             }
                           }
                         : null,

@@ -200,6 +200,14 @@ class _LocalNetworkScreenState extends State<LocalNetworkScreen> {
               ],
             ),
           ),
+          const Padding(
+            key: ValueKey('network-metrics-note'),
+            padding: EdgeInsets.fromLTRB(20, 8, 20, 0),
+            child: Text(
+              '演示网络数据 · 不代表真实 AIP、AIT 或商业结算',
+              style: TextStyle(fontSize: 9, color: AirvanaColors.muted),
+            ),
+          ),
           const SizedBox(
             key: ValueKey('network-metrics-content-gap'),
             height: 12,
