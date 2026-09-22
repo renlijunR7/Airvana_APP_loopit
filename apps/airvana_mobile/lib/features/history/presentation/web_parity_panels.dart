@@ -1,8 +1,10 @@
+import 'package:airvana_mobile/features/history/presentation/connector_publish_sheet.dart';
 import 'package:airvana_mobile/design_system/airvana_theme.dart';
 import 'package:airvana_mobile/features/shared/domain/airvana_models.dart';
 import 'package:airvana_mobile/features/shared/presentation/playable_detail_screen.dart';
 import 'package:airvana_mobile/features/shared/presentation/player_publish_sheet.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 /// 复刻旧版 Web 的 `globalSearch` panel（4 个分类 tab + 搜索历史 + 结果列表）。
 class GlobalSearchPageBody extends StatefulWidget {
@@ -702,6 +704,65 @@ class _PlayableLibraryPageBodyState extends State<PlayableLibraryPageBody> {
                               fontWeight: FontWeight.w800,
                               color: AirvanaColors.accent,
                             ),
+                          ),
+                          const SizedBox(height: 4),
+                          // Web 的卡片操作：查看 / 编辑 / 归档 + 连接器发布。
+                          Wrap(
+                            spacing: 2,
+                            children: [
+                              TextButton(
+                                key: ValueKey('library-view-${item.id}'),
+                                onPressed: () => Navigator.of(context).push(
+                                  MaterialPageRoute<void>(
+                                    builder: (_) => PlayableDetailScreen(
+                                      playable: item,
+                                      ownerView: true,
+                                    ),
+                                  ),
+                                ),
+                                child: const Text(
+                                  '查看',
+                                  style: TextStyle(fontSize: 10),
+                                ),
+                              ),
+                              TextButton(
+                                key: ValueKey('library-edit-${item.id}'),
+                                onPressed: () => context.push('/create'),
+                                child: const Text(
+                                  '编辑',
+                                  style: TextStyle(fontSize: 10),
+                                ),
+                              ),
+                              TextButton(
+                                key: ValueKey('library-archive-${item.id}'),
+                                onPressed: () =>
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content: Text('归档只改本机展示状态，不影响已发布链接'),
+                                      ),
+                                    ),
+                                child: const Text(
+                                  '归档',
+                                  style: TextStyle(fontSize: 10),
+                                ),
+                              ),
+                              TextButton(
+                                key: ValueKey('library-connector-${item.id}'),
+                                onPressed: () => showModalBottomSheet<void>(
+                                  context: context,
+                                  isScrollControlled: true,
+                                  useSafeArea: true,
+                                  showDragHandle: true,
+                                  backgroundColor: Colors.white,
+                                  builder: (_) =>
+                                      ConnectorPublishSheet(playable: item),
+                                ),
+                                child: const Text(
+                                  '↗ 连接器发布',
+                                  style: TextStyle(fontSize: 10),
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
