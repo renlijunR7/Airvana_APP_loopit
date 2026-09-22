@@ -36,6 +36,10 @@ npm -v
 echo '== 2/8 创建隔离运行账号与持久化目录 =='
 id -u airvana >/dev/null 2>&1 || useradd --system --home "${ROOT_DIR}" --shell /usr/sbin/nologin airvana
 install -d -o airvana -g airvana -m 750 "${ROOT_DIR}" "${ROOT_DIR}/releases" /var/lib/airvana /var/backups/airvana
+# 静态资源由 nginx 直接发，www-data 必须能读到 releases/*/public。
+# 750 + 同组即可，不放开 others 权限。
+usermod -aG airvana www-data
+chmod 750 "${ROOT_DIR}" "${ROOT_DIR}/releases"
 
 echo "== 3/8 获取 ${BRANCH} 分支 =="
 if [ ! -d "${SOURCE_DIR}/.git" ]; then

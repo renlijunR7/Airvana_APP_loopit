@@ -28,6 +28,28 @@
 
 当前工作分支是 `codex/loopit-v2-update`。正式上线前应把经过审核的部署文件和反向代理修复提交到明确的发布分支，不要把本地数据库、`.env`、密钥、日志、构建缓存一起上传。
 
+## 二·五、前后端职责边界（部署形态）
+
+部署上前端与后端是**两个独立单元**，各自发版、各自回滚：
+
+| 层 | 内容 | 由谁提供 | 发版方式 |
+| --- | --- | --- | --- |
+| Web 前端与静态资源 | `public/`（含 index.html、arcade 游戏包、图片） | nginx 直接发（`root /opt/airvana/current/public`） | 换 `current` 软链即生效，不重启 Node |
+| 接口层 | `/api/*` | Node（`src/`，监听 127.0.0.1:8082） | `systemctl restart airvana`，不影响静态资源 |
+| 受控页面路由 | `/content/:id`、`/preview/:id`、`/l/:linkId` | Node（带 CSP 与同源限制，不能交给 CDN） | 同接口层 |
+| 移动端 | `apps/airvana_mobile`（Flutter） | 随安装包分发 | 与服务端解耦，只依赖 `/api` 契约 |
+
+服务端用 `SERVE_STATIC=false` 关掉自带的静态托管（见 `deploy/.env.example`）。
+关掉后 Node 对非 API 路径一律返回 `api_only` 的 404，避免出现「nginx 挂了但
+Node 还在发旧页面」这种两个来源不一致的情况。
+
+本地开发不要设这一项：Node 默认仍然托管 `public/`，`npm start` 一条命令就能
+同时跑前端和接口。
+
+> nginx 以 `www-data` 身份读 `public/`，`setup-server.sh` 会把 `www-data` 加入
+> `airvana` 组，`deploy.sh` 每次发版把 `public/` 设为 750/640。不要为了省事把
+> 发布目录改成 777。
+
 ## 三、首次部署：按顺序执行
 
 下面用这些占位符：
@@ -101,8 +123,14 @@ curl -fsS http://127.0.0.1:8082/api/health
 # C. 公网 HTTPS API
 curl -fsS https://<DOMAIN>/api/health
 
-# D. 首页与 HTTPS 跳转
+# D. 首页与 HTTPS 跳转（由 nginx 直接发，不经过 Node）
 curl -I https://<DOMAIN>/
+
+# E. 确认静态托管确实已经从 Node 摘掉：应当返回 404 且带 api_only
+curl -s http://127.0.0.1:8082/ | head -c 200
+
+# F. 受控页面路由仍由 Node 负责：应当是业务 404，不是 api_only
+curl -s http://127.0.0.1:8082/content/not-a-real-id | head -c 200
 ```
 
 然后用浏览器打开 `https://<DOMAIN>/`，至少人工检查：首页加载、钱包签名域名显示为 HTTPS、登录态 Cookie 带 Secure、刷新后登录态仍在。

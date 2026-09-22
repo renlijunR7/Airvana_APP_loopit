@@ -570,6 +570,10 @@ export function createApp(options = {}) {
     try { saveArtifact(db, { content, payload: safeJson(content.payload_json), version: content.current_version }); } catch (error) { console.error('Artifact backfill failed', content.id, error); }
   }
   const worker = createWorker({ db, ai, pollMs: Number(env.WORKER_POLL_MS || 350) });
+  // 静态资源默认仍由本进程托管，方便本地开发与测试一条命令跑起来；
+  // 生产部署把 SERVE_STATIC=false 打开，让 nginx/CDN 直接发 public/，
+  // Node 只留 /api，前后端成为两个可独立发布、独立回滚的部署单元。
+  const serveStaticAssets = options.serveStatic ?? (env.SERVE_STATIC !== 'false');
   const secret = env.APP_SECRET || 'airvana-development-secret-change-me';
   if (env.NODE_ENV === 'production' && secret === 'airvana-development-secret-change-me') throw new Error('APP_SECRET must be configured in production');
   const allowDemo = options.allowDemo ?? (env.NODE_ENV !== 'production' && env.ALLOW_DEMO_AUTH !== 'false');
@@ -2906,6 +2910,10 @@ export function createApp(options = {}) {
       }
 
       if (pathname.startsWith('/api/')) throw new HttpError(404, '接口不存在', 'not_found');
+      // 关掉静态托管后，非 API 路径一律不由本服务处理——由 nginx/CDN 负责。
+      if (!serveStaticAssets) {
+        throw new HttpError(404, '该服务只提供 /api 接口，静态资源由前端托管层提供', 'api_only');
+      }
       if ((req.method === 'GET' || req.method === 'HEAD') && pathname === '/workspace') {
         return serveStatic(publicDir, '/workspace.html', res);
       }

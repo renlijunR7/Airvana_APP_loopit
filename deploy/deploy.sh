@@ -31,6 +31,9 @@ RELEASE_DIR="${RELEASES_DIR}/${RELEASE_ID}"
 install -d -o airvana -g airvana -m 750 "${RELEASE_DIR}"
 runuser -u airvana -- git -C "${SOURCE_DIR}" archive "${COMMIT}" | tar -x -C "${RELEASE_DIR}"
 chown -R airvana:airvana "${RELEASE_DIR}"
+# nginx 以 www-data 身份读 public/，靠 airvana 组权限；目录要可进入。
+find "${RELEASE_DIR}/public" -type d -exec chmod 750 {} +
+find "${RELEASE_DIR}/public" -type f -exec chmod 640 {} +
 
 echo "== 在隔离目录验证 ${SHORT_SHA} =="
 runuser -u airvana -- npm --prefix "${RELEASE_DIR}" ci --omit=dev
