@@ -197,6 +197,13 @@ class _CreatorCenterPageBodyState extends ConsumerState<CreatorCenterPageBody> {
                 ],
               ),
             ),
+            // Web 的身份卡右侧有「身份与权限 ›」。
+            TextButton(
+              key: const ValueKey('creator-identity-link'),
+              onPressed: () =>
+                  context.push('/profile/secondary/identityVerification'),
+              child: const Text('身份与权限 ›', style: TextStyle(fontSize: 10)),
+            ),
           ],
         ),
       ),
@@ -237,7 +244,12 @@ class _CreatorCenterPageBodyState extends ConsumerState<CreatorCenterPageBody> {
         ),
       ),
       const SizedBox(height: 14),
-      _SectionHeading(title: '核心指标', meta: '演示值与服务端确认值分开展示'),
+      const _SectionHeading(
+        title: '核心指标',
+        meta: '演示值与服务端确认值分开展示',
+        linkLabel: '数据口径',
+        linkRoute: '/profile/secondary/attribution',
+      ),
       const SizedBox(height: 10),
       Row(
         children: [
@@ -266,7 +278,12 @@ class _CreatorCenterPageBodyState extends ConsumerState<CreatorCenterPageBody> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const _SectionHeading(title: '互动贡献趋势', meta: '本地演示，不代表真实收益'),
+            const _SectionHeading(
+              title: '互动贡献趋势',
+              meta: '本地演示，不代表真实收益',
+              linkLabel: '查看明细',
+              linkRoute: '/profile/secondary/attribution',
+            ),
             const SizedBox(height: 12),
             SizedBox(
               height: 96,
@@ -303,6 +320,8 @@ class _CreatorCenterPageBodyState extends ConsumerState<CreatorCenterPageBody> {
             const _SectionHeading(
               title: 'Campaign 漏斗',
               meta: 'Canonical 事件是否完整接入',
+              linkLabel: '接入事件',
+              linkRoute: '/profile/secondary/campaign',
             ),
             const SizedBox(height: 10),
             for (final (label, value, hooked) in const [
@@ -351,6 +370,8 @@ class _CreatorCenterPageBodyState extends ConsumerState<CreatorCenterPageBody> {
           children: [
             const _SectionHeading(
               title: 'Playable 表现',
+              linkLabel: '全部资产',
+              linkRoute: '/profile/secondary/library',
               meta: '只统计当前 KOL 的本地内容',
             ),
             const SizedBox(height: 10),
@@ -432,8 +453,7 @@ class _CreatorCenterPageBodyState extends ConsumerState<CreatorCenterPageBody> {
                 key: ValueKey('creator-advice-tab-${tab.$1}'),
                 label: Text(tab.$2, style: const TextStyle(fontSize: 11)),
                 selected: _adviceCategory == tab.$1,
-                onSelected: (_) =>
-                    setState(() => _adviceCategory = tab.$1),
+                onSelected: (_) => setState(() => _adviceCategory = tab.$1),
               ),
             ),
         ],
@@ -603,6 +623,71 @@ class _CreatorCenterPageBodyState extends ConsumerState<CreatorCenterPageBody> {
   // ---------- Tab 3 增长体系 ----------
 
   List<Widget> _growth(BuildContext context) => [
+    // Web 的「当前成长任务」三条本地任务，各自跳到对应模块。
+    _Panel(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const _SectionHeading(title: '当前成长任务', meta: '先完成阻塞项，再扩大内容与分发'),
+          const SizedBox(height: 10),
+          for (final (title, desc, action, route) in const [
+            (
+              '确认当前 Campaign Contract',
+              '地区、CTA、成功事件与结算口径仍是锁定字段。',
+              '去确认',
+              '/profile/secondary/campaign',
+            ),
+            ('完成今日推荐体验', '用一次完整体验检查互动闭环。', '去完成', '/'),
+            (
+              '检查发布与回滚边界',
+              '发布、灰度、回滚和 Kill Switch 必须保留人工控制。',
+              '去治理',
+              '/profile/secondary/publishingGovernance',
+            ),
+          ])
+            Padding(
+              key: ValueKey('creator-growth-task-$title'),
+              padding: const EdgeInsets.only(bottom: 9),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          title,
+                          style: const TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w900,
+                          ),
+                        ),
+                        const SizedBox(height: 2),
+                        Text(
+                          desc,
+                          style: const TextStyle(
+                            fontSize: 9,
+                            height: 1.55,
+                            color: AirvanaColors.muted,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () =>
+                        route == '/' ? context.go(route) : context.push(route),
+                    child: Text(
+                      '$action ›',
+                      style: const TextStyle(fontSize: 10),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+        ],
+      ),
+    ),
+    const SizedBox(height: 14),
     CreatorGrowthTasksCard(snapshot: _server),
     const SizedBox(height: 14),
     _Panel(
@@ -883,10 +968,19 @@ class _GoalStyleChip extends StatelessWidget {
 }
 
 class _SectionHeading extends StatelessWidget {
-  const _SectionHeading({required this.title, required this.meta});
+  const _SectionHeading({
+    required this.title,
+    required this.meta,
+    this.linkLabel,
+    this.linkRoute,
+  });
 
   final String title;
   final String meta;
+
+  /// Web 在这些分区右上角有「› 跳转」，指向对应的权威模块。
+  final String? linkLabel;
+  final String? linkRoute;
 
   @override
   Widget build(BuildContext context) => Row(
@@ -898,10 +992,17 @@ class _SectionHeading extends StatelessWidget {
           style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w900),
         ),
       ),
-      Text(
-        meta,
-        style: const TextStyle(fontSize: 9, color: AirvanaColors.muted),
-      ),
+      if (linkLabel != null && linkRoute != null)
+        TextButton(
+          key: ValueKey('creator-link-$linkLabel'),
+          onPressed: () => context.push(linkRoute!),
+          child: Text('$linkLabel ›', style: const TextStyle(fontSize: 10)),
+        )
+      else
+        Text(
+          meta,
+          style: const TextStyle(fontSize: 9, color: AirvanaColors.muted),
+        ),
     ],
   );
 }

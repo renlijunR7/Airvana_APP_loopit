@@ -42,19 +42,30 @@ void main() {
       // 运营数据（默认）：身份卡 + 周期切换 + 指标口径 + 免责声明
       expect(find.text('创作者中心'), findsOneWidget);
       // 创作周报置顶：服务端未接入时如实显示未接入，不给任何数字
-      expect(find.byKey(const ValueKey('creator-weekly-report')), findsOneWidget);
+      expect(
+        find.byKey(const ValueKey('creator-weekly-report')),
+        findsOneWidget,
+      );
       expect(find.textContaining('创作周报需要服务端数据'), findsOneWidget);
       await tester.scrollUntilVisible(find.text('创作者已开通 · 演示'), 200);
       expect(find.text('创作者已开通 · 演示'), findsOneWidget);
       await tester.scrollUntilVisible(find.text('互动完成 · 演示'), 200);
       expect(find.text('互动完成 · 演示'), findsOneWidget);
       expect(find.text('0 · 待接入'), findsOneWidget);
+      await tester.scrollUntilVisible(
+        find.byKey(const ValueKey('creator-trend-chart')),
+        200,
+      );
       expect(find.byKey(const ValueKey('creator-trend-chart')), findsOneWidget);
       expect(
         find.byKey(const ValueKey('creator-earnings-disclaimer')),
         findsOneWidget,
       );
       expect(find.text('128'), findsOneWidget);
+      await tester.ensureVisible(
+        find.byKey(const ValueKey('creator-period-30d')),
+      );
+      await tester.pump();
       await tester.tap(find.byKey(const ValueKey('creator-period-30d')));
       await tester.pump();
       expect(find.text('512'), findsOneWidget);
@@ -89,10 +100,12 @@ void main() {
       await tester.scrollUntilVisible(
         find.text('灵感转 Brief'),
         200,
-        scrollable: find.descendant(
-          of: find.byKey(const ValueKey('creator-center-scroll')),
-          matching: find.byType(Scrollable),
-        ).first,
+        scrollable: find
+            .descendant(
+              of: find.byKey(const ValueKey('creator-center-scroll')),
+              matching: find.byType(Scrollable),
+            )
+            .first,
       );
       expect(find.text('灵感转 Brief'), findsOneWidget);
 
