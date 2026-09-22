@@ -484,6 +484,14 @@ class LocalAiTwinState {
     this.sceneId = 'default',
     this.language = 'zh',
     this.versions = const [],
+    this.position = 'host',
+    this.visualStyle = 'hyperreal',
+    this.customStyle = 'cg',
+    this.customLook = 'game',
+    this.customMotion = 'explain',
+    this.customSaved = false,
+    this.copyProfileOnCreate = true,
+    this.scenes = const ['主分身'],
   });
 
   factory LocalAiTwinState.fromJson(Map<String, dynamic> json) =>
@@ -518,6 +526,18 @@ class LocalAiTwinState {
             : const [],
         sceneId: '${json['scene_id'] ?? 'default'}',
         language: '${json['language'] ?? 'zh'}',
+        position: '${json['position'] ?? 'host'}',
+        visualStyle: '${json['visual_style'] ?? 'hyperreal'}',
+        customStyle: '${json['custom_style'] ?? 'cg'}',
+        customLook: '${json['custom_look'] ?? 'game'}',
+        customMotion: '${json['custom_motion'] ?? 'explain'}',
+        customSaved: json['custom_saved'] == true,
+        copyProfileOnCreate: json['copy_profile_on_create'] != false,
+        scenes: json['scenes'] is List
+            ? (json['scenes'] as List)
+                  .map((item) => '$item')
+                  .toList(growable: false)
+            : const ['主分身'],
         versions: json['versions'] is List
             ? (json['versions'] as List)
                   .whereType<Map>()
@@ -547,6 +567,17 @@ class LocalAiTwinState {
   /// 舞台讲解语言（zh / en）。
   final String language;
 
+  /// 人物定位与造型：与 Web 的 aiTwinPosition / aiTwinVisualStyle /
+  /// aiTwinCustom* 一一对应，只是前端概念配置，不训练模型也不获得发布权限。
+  final String position;
+  final String visualStyle;
+  final String customStyle;
+  final String customLook;
+  final String customMotion;
+  final bool customSaved;
+  final bool copyProfileOnCreate;
+  final List<String> scenes;
+
   /// 人格与知识的版本记录（新到旧）。
   final List<({String label, String time, String scene})> versions;
 
@@ -562,6 +593,14 @@ class LocalAiTwinState {
     String? sceneId,
     String? language,
     List<({String label, String time, String scene})>? versions,
+    String? position,
+    String? visualStyle,
+    String? customStyle,
+    String? customLook,
+    String? customMotion,
+    bool? customSaved,
+    bool? copyProfileOnCreate,
+    List<String>? scenes,
   }) => LocalAiTwinState(
     status: status ?? this.status,
     name: name ?? this.name,
@@ -574,6 +613,14 @@ class LocalAiTwinState {
     sceneId: sceneId ?? this.sceneId,
     language: language ?? this.language,
     versions: versions ?? this.versions,
+    position: position ?? this.position,
+    visualStyle: visualStyle ?? this.visualStyle,
+    customStyle: customStyle ?? this.customStyle,
+    customLook: customLook ?? this.customLook,
+    customMotion: customMotion ?? this.customMotion,
+    customSaved: customSaved ?? this.customSaved,
+    copyProfileOnCreate: copyProfileOnCreate ?? this.copyProfileOnCreate,
+    scenes: scenes ?? this.scenes,
   );
 
   Map<String, dynamic> toJson() => {
@@ -584,6 +631,14 @@ class LocalAiTwinState {
     'topics': topics,
     'blocked_topics': blockedTopics,
     'consent': consent,
+    'position': position,
+    'visual_style': visualStyle,
+    'custom_style': customStyle,
+    'custom_look': customLook,
+    'custom_motion': customMotion,
+    'custom_saved': customSaved,
+    'copy_profile_on_create': copyProfileOnCreate,
+    'scenes': scenes,
     'audit': audit
         .map(
           (item) => {

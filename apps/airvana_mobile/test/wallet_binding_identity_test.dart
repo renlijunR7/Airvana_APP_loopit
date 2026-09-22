@@ -27,88 +27,78 @@ Widget _app(TestCreateWorkflowHarness harness, String location) =>
     );
 
 void main() {
-  testWidgets(
-    'wallet binding walks none → pending → verified and can unbind',
-    (tester) async {
-      final harness = TestCreateWorkflowHarness();
-      tester.view.physicalSize = const Size(430, 932);
-      tester.view.devicePixelRatio = 1;
-      addTearDown(tester.view.resetPhysicalSize);
-      addTearDown(tester.view.resetDevicePixelRatio);
+  testWidgets('wallet binding walks none → pending → verified and can unbind', (
+    tester,
+  ) async {
+    final harness = TestCreateWorkflowHarness();
+    tester.view.physicalSize = const Size(430, 932);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
 
-      await tester.pumpWidget(_app(harness, '/profile/secondary/wallet'));
-      await tester.pumpAndSettle();
+    await tester.pumpWidget(_app(harness, '/profile/secondary/wallet'));
+    await tester.pumpAndSettle();
 
-      await tester.tap(find.byKey(const ValueKey('wallet-tab-ait')));
-      await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const ValueKey('wallet-tab-ait')));
+    await tester.pumpAndSettle();
 
-      // none：绑定按钮 + 安全提示
-      expect(find.byKey(const ValueKey('wallet-bind')), findsOneWidget);
-      expect(find.textContaining('不会索取助记词或私钥'), findsOneWidget);
-      await tester.tap(find.byKey(const ValueKey('wallet-bind')));
-      await tester.pumpAndSettle();
+    // none：绑定按钮 + 安全提示
+    expect(find.byKey(const ValueKey('wallet-bind')), findsOneWidget);
+    expect(find.textContaining('不会索取助记词或私钥'), findsOneWidget);
+    await tester.tap(find.byKey(const ValueKey('wallet-bind')));
+    await tester.pumpAndSettle();
 
-      // pending：候选地址 + 继续验证 / 移除
-      expect(find.text('待验证'), findsOneWidget);
-      expect(
-        find.byKey(const ValueKey('wallet-binding-address')),
-        findsOneWidget,
-      );
-      await tester.tap(find.byKey(const ValueKey('wallet-binding-verify')));
-      await tester.pumpAndSettle();
+    // pending：候选地址 + 继续验证 / 移除
+    expect(find.text('待验证'), findsOneWidget);
+    expect(
+      find.byKey(const ValueKey('wallet-binding-address')),
+      findsOneWidget,
+    );
+    await tester.tap(find.byKey(const ValueKey('wallet-binding-verify')));
+    await tester.pumpAndSettle();
 
-      // verified：状态 pill + 解除绑定；状态已持久化
-      expect(find.text('已验证 · 演示'), findsOneWidget);
-      expect(
-        (await harness.repository.loadWalletBinding()).status,
-        'verified',
-      );
-      await tester.tap(find.byKey(const ValueKey('wallet-binding-unbind')));
-      await tester.pumpAndSettle();
-      expect(find.byKey(const ValueKey('wallet-bind')), findsOneWidget);
-      expect((await harness.repository.loadWalletBinding()).status, 'none');
-    },
-  );
+    // verified：状态 pill + 解除绑定；状态已持久化
+    expect(find.text('已验证 · 演示'), findsOneWidget);
+    expect((await harness.repository.loadWalletBinding()).status, 'verified');
+    await tester.tap(find.byKey(const ValueKey('wallet-binding-unbind')));
+    await tester.pumpAndSettle();
+    expect(find.byKey(const ValueKey('wallet-bind')), findsOneWidget);
+    expect((await harness.repository.loadWalletBinding()).status, 'none');
+  });
 
-  testWidgets(
-    'creator center gate blocks until demo activation completes',
-    (tester) async {
-      final harness = TestCreateWorkflowHarness();
-      tester.view.physicalSize = const Size(430, 932);
-      tester.view.devicePixelRatio = 1;
-      addTearDown(tester.view.resetPhysicalSize);
-      addTearDown(tester.view.resetDevicePixelRatio);
+  testWidgets('creator center gate blocks until demo activation completes', (
+    tester,
+  ) async {
+    final harness = TestCreateWorkflowHarness();
+    tester.view.physicalSize = const Size(430, 932);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
 
-      // 预置：身份未开通
-      await harness.repository.saveIdentityState(
-        const LocalIdentityState(
-          creatorStatus: 'not_activated',
-          kycStatus: 'unverified',
-        ),
-      );
+    // 预置：身份未开通
+    await harness.repository.saveIdentityState(
+      const LocalIdentityState(
+        creatorStatus: 'not_activated',
+        kycStatus: 'unverified',
+      ),
+    );
 
-      await tester.pumpWidget(
-        _app(harness, '/profile/secondary/creatorCenter'),
-      );
-      await tester.pumpAndSettle();
+    await tester.pumpWidget(_app(harness, '/profile/secondary/creatorCenter'));
+    await tester.pumpAndSettle();
 
-      expect(find.byKey(const ValueKey('creator-center-gate')), findsOneWidget);
-      expect(find.text('请先完成创作者身份开通'), findsOneWidget);
-      expect(find.byKey(const ValueKey('creator-center-scroll')), findsNothing);
+    expect(find.byKey(const ValueKey('creator-center-gate')), findsOneWidget);
+    expect(find.text('请先完成创作者身份开通'), findsOneWidget);
+    expect(find.byKey(const ValueKey('creator-center-scroll')), findsNothing);
 
-      await tester.tap(find.byKey(const ValueKey('creator-gate-activate')));
-      await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const ValueKey('creator-gate-activate')));
+    await tester.pumpAndSettle();
 
-      expect(
-        find.byKey(const ValueKey('creator-center-scroll')),
-        findsOneWidget,
-      );
-      expect(
-        (await harness.repository.loadIdentityState()).creatorEntitled,
-        isTrue,
-      );
-    },
-  );
+    expect(find.byKey(const ValueKey('creator-center-scroll')), findsOneWidget);
+    expect(
+      (await harness.repository.loadIdentityState()).creatorEntitled,
+      isTrue,
+    );
+  });
 
   testWidgets(
     'ai twin scenes languages stage and versions mirror the Web behaviors',
@@ -120,6 +110,19 @@ void main() {
       addTearDown(tester.view.resetDevicePixelRatio);
 
       await tester.pumpWidget(_app(harness, '/profile/secondary/aiTwin'));
+      await tester.pumpAndSettle();
+
+      // configurator 常驻在 tab 之上，先把 tab 条滚进视口。
+      await tester.scrollUntilVisible(
+        find.byKey(const ValueKey('ai-twin-tab-scroll')),
+        300,
+        scrollable: find
+            .descendant(
+              of: find.byKey(const ValueKey('ai-twin-scroll')),
+              matching: find.byType(Scrollable),
+            )
+            .first,
+      );
       await tester.pumpAndSettle();
 
       // 场景切换：整组替换人格并写审计 + 版本
@@ -145,6 +148,10 @@ void main() {
       await tester.tap(find.byKey(const ValueKey('ai-twin-tab-stage')));
       await tester.pumpAndSettle();
       expect(find.text('待机'), findsOneWidget);
+      await tester.ensureVisible(
+        find.byKey(const ValueKey('ai-twin-voice-toggle')),
+      );
+      await tester.pumpAndSettle();
       await tester.tap(find.byKey(const ValueKey('ai-twin-voice-toggle')));
       await tester.pump(const Duration(milliseconds: 1000));
       expect(find.text('思考中…'), findsOneWidget);

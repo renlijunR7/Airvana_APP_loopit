@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:airvana_mobile/features/ai_twin/presentation/ai_twin_configurator.dart';
 import 'package:airvana_mobile/app/providers.dart';
 import 'package:airvana_mobile/design_system/airvana_shared_cards.dart';
 import 'package:airvana_mobile/design_system/airvana_theme.dart';
@@ -11,7 +12,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 /// 旧版 Web「KOL AI 分身」管理面板的第一批迁移：
 /// 状态机（not_created → configuring → testing → active_demo ⇄ paused_demo）、
 /// 概览 / 资料 / 测试沙盒 / 渠道 / 授权审计。
-/// 舞台演示（HeyGen 视频与语音状态流）按需求书降级为静态身份卡，待后续批次。
+/// HeyGen 视频与语音状态流仍是静态概念预览：真实口型视频依赖第三方服务，
+/// 本机不生成，也不训练人脸模型。
 class AiTwinPageBody extends ConsumerStatefulWidget {
   const AiTwinPageBody({super.key});
 
@@ -231,6 +233,9 @@ class _AiTwinPageBodyState extends ConsumerState<AiTwinPageBody> {
               ),
             ),
             const SizedBox(height: 14),
+            // Web 的 configurator 位于身份卡之后、tab 之上，常驻显示。
+            AiTwinConfigurator(state: state),
+            const SizedBox(height: 14),
             SingleChildScrollView(
               key: const ValueKey('ai-twin-tab-scroll'),
               scrollDirection: Axis.horizontal,
@@ -401,7 +406,7 @@ class _AiTwinPageBodyState extends ConsumerState<AiTwinPageBody> {
               ),
             ),
           const Text(
-            '每个字段回车保存；造型与 HeyGen 舞台演示属于后续批次，当前使用静态身份卡降级态。',
+            '每个字段回车保存；造型在上方 configurator 配置，HeyGen 舞台为静态概念预览。',
             style: TextStyle(fontSize: 9, color: AirvanaColors.muted),
           ),
         ],
@@ -528,42 +533,39 @@ class _AiTwinPageBodyState extends ConsumerState<AiTwinPageBody> {
     ),
   ];
 
-  Widget _knowledgeHeading(String title, String subtitle, String trailing) =>
-      Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: const TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w900,
-                  ),
-                ),
-                const SizedBox(height: 3),
-                Text(
-                  subtitle,
-                  style: const TextStyle(
-                    fontSize: 10,
-                    color: AirvanaColors.muted,
-                  ),
-                ),
-              ],
+  Widget _knowledgeHeading(
+    String title,
+    String subtitle,
+    String trailing,
+  ) => Row(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Expanded(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w900),
             ),
-          ),
-          Text(
-            trailing,
-            style: const TextStyle(
-              fontSize: 10,
-              fontWeight: FontWeight.w800,
-              color: AirvanaColors.muted,
+            const SizedBox(height: 3),
+            Text(
+              subtitle,
+              style: const TextStyle(fontSize: 10, color: AirvanaColors.muted),
             ),
-          ),
-        ],
-      );
+          ],
+        ),
+      ),
+      Text(
+        trailing,
+        style: const TextStyle(
+          fontSize: 10,
+          fontWeight: FontWeight.w800,
+          color: AirvanaColors.muted,
+        ),
+      ),
+    ],
+  );
 
   /// Web 的「知识」tab：已授权知识 + Campaign 知识域隔离。
   /// 口径保持一致——只索引公开内容与获批的 Contract 字段。
@@ -612,7 +614,9 @@ class _AiTwinPageBodyState extends ConsumerState<AiTwinPageBody> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               decoration: BoxDecoration(
-                color: row.$4 ? const Color(0xFFFFF3D6) : const Color(0xFFEAF8EF),
+                color: row.$4
+                    ? const Color(0xFFFFF3D6)
+                    : const Color(0xFFEAF8EF),
                 borderRadius: BorderRadius.circular(999),
               ),
               child: Text(
@@ -631,19 +635,13 @@ class _AiTwinPageBodyState extends ConsumerState<AiTwinPageBody> {
       ),
     OutlinedButton(
       key: const ValueKey('ai-twin-knowledge-add'),
-      onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('真实公开链接需要服务端抓取、来源校验与撤销机制'),
-        ),
-      ),
+      onPressed: () => ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('真实公开链接需要服务端抓取、来源校验与撤销机制'))),
       child: const Text('＋ 添加公开链接（演示）'),
     ),
     const SizedBox(height: 14),
-    _knowledgeHeading(
-      'Campaign 知识与权限隔离',
-      '只向绑定场景开放获批字段，不跨品牌共享',
-      '3 个知识域',
-    ),
+    _knowledgeHeading('Campaign 知识与权限隔离', '只向绑定场景开放获批字段，不跨品牌共享', '3 个知识域'),
     const SizedBox(height: 10),
     const BoundaryCard(
       key: ValueKey('ai-twin-knowledge-boundary'),

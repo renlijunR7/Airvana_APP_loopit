@@ -102,9 +102,33 @@ void main() {
       expect(find.text('已启用 · 演示', skipOffstage: false), findsWidgets);
       expect(find.text('暂停全部渠道'), findsOneWidget);
 
-      // 执行边界原文
+      // 执行边界原文。configurator 常驻在 tab 之上，边界卡落到更下方，先滚过去。
+      await tester.scrollUntilVisible(
+        find.byKey(const ValueKey('ai-twin-boundary-card')),
+        400,
+        // 页内还有横向 tab 条，取第一个（纵向主列表）。
+        scrollable: find
+            .descendant(
+              of: find.byKey(const ValueKey('ai-twin-scroll')),
+              matching: find.byType(Scrollable),
+            )
+            .first,
+      );
+      await tester.pumpAndSettle();
       expect(find.text('执行边界'), findsOneWidget);
       expect(find.textContaining('AI 分身不会直接发布作品、确认 Campaign'), findsOneWidget);
+      await tester.scrollUntilVisible(
+        find.byKey(const ValueKey('ai-twin-tab-scroll')),
+        -400,
+        // 页内还有横向 tab 条，取第一个（纵向主列表）。
+        scrollable: find
+            .descendant(
+              of: find.byKey(const ValueKey('ai-twin-scroll')),
+              matching: find.byType(Scrollable),
+            )
+            .first,
+      );
+      await tester.pumpAndSettle();
 
       // 沙盒：拒答范围触发安全拦截
       // 补齐「知识」tab 后 tab 条更长，先滚动再点击靠后的项。
