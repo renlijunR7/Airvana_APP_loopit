@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:airvana_mobile/features/shared/data/legacy_demo_catalog.dart';
 import 'package:airvana_mobile/app/providers.dart';
 import 'package:airvana_mobile/design_system/airvana_theme.dart';
 import 'package:airvana_mobile/design_system/app_state_view.dart';
@@ -8,6 +9,7 @@ import 'package:airvana_mobile/features/shared/data/airvana_repository.dart';
 import 'package:airvana_mobile/features/shared/domain/airvana_models.dart';
 import 'package:airvana_mobile/features/messages/presentation/local_chat_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ConnectedMessagesScreen extends ConsumerStatefulWidget {
@@ -82,10 +84,12 @@ class _ConnectedMessagesScreenState
               threads.fold<int>(0, (total, item) => total + item.unread),
           orElse: () => 0,
         );
-    final badges = [notificationBadges, 0, threadUnread];
+    // 互动流从本机真实的收藏 / 点赞 / 关注派生，而不是写死两条。
+    final interactions = _derivedInteractions();
+    final badges = [notificationBadges, interactions.length, threadUnread];
     final items = switch (_tab) {
       0 => _legacyNotifications,
-      1 => _legacyInteractions,
+      1 => interactions,
       _ => _legacyDirectMessages,
     };
     return SafeArea(
@@ -134,6 +138,52 @@ class _ConnectedMessagesScreenState
         ],
       ),
     );
+  }
+
+  /// Web 的互动 Tab 由本机事件日志派生。本机目前记录的是收藏、点赞与关注关系，
+  /// 这里按同一口径生成，不编造数据。
+  List<_LegacyMessage> _derivedInteractions() {
+    final social = ref.watch(localSocialStateProvider).value;
+    if (social == null) return const [];
+    final rows = <_LegacyMessage>[];
+    for (final id in social.likedPlayableIds.reversed) {
+      rows.add(
+        _LegacyMessage(
+          title: LegacyDemoCatalog.byId(id)?.title ?? id,
+          body: '你点赞了这个 Agentic Playable。',
+          meta: '点赞 · 本机记录',
+          avatarSeed: id,
+          unread: false,
+          icon: Icons.favorite_border_rounded,
+        ),
+      );
+    }
+    for (final id in social.savedPlayableIds.reversed) {
+      rows.add(
+        _LegacyMessage(
+          title: LegacyDemoCatalog.byId(id)?.title ?? id,
+          body: '你收藏了这个 Agentic Playable。',
+          meta: '收藏 · 本机记录',
+          avatarSeed: id,
+          unread: false,
+          icon: Icons.bookmark_border_rounded,
+        ),
+      );
+    }
+    for (final owner in social.followingOwners.reversed) {
+      rows.add(
+        _LegacyMessage(
+          title: owner,
+          body: '你关注了这位创作者。',
+          meta: '关注 · 本机记录',
+          avatarSeed: owner,
+          unread: false,
+          icon: Icons.person_add_alt_1_outlined,
+        ),
+      );
+    }
+    // Web 取最近 12 条。
+    return rows.take(12).toList(growable: false);
   }
 
   /// 私信 Tab 走本机线程：可以点开会话、发送并落盘，而不是只弹只读说明。
@@ -214,7 +264,31 @@ class _ConnectedMessagesScreenState
     if (mounted) ref.invalidate(localMessageThreadsProvider);
   }
 
-  Future<void> _openLegacyMessage(
+  /// Web 的每条通知都会跳到对应模块，而不是只弹一段说明。
+  static String? _legacyRouteFor(String avatarSeed) => switch (avatarSeed) {
+    'notification-kol-review' ||
+    'notification-kol-publish' ||
+    'notification-review' => '/profile/secondary/publishingGovernance',
+    'notification-kol-contract' ||
+    'notification-preview-campaign-unread' ||
+    'notification-preview-campaign-read' => '/profile/secondary/campaign',
+    'notification-attribution' => '/profile/secondary/attribution',
+    'notification-ait-settlement-approved' => '/profile/secondary/settlement',
+    'notification-preview-generated-unread-1' ||
+    'notification-preview-generated-read-1' => '/profile/secondary/library',
+    _ => null,
+  };
+
+  Future<void> _openLegacyMessage(_LegacyMessage item) async {
+    final route = _legacyRouteFor(item.avatarSeed);
+    if (route != null) {
+      context.push(route);
+      return;
+    }
+    await _showLegacyMessageSheet(item);
+  }
+
+  Future<void> _showLegacyMessageSheet(
     _LegacyMessage item,
   ) => showModalBottomSheet<void>(
     context: context,
@@ -494,23 +568,6 @@ const _legacyNotifications = <_LegacyMessage>[
     meta: '已读',
     avatarSeed: 'notification-welcome',
     icon: Icons.waving_hand_outlined,
-  ),
-];
-
-const _legacyInteractions = <_LegacyMessage>[
-  _LegacyMessage(
-    title: 'Nina 收藏了你的作品',
-    body: '「Crypto City 安全挑战」新增一次本地收藏意图。',
-    meta: '互动 · 本地演示',
-    avatarSeed: '@nina',
-    icon: Icons.bookmark_border_rounded,
-  ),
-  _LegacyMessage(
-    title: 'Leo 关注了你的创作',
-    body: '关注关系仅用于推荐演示，不代表服务端商业授权。',
-    meta: '互动 · 本地演示',
-    avatarSeed: '@leo.art',
-    icon: Icons.person_add_alt_rounded,
   ),
 ];
 

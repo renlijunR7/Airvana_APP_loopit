@@ -86,7 +86,8 @@ class _ConnectedDiscoverScreenState
         ),
       );
     } else if (_tab == 3) {
-      result = result.reversed.toList(growable: true);
+      // Web 的「最新」是按 id 倒序，不是把列表反过来。
+      result.sort((left, right) => right.id.compareTo(left.id));
     }
     return result;
   }
@@ -248,6 +249,35 @@ class _ConnectedDiscoverScreenState
                   author: 'Jaspe',
                   likes: '28,500',
                   comments: '4,900',
+                ),
+              ],
+            ),
+            const SizedBox(height: 19),
+            // Web 的第三个主题组，匹配 效果归因 / 版本实验 / 资产沉淀 三类标签。
+            _LegacyDiscoverSection(
+              title: '#效果归因',
+              description: '用互动故事解释产品价值，并保留 KOL 链接、版本与归因证据。',
+              cards: const [
+                _LegacyStaticCard(
+                  cover: '$_coverRoot/product-exploration.png',
+                  title: '产品探索路径',
+                  author: 'Sora',
+                  likes: '640',
+                  comments: '52',
+                ),
+                _LegacyStaticCard(
+                  cover: '$_coverRoot/coin-journey.jpg',
+                  title: '创作者收益计算器',
+                  author: 'TomNo',
+                  likes: '520',
+                  comments: '88',
+                ),
+                _LegacyStaticCard(
+                  cover: '$_coverRoot/neon-dash.jpg',
+                  title: '霓虹城市品牌解谜',
+                  author: 'Leo',
+                  likes: '284',
+                  comments: '19',
                 ),
               ],
             ),
@@ -684,74 +714,74 @@ class _LegacyDiscoverCardFrame extends StatelessWidget {
           // 封面沿用原 148:226 的比例，避免换算后变形。
           final coverHeight = width * 226 / 148;
           return SizedBox(
-        width: width,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(13),
-              child: SizedBox(
-                key: const ValueKey('discover-rail-cover'),
-                width: width,
-                height: coverHeight,
-                child: cover,
-              ),
-            ),
-            const SizedBox(height: 8),
-            ExcludeSemantics(
-              child: Text(
-                title,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w900,
-                ),
-              ),
-            ),
-            const SizedBox(height: 5),
-            Row(
+            width: width,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CircleAvatar(
-                  radius: 8,
-                  backgroundColor: const Color(0xFFEDE1FF),
-                  child: Text(
-                    author.characters.first,
-                    style: const TextStyle(fontSize: 8),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(13),
+                  child: SizedBox(
+                    key: const ValueKey('discover-rail-cover'),
+                    width: width,
+                    height: coverHeight,
+                    child: cover,
                   ),
                 ),
-                const SizedBox(width: 5),
-                Expanded(
-                  child: ExcludeSemantics(
-                    child: Text(
-                      author,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        color: AirvanaColors.muted,
-                        fontSize: 9,
+                const SizedBox(height: 8),
+                ExcludeSemantics(
+                  child: Text(
+                    title,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 5),
+                Row(
+                  children: [
+                    CircleAvatar(
+                      radius: 8,
+                      backgroundColor: const Color(0xFFEDE1FF),
+                      child: Text(
+                        author.characters.first,
+                        style: const TextStyle(fontSize: 8),
                       ),
                     ),
+                    const SizedBox(width: 5),
+                    Expanded(
+                      child: ExcludeSemantics(
+                        child: Text(
+                          author,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            color: AirvanaColors.muted,
+                            fontSize: 9,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 5),
+                ExcludeSemantics(
+                  child: Row(
+                    children: [
+                      const Icon(Icons.favorite_border_rounded, size: 12),
+                      const SizedBox(width: 3),
+                      Text(likes, style: const TextStyle(fontSize: 9)),
+                      const SizedBox(width: 10),
+                      const Icon(Icons.chat_bubble_outline_rounded, size: 11),
+                      const SizedBox(width: 3),
+                      Text(comments, style: const TextStyle(fontSize: 9)),
+                    ],
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 5),
-            ExcludeSemantics(
-              child: Row(
-                children: [
-                  const Icon(Icons.favorite_border_rounded, size: 12),
-                  const SizedBox(width: 3),
-                  Text(likes, style: const TextStyle(fontSize: 9)),
-                  const SizedBox(width: 10),
-                  const Icon(Icons.chat_bubble_outline_rounded, size: 11),
-                  const SizedBox(width: 3),
-                  Text(comments, style: const TextStyle(fontSize: 9)),
-                ],
-              ),
-            ),
-          ],
-        ),
           );
         },
       ),

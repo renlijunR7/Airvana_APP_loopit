@@ -388,7 +388,14 @@ class _LegacyFeedPagerState extends ConsumerState<_LegacyFeedPager> {
     }
     return Column(
       children: [
-        const _LegacyHeader(),
+        _LegacyHeader(
+          hasUnread: ref
+              .watch(localMessageThreadsProvider)
+              .maybeWhen(
+                data: (threads) => threads.any((item) => item.unread > 0),
+                orElse: () => false,
+              ),
+        ),
         Expanded(
           child: PageView.builder(
             key: const ValueKey('legacy-feed-pager'),
@@ -455,7 +462,10 @@ class _LegacyFeedPagerState extends ConsumerState<_LegacyFeedPager> {
 }
 
 class _LegacyHeader extends StatelessWidget {
-  const _LegacyHeader();
+  const _LegacyHeader({required this.hasUnread});
+
+  /// Web 的红点由未读数驱动；本机演示按线程未读判断。
+  final bool hasUnread;
 
   @override
   Widget build(BuildContext context) {
@@ -475,14 +485,16 @@ class _LegacyHeader extends StatelessWidget {
                   onPressed: () => context.go('/messages'),
                   icon: const Icon(Icons.notifications_none_rounded, size: 26),
                 ),
-                const Positioned(
-                  right: 7,
-                  top: 5,
-                  child: CircleAvatar(
-                    radius: 3.5,
-                    backgroundColor: AirvanaColors.accent,
+                // Web 的红点由未读数驱动，不是常显。
+                if (hasUnread)
+                  const Positioned(
+                    right: 7,
+                    top: 5,
+                    child: CircleAvatar(
+                      radius: 3.5,
+                      backgroundColor: AirvanaColors.accent,
+                    ),
                   ),
-                ),
               ],
             ),
           ],

@@ -449,10 +449,11 @@ void main() {
     await tester.pump(const Duration(milliseconds: 350));
     await tester.tap(find.byKey(const ValueKey('network-filter-1')));
     await tester.pump();
-    expect(find.text('霓虹疾跑 Neon Dash'), findsOneWidget);
-    expect(find.text('节拍熔炉 Pulse Forge'), findsOneWidget);
-    expect(find.text('天际叠塔 Sky Stack'), findsOneWidget);
-    expect(find.text('0 互动 · 0 演示转化'), findsNWidgets(3));
+    // 「运行中」现在按 stage 真实筛选（运行中 / 优化中），不再是写死的三条。
+    expect(find.text('Crypto City 安全挑战'), findsOneWidget);
+    expect(find.text('星际农场 Community Launch'), findsOneWidget);
+    expect(find.text('完美叠叠塔 Perfect Block Tower'), findsOneWidget);
+    expect(find.text('0 互动 · 0 演示转化'), findsNothing);
 
     await tester.tap(find.byKey(const ValueKey('network-filter-2')));
     await tester.pump();
@@ -461,10 +462,10 @@ void main() {
     expect(find.text('小炮手大战空降恶魔'), findsOneWidget);
     expect(find.text('9,240 互动 · 348 演示转化'), findsOneWidget);
 
+    // 「品牌合作」按分类里是否含「品牌」筛选。
     await tester.tap(find.byKey(const ValueKey('network-filter-3')));
     await tester.pump();
     expect(find.text('霓虹城市品牌解谜'), findsOneWidget);
     expect(find.text('红杯速配 Red Cup Shuffle'), findsOneWidget);
-    expect(find.text('翻照片做玩偶 Make Your Photo Playable'), findsOneWidget);
   });
 }

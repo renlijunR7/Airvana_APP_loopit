@@ -111,58 +111,85 @@ class _LocalNetworkScreenState extends State<LocalNetworkScreen> {
     localDemo: true,
   );
 
-  static final _networkGroups = <List<_NetworkEntry>>[
-    [
-      _NetworkEntry(
-        playable: LegacyDemoCatalog.byId('plb_safety_workshop')!,
-        metrics: '1,284 互动 · 86 演示转化',
-      ),
-      _NetworkEntry(
-        playable: LegacyDemoCatalog.byId('plb_stellar_farm')!,
-        metrics: '3,860 互动 · 142 演示转化',
-      ),
-      _NetworkEntry(playable: _productExploration, metrics: '640 互动 · 52 演示转化'),
-    ],
-    [
-      _NetworkEntry(
-        playable: LegacyDemoCatalog.byId('plb_neon_dash')!,
-        metrics: '0 互动 · 0 演示转化',
-      ),
-      _NetworkEntry(
-        playable: LegacyDemoCatalog.byId('plb_pulse_forge')!,
-        metrics: '0 互动 · 0 演示转化',
-      ),
-      _NetworkEntry(
-        playable: LegacyDemoCatalog.byId('plb_sky_stack')!,
-        metrics: '0 互动 · 0 演示转化',
-      ),
-    ],
-    [
-      _NetworkEntry(
-        playable: LegacyDemoCatalog.byId('plb_city_rush')!,
-        metrics: '9,240 互动 · 348 演示转化',
-      ),
-      _NetworkEntry(
-        playable: _perfectBlockTower,
-        metrics: '8,600 互动 · 305 演示转化',
-      ),
-      _NetworkEntry(
-        playable: LegacyDemoCatalog.byId('plb_sky_cannon')!,
-        metrics: '7,560 互动 · 296 演示转化',
-      ),
-    ],
-    [
-      _NetworkEntry(playable: _brandPuzzle, metrics: '512 互动 · 18 演示转化'),
-      _NetworkEntry(
-        playable: LegacyDemoCatalog.byId('plb_red_cup_shuffle')!,
-        metrics: '5,200 互动 · 210 演示转化',
-      ),
-      _NetworkEntry(
-        playable: LegacyDemoCatalog.byId('plb_puppet_studio')!,
-        metrics: '4,400 互动 · 176 演示转化',
-      ),
-    ],
+  /// 一个池子，四个筛选按 Web 的规则从中取：运行中看 stage，增长最快按演示转化
+  /// 排序，品牌合作按分类匹配「品牌」。
+  static final _networkPool = <_NetworkEntry>[
+    _NetworkEntry(
+      playable: LegacyDemoCatalog.byId('plb_safety_workshop')!,
+      interactions: 1284,
+      conversions: 86,
+    ),
+    _NetworkEntry(
+      playable: LegacyDemoCatalog.byId('plb_stellar_farm')!,
+      interactions: 3860,
+      conversions: 142,
+    ),
+    _NetworkEntry(
+      playable: _productExploration,
+      interactions: 640,
+      conversions: 52,
+    ),
+    _NetworkEntry(
+      playable: LegacyDemoCatalog.byId('plb_neon_dash')!,
+      interactions: 2150,
+      conversions: 74,
+    ),
+    _NetworkEntry(
+      playable: LegacyDemoCatalog.byId('plb_sky_stack')!,
+      interactions: 1960,
+      conversions: 61,
+    ),
+    _NetworkEntry(
+      playable: LegacyDemoCatalog.byId('plb_city_rush')!,
+      interactions: 9240,
+      conversions: 348,
+    ),
+    _NetworkEntry(
+      playable: _perfectBlockTower,
+      interactions: 8600,
+      conversions: 305,
+    ),
+    _NetworkEntry(
+      playable: LegacyDemoCatalog.byId('plb_sky_cannon')!,
+      interactions: 7560,
+      conversions: 296,
+    ),
+    _NetworkEntry(playable: _brandPuzzle, interactions: 512, conversions: 18),
+    _NetworkEntry(
+      playable: LegacyDemoCatalog.byId('plb_red_cup_shuffle')!,
+      interactions: 5200,
+      conversions: 210,
+    ),
+    _NetworkEntry(
+      playable: LegacyDemoCatalog.byId('plb_puppet_studio')!,
+      interactions: 4400,
+      conversions: 176,
+    ),
   ];
+
+  /// Web 的 worldSource：四个筛选各自的口径，最后都截断到前 3 条。
+  List<_NetworkEntry> get _filteredNetworkEntries {
+    final pool = [..._networkPool];
+    final result = switch (_filter) {
+      1 =>
+        pool
+            .where(
+              (item) =>
+                  item.playable.stage == '运行中' || item.playable.stage == '优化中',
+            )
+            .toList(growable: false),
+      2 =>
+        (pool..sort(
+          (left, right) => right.conversions.compareTo(left.conversions),
+        )),
+      3 =>
+        pool
+            .where((item) => item.playable.category.contains('品牌'))
+            .toList(growable: false),
+      _ => pool,
+    };
+    return result.take(3).toList(growable: false);
+  }
 
   Future<void> _openNetworkGuide() =>
       Navigator.of(context, rootNavigator: true).push<void>(
@@ -173,7 +200,7 @@ class _LocalNetworkScreenState extends State<LocalNetworkScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final playables = _networkGroups[_filter];
+    final playables = _filteredNetworkEntries;
     return SafeArea(
       bottom: false,
       child: ListView(
@@ -303,10 +330,29 @@ class _LocalNetworkScreenState extends State<LocalNetworkScreen> {
 }
 
 class _NetworkEntry {
-  const _NetworkEntry({required this.playable, required this.metrics});
+  const _NetworkEntry({
+    required this.playable,
+    required this.interactions,
+    required this.conversions,
+  });
 
   final Playable playable;
-  final String metrics;
+  final int interactions;
+  final int conversions;
+
+  String get metrics =>
+      '${_formatCount(interactions)} 互动 · '
+      '$conversions 演示转化';
+
+  static String _formatCount(int value) {
+    final digits = '$value';
+    final buffer = StringBuffer();
+    for (var index = 0; index < digits.length; index += 1) {
+      if (index > 0 && (digits.length - index) % 3 == 0) buffer.write(',');
+      buffer.write(digits[index]);
+    }
+    return buffer.toString();
+  }
 }
 
 class _NetworkGlobeStage extends StatefulWidget {

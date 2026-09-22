@@ -3151,6 +3151,9 @@ class _ProfileAndHistoryScreenState
                     ),
                   ),
                   const SizedBox(height: 12),
+                  // Web 的「我的」页有订阅卡，不是只在设置里。
+                  const _ProfileSubscriptionCard(),
+                  const SizedBox(height: 12),
                   const _CreatorShortcuts(),
                 ],
               ),
@@ -4173,16 +4176,65 @@ class _TabBody extends StatelessWidget {
                 ..sort(
                   (left, right) => right.updatedAt.compareTo(left.updatedAt),
                 );
+          // Web 在草稿箱顶部有「最近删除 N 项 ›」入口。
+          final trashEntry = localWorkspace.draftTrash.isEmpty
+              ? null
+              : Padding(
+                  key: const ValueKey('profile-draft-trash-entry'),
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: InkWell(
+                    onTap: () =>
+                        context.push('/profile/secondary/recordManager'),
+                    borderRadius: BorderRadius.circular(12),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 10,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: AirvanaColors.line),
+                      ),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              '最近删除 ${localWorkspace.draftTrash.length} 项',
+                              style: const TextStyle(
+                                fontSize: 11,
+                                fontWeight: FontWeight.w900,
+                              ),
+                            ),
+                          ),
+                          const Icon(Icons.chevron_right_rounded, size: 16),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
           if (drafts.isEmpty) {
-            return _InlineHistoryState(
-              icon: Icons.description_outlined,
-              title: '草稿箱是空的',
-              message: '创建中未发布的作品会自动保存到这里。',
-              actionLabel: '开始创建',
-              onAction: () => context.push('/create'),
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                if (trashEntry != null) trashEntry,
+                _InlineHistoryState(
+                  icon: Icons.description_outlined,
+                  title: '草稿箱是空的',
+                  message: '创建中未发布的作品会自动保存到这里。',
+                  actionLabel: '开始创建',
+                  onAction: () => context.push('/create'),
+                ),
+              ],
             );
           }
-          return _DraftGrid(drafts: drafts, onOpenDraft: onOpenDraft);
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              if (trashEntry != null) trashEntry,
+              _DraftGrid(drafts: drafts, onOpenDraft: onOpenDraft),
+            ],
+          );
         },
       ),
     );
@@ -4205,8 +4257,8 @@ class _TabBody extends StatelessWidget {
               onAction: () => context.go('/'),
             )
           : _PlayableGrid(
+              // Web 不截断体验记录，这里同样全量展示。
               items: records
-                  .take(9)
                   .map(
                     (record) => _GridEntry(
                       playableId: record.contentId,
@@ -4746,6 +4798,70 @@ class _InlineHistoryState extends StatelessWidget {
           ],
         ],
       ),
+    );
+  }
+}
+
+/// 「我的」页的订阅与额度卡，对应 Web profile 页上的同名区块。
+class _ProfileSubscriptionCard extends ConsumerWidget {
+  const _ProfileSubscriptionCard();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final feature = ref.watch(profileFeatureStateProvider);
+    return feature.when(
+      loading: () => const SizedBox.shrink(),
+      error: (_, _) => const SizedBox.shrink(),
+      data: (state) {
+        final planName = switch (state.subscriptionPlanKey) {
+          'creator_pro' => 'Creator Pro',
+          'brand_campaign' => 'Brand / Campaign',
+          _ => 'Free',
+        };
+        return Container(
+          key: const ValueKey('profile-subscription-card'),
+          padding: const EdgeInsets.all(13),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(15),
+            border: Border.all(color: AirvanaColors.line),
+          ),
+          child: Row(
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      planName,
+                      style: const TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                    const SizedBox(height: 3),
+                    Text(
+                      state.subscriptionCancelAtPeriodEnd
+                          ? '本周期结束后不再续订'
+                          : '订阅只提供功能与周期额度，不直接发放 AIP 或 AIT',
+                      style: const TextStyle(
+                        fontSize: 9,
+                        color: AirvanaColors.muted,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              TextButton(
+                key: const ValueKey('profile-subscription-manage'),
+                onPressed: () =>
+                    context.push('/profile/secondary/subscription'),
+                child: const Text('管理'),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
