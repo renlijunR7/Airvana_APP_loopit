@@ -1,7 +1,11 @@
 import 'package:airvana_mobile/features/shared/presentation/local_demo_screens.dart';
 import 'package:airvana_mobile/design_system/airvana_theme.dart';
 import 'package:airvana_mobile/features/shared/data/legacy_demo_catalog.dart';
+import 'package:airvana_mobile/app/providers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'support/test_create_workflow.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -250,9 +254,18 @@ void main() {
     addTearDown(tester.view.resetViewPadding);
 
     await tester.pumpWidget(
-      MaterialApp(
-        theme: buildAirvanaTheme(),
-        home: const Scaffold(body: LocalNetworkScreen()),
+      // 「我的连接」现在读本机协作组状态，详情页需要 ProviderScope；
+      // 用内存仓库让建立/加入协作组真的写得进去。
+      ProviderScope(
+        overrides: [
+          airvanaRepositoryProvider.overrideWithValue(
+            TestCreateWorkflowHarness().repository,
+          ),
+        ],
+        child: MaterialApp(
+          theme: buildAirvanaTheme(),
+          home: const Scaffold(body: LocalNetworkScreen()),
+        ),
       ),
     );
 
@@ -413,7 +426,8 @@ void main() {
     await tester.tap(
       find.byKey(const ValueKey('growth-network-submit-invite')),
     );
-    await tester.pump();
+    // 加入写本机存储后 provider 才重新解析，需要等异步完成。
+    await tester.pumpAndSettle();
     expect(find.text('Kai Agent Circle'), findsOneWidget);
 
     await tester.tap(find.byKey(const ValueKey('growth-network-tab-2')));

@@ -1,3 +1,4 @@
+import 'package:airvana_mobile/features/network/domain/growth_node_state.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
@@ -671,6 +672,118 @@ class LocalAirvanaStore {
     );
     await _writeWorkspaceUnlocked(snapshot.copyWith(socialState: social));
     return social;
+  });
+
+  Future<LocalGrowthNodeState> loadGrowthNode() async {
+    final snapshot = await loadWorkspace();
+    return snapshot.growthNode;
+  }
+
+  /// 建立本机协作组：发起人占第一席，状态进入招募中。
+  Future<LocalGrowthNodeState> createGrowthNode() => _serial(() async {
+    final snapshot = await _readWorkspaceUnlocked();
+    final node = snapshot.growthNode.copyWith(
+      status: 'recruiting',
+      members: LocalGrowthNodeState.seedMembers(),
+      paused: false,
+      appealSubmitted: false,
+    );
+    await _writeWorkspaceUnlocked(snapshot.copyWith(growthNode: node));
+    return node;
+  });
+
+  /// 通过邀请码加入：本机只生成一组协作关系，不发送服务端请求。
+  Future<LocalGrowthNodeState> joinGrowthNode(String inviteCode) =>
+      _serial(() async {
+        final code = inviteCode.trim().toUpperCase();
+        if (code.isEmpty) {
+          throw const LocalStoreException('请输入协作邀请码');
+        }
+        final snapshot = await _readWorkspaceUnlocked();
+        final node = snapshot.growthNode.copyWith(
+          status: 'recruiting',
+          inviteCode: code,
+          members: LocalGrowthNodeState.seedMembers(),
+        );
+        await _writeWorkspaceUnlocked(snapshot.copyWith(growthNode: node));
+        return node;
+      });
+
+  /// 邀请下一位成员：席位从待邀请变为待确认，不产生任何奖励。
+  Future<LocalGrowthNodeState> inviteGrowthSeat(int seat) => _serial(() async {
+    final snapshot = await _readWorkspaceUnlocked();
+    final members = [...snapshot.growthNode.members];
+    final index = members.indexWhere((item) => item.seat == seat);
+    if (index < 0) {
+      throw LocalStoreException('没有第 $seat 个席位');
+    }
+    members[index] = members[index].copyWith(name: '受邀成员', status: 'pending');
+    final node = snapshot.growthNode.copyWith(members: members);
+    await _writeWorkspaceUnlocked(snapshot.copyWith(growthNode: node));
+    return node;
+  });
+
+  /// 成员接受或拒绝邀请（演示）。
+  Future<LocalGrowthNodeState> resolveGrowthSeat({
+    required int seat,
+    required bool accepted,
+  }) => _serial(() async {
+    final snapshot = await _readWorkspaceUnlocked();
+    final members = [...snapshot.growthNode.members];
+    final index = members.indexWhere((item) => item.seat == seat);
+    if (index < 0) {
+      throw LocalStoreException('没有第 $seat 个席位');
+    }
+    members[index] = accepted
+        ? members[index].copyWith(status: 'accepted', owner: '@member$seat')
+        : members[index].copyWith(status: 'empty', name: '等待成员', owner: '');
+    var node = snapshot.growthNode.copyWith(members: members);
+    // 五席全部确认后进入试运行，与 Web 的节点生命周期一致。
+    if (node.acceptedCount == 5 && node.status == 'recruiting') {
+      node = node.copyWith(status: 'trial');
+    }
+    await _writeWorkspaceUnlocked(snapshot.copyWith(growthNode: node));
+    return node;
+  });
+
+  /// 撤回席位成员，走 remove-growth-member 确认层。
+  Future<LocalGrowthNodeState> removeGrowthMember(int seat) =>
+      _serial(() async {
+        final snapshot = await _readWorkspaceUnlocked();
+        final members = [...snapshot.growthNode.members];
+        final index = members.indexWhere((item) => item.seat == seat);
+        if (index < 0) {
+          throw LocalStoreException('没有第 $seat 个席位');
+        }
+        if (seat == 1) {
+          throw const LocalStoreException('发起人席位不能撤回');
+        }
+        members[index] = members[index].copyWith(
+          status: 'empty',
+          name: '等待成员',
+          owner: '',
+        );
+        final node = snapshot.growthNode.copyWith(members: members);
+        await _writeWorkspaceUnlocked(snapshot.copyWith(growthNode: node));
+        return node;
+      });
+
+  /// 公约确认、暂停、退出与申诉：全部只保存本机意向。
+  Future<LocalGrowthNodeState> updateGrowthNode({
+    bool? charterAccepted,
+    bool? paused,
+    bool? appealSubmitted,
+    String? status,
+  }) => _serial(() async {
+    final snapshot = await _readWorkspaceUnlocked();
+    final node = snapshot.growthNode.copyWith(
+      charterAccepted: charterAccepted,
+      paused: paused,
+      appealSubmitted: appealSubmitted,
+      status: status,
+    );
+    await _writeWorkspaceUnlocked(snapshot.copyWith(growthNode: node));
+    return node;
   });
 
   /// 草稿复制：Web 的「复制草稿」生成一份新 id 的副本，排在原草稿之后。

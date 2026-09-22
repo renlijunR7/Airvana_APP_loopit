@@ -1,3 +1,4 @@
+import 'package:airvana_mobile/features/network/domain/growth_node_state.dart';
 import 'dart:async';
 
 import 'package:airvana_mobile/core/config/app_environment.dart';
@@ -1292,6 +1293,38 @@ class AirvanaRepository {
     required String owner,
     required bool active,
   }) => _localStore.setFollowing(owner: owner, active: active);
+
+  Future<LocalGrowthNodeState> loadLocalGrowthNode() =>
+      _localStore.loadGrowthNode();
+
+  Future<LocalGrowthNodeState> createLocalGrowthNode() =>
+      _localStore.createGrowthNode();
+
+  Future<LocalGrowthNodeState> joinLocalGrowthNode(String inviteCode) =>
+      _localStore.joinGrowthNode(inviteCode);
+
+  Future<LocalGrowthNodeState> inviteLocalGrowthSeat(int seat) =>
+      _localStore.inviteGrowthSeat(seat);
+
+  Future<LocalGrowthNodeState> resolveLocalGrowthSeat({
+    required int seat,
+    required bool accepted,
+  }) => _localStore.resolveGrowthSeat(seat: seat, accepted: accepted);
+
+  Future<LocalGrowthNodeState> removeLocalGrowthMember(int seat) =>
+      _localStore.removeGrowthMember(seat);
+
+  Future<LocalGrowthNodeState> updateLocalGrowthNode({
+    bool? charterAccepted,
+    bool? paused,
+    bool? appealSubmitted,
+    String? status,
+  }) => _localStore.updateGrowthNode(
+    charterAccepted: charterAccepted,
+    paused: paused,
+    appealSubmitted: appealSubmitted,
+    status: status,
+  );
 
   Future<LocalDraft> duplicateLocalDraft(String draftId) =>
       _localStore.duplicateDraft(draftId);

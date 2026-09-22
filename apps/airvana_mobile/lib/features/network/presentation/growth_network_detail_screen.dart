@@ -1,7 +1,12 @@
 import 'dart:ui' show BlurStyle, MaskFilter, lerpDouble;
 
+import 'package:airvana_mobile/app/providers.dart';
 import 'package:airvana_mobile/design_system/airvana_theme.dart';
+import 'package:airvana_mobile/features/network/domain/growth_node_state.dart';
+import 'package:airvana_mobile/shared/presentation/destructive_confirm.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 class GrowthForcePulseIcon extends StatefulWidget {
@@ -143,19 +148,25 @@ class _GrowthBoltPainter extends CustomPainter {
       oldDelegate.glow != glow;
 }
 
-class GrowthNetworkDetailScreen extends StatefulWidget {
+class GrowthNetworkDetailScreen extends ConsumerStatefulWidget {
   const GrowthNetworkDetailScreen({super.key});
 
   @override
-  State<GrowthNetworkDetailScreen> createState() =>
+  ConsumerState<GrowthNetworkDetailScreen> createState() =>
       _GrowthNetworkDetailScreenState();
 }
 
-class _GrowthNetworkDetailScreenState extends State<GrowthNetworkDetailScreen> {
+class _GrowthNetworkDetailScreenState
+    extends ConsumerState<GrowthNetworkDetailScreen> {
   int _tab = 0;
   bool _joinMode = false;
-  bool _hasLocalCircle = false;
   final _inviteController = TextEditingController();
+
+  void _toast(String message) => ScaffoldMessenger.of(
+    context,
+  ).showSnackBar(SnackBar(content: Text(message)));
+
+  void _refreshNode() => ref.invalidate(localGrowthNodeProvider);
 
   static const _tabs = ['网络', '我的连接', '贡献', '规则'];
 
@@ -298,7 +309,75 @@ class _GrowthNetworkDetailScreenState extends State<GrowthNetworkDetailScreen> {
   );
 
   Widget _connections() {
-    if (_hasLocalCircle) return const _GrowthLocalCircle();
+    final node = ref.watch(localGrowthNodeProvider);
+    return node.when(
+      loading: () => const Center(child: CircularProgressIndicator()),
+      error: (error, _) => Text('本机协作组读取失败：$error'),
+      data: (state) => state.created
+          ? _GrowthLocalCircle(
+              node: state,
+              onInvite: (seat) async {
+                await ref
+                    .read(airvanaRepositoryProvider)
+                    .inviteLocalGrowthSeat(seat);
+                _refreshNode();
+                _toast('邀请链接只建立待确认关系，不产生奖励');
+              },
+              onResolve: (seat, accepted) async {
+                await ref
+                    .read(airvanaRepositoryProvider)
+                    .resolveLocalGrowthSeat(seat: seat, accepted: accepted);
+                _refreshNode();
+              },
+              onRemove: (seat) async {
+                final ok = await confirmDestructiveAction(
+                  context,
+                  DestructiveAction.removeGrowthMember,
+                );
+                if (!ok) return;
+                await ref
+                    .read(airvanaRepositoryProvider)
+                    .removeLocalGrowthMember(seat);
+                _refreshNode();
+                _toast('已撤回该席位（本机演示）');
+              },
+              onCharter: (value) async {
+                await ref
+                    .read(airvanaRepositoryProvider)
+                    .updateLocalGrowthNode(charterAccepted: value);
+                _refreshNode();
+              },
+              onPause: () async {
+                await ref
+                    .read(airvanaRepositoryProvider)
+                    .updateLocalGrowthNode(paused: !state.paused);
+                _refreshNode();
+                _toast(state.paused ? '已恢复节点（本机意向）' : '已暂停节点（本机意向）');
+              },
+              onExit: () async {
+                await ref
+                    .read(airvanaRepositoryProvider)
+                    .updateLocalGrowthNode(status: 'exited_demo');
+                _refreshNode();
+                _toast('已记录退出意向，不会修改真实成员关系');
+              },
+              onAppeal: () async {
+                await ref
+                    .read(airvanaRepositoryProvider)
+                    .updateLocalGrowthNode(appealSubmitted: true);
+                _refreshNode();
+                _toast('申诉意向已保存在本机');
+              },
+              onCopyCode: () async {
+                await Clipboard.setData(ClipboardData(text: state.inviteCode));
+                _toast('协作编号已复制');
+              },
+            )
+          : _connectionsEntry(),
+    );
+  }
+
+  Widget _connectionsEntry() {
     if (_joinMode) {
       return _GrowthCard(
         key: const ValueKey('growth-network-join-card'),
@@ -325,7 +404,17 @@ class _GrowthNetworkDetailScreenState extends State<GrowthNetworkDetailScreen> {
               key: const ValueKey('growth-network-submit-invite'),
               label: '确认连接（演示）',
               primary: true,
-              onTap: () => setState(() => _hasLocalCircle = true),
+              onTap: () async {
+                try {
+                  await ref
+                      .read(airvanaRepositoryProvider)
+                      .joinLocalGrowthNode(_inviteController.text);
+                  _refreshNode();
+                  if (mounted) setState(() => _joinMode = false);
+                } on Object catch (error) {
+                  _toast('$error');
+                }
+              },
             ),
             const SizedBox(height: 4),
             Center(
@@ -372,7 +461,10 @@ class _GrowthNetworkDetailScreenState extends State<GrowthNetworkDetailScreen> {
             key: const ValueKey('growth-network-create-circle'),
             label: '建立协作连接',
             primary: true,
-            onTap: () => setState(() => _hasLocalCircle = true),
+            onTap: () async {
+              await ref.read(airvanaRepositoryProvider).createLocalGrowthNode();
+              _refreshNode();
+            },
           ),
           const SizedBox(height: 9),
           _GrowthAction(
@@ -1932,63 +2024,383 @@ class _Lifecycle extends StatelessWidget {
 }
 
 class _GrowthLocalCircle extends StatelessWidget {
-  const _GrowthLocalCircle();
+  const _GrowthLocalCircle({
+    required this.node,
+    required this.onInvite,
+    required this.onResolve,
+    required this.onRemove,
+    required this.onCharter,
+    required this.onPause,
+    required this.onExit,
+    required this.onAppeal,
+    required this.onCopyCode,
+  });
+
+  final LocalGrowthNodeState node;
+  final Future<void> Function(int seat) onInvite;
+  final Future<void> Function(int seat, bool accepted) onResolve;
+  final Future<void> Function(int seat) onRemove;
+  final Future<void> Function(bool value) onCharter;
+  final Future<void> Function() onPause;
+  final Future<void> Function() onExit;
+  final Future<void> Function() onAppeal;
+  final Future<void> Function() onCopyCode;
+
   @override
-  Widget build(BuildContext context) => Column(
-    children: [
-      _GrowthCard(
-        key: const ValueKey('growth-network-local-circle'),
-        child: const Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+  Widget build(BuildContext context) {
+    // KYC 状态影响合规因子；本机没有已验证 KYC 时按未验证计算。
+    final credit = calculateGrowthCredit(node, kycVerified: false);
+    return Column(
+      children: [
+        _GrowthCard(
+          key: const ValueKey('growth-network-local-circle'),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                '我的 Agent 协作组',
+                style: TextStyle(
+                  color: Color(0xFFC62836),
+                  fontSize: 9,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+              const SizedBox(height: 5),
+              const Text(
+                'Kai Agent Circle',
+                style: TextStyle(fontSize: 17, fontWeight: FontWeight.w900),
+              ),
+              const SizedBox(height: 4),
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      '协作编号 ${node.inviteCode} · '
+                      '${node.acceptedCount}/5 已确认',
+                      style: const TextStyle(
+                        color: AirvanaColors.muted,
+                        fontSize: 9,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 3,
+                    ),
+                    decoration: BoxDecoration(
+                      color: AirvanaColors.canvas,
+                      borderRadius: BorderRadius.circular(999),
+                    ),
+                    child: Text(
+                      node.statusLabel,
+                      key: const ValueKey('growth-node-status'),
+                      style: const TextStyle(
+                        fontSize: 9,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 10),
+        _GrowthCreditCard(credit: credit),
+        const SizedBox(height: 10),
+        _GrowthCard(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text('五个协作角色', style: _titleStyle),
+              const SizedBox(height: 10),
+              for (final member in node.members)
+                _MemberRow(
+                  key: ValueKey('growth-seat-${member.seat}'),
+                  member: member,
+                  onInvite: () => onInvite(member.seat),
+                  onAccept: () => onResolve(member.seat, true),
+                  onDecline: () => onResolve(member.seat, false),
+                  onRemove: () => onRemove(member.seat),
+                ),
+              const SizedBox(height: 8),
+              const Text('邀请下一位成员', style: _labelStyle),
+              const SizedBox(height: 3),
+              const Text('链接只建立待确认关系，不产生奖励', style: _bodyStyle),
+              const SizedBox(height: 9),
+              Row(
+                children: [
+                  Expanded(
+                    child: OutlinedButton(
+                      key: const ValueKey('growth-copy-invite'),
+                      onPressed: onCopyCode,
+                      child: const Text('复制链接'),
+                    ),
+                  ),
+                  const SizedBox(width: 9),
+                  Expanded(
+                    child: FilledButton(
+                      key: const ValueKey('growth-send-invite'),
+                      onPressed: () {
+                        final next = node.members
+                            .where((item) => item.status == 'empty')
+                            .firstOrNull;
+                        if (next == null) return;
+                        onInvite(next.seat);
+                      },
+                      child: const Text('发送演示邀请'),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 10),
+        _GrowthCard(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text('经济节点资格', style: _titleStyle),
+              const SizedBox(height: 10),
+              _EligibilityRow(
+                icon: '◎',
+                label: '五席位全部确认',
+                done: node.acceptedCount == 5,
+              ),
+              _EligibilityRow(
+                icon: '✓',
+                label: '信用分达到 650',
+                done: credit.eligible,
+              ),
+              _EligibilityRow(icon: '⌁', label: 'KYC 通过', done: false),
+              _EligibilityRow(
+                icon: '◇',
+                label: '已确认节点公约',
+                done: node.charterAccepted,
+              ),
+              const SizedBox(height: 8),
+              CheckboxListTile(
+                key: const ValueKey('growth-charter-checkbox'),
+                contentPadding: EdgeInsets.zero,
+                controlAffinity: ListTileControlAffinity.leading,
+                value: node.charterAccepted,
+                onChanged: (value) => onCharter(value ?? false),
+                title: const Text(
+                  '我已阅读并确认：成员独立同意、贡献按证据核验；'
+                  '不因邀请成员自动获得 Token、固定收益或结算资格。',
+                  style: TextStyle(fontSize: 10, height: 1.6),
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 10),
+        _GrowthCard(
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                    child: OutlinedButton(
+                      key: const ValueKey('growth-node-pause'),
+                      onPressed: onPause,
+                      child: Text(node.paused ? '恢复节点' : '暂停节点'),
+                    ),
+                  ),
+                  const SizedBox(width: 9),
+                  Expanded(
+                    child: OutlinedButton(
+                      key: const ValueKey('growth-node-exit'),
+                      onPressed: onExit,
+                      child: const Text('退出节点'),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 9),
+              SizedBox(
+                width: double.infinity,
+                child: OutlinedButton(
+                  key: const ValueKey('growth-node-appeal'),
+                  onPressed: node.appealSubmitted ? null : onAppeal,
+                  child: Text(node.appealSubmitted ? '申诉已提交（演示）' : '提交申诉'),
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 10),
+        const _NetworkNote('暂停、退出和申诉在当前版本仅保存本地意向，不会修改真实成员关系、服务端资格、合约或资产。'),
+      ],
+    );
+  }
+}
+
+class _GrowthCreditCard extends StatelessWidget {
+  const _GrowthCreditCard({required this.credit});
+
+  final GrowthCredit credit;
+
+  @override
+  Widget build(BuildContext context) => _GrowthCard(
+    key: const ValueKey('growth-credit-card'),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Text(
-              '我的 Agent 协作组',
-              style: TextStyle(
-                color: Color(0xFFC62836),
-                fontSize: 9,
-                fontWeight: FontWeight.w900,
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('节点协作信用', style: _labelStyle),
+                  const SizedBox(height: 3),
+                  Text(
+                    credit.band,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                ],
               ),
             ),
-            SizedBox(height: 5),
-            Text(
-              'Kai Agent Circle',
-              style: TextStyle(fontSize: 17, fontWeight: FontWeight.w900),
-            ),
-            SizedBox(height: 4),
-            Text(
-              '协作编号 AIR-NODE-4821 · 1/5 已确认',
-              style: TextStyle(color: AirvanaColors.muted, fontSize: 9),
+            Text.rich(
+              TextSpan(
+                children: [
+                  TextSpan(
+                    text: '${credit.score}',
+                    style: const TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                  const TextSpan(
+                    text: ' / 900',
+                    style: TextStyle(fontSize: 10, color: AirvanaColors.muted),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
-      ),
-      const SizedBox(height: 10),
-      const _GrowthCard(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('五个协作角色', style: _titleStyle),
-            SizedBox(height: 10),
-            _MemberRow('1', 'Kai Chen', '发起人 · 创作与运营', '已确认'),
-            _MemberRow('2', '等待成员', '内容与创意', '待邀请'),
-            _MemberRow('3', '等待成员', '社区与分发', '待邀请'),
-            _MemberRow('4', '等待成员', '运营与归因', '待邀请'),
-            _MemberRow('5', '等待成员', '审核与合规', '待邀请'),
-          ],
+        const SizedBox(height: 9),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(999),
+          child: LinearProgressIndicator(
+            value: (credit.score - 300) / 600,
+            minHeight: 6,
+            backgroundColor: AirvanaColors.canvas,
+          ),
         ),
-      ),
-      const SizedBox(height: 10),
-      const _NetworkNote('暂停、退出和申诉在当前版本仅保存本地意向，不会修改真实成员关系、服务端资格、合约或资产。'),
-    ],
+        const SizedBox(height: 5),
+        Text(
+          '经济节点门槛 ${credit.threshold}',
+          style: const TextStyle(fontSize: 9, color: AirvanaColors.muted),
+        ),
+        const SizedBox(height: 11),
+        for (final factor in credit.factors)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 9),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Text(factor.icon, style: const TextStyle(fontSize: 11)),
+                    const SizedBox(width: 6),
+                    Expanded(
+                      child: Text(
+                        factor.label,
+                        style: const TextStyle(
+                          fontSize: 11,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                    ),
+                    Text(
+                      '${factor.weight}%',
+                      style: const TextStyle(
+                        fontSize: 9,
+                        color: AirvanaColors.muted,
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      '${factor.value}/100',
+                      style: const TextStyle(
+                        fontSize: 10,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 2),
+                Text(factor.desc, style: _bodyStyle),
+              ],
+            ),
+          ),
+        const Text(
+          '前端估算 · 真实分数由权威事件与服务端确认',
+          key: ValueKey('growth-credit-note'),
+          style: TextStyle(fontSize: 9, color: AirvanaColors.muted),
+        ),
+      ],
+    ),
+  );
+}
+
+class _EligibilityRow extends StatelessWidget {
+  const _EligibilityRow({
+    required this.icon,
+    required this.label,
+    required this.done,
+  });
+
+  final String icon;
+  final String label;
+  final bool done;
+
+  @override
+  Widget build(BuildContext context) => Padding(
+    padding: const EdgeInsets.symmetric(vertical: 5),
+    child: Row(
+      children: [
+        Text(icon, style: const TextStyle(fontSize: 11)),
+        const SizedBox(width: 8),
+        Expanded(child: Text(label, style: const TextStyle(fontSize: 11))),
+        Text(
+          done ? '已满足' : '未满足',
+          style: TextStyle(
+            fontSize: 9,
+            fontWeight: FontWeight.w900,
+            color: done ? AirvanaColors.success : AirvanaColors.muted,
+          ),
+        ),
+      ],
+    ),
   );
 }
 
 class _MemberRow extends StatelessWidget {
-  const _MemberRow(this.index, this.name, this.role, this.status);
-  final String index;
-  final String name;
-  final String role;
-  final String status;
+  const _MemberRow({
+    super.key,
+    required this.member,
+    required this.onInvite,
+    required this.onAccept,
+    required this.onDecline,
+    required this.onRemove,
+  });
+
+  final LocalGrowthMember member;
+  final Future<void> Function() onInvite;
+  final Future<void> Function() onAccept;
+  final Future<void> Function() onDecline;
+  final Future<void> Function() onRemove;
+
   @override
   Widget build(BuildContext context) => Padding(
     padding: const EdgeInsets.symmetric(vertical: 8),
@@ -1998,7 +2410,7 @@ class _MemberRow extends StatelessWidget {
           radius: 16,
           backgroundColor: const Color(0xFFFFF1F2),
           child: Text(
-            index,
+            '${member.seat}',
             style: const TextStyle(
               color: AirvanaColors.accent,
               fontSize: 9,
@@ -2012,27 +2424,57 @@ class _MemberRow extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                name,
+                member.owner.isEmpty
+                    ? member.name
+                    : '${member.name} · ${member.owner}',
                 style: const TextStyle(
                   fontSize: 10,
                   fontWeight: FontWeight.w900,
                 ),
               ),
               Text(
-                role,
+                member.role,
                 style: const TextStyle(color: AirvanaColors.muted, fontSize: 8),
               ),
             ],
           ),
         ),
-        Text(
-          status,
-          style: const TextStyle(
-            color: Color(0xFF147542),
-            fontSize: 8,
-            fontWeight: FontWeight.w800,
+        // 席位按状态给出不同操作：待邀请可邀请，待确认可接受/拒绝，
+        // 已确认的非发起人席位可撤回。
+        if (member.status == 'empty')
+          TextButton(
+            key: ValueKey('growth-seat-invite-${member.seat}'),
+            onPressed: onInvite,
+            child: const Text('邀请', style: TextStyle(fontSize: 10)),
+          )
+        else if (member.status == 'pending') ...[
+          TextButton(
+            key: ValueKey('growth-seat-accept-${member.seat}'),
+            onPressed: onAccept,
+            child: const Text('接受', style: TextStyle(fontSize: 10)),
           ),
-        ),
+          TextButton(
+            key: ValueKey('growth-seat-decline-${member.seat}'),
+            onPressed: onDecline,
+            child: const Text('拒绝', style: TextStyle(fontSize: 10)),
+          ),
+        ] else ...[
+          Text(
+            member.statusLabel,
+            style: const TextStyle(
+              color: Color(0xFF147542),
+              fontSize: 8,
+              fontWeight: FontWeight.w800,
+            ),
+          ),
+          if (member.seat != 1)
+            IconButton(
+              key: ValueKey('growth-seat-remove-${member.seat}'),
+              tooltip: '撤回该席位',
+              onPressed: onRemove,
+              icon: const Icon(Icons.close_rounded, size: 14),
+            ),
+        ],
       ],
     ),
   );

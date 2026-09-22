@@ -1,3 +1,4 @@
+import 'package:airvana_mobile/features/network/domain/growth_node_state.dart';
 import 'dart:typed_data';
 import 'package:airvana_mobile/features/account/domain/account_service_models.dart';
 import 'package:airvana_mobile/features/account/domain/platform_service_models.dart';
@@ -178,4 +179,8 @@ final localMessageThreadsProvider = FutureProvider<List<LocalMessageThread>>((
   ref,
 ) {
   return ref.watch(airvanaRepositoryProvider).loadLocalMessageThreads();
+});
+
+final localGrowthNodeProvider = FutureProvider<LocalGrowthNodeState>((ref) {
+  return ref.watch(airvanaRepositoryProvider).loadLocalGrowthNode();
 });

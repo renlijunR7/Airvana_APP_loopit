@@ -1,3 +1,5 @@
+import 'package:airvana_mobile/features/network/domain/growth_node_state.dart';
+
 enum LocalDataMode { local, demo }
 
 enum LocalDraftStatus { editing, readyForGeneration, publishedLocal, archived }
@@ -1166,6 +1168,7 @@ class LocalWorkspaceSnapshot {
     this.messageThreads = kLocalMessageThreadSeeds,
     this.draftTrash = const [],
     this.savedRelations = const [],
+    this.growthNode = const LocalGrowthNodeState(),
     this.profileFeatureState = const LocalProfileFeatureState(),
     this.lastGameRewardDates = const {},
   });
@@ -1232,6 +1235,11 @@ class LocalWorkspaceSnapshot {
         savedRelations: _maps(
           json['saved_relations'],
         ).map(LocalSavedRelation.fromJson).toList(growable: false),
+        growthNode: json['growth_node'] is Map
+            ? LocalGrowthNodeState.fromJson(
+                Map<String, dynamic>.from(json['growth_node'] as Map),
+              )
+            : const LocalGrowthNodeState(),
         profileFeatureState: json['profile_feature_state'] is Map
             ? LocalProfileFeatureState.fromJson(
                 Map<String, dynamic>.from(json['profile_feature_state'] as Map),
@@ -1274,6 +1282,7 @@ class LocalWorkspaceSnapshot {
   /// 草稿墓碑，对应 Web 的 draftTrash：删除后仍可恢复。
   final List<LocalDraft> draftTrash;
   final List<LocalSavedRelation> savedRelations;
+  final LocalGrowthNodeState growthNode;
   final LocalProfileFeatureState profileFeatureState;
 
   /// 每个 playable 最近一次发放游玩 AIP 的日期键（每作品每日一次 5 AIP）。
@@ -1296,6 +1305,7 @@ class LocalWorkspaceSnapshot {
     List<LocalMessageThread>? messageThreads,
     List<LocalDraft>? draftTrash,
     List<LocalSavedRelation>? savedRelations,
+    LocalGrowthNodeState? growthNode,
     LocalProfileFeatureState? profileFeatureState,
     Map<String, String>? lastGameRewardDates,
   }) => LocalWorkspaceSnapshot(
@@ -1315,6 +1325,7 @@ class LocalWorkspaceSnapshot {
     messageThreads: messageThreads ?? this.messageThreads,
     draftTrash: draftTrash ?? this.draftTrash,
     savedRelations: savedRelations ?? this.savedRelations,
+    growthNode: growthNode ?? this.growthNode,
     profileFeatureState: profileFeatureState ?? this.profileFeatureState,
     lastGameRewardDates: lastGameRewardDates ?? this.lastGameRewardDates,
   );
@@ -1345,6 +1356,7 @@ class LocalWorkspaceSnapshot {
     'saved_relations': savedRelations
         .map((item) => item.toJson())
         .toList(growable: false),
+    'growth_node': growthNode.toJson(),
     'profile_feature_state': profileFeatureState.toJson(),
     'last_game_reward_dates': lastGameRewardDates,
   };
