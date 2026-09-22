@@ -1,3 +1,4 @@
+import 'package:airvana_mobile/features/history/presentation/record_manager_page.dart';
 import 'package:airvana_mobile/features/history/presentation/ai_workspace_page.dart';
 import 'package:airvana_mobile/app/providers.dart';
 import 'package:airvana_mobile/design_system/airvana_theme.dart';

@@ -673,6 +673,140 @@ class LocalAirvanaStore {
     return social;
   });
 
+  /// 草稿复制：Web 的「复制草稿」生成一份新 id 的副本，排在原草稿之后。
+  Future<LocalDraft> duplicateDraft(String draftId) => _serial(() async {
+    final snapshot = await _readWorkspaceUnlocked();
+    final drafts = [...snapshot.drafts];
+    final index = drafts.indexWhere((item) => item.draftId == draftId);
+    if (index < 0) {
+      throw LocalStoreException('找不到草稿：$draftId');
+    }
+    final source = drafts[index];
+    final now = _clock();
+    final copy = LocalDraft(
+      draftId: _ids.next('draft_local'),
+      ownerId: source.ownerId,
+      idea: source.idea,
+      deepMode: source.deepMode,
+      selectedPowerIds: source.selectedPowerIds,
+      workflowState: source.workflowState,
+      status: source.status,
+      dataMode: source.dataMode,
+      createdAt: now,
+      updatedAt: now,
+      playableId: source.playableId,
+      sourcePlayableId: source.sourcePlayableId,
+    );
+    drafts.insert(index + 1, copy);
+    await _writeWorkspaceUnlocked(snapshot.copyWith(drafts: drafts));
+    return copy;
+  });
+
+  /// 草稿排序：Web 的「向前 / 向后排序」只在本机列表内换位。
+  Future<List<LocalDraft>> moveDraft({
+    required String draftId,
+    required int delta,
+  }) => _serial(() async {
+    final snapshot = await _readWorkspaceUnlocked();
+    final drafts = [...snapshot.drafts];
+    final index = drafts.indexWhere((item) => item.draftId == draftId);
+    if (index < 0) {
+      throw LocalStoreException('找不到草稿：$draftId');
+    }
+    final target = index + delta;
+    if (target < 0 || target >= drafts.length) return snapshot.drafts;
+    final moved = drafts.removeAt(index);
+    drafts.insert(target, moved);
+    await _writeWorkspaceUnlocked(snapshot.copyWith(drafts: drafts));
+    return drafts;
+  });
+
+  /// 移到最近删除：草稿进墓碑而不是直接消失，与 Web 的 draftTrash 一致。
+  Future<LocalWorkspaceSnapshot> trashDraft(String draftId) =>
+      _serial(() async {
+        final snapshot = await _readWorkspaceUnlocked();
+        final drafts = [...snapshot.drafts];
+        final index = drafts.indexWhere((item) => item.draftId == draftId);
+        if (index < 0) {
+          throw LocalStoreException('找不到草稿：$draftId');
+        }
+        final removed = drafts.removeAt(index);
+        final next = snapshot.copyWith(
+          drafts: drafts,
+          draftTrash: [removed, ...snapshot.draftTrash],
+        );
+        await _writeWorkspaceUnlocked(next);
+        return next;
+      });
+
+  Future<LocalWorkspaceSnapshot> restoreDraft(String draftId) =>
+      _serial(() async {
+        final snapshot = await _readWorkspaceUnlocked();
+        final trash = [...snapshot.draftTrash];
+        final index = trash.indexWhere((item) => item.draftId == draftId);
+        if (index < 0) {
+          throw LocalStoreException('最近删除里没有这份草稿：$draftId');
+        }
+        final restored = trash.removeAt(index);
+        final next = snapshot.copyWith(
+          drafts: [...snapshot.drafts, restored],
+          draftTrash: trash,
+        );
+        await _writeWorkspaceUnlocked(next);
+        return next;
+      });
+
+  /// 收藏夹与备注，对应 Web 的 saveSavedRelationMetadata。
+  Future<List<LocalSavedRelation>> saveSavedRelation({
+    required String playableId,
+    required String collection,
+    required String note,
+  }) => _serial(() async {
+    final snapshot = await _readWorkspaceUnlocked();
+    final relations = [...snapshot.savedRelations]
+      ..removeWhere((item) => item.playableId == playableId);
+    relations.add(
+      LocalSavedRelation(
+        playableId: playableId,
+        collection: collection.trim().isEmpty ? '默认收藏' : collection.trim(),
+        note: note.trim(),
+      ),
+    );
+    await _writeWorkspaceUnlocked(snapshot.copyWith(savedRelations: relations));
+    return relations;
+  });
+
+  /// 体验记录删除：单条 / 按作品清除 / 全部清空，对应 Web 的三个破坏性操作。
+  Future<List<LocalExperienceRecord>> deleteExperienceRecord(String recordId) =>
+      _serial(() async {
+        final snapshot = await _readWorkspaceUnlocked();
+        final records = [...snapshot.experienceRecords]
+          ..removeWhere((item) => item.recordId == recordId);
+        await _writeWorkspaceUnlocked(
+          snapshot.copyWith(experienceRecords: records),
+        );
+        return records;
+      });
+
+  Future<List<LocalExperienceRecord>> clearContentRuns(String playableId) =>
+      _serial(() async {
+        final snapshot = await _readWorkspaceUnlocked();
+        final records = [...snapshot.experienceRecords]
+          ..removeWhere((item) => item.playableId == playableId);
+        await _writeWorkspaceUnlocked(
+          snapshot.copyWith(experienceRecords: records),
+        );
+        return records;
+      });
+
+  Future<List<LocalExperienceRecord>> clearAllRuns() => _serial(() async {
+    final snapshot = await _readWorkspaceUnlocked();
+    await _writeWorkspaceUnlocked(
+      snapshot.copyWith(experienceRecords: const []),
+    );
+    return const [];
+  });
+
   /// 本机作品的收藏 / 点赞：与 Web 的 savedContentIds、likedContentIds 同口径，
   /// 写进 socialState 持久化，而不是只留在页面状态里。
   Future<LocalSocialState> setEngagement({

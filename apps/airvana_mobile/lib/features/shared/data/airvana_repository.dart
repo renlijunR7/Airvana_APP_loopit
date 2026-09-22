@@ -1293,6 +1293,41 @@ class AirvanaRepository {
     required bool active,
   }) => _localStore.setFollowing(owner: owner, active: active);
 
+  Future<LocalDraft> duplicateLocalDraft(String draftId) =>
+      _localStore.duplicateDraft(draftId);
+
+  Future<List<LocalDraft>> moveLocalDraft({
+    required String draftId,
+    required int delta,
+  }) => _localStore.moveDraft(draftId: draftId, delta: delta);
+
+  Future<LocalWorkspaceSnapshot> trashLocalDraft(String draftId) =>
+      _localStore.trashDraft(draftId);
+
+  Future<LocalWorkspaceSnapshot> restoreLocalDraft(String draftId) =>
+      _localStore.restoreDraft(draftId);
+
+  Future<List<LocalSavedRelation>> saveLocalSavedRelation({
+    required String playableId,
+    required String collection,
+    required String note,
+  }) => _localStore.saveSavedRelation(
+    playableId: playableId,
+    collection: collection,
+    note: note,
+  );
+
+  Future<List<LocalExperienceRecord>> deleteLocalExperienceRecord(
+    String recordId,
+  ) => _localStore.deleteExperienceRecord(recordId);
+
+  Future<List<LocalExperienceRecord>> clearLocalContentRuns(
+    String playableId,
+  ) => _localStore.clearContentRuns(playableId);
+
+  Future<List<LocalExperienceRecord>> clearLocalAllRuns() =>
+      _localStore.clearAllRuns();
+
   Future<List<LocalMessageThread>> loadLocalMessageThreads() =>
       _localStore.loadMessageThreads();
 

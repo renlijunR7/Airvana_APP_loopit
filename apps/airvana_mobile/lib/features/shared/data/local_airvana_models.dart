@@ -842,6 +842,32 @@ const kLocalMessageThreadSeeds = <LocalMessageThread>[
   ),
 ];
 
+/// 收藏关系的附加信息。Web 的 savedRelations 记录收藏夹与备注。
+class LocalSavedRelation {
+  const LocalSavedRelation({
+    required this.playableId,
+    this.collection = '默认收藏',
+    this.note = '',
+  });
+
+  factory LocalSavedRelation.fromJson(Map<String, dynamic> json) =>
+      LocalSavedRelation(
+        playableId: '${json['playable_id'] ?? ''}',
+        collection: '${json['collection'] ?? '默认收藏'}',
+        note: '${json['note'] ?? ''}',
+      );
+
+  final String playableId;
+  final String collection;
+  final String note;
+
+  Map<String, dynamic> toJson() => {
+    'playable_id': playableId,
+    'collection': collection,
+    'note': note,
+  };
+}
+
 class LocalSocialState {
   const LocalSocialState({
     this.followerOwners = const ['@nina', '@leo.art'],
@@ -1138,6 +1164,8 @@ class LocalWorkspaceSnapshot {
     this.profileState = const LocalProfileState(),
     this.socialState = const LocalSocialState(),
     this.messageThreads = kLocalMessageThreadSeeds,
+    this.draftTrash = const [],
+    this.savedRelations = const [],
     this.profileFeatureState = const LocalProfileFeatureState(),
     this.lastGameRewardDates = const {},
   });
@@ -1198,6 +1226,12 @@ class LocalWorkspaceSnapshot {
                 json['message_threads'],
               ).map(LocalMessageThread.fromJson).toList(growable: false)
             : kLocalMessageThreadSeeds,
+        draftTrash: _maps(
+          json['draft_trash'],
+        ).map(LocalDraft.fromJson).toList(growable: false),
+        savedRelations: _maps(
+          json['saved_relations'],
+        ).map(LocalSavedRelation.fromJson).toList(growable: false),
         profileFeatureState: json['profile_feature_state'] is Map
             ? LocalProfileFeatureState.fromJson(
                 Map<String, dynamic>.from(json['profile_feature_state'] as Map),
@@ -1236,6 +1270,10 @@ class LocalWorkspaceSnapshot {
   final LocalProfileState profileState;
   final LocalSocialState socialState;
   final List<LocalMessageThread> messageThreads;
+
+  /// 草稿墓碑，对应 Web 的 draftTrash：删除后仍可恢复。
+  final List<LocalDraft> draftTrash;
+  final List<LocalSavedRelation> savedRelations;
   final LocalProfileFeatureState profileFeatureState;
 
   /// 每个 playable 最近一次发放游玩 AIP 的日期键（每作品每日一次 5 AIP）。
@@ -1256,6 +1294,8 @@ class LocalWorkspaceSnapshot {
     LocalProfileState? profileState,
     LocalSocialState? socialState,
     List<LocalMessageThread>? messageThreads,
+    List<LocalDraft>? draftTrash,
+    List<LocalSavedRelation>? savedRelations,
     LocalProfileFeatureState? profileFeatureState,
     Map<String, String>? lastGameRewardDates,
   }) => LocalWorkspaceSnapshot(
@@ -1273,6 +1313,8 @@ class LocalWorkspaceSnapshot {
     profileState: profileState ?? this.profileState,
     socialState: socialState ?? this.socialState,
     messageThreads: messageThreads ?? this.messageThreads,
+    draftTrash: draftTrash ?? this.draftTrash,
+    savedRelations: savedRelations ?? this.savedRelations,
     profileFeatureState: profileFeatureState ?? this.profileFeatureState,
     lastGameRewardDates: lastGameRewardDates ?? this.lastGameRewardDates,
   );
@@ -1295,6 +1337,12 @@ class LocalWorkspaceSnapshot {
     'profile_state': profileState.toJson(),
     'social_state': socialState.toJson(),
     'message_threads': messageThreads
+        .map((item) => item.toJson())
+        .toList(growable: false),
+    'draft_trash': draftTrash
+        .map((item) => item.toJson())
+        .toList(growable: false),
+    'saved_relations': savedRelations
         .map((item) => item.toJson())
         .toList(growable: false),
     'profile_feature_state': profileFeatureState.toJson(),

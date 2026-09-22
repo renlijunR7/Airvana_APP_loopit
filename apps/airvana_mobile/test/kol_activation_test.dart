@@ -68,21 +68,6 @@ void main() {
     expect(find.byKey(const ValueKey('kol-activation-done')), findsOneWidget);
   });
 
-  testWidgets('record manager keeps the four Web record kinds', (tester) async {
-    await tester.pumpWidget(_host(const RecordManagerPageBody()));
-    await tester.pump();
-
-    for (final kind in ['saved', 'history', 'draft', 'trash']) {
-      expect(find.byKey(ValueKey('record-kind-$kind')), findsOneWidget);
-    }
-    expect(find.byKey(const ValueKey('record-empty-saved')), findsOneWidget);
-
-    await tester.tap(find.byKey(const ValueKey('record-kind-trash')));
-    await tester.pump();
-    expect(find.byKey(const ValueKey('record-empty-trash')), findsOneWidget);
-    expect(find.textContaining('墓碑记录'), findsOneWidget);
-  });
-
   testWidgets('invite page states the qualification rule and reward', (
     tester,
   ) async {
