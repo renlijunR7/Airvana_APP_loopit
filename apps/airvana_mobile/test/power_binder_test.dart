@@ -286,7 +286,7 @@ void main() {
         );
       }
     }
-    expect(byId.length, 58);
+    expect(byId.length, 60);
   });
 
   test('需要实时服务的能力：服务可达才撮合得上，不可达时明确降级', () {

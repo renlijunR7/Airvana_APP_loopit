@@ -12,7 +12,7 @@ void main() {
   final byId = {for (final power in kPowerCatalog) power.id: power};
 
   test('目录规模与唯一性', () {
-    expect(kPowerCatalog.length, 58);
+    expect(kPowerCatalog.length, 60);
     expect(byId.length, kPowerCatalog.length, reason: 'Power id 必须唯一');
   });
 
@@ -147,7 +147,7 @@ void main() {
       byBinding.update(power.binding, (v) => v + 1, ifAbsent: () => 1);
     }
     expect(byBinding[PowerBinding.hosted], 18);
-    expect(byBinding[PowerBinding.workflow], 8);
+    expect(byBinding[PowerBinding.workflow], 10);
     expect(byBinding[PowerBinding.baked], 32);
   });
 

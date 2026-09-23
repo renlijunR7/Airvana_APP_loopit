@@ -69,6 +69,8 @@ const Map<String, IconData> kPowerIcons = <String, IconData>{
   'stepActivity': Icons.directions_walk_rounded,
   'proximityLink': Icons.nfc_rounded,
   'kolTwin': Icons.smart_toy_outlined,
+  'adsApi': Icons.campaign_outlined,
+  'adsMcp': Icons.hub_outlined,
 };
 
 /// 实现层级对应的徽章配色。原本内联在 `_PowerSupport` 枚举里，

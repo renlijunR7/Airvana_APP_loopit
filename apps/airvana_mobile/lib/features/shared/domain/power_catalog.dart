@@ -1,4 +1,4 @@
-/// Airvana 的 48 条 Power 能力目录。
+/// Airvana 的 Power 能力目录。
 ///
 /// 这份目录原先内联在 `create_playable_screen.dart`（6014 行）里，字段只够画卡片：
 /// 分类、标题、描述、图标，外加一个只带 label 和 color 的 `_PowerSupport` 徽章。
@@ -9,15 +9,16 @@
 /// * 审核侧——[PowerSupport.approval] 与 [PowerSupport.service] 的条目在本地
 ///   闭环里只做展示，不伪造行为。
 ///
-/// 48 条里真正能在运行时插拔的只有 8 条（[PowerBinding.hosted]）。其余 32 条烘焙
-/// 进生成代码、8 条属于创作与运营流程。把这个比例摆在类型系统里，比写在文档里
+/// 目录里真正能在运行时插拔的只有 [PowerBinding.hosted] 那一档。其余烘焙
+/// 进生成代码，或属于创作与运营流程。把这个比例摆在类型系统里，比写在文档里
 /// 更难被忽略——[PowerDescriptor] 的构造器断言会拒绝「要权限却不是 hosted」和
 /// 「hosted 却没有降级方案」这两类声明。
 library;
 
 import 'power_capability.dart';
 
-/// 全部 48 条能力。顺序与原 `_powerCatalog` 一致，便于逐条比对。
+/// 全部能力。规模由 `test/power_catalog_test.dart` 断言，改动数量时
+/// 那条测试会红——数字写在注释里守不住，写在断言里才守得住。
 const List<PowerDescriptor> kPowerCatalog = <PowerDescriptor>[
     PowerDescriptor(
       id: 'textTypography',
@@ -400,6 +401,35 @@ const List<PowerDescriptor> kPowerCatalog = <PowerDescriptor>[
       description: '审批后发布到 Telegram、Facebook、X 或 Discord',
       support: PowerSupport.approval,
       binding: PowerBinding.workflow,
+      quickAllowed: false,
+    ),
+    PowerDescriptor(
+      id: 'adsApi',
+      category: 'operations',
+      // 标题不用「广告 API」：目录里的英文词（GIF / 3D / AR / NPC / Persona /
+      // KOL / Remix）都是创作者本来就在用的，而 API、MCP 是开发者术语。
+      // 这份目录是给创作者看的能力面板，不是给开发者看的接口文档。
+      title: '广告投放管理',
+      description: '程序化创建与管理广告系列、广告团队、创意、受众、定位与报告',
+      support: PowerSupport.approval,
+      binding: PowerBinding.workflow,
+      // 和外部连接器同一类：接的是平台方的营销接口，要凭证、要合同，
+      // 而且会真实花钱。所以沿用它的口径——需审批、快速模式下不可选。
+      dependencies: ['externalConnectors'],
+      quickAllowed: false,
+    ),
+    PowerDescriptor(
+      id: 'adsMcp',
+      category: 'operations',
+      // 与「广告投放管理」的分工写在名字里：那条是写（创建与管理投放），
+      // 这条是读（让智能体看懂投放）。协议名留在描述里，不进标题。
+      title: '营销智能体',
+      description: '让 AI 智能体接入营销接口，读取活动设置与投放效果（MCP）',
+      support: PowerSupport.approval,
+      binding: PowerBinding.workflow,
+      // 依赖广告 API：MCP 读的是它管理的那些活动数据，
+      // 没有接口层就没有可读的东西。
+      dependencies: ['adsApi'],
       quickAllowed: false,
     ),
     PowerDescriptor(

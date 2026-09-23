@@ -145,6 +145,6 @@ void main() {
     }
     // 手势信号标称 30Hz，要求更高的作品接不上——这是如实结论，不是缺陷。
     expect(covered, isNotEmpty);
-    expect(kPowerCatalog.length, 58);
+    expect(kPowerCatalog.length, 60);
   });
 }
