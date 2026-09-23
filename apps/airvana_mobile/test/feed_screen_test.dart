@@ -38,10 +38,10 @@ void main() {
       final pager = tester.widget<PageView>(
         find.byKey(const ValueKey('legacy-feed-pager')),
       );
-      expect(pager.childrenDelegate.estimatedChildCount, 65);
+      expect(pager.childrenDelegate.estimatedChildCount, 68);
       // 首条现在是项目自有新增作品，Web 基线的 64 条紧随其后（由下方循环逐条校验）。
-      const first = 'plb_christmas_tree_gesture';
-      expect(find.textContaining('圣诞树手势互动'), findsWidgets);
+      const first = 'plb_magic_choir_replica';
+      expect(find.textContaining('魔法合唱团'), findsWidgets);
       // 左上角的 AIRVANA ORIGINAL 徽标已按产品要求移除。
       expect(find.textContaining('AIRVANA ORIGINAL'), findsNothing);
       // 作品区里的大标题、摘要与边界说明已按产品要求移除，只留试玩按钮。

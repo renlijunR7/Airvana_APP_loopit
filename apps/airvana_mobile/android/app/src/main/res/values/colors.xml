@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 自适应图标底色：与 logo 原始锁定版式一致的白底 -->
+    <color name="ic_launcher_background">#FFFFFFFF</color>
+</resources>

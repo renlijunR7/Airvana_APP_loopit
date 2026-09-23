@@ -57,6 +57,116 @@ class _Heading extends StatelessWidget {
   );
 }
 
+/// 服务端未接入时的本地演示占位数据。
+///
+/// 这些值只是占位：数字与 Web 版本用的同一批演示值保持一致，绝不代表真实
+/// 账本、真实 Campaign 或可结算金额。服务端接上后会被真实对象整体替换。
+class CreatorDemoSeeds {
+  const CreatorDemoSeeds._();
+
+  static const metaLabel = '本地演示 · 服务端接入后替换';
+
+  static const note = '以上为本地演示占位值，不代表真实账本、真实 Campaign 或可结算金额。';
+
+  static CreatorWeeklyReport weekly(DateTime now) {
+    final end = DateTime(now.year, now.month, now.day);
+    return CreatorWeeklyReport(
+      periodStart: end.subtract(const Duration(days: 6)),
+      periodEnd: end,
+      publishedThisWeek: 1,
+      aipEarnedThisWeek: 120,
+      // 与「我的」页的 892 获赞、发布作品 2 保持同一套演示值。
+      totalPublished: 2,
+      totalLikes: 892,
+      activeTasks: 0,
+      pendingDeliverables: 1,
+    );
+  }
+
+  /// 金额取自经济规则本身：完成 5、签到阶梯、首次发布 50。
+  static List<CreatorIncentive> incentives(DateTime now) => [
+    CreatorIncentive(
+      kind: 'playable_complete',
+      id: 'demo-complete',
+      title: '有效完成奖励 · Crypto City 安全挑战',
+      amountAip: 5,
+      occurredAt: now.subtract(const Duration(hours: 3)),
+    ),
+    CreatorIncentive(
+      kind: 'daily_login',
+      id: 'demo-checkin',
+      title: '每日签到 · 连签第 5 天',
+      amountAip: 60,
+      occurredAt: now.subtract(const Duration(days: 1)),
+    ),
+    CreatorIncentive(
+      kind: 'first_publish',
+      id: 'demo-first-publish',
+      title: '首次发布 Agentic Playable',
+      amountAip: 50,
+      occurredAt: now.subtract(const Duration(days: 4)),
+    ),
+  ];
+
+  /// 逐条搬自 Web 的 creatorOpportunitySeeds。
+  static const challenges = <CreatorChallenge>[
+    CreatorChallenge(
+      campaignId: 'crypto-safety-campaign',
+      title: 'Crypto City 安全教育 Campaign',
+      objective: '为钱包新用户制作可复用的安全选择 Agentic Playable。',
+      brandName: 'Airvana Campaign 示例',
+      rewardAit: 0,
+      budgetRemaining: 0,
+      endsAt: null,
+      participantStatus: null,
+    ),
+    CreatorChallenge(
+      campaignId: 'star-farm-invite',
+      title: '星际农场 Community Launch 共创',
+      objective: '通过社区任务与分支反馈完成首轮参与引导。',
+      brandName: '品牌邀请 · 本地演示',
+      rewardAit: 0,
+      budgetRemaining: 0,
+      endsAt: null,
+      participantStatus: 'invited',
+    ),
+    CreatorChallenge(
+      campaignId: 'playable-v2-delivery',
+      title: 'Playable v2 安全挑战交付',
+      objective: '提交已批准版本、KOL 链接与交付证据，等待品牌审核。',
+      brandName: 'Campaign 交付中心',
+      rewardAit: 0,
+      budgetRemaining: 0,
+      endsAt: null,
+      participantStatus: 'in_progress',
+    ),
+    CreatorChallenge(
+      campaignId: 'kyc-gated-opportunity',
+      title: '全球创作者产品教育计划',
+      objective: '为不同地区的新用户制作本地化产品教育互动。',
+      brandName: '平台示例机会',
+      rewardAit: 0,
+      budgetRemaining: 0,
+      endsAt: null,
+      participantStatus: null,
+    ),
+  ];
+}
+
+/// 演示占位的统一脚注。
+class _DemoNote extends StatelessWidget {
+  const _DemoNote();
+
+  @override
+  Widget build(BuildContext context) => const Padding(
+    padding: EdgeInsets.only(top: 10),
+    child: Text(
+      CreatorDemoSeeds.note,
+      style: TextStyle(fontSize: 9, color: AirvanaColors.muted, height: 1.7),
+    ),
+  );
+}
+
 /// 服务端未接入时的统一占位：说明原因，不给任何数字。
 class _NotConnected extends StatelessWidget {
   const _NotConnected({required this.what});
@@ -147,7 +257,10 @@ class CreatorWeeklyReportCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final weekly = snapshot.weekly;
+    // 服务端未接入时用本地演示占位，而不是一块空白说明。
+    final serverWeekly = snapshot.weekly;
+    final demo = serverWeekly == null;
+    final weekly = serverWeekly ?? CreatorDemoSeeds.weekly(DateTime.now());
     return CreatorPanel(
       key: const ValueKey('creator-weekly-report'),
       child: Column(
@@ -155,14 +268,13 @@ class CreatorWeeklyReportCard extends StatelessWidget {
         children: [
           _Heading(
             '创作周报',
-            meta: weekly == null
-                ? '服务端未接入'
+            meta: demo
+                ? '${_fmtDay(weekly.periodStart)} 至 ${_fmtDay(weekly.periodEnd)} · '
+                      '${CreatorDemoSeeds.metaLabel}'
                 : '${_fmtDay(weekly.periodStart)} 至 ${_fmtDay(weekly.periodEnd)} · 服务端账本',
           ),
           const SizedBox(height: 14),
-          if (weekly == null)
-            const _NotConnected(what: '创作周报')
-          else ...[
+          ...[
             Row(
               children: [
                 _Stat(
@@ -202,14 +314,17 @@ class CreatorWeeklyReportCard extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 10),
-            Text(
-              '${unavailableWeeklyDeltas.join(' / ')}需要历史快照才能计算，服务端目前只存总量，因此不在此处给出增量数字。',
-              style: const TextStyle(
-                fontSize: 9,
-                color: AirvanaColors.muted,
-                height: 1.7,
+            if (demo)
+              const _DemoNote()
+            else
+              Text(
+                '${unavailableWeeklyDeltas.join(' / ')}需要历史快照才能计算，服务端目前只存总量，因此不在此处给出增量数字。',
+                style: const TextStyle(
+                  fontSize: 9,
+                  color: AirvanaColors.muted,
+                  height: 1.7,
+                ),
               ),
-            ),
           ],
         ],
       ),
@@ -366,6 +481,13 @@ class _CreatorChallengesCardState extends ConsumerState<CreatorChallengesCard> {
   String? _applying;
 
   Future<void> _apply(CreatorChallenge challenge) async {
+    // 演示占位的挑战没有对应的服务端 Campaign，不去发一个注定失败的请求。
+    if (!widget.snapshot.serverConnected) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('演示占位：真实报名需要服务端 Campaign 接入')),
+      );
+      return;
+    }
     setState(() => _applying = challenge.campaignId);
     final messenger = ScaffoldMessenger.of(context);
     try {
@@ -385,7 +507,10 @@ class _CreatorChallengesCardState extends ConsumerState<CreatorChallengesCard> {
 
   @override
   Widget build(BuildContext context) {
-    final challenges = widget.snapshot.challenges;
+    final demo = !widget.snapshot.serverConnected;
+    final challenges = demo
+        ? CreatorDemoSeeds.challenges
+        : widget.snapshot.challenges;
     return CreatorPanel(
       key: const ValueKey('creator-challenges'),
       child: Column(
@@ -395,12 +520,10 @@ class _CreatorChallengesCardState extends ConsumerState<CreatorChallengesCard> {
             '创作灵感挑战',
             meta: widget.snapshot.serverConnected
                 ? '平台进行中的真实 Campaign · 奖励与预算为 Contract 锁定值'
-                : '服务端未接入',
+                : CreatorDemoSeeds.metaLabel,
           ),
           const SizedBox(height: 14),
-          if (!widget.snapshot.serverConnected)
-            const _NotConnected(what: '灵感挑战')
-          else if (challenges.isEmpty)
+          if (challenges.isEmpty)
             const _EmptyLine('当前没有进行中的 Campaign')
           else
             for (var index = 0; index < challenges.length; index += 1) ...[
@@ -412,6 +535,7 @@ class _CreatorChallengesCardState extends ConsumerState<CreatorChallengesCard> {
               ),
               if (index != challenges.length - 1) const SizedBox(height: 12),
             ],
+          if (demo) const _DemoNote(),
         ],
       ),
     );
@@ -554,7 +678,10 @@ class CreatorIncentiveCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final incentives = snapshot.incentives;
+    final demo = !snapshot.serverConnected;
+    final incentives = demo
+        ? CreatorDemoSeeds.incentives(DateTime.now())
+        : snapshot.incentives;
     return CreatorPanel(
       key: const ValueKey('creator-incentives'),
       child: Column(
@@ -562,12 +689,12 @@ class CreatorIncentiveCard extends StatelessWidget {
         children: [
           _Heading(
             '创作激励',
-            meta: snapshot.serverConnected ? '服务端 AIP 账本与生效中的发现加权' : '服务端未接入',
+            meta: snapshot.serverConnected
+                ? '服务端 AIP 账本与生效中的发现加权'
+                : CreatorDemoSeeds.metaLabel,
           ),
           const SizedBox(height: 14),
-          if (!snapshot.serverConnected)
-            const _NotConnected(what: '创作激励记录')
-          else if (incentives.isEmpty)
+          if (incentives.isEmpty)
             const _EmptyLine('暂无激励记录')
           else
             for (final item in incentives) ...[
@@ -577,7 +704,8 @@ class CreatorIncentiveCard extends StatelessWidget {
           if (snapshot.serverConnected) ...[
             const SizedBox(height: 12),
             _BoostAction(works: snapshot.publishedWorks),
-          ],
+          ] else
+            const _DemoNote(),
         ],
       ),
     );

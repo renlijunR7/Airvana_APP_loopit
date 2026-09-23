@@ -12,12 +12,18 @@ class AirvanaLogo extends StatelessWidget {
     super.key,
     this.width = 78,
     this.backgroundColor = const Color(0xFFF2F2F7),
+    this.dark = false,
   });
 
   final double width;
 
   /// Logo 所在区域的背景色；白底 PNG 会与它相乘融合。
   final Color backgroundColor;
+
+  /// 深色底上用反转灰阶的那份 PNG：黑底白字，红蓝圆点保持原色。
+  /// multiply 在黑底上会把整个 Logo 抹成黑色，所以这里换成 screen——
+  /// 黑色像素被抬到背景色，白字保持白色。
+  final bool dark;
 
   @override
   Widget build(BuildContext context) {
@@ -38,11 +44,13 @@ class AirvanaLogo extends StatelessWidget {
                 width: 105 * scale,
                 height: 35 * scale,
                 child: Image.asset(
-                  'assets/legacy/logo.png',
+                  dark
+                      ? 'assets/legacy/logo-dark.png'
+                      : 'assets/legacy/logo.png',
                   key: const ValueKey('airvana-logo-image'),
                   fit: BoxFit.contain,
                   color: backgroundColor,
-                  colorBlendMode: BlendMode.multiply,
+                  colorBlendMode: dark ? BlendMode.screen : BlendMode.multiply,
                   excludeFromSemantics: true,
                 ),
               ),

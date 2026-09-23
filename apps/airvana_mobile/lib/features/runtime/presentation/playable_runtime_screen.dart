@@ -17,9 +17,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 class PlayableRuntimeScreen extends ConsumerStatefulWidget {
-  const PlayableRuntimeScreen({super.key, required this.playable});
+  const PlayableRuntimeScreen({
+    super.key,
+    required this.playable,
+    this.fullscreen = false,
+  });
 
   final Playable playable;
+
+  /// 从信息流的「全屏体验」进来：直接开始，并去掉顶栏、状态栏与安全区，
+  /// 整屏只剩游戏画面。
+  final bool fullscreen;
 
   @override
   ConsumerState<PlayableRuntimeScreen> createState() =>
@@ -118,6 +126,25 @@ class _RuntimeSpec {
 }
 
 class _PlayableRuntimeScreenState extends ConsumerState<PlayableRuntimeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    if (widget.fullscreen) {
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted && !_started) _start();
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    if (widget.fullscreen) {
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+    }
+    super.dispose();
+  }
+
   int _round = 0;
   int _score = 0;
   int _lives = 3;
@@ -479,8 +506,69 @@ class _PlayableRuntimeScreenState extends ConsumerState<PlayableRuntimeScreen> {
       );
   }
 
+  /// 真·全屏：没有顶栏、没有安全区留白、系统状态栏也隐藏，整屏只有游戏。
+  /// 只保留一个半透明小退出键——没有它就会被困在游戏里出不来。
+  Widget _fullscreenBody(BuildContext context) {
+    final Widget surface;
+    if (_useStandaloneRuntime) {
+      surface = StandaloneGameRuntime(
+        key: ValueKey('fullscreen-standalone-${playable.id}-$_runId'),
+        asset: playable.standaloneAsset,
+        onLoadError: (_) => setState(() => _standaloneFallbackToChoices = true),
+      );
+    } else if (_useH5Runtime) {
+      surface = H5GameRuntime(
+        key: ValueKey('fullscreen-h5-${playable.id}-$_runId'),
+        gameKey: h5GameKeyForPlayable(playable.id)!,
+        muted: _muted,
+        onComplete: _onH5Complete,
+        onLoadError: (_) => setState(() => _h5FallbackToChoices = true),
+      );
+    } else {
+      // 没有可用运行时就退回普通页，而不是给一块空白全屏。
+      surface = const SizedBox.shrink();
+    }
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: Stack(
+        key: const ValueKey('runtime-fullscreen'),
+        fit: StackFit.expand,
+        children: [
+          surface,
+          Positioned(
+            left: 10,
+            top: 10,
+            child: SafeArea(
+              child: Opacity(
+                opacity: .45,
+                child: Material(
+                  color: Colors.black54,
+                  shape: const CircleBorder(),
+                  child: InkWell(
+                    key: const ValueKey('runtime-fullscreen-exit'),
+                    customBorder: const CircleBorder(),
+                    onTap: () => context.pop(),
+                    child: const Padding(
+                      padding: EdgeInsets.all(7),
+                      child: Icon(
+                        Icons.close_rounded,
+                        size: 18,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    if (widget.fullscreen) return _fullscreenBody(context);
     return Scaffold(
       backgroundColor: const Color(0xFF050907),
       body: SafeArea(

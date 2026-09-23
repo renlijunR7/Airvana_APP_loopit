@@ -69,39 +69,40 @@ class _ConnectedNetworkScreenState
           if (_tab != 'node')
             Expanded(child: _GrowthNarrative(tab: _tab))
           else
-          Expanded(
-            child: nodes.when(
-              loading: () => const Center(child: CircularProgressIndicator()),
-              error: (error, _) => AppStateView(
-                icon: Icons.cloud_off_rounded,
-                title: '节点数据加载失败',
-                message: '$error',
-                actionLabel: '重试',
-                onAction: () => ref.invalidate(growthNodesProvider),
-              ),
-              data: (items) => items.isEmpty
-                  ? AppStateView(
-                      icon: Icons.hub_outlined,
-                      title: '还没有加入增长节点',
-                      message: '创建一个五人协作节点，或输入邀请码占用一个席位。',
-                      actionLabel: '输入邀请码',
-                      onAction: () => _showJoinNode(context, ref),
-                    )
-                  : RefreshIndicator(
-                      onRefresh: () async {
-                        ref.invalidate(growthNodesProvider);
-                        await ref.read(growthNodesProvider.future);
-                      },
-                      child: ListView.separated(
-                        key: const ValueKey('connected-growth-nodes'),
-                        padding: const EdgeInsets.fromLTRB(16, 10, 16, 110),
-                        itemCount: items.length,
-                        separatorBuilder: (_, __) => const SizedBox(height: 12),
-                        itemBuilder: (_, index) => _NodeCard(items[index]),
+            Expanded(
+              child: nodes.when(
+                loading: () => const Center(child: CircularProgressIndicator()),
+                error: (error, _) => AppStateView(
+                  icon: Icons.cloud_off_rounded,
+                  title: '节点数据加载失败',
+                  message: '$error',
+                  actionLabel: '重试',
+                  onAction: () => ref.invalidate(growthNodesProvider),
+                ),
+                data: (items) => items.isEmpty
+                    ? AppStateView(
+                        icon: Icons.hub_outlined,
+                        title: '还没有加入增长节点',
+                        message: '创建一个五人协作节点，或输入邀请码占用一个席位。',
+                        actionLabel: '输入邀请码',
+                        onAction: () => _showJoinNode(context, ref),
+                      )
+                    : RefreshIndicator(
+                        onRefresh: () async {
+                          ref.invalidate(growthNodesProvider);
+                          await ref.read(growthNodesProvider.future);
+                        },
+                        child: ListView.separated(
+                          key: const ValueKey('connected-growth-nodes'),
+                          padding: const EdgeInsets.fromLTRB(16, 10, 16, 110),
+                          itemCount: items.length,
+                          separatorBuilder: (_, __) =>
+                              const SizedBox(height: 12),
+                          itemBuilder: (_, index) => _NodeCard(items[index]),
+                        ),
                       ),
-                    ),
+              ),
             ),
-          ),
         ],
       ),
     );
@@ -403,11 +404,7 @@ class _GrowthNarrative extends StatelessWidget {
     ),
     'contribution': (
       '贡献以证据为准',
-      [
-        '贡献来自可验证结果，不按主观投入计分',
-        '信用分达到 650 才能申请经济节点',
-        '每笔贡献都保留归因证据链，可回溯到具体事件',
-      ],
+      ['贡献来自可验证结果，不按主观投入计分', '信用分达到 650 才能申请经济节点', '每笔贡献都保留归因证据链，可回溯到具体事件'],
       '信用分与贡献值需要服务端归因服务确认，本机不展示估算值。',
     ),
     'rules': (

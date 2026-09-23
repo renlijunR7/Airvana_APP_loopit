@@ -30,8 +30,8 @@ void main() {
 
     expect(snapshot.localDemo, isTrue);
     expect(snapshot.user.displayName, 'Kai Chen');
-    // Web 基线 64 条 + 项目自有新增 1 条。
-    expect(snapshot.playables, hasLength(65));
+    // Web 基线 64 条 + 项目自有新增 2 条。
+    expect(snapshot.playables, hasLength(68));
     expect(snapshot.playables.every((item) => item.localDemo), isTrue);
   });
 

@@ -18,11 +18,12 @@ abstract final class AirvanaMetrics {
   static const pageGutter = 20.0;
   static const compactGutter = 16.0;
   // 与旧版 Web bottom-nav 完全一致的原值：
-  // 外层宽 85%×430、条目 36、图标 23、胶囊 padding 8×6 + 1px 边框、加号 39。
+  // 外层宽 85%×430、条目 36、胶囊 padding 8×6 + 1px 边框、加号 39。
+  // 图标在 Web 上是 23，移动端实机偏小，放大到 26（条目框 36 仍装得下）。
   static const navDockWidth = 365.5;
   static const navCapsuleHeight = 54.0;
   static const navItemSize = 36.0;
-  static const navIconSize = 23.0;
+  static const navIconSize = 26.0;
   static const navLensWidth = 46.0;
   static const navLensHeight = 38.0;
   static const createButtonSize = 39.0;

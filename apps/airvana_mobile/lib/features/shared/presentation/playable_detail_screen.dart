@@ -80,10 +80,7 @@ class _PlayableDetailScreenState extends State<PlayableDetailScreen> {
         children: [
           Text(
             item.authorName,
-            style: const TextStyle(
-              fontSize: 11,
-              color: AirvanaColors.muted,
-            ),
+            style: const TextStyle(fontSize: 11, color: AirvanaColors.muted),
           ),
           const SizedBox(width: 8),
           StatusPill(label: item.stage, tone: AirvanaStatusTone.demo),
@@ -104,10 +101,7 @@ class _PlayableDetailScreenState extends State<PlayableDetailScreen> {
       const SizedBox(height: 10),
       _card('玩法说明', item.instruction),
       const SizedBox(height: 10),
-      _card(
-        '互动反馈',
-        '分享体验感受，帮助作品持续优化。评论与互动计数只写入本机演示数据。',
-      ),
+      _card('互动反馈', '分享体验感受，帮助作品持续优化。评论与互动计数只写入本机演示数据。'),
     ],
   );
 
@@ -131,15 +125,13 @@ class _PlayableDetailScreenState extends State<PlayableDetailScreen> {
             '数据来自本机互动记录，不代表投放效果。',
       ),
       const SizedBox(height: 10),
-      _card(
-        '版本治理',
-        '每次发布都会留下版本记录，可回滚到上一版；回滚不会删除已产生的体验记录。',
-      ),
+      _card('版本治理', '每次发布都会留下版本记录，可回滚到上一版；回滚不会删除已产生的体验记录。'),
       const SizedBox(height: 10),
       const BoundaryCard(
         key: ValueKey('playable-detail-boundary'),
         title: '管理边界',
-        body: '下架、回滚与归因确认都需要服务端治理服务执行；'
+        body:
+            '下架、回滚与归因确认都需要服务端治理服务执行；'
             '本机操作只记录意图，不改变对外状态。',
       ),
     ],

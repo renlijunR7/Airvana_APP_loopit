@@ -28,18 +28,32 @@ class FeedScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(homeProvider);
-    return SafeArea(
-      bottom: false,
-      child: state.when(
-        loading: () => const _FeedLoading(),
-        error: (error, _) => AppStateView(
+    return state.when(
+      loading: () => const SafeArea(bottom: false, child: _FeedLoading()),
+      error: (error, _) => SafeArea(
+        bottom: false,
+        child: AppStateView(
           icon: Icons.cloud_off_outlined,
           title: '本机数据暂不可用',
           message: '$error',
           actionLabel: '重新载入',
           onAction: () => ref.invalidate(homeProvider),
         ),
-        data: (snapshot) => _LegacyFeedPager(snapshot: snapshot),
+      ),
+      // 首页整屏是深色的，状态栏那一条也跟着走深色，并把状态栏图标改成浅色。
+      data: (snapshot) => AnnotatedRegion<SystemUiOverlayStyle>(
+        value: const SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarIconBrightness: Brightness.light,
+          statusBarBrightness: Brightness.dark,
+        ),
+        child: ColoredBox(
+          color: _LegacyHeader.background,
+          child: SafeArea(
+            bottom: false,
+            child: _LegacyFeedPager(snapshot: snapshot),
+          ),
+        ),
       ),
     );
   }
@@ -479,37 +493,51 @@ class _LegacyHeader extends StatelessWidget {
   /// Web 的红点由未读数驱动；本机演示按线程未读判断。
   final bool hasUnread;
 
+  /// 首页顶栏与下方作品区同为深色，顶栏不再是一条浅色带。
+  static const background = Color(0xFF050A08);
+
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 52,
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(14, 4, 10, 4),
-        child: Row(
-          children: [
-            const AirvanaLogo(width: 76),
-            const Spacer(),
-            Stack(
-              clipBehavior: Clip.none,
-              children: [
-                IconButton(
-                  tooltip: '通知',
-                  onPressed: () => context.go('/messages'),
-                  icon: const Icon(Icons.notifications_none_rounded, size: 26),
-                ),
-                // Web 的红点由未读数驱动，不是常显。
-                if (hasUnread)
-                  const Positioned(
-                    right: 7,
-                    top: 5,
-                    child: CircleAvatar(
-                      radius: 3.5,
-                      backgroundColor: AirvanaColors.accent,
+    return ColoredBox(
+      color: background,
+      child: SizedBox(
+        height: 52,
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(14, 4, 10, 4),
+          child: Row(
+            children: [
+              const AirvanaLogo(
+                width: 76,
+                backgroundColor: background,
+                dark: true,
+              ),
+              const Spacer(),
+              Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  IconButton(
+                    tooltip: '通知',
+                    onPressed: () => context.go('/messages'),
+                    icon: const Icon(
+                      Icons.notifications_none_rounded,
+                      size: 26,
+                      color: Colors.white,
                     ),
                   ),
-              ],
-            ),
-          ],
+                  // Web 的红点由未读数驱动，不是常显。
+                  if (hasUnread)
+                    const Positioned(
+                      right: 7,
+                      top: 5,
+                      child: CircleAvatar(
+                        radius: 3.5,
+                        backgroundColor: AirvanaColors.accent,
+                      ),
+                    ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -580,23 +608,6 @@ class _LegacyPlayablePage extends StatelessWidget {
   final VoidCallback onPagePrevious;
   final VoidCallback onPageNext;
 
-  String get _heroTitle {
-    if (!playable.localDemo) return playable.title;
-    final match = RegExp(r'\s+[A-Za-z]').firstMatch(playable.title);
-    return match == null
-        ? playable.title
-        : playable.title.substring(0, match.start);
-  }
-
-  String get _heroSummary {
-    if (!playable.localDemo) return playable.summary;
-    final instruction = playable.instruction.trim().replaceFirst(
-      RegExp(r'[。.!！]+$'),
-      '',
-    );
-    return '$instruction。包含实时反馈、阶段升级、本地计分、成功失败与立即重玩。';
-  }
-
   @override
   Widget build(BuildContext context) {
     return ColoredBox(
@@ -604,160 +615,122 @@ class _LegacyPlayablePage extends StatelessWidget {
       child: Column(
         children: [
           Expanded(
-            child: Stack(
-              fit: StackFit.expand,
-              children: [
-                GestureDetector(
-                  key: ValueKey('feed-double-tap-${playable.id}'),
-                  behavior: HitTestBehavior.opaque,
-                  onDoubleTap: active ? null : onDoubleTap,
-                  child: Stack(
-                    fit: StackFit.expand,
-                    children: [
-                      _FeedCover(playable: playable),
-                      const DecoratedBox(
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [
-                              Color(0x18000000),
-                              Color(0x08000000),
-                              Color(0xCC000000),
-                            ],
-                            stops: [0, .5, 1],
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                if (active)
-                  Positioned.fill(
-                    child: _FeedGameSurface(
-                      playable: playable,
-                      muted: muted,
-                      onExit: onClose,
-                    ),
-                  ),
-                Positioned(
-                  left: 14,
-                  right: 14,
-                  top: 12,
-                  child: Row(
-                    children: [
-                      if (active)
-                        const Spacer()
-                      else
-                        Expanded(
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: _GlassBadge(
-                              label: playable.localDemo
-                                  ? 'AIRVANA ORIGINAL'
-                                  : 'RUNTIME · ${playable.stage}',
+            // 作品区（封面与游戏画面）带 8px 圆角，不再是直角贴边。
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  GestureDetector(
+                    key: ValueKey('feed-double-tap-${playable.id}'),
+                    behavior: HitTestBehavior.opaque,
+                    onDoubleTap: active ? null : onDoubleTap,
+                    child: Stack(
+                      fit: StackFit.expand,
+                      children: [
+                        _FeedCover(playable: playable),
+                        const DecoratedBox(
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [
+                                Color(0x18000000),
+                                Color(0x08000000),
+                                Color(0xCC000000),
+                              ],
+                              stops: [0, .5, 1],
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
                             ),
                           ),
                         ),
-                      const SizedBox(width: 8),
-                      _CircleGlass(
-                        icon: muted
-                            ? Icons.volume_off_outlined
-                            : Icons.volume_up_outlined,
-                        label: muted ? '开启作品音效' : '静音作品音效',
-                        onTap: onMute,
-                      ),
-                      const SizedBox(width: 8),
-                      _CircleGlass(
-                        icon: Icons.close_rounded,
-                        label: '退出当前作品',
-                        onTap: onClose,
-                      ),
-                    ],
-                  ),
-                ),
-                if (!active)
-                  Positioned.fill(
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(24, 58, 24, 12),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              _heroTitle,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 28,
-                                height: 1.05,
-                                fontWeight: FontWeight.w900,
-                                letterSpacing: -.7,
-                                shadows: [
-                                  Shadow(color: Colors.black54, blurRadius: 8),
-                                ],
-                              ),
-                            ),
-                            const SizedBox(height: 9),
-                            Text(
-                              _heroSummary,
-                              maxLines: 3,
-                              overflow: TextOverflow.ellipsis,
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 12,
-                                height: 1.45,
-                                shadows: [
-                                  Shadow(color: Colors.black87, blurRadius: 6),
-                                ],
-                              ),
-                            ),
-                            const SizedBox(height: 17),
-                            FilledButton(
-                              key: ValueKey('play-${playable.id}'),
-                              onPressed: onStart,
-                              style: FilledButton.styleFrom(
-                                backgroundColor: Colors.white,
-                                foregroundColor: const Color(0xFF111111),
-                                minimumSize: const Size(156, 44),
-                                shape: const StadiumBorder(),
-                                textStyle: const TextStyle(
-                                  fontWeight: FontWeight.w900,
-                                ),
-                              ),
-                              child: const Text('开始完整试玩'),
-                            ),
-                            const SizedBox(height: 9),
-                            Text(
-                              playable.localDemo
-                                  ? '本地互动 DEMO · 游戏金币按作品隔离；有效完成可记录本机 AIP'
-                                  : '服务端成品 · 完成必须通过开始、阶段、完成顺序验证\nAIP 仅在服务端确认资格与 24 小时去重后记账',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Colors.white.withValues(alpha: .68),
-                                fontSize: 9,
-                                height: 1.4,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                      ],
                     ),
                   ),
-                if (heartBurst)
-                  Positioned.fill(
-                    child: IgnorePointer(
+                  if (active)
+                    Positioned.fill(
+                      child: _FeedGameSurface(
+                        playable: playable,
+                        muted: muted,
+                        onExit: onClose,
+                      ),
+                    ),
+                  Positioned(
+                    left: 14,
+                    right: 14,
+                    top: 12,
+                    child: Row(
+                      children: [
+                        const Spacer(),
+                        const SizedBox(width: 8),
+                        _CircleGlass(
+                          icon: muted
+                              ? Icons.volume_off_outlined
+                              : Icons.volume_up_outlined,
+                          label: muted ? '开启作品音效' : '静音作品音效',
+                          onTap: onMute,
+                        ),
+                        const SizedBox(width: 8),
+                        // 未开始时这里原来是个 × ——点了只弹一句「已退出当前作品」，
+                        // 实际什么都没发生。改成进入全屏运行页；游戏跑起来后仍要
+                        // 保留退出口，因为播放中信息流是锁死的。
+                        if (active)
+                          _CircleGlass(
+                            key: ValueKey('feed-exit-${playable.id}'),
+                            icon: Icons.close_rounded,
+                            label: '退出当前作品',
+                            onTap: onClose,
+                          )
+                        else
+                          _CircleGlass(
+                            key: ValueKey('feed-fullscreen-${playable.id}'),
+                            icon: Icons.fullscreen_rounded,
+                            label: '全屏体验',
+                            onTap: () => context.push(
+                              '/runtime/${playable.id}?fullscreen=1',
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
+                  if (!active)
+                    Positioned.fill(
                       child: Center(
-                        child: _HeartBurst(
-                          key: ValueKey('feed-heart-burst-$heartBurstSerial'),
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(24, 58, 24, 12),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              FilledButton(
+                                key: ValueKey('play-${playable.id}'),
+                                onPressed: onStart,
+                                style: FilledButton.styleFrom(
+                                  backgroundColor: Colors.white,
+                                  foregroundColor: const Color(0xFF111111),
+                                  minimumSize: const Size(156, 44),
+                                  shape: const StadiumBorder(),
+                                  textStyle: const TextStyle(
+                                    fontWeight: FontWeight.w900,
+                                  ),
+                                ),
+                                child: const Text('开始完整试玩'),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-              ],
+                  if (heartBurst)
+                    Positioned.fill(
+                      child: IgnorePointer(
+                        child: Center(
+                          child: _HeartBurst(
+                            key: ValueKey('feed-heart-burst-$heartBurstSerial'),
+                          ),
+                        ),
+                      ),
+                    ),
+                ],
+              ),
             ),
           ),
           _FeedFooterSwipePager(
@@ -2372,37 +2345,9 @@ class _SocialButton extends StatelessWidget {
   }
 }
 
-class _GlassBadge extends StatelessWidget {
-  const _GlassBadge({required this.label});
-  final String label;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      constraints: const BoxConstraints(maxWidth: 270),
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
-      decoration: BoxDecoration(
-        color: Colors.black.withValues(alpha: .38),
-        borderRadius: BorderRadius.circular(999),
-        border: Border.all(color: Colors.white30),
-      ),
-      child: Text(
-        label,
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-        style: const TextStyle(
-          color: Colors.white,
-          fontSize: 9,
-          fontWeight: FontWeight.w900,
-          letterSpacing: 1,
-        ),
-      ),
-    );
-  }
-}
-
 class _CircleGlass extends StatelessWidget {
   const _CircleGlass({
+    super.key,
     required this.icon,
     required this.label,
     required this.onTap,

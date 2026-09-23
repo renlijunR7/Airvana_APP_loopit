@@ -16,15 +16,24 @@ import 'package:webview_flutter/webview_flutter.dart';
 /// Uses the server-confirmed H5 runtime only for server content IDs. Local
 /// releases and the frozen legacy catalog remain explicitly labelled demos.
 class PlayableRuntimeEntryScreen extends StatelessWidget {
-  const PlayableRuntimeEntryScreen({super.key, required this.playable});
+  const PlayableRuntimeEntryScreen({
+    super.key,
+    required this.playable,
+    this.fullscreen = false,
+  });
 
   final Playable playable;
+
+  /// 「全屏体验」：直接进入游戏，并去掉顶栏与状态栏。
+  final bool fullscreen;
 
   @override
   Widget build(BuildContext context) {
     final serverContent =
         !playable.localDemo && playable.id.startsWith('content_');
-    if (!serverContent) return PlayableRuntimeScreen(playable: playable);
+    if (!serverContent) {
+      return PlayableRuntimeScreen(playable: playable, fullscreen: fullscreen);
+    }
     return ServerPlayableRuntimeScreen(playable: playable);
   }
 }

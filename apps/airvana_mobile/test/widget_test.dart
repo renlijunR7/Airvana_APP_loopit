@@ -182,7 +182,7 @@ void main() {
 
       final destinations = <(int, String)>[
         // 首页首条已换成项目自有新增作品。
-        (0, '圣诞树手势互动'),
+        (0, '魔法合唱团'),
         (1, '#原创新游'),
         (2, '增长网络'),
         (3, '消息'),
@@ -336,12 +336,16 @@ void main() {
       await tester.pumpWidget(_testAirvanaApp(harness));
       await tester.pumpAndSettle();
 
-      // 首条已是项目自有新增作品，这条用例验证的是 Web 基线那张卡，先滑过去。
-      await tester.drag(
-        find.byKey(const ValueKey('legacy-feed-pager')),
-        const Offset(0, -620),
-      );
-      await tester.pumpAndSettle();
+      // 前两条是项目自有新增作品，这条用例验证的是 Web 基线那张卡，先滑过去。
+      // 首页前三条是项目自有新增作品，Luna 小镇从第 4 条开始，
+      // 每新增一条自有作品这里就要多翻一页。
+      for (var i = 0; i < 4; i += 1) {
+        await tester.drag(
+          find.byKey(const ValueKey('legacy-feed-pager')),
+          const Offset(0, -620),
+        );
+        await tester.pumpAndSettle();
+      }
       expect(
         find.text('运营 Agentic Playable「Luna 小镇 · KOL Town」'),
         findsOneWidget,

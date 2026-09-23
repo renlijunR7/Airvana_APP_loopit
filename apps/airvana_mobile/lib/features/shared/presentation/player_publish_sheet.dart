@@ -36,9 +36,7 @@ class _PlayerPublishSheetState extends State<PlayerPublishSheet> {
     final canPublish = _body.text.trim().isNotEmpty;
     return Padding(
       key: const ValueKey('player-publish-sheet'),
-      padding: EdgeInsets.only(
-        bottom: MediaQuery.viewInsetsOf(context).bottom,
-      ),
+      padding: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(context).bottom),
       child: SingleChildScrollView(
         padding: const EdgeInsets.fromLTRB(18, 16, 18, 20),
         child: Column(
@@ -74,10 +72,7 @@ class _PlayerPublishSheetState extends State<PlayerPublishSheet> {
             const SizedBox(height: 4),
             Text(
               '${widget.displayName} · @kai.builds',
-              style: const TextStyle(
-                fontSize: 11,
-                color: AirvanaColors.muted,
-              ),
+              style: const TextStyle(fontSize: 11, color: AirvanaColors.muted),
             ),
             const SizedBox(height: 14),
             Row(

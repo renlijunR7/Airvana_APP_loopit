@@ -33,3 +33,9 @@ output/
 # 构建前执行：node scripts/sync-flutter-runner.mjs
 apps/airvana_mobile/assets/arcade/
 apps/airvana_mobile/assets/featured-originals-v2/
+
+# Flutter 的 build 在本机是指向 ~/airvana-build 的软链接：
+# 项目目录会被同步服务扫描，它给产物反复写 com.apple.FinderInfo 扩展属性，
+# 导致 iOS codesign 失败，所以把产物挪到同步范围外。这个软链接是本机配置，
+# 绝不能入库——提交上去别人 clone 下来会得到一条指向不存在路径的死链。
+apps/airvana_mobile/build
