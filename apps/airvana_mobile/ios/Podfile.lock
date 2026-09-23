@@ -8,6 +8,8 @@ PODS:
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
+  - permission_handler_apple (9.4.8):
+    - Flutter
   - webview_flutter_wkwebview (0.0.1):
     - Flutter
     - FlutterMacOS
@@ -17,6 +19,7 @@ DEPENDENCIES:
   - "flutter_secure_storage_darwin (from `../../../../../../Airvana APP （参考loopit）/Airvana_APP_v1.0.0_loopit_hifi/airvana-v5-fullstack/apps/airvana_mobile/ios/.symlinks/plugins/flutter_secure_storage_darwin/darwin`)"
   - "image_picker_ios (from `../../../../../../Airvana APP （参考loopit）/Airvana_APP_v1.0.0_loopit_hifi/airvana-v5-fullstack/apps/airvana_mobile/ios/.symlinks/plugins/image_picker_ios/ios`)"
   - "path_provider_foundation (from `../../../../../../Airvana APP （参考loopit）/Airvana_APP_v1.0.0_loopit_hifi/airvana-v5-fullstack/apps/airvana_mobile/ios/.symlinks/plugins/path_provider_foundation/darwin`)"
+  - "permission_handler_apple (from `../../../../../../Airvana APP （参考loopit）/Airvana_APP_v1.0.0_loopit_hifi/airvana-v5-fullstack/apps/airvana_mobile/ios/.symlinks/plugins/permission_handler_apple/ios`)"
   - "webview_flutter_wkwebview (from `../../../../../../Airvana APP （参考loopit）/Airvana_APP_v1.0.0_loopit_hifi/airvana-v5-fullstack/apps/airvana_mobile/ios/.symlinks/plugins/webview_flutter_wkwebview/darwin`)"
 
 EXTERNAL SOURCES:
@@ -28,6 +31,8 @@ EXTERNAL SOURCES:
     :path: "../../../../../../Airvana APP （参考loopit）/Airvana_APP_v1.0.0_loopit_hifi/airvana-v5-fullstack/apps/airvana_mobile/ios/.symlinks/plugins/image_picker_ios/ios"
   path_provider_foundation:
     :path: "../../../../../../Airvana APP （参考loopit）/Airvana_APP_v1.0.0_loopit_hifi/airvana-v5-fullstack/apps/airvana_mobile/ios/.symlinks/plugins/path_provider_foundation/darwin"
+  permission_handler_apple:
+    :path: "../../../../../../Airvana APP （参考loopit）/Airvana_APP_v1.0.0_loopit_hifi/airvana-v5-fullstack/apps/airvana_mobile/ios/.symlinks/plugins/permission_handler_apple/ios"
   webview_flutter_wkwebview:
     :path: "../../../../../../Airvana APP （参考loopit）/Airvana_APP_v1.0.0_loopit_hifi/airvana-v5-fullstack/apps/airvana_mobile/ios/.symlinks/plugins/webview_flutter_wkwebview/darwin"
 
@@ -36,8 +41,9 @@ SPEC CHECKSUMS:
   flutter_secure_storage_darwin: acdb3f316ed05a3e68f856e0353b133eec373a23
   image_picker_ios: 7fe1ff8e34c1790d6fff70a32484959f563a928a
   path_provider_foundation: 080d55be775b7414fd5a5ef3ac137b97b097e564
+  permission_handler_apple: 92d754bbaa7361d436db2d6c3c1c2a0fdcec462e
   webview_flutter_wkwebview: 1821ceac936eba6f7984d89a9f3bcb4dea99ebb2
 
-PODFILE CHECKSUM: 3b699761a5cb9432aca9a3b37488e7daba5f31a7
+PODFILE CHECKSUM: ef26c043c16bc99a5707d73564ece0e709a98ba5
 
 COCOAPODS: 1.16.2
