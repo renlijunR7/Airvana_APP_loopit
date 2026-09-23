@@ -185,8 +185,11 @@ void main() {
     final serviceIds = kPowerCatalog
         .where((power) => power.support == PowerSupport.service)
         .map((power) => power.id)
-        .toList();
-    expect(serviceIds, ['musicRecognition', 'chatDm', 'multiplayer', 'kolTwin']);
+        .toSet();
+    // 用集合而不是列表：这条测试守的是「哪些能力需要实时服务」，
+    // 不是它们在目录里的先后。目录顺序决定的是界面展示次序，
+    // 属于产品编排，改动它不该让这条红。
+    expect(serviceIds, {'musicRecognition', 'chatDm', 'multiplayer', 'kolTwin'});
     for (final id in serviceIds) {
       expect(byId[id]!.isDisplayOnlyLocally, isTrue);
     }

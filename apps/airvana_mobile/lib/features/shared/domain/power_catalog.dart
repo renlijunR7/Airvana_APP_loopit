@@ -142,6 +142,18 @@ const List<PowerDescriptor> kPowerCatalog = <PowerDescriptor>[
       binding: PowerBinding.baked,
     ),
     PowerDescriptor(
+      id: 'kolTwin',
+      category: 'narrative',
+      title: 'KOL 智能分身',
+      description: '创作者分身：承载创作者记忆与玩家记忆，代为互动并绑定站内钱包口径',
+      support: PowerSupport.service,
+      binding: PowerBinding.hosted,
+      // 交付：实时服务 —— 只能由宿主推送，对不可改动的作品不成立。
+      delivery: {PowerDelivery.signal},
+      dependencies: ['personaLibrary', 'stateMemory'],
+      fallback: PowerFallback(hint: '实时服务未接入时按本地已有的人设与记忆展示，不伪造对话与收益', timeout: Duration(seconds: 12)),
+    ),
+    PowerDescriptor(
       id: 'personaLibrary',
       category: 'narrative',
       title: '角色库与 Persona',
@@ -355,6 +367,35 @@ const List<PowerDescriptor> kPowerCatalog = <PowerDescriptor>[
       fallback: PowerFallback(hint: '实时服务未接入时以单人模式进行，不伪造房间人数', timeout: Duration(seconds: 12)),
     ),
     PowerDescriptor(
+      id: 'adsMcp',
+      category: 'operations',
+      // 与「广告投放管理」的分工写在名字里：那条是写（创建与管理投放），
+      // 这条是读（让智能体看懂投放）。协议名留在描述里，不进标题。
+      title: '营销智能体',
+      description: '让 AI 智能体接入营销接口，读取活动设置与投放效果（MCP）',
+      support: PowerSupport.approval,
+      binding: PowerBinding.workflow,
+      // 依赖广告 API：MCP 读的是它管理的那些活动数据，
+      // 没有接口层就没有可读的东西。
+      dependencies: ['adsApi'],
+      quickAllowed: false,
+    ),
+    PowerDescriptor(
+      id: 'adsApi',
+      category: 'operations',
+      // 标题不用「广告 API」：目录里的英文词（GIF / 3D / AR / NPC / Persona /
+      // KOL / Remix）都是创作者本来就在用的，而 API、MCP 是开发者术语。
+      // 这份目录是给创作者看的能力面板，不是给开发者看的接口文档。
+      title: '广告投放管理',
+      description: '程序化创建与管理广告系列、广告团队、创意、受众、定位与报告',
+      support: PowerSupport.approval,
+      binding: PowerBinding.workflow,
+      // 和外部连接器同一类：接的是平台方的营销接口，要凭证、要合同，
+      // 而且会真实花钱。所以沿用它的口径——需审批、快速模式下不可选。
+      dependencies: ['externalConnectors'],
+      quickAllowed: false,
+    ),
+    PowerDescriptor(
       id: 'draftPreview',
       category: 'operations',
       title: '草稿与预览',
@@ -401,35 +442,6 @@ const List<PowerDescriptor> kPowerCatalog = <PowerDescriptor>[
       description: '审批后发布到 Telegram、Facebook、X 或 Discord',
       support: PowerSupport.approval,
       binding: PowerBinding.workflow,
-      quickAllowed: false,
-    ),
-    PowerDescriptor(
-      id: 'adsApi',
-      category: 'operations',
-      // 标题不用「广告 API」：目录里的英文词（GIF / 3D / AR / NPC / Persona /
-      // KOL / Remix）都是创作者本来就在用的，而 API、MCP 是开发者术语。
-      // 这份目录是给创作者看的能力面板，不是给开发者看的接口文档。
-      title: '广告投放管理',
-      description: '程序化创建与管理广告系列、广告团队、创意、受众、定位与报告',
-      support: PowerSupport.approval,
-      binding: PowerBinding.workflow,
-      // 和外部连接器同一类：接的是平台方的营销接口，要凭证、要合同，
-      // 而且会真实花钱。所以沿用它的口径——需审批、快速模式下不可选。
-      dependencies: ['externalConnectors'],
-      quickAllowed: false,
-    ),
-    PowerDescriptor(
-      id: 'adsMcp',
-      category: 'operations',
-      // 与「广告投放管理」的分工写在名字里：那条是写（创建与管理投放），
-      // 这条是读（让智能体看懂投放）。协议名留在描述里，不进标题。
-      title: '营销智能体',
-      description: '让 AI 智能体接入营销接口，读取活动设置与投放效果（MCP）',
-      support: PowerSupport.approval,
-      binding: PowerBinding.workflow,
-      // 依赖广告 API：MCP 读的是它管理的那些活动数据，
-      // 没有接口层就没有可读的东西。
-      dependencies: ['adsApi'],
       quickAllowed: false,
     ),
     PowerDescriptor(
@@ -715,17 +727,5 @@ const List<PowerDescriptor> kPowerCatalog = <PowerDescriptor>[
         PowerParameter(name: 'rssiThreshold', defaultValue: -70.0, min: -100.0, max: -30.0, label: '信号强度阈值'),
       ],
       fallback: PowerFallback(hint: '可扫码或输入口令代替碰一碰', control: PowerControl.trigger, timeout: Duration(seconds: 12)),
-    ),
-    PowerDescriptor(
-      id: 'kolTwin',
-      category: 'narrative',
-      title: 'KOL 智能分身',
-      description: '创作者分身：承载创作者记忆与玩家记忆，代为互动并绑定站内钱包口径',
-      support: PowerSupport.service,
-      binding: PowerBinding.hosted,
-      // 交付：实时服务 —— 只能由宿主推送，对不可改动的作品不成立。
-      delivery: {PowerDelivery.signal},
-      dependencies: ['personaLibrary', 'stateMemory'],
-      fallback: PowerFallback(hint: '实时服务未接入时按本地已有的人设与记忆展示，不伪造对话与收益', timeout: Duration(seconds: 12)),
     ),
 ];
