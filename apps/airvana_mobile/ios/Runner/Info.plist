@@ -38,8 +38,18 @@
 	</array>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>用于选择本人有权使用的头像，并在 Airvana 个人资料中预览。</string>
+	<key>NSCameraUsageDescription</key>
+	<string>手势互动作品需要使用前置摄像头识别手势；画面只在本机处理，不上传、不录制。</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>用于支持游戏中的吹气与声音互动；音频仅在本机处理，不会上传。</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>用于城市寻宝、门店打卡等基于位置的互动玩法；仅在使用期间读取，不做后台定位，也不上传轨迹。</string>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>用于碰一碰集卡、靠近信标解锁等近距离互动；仅用于发现附近设备，不用于推断你的位置。</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>用于近距离组队与实体道具联动。</string>
+	<key>NFCReaderUsageDescription</key>
+	<string>用于碰一碰解锁实体道具与线下关卡。</string>
 	<key>NSMotionUsageDescription</key>
 	<string>用于支持游戏中的陀螺仪、倾斜与摇晃互动。</string>
 	<key>UILaunchStoryboardName</key>

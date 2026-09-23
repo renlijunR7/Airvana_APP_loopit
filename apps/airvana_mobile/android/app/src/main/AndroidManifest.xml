@@ -1,9 +1,74 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--
+      Power 能力需要的设备权限。每一条都对应 power_catalog.dart 里某条能力的
+      PowerPermission 声明，由 test/power_platform_declaration_test.dart 强制对齐 ——
+      漏一条的后果不是编译报错，而是运行期申请直接返回「拒绝」，且不弹任何窗：
+      Android 上申请未在 manifest 声明的权限会被系统静默否决。
+      吹气玩法此前一直失效，就是因为 RECORD_AUDIO 缺了这一行。
+
+      所有 uses-feature 一律 required="false"：作品在缺少传感器时走降级方案，
+      不能因此把应用从设备的应用商店里筛掉。
+    -->
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- 摄像头与 AR / 手势 / 面部 / 身体 / 环境扫描 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+    <uses-feature android:name="android.hardware.camera.front" android:required="false" />
+    <uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
+
+    <!--
+      麦克风与声控 / 音乐识别。
+      MODIFY_AUDIO_SETTINGS 是必须的第二条：Chromium 的 Android 音频管理器
+      在只有 RECORD_AUDIO 时会直接放弃采集，logcat 里是
+      `cr_media: Requires MODIFY_AUDIO_SETTINGS and RECORD_AUDIO.
+       No audio device will be available for recording`。
+      它是安装期普通权限，不弹窗、无需运行时申请，但少了它麦克风玩法一样跑不起来，
+      且表现为「已授权却没有声音」，极难从现象反推。
+    -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-feature android:name="android.hardware.microphone" android:required="false" />
+
+    <!-- 体感与震动 / 手机姿态 / 电子罗盘 / 环境光与距离 -->
+    <uses-feature android:name="android.hardware.sensor.accelerometer" android:required="false" />
+    <uses-feature android:name="android.hardware.sensor.gyroscope" android:required="false" />
+    <uses-feature android:name="android.hardware.sensor.compass" android:required="false" />
+    <uses-feature android:name="android.hardware.sensor.light" android:required="false" />
+    <uses-feature android:name="android.hardware.sensor.proximity" android:required="false" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <!-- 地理位置：只要粗略与使用期间定位，不要后台定位 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-feature android:name="android.hardware.location" android:required="false" />
+
+    <!-- 计步与运动数据 -->
+    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
+    <uses-feature android:name="android.hardware.sensor.stepcounter" android:required="false" />
+
+    <!--
+      近场联动。Android 12 起蓝牙扫描从定位权限里拆了出来，
+      neverForLocation 明确声明不用它推断位置，可以少要一次定位授权。
+    -->
+    <uses-permission
+        android:name="android.permission.BLUETOOTH_SCAN"
+        android:usesPermissionFlags="neverForLocation" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <uses-permission
+        android:name="android.permission.BLUETOOTH"
+        android:maxSdkVersion="30" />
+    <uses-permission
+        android:name="android.permission.BLUETOOTH_ADMIN"
+        android:maxSdkVersion="30" />
+    <uses-permission android:name="android.permission.NFC" />
+    <uses-feature android:name="android.hardware.bluetooth_le" android:required="false" />
+    <uses-feature android:name="android.hardware.nfc" android:required="false" />
     <application
         android:label="Airvana"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:enableOnBackInvokedCallback="true"
         android:usesCleartextTraffic="true">
         <activity

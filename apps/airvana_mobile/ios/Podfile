@@ -38,5 +38,26 @@ end
 post_install do |installer|
   installer.pods_project.targets.each do |target|
     flutter_additional_ios_build_settings(target)
+
+    # permission_handler 在 iOS 上把每种权限用 PERMISSION_* 宏包起来，
+    # 目的是让未使用的权限代码不进二进制，以免 App Store 因为「引用了某能力
+    # 却没有对应 UsageDescription」退审（ITMS-90683）。CocoaPods 下这些宏
+    # 必须由我们自己给，不给就等于全部关闭 —— 表现是权限申请直接返回
+    # permanentlyDenied，且不弹任何窗，很容易被误判成「用户拒绝过」。
+    #
+    # 这里开启的每一项都与 Runner/Info.plist 里的 NS*UsageDescription 一一对应，
+    # 由 test/power_platform_declaration_test.dart 强制对齐。
+    target.build_configurations.each do |config|
+      config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] ||= [
+        '$(inherited)',
+        'PERMISSION_CAMERA=1',
+        'PERMISSION_MICROPHONE=1',
+        'PERMISSION_SENSORS=1',
+        'PERMISSION_LOCATION=1',
+        'PERMISSION_LOCATION_WHENINUSE=1',
+        'PERMISSION_BLUETOOTH=1',
+        'PERMISSION_PHOTOS=1',
+      ]
+    end
   end
 end

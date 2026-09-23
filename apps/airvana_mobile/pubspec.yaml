@@ -41,9 +41,11 @@ dependencies:
   http: ^1.6.0
   webview_flutter: ^4.13.1
   webview_flutter_platform_interface: ^2.13.1
+  webview_flutter_android: ^4.10.1
   webview_flutter_wkwebview: ^3.23.0
   flutter_secure_storage: ^10.3.1
   image_picker: ^1.2.1
+  permission_handler: ^12.0.1
 
 dev_dependencies:
   flutter_test:
@@ -90,6 +92,10 @@ flutter:
     - assets/runner/assets/games/reference-v1/
     - assets/runner/assets/games/reference-screenshots-v1/
     - assets/arcade/
+    - assets/arcade/_shared/three/
+    - assets/arcade/ice-float-party/
+    - assets/arcade/magic-choir-replica/
+    - assets/arcade/ice-float-party/assets/
     - assets/arcade/city-squad/
     - assets/arcade/city-squad/assets/
     - assets/arcade/city-squad/original-models/
@@ -127,6 +133,11 @@ flutter:
     - assets/arcade/coin-dozer/assets/art-v1/
     - assets/arcade/coin-dozer/assets/crypto-v1/
     - assets/arcade/coin-dozer/icons/
+    - assets/arcade/_shared/mediapipe/
+    - assets/arcade/christmas-tree-gesture/
+    - assets/arcade/gesture-fruit-slice/
+    - assets/arcade/gesture-fruit-slice/assets/
+    - assets/arcade/gesture-fruit-slice/assets/fruit-slicer/
     - assets/arcade/htx-quest/
     - assets/arcade/htx-quest/art/
     - assets/arcade/htx-quest/assets/
