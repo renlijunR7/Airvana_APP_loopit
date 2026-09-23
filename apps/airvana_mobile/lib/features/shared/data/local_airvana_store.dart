@@ -934,6 +934,45 @@ class LocalAirvanaStore {
   });
 
   /// 本机作品的收藏 / 点赞：与 Web 的 savedContentIds、likedContentIds 同口径，
+
+  /// 读取搜索历史。最近搜的在最前。
+  Future<List<String>> readSearchHistory() =>
+      _serial(() async => (await _readWorkspaceUnlocked()).searchHistory);
+
+  /// 记一次搜索。重复词会被提到最前而不是产生第二条，上限 12 条。
+  ///
+  /// 之所以要落盘：原来的实现把历史放在页面的 `final _history = <String>[]`
+  /// 里，退出搜索页就没了——「搜索记录」这个功能从未真正生效过。
+  Future<List<String>> pushSearchHistory(String term) async {
+    final trimmed = term.trim();
+    if (trimmed.isEmpty) return readSearchHistory();
+    return _serial(() async {
+      final snapshot = await _readWorkspaceUnlocked();
+      final history = [...snapshot.searchHistory]
+        ..removeWhere((item) => item.toLowerCase() == trimmed.toLowerCase())
+        ..insert(0, trimmed);
+      final trimmedHistory = history.take(12).toList(growable: false);
+      await _writeWorkspaceUnlocked(
+        snapshot.copyWith(searchHistory: trimmedHistory),
+      );
+      return trimmedHistory;
+    });
+  }
+
+  /// 删除一条历史，或传 null 清空全部。
+  Future<List<String>> removeSearchHistory(String? term) async {
+    return _serial(() async {
+      final snapshot = await _readWorkspaceUnlocked();
+      final history = term == null
+          ? const <String>[]
+          : ([...snapshot.searchHistory]
+                  ..removeWhere((item) => item == term))
+                .toList(growable: false);
+      await _writeWorkspaceUnlocked(snapshot.copyWith(searchHistory: history));
+      return history;
+    });
+  }
+
   /// 写进 socialState 持久化，而不是只留在页面状态里。
   Future<LocalSocialState> setEngagement({
     required String playableId,

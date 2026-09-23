@@ -1226,6 +1226,7 @@ class LocalWorkspaceSnapshot {
     this.growthNode = const LocalGrowthNodeState(),
     this.profileFeatureState = const LocalProfileFeatureState(),
     this.lastGameRewardDates = const {},
+    this.searchHistory = const [],
   });
 
   factory LocalWorkspaceSnapshot.fromJson(Map<String, dynamic> json) =>
@@ -1274,6 +1275,7 @@ class LocalWorkspaceSnapshot {
                 Map<String, dynamic>.from(json['profile_state'] as Map),
               )
             : const LocalProfileState(),
+        searchHistory: _strings(json['search_history']),
         socialState: json['social_state'] is Map
             ? LocalSocialState.fromJson(
                 Map<String, dynamic>.from(json['social_state'] as Map),
@@ -1332,6 +1334,11 @@ class LocalWorkspaceSnapshot {
   /// 当前设备上的个人资料与互动关系。
   final LocalProfileState profileState;
   final LocalSocialState socialState;
+
+  /// 搜索历史，最近的在前。存进快照而不是只留在页面状态里——
+  /// 原实现是 `final _history = <String>[]` 的内存列表，退出页面即清空，
+  /// 「搜索记录」这个功能实际上从来没有生效过。
+  final List<String> searchHistory;
   final List<LocalMessageThread> messageThreads;
 
   /// 草稿墓碑，对应 Web 的 draftTrash：删除后仍可恢复。
@@ -1357,6 +1364,7 @@ class LocalWorkspaceSnapshot {
     LocalIdentityState? identityState,
     LocalProfileState? profileState,
     LocalSocialState? socialState,
+    List<String>? searchHistory,
     List<LocalMessageThread>? messageThreads,
     List<LocalDraft>? draftTrash,
     List<LocalSavedRelation>? savedRelations,
@@ -1377,6 +1385,7 @@ class LocalWorkspaceSnapshot {
     identityState: identityState ?? this.identityState,
     profileState: profileState ?? this.profileState,
     socialState: socialState ?? this.socialState,
+    searchHistory: searchHistory ?? this.searchHistory,
     messageThreads: messageThreads ?? this.messageThreads,
     draftTrash: draftTrash ?? this.draftTrash,
     savedRelations: savedRelations ?? this.savedRelations,
@@ -1402,6 +1411,7 @@ class LocalWorkspaceSnapshot {
     'identity_state': identityState.toJson(),
     'profile_state': profileState.toJson(),
     'social_state': socialState.toJson(),
+    'search_history': searchHistory,
     'message_threads': messageThreads
         .map((item) => item.toJson())
         .toList(growable: false),

@@ -19,7 +19,8 @@ class _ConnectedDiscoverScreenState
     extends ConsumerState<ConnectedDiscoverScreen> {
   int _tab = 0;
   String _query = '';
-  bool _searching = false;
+  // 搜索已改为独立页面，这里只保留 header 的展示分支。
+  final bool _searching = false;
 
   @override
   Widget build(BuildContext context) {
@@ -38,10 +39,10 @@ class _ConnectedDiscoverScreenState
               searching: _searching,
               query: _query,
               onSelected: (value) => setState(() => _tab = value),
-              onSearchToggle: () => setState(() {
-                _searching = !_searching;
-                if (!_searching) _query = '';
-              }),
+              // 搜索不再在本页就地展开：跳独立页，空态有搜索记录与热门，
+              // 输入即出模糊结果。就地展开时下面的栅格不变，用户看不出
+              // 自己在搜什么，历史也只活在页面内存里。
+              onSearchToggle: () => context.push('/search'),
               onQuery: (value) => setState(() => _query = value),
             )
           else ...[

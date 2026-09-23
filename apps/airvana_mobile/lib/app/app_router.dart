@@ -15,6 +15,7 @@ import 'package:airvana_mobile/shared/presentation/airvana_shell.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../features/discover/presentation/search_screen.dart';
 
 GoRouter buildAirvanaRouter({String? initialLocation}) {
   return GoRouter(
@@ -78,6 +79,13 @@ GoRouter buildAirvanaRouter({String? initialLocation}) {
       ),
       // 登录页在 Shell 之外：未登录时不应看到底部导航，
       // 也不该被算作某个主标签的子页面。
+      // 搜索是独立页面而不是发现页顶部就地展开的输入框：
+      // 空态要给搜索记录与热门，输入时整页都是结果。
+      GoRoute(
+        path: '/search',
+        builder: (_, state) =>
+            SearchScreen(initialQuery: state.uri.queryParameters['q'] ?? ''),
+      ),
       GoRoute(path: '/signin', builder: (_, _) => const SignInScreen()),
       GoRoute(
         path: '/profile/secondary/:destination',
@@ -92,8 +100,11 @@ GoRouter buildAirvanaRouter({String? initialLocation}) {
       ),
       GoRoute(
         path: '/runtime/:contentId',
-        builder: (_, state) =>
-            _PlayableRouteEntry(contentId: state.pathParameters['contentId']!),
+        builder: (_, state) => _PlayableRouteEntry(
+          contentId: state.pathParameters['contentId']!,
+          // ?fullscreen=1 来自信息流的「全屏体验」，进去就开始。
+          fullscreen: state.uri.queryParameters['fullscreen'] == '1',
+        ),
       ),
     ],
   );
@@ -121,9 +132,10 @@ class _CreateRouteEntry extends ConsumerWidget {
 }
 
 class _PlayableRouteEntry extends ConsumerWidget {
-  const _PlayableRouteEntry({required this.contentId});
+  const _PlayableRouteEntry({required this.contentId, this.fullscreen = false});
 
   final String contentId;
+  final bool fullscreen;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -141,7 +153,10 @@ class _PlayableRouteEntry extends ConsumerWidget {
           }
         }
         if (playable != null) {
-          return PlayableRuntimeEntryScreen(playable: playable);
+          return PlayableRuntimeEntryScreen(
+            playable: playable,
+            fullscreen: fullscreen,
+          );
         }
         final local = ref.watch(localPlayableByIdProvider(contentId));
         return local.when(
@@ -151,6 +166,7 @@ class _PlayableRouteEntry extends ConsumerWidget {
                 candidate.status == LocalPlayableStatus.publishedLocal) {
               return PlayableRuntimeEntryScreen(
                 playable: _domainPlayable(candidate),
+                fullscreen: fullscreen,
               );
             }
             return Scaffold(

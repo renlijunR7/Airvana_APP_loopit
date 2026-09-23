@@ -1380,6 +1380,16 @@ class AirvanaRepository {
       _localStore.requestHumanHandoff(threadId);
 
   /// 本机作品的收藏 / 点赞落盘。服务端作品仍走 setEngagement 的 API 分支。
+  /// 搜索历史落盘。放在 repository 而不是直接让页面碰 store，
+  /// 是为了和其它本地数据走同一条通道。
+  Future<List<String>> readSearchHistory() => _localStore.readSearchHistory();
+
+  Future<List<String>> pushSearchHistory(String term) =>
+      _localStore.pushSearchHistory(term);
+
+  Future<List<String>> removeSearchHistory(String? term) =>
+      _localStore.removeSearchHistory(term);
+
   Future<LocalSocialState> setLocalEngagement({
     required String playableId,
     required String eventType,
