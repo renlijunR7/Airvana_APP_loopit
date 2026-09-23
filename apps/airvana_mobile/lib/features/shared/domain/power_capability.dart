@@ -1,7 +1,7 @@
 /// Power 能力的领域模型。
 ///
 /// 这一层存在的理由，是把原本散在 `create_playable_screen.dart`（6000 行的
-/// presentation 文件）里的 48 条能力目录，从「一串用来画卡片的静态数据」
+/// presentation 文件）里的能力目录，从「一串用来画卡片的静态数据」
 /// 升级成「运行时能据以撮合的契约」。
 ///
 /// 在此之前，仓库里已经有两套各自成立、但互不相通的东西：
@@ -76,11 +76,11 @@ enum PowerBinding {
 /// 宿主把能力交付给作品的方式。这是「即插即用」到底能不能成立的分水岭。
 ///
 /// 区分来自一个实测事实：`game_webview_controller.dart` 里的
-/// `createGameWebViewController()` 对全部 15 个**刻意不改动**的第三方游戏包
+/// `createGameWebViewController()` 对 manifest.json 里那 13 个**刻意不改动**的第三方作品
 /// 零改动生效。它能生效不是因为做了什么注入，而是因为**游戏本来就在调
 /// `getUserMedia` 和 `<audio>`，宿主只是换了答复**。
 ///
-/// 把这一层和「宿主主动推信号」分开，才能如实回答「哪些能力能用在那 15 个
+/// 把这一层和「宿主主动推信号」分开，才能如实回答「哪些能力能用在那些动不了的
 /// 动不了的游戏上」——答案是 [container] 的那些，而且今天就能用。
 enum PowerDelivery {
   /// 容器边界：宿主拦截并代答作品本就会调用的标准 Web API
@@ -330,7 +330,8 @@ class PowerDescriptor {
 
   /// 是否对「不可改动的第三方游戏包」也生效。
   ///
-  /// 这是判断一条能力能不能用在 assets/arcade 那 15 个游戏上的唯一标准：
+  /// 这是判断一条能力能不能用在 manifest.json 承诺不改动的那 13 个作品上的
+  /// 唯一标准（arcade 目录下另有 4 个自研件，允许改包）：
   /// 只有容器边界层的能力不要求作品配合。
   bool get worksOnSealedGames => delivery.contains(PowerDelivery.container);
 
