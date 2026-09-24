@@ -69,13 +69,7 @@ class _SignInPageBodyState extends ConsumerState<SignInPageBody> {
     }
   }
 
-  void _refreshSessionScopedData() {
-    ref.invalidate(homeProvider);
-    ref.invalidate(accountProvider);
-    ref.invalidate(creatorCenterProvider);
-    ref.invalidate(notificationsProvider);
-    ref.invalidate(accountSessionsProvider);
-  }
+  void _refreshSessionScopedData() => invalidateSessionScopedProviders(ref);
 
   Widget _card({required Key key, required List<Widget> children}) => Container(
     key: key,

@@ -52,3 +52,26 @@ class SignedInIdentity {
   /// 'email' / 'google_local'，用于界面如实说明登录方式。
   final String method;
 }
+
+/// Web「Google 一键登录」的演示人格。
+///
+/// Web 走的是 `localAdapterLogin('google', 'Kai Chen', …)`：不问邮箱，直接以这
+/// 个人格建立身份。服务端 `/api/auth/google/local` 在没给邮箱时也缺省到
+/// `kai.chen@airvana-demo.local`，两边本来就对得上。这里仍然显式传——
+/// 服务端缺省值改了，不该悄悄换掉本机的登录身份。
+abstract final class GoogleLocalAdapterPersona {
+  static const email = 'kai.chen@airvana-demo.local';
+  static const displayName = 'Kai Chen';
+}
+
+/// 与 Web `isValidEmail` 同一条正则。
+///
+/// 发请求前先在本地拦一次明显写错的地址，把「邮箱格式不对」和
+/// 「服务端不可用」这两种失败分开，用户才知道该改什么。
+bool isValidLoginEmail(String value) => _loginEmail.hasMatch(value.trim());
+
+final _loginEmail = RegExp(
+  r"^[A-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?"
+  r'(?:\.[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?)+$',
+  caseSensitive: false,
+);

@@ -61,6 +61,19 @@ final signedOutProvider = FutureProvider<bool>((ref) {
   return ref.watch(airvanaRepositoryProvider).signedOut;
 });
 
+/// 登录 / 退出之后要重新拉的那组数据——它们都带服务端身份。
+///
+/// 全屏登录页和「设置与更多」里的账号页都会用到；集中在一处，
+/// 新增一个带身份的 provider 时只改这里。
+void invalidateSessionScopedProviders(WidgetRef ref) {
+  ref.invalidate(homeProvider);
+  ref.invalidate(accountProvider);
+  ref.invalidate(creatorCenterProvider);
+  ref.invalidate(notificationsProvider);
+  ref.invalidate(accountSessionsProvider);
+  ref.invalidate(signedOutProvider);
+}
+
 final accountDeletionProvider = FutureProvider<AccountDeletionRequest?>((ref) {
   return ref.watch(airvanaRepositoryProvider).loadAccountDeletionRequest();
 });

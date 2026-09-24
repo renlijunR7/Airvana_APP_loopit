@@ -16,7 +16,7 @@ import 'support/test_create_workflow.dart';
 
 Widget _testAirvanaApp(TestCreateWorkflowHarness harness) => ProviderScope(
   overrides: [airvanaRepositoryProvider.overrideWithValue(harness.repository)],
-  child: const AirvanaApp(),
+  child: const AirvanaApp(initialLocation: '/'),
 );
 
 void main() {
@@ -176,13 +176,13 @@ void main() {
       tester.view.devicePixelRatio = 1;
       addTearDown(tester.view.resetPhysicalSize);
       addTearDown(tester.view.resetDevicePixelRatio);
-
+      await harness.disableStartupPopups();
       await tester.pumpWidget(_testAirvanaApp(harness));
       await tester.pumpAndSettle();
 
       final destinations = <(int, String)>[
         // 首页首条已换成项目自有新增作品。
-        (0, '魔法合唱团'),
+        (0, '德州扑克新手训练桌'),
         (1, '#原创新游'),
         (2, '增长网络'),
         (3, '消息'),
@@ -225,7 +225,7 @@ void main() {
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.resetPhysicalSize);
     addTearDown(tester.view.resetDevicePixelRatio);
-
+    await harness.disableStartupPopups();
     await tester.pumpWidget(_testAirvanaApp(harness));
     await tester.pumpAndSettle();
 
@@ -258,7 +258,7 @@ void main() {
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.resetPhysicalSize);
     addTearDown(tester.view.resetDevicePixelRatio);
-
+    await harness.disableStartupPopups();
     await tester.pumpWidget(_testAirvanaApp(harness));
     await tester.pumpAndSettle();
 
@@ -283,7 +283,7 @@ void main() {
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.resetPhysicalSize);
     addTearDown(tester.view.resetDevicePixelRatio);
-
+    await harness.disableStartupPopups();
     await tester.pumpWidget(_testAirvanaApp(harness));
     await tester.pumpAndSettle();
 
@@ -305,7 +305,7 @@ void main() {
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.resetPhysicalSize);
     addTearDown(tester.view.resetDevicePixelRatio);
-
+    await harness.disableStartupPopups();
     await tester.pumpWidget(_testAirvanaApp(harness));
     await tester.pumpAndSettle();
 
@@ -332,14 +332,14 @@ void main() {
       tester.view.devicePixelRatio = 1;
       addTearDown(tester.view.resetPhysicalSize);
       addTearDown(tester.view.resetDevicePixelRatio);
-
+      await harness.disableStartupPopups();
       await tester.pumpWidget(_testAirvanaApp(harness));
       await tester.pumpAndSettle();
 
       // 前两条是项目自有新增作品，这条用例验证的是 Web 基线那张卡，先滑过去。
       // 首页前三条是项目自有新增作品，Luna 小镇从第 4 条开始，
       // 每新增一条自有作品这里就要多翻一页。
-      for (var i = 0; i < 4; i += 1) {
+      for (var i = 0; i < 7; i += 1) {
         await tester.drag(
           find.byKey(const ValueKey('legacy-feed-pager')),
           const Offset(0, -620),

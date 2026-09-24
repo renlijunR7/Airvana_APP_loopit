@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 180 180" fill="none">
+  <title>资产沉淀</title>
+  <desc>三层清晰归档的资产卡片，代表运营内容与经验持续沉淀。</desc>
+  <rect x="35" y="70" width="100" height="80" rx="20" fill="#FFE6E9"/>
+  <rect x="41" y="75" width="99" height="66" rx="17" fill="#FFFFFF" stroke="#1C1C1E" stroke-width="3"/>
+  <rect x="41" y="57" width="99" height="66" rx="17" fill="#FFFFFF" stroke="#1C1C1E" stroke-width="3"/>
+  <rect x="41" y="35" width="99" height="70" rx="17" fill="#FFFFFF" stroke="#1C1C1E" stroke-width="3"/>
+  <rect x="58" y="54" width="26" height="30" rx="8" fill="#FF3B4A"/>
+  <path d="M95 61H123M95 73H116" stroke="#1C1C1E" stroke-width="3" stroke-linecap="round"/>
+  <path d="M62 105H119" stroke="#FF3B4A" stroke-width="3" stroke-linecap="round"/>
+</svg>

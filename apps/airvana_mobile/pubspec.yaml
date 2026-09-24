@@ -77,6 +77,7 @@ flutter:
     - assets/legacy/covers/
     - assets/legacy/avatars/
     - assets/legacy/capability-icons/
+    - assets/legacy/onboarding/
     - assets/runner/
     - assets/runner/assets/games/casual-v1/scenes/
     - assets/runner/assets/games/casual-v1/sprites/

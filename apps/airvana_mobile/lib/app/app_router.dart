@@ -16,6 +16,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../features/discover/presentation/search_screen.dart';
+import '../features/account/presentation/launch_splash_screen.dart';
+import '../features/account/presentation/onboarding_screen.dart';
 
 GoRouter buildAirvanaRouter({String? initialLocation}) {
   return GoRouter(
@@ -86,6 +88,11 @@ GoRouter buildAirvanaRouter({String? initialLocation}) {
         builder: (_, state) =>
             SearchScreen(initialQuery: state.uri.queryParameters['q'] ?? ''),
       ),
+      // 冷启动四段：启动页 → 引导页 → 登录页 → 主应用，与 Web 一致。
+      // 每次冷启动都从 /launch 起步（AirvanaApp.initialLocation 缺省值），
+      // 引导看完或跳过进登录页；不落任何「看过」标记。
+      GoRoute(path: '/launch', builder: (_, _) => const LaunchSplashScreen()),
+      GoRoute(path: '/onboarding', builder: (_, _) => const OnboardingScreen()),
       GoRoute(path: '/signin', builder: (_, _) => const SignInScreen()),
       GoRoute(
         path: '/profile/secondary/:destination',

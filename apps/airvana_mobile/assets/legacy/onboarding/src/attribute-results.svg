@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 180 180" fill="none">
+  <title>互动归因</title>
+  <desc>内容卡片经过清晰的连接路径，抵达已确认的归因结果。</desc>
+  <rect x="30" y="44" width="72" height="90" rx="19" fill="#FFE6E9"/>
+  <path d="M104 55H120C128.284 55 135 61.716 135 70V94" stroke="#FF3B4A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="135" cy="78" r="4.5" fill="#F2F2F7" stroke="#FF3B4A" stroke-width="3"/>
+  <rect x="39" y="35" width="65" height="82" rx="17" fill="#FFFFFF" stroke="#1C1C1E" stroke-width="3"/>
+  <path d="M65 56.5C65 55.344 66.257 54.623 67.256 55.206L82.13 63.883C83.123 64.462 83.123 65.898 82.13 66.477L67.256 75.154C66.257 75.737 65 75.016 65 73.86V56.5Z" fill="#FF3B4A"/>
+  <path d="M56 91H87M56 100H76" stroke="#1C1C1E" stroke-width="3" stroke-linecap="round"/>
+  <path d="M71 118V125C71 131.627 76.373 137 83 137H108" stroke="#1C1C1E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="105" y="97" width="46" height="46" rx="16" fill="#FF3B4A"/>
+  <path d="M117.5 120L125 127.5L139 113.5" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

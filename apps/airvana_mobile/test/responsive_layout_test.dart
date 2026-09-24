@@ -23,9 +23,14 @@ void main() {
         addTearDown(tester.view.resetPhysicalSize);
         addTearDown(tester.view.resetDevicePixelRatio);
 
+        // 这几条断言的是主应用各页的布局，冷启动时不该被首启引导拦住。
+        // 引导本身由 test/onboarding_gate_test.dart 覆盖。
+        final harness = TestCreateWorkflowHarness();
+        await harness.disableStartupPopups();
         await tester.pumpWidget(
           ProviderScope(
             overrides: [
+              airvanaRepositoryProvider.overrideWithValue(harness.repository),
               appEnvironmentProvider.overrideWithValue(
                 AppEnvironment(
                   apiBaseUri: Uri.parse('http://192.0.2.1:8082'),
@@ -34,7 +39,7 @@ void main() {
                 ),
               ),
             ],
-            child: const AirvanaApp(),
+            child: const AirvanaApp(initialLocation: '/'),
           ),
         );
         await tester.pumpAndSettle();
