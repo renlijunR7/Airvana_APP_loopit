@@ -96,7 +96,12 @@ class _ServerPlayableRuntimeScreenState
         ),
       );
 
-      final controller = createGameWebViewController();
+      // 服务端下发的内容是这三条运行时里最不可信的一条，而且宿主拿不到
+      // 它的权限声明。默认不放行任何设备权限——等服务端能随内容下发
+      // 声明、且声明本身可被校验之后再放开，而不是先给了再想怎么收。
+      final controller = createGameWebViewController(
+        allowedPermissions: const {},
+      );
       await controller.setJavaScriptMode(JavaScriptMode.unrestricted);
       await controller.setBackgroundColor(const Color(0xFF0E120F));
       await controller.addJavaScriptChannel(

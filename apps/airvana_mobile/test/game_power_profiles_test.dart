@@ -22,9 +22,12 @@ void main() {
     },
   );
 
-  test('17 个作品，13 个受 manifest 的不改动承诺约束', () {
-    expect(kGamePowerProfiles.length, 17);
-    final sealed = kGamePowerProfiles.where((g) => g.sealed).map((g) => g.slug).toSet();
+  test('20 个作品，13 个受 manifest 的不改动承诺约束', () {
+    expect(kGamePowerProfiles.length, 20);
+    final sealed = kGamePowerProfiles
+        .where((g) => g.sealed)
+        .map((g) => g.slug)
+        .toSet();
     expect(sealed.length, 13);
     // 今天新加的两个手势作品是自研件，不在 manifest 里，允许改包。
     expect(sealed, isNot(contains('gesture-fruit-slice')));
@@ -44,7 +47,11 @@ void main() {
   test('需求参数在合理范围内', () {
     for (final game in kGamePowerProfiles) {
       for (final r in game.requirements) {
-        expect(r.dimensions, inInclusiveRange(1, 3), reason: '${game.slug} 维度越界');
+        expect(
+          r.dimensions,
+          inInclusiveRange(1, 3),
+          reason: '${game.slug} 维度越界',
+        );
         expect(r.minHz, greaterThan(0), reason: '${game.slug} 采样率必须为正');
         expect(
           r.maxLatency.inMilliseconds,
@@ -104,11 +111,13 @@ void main() {
     PowerBindingResult bindFirst(String slug, PowerControl control) {
       final game = kGamePowerProfiles.firstWhere((g) => g.slug == slug);
       final req = game.requirements.firstWhere((r) => r.control == control);
-      return binder.bind(
-        requirements: [req],
-        selectedPowerIds: {'motionHaptic'},
-        availability: allGranted,
-      ).single;
+      return binder
+          .bind(
+            requirements: [req],
+            selectedPowerIds: {'motionHaptic'},
+            availability: allGranted,
+          )
+          .single;
     }
 
     test('赛车的 steer 配上倾斜信号', () {
@@ -134,7 +143,9 @@ void main() {
   test('手势能力覆盖了哪些作品：所有声明 pointer 的都能接上', () {
     final covered = <String>[];
     for (final game in kGamePowerProfiles) {
-      final pointer = game.requirements.where((r) => r.control == PowerControl.pointer);
+      final pointer = game.requirements.where(
+        (r) => r.control == PowerControl.pointer,
+      );
       if (pointer.isEmpty) continue;
       final results = binder.bind(
         requirements: pointer.toList(),
@@ -146,5 +157,62 @@ void main() {
     // 手势信号标称 30Hz，要求更高的作品接不上——这是如实结论，不是缺陷。
     expect(covered, isNotEmpty);
     expect(kPowerCatalog.length, 60);
+  });
+
+  group('按作品收窄权限代答面', () {
+    test('只有两个手势作品声明了权限，且都只要摄像头', () {
+      final declaring = {
+        for (final g in kGamePowerProfiles)
+          if (g.permissions.isNotEmpty) g.slug: g.permissions,
+      };
+      expect(declaring, {
+        'christmas-tree-gesture': {PowerPermission.camera},
+        'gesture-fruit-slice': {PowerPermission.camera},
+      });
+    });
+
+    test('其余 15 个作品一个权限都不声明', () {
+      final silent = kGamePowerProfiles.where((g) => g.permissions.isEmpty);
+      expect(silent.length, 18);
+      // 这 15 个此前会回落到目录推导出的全量并集，等于一个纯触屏作品
+      // 也能弹出摄像头授权框。收窄之后它们请求任何权限都会被拒。
+    });
+
+    test('没有作品需要麦克风或定位——arcade 侧那两项代答面应当是空的', () {
+      for (final g in kGamePowerProfiles) {
+        expect(g.permissions, isNot(contains(PowerPermission.microphone)));
+        expect(g.permissions, isNot(contains(PowerPermission.location)));
+      }
+    });
+
+    test('声明的权限必须是目录里真实存在、且由容器层能力提供的', () {
+      // 声明一个没有任何容器层能力支撑的权限，代答时会被 broker 拒掉，
+      // 表现为「声明了却不生效」，很难从现象反推。
+      final container = <PowerPermission>{
+        for (final power in kPowerCatalog)
+          if (power.worksOnSealedGames) ...power.permissions,
+      };
+      for (final g in kGamePowerProfiles) {
+        for (final permission in g.permissions) {
+          expect(
+            container,
+            contains(permission),
+            reason: '${g.slug} 声明了 $permission，但没有容器层能力提供它',
+          );
+        }
+      }
+    });
+
+    test('按 slug 反查档案：命中与未命中都有确定行为', () {
+      expect(gamePowerProfileFor('gesture-fruit-slice')?.permissions, {
+        PowerPermission.camera,
+      });
+      // 未知作品必须返回 null，让调用方落到空集合而不是全量。
+      expect(gamePowerProfileFor('不存在的作品'), isNull);
+    });
+
+    test('runner 内置作品只需要麦克风', () {
+      expect(kRunnerGamePermissions, {PowerPermission.microphone});
+    });
   });
 }

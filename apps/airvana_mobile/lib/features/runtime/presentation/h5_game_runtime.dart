@@ -5,6 +5,7 @@ import 'package:airvana_mobile/design_system/airvana_theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import '../domain/game_power_profiles.dart';
 
 /// 一次 H5 完整玩法的结果（来自旧版 Web 游戏引擎的 onComplete）。
 class H5GameResult {
@@ -63,30 +64,36 @@ class _H5GameRuntimeState extends State<H5GameRuntime> {
   @override
   void initState() {
     super.initState();
-    _controller = createGameWebViewController()
-      ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..setBackgroundColor(const Color(0xFF0B0A10))
-      ..addJavaScriptChannel('GameBridge', onMessageReceived: _onBridgeMessage)
-      ..setNavigationDelegate(
-        NavigationDelegate(
-          onPageFinished: (_) => _startGame(),
-          onWebResourceError: (error) {
-            // 子资源级错误（favicon、可选素材等）不致命；只有 runner 主文档
-            // 加载失败才降级到本地演示结构。
-            if (error.isForMainFrame != true) return;
-            if (!mounted) return;
-            setState(() => _error = error.description);
-            widget.onLoadError?.call(error.description);
-          },
-          // 只允许 runner 资产页自身；外部导航一律拦截。
-          onNavigationRequest: (request) =>
-              request.url.startsWith('http') &&
-                  !request.url.contains('flutter_assets')
-              ? NavigationDecision.prevent
-              : NavigationDecision.navigate,
-        ),
-      )
-      ..loadFlutterAsset('assets/runner/playable-runner.html');
+    // runner 内置作品只有 magic-choir 一类会调 getUserMedia({audio})；
+    // 没有任何一个调摄像头。体感与陀螺仪不经这条回调。
+    _controller =
+        createGameWebViewController(allowedPermissions: kRunnerGamePermissions)
+          ..setJavaScriptMode(JavaScriptMode.unrestricted)
+          ..setBackgroundColor(const Color(0xFF0B0A10))
+          ..addJavaScriptChannel(
+            'GameBridge',
+            onMessageReceived: _onBridgeMessage,
+          )
+          ..setNavigationDelegate(
+            NavigationDelegate(
+              onPageFinished: (_) => _startGame(),
+              onWebResourceError: (error) {
+                // 子资源级错误（favicon、可选素材等）不致命；只有 runner 主文档
+                // 加载失败才降级到本地演示结构。
+                if (error.isForMainFrame != true) return;
+                if (!mounted) return;
+                setState(() => _error = error.description);
+                widget.onLoadError?.call(error.description);
+              },
+              // 只允许 runner 资产页自身；外部导航一律拦截。
+              onNavigationRequest: (request) =>
+                  request.url.startsWith('http') &&
+                      !request.url.contains('flutter_assets')
+                  ? NavigationDecision.prevent
+                  : NavigationDecision.navigate,
+            ),
+          )
+          ..loadFlutterAsset('assets/runner/playable-runner.html');
   }
 
   void _startGame() {
