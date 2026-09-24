@@ -22,7 +22,13 @@ void main() {
   test('只需宿主推信号的能力，其权限不进可代答范围', () {
     // 计步与近场设备在 WebView 里根本没有对应的 Web API，作品不可能去请求它们；
     // 把它们放进代答白名单只会扩大攻击面。
-    expect(brokerablePermissions, isNot(contains(PowerPermission.activityRecognition)));
-    expect(brokerablePermissions, isNot(contains(PowerPermission.nearbyDevices)));
+    expect(
+      brokerablePermissions,
+      isNot(contains(PowerPermission.activityRecognition)),
+    );
+    expect(
+      brokerablePermissions,
+      isNot(contains(PowerPermission.nearbyDevices)),
+    );
   });
 }

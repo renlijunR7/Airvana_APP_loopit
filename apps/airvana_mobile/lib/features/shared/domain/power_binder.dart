@@ -41,7 +41,8 @@ class PowerAvailability {
 
   bool allows(PowerDescriptor power) {
     if (unavailablePowerIds.contains(power.id)) return false;
-    if (power.support == PowerSupport.service && !serviceReachable) return false;
+    if (power.support == PowerSupport.service && !serviceReachable)
+      return false;
     for (final permission in power.permissions) {
       if (!grantedPermissions.contains(permission)) return false;
     }
@@ -110,10 +111,9 @@ class PowerBindingResult {
   ///
   /// 注意它常常**等于**原来的 control——那表示「语义不变、信号源退化」，
   /// 例如倾斜转向退化成按住左右两侧，游戏拿到的仍然是 steer。
-  PowerControl get effectiveControl =>
-      degraded
-          ? (power?.fallback?.control ?? requirement.control)
-          : requirement.control;
+  PowerControl get effectiveControl => degraded
+      ? (power?.fallback?.control ?? requirement.control)
+      : requirement.control;
 
   Map<String, dynamic> toJson() => {
     'control': effectiveControl.name,
@@ -228,7 +228,8 @@ class PowerBinder {
     if (availability.unavailablePowerIds.contains(power.id)) {
       return PowerDegradeReason.unavailable;
     }
-    if (power.support == PowerSupport.service && !availability.serviceReachable) {
+    if (power.support == PowerSupport.service &&
+        !availability.serviceReachable) {
       return PowerDegradeReason.serviceUnreachable;
     }
     for (final permission in power.permissions) {

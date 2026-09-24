@@ -965,9 +965,9 @@ class LocalAirvanaStore {
       final snapshot = await _readWorkspaceUnlocked();
       final history = term == null
           ? const <String>[]
-          : ([...snapshot.searchHistory]
-                  ..removeWhere((item) => item == term))
-                .toList(growable: false);
+          : ([
+              ...snapshot.searchHistory,
+            ]..removeWhere((item) => item == term)).toList(growable: false);
       await _writeWorkspaceUnlocked(snapshot.copyWith(searchHistory: history));
       return history;
     });

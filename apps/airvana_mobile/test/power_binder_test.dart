@@ -27,16 +27,21 @@ void main() {
   group('同一个手势能力接到形态不同的游戏上', () {
     // 这是「匹配不同游戏」的核心用例：手势识别产出的是归一化的指尖坐标，
     // 三个游戏拿它当三种完全不同的东西用，而能力本身一行都不用改。
-    const slicer = PowerRequirement(control: PowerControl.pointer, dimensions: 2);
+    const slicer = PowerRequirement(
+      control: PowerControl.pointer,
+      dimensions: 2,
+    );
     const shooter = PowerRequirement(control: PowerControl.aim, dimensions: 2);
     const tap = PowerRequirement(control: PowerControl.trigger, dimensions: 1);
 
     test('切水果要平面指针 → hand.indexTip', () {
-      final result = binder.bind(
-        requirements: const [slicer],
-        selectedPowerIds: {'gestureVision'},
-        availability: allGranted,
-      ).single;
+      final result = binder
+          .bind(
+            requirements: const [slicer],
+            selectedPowerIds: {'gestureVision'},
+            availability: allGranted,
+          )
+          .single;
       expect(result.degraded, isFalse);
       expect(result.power!.id, 'gestureVision');
       expect(result.signal!.name, 'hand.indexTip');
@@ -44,21 +49,25 @@ void main() {
     });
 
     test('瞄准类要 aim，同一个能力同一路信号也能满足', () {
-      final result = binder.bind(
-        requirements: const [shooter],
-        selectedPowerIds: {'gestureVision'},
-        availability: allGranted,
-      ).single;
+      final result = binder
+          .bind(
+            requirements: const [shooter],
+            selectedPowerIds: {'gestureVision'},
+            availability: allGranted,
+          )
+          .single;
       expect(result.degraded, isFalse);
       expect(result.signal!.name, 'hand.indexTip');
     });
 
     test('单点触发要一维，捏合信号顶上', () {
-      final result = binder.bind(
-        requirements: const [tap],
-        selectedPowerIds: {'gestureVision'},
-        availability: allGranted,
-      ).single;
+      final result = binder
+          .bind(
+            requirements: const [tap],
+            selectedPowerIds: {'gestureVision'},
+            availability: allGranted,
+          )
+          .single;
       expect(result.degraded, isFalse);
       // 二维的指尖坐标维度够用，会先被选中——这是合理的，
       // 适配层丢掉多余维度即可。
@@ -66,37 +75,52 @@ void main() {
     });
 
     test('赛车要连续转向，手势不声明 steer，于是降级而不是硬凑', () {
-      const steering = PowerRequirement(control: PowerControl.steer, dimensions: 1);
-      final result = binder.bind(
-        requirements: const [steering],
-        selectedPowerIds: {'gestureVision'},
-        availability: allGranted,
-      ).single;
+      const steering = PowerRequirement(
+        control: PowerControl.steer,
+        dimensions: 1,
+      );
+      final result = binder
+          .bind(
+            requirements: const [steering],
+            selectedPowerIds: {'gestureVision'},
+            availability: allGranted,
+          )
+          .single;
       expect(result.degraded, isTrue);
       expect(result.reason, PowerDegradeReason.notSelected);
     });
 
     test('换成体感能力，赛车的 steer 就配上了', () {
-      const steering = PowerRequirement(control: PowerControl.steer, dimensions: 1);
-      final result = binder.bind(
-        requirements: const [steering],
-        selectedPowerIds: {'motionHaptic'},
-        availability: allGranted,
-      ).single;
+      const steering = PowerRequirement(
+        control: PowerControl.steer,
+        dimensions: 1,
+      );
+      final result = binder
+          .bind(
+            requirements: const [steering],
+            selectedPowerIds: {'motionHaptic'},
+            availability: allGranted,
+          )
+          .single;
       expect(result.degraded, isFalse);
       expect(result.signal!.name, 'orientation.tilt');
     });
   });
 
   group('降级路径', () {
-    const slicer = PowerRequirement(control: PowerControl.pointer, dimensions: 2);
+    const slicer = PowerRequirement(
+      control: PowerControl.pointer,
+      dimensions: 2,
+    );
 
     test('权限没拿到 → 降级，且原因指向权限而不是笼统的不可用', () {
-      final result = binder.bind(
-        requirements: const [slicer],
-        selectedPowerIds: {'gestureVision'},
-        availability: nothingGranted,
-      ).single;
+      final result = binder
+          .bind(
+            requirements: const [slicer],
+            selectedPowerIds: {'gestureVision'},
+            availability: nothingGranted,
+          )
+          .single;
       expect(result.degraded, isTrue);
       expect(result.reason, PowerDegradeReason.permissionDenied);
       expect(result.hint, '触屏滑动仍可操作');
@@ -105,24 +129,31 @@ void main() {
     });
 
     test('设备不支持 → 降级原因是 unavailable', () {
-      final result = binder.bind(
-        requirements: const [slicer],
-        selectedPowerIds: {'gestureVision'},
-        availability: const PowerAvailability(
-          grantedPermissions: {PowerPermission.camera},
-          unavailablePowerIds: {'gestureVision'},
-        ),
-      ).single;
+      final result = binder
+          .bind(
+            requirements: const [slicer],
+            selectedPowerIds: {'gestureVision'},
+            availability: const PowerAvailability(
+              grantedPermissions: {PowerPermission.camera},
+              unavailablePowerIds: {'gestureVision'},
+            ),
+          )
+          .single;
       expect(result.reason, PowerDegradeReason.unavailable);
     });
 
     test('实时服务不可达 → 本地闭环的常态，明确标注而不是假装可用', () {
-      const chat = PowerRequirement(control: PowerControl.trigger, dimensions: 1);
-      final result = binder.bind(
-        requirements: const [chat],
-        selectedPowerIds: {'multiplayer'},
-        availability: allGranted,
-      ).single;
+      const chat = PowerRequirement(
+        control: PowerControl.trigger,
+        dimensions: 1,
+      );
+      final result = binder
+          .bind(
+            requirements: const [chat],
+            selectedPowerIds: {'multiplayer'},
+            availability: allGranted,
+          )
+          .single;
       expect(result.degraded, isTrue);
       // multiplayer 不声明任何 control，所以连候选都进不去。
       expect(result.reason, PowerDegradeReason.notSelected);
@@ -134,11 +165,13 @@ void main() {
         dimensions: 2,
         minHz: 120, // 手势能力标称 30Hz，达不到
       );
-      final result = binder.bind(
-        requirements: const [picky],
-        selectedPowerIds: {'gestureVision'},
-        availability: allGranted,
-      ).single;
+      final result = binder
+          .bind(
+            requirements: const [picky],
+            selectedPowerIds: {'gestureVision'},
+            availability: allGranted,
+          )
+          .single;
       expect(result.degraded, isTrue);
       expect(result.reason, PowerDegradeReason.specMismatch);
     });
@@ -176,15 +209,20 @@ void main() {
   });
 
   test('烘焙类能力即使被选中也不参与运行时撮合', () {
-    const anything = PowerRequirement(control: PowerControl.pointer, dimensions: 2);
-    final result = binder.bind(
-      requirements: const [anything],
-      selectedPowerIds: kPowerCatalog
-          .where((p) => p.binding == PowerBinding.baked)
-          .map((p) => p.id)
-          .toSet(),
-      availability: allGranted,
-    ).single;
+    const anything = PowerRequirement(
+      control: PowerControl.pointer,
+      dimensions: 2,
+    );
+    final result = binder
+        .bind(
+          requirements: const [anything],
+          selectedPowerIds: kPowerCatalog
+              .where((p) => p.binding == PowerBinding.baked)
+              .map((p) => p.id)
+              .toSet(),
+          availability: allGranted,
+        )
+        .single;
     expect(result.degraded, isTrue);
     expect(result.reason, PowerDegradeReason.notSelected);
   });
@@ -240,16 +278,34 @@ void main() {
     test('自动带入的依赖被用户再次显式选中后，就不再被回收', () {
       final added = selection.select({}, 'musicRecognition');
       // 用户点了一下 audioVoice 取消、再点一下选上 —— 它转为手动持有。
-      final off = selection.select(added.selected, 'audioVoice', autoAdded: added.autoAdded);
-      final on = selection.select(off.selected, 'audioVoice', autoAdded: off.autoAdded);
+      final off = selection.select(
+        added.selected,
+        'audioVoice',
+        autoAdded: added.autoAdded,
+      );
+      final on = selection.select(
+        off.selected,
+        'audioVoice',
+        autoAdded: off.autoAdded,
+      );
       expect(on.autoAdded, isNot(contains('audioVoice')));
-      final removed = selection.select(on.selected, 'musicRecognition', autoAdded: on.autoAdded);
+      final removed = selection.select(
+        on.selected,
+        'musicRecognition',
+        autoAdded: on.autoAdded,
+      );
       expect(removed.selected, contains('audioVoice'));
     });
 
     test('冲突消解与选择顺序无关（依赖目录里冲突关系的对称性）', () {
-      final a = selection.select(selection.select({}, 'cameraAr').selected, 'vrExperience');
-      final b = selection.select(selection.select({}, 'vrExperience').selected, 'cameraAr');
+      final a = selection.select(
+        selection.select({}, 'cameraAr').selected,
+        'vrExperience',
+      );
+      final b = selection.select(
+        selection.select({}, 'vrExperience').selected,
+        'cameraAr',
+      );
       expect(a.selected.length, 1);
       expect(b.selected.length, 1);
     });
@@ -257,7 +313,9 @@ void main() {
 
   test('目录里每条 hosted 能力都至少能被某个控制语义撮合到', () {
     // 防止出现「声明了信号却没有任何 control 能用上」的死条目。
-    for (final power in kPowerCatalog.where((p) => p.binding == PowerBinding.hosted)) {
+    for (final power in kPowerCatalog.where(
+      (p) => p.binding == PowerBinding.hosted,
+    )) {
       if (power.controls.isEmpty) continue; // 服务类没有控制语义，跳过
       // 需要实时服务的能力在本地闭环下本就撮合不上，那是正确行为，
       // 单独在下一个用例里验证。
@@ -268,17 +326,19 @@ void main() {
           .map((signal) => signal.nominalHz)
           .reduce((a, b) => a < b ? a : b);
       for (final control in power.controls) {
-        final result = binder.bind(
-          requirements: [
-            PowerRequirement(
-              control: control,
-              dimensions: 1,
-              minHz: slowestHz,
-            ),
-          ],
-          selectedPowerIds: {power.id},
-          availability: allGranted,
-        ).single;
+        final result = binder
+            .bind(
+              requirements: [
+                PowerRequirement(
+                  control: control,
+                  dimensions: 1,
+                  minHz: slowestHz,
+                ),
+              ],
+              selectedPowerIds: {power.id},
+              availability: allGranted,
+            )
+            .single;
         expect(
           result.degraded,
           isFalse,
@@ -290,23 +350,30 @@ void main() {
   });
 
   test('需要实时服务的能力：服务可达才撮合得上，不可达时明确降级', () {
-    const beat = PowerRequirement(control: PowerControl.sequence, dimensions: 1);
-    final offline = binder.bind(
-      requirements: const [beat],
-      selectedPowerIds: {'musicRecognition'},
-      availability: allGranted,
-    ).single;
+    const beat = PowerRequirement(
+      control: PowerControl.sequence,
+      dimensions: 1,
+    );
+    final offline = binder
+        .bind(
+          requirements: const [beat],
+          selectedPowerIds: {'musicRecognition'},
+          availability: allGranted,
+        )
+        .single;
     expect(offline.degraded, isTrue);
     expect(offline.reason, PowerDegradeReason.serviceUnreachable);
 
-    final online = binder.bind(
-      requirements: const [beat],
-      selectedPowerIds: {'musicRecognition'},
-      availability: const PowerAvailability(
-        grantedPermissions: {PowerPermission.microphone},
-        serviceReachable: true,
-      ),
-    ).single;
+    final online = binder
+        .bind(
+          requirements: const [beat],
+          selectedPowerIds: {'musicRecognition'},
+          availability: const PowerAvailability(
+            grantedPermissions: {PowerPermission.microphone},
+            serviceReachable: true,
+          ),
+        )
+        .single;
     expect(online.degraded, isFalse);
     expect(online.signal!.name, 'audio.beat');
   });

@@ -39,15 +39,16 @@ PowerPermission? _toPowerPermission(WebViewPermissionResourceType type) {
   return null;
 }
 
-Permission? _toSystemPermission(PowerPermission permission) => switch (permission) {
-  PowerPermission.camera => Permission.camera,
-  PowerPermission.microphone => Permission.microphone,
-  PowerPermission.location => Permission.locationWhenInUse,
-  PowerPermission.activityRecognition => Permission.activityRecognition,
-  PowerPermission.nearbyDevices => Permission.bluetoothScan,
-  PowerPermission.motion => Permission.sensors,
-  PowerPermission.notification => Permission.notification,
-};
+Permission? _toSystemPermission(PowerPermission permission) =>
+    switch (permission) {
+      PowerPermission.camera => Permission.camera,
+      PowerPermission.microphone => Permission.microphone,
+      PowerPermission.location => Permission.locationWhenInUse,
+      PowerPermission.activityRecognition => Permission.activityRecognition,
+      PowerPermission.nearbyDevices => Permission.bluetoothScan,
+      PowerPermission.motion => Permission.sensors,
+      PowerPermission.notification => Permission.notification,
+    };
 
 /// 目录里所有「容器层能力」用到的权限集合。
 ///
@@ -148,7 +149,6 @@ Future<bool> _ensureSystemPermission(PowerPermission permission) async {
     return false;
   }
 }
-
 
 /// 接上 Android WebView 的定位授权回调。
 ///

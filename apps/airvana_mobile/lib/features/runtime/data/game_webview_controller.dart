@@ -29,10 +29,8 @@ WebViewController createGameWebViewController({
     // 手势、吹气、体感这类互动作品会去调标准 Web API 要设备权限。
     // 宿主在这里代答——这是 Power 容器层唯一需要做的事，也是它能对
     // 不可改动的第三方作品生效的原因。
-    onPermissionRequest: (request) => handlePowerPermissionRequest(
-      request,
-      allowed: allowedPermissions,
-    ),
+    onPermissionRequest: (request) =>
+        handlePowerPermissionRequest(request, allowed: allowedPermissions),
   );
   // 定位走的是另一条回调，不接就恒被拒（插件默认 don't allow）。
   // 这里 fire-and-forget：它只是注册回调，失败也不该拦住作品加载。

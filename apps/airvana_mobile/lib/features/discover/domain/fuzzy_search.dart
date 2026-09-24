@@ -137,7 +137,10 @@ List<(int, int)> _mergeRanges(List<(int, int)> ranges) {
   for (final range in sorted.skip(1)) {
     final last = merged.last;
     if (range.$1 <= last.$2) {
-      merged[merged.length - 1] = (last.$1, range.$2 > last.$2 ? range.$2 : last.$2);
+      merged[merged.length - 1] = (
+        last.$1,
+        range.$2 > last.$2 ? range.$2 : last.$2,
+      );
     } else {
       merged.add(range);
     }

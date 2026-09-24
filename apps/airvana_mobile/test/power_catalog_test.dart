@@ -19,11 +19,7 @@ void main() {
   test('hosted 能力必须声明降级方案', () {
     for (final power in kPowerCatalog) {
       if (power.binding != PowerBinding.hosted) continue;
-      expect(
-        power.fallback,
-        isNotNull,
-        reason: '${power.id} 是运行时托管能力，必须有降级方案',
-      );
+      expect(power.fallback, isNotNull, reason: '${power.id} 是运行时托管能力，必须有降级方案');
       expect(
         power.fallback!.hint.trim(),
         isNotEmpty,
@@ -62,7 +58,11 @@ void main() {
         expect(id, isNot(power.id), reason: '${power.id} 不能依赖自己');
       }
       for (final id in power.conflicts) {
-        expect(byId.containsKey(id), isTrue, reason: '${power.id} 冲突指向不存在的 $id');
+        expect(
+          byId.containsKey(id),
+          isTrue,
+          reason: '${power.id} 冲突指向不存在的 $id',
+        );
         expect(id, isNot(power.id), reason: '${power.id} 不能与自己冲突');
       }
     }
@@ -154,7 +154,11 @@ void main() {
   test('每条 hosted 能力都必须说明交付方式', () {
     for (final power in kPowerCatalog) {
       if (power.binding != PowerBinding.hosted) {
-        expect(power.delivery, isEmpty, reason: '${power.id} 不是 hosted，不应声明交付方式');
+        expect(
+          power.delivery,
+          isEmpty,
+          reason: '${power.id} 不是 hosted，不应声明交付方式',
+        );
         continue;
       }
       expect(
@@ -169,14 +173,30 @@ void main() {
     // assets/arcade 下 15 个游戏在 manifest.json 里被明确承诺不改动。
     // 能用在它们身上的能力，必须是「作品本来就在调标准 Web API、宿主只换答复」
     // 那一类 —— 需要作品主动订阅的能力对黑盒不成立。
-    final sealed = kPowerCatalog.where((p) => p.worksOnSealedGames).map((p) => p.id).toSet();
+    final sealed = kPowerCatalog
+        .where((p) => p.worksOnSealedGames)
+        .map((p) => p.id)
+        .toSet();
     expect(sealed, {
-      'cameraAr', 'microphoneVoice', 'gestureVision', 'motionHaptic',
-      'devicePosture', 'faceExpression', 'bodyPose', 'environmentScan',
-      'geoLocation', 'compassHeading',
+      'cameraAr',
+      'microphoneVoice',
+      'gestureVision',
+      'motionHaptic',
+      'devicePosture',
+      'faceExpression',
+      'bodyPose',
+      'environmentScan',
+      'geoLocation',
+      'compassHeading',
     });
     // 反向确认：WebView 里根本没有对应 Web API 的，一定不在这张表里。
-    for (final id in ['stepActivity', 'proximityLink', 'ambientSensing', 'multiplayer', 'kolTwin']) {
+    for (final id in [
+      'stepActivity',
+      'proximityLink',
+      'ambientSensing',
+      'multiplayer',
+      'kolTwin',
+    ]) {
       expect(sealed, isNot(contains(id)), reason: '$id 需要作品配合，对黑盒不成立');
     }
   });
@@ -189,7 +209,12 @@ void main() {
     // 用集合而不是列表：这条测试守的是「哪些能力需要实时服务」，
     // 不是它们在目录里的先后。目录顺序决定的是界面展示次序，
     // 属于产品编排，改动它不该让这条红。
-    expect(serviceIds, {'musicRecognition', 'chatDm', 'multiplayer', 'kolTwin'});
+    expect(serviceIds, {
+      'musicRecognition',
+      'chatDm',
+      'multiplayer',
+      'kolTwin',
+    });
     for (final id in serviceIds) {
       expect(byId[id]!.isDisplayOnlyLocally, isTrue);
     }

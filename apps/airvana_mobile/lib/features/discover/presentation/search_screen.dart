@@ -363,7 +363,11 @@ class _Results extends StatelessWidget {
         return ListTile(
           key: ValueKey('search-result-${hit.kind}-${hit.title}'),
           title: _Highlighted(text: hit.title, ranges: hit.titleRanges),
-          subtitle: Text(hit.subtitle, maxLines: 1, overflow: TextOverflow.ellipsis),
+          subtitle: Text(
+            hit.subtitle,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
           leading: _KindBadge(kind: hit.kind),
           trailing: hit.playableId == null
               ? null
@@ -397,7 +401,11 @@ class _KindBadge extends StatelessWidget {
       ),
       child: Text(
         kind,
-        style: TextStyle(fontSize: 10, fontWeight: FontWeight.w800, color: color),
+        style: TextStyle(
+          fontSize: 10,
+          fontWeight: FontWeight.w800,
+          color: color,
+        ),
       ),
     );
   }
@@ -415,7 +423,12 @@ class _Highlighted extends StatelessWidget {
   Widget build(BuildContext context) {
     final base = Theme.of(context).textTheme.bodyLarge;
     if (ranges.isEmpty) {
-      return Text(text, maxLines: 1, overflow: TextOverflow.ellipsis, style: base);
+      return Text(
+        text,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+        style: base,
+      );
     }
     final spans = <TextSpan>[];
     var cursor = 0;

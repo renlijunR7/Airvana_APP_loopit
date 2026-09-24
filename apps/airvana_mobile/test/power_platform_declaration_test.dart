@@ -89,7 +89,8 @@ void main() {
         expect(
           androidManifest.contains('android:name="$name"'),
           isTrue,
-          reason: '$permission 需要 $name，但 AndroidManifest.xml 里没有。'
+          reason:
+              '$permission 需要 $name，但 AndroidManifest.xml 里没有。'
               '后果是运行期申请被系统静默否决，且不弹任何窗。',
         );
       }
@@ -125,7 +126,9 @@ void main() {
 
   test('Android：蓝牙扫描声明 neverForLocation，避免连带索要定位权限', () {
     expect(
-      androidManifest.contains('android:usesPermissionFlags="neverForLocation"'),
+      androidManifest.contains(
+        'android:usesPermissionFlags="neverForLocation"',
+      ),
       isTrue,
     );
   });
@@ -141,7 +144,8 @@ void main() {
       // 取出该键后面的第一段 string，确认不是占位符。
       final index = infoPlist.indexOf('<key>$key</key>');
       final tail = infoPlist.substring(index);
-      final value = RegExp(r'<string>([^<]*)</string>').firstMatch(tail)?.group(1) ?? '';
+      final value =
+          RegExp(r'<string>([^<]*)</string>').firstMatch(tail)?.group(1) ?? '';
       expect(
         value.trim().length,
         greaterThan(10),
@@ -156,7 +160,8 @@ void main() {
       expect(
         podfile.contains('$macro=1'),
         isTrue,
-        reason: '$permission 需要 Podfile 里的 $macro=1。'
+        reason:
+            '$permission 需要 Podfile 里的 $macro=1。'
             '缺了不会报错，只会让申请直接返回 permanentlyDenied 且不弹窗。',
       );
     }
