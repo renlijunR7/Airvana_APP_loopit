@@ -149,6 +149,7 @@ class _CreatePlayableScreenState extends State<CreatePlayableScreen> {
     'operations': '草稿、版本、审核、发布、归因与智能运营',
     'other': '实验型、跨媒介与专用创作能力',
   };
+
   /// 能力目录。**唯一数据源是 domain 层的 [kPowerCatalog]**，这里只做表现层适配。
   ///
   /// 在此之前这 48 条是内联在本文件里的常量数组，而 Web 端另有两份
@@ -5086,11 +5087,6 @@ class _ComposerPowerTile extends StatelessWidget {
   final String? recommendationLabel;
   final VoidCallback onTap;
 
-  static String _assetName(String id) => id.replaceAllMapped(
-    RegExp(r'[A-Z]'),
-    (match) => '-${match.group(0)!.toLowerCase()}',
-  );
-
   LinearGradient get _cardGradient => switch (power.category) {
     'content' => const LinearGradient(
       begin: Alignment.topLeft,
@@ -5225,7 +5221,7 @@ class _ComposerPowerTile extends StatelessWidget {
               ),
               clipBehavior: Clip.antiAlias,
               child: Image.asset(
-                'assets/legacy/capability-icons/${_assetName(power.id)}.png',
+                powerIconAssetPath(power.id),
                 fit: BoxFit.cover,
                 errorBuilder: (_, __, ___) => Container(
                   color: const Color(0xFF2C2C34),

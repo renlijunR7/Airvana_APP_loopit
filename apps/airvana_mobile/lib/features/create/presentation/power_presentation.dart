@@ -9,6 +9,15 @@ import 'package:flutter/material.dart';
 
 import '../../shared/domain/power_capability.dart';
 
+/// Power 卡片的彩色图标路径，与资源覆盖测试共用命名规则。
+String powerIconAssetPath(String id) {
+  final assetName = id.replaceAllMapped(
+    RegExp(r'[A-Z]'),
+    (match) => '-${match.group(0)!.toLowerCase()}',
+  );
+  return 'assets/legacy/capability-icons/$assetName.png';
+}
+
 /// 按 Power id 取图标。
 const Map<String, IconData> kPowerIcons = <String, IconData>{
   'textTypography': Icons.text_fields_rounded,
