@@ -106,7 +106,7 @@ void main() {
     // 这条断言只锁 38 款经典游戏仍统一使用 casual-v1 封面。
     final playables = LegacyDemoCatalog.legacyWebPlayables;
     // Web 基线 64 条 + 项目自有新增 1 条。
-    expect(playables, hasLength(68));
+    expect(playables, hasLength(71));
     final classic = playables
         .where(
           (item) => item.coverAsset.startsWith(

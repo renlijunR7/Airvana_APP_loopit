@@ -93,6 +93,15 @@ flutter:
     - assets/runner/assets/games/reference-screenshots-v1/
     - assets/arcade/
     - assets/arcade/_shared/three/
+    - assets/arcade/poker-training/
+    - assets/arcade/poker-training/src/
+    - assets/arcade/poker-training/src/environments/
+    - assets/arcade/poker-training/vendor/
+    - assets/arcade/poker-training/assets/
+    - assets/arcade/poker-training/assets/characters/
+    - assets/arcade/hide-online/
+    - assets/arcade/hide-online/assets/
+    - assets/arcade/pelican-bike/
     - assets/arcade/ice-float-party/
     - assets/arcade/magic-choir-replica/
     - assets/arcade/ice-float-party/assets/

@@ -902,6 +902,59 @@ abstract final class LegacyDemoCatalog {
       localDemo: true,
       standaloneAsset: 'assets/arcade/coin-dozer/index.html',
     ),
+    // 来源包名为 pokerstars-free-training，其 PROVENANCE.md 自述
+    // 「Commercial trademark/asset permission: not provided or verified」。
+    // 入库前已移除全部未授权商标与指向真实博彩运营商的外链：wordmark 图片、
+    // 页面标题、牌桌绒面烫印（scene.js 的 textPlane）、以及「了解免费玩法」
+    // 的站外 CTA。玩法本身不依赖这些。
+    Playable(
+      id: 'plb_poker_training',
+      title: '德州扑克新手训练桌 Free Training',
+      authorName: 'Airvana Studio',
+      contentType: 'game',
+      version: 1,
+      summary: '固定教学局带你走完第一手，再进自由练习；虚拟筹码不可兑换，无现金奖励。',
+      coverAsset: 'assets/featured-originals-v2/poker-training.png',
+      stage: '完整试玩',
+      agentName: 'Nova',
+      ownerHandle: '@airvana.studio',
+      category: '独立打包游戏',
+      instruction: '点「开始免费教学」走完固定教学局，复盘后可进入自由练习；拖动可旋转视角。',
+      localDemo: true,
+      standaloneAsset: 'assets/arcade/poker-training/index.html',
+    ),
+    Playable(
+      id: 'plb_hide_online',
+      title: '办公室捉迷藏 Hide Online',
+      authorName: 'Airvana Studio',
+      contentType: 'game',
+      version: 1,
+      summary: '变成办公室里的任意物品藏起来，或拿起武器找出那个不对劲的家伙。',
+      coverAsset: 'assets/featured-originals-v2/hide-online.png',
+      stage: '完整试玩',
+      agentName: 'Nova',
+      ownerHandle: '@airvana.studio',
+      category: '独立打包游戏',
+      instruction: '选阵营后开始：躲藏者用摇杆移动、点「变身」化作物品；猎人仔细观察找出伪装。',
+      localDemo: true,
+      standaloneAsset: 'assets/arcade/hide-online/index.html',
+    ),
+    Playable(
+      id: 'plb_pelican_bike',
+      title: '鹈鹕骑单车 Pelican on a Bike',
+      authorName: 'Airvana Studio',
+      contentType: 'game',
+      version: 1,
+      summary: '白鹤沿着古单车海岸线滑行，黄昏、星空、激浪与路灯全部实时生成。',
+      coverAsset: 'assets/featured-originals-v2/pelican-bike.png',
+      stage: '完整试玩',
+      agentName: 'Mochi',
+      ownerHandle: '@airvana.studio',
+      category: '独立打包游戏',
+      instruction: '点「开始骑行」后用左右按钮转向、上下调速；可切换自由巡航、追逐、礼盒雨等模式。',
+      localDemo: true,
+      standaloneAsset: 'assets/arcade/pelican-bike/index.html',
+    ),
     Playable(
       id: 'plb_magic_choir_replica',
       title: '魔法合唱团 Magic Choir',
@@ -1159,6 +1212,9 @@ abstract final class LegacyDemoCatalog {
   /// order silently change what users see first.
   static const _legacyWebOrder = <String>[
     // 项目自有新增作品排在 Web 基线之前；Web 那 64 条的相对顺序保持不变。
+    'plb_poker_training',
+    'plb_hide_online',
+    'plb_pelican_bike',
     'plb_magic_choir_replica',
     'plb_ice_float_party',
     'plb_gesture_fruit_slice',
