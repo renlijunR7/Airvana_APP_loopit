@@ -511,8 +511,10 @@ class _LegacyDiscoverSection extends StatelessWidget {
         style: const TextStyle(color: AirvanaColors.muted, fontSize: 10),
       ),
       const SizedBox(height: 12),
+      // 高度跟着卡片走。原来写死 302 是按 Web 的 148px 宽卡片量的；这里一行
+      // 排 3 张、卡片更窄也更矮，写死会在每个分区底下留出几十像素的空白。
       SizedBox(
-        height: 302,
+        height: _LegacyDiscoverCardFrame.railHeight(context),
         child: ListView.separated(
           scrollDirection: Axis.horizontal,
           itemCount: cards.length,
@@ -697,6 +699,26 @@ class _LegacyDiscoverCardFrame extends StatelessWidget {
   final VoidCallback onTap;
   final Widget cover;
 
+  /// 一行正好排 3 张：减去左右页边距和两条 10px 间隔后三等分。
+  static double cardWidth(BuildContext context) =>
+      (MediaQuery.sizeOf(context).width - AirvanaMetrics.pageGutter * 2 - 20) /
+      3;
+
+  /// 封面沿用原 148:226 的比例，避免换算后变形。
+  static double coverHeight(BuildContext context) =>
+      cardWidth(context) * 226 / 148;
+
+  /// 封面下方文字块的高度：8 + 标题 15 + 5 + 作者行 16 + 5 + 计数行 12。
+  /// 三个 TextStyle 都写死了 `height`，所以这串数字不随字体而变；
+  /// 再留 4px 余量给不同平台的基线取整。
+  static const _textBlockHeight = 8 + 15 + 5 + 16 + 5 + 12 + 4.0;
+
+  /// 横向栏应有的高度——正好装下一张卡片，不多留。
+  static double railHeight(BuildContext context) =>
+      coverHeight(context) + _textBlockHeight;
+
+  static const _statStyle = TextStyle(fontSize: 9, height: 1.3);
+
   @override
   Widget build(BuildContext context) => Semantics(
     button: true,
@@ -706,14 +728,8 @@ class _LegacyDiscoverCardFrame extends StatelessWidget {
       borderRadius: BorderRadius.circular(13),
       child: Builder(
         builder: (context) {
-          // 一行正好排 3 张：减去左右页边距和两条 10px 间隔后三等分。
-          final width =
-              (MediaQuery.sizeOf(context).width -
-                  AirvanaMetrics.pageGutter * 2 -
-                  20) /
-              3;
-          // 封面沿用原 148:226 的比例，避免换算后变形。
-          final coverHeight = width * 226 / 148;
+          final width = cardWidth(context);
+          final coverHeight = _LegacyDiscoverCardFrame.coverHeight(context);
           return SizedBox(
             width: width,
             child: Column(
@@ -736,6 +752,7 @@ class _LegacyDiscoverCardFrame extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
                       fontSize: 12,
+                      height: 1.25,
                       fontWeight: FontWeight.w900,
                     ),
                   ),
@@ -761,6 +778,7 @@ class _LegacyDiscoverCardFrame extends StatelessWidget {
                           style: const TextStyle(
                             color: AirvanaColors.muted,
                             fontSize: 9,
+                            height: 1.3,
                           ),
                         ),
                       ),
@@ -773,11 +791,11 @@ class _LegacyDiscoverCardFrame extends StatelessWidget {
                     children: [
                       const Icon(Icons.favorite_border_rounded, size: 12),
                       const SizedBox(width: 3),
-                      Text(likes, style: const TextStyle(fontSize: 9)),
+                      Text(likes, style: _statStyle),
                       const SizedBox(width: 10),
                       const Icon(Icons.chat_bubble_outline_rounded, size: 11),
                       const SizedBox(width: 3),
-                      Text(comments, style: const TextStyle(fontSize: 9)),
+                      Text(comments, style: _statStyle),
                     ],
                   ),
                 ),
