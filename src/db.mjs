@@ -439,27 +439,6 @@ function migrate(db) {
       updated_at TEXT NOT NULL
     );
 
-    CREATE TABLE IF NOT EXISTS ait_withdrawal_requests (
-      id TEXT PRIMARY KEY,
-      user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-      wallet_binding_id TEXT NOT NULL REFERENCES wallet_bindings(id),
-      currency TEXT NOT NULL CHECK(currency = 'AIT'),
-      amount INTEGER NOT NULL CHECK(amount > 0),
-      address TEXT NOT NULL,
-      chain_id INTEGER NOT NULL,
-      status TEXT NOT NULL CHECK(status IN ('submitted','approved','processing','paid','rejected','cancelled')),
-      idempotency_key TEXT NOT NULL,
-      compliance_confirmed_at TEXT NOT NULL,
-      review_note TEXT,
-      reviewed_by TEXT REFERENCES users(id),
-      reviewed_at TEXT,
-      tx_hash TEXT,
-      paid_at TEXT,
-      created_at TEXT NOT NULL,
-      updated_at TEXT NOT NULL,
-      UNIQUE(user_id,idempotency_key)
-    );
-
     CREATE TABLE IF NOT EXISTS audit_logs (
       id TEXT PRIMARY KEY,
       actor_user_id TEXT,
@@ -712,7 +691,6 @@ function migrate(db) {
     CREATE INDEX IF NOT EXISTS idx_payment_settlements_user ON payment_settlements(user_id, status, created_at);
     CREATE INDEX IF NOT EXISTS idx_wallet_bindings_user ON wallet_bindings(user_id, status, is_primary);
     CREATE INDEX IF NOT EXISTS idx_wallet_binding_challenges_user ON wallet_binding_challenges(user_id, expires_at);
-    CREATE INDEX IF NOT EXISTS idx_ait_withdrawals_user ON ait_withdrawal_requests(user_id, status, created_at);
     CREATE INDEX IF NOT EXISTS idx_campaign_status ON campaigns(status, starts_at, ends_at);
     CREATE INDEX IF NOT EXISTS idx_deliverables_campaign ON campaign_deliverables(campaign_id, status);
     CREATE INDEX IF NOT EXISTS idx_runtime_sessions_user ON runtime_sessions(user_id, content_id, created_at);

@@ -3924,8 +3924,23 @@ class Component extends DCLogic {
   }
   copyText(text, success) {
     const done = () => this.toast(success || '已复制');
-    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done).catch(() => this.toast('复制失败，请手动复制'));
-    else this.toast('当前浏览器不支持自动复制');
+    const fallback = () => {
+      try {
+        const area = document.createElement('textarea');
+        area.value = text;
+        area.setAttribute('readonly', '');
+        area.style.cssText = 'position:fixed;top:-999px;left:-999px;opacity:0';
+        document.body.appendChild(area);
+        area.select();
+        area.setSelectionRange(0, area.value.length);
+        const ok = document.execCommand('copy');
+        document.body.removeChild(area);
+        if (ok) { done(); return; }
+      } catch {}
+      window.prompt('自动复制不可用，请长按/全选后手动复制：', text);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done).catch(fallback);
+    else fallback();
   }
   scrollPanelTop() {
     requestAnimationFrame(()=>{

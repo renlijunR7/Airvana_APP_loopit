@@ -155,8 +155,8 @@ test('creator binds an optional settlement wallet and Contract-bound AIT complet
   assert.equal((await req(`/api/admin/payment-settlements/${payment.data.record.id}/review`, { method: 'POST', cookie: admin, body: { decision: 'approve', note: 'Contract 与收款主体已复核' } })).data.settlement.status, 'approved');
   const completed = await req(`/api/admin/payment-settlements/${payment.data.record.id}/complete`, { method: 'POST', cookie: admin, body: { paymentReference: 'provider:payment-api-1', receiptReference: 'receipt:payment-api-1' } });
   assert.equal(completed.data.record.status, 'paid');
-  const retiredWithdrawal = await req('/api/ait-withdrawals', { method: 'POST', cookie: creator, body: { amount: 1 } });
-  assert.equal(retiredWithdrawal.response.status, 410);
+  const removedWithdrawal = await req('/api/ait-withdrawals', { method: 'POST', cookie: creator, body: { amount: 1 } });
+  assert.equal(removedWithdrawal.response.status, 404);
   const finalData = await bootstrap(creator);
   assert.equal(finalData.walletBindings[0].address, wallet.address.toLowerCase());
   assert.equal(finalData.economy.ait.settled, 80);
@@ -309,8 +309,8 @@ test('campaign contract, platform review, delivery approval and AIT settlement c
   assert.equal(platformApproval.data.status, 'platform_approved');
   const approvalTrail = (await bootstrap(brand.cookie)).settlements.find(item => item.id === settlement.id).approvals;
   assert.deepEqual(approvalTrail.map(item => item.decision), ['brand_confirmed', 'approved']);
-  const retiredIssue = await req(`/api/settlements/${settlement.id}/issue`, { method: 'POST', cookie: brand.cookie });
-  assert.equal(retiredIssue.response.status, 410);
+  const removedIssue = await req(`/api/settlements/${settlement.id}/issue`, { method: 'POST', cookie: brand.cookie });
+  assert.equal(removedIssue.response.status, 404);
   const contract = await req(`/api/campaigns/${campaign.id}/economy-contract`, { method: 'POST', cookie: brand.cookie, body: {
     contractVersion: 'economy-contract-v1', primarySuccessEvent: 'wallet_safety_complete',
     playerRule: { perUserCapAit: 50, amountAit: 50 }, creatorRule: { perUserCapAit: 500, amountAit: 500, eventTypes: ['delivery_approved'] },

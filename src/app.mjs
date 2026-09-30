@@ -19,7 +19,7 @@ import {
   sendJson, sha256, uid,
 } from './utils.mjs';
 
-const MIME = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.svg': 'image/svg+xml', '.png': 'image/png', '.webp': 'image/webp', '.mp4': 'video/mp4', '.ico': 'image/x-icon' };
+const MIME = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.json': 'application/json; charset=utf-8', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp', '.mp4': 'video/mp4', '.ico': 'image/x-icon' };
 const CONTENT_TYPES = new Set(['game', 'video', 'article']);
 const AGENT_TYPES = new Set(['game', 'video', 'article', 'all']);
 const PERMISSION_KEYS = ['draft', 'readAnalytics', 'useBrandAssets', 'publish'];
@@ -343,7 +343,7 @@ function loadBootstrap(db, user, ai) {
   const creatorApplications = user.role === 'admin'
     ? db.prepare(`SELECT a.*,u.display_name user_name FROM creator_applications a JOIN users u ON u.id=a.user_id ORDER BY a.created_at DESC LIMIT 100`).all()
     : db.prepare(`SELECT * FROM creator_applications WHERE user_id=? ORDER BY created_at DESC LIMIT 20`).all(user.id);
-  return { me: publicEconomyUser(db, user), ai: ai.info, points: { AIP: economy.aip.available, AIT: economy.ait.available }, economy, creatorApplications, aitEntitlements, benefitClaims, paymentSettlements, ledgerAppeals, aitWithdrawal: { retired: true, available: 0, reason: 'AIT 是 Campaign 权益与收益凭证，不支持通用提现' }, walletBindings, aitWithdrawals: [], stats, organization: organization && { id: organization.id, name: organization.name, verificationStatus: organization.verification_status, verificationNote: organization.verification_note }, organizations, participants, attribution, runtimeEnabled, agents, agentMemories, contents, artifacts, activeBoosts, feed, tasks, taskSteps, ledger, managedPointEvents, campaigns, deliverables, settlements, notifications, sessions, termsAcceptances, deletionRequest, riskCases, reports, contentAppeals, appealableContentIds, auditLogs };
+  return { me: publicEconomyUser(db, user), ai: ai.info, points: { AIP: economy.aip.available, AIT: economy.ait.available }, economy, creatorApplications, aitEntitlements, benefitClaims, paymentSettlements, ledgerAppeals, walletBindings, stats, organization: organization && { id: organization.id, name: organization.name, verificationStatus: organization.verification_status, verificationNote: organization.verification_note }, organizations, participants, attribution, runtimeEnabled, agents, agentMemories, contents, artifacts, activeBoosts, feed, tasks, taskSteps, ledger, managedPointEvents, campaigns, deliverables, settlements, notifications, sessions, termsAcceptances, deletionRequest, riskCases, reports, contentAppeals, appealableContentIds, auditLogs };
 }
 
 function requireOwnedAgent(db, id, user) {
@@ -813,14 +813,7 @@ export function createApp(options = {}) {
         return sendJson(res, 200, { binding: serializeWalletBinding(binding) });
       }
 
-      if (pathname === '/api/ait-withdrawals' && req.method === 'POST') {
-        throw new HttpError(410, 'AIT 通用提现已下线；请从具体 Campaign AIT 权益发起权益申领或独立付款结算', 'ait_withdrawal_retired');
-      }
-
-      let params = routeMatch(pathname, '/api/ait-withdrawals/:id/cancel');
-      if (params && req.method === 'POST') {
-        throw new HttpError(410, 'AIT 通用提现已下线', 'ait_withdrawal_retired');
-      }
+      let params;
 
       if (pathname === '/api/agents' && req.method === 'POST') {
         const user = requireUser(db, req, ['creator']);
@@ -1496,11 +1489,6 @@ export function createApp(options = {}) {
         return sendJson(res, 200, { status: next });
       }
 
-      params = routeMatch(pathname, '/api/settlements/:id/issue');
-      if (params && req.method === 'POST') {
-        throw new HttpError(410, '旧 AIT 发放入口已下线；请创建获批 Contract 下的 AIT 权益记录', 'legacy_ait_issue_retired');
-      }
-
       params = routeMatch(pathname, '/api/organizations/:id/review');
       if (params && req.method === 'POST') {
         const user = requireUser(db, req, ['admin']);
@@ -1707,16 +1695,6 @@ export function createApp(options = {}) {
         db.prepare('UPDATE risk_cases SET status=?,resolution_note=?,resolved_by=?,updated_at=? WHERE id=?').run(next, String(body.note || '').slice(0, 500), user.id, isoNow(), risk.id);
         audit(db, { actorUserId: user.id, action: `risk.${next}`, subjectType: 'risk_case', subjectId: risk.id, after: { note: body.note || '' }, ipHash: ctx.ipHash });
         return sendJson(res, 200, { status: next });
-      }
-
-      params = routeMatch(pathname, '/api/admin/ait-withdrawals/:id/review');
-      if (params && req.method === 'POST') {
-        throw new HttpError(410, 'AIT 通用提现审核已下线', 'ait_withdrawal_retired');
-      }
-
-      params = routeMatch(pathname, '/api/admin/ait-withdrawals/:id/complete');
-      if (params && req.method === 'POST') {
-        throw new HttpError(410, 'AIT 通用提现完成入口已下线', 'ait_withdrawal_retired');
       }
 
       if (pathname === '/api/admin/points/adjust' && req.method === 'POST') {

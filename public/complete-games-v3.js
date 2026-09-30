@@ -140,7 +140,7 @@
     'ember-bastion': {id: 31, title: '赤焰防线', mechanic: 'defense', accent: '#D96045', secondary: '#D5B05B', surface: '#3D2D29', background: '#1A100E', instruction: '选择塔位部署守卫，自动攻击并阻止六波敌军'},
     'nova-drift': {id: 32, title: '新星漂移', mechanic: 'drift', accent: '#D24F49', secondary: '#4C9CB5', surface: '#28343C', background: '#0D151A', instruction: '按住左右完成连续弯道，保持在赛道安全区'},
     'void-squadron': {id: 33, title: '虚空小队', mechanic: 'shooter', accent: '#5C76D9', secondary: '#D45A8C', surface: '#242C4A', background: '#0A0E1D', instruction: '拖动编队自动射击，击破敌舰并收集护盾芯片'},
-    'orchard-merge': {id: 34, title: '果园合合塔', mechanic: 'merge', accent: '#7EA84E', secondary: '#D99A4D', surface: '#34402A', background: '#161E10', instruction: '移动相邻同级水果进行合成，培育最高级果实'},
+    'orchard-merge': {id: 34, title: '果园合合塔', mechanic: 'merge', accent: '#7EA84E', secondary: '#D99A4D', surface: '#34402A', background: '#161E10', instruction: '拖动或点选相邻同级水果进行合成，培育最高级果实'},
     'moonlight-tea-shop': {id: 36, title: '月光奶茶铺', mechanic: 'shop', heroCharacterId: 'chr_mina_vale', accent: '#4C9389', secondary: '#D9A46A', surface: '#2C403D', background: '#111E1C', instruction: '读取订单并依次完成茶底、奶量、配料和封杯'},
     'microbe-arena': {id: 37, title: '微粒竞技场', mechanic: 'io', accent: '#4CA29C', secondary: '#D97962', surface: '#25413F', background: '#0F2322', instruction: '拖动微粒吞噬更小目标，避开体型更大的本地机器人'},
     'crystal-bastion': {id: 39, title: '晶核防线', mechanic: 'defense', accent: '#4C9EA1', secondary: '#D2A754', surface: '#2B3E40', background: '#111E20', instruction: '在路径节点部署晶塔，管理能量守住三阶段石门'},
@@ -314,7 +314,7 @@
     initMerge() {
       const size = 5;
       const grid = Array.from({length: size * size}, (_, index) => (index + Math.floor(index / size)) % 3 + 1);
-      this.world = {size, grid, selected: -1, moves: 18, bestLevel: 3, goal: 4 + Math.min(this.stage, 2)};
+      this.world = {size, grid, selected: -1, dragFrom: -1, moves: 18, bestLevel: 3, goal: 4 + Math.min(this.stage, 2)};
     }
 
     initShop() {
@@ -597,7 +597,7 @@
         case 'defense': this.placeTower(point); break;
         case 'drift': world.steer = point.x < 180 ? -1 : 1; break;
         case 'shooter': world.ship.x = point.x; world.ship.y = clamp(point.y, 300, 505); break;
-        case 'merge': this.selectMerge(point); break;
+        case 'merge': this.pressMerge(point); break;
         case 'shop': this.selectShopStep(point); break;
         case 'io': world.player.x = point.x; world.player.y = clamp(point.y, 90, 520); break;
         case 'wardrobe': this.selectWardrobe(point); break;
@@ -629,6 +629,7 @@
       if (this.config.mechanic === 'fishing') this.releaseHook();
       if (this.config.mechanic === 'drift') this.world.steer = 0;
       if (this.config.mechanic === 'sort') this.endSort(point);
+      if (this.config.mechanic === 'merge') this.releaseMerge(point);
     }
 
     key(action) {
@@ -836,6 +837,22 @@
       if (world.energy < cost || world.towers[index] >= 3) { this.tone('hit'); return; }
       world.energy -= cost; world.towers[index] += 1; this.score += 20; this.tone('tap');
       this.emitInteraction('tower_place', {index, level: world.towers[index], energy: Number(world.energy.toFixed(1))});
+    }
+
+    pressMerge(point) {
+      this.world.dragFrom = this.boardCell(point, this.world.size, {x: 35, y: 126, w: 290, h: 290});
+      this.selectMerge(point);
+    }
+
+    releaseMerge(point) {
+      const world = this.world;
+      const from = world.dragFrom;
+      world.dragFrom = -1;
+      if (from == null || from < 0) return;
+      const cell = this.boardCell(point, world.size, {x: 35, y: 126, w: 290, h: 290});
+      if (cell < 0 || cell === from) return;
+      world.selected = from;
+      this.selectMerge(point);
     }
 
     selectMerge(point) {

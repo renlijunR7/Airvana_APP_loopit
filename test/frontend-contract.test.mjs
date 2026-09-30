@@ -396,8 +396,8 @@ test('wallet presents AIP, subscription allowances and Contract-bound AIT entitl
   assert.match(server, /pathname === '\/api\/wallet-bindings\/challenge'/);
   assert.match(server, /pathname === '\/api\/wallet-bindings\/verify'/);
   assert.match(server, /pathname === '\/api\/wallet-bindings\/validate-address'/);
-  assert.match(server, /pathname === '\/api\/ait-withdrawals'/);
-  assert.match(server, /'ait_withdrawal_retired'/);
+  assert.doesNotMatch(server, /\/api\/ait-withdrawals/);
+  assert.doesNotMatch(server, /ait_withdrawal_retired/);
   assert.match(server, /\/api\/ait-entitlements\/:id\/settlements/);
   assert.match(server, /\/api\/admin\/payment-settlements\/:id\/complete/);
   assert.doesNotMatch(mobileEntry, /AIP 提现/);
