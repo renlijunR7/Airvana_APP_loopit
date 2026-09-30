@@ -1,0 +1,62 @@
+[
+  {
+    "file": "male-suit.glb",
+    "bytes": 1031300,
+    "sha256": "488883a7bb52c076bae3ecd5fc32876c94bb1bab5052da585dba41b27e1b54d7",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "source": "https://drive.google.com/file/d/1NhXHnGU0zK9hBrT5FoZp8nTz_EmvTPg5/view",
+    "modification": "Converted from embedded glTF to GLB; retained Idle, Idle_Neutral, Interact, Wave; pruned unused animation buffer data.",
+    "note": "No sitting/poker-specific animation. Pure-color PBR materials; no external images."
+  },
+  {
+    "file": "male-casual.glb",
+    "bytes": 841528,
+    "sha256": "c31229b3be7632968a31aa21beca4b620303c1c56e564c6e6ff1df6081a2052c",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "source": "https://drive.google.com/file/d/1Jn7kULNmrtqP8BUUL19h8MhbdOnwPFhv/view",
+    "modification": "Converted from embedded glTF to GLB; retained Idle, Idle_Neutral, Interact, Wave; pruned unused animation buffer data.",
+    "note": "No sitting/poker-specific animation. Pure-color PBR materials; no external images."
+  },
+  {
+    "file": "male-punk.glb",
+    "bytes": 798392,
+    "sha256": "8189734fa0bb6c16303aff3cade9f1f93bcbf4521bacf133eb6dee77fe26c69b",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "source": "https://drive.google.com/file/d/1yHWu5ezXq4dYBcn4sWiNd16YN9fMtXo0/view",
+    "modification": "Converted from embedded glTF to GLB; retained Idle, Idle_Neutral, Interact, Wave; pruned unused animation buffer data.",
+    "note": "No sitting/poker-specific animation. Pure-color PBR materials; no external images."
+  },
+  {
+    "file": "female-formal.glb",
+    "bytes": 863268,
+    "sha256": "c7e16f3335d845125b40ce30b74e3d09b23d22bc6ee7c7a07ab6b50cb698e550",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "source": "https://drive.google.com/file/d/1iayBzVv_zLjuPtaNPouw_auwKlQLLmes/view",
+    "modification": "Converted from embedded glTF to GLB; retained Idle, Idle_Neutral, Interact, Wave; pruned unused animation buffer data.",
+    "note": "No sitting/poker-specific animation. Pure-color PBR materials; no external images."
+  },
+  {
+    "file": "female-suit.glb",
+    "bytes": 907244,
+    "sha256": "dd1cc6918331b343565968ba9922fd5440e9782954e9ecb6447b348b670febc1",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "source": "https://drive.google.com/file/d/1GjWtofxjmPku25cXJxHrzLLeUbXw7A_s/view",
+    "modification": "Converted from embedded glTF to GLB; retained Idle, Idle_Neutral, Interact, Wave; pruned unused animation buffer data.",
+    "note": "No sitting/poker-specific animation. Pure-color PBR materials; no external images."
+  },
+  {
+    "file": "female-punk.glb",
+    "bytes": 847336,
+    "sha256": "ae139a48661cddd18d37a7fc4c4c625841e289094b18b609dce53ae361107392",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "source": "https://drive.google.com/file/d/1ITb_iFiroAsmjQI38z_p6nNXinwliVLA/view",
+    "modification": "Converted from embedded glTF to GLB; retained Idle, Idle_Neutral, Interact, Wave; pruned unused animation buffer data.",
+    "note": "No sitting/poker-specific animation. Pure-color PBR materials; no external images."
+  }
+]

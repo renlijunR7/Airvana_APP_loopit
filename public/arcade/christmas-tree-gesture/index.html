@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <title>Christmas Tree Gesture</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main id="app">
+    <section id="customizer" class="screen customizer" aria-label="圣诞树定制">
+      <div class="status-bar" aria-hidden="true">
+        <span id="clock">3:24</span>
+        <span class="status-icons">▮▮▮ ᯤ <b>100</b></span>
+      </div>
+
+      <header class="topbar">
+        <button id="backButton" class="back-button" aria-label="返回">←</button>
+        <h1>Custom</h1>
+        <span class="topbar-spacer"></span>
+      </header>
+
+      <div id="progress" class="progress" aria-label="步骤 1，共 4 步">
+        <span class="progress-line"><i></i></span>
+        <button class="progress-dot active" data-step="0" aria-label="第 1 步"></button>
+        <button class="progress-dot" data-step="1" aria-label="第 2 步"></button>
+        <button class="progress-dot" data-step="2" aria-label="第 3 步"></button>
+        <button class="progress-dot" data-step="3" aria-label="第 4 步"></button>
+      </div>
+
+      <div class="steps">
+        <section class="step active" data-step="0">
+          <h2>Choose card purpose</h2>
+          <div class="purpose-grid">
+            <button class="purpose-card selected" data-purpose="Holiday">
+              <span class="card-face"><span class="purpose-emoji">🏝️</span></span>
+              <strong>Holiday</strong>
+            </button>
+            <button class="purpose-card" data-purpose="Magic">
+              <span class="card-face"><span class="purpose-emoji">🪄</span></span>
+              <strong>Magic</strong>
+            </button>
+          </div>
+        </section>
+
+        <section class="step" data-step="1">
+          <div class="tree-preview"><canvas class="mini-tree" width="520" height="660"></canvas></div>
+          <h2>Choose card style</h2>
+          <div class="choice-row">
+            <button class="pill-choice selected" data-style="tree">Christmas Tree</button>
+            <button class="pill-choice" data-style="explore">Christmas Explore</button>
+          </div>
+        </section>
+
+        <section class="step context-step" data-step="2">
+          <div class="tree-preview compact"><canvas class="mini-tree" width="520" height="660"></canvas></div>
+          <h2>Custom context</h2>
+          <label class="toggle-row">Images <input id="imageToggle" type="checkbox" /><span class="toggle"></span></label>
+          <label class="field-label">Main Message
+            <span class="text-box"><input id="mainMessage" maxlength="30" placeholder="Send to my love" /><i><span>0</span>/30</i></span>
+          </label>
+          <label class="field-label">Subtext
+            <span class="text-box"><input id="subMessage" maxlength="30" placeholder="Merry Christmas" /><i><span>0</span>/30</i></span>
+          </label>
+        </section>
+
+        <section class="step action-step" data-step="3">
+          <div class="tree-preview compact"><canvas class="mini-tree" width="520" height="660"></canvas><span class="preview-copy">1&nbsp;&nbsp; 2&nbsp;&nbsp; 3</span></div>
+          <h2>Choose text action</h2>
+          <h3>Action</h3>
+          <div id="gesturePicker" class="gesture-picker" aria-label="手势列表"></div>
+          <h3>You can custom</h3>
+          <div id="customActions" class="custom-actions"></div>
+        </section>
+      </div>
+
+      <div class="bottom-cta"><button id="nextButton" class="primary-button">Next</button></div>
+    </section>
+
+    <section id="experience" class="screen experience" hidden aria-label="手势控制粒子圣诞树">
+      <canvas id="particleCanvas"></canvas>
+      <div class="experience-status status-bar" aria-hidden="true">
+        <span id="playClock">3:24</span><span class="camera-dot"></span>
+        <span class="status-icons">▮▮▮ ᯤ <b>100</b></span>
+      </div>
+      <button id="closeExperience" class="close-experience" aria-label="退出体验">×</button>
+      <div id="cameraPanel" class="camera-panel">
+        <video id="cameraVideo" autoplay muted playsinline></video>
+        <button id="cameraFallback" type="button" aria-label="开启前置摄像头">
+          <span class="camera-icon" aria-hidden="true"></span>
+          <strong>开启摄像头</strong>
+          <small>显示你的实时手势</small>
+        </button>
+        <div id="recognitionStatus" class="recognition-status" aria-live="polite">等待摄像头</div>
+      </div>
+      <div id="messageOverlay" class="message-overlay">
+        <strong id="displayMain">Merry Christmas</strong>
+        <span id="displaySub">Made with a little magic ✨</span>
+      </div>
+      <button id="recordButton" class="record-button" aria-label="录制"><span></span></button>
+      <div id="gestureHint" class="gesture-hint">展示拳头，让圣诞树聚拢</div>
+      <aside class="action-dock">
+        <h2>Action:</h2>
+        <div id="actionCarousel" class="action-carousel"></div>
+      </aside>
+    </section>
+  </main>
+  <div id="toast" class="toast" role="status"></div>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

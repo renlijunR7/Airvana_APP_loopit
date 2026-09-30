@@ -1,0 +1,73 @@
+/* Free learning concept: brand red, legible cards, touch-first lesson flow. */
+:root{--brand:#e82738;--brand-light:#ff8993}
+a{color:inherit}button,a,input{touch-action:manipulation}
+.wordmark{display:block;font-family:Arial,"PingFang SC",sans-serif;letter-spacing:0;text-shadow:none}
+.wordmark img{display:block;width:172px;height:auto;border-radius:4px}
+.wordmark small{font-size:9px;text-align:left;letter-spacing:1px;color:#fff1e7;margin-top:7px;line-height:1.45}
+.wordmark small span{display:inline;margin-left:8px;font-size:8px;color:#c1c4c4;letter-spacing:0}
+.room-meta{margin-left:8px}.topbar{height:62px;gap:22px}
+.primary-button{background:var(--brand);border-color:var(--brand);color:white;border-radius:4px;letter-spacing:.3px}
+.primary-button:hover{background:#fb3b4b;box-shadow:0 0 25px #f32a3833}
+.secondary-button{border-radius:4px;min-height:44px}
+.lobby-panel{width:390px;top:52%;transform:translateY(-45%)}
+.lobby-panel h1{font-size:52px;line-height:1.3;letter-spacing:1px;font-weight:650;margin:22px 0 18px}
+.lobby-panel h1 em{font-style:normal;color:#f3dedb}.lobby-desc{font-size:14px;color:#d0d4cf;line-height:1.9}
+.lobby-panel .eyebrow{color:#ff9499;font-size:10px;letter-spacing:2.5px}.lobby-panel .eyebrow>span{background:var(--brand)}
+.training-benefits{display:flex;gap:16px;color:#eadbd0;font-size:10px;margin-top:22px}
+.table-info{margin:27px 0 24px}.table-info small{color:#bfc6bf}.table-info b{font-family:inherit;font-size:22px}
+.practice-link{display:block;border:0;background:transparent;color:#e3e6dd;font-size:12px;min-height:44px;padding:12px 0;text-align:center;width:100%}
+.practice-link:hover{color:#ffadb0}.lobby-foot{font-size:10px;color:#c0c8c0;margin:8px 0;line-height:1.5}
+.prototype-note{font-size:9px;color:#969f97;margin:0;line-height:1.5}.scene-switcher{top:109px}
+.coach-panel{position:absolute;left:3.5%;top:174px;width:292px;z-index:8;border:1px solid #f28d9855;border-radius:10px;background:linear-gradient(130deg,#1b2325f5,#121b20e8);box-shadow:0 9px 32px #0004;padding:15px 17px;backdrop-filter:blur(15px)}
+.coach-top{display:flex;align-items:center;justify-content:space-between;font-size:10px;letter-spacing:1px;color:#f4d5d7}.coach-top b{color:#b7c5c8;font-size:9px;font-weight:400;margin-left:9px}.coach-top button{border:1px solid #879eaa55;border-radius:50%;background:#ffffff06;width:32px;height:32px;flex-shrink:0;font-size:20px;line-height:1}
+.coach-progress{display:flex;gap:5px;margin:13px 0 15px}.coach-progress span{flex:1;border-top:2px solid #ffffff25;padding-top:7px;font-size:9px;color:#819391;text-align:center}.coach-progress .current{border-color:var(--brand);color:#ffb6bb}.coach-progress .done{border-color:#b4d5c4;color:#cadbd3}
+.coach-panel h2{font-size:18px;font-weight:600;margin:0 0 9px;color:#fcf6ed;line-height:1.4}.coach-panel p{font-size:12px;line-height:1.85;color:#c9d3d0;margin:0 0 10px}.coach-tip{font-size:11px;line-height:1.7;color:#ffe5d6;border-left:2px solid var(--brand);padding:7px 9px;background:#f48b9a0b}.coach-note{display:block;margin-top:13px;color:#8e9f9b;font-size:9px;line-height:1.5}.coach-panel.is-collapsed #coach-copy,.coach-panel.is-collapsed .coach-note{display:none}.coach-panel.is-collapsed .coach-progress{margin-bottom:0}
+.call-action.is-guided{background:#ae26304f;box-shadow:inset 0 0 30px #ee5d5830}.call-action.is-guided strong{color:#fff}.call-action.is-guided .action-symbol{border-color:#ff8993;color:#ffb4b9}
+.card.is-best{border:2px solid #ffe296;box-shadow:0 0 12px #ffdd7566}.rep-medallion{display:none}
+.training-result{z-index:10!important;width:390px!important;max-height:calc(100dvh - 130px);overflow-y:auto;right:5%!important;bottom:65px!important;padding:26px!important;border:1px solid #dc89925c!important;border-radius:12px;background:linear-gradient(145deg,#1b2428fa,#10191efa)!important;backdrop-filter:blur(20px)}
+.training-result h2{font-size:25px!important;margin:10px 0!important}.training-result>.eyebrow{font-size:9px;color:#ff969c;letter-spacing:2px}.training-result>p{color:#bccbc9;font-size:11px;line-height:1.6}
+.review-badge{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:#c6314033;border:1px solid #ed65748c;color:#ffb5bc;font-size:21px;margin-bottom:17px}
+.review-hand-label{display:flex;align-items:center;justify-content:space-between;margin-top:19px;font-size:10px;color:#a1b1ac}.review-hand-label strong{font-size:15px;color:#fff2de}.training-result .best-hand{margin:12px 0 16px;justify-content:flex-start;gap:7px}.training-result .best-hand .card{width:43px;height:60px}
+.review-lessons{list-style:none;padding:0;margin:14px 0 20px;display:grid;gap:9px}.review-lessons li{font-size:11px;line-height:1.7;color:#dae1da;padding-left:15px;position:relative}.review-lessons li:before{content:'✓';position:absolute;left:0;color:#c9d994}
+.training-result .primary-button{width:100%;font-size:12px;min-height:48px}.training-result .cta-caption{font-size:9px;color:#8fa49e;text-align:center;margin:8px 0 12px!important}
+.review-actions{display:flex;gap:10px}.review-actions button{flex:1;font-size:11px;padding:10px;min-width:0}.review-disclosure{font-size:9px!important;text-align:center;margin:15px 0 0!important;color:#9aaaa5!important;line-height:1.7!important}
+.learn-more-link{display:block;border:1px solid #dd596166;background:#e6374210;color:#ffd4d3;width:100%;min-height:44px;font-size:10px;border-radius:4px;margin-top:12px}
+.free-play-tag{font-size:11px;letter-spacing:2px;color:#ff939a;margin-bottom:18px}.free-play-steps{margin:22px 0;display:grid;gap:14px}.free-play-steps>div{display:flex;gap:15px;align-items:center;font-size:12px;line-height:1.7}.free-play-steps b{font-size:18px;color:#ff8993;font-family:Georgia,serif}.external-note{font-size:11px!important;border-top:1px solid #ffffff20;padding-top:15px;color:#aabbaf!important}.external-link{display:block;text-decoration:none;text-align:center;line-height:1.6;margin-top:20px}
+.local-funnel{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0}.local-funnel>div{padding:12px 10px;border:1px solid #a2b8a633;border-radius:5px}.local-funnel span{font-size:10px;color:#a8baaf;display:block}.local-funnel strong{font-size:23px;font-weight:400;display:block;margin-top:8px}
+#modal{max-height:calc(100dvh - 32px);overflow:auto}#modal-content button{min-height:44px}#modal-content .settings-row{gap:15px}.settings-row button{font-size:11px}
+.result-panel:not(.training-result){max-height:calc(100dvh - 130px);overflow:auto}
+.simple-table-message{position:absolute;top:25%;width:100%;text-align:center;color:#a4c7bc;font-size:11px}.simple-table #scene{background:radial-gradient(ellipse at 50% 45%,#225d4b,#152a28 55%,#0c171a)}
+.simple-table #scene:after{content:'';position:absolute;inset:32% 12% 25%;border:10px solid #5e4d36;border-radius:50%;box-shadow:0 0 0 3px #a9936055}.simple-table .table-hud{top:42%}
+@media(min-width:1400px){.lobby-panel{left:8%}.training-result{right:7%!important}.coach-panel{left:4%;top:183px;width:310px}}
+@media(orientation:portrait){
+  .topbar{top:max(16px,env(safe-area-inset-top));height:55px;left:5%;right:5%}.wordmark img{width:142px}.wordmark small{font-size:9px;margin-top:6px;line-height:1.5;letter-spacing:.3px}.wordmark small span{display:block;margin-left:0;font-size:8px}.room-meta{display:none}.top-actions{gap:6px}.scene-switcher{top:99px;left:5%;font-size:10px;min-height:42px}
+  .lobby-panel{width:86%;max-width:400px;left:7%;top:auto;bottom:11%;transform:none}.lobby-panel h1{font-size:38px;line-height:1.25;margin:18px 0 14px}.lobby-desc{font-size:12px;line-height:1.9}.training-benefits{font-size:9px;gap:14px;margin-top:17px}.table-info{margin:22px 0}.table-info b{font-size:19px}.table-info>div{padding:0 22px}.lobby-panel .eyebrow{font-size:9px}.lobby-foot{font-size:9px}.prototype-note{font-size:8px}.practice-link{font-size:11px}
+  .coach-panel{top:151px;left:5%;width:90%;padding:10px 13px;border-radius:8px}.coach-top{font-size:9px}.coach-top button{width:32px;height:32px}.coach-progress{margin:4px 38px 10px 0;gap:5px}.coach-progress span{font-size:8px;padding-top:4px}.coach-panel h2{font-size:15px;margin:0 0 6px}.coach-panel p{font-size:10px;line-height:1.6;margin-bottom:7px}.coach-tip{font-size:10px;line-height:1.5;padding:5px 8px}.coach-note{font-size:8px;margin-top:7px}.coach-panel.is-collapsed .coach-progress{margin-right:0}
+  #game[data-mode="tutorial"] .table-hud,#game[data-mode="tutorial"] #scene[data-framing="scenic"] ~ .table-hud{top:44%}
+  .hero-panel{bottom:91px;left:6%}.hero-status>div>strong{font-size:24px}.hero-status>div>small{font-size:8px}.hero-status{align-self:flex-start;margin-left:10px}
+  .training-result{left:5%!important;right:5%!important;bottom:67px!important;width:90%!important;max-height:calc(100dvh - 163px);padding:20px!important;box-shadow:0 0 0 100vmax #050d146b}
+  .training-result .review-badge{width:30px;height:30px;font-size:18px;margin-bottom:12px}.training-result h2{font-size:24px!important}.training-result .best-hand .card{width:40px;height:56px}.review-hand-label{margin-top:15px}.review-lessons{margin:12px 0 16px;gap:7px}.review-disclosure{margin-top:12px!important;font-size:8px!important}.portrait-tip{font-size:8px;letter-spacing:0}.bottom-bar{gap:4px}.bottom-bar p{font-size:7px}.bottom-bar p span{padding:0 3px}
+  .local-funnel{grid-template-columns:repeat(2,1fr)}
+}
+@media(orientation:portrait) and (max-height:740px){
+  .lobby-panel{bottom:10%;max-height:calc(100dvh - 220px);overflow-y:auto;padding:2px 0}.lobby-panel h1{font-size:30px;margin:12px 0 10px}.lobby-desc{font-size:11px}.training-benefits{margin-top:12px;font-size:8px;gap:10px}.table-info{margin:17px 0}.table-info b{font-size:17px}.lobby-panel .primary-button{min-height:46px;padding:12px}.lobby-foot{font-size:8px}.coach-panel{top:148px}.coach-panel p{font-size:10px}.coach-note{display:none}.coach-panel h2{font-size:14px}.coach-tip{font-size:9px}.hero-panel{bottom:64px}.action-panel{bottom:68px}.portrait-tip{display:none}.hero-cards{height:88px}.hero-cards .card{width:55px;height:78px}.action-wheel{width:142px;height:142px}.turn-label{font-size:7px}.training-result{bottom:48px!important;max-height:calc(100dvh - 142px)}
+  #game[data-mode="tutorial"] .table-hud,#game[data-mode="tutorial"] #scene[data-framing="scenic"] ~ .table-hud{top:51%}
+}
+@media(max-height:620px) and (orientation:landscape){
+  .topbar{top:10px;height:40px;gap:15px}.wordmark img{width:128px}.wordmark small{font-size:7px;margin-top:3px}.wordmark small span{font-size:7px;display:block;margin-left:0}.room-meta{margin-left:5px}.scene-switcher{top:61px;right:3%;left:auto}.lobby-panel{top:97px;left:5%;width:300px;bottom:35px;transform:none;overflow:auto;padding-right:8px}.lobby-panel h1{font-size:30px;margin:12px 0 10px}.lobby-desc{font-size:10px;margin:8px 0}.training-benefits{font-size:8px;margin-top:12px;gap:10px}.table-info{margin:14px 0}.table-info b{font-size:17px}.lobby-foot,.prototype-note{font-size:8px}.lobby-panel .primary-button{font-size:11px}.practice-link{font-size:10px}
+  .coach-panel{top:84px;left:3%;width:224px;max-height:calc(100dvh - 222px);overflow:auto;padding:8px 11px}.coach-top{font-size:8px}.coach-top button{width:27px;height:27px}.coach-progress{margin:3px 0 8px}.coach-progress span{font-size:7px;padding-top:4px}.coach-panel h2{font-size:12px;margin-bottom:5px}.coach-panel p{font-size:9px;line-height:1.55;margin-bottom:5px}.coach-tip{font-size:9px;padding:4px 7px}.coach-note{display:none}
+  .training-result{right:3%!important;bottom:34px!important;top:64px;max-height:none;width:320px!important;padding:16px!important}.training-result .review-badge{display:none}.training-result h2{font-size:20px!important}.training-result .best-hand{margin:8px 0}.training-result .best-hand .card{width:33px;height:47px}.training-result .primary-button{min-height:44px;padding:10px}.review-hand-label{margin-top:12px}.review-lessons{margin:10px 0 12px}.review-lessons li{font-size:10px}.review-disclosure{font-size:8px!important}
+  .result-panel:not(.training-result){max-height:calc(100dvh - 100px)}
+}
+@media(max-width:350px) and (orientation:portrait){.wordmark img{width:130px}.wordmark small span{font-size:7px}.action-wheel{width:135px;height:135px}.hero-cards .card{width:49px;height:72px}.hero-cards .suit-big{font-size:30px}.hero-status>div>strong{font-size:22px}.coach-panel h2{font-size:13px}.table-info>div{padding:0 17px}.bottom-bar p{font-size:6px}}
+@media(orientation:portrait){#game[data-mode="tutorial"] .table-hud,#game[data-mode="tutorial"] #scene[data-framing="scenic"] ~ .table-hud{top:48%}}
+@media(orientation:portrait) and (max-height:740px){
+  #coach-body{display:none}.coach-note{display:none}.coach-progress{margin-top:2px;margin-bottom:6px}
+  #game[data-mode="tutorial"] .table-hud,#game[data-mode="tutorial"] #scene[data-framing="scenic"] ~ .table-hud{top:44%}
+}
+@media(orientation:portrait) and (max-height:660px){
+  .coach-panel{top:147px;padding:8px 11px}.coach-top button{height:28px;width:28px}.coach-tip{font-size:9px}.coach-progress{display:none}.coach-panel h2{margin:3px 0 5px}.coach-panel.is-collapsed #coach-copy{display:none}
+  .hero-panel{bottom:52px;gap:2px}.hero-cards{height:76px}.hero-cards .card{width:49px;height:72px}.hero-status{margin-top:2px;margin-bottom:0}.hero-status>div>strong{font-size:21px}.action-panel{bottom:54px}.turn-label{margin-bottom:7px}
+  #game[data-mode="tutorial"] .table-hud,#game[data-mode="tutorial"] #scene[data-framing="scenic"] ~ .table-hud{top:46%}.board-cards .card{width:32px;height:44px}.pot strong{font-size:24px}.board-cards{margin-top:6px}
+}
+@media(max-height:620px) and (orientation:landscape){.topbar{align-items:flex-start}.room-meta{margin-top:7px}}

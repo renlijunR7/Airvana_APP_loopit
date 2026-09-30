@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#151421">
+  <meta name="description" content="滑动连接十五个小团员，组成你的魔法合唱团。">
+  <title>Magic Choir · 魔法合唱团</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='30' fill='%23ffd663'/%3E%3Ccircle cx='35' cy='40' r='6'/%3E%3Ccircle cx='65' cy='40' r='6'/%3E%3Cellipse cx='50' cy='65' rx='12' ry='16' fill='%237a3b3b'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="game" id="game" data-phase="idle" aria-label="魔法合唱团互动游戏">
+    <header class="heading">
+      <div class="title-row"><h1>Magic Choir<span class="title-note" aria-hidden="true">♫</span></h1><button class="info-button" id="help-button" aria-label="查看玩法"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7h.01"/></svg></button></div>
+      <p class="subtitle" id="subtitle">Swipe to connect &amp; play!</p>
+    </header>
+    <section class="stage" id="stage" aria-label="滑动连接合唱团员">
+      <svg class="connections" id="connections" aria-hidden="true"></svg>
+      <div class="choir" id="choir" role="group" aria-label="15 个团员；滑动连接，或使用键盘选择后点击合唱"></div>
+      <div class="particles" id="particles" aria-hidden="true"></div>
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </section>
+    <footer class="footer">
+      <div class="caption" aria-live="polite">
+        <div id="status" class="status"><span class="gesture" aria-hidden="true">〰</span> 连起 3 位团员，唤醒一首小合唱</div>
+        <div class="meter" id="meter" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <button class="sing-button" id="sing-button" hidden>开始合唱 ♫</button>
+      </div>
+      <div class="toolbar">
+        <button class="tool" id="sound-button" aria-label="关闭声音" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4 6 8H3v8h3l5 4V4Z"/><path class="sound-waves" d="M15 8c2 2 2 6 0 8m3-11c4 4 4 10 0 14"/></svg><span>声音已开启</span></button>
+        <button class="restart" id="restart-button" aria-label="重新开始"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9a8 8 0 1 1 0 6M5 3v6h6"/></svg><span>再来一次</span></button>
+        <div class="voice-count"><span class="live-dot"></span>15 VOICES</div>
+      </div>
+      <p class="footnote">MAGIC CHOIR · 魔法合唱团</p>
+    </footer>
+    <dialog id="help-dialog">
+      <button class="dialog-close" id="close-help" aria-label="关闭玩法">×</button>
+      <div class="dialog-note" aria-hidden="true">♫</div>
+      <h2>轮到你当指挥家</h2>
+      <p>按住一个小团员，滑向其他团员。<br>连接至少 3 位后松手，它们就会合唱。</p>
+      <p>向上一位滑回可以撤销；换一种顺序，<br>就能听见不同的旋律。</p>
+      <p class="help-small">键盘：Tab 移动，空格选择团员，<br>点击「开始合唱」演奏，Esc 清空选择。</p>
+      <button class="dialog-play" id="help-play">知道啦，开始指挥 ♫</button>
+    </dialog>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

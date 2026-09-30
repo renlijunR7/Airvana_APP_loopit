@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+  <meta name="theme-color" content="#31bfff">
+  <link rel="icon" href="data:,">
+  <title>冰浪派对 · DEMO</title>
+  <link rel="stylesheet" href="./style.css?v=4">
+</head>
+<body>
+  <main id="app" aria-label="冰浪派对试玩">
+    <canvas id="game" aria-label="冰面泳圈生存竞技场"></canvas>
+
+    <section id="hud" class="hud" aria-live="polite">
+      <div class="hud-top">
+        <div id="alive" class="chip">存活 5</div>
+        <div id="timer" class="timer">45</div>
+        <button id="pauseBtn" class="icon-btn" aria-label="暂停游戏">Ⅱ</button>
+      </div>
+      <div id="players" class="players" aria-label="玩家状态"></div>
+      <div id="hint" class="hint">拖动屏幕移动 · 点击冲撞</div>
+    </section>
+
+    <div id="joystick" class="joystick" aria-hidden="true"><i></i></div>
+    <button id="dashBtn" class="dash" aria-label="冲撞">冲撞<span></span></button>
+
+    <section id="intro" class="panel show" role="dialog" aria-modal="true" aria-labelledby="introTitle">
+      <div class="eyebrow">DEMO · 手机竖屏 H5</div>
+      <h1 id="introTitle">冰浪派对</h1>
+      <p class="lead">守住最后一块冰面，<br>把对手撞进冰海！</p>
+      <div class="rules">
+        <div><b>拖动</b><small>控制泳圈</small></div>
+        <div><b>冲撞</b><small>击退对手</small></div>
+        <div><b>躲开</b><small>闪烁冰块</small></div>
+      </div>
+      <button id="startBtn" class="primary">开始比赛</button>
+      <p class="demo-note">参考重建 · 实时 3D 角色 · 随移动方向转身</p>
+    </section>
+
+    <section id="result" class="panel result" role="dialog" aria-modal="true" aria-labelledby="resultTitle">
+      <div id="resultBadge" class="result-badge">🏆</div>
+      <h2 id="resultTitle">你赢了！</h2>
+      <p id="resultText">最后存活，冰面之王！</p>
+      <div class="result-stats">
+        <div><b id="rankValue">1</b><small>本局排名</small></div>
+        <div><b id="hitValue">0</b><small>成功冲撞</small></div>
+      </div>
+      <button id="replayBtn" class="primary">再玩一次</button>
+      <button id="exitBtn" class="secondary">返回首页</button>
+    </section>
+
+    <section id="pausePanel" class="panel pause-panel" role="dialog" aria-modal="true" aria-label="游戏暂停">
+      <h2>暂停中</h2>
+      <p>冰面暂时不会继续破裂。</p>
+      <button id="resumeBtn" class="primary">继续比赛</button>
+      <button id="restartBtn" class="secondary">重新开始</button>
+    </section>
+  </main>
+  <!-- three.js 与 mini-gp-racers 用的是同一份文件（md5 一致），抽到 _shared 去重。 -->
+  <script src="../_shared/three/three-r158.min.js"></script>
+  <script type="module" src="./game.js?v=18"></script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+ <meta name="theme-color" content="#101513">
+ <meta name="description" content=" 免费新手训练桌概念演示：循序学习德州扑克，三种 3D 场景和本地 AI 自由练习。虚拟筹码不可兑换。">
+ <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23141816'/%3E%3Ctext x='32' y='49' text-anchor='middle' font-size='54' fill='%23d7c175'%3E♠%3C/text%3E%3C/svg%3E">
+ <link rel="stylesheet" href="./style.css">
+ <link rel="stylesheet" href="./training.css?v=1.2.0">
+ <title>免费新手训练桌 · 德州扑克概念演示</title>
+</head>
+<body>
+<main id="game" class="is-lobby">
+ <div id="scene" aria-label="实时 3D 德州扑克牌桌"></div>
+ <div class="cinema-shade"></div>
+ <header class="topbar">
+  <div class="wordmark"><span class="wordmark-text">FREE TRAINING</span><small>免费新手训练桌 <span>概念演示 · 非官方客户端</span></small></div>
+  <div class="room-meta"><span class="live-dot"></span><strong id="room-name">LAS VEGAS NIGHTS</strong><span id="mode-label">学习基础 · 免费练习</span></div>
+  <nav class="top-actions" aria-label="游戏菜单">
+   <button class="icon-button" id="camera-btn" title="切换视角" aria-label="切换视角"><svg viewBox="0 0 24 24"><path d="M8 5 6 8H3v12h18V8h-3l-2-3Z"/><circle cx="12" cy="13" r="4"/></svg></button>
+   <button class="icon-button" id="sound-btn" title="开启声音" aria-label="开启声音"><svg viewBox="0 0 24 24"><path d="m11 4-6 5H2v6h3l6 5Z M16 9l6 6 M22 9l-6 6"/></svg></button>
+   <button class="icon-button" id="help-btn" title="牌型与玩法" aria-label="牌型与玩法">?</button>
+   <button class="icon-button" id="menu-btn" title="设置与战绩" aria-label="设置与战绩"><svg viewBox="0 0 24 24"><path d="M4 6h16 M4 12h16 M4 18h16"/></svg></button>
+  </nav>
+ </header>
+ <button id="scene-btn" class="scene-switcher" aria-label="切换场景"><span aria-hidden="true">◈</span><span id="scene-name">拉斯维加斯</span><span class="scene-switcher-action">切换场景⌄</span></button>
+ <div class="room-caption"><span>PRIVATE TABLE</span><strong>地下牌局</strong><p>THE UNDERGROUND CLUB</p></div>
+ <div id="seat-labels" aria-label="牌桌玩家"></div>
+ <section id="table-hud" class="table-hud" hidden>
+  <div class="street"><span id="street-name">翻牌前</span><span id="hand-number">HAND 01</span></div>
+  <div class="pot"><span>POT / 底池</span><strong id="pot-amount">75</strong></div>
+  <div id="board-cards" class="board-cards" aria-label="公共牌"></div>
+ </section>
+ <section id="lobby" class="lobby-panel">
+  <div class="eyebrow"><span></span> LEARN. PLAY. REPEAT.</div>
+  <h1>你的第一手，<br><em>从这里开始。</em></h1>
+  <p class="lobby-desc">不必先懂规则。跟随一手教学局，<br>从两张底牌，读懂属于你的最佳五张牌。</p>
+  <div class="training-benefits"><span>01 认识手牌</span><span>02 尝试操作</span><span>03 牌型复盘</span></div>
+  <div class="table-info"><div><small>教学时长</small><b>约 90 秒</b></div><div><small>练习筹码</small><b>2,500</b></div><div><small>场景</small><b>3 种</b></div></div>
+  <button id="start-btn" class="primary-button">开始免费教学 <span>↗</span></button>
+  <button id="practice-btn" class="practice-link">已了解规则，进入自由练习 →</button>
+  <p class="lobby-foot">无需注册 · 无现金奖励 · 虚拟筹码不可兑换</p>
+  <p class="prototype-note">独立概念演示，未接入 账号或牌局。</p>
+ </section>
+ <aside id="coach" class="coach-panel" hidden aria-label="新手教学提示">
+  <div class="coach-top"><span>新手教学 <b id="coach-count">01 / 05</b></span><button id="coach-toggle" aria-label="收起教学提示" aria-expanded="true">−</button></div>
+  <div id="coach-progress" class="coach-progress" aria-label="教学进度"></div>
+  <div id="coach-copy" aria-live="polite"><h2 id="coach-title"></h2><p id="coach-body"></p><div id="coach-tip" class="coach-tip"></div></div>
+  <small class="coach-note">固定教学发牌 · 可按自己的节奏操作</small>
+ </aside>
+ <section id="hero-panel" class="hero-panel" hidden>
+  <div class="hero-cards" id="hero-cards" aria-label="我的底牌"></div>
+  <div class="hero-status"><div class="rep-medallion"><span>REP</span><strong id="hero-level">01</strong></div><div><small>练习筹码 <span id="hero-position"></span></small><strong id="hero-stack">2,500</strong><span id="hand-strength">等待翻牌</span></div></div>
+ </section>
+ <section id="action-panel" class="action-panel" hidden aria-label="下注操作">
+  <p class="turn-label" id="turn-label">轮到你行动</p>
+  <div class="action-wheel">
+   <button id="call-btn" class="wheel-action call-action" aria-label="跟注"><span class="action-symbol">↑</span><strong id="call-label">跟注</strong><small id="call-cost">50</small></button>
+   <button id="raise-btn" class="wheel-action raise-action" aria-label="加注"><span class="action-symbol">⇈</span><strong>加注</strong><small>RAISE</small></button>
+   <button id="fold-btn" class="wheel-action fold-action" aria-label="弃牌"><span class="action-symbol">×</span><strong>弃牌</strong></button>
+   <div class="wheel-center"></div>
+  </div>
+  <p class="shortcut-hint">F 弃牌 <span>·</span> C 跟注/过牌 <span>·</span> R 加注</p>
+ </section>
+ <section id="raise-panel" class="raise-panel" hidden aria-label="设置加注金额">
+  <div class="raise-title"><span id="raise-kind">RAISE TO / 加注至</span><button id="raise-close" class="text-button" aria-label="取消加注">×</button></div>
+  <div class="raise-amount"><span>◉</span><output id="raise-output" for="raise-range">100</output></div>
+  <input id="raise-range" aria-label="加注总额" type="range" min="100" max="2500" step="25" value="100">
+  <div class="raise-presets"><button data-size="min">最小</button><button data-size="half">½ 底池</button><button data-size="pot">底池</button><button data-size="all">ALL IN</button></div>
+  <div class="raise-footer"><button id="raise-cancel" class="secondary-button">取消</button><button id="raise-confirm" class="primary-button">确认加注</button></div>
+ </section>
+ <div id="waiting" class="waiting" hidden><span class="thinking-dots"><i></i><i></i><i></i></span><span id="waiting-text"></span><button id="speed-btn" class="text-button" title="切换对手行动速度">1×</button></div>
+ <section id="result" class="result-panel" hidden aria-live="polite"></section>
+ <footer class="bottom-bar"><button id="history-btn" class="text-button"><span>≡</span> 牌局记录</button><button id="reset-view-btn" class="text-button" aria-label="回正视角">↶ 回正视角</button><p id="table-note">免费练习 <span>·</span> 筹码不可兑换</p><span class="build-note">CONCEPT DEMO</span></footer>
+ <div id="toast" role="status" hidden></div>
+ <div class="portrait-tip">横屏可获得更完整的牌桌视野 <span>↻</span></div>
+</main>
+<dialog id="modal"><div class="modal-head"><span id="modal-title"></span><button id="modal-close" class="icon-button" aria-label="关闭弹窗">×</button></div><div id="modal-content"></div></dialog>
+<script type="module" src="./src/app.js?v=1.2.1"></script>
+</body>
+</html>
