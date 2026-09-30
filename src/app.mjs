@@ -5,6 +5,7 @@ import { getAddress, verifyMessage } from 'ethers';
 import { openDatabase, closeDatabase, transaction } from './db.mjs';
 import { createAiService } from './ai.mjs';
 import { createWorker } from './worker.mjs';
+import { submitCommentReport, listCommentReports, resolveCommentReport } from './comment-reports.mjs';
 import { saveArtifact } from './artifact.mjs';
 import { serverCasualBackground, upgradeServerGameRuntimeReferences } from './game-artifact-v3.mjs';
 import { assertOptimizable, assignVariant, assignmentCounts, resolveContentVariant } from './experiments.mjs';
@@ -1498,11 +1499,11 @@ export function createApp(options = {}) {
 
       params = routeMatch(pathname, '/api/contents/:id/comments');
       if (params && req.method === 'GET') {
-        requireUser(db, req);
+        const user = requireUser(db, req);
         const rows = db.prepare(`SELECT c.id,c.body,c.created_at,u.display_name author_name,c.user_id
           FROM content_comments c JOIN users u ON u.id=c.user_id
           WHERE c.content_id=? AND c.status='visible' ORDER BY c.created_at DESC LIMIT 100`).all(params.id);
-        return sendJson(res, 200, { comments: rows.map(row => ({ id: row.id, body: row.body, authorName: row.author_name, authorUserId: row.user_id, createdAt: row.created_at })) });
+        return sendJson(res, 200, { comments: rows.map(row => ({ id: row.id, body: row.body, authorName: row.author_name, authorUserId: row.user_id, owned: row.user_id === user.id, createdAt: row.created_at })) });
       }
       if (params && req.method === 'POST') {
         const user = requireUser(db, req);
@@ -2640,6 +2641,23 @@ export function createApp(options = {}) {
         const version = clampText(body.documentVersion, 40, '协议版本');
         db.prepare(`INSERT OR IGNORE INTO terms_acceptances (id,user_id,document_type,document_version,accepted_at) VALUES (?,?,?,?,?)`).run(uid('acceptance'), user.id, type, version, isoNow());
         return sendJson(res, 200, { accepted: true, documentType: type, documentVersion: version });
+      }
+
+      if (pathname === '/api/comment-reports' && req.method === 'POST') {
+        const user = requireUser(db, req);
+        const body = await readJson(req);
+        const report = submitCommentReport(db, user, body, { allowDemo, ipHash: ctx.ipHash });
+        return sendJson(res, report.alreadyReported ? 200 : 201, { report });
+      }
+      if (pathname === '/api/comment-reports' && req.method === 'GET') {
+        const user = requireUser(db, req);
+        return sendJson(res, 200, { reports: listCommentReports(db, user) });
+      }
+      params = routeMatch(pathname, '/api/admin/comment-reports/:id/resolve');
+      if (params && req.method === 'POST') {
+        const user = requireUser(db, req, ['admin']);
+        const body = await readJson(req);
+        return sendJson(res, 200, { report: resolveCommentReport(db, user, params.id, body, ctx.ipHash) });
       }
 
       if (pathname === '/api/content-reports' && req.method === 'POST') {

@@ -1,10 +1,14 @@
 import 'dart:math' as math;
 
+import 'package:airvana_mobile/app/providers.dart';
 import 'package:airvana_mobile/design_system/airvana_theme.dart';
 import 'package:airvana_mobile/design_system/legacy_web_assets.dart';
 import 'package:airvana_mobile/features/shared/domain/airvana_models.dart';
 import 'package:airvana_mobile/shared/presentation/destructive_confirm.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'comment_report_sheet.dart';
 
 enum AirvanaShareChoice {
   copy('复制链接'),
@@ -455,9 +459,21 @@ class _AirvanaLocalCommentSheetState extends State<AirvanaLocalCommentSheet> {
 
   final _controller = TextEditingController();
   final _liked = <int>{};
+  final _reported = <String>{};
+  bool _reportOpen = false;
   late final List<_LocalComment> _comments = [
-    const _LocalComment(author: 'Mina', body: '玩法节奏很清楚，失败后也能立即重试。', time: '刚刚'),
-    const _LocalComment(author: 'Leo', body: '竖屏单手操作很顺，期待下一个版本。', time: '刚刚'),
+    const _LocalComment(
+      author: 'Mina',
+      body: '玩法节奏很清楚，失败后也能立即重试。',
+      time: '刚刚',
+      reportKey: 'demo-mina',
+    ),
+    const _LocalComment(
+      author: 'Leo',
+      body: '竖屏单手操作很顺，期待下一个版本。',
+      time: '刚刚',
+      reportKey: 'demo-leo',
+    ),
   ];
   var _posted = false;
 
@@ -534,6 +550,7 @@ class _AirvanaLocalCommentSheetState extends State<AirvanaLocalCommentSheet> {
                     comment: comment,
                     dividerKey: ValueKey('comment-row-divider-$index'),
                     liked: _liked.contains(index),
+                    reported: _reported.contains(comment.reportKey),
                     onReply: () {
                       _controller.text = '@${comment.author} ';
                       _controller.selection = TextSelection.collapsed(
@@ -546,7 +563,28 @@ class _AirvanaLocalCommentSheetState extends State<AirvanaLocalCommentSheet> {
                           : _liked.add(index);
                     }),
                     onAction: () async {
-                      if (!comment.owned) return;
+                      if (!comment.owned) {
+                        if (_reportOpen) return;
+                        _reportOpen = true;
+                        try {
+                          final receipt = await showCommentReportSheet(
+                            context,
+                            repository: ProviderScope.containerOf(
+                              context,
+                            ).read(airvanaRepositoryProvider),
+                            playable: widget.playable,
+                            author: comment.author,
+                            body: comment.body,
+                            demoCommentKey: comment.reportKey,
+                          );
+                          if (mounted && receipt != null) {
+                            setState(() => _reported.add(comment.reportKey!));
+                          }
+                        } finally {
+                          _reportOpen = false;
+                        }
+                        return;
+                      }
                       // 删除评论会同步更新本地互动计数，走统一确认层。
                       final confirmed = await confirmDestructiveAction(
                         context,
@@ -661,12 +699,14 @@ class _LocalComment {
     required this.body,
     required this.time,
     this.owned = false,
+    this.reportKey,
   });
 
   final String author;
   final String body;
   final String time;
   final bool owned;
+  final String? reportKey;
 
   String get avatarAsset =>
       owned ? 'assets/legacy/avatars/kai.png' : legacyWebAvatarAsset(author);
@@ -677,6 +717,7 @@ class _CommentRow extends StatelessWidget {
     required this.comment,
     required this.dividerKey,
     required this.liked,
+    required this.reported,
     required this.onReply,
     required this.onLike,
     required this.onAction,
@@ -685,6 +726,7 @@ class _CommentRow extends StatelessWidget {
   final _LocalComment comment;
   final Key dividerKey;
   final bool liked;
+  final bool reported;
   final VoidCallback onReply;
   final VoidCallback onLike;
   final VoidCallback onAction;
@@ -758,7 +800,7 @@ class _CommentRow extends StatelessWidget {
                         onTap: onLike,
                       ),
                       _CommentAction(
-                        label: comment.owned ? '删除' : '举报',
+                        label: comment.owned ? '删除' : (reported ? '已举报' : '举报'),
                         danger: comment.owned,
                         onTap: onAction,
                       ),

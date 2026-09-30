@@ -775,6 +775,26 @@ function migrate(db) {
       UNIQUE(reporter_user_id, content_id, reason)
     );
 
+    CREATE TABLE IF NOT EXISTS comment_reports (
+      id TEXT PRIMARY KEY,
+      reporter_user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      content_id TEXT NOT NULL REFERENCES contents(id) ON DELETE CASCADE,
+      comment_id TEXT REFERENCES content_comments(id) ON DELETE SET NULL,
+      target_key TEXT NOT NULL,
+      author_snapshot TEXT NOT NULL,
+      body_snapshot TEXT NOT NULL,
+      demo INTEGER NOT NULL DEFAULT 0 CHECK(demo IN (0,1)),
+      reason TEXT NOT NULL,
+      details TEXT NOT NULL,
+      status TEXT NOT NULL DEFAULT 'open' CHECK(status IN ('open','resolved')),
+      resolution_action TEXT,
+      resolution_note TEXT,
+      resolved_by TEXT REFERENCES users(id),
+      created_at TEXT NOT NULL,
+      updated_at TEXT NOT NULL,
+      UNIQUE(reporter_user_id, content_id, target_key)
+    );
+
     CREATE TABLE IF NOT EXISTS content_appeals (
       id TEXT PRIMARY KEY,
       content_id TEXT NOT NULL REFERENCES contents(id) ON DELETE CASCADE,

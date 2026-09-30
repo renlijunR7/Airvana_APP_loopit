@@ -11,6 +11,8 @@
 /// 它不需要签名，也不构成绑定，界面必须把这个区别说明白。
 library;
 
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -85,7 +87,13 @@ class _WalletLoginSheetState extends ConsumerState<WalletLoginSheet> {
       20,
       0,
       20,
-      20 + MediaQuery.viewInsetsOf(context).bottom,
+      // Modal useSafeArea excludes the bottom system navigation area.
+      // Keep the scroll viewport above whichever obstruction is taller.
+      20 +
+          math.max(
+            MediaQuery.viewInsetsOf(context).bottom,
+            MediaQuery.viewPaddingOf(context).bottom,
+          ),
     ),
     child: SingleChildScrollView(
       child: Column(

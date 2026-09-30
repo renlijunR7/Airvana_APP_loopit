@@ -610,18 +610,13 @@ class _GrowthAgentHero extends StatelessWidget {
     padding: const EdgeInsets.all(20),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(26),
-      gradient: const LinearGradient(
-        begin: Alignment(-1, -1),
-        end: Alignment(1, 1),
-        colors: [Color(0xFF18191D), Color(0xFF22232A), Color(0xFF16171B)],
-        stops: [0, .55, 1],
-      ),
-      border: Border.all(color: const Color(0xFF34343A)),
-      boxShadow: const [
+      color: AirvanaColors.surface,
+      border: Border.all(color: AirvanaColors.line),
+      boxShadow: [
         BoxShadow(
-          color: Color(0x241C1C20),
-          offset: Offset(0, 22),
-          blurRadius: 46,
+          color: AirvanaColors.ink.withValues(alpha: .04),
+          offset: const Offset(0, 8),
+          blurRadius: 24,
         ),
       ],
     ),
@@ -642,10 +637,13 @@ class _GrowthAgentHero extends StatelessWidget {
             child: Container(
               width: 210,
               height: 210,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 gradient: RadialGradient(
-                  colors: [Color(0x47FF5361), Color(0x00FF5361)],
+                  colors: [
+                    AirvanaColors.accent.withValues(alpha: .06),
+                    AirvanaColors.accent.withValues(alpha: 0),
+                  ],
                 ),
               ),
             ),
@@ -658,10 +656,13 @@ class _GrowthAgentHero extends StatelessWidget {
             child: Container(
               width: 190,
               height: 190,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 gradient: RadialGradient(
-                  colors: [Color(0x337C5CFF), Color(0x007C5CFF)],
+                  colors: [
+                    AirvanaColors.accent.withValues(alpha: .035),
+                    AirvanaColors.accent.withValues(alpha: 0),
+                  ],
                 ),
               ),
             ),
@@ -673,7 +674,7 @@ class _GrowthAgentHero extends StatelessWidget {
             Text(
               'AIRVANA AGENT NETWORK · 产品规划',
               style: TextStyle(
-                color: Color(0xFFFF8995),
+                color: AirvanaColors.accent,
                 fontSize: 8.5,
                 fontWeight: FontWeight.w900,
                 letterSpacing: .85,
@@ -683,7 +684,7 @@ class _GrowthAgentHero extends StatelessWidget {
             Text(
               '每个人都有一个，\n持续成长的 AI 分身。',
               style: TextStyle(
-                color: Colors.white,
+                color: AirvanaColors.ink,
                 fontSize: 26,
                 height: 1.15,
                 fontWeight: FontWeight.w900,
@@ -694,7 +695,7 @@ class _GrowthAgentHero extends StatelessWidget {
             Text(
               '它带着你的长期记忆、数字身份与钱包，在获得授权的边界内与玩家持续互动，把产品体验与真实反馈转化为新的创作方向，并自主运营你拥有的 Agentic Playable。',
               style: TextStyle(
-                color: Color(0xFFC7C8CF),
+                color: AirvanaColors.muted,
                 fontSize: 10.5,
                 height: 1.75,
               ),
@@ -717,21 +718,12 @@ class _AgentCoreVisual extends StatelessWidget {
     height: 282,
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(22),
-      gradient: LinearGradient(
+      gradient: const LinearGradient(
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
-        colors: [
-          Colors.white.withValues(alpha: .09),
-          Colors.white.withValues(alpha: .025),
-        ],
+        colors: [AirvanaColors.canvas, AirvanaColors.surface],
       ),
-      border: Border.all(color: Colors.white.withValues(alpha: .12)),
-      boxShadow: [
-        BoxShadow(
-          color: Colors.white.withValues(alpha: .08),
-          offset: const Offset(0, 1),
-        ),
-      ],
+      border: Border.all(color: AirvanaColors.line),
     ),
     child: Stack(
       children: [
@@ -768,6 +760,7 @@ class _AgentCoreVisual extends StatelessWidget {
         Align(
           alignment: const Alignment(0, -.08),
           child: Container(
+            key: const ValueKey('growth-agent-core'),
             width: 116,
             height: 126,
             padding: const EdgeInsets.all(6),
@@ -777,19 +770,24 @@ class _AgentCoreVisual extends StatelessWidget {
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
                 colors: [
-                  Colors.white.withValues(alpha: .16),
-                  AirvanaColors.accent.withValues(alpha: .08),
+                  AirvanaColors.surface,
+                  Color.alphaBlend(
+                    AirvanaColors.accent.withValues(alpha: .06),
+                    AirvanaColors.surface,
+                  ),
                 ],
               ),
-              border: Border.all(color: Colors.white.withValues(alpha: .18)),
+              border: Border.all(
+                color: AirvanaColors.accent.withValues(alpha: .16),
+              ),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withValues(alpha: .3),
-                  offset: const Offset(0, 18),
-                  blurRadius: 42,
+                  color: AirvanaColors.ink.withValues(alpha: .06),
+                  offset: const Offset(0, 8),
+                  blurRadius: 24,
                 ),
                 BoxShadow(
-                  color: AirvanaColors.accent.withValues(alpha: .035),
+                  color: AirvanaColors.accent.withValues(alpha: .025),
                   spreadRadius: 10,
                 ),
               ],
@@ -806,7 +804,7 @@ class _AgentCoreVisual extends StatelessWidget {
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         border: Border.all(
-                          color: const Color(0xD6FF8995),
+                          color: AirvanaColors.accent.withValues(alpha: .35),
                           width: 2,
                         ),
                         image: const DecorationImage(
@@ -842,7 +840,7 @@ class _AgentCoreVisual extends StatelessWidget {
                 const Text(
                   'Kai Chen 的分身',
                   style: TextStyle(
-                    color: Colors.white,
+                    color: AirvanaColors.ink,
                     fontSize: 9,
                     fontWeight: FontWeight.w900,
                   ),
@@ -853,7 +851,7 @@ class _AgentCoreVisual extends StatelessWidget {
                   children: [
                     DecoratedBox(
                       decoration: BoxDecoration(
-                        color: Color(0xFF48D789),
+                        color: AirvanaColors.success,
                         shape: BoxShape.circle,
                       ),
                       child: SizedBox.square(dimension: 5),
@@ -862,7 +860,7 @@ class _AgentCoreVisual extends StatelessWidget {
                     Text(
                       '持续学习中',
                       style: TextStyle(
-                        color: Color(0xFFB9BBC2),
+                        color: AirvanaColors.muted,
                         fontSize: 6.5,
                         fontWeight: FontWeight.w800,
                       ),
@@ -878,16 +876,17 @@ class _AgentCoreVisual extends StatelessWidget {
           bottom: 10,
           left: 10,
           child: Container(
+            key: const ValueKey('growth-agent-caption'),
             height: 27,
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              color: Colors.black.withValues(alpha: .3),
+              color: AirvanaColors.canvas,
               borderRadius: BorderRadius.circular(10),
             ),
             child: const Text(
               '一个用户  →  一个 AI 分身  →  多个 Agentic Playable',
               style: TextStyle(
-                color: Color(0xFFD5D6DA),
+                color: AirvanaColors.ink,
                 fontSize: 7,
                 fontWeight: FontWeight.w900,
               ),
@@ -909,18 +908,19 @@ class _Capability extends StatelessWidget {
   Widget build(BuildContext context) {
     final compact = MediaQuery.sizeOf(context).width <= 374;
     return Container(
+      key: ValueKey('growth-capability-$icon'),
       width: compact ? 70 : 76,
       constraints: const BoxConstraints(minHeight: 52),
       padding: EdgeInsets.all(compact ? 6 : 7),
       decoration: BoxDecoration(
-        color: const Color(0xB8131418),
+        color: AirvanaColors.surface,
         borderRadius: BorderRadius.circular(15),
-        border: Border.all(color: Colors.white.withValues(alpha: .13)),
+        border: Border.all(color: AirvanaColors.line),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: .2),
-            offset: const Offset(0, 10),
-            blurRadius: 24,
+            color: AirvanaColors.ink.withValues(alpha: .04),
+            offset: const Offset(0, 4),
+            blurRadius: 12,
           ),
         ],
       ),
@@ -931,13 +931,13 @@ class _Capability extends StatelessWidget {
             height: 22,
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              color: AirvanaColors.accent.withValues(alpha: .16),
+              color: AirvanaColors.accent.withValues(alpha: .07),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Text(
               icon,
               style: const TextStyle(
-                color: Color(0xFFFF9CA6),
+                color: AirvanaColors.accent,
                 fontSize: 8,
                 fontWeight: FontWeight.w900,
               ),
@@ -951,14 +951,17 @@ class _Capability extends StatelessWidget {
                 Text(
                   title,
                   style: const TextStyle(
-                    color: Colors.white,
+                    color: AirvanaColors.ink,
                     fontSize: 7.5,
                     fontWeight: FontWeight.w900,
                   ),
                 ),
                 Text(
                   subtitle,
-                  style: const TextStyle(color: Color(0xFF92949D), fontSize: 6),
+                  style: const TextStyle(
+                    color: AirvanaColors.muted,
+                    fontSize: 6,
+                  ),
                 ),
               ],
             ),
@@ -974,7 +977,7 @@ class _GrowthHeroDotsPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()..color = Colors.white.withValues(alpha: .11);
+    final paint = Paint()..color = AirvanaColors.muted.withValues(alpha: .1);
     for (double y = 8; y < size.height; y += 28) {
       for (double x = 8; x < size.width; x += 28) {
         canvas.drawCircle(Offset(x, y), .8, paint);
@@ -993,7 +996,7 @@ class _GrowthHeroLinksPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final center = Offset(size.width * .5, size.height * (130 / 270));
     final paint = Paint()
-      ..color = const Color(0x66FF8995)
+      ..color = AirvanaColors.accent.withValues(alpha: .24)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1;
     for (final point in [
@@ -1011,7 +1014,7 @@ class _GrowthHeroLinksPainter extends CustomPainter {
         height: size.height * (148 / 270),
       ),
       Paint()
-        ..color = Colors.white.withValues(alpha: .09)
+        ..color = AirvanaColors.accent.withValues(alpha: .08)
         ..style = PaintingStyle.stroke,
     );
   }

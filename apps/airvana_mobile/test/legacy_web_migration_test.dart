@@ -402,11 +402,91 @@ void main() {
     );
     final growthHeroDecoration = growthHero.decoration! as BoxDecoration;
     expect(growthHeroDecoration.borderRadius, BorderRadius.circular(26));
-    expect((growthHeroDecoration.gradient! as LinearGradient).colors, const [
-      Color(0xFF18191D),
-      Color(0xFF22232A),
-      Color(0xFF16171B),
+    expect(growthHeroDecoration.color, AirvanaColors.surface);
+    expect(growthHeroDecoration.gradient, isNull);
+    expect(growthHeroDecoration.border, Border.all(color: AirvanaColors.line));
+    final agentVisualDecoration =
+        tester
+                .widget<Container>(
+                  find.byKey(const ValueKey('growth-agent-visual')),
+                )
+                .decoration!
+            as BoxDecoration;
+    expect((agentVisualDecoration.gradient! as LinearGradient).colors, const [
+      AirvanaColors.canvas,
+      AirvanaColors.surface,
     ]);
+    final agentCoreDecoration =
+        tester
+                .widget<Container>(
+                  find.byKey(const ValueKey('growth-agent-core')),
+                )
+                .decoration!
+            as BoxDecoration;
+    expect((agentCoreDecoration.gradient! as LinearGradient).colors, [
+      AirvanaColors.surface,
+      Color.alphaBlend(
+        AirvanaColors.accent.withValues(alpha: .06),
+        AirvanaColors.surface,
+      ),
+    ]);
+    final heroFinder = find.byKey(const ValueKey('growth-network-hero'));
+    for (final symbol in ['记', '人', '签', '玩']) {
+      final capabilityDecoration =
+          tester
+                  .widget<Container>(
+                    find.byKey(ValueKey('growth-capability-$symbol')),
+                  )
+                  .decoration!
+              as BoxDecoration;
+      expect(capabilityDecoration.color, AirvanaColors.surface);
+      expect(
+        capabilityDecoration.border,
+        Border.all(color: AirvanaColors.line),
+      );
+      expect(
+        tester
+            .widget<Text>(
+              find.descendant(of: heroFinder, matching: find.text(symbol)),
+            )
+            .style
+            ?.color,
+        AirvanaColors.accent,
+      );
+    }
+    for (final title in [
+      '每个人都有一个，\n持续成长的 AI 分身。',
+      'Kai Chen 的分身',
+      '长期记忆',
+      '数字分身',
+      '数字钱包',
+      '玩家互动',
+      '一个用户  →  一个 AI 分身  →  多个 Agentic Playable',
+    ]) {
+      expect(
+        tester
+            .widget<Text>(
+              find.descendant(of: heroFinder, matching: find.text(title)),
+            )
+            .style
+            ?.color,
+        AirvanaColors.ink,
+      );
+    }
+    expect(
+      tester.widget<Text>(find.text('持续学习中')).style?.color,
+      AirvanaColors.muted,
+    );
+    expect(
+      (tester
+                  .widget<Container>(
+                    find.byKey(const ValueKey('growth-agent-caption')),
+                  )
+                  .decoration!
+              as BoxDecoration)
+          .color,
+      AirvanaColors.canvas,
+    );
     expect(find.byKey(const ValueKey('growth-hero-dots')), findsOneWidget);
     expect(find.byKey(const ValueKey('growth-hero-links')), findsOneWidget);
     expect(

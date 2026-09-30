@@ -4,22 +4,22 @@
 /// 作为产品面维护，但它仍是这套交互唯一的完整定义，照抄文案比重写更可靠——
 /// 这几句是对外的产品主张，不该在移植过程中被"顺手改好一点"。
 ///
-/// 第 2、3 页的图不再是 Web 的 ◎ / ✨ 文字符号，而是设计稿给的两张 180×180
-/// 插图（2026-09-24，桌面 `Airvana-引导页图标/01-互动归因.svg`、`02-资产沉淀.svg`）。
+/// 三页统一使用 180×180 红黑圆角插图：KOL 拥有 Playable、互动归因、资产沉淀。
+/// 第一页按用户要求替换原 logo；第二、三页沿用已确认的设计稿。
 /// SVG 源文件留在 `assets/legacy/onboarding/src/`，位图由它们光栅化出 1x/2x/3x。
 library;
 
 /// 一张引导页。
 class OnboardingSlide {
   const OnboardingSlide({
+    required this.image,
     required this.title,
     required this.titleAccent,
     required this.description,
-    this.image,
   });
 
-  /// 插图资源路径；第一张为 null，显示 logo（Web 的 `obFirst` 分支）。
-  final String? image;
+  /// 统一风格的插图资源路径，三张均提供 1x/2x/3x 位图。
+  final String image;
 
   /// 标题分两行，第二行用强调色（Web 的 `obTitle` / `obTitleAccent`）。
   final String title;
@@ -31,6 +31,7 @@ class OnboardingSlide {
 
 const List<OnboardingSlide> kOnboardingSlides = <OnboardingSlide>[
   OnboardingSlide(
+    image: 'assets/legacy/onboarding/kol-playables.png',
     title: 'Every KOL Owns',
     titleAccent: 'Agentic Playables',
     description: '让每一位 KOL 都能创建并运营属于自己的 Agentic Playable 智能营销体。',

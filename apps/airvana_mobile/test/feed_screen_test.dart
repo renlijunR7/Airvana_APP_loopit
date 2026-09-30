@@ -56,7 +56,7 @@ void main() {
         tester
             .getSize(find.byKey(const ValueKey('feed-bottom-nav-reserve')))
             .height,
-        65,
+        73,
       );
 
       for (final playable in LegacyDemoCatalog.legacyWebPlayables.skip(1)) {
@@ -154,7 +154,26 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      await tester.tap(find.byKey(const ValueKey('play-plb_star_mower')));
+      final startButton = find.byKey(const ValueKey('play-plb_star_mower'));
+      expect(
+        tester.getSize(
+          find.descendant(of: startButton, matching: find.byType(Material)),
+        ),
+        const Size(128, 36),
+        reason: '缩小可见胶囊，不改变居中位置或试玩操作',
+      );
+      expect(tester.getSize(startButton).height, greaterThanOrEqualTo(48));
+      expect(tester.getCenter(startButton).dx, 215);
+      expect(
+        tester
+            .widget<FilledButton>(startButton)
+            .style!
+            .textStyle!
+            .resolve({})!
+            .fontSize,
+        13,
+      );
+      await tester.tap(startButton);
       await tester.pump();
       expect(
         find.byKey(const ValueKey('feed-inline-game-plb_star_mower')),

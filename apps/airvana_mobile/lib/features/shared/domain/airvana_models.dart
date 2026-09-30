@@ -217,12 +217,14 @@ class ContentComment {
     required this.body,
     required this.authorName,
     required this.createdAt,
+    this.owned = false,
   });
 
   factory ContentComment.fromJson(Map<String, dynamic> json) => ContentComment(
     id: '${json['id'] ?? ''}',
     body: '${json['body'] ?? ''}',
     authorName: '${json['authorName'] ?? 'Airvana 用户'}',
+    owned: json['owned'] == true,
     createdAt:
         DateTime.tryParse('${json['createdAt'] ?? ''}') ??
         DateTime.fromMillisecondsSinceEpoch(0),
@@ -232,6 +234,7 @@ class ContentComment {
   final String body;
   final String authorName;
   final DateTime createdAt;
+  final bool owned;
 }
 
 class AppNotification {

@@ -8,14 +8,13 @@
 /// 在杀掉进程重开时原样走一遍。
 ///
 /// 交互沿用 Web：可左右滑动、点圆点直达、末页按钮文案变「开始」、
-/// 右下角常驻「跳过」。第一页显示 logo，后两页是设计稿插图。
+/// 右下角常驻「跳过」。三页统一使用同一套设计稿插图。
 library;
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../design_system/airvana_theme.dart';
-import '../../../shared/presentation/airvana_logo.dart';
 import '../domain/onboarding_slides.dart';
 import 'onboarding_glow.dart';
 
@@ -74,10 +73,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     controller: _pages,
                     itemCount: kOnboardingSlides.length,
                     onPageChanged: (value) => setState(() => _index = value),
-                    itemBuilder: (context, index) => _Slide(
-                      slide: kOnboardingSlides[index],
-                      isFirst: index == 0,
-                    ),
+                    itemBuilder: (context, index) =>
+                        _Slide(slide: kOnboardingSlides[index]),
                   ),
                 ),
                 Padding(
@@ -137,15 +134,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 }
 
 class _Slide extends StatelessWidget {
-  const _Slide({required this.slide, required this.isFirst});
+  const _Slide({required this.slide});
 
   final OnboardingSlide slide;
-  final bool isFirst;
 
   @override
   Widget build(BuildContext context) => LayoutBuilder(
     // 正常手机上内容居中；屏幕过矮（小机型、放大字号、横屏）时允许滚动，
-    // 而不是让 180px 的图标圈把标题挤出可视区。
+    // 而不是让 180px 的插图把标题挤出可视区。
     builder: (context, constraints) => SingleChildScrollView(
       padding: const EdgeInsets.symmetric(horizontal: 36, vertical: 12),
       child: ConstrainedBox(
@@ -153,21 +149,16 @@ class _Slide extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // 第一页放 logo；后两页放设计稿的 180×180 插图，占 Web 那个 180px
-            // 圆圈的位置——插图自带浅粉底，不再另画圆圈。
-            if (slide.image == null) ...[
-              const AirvanaLogo(width: 220),
-              const SizedBox(height: 44),
-            ] else ...[
-              Image.asset(
-                slide.image!,
-                key: ValueKey('onboarding-image-${slide.image}'),
-                width: 180,
-                height: 180,
-                filterQuality: FilterQuality.medium,
-              ),
-              const SizedBox(height: 40),
-            ],
+            // 三页共用同一插图尺寸与间距；淡粉衬底在图片内，不另加底盘。
+            Image.asset(
+              slide.image,
+              key: ValueKey('onboarding-image-${slide.image}'),
+              width: 180,
+              height: 180,
+              filterQuality: FilterQuality.medium,
+              excludeFromSemantics: true,
+            ),
+            const SizedBox(height: 40),
             Text(
               slide.title,
               textAlign: TextAlign.center,
@@ -192,18 +183,6 @@ class _Slide extends StatelessWidget {
                 color: AirvanaColors.accent,
               ),
             ),
-            if (!isFirst) ...[
-              const SizedBox(height: 14),
-              Text(
-                slide.description,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontSize: 15,
-                  height: 1.7,
-                  color: AirvanaColors.muted,
-                ),
-              ),
-            ],
           ],
         ),
       ),

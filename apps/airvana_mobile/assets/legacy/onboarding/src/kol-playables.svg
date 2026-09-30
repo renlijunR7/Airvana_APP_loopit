@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 180 180" fill="none">
+  <title>KOL 拥有自己的 Playable</title>
+  <desc>创作者头像与专属互动内容卡片相连，代表每位 KOL 都能创建并运营自己的 Playable。</desc>
+  <rect x="27" y="92" width="72" height="60" rx="19" fill="#FFE6E9"/>
+  <path d="M54 82V68C54 60.82 59.82 55 67 55H77" stroke="#FF3B4A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="76" y="35" width="66" height="88" rx="17" fill="#FFFFFF" stroke="#1C1C1E" stroke-width="3"/>
+  <path d="M101 56.5C101 55.344 102.257 54.623 103.256 55.206L118.13 63.883C119.123 64.462 119.123 65.898 118.13 66.477L103.256 75.154C102.257 75.737 101 75.016 101 73.86V56.5Z" fill="#FF3B4A"/>
+  <path d="M93 98H125M93 107H114" stroke="#1C1C1E" stroke-width="3" stroke-linecap="round"/>
+  <rect x="35" y="82" width="63" height="61" rx="17" fill="#FFFFFF" stroke="#1C1C1E" stroke-width="3"/>
+  <circle cx="66.5" cy="102" r="8.5" fill="#FF3B4A"/>
+  <path d="M50.5 128C51.467 120.48 57.86 115 66.5 115C75.14 115 81.533 120.48 82.5 128C82.638 129.104 81.745 130 80.632 130H52.368C51.255 130 50.362 129.104 50.5 128Z" fill="#FF3B4A"/>
+</svg>
