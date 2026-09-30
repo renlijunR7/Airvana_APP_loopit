@@ -1,0 +1,82 @@
+{
+  "pack": "physics-v1",
+  "version": "1.0.0",
+  "asset_kind": "original_game_covers",
+  "created_at": "2026-09-06",
+  "root": "/assets/games/physics-v1/",
+  "format": "image/svg+xml",
+  "viewBox": "0 0 360 560",
+  "provenance": {
+    "source_type": "original_repo_native_vector_code",
+    "description": "Five SVG covers authored as editable vector geometry for this local project. No extracted, downloaded, traced, or embedded artwork from the referenced third-party games is included.",
+    "authorship_note": "Original code-authored vector source; this is not a claim of manual human illustration or third-party IP authorization.",
+    "third_party_game_assets": false,
+    "raster_image_generation_used": false,
+    "embedded_bitmap_assets": false,
+    "external_resource_references": false,
+    "authorization_scope": "Local project preview only. No assertion of a license to third-party game names, characters, logos, artwork, or commercial distribution rights.",
+    "dependency_note": "Matter.js is runtime code, not a cover-art source; its separate MIT license is preserved at public/vendor/matter-LICENSE.txt."
+  },
+  "review": {
+    "status": "source_and_checksums_verified",
+    "checks": ["JSON parse", "five expected SVG paths", "SHA-256 and byte count", "360x560 viewBox", "no image, script, foreignObject, or external resource references"],
+    "production_approval": "not_claimed"
+  },
+  "assets": [
+    {
+      "asset_id": "cloud-sling",
+      "content_id": 101,
+      "title": "弹射云堡",
+      "file": "cloud-sling.svg",
+      "path": "public/assets/games/physics-v1/cloud-sling.svg",
+      "url": "/assets/games/physics-v1/cloud-sling.svg",
+      "bytes": 2774,
+      "sha256": "986e0b55c4331b4c607d3063eb737d8acf96507f73c08d58d7728f515f3909df",
+      "provenance": "Original SVG vector code for the cloud-castle slingshot world; no original-game artwork."
+    },
+    {
+      "asset_id": "candy-swing",
+      "content_id": 102,
+      "title": "糖果摆摆屋",
+      "file": "candy-swing.svg",
+      "path": "public/assets/games/physics-v1/candy-swing.svg",
+      "url": "/assets/games/physics-v1/candy-swing.svg",
+      "bytes": 1893,
+      "sha256": "b6f4297e9060f89b6ee94658ee4967c1bc43c9ca46ce862c323e3b1569503b57",
+      "provenance": "Original SVG vector code for the candy-pendulum pastry world; no original-game artwork."
+    },
+    {
+      "asset_id": "happy-cup",
+      "content_id": 103,
+      "title": "画线接水",
+      "file": "happy-cup.svg",
+      "path": "public/assets/games/physics-v1/happy-cup.svg",
+      "url": "/assets/games/physics-v1/happy-cup.svg",
+      "bytes": 2626,
+      "sha256": "c4a7b991f80cff5b7867eca1d1245400e66e956a09149100aa0ac68cda1ed4ec",
+      "provenance": "Original SVG vector code for the line-drawing water workshop; no original-game artwork."
+    },
+    {
+      "asset_id": "spring-dig",
+      "content_id": 104,
+      "title": "地底泉水",
+      "file": "spring-dig.svg",
+      "path": "public/assets/games/physics-v1/spring-dig.svg",
+      "url": "/assets/games/physics-v1/spring-dig.svg",
+      "bytes": 2271,
+      "sha256": "8421396704ce54a40757e8eb6eae97d5e47c95a9ad53591b81f63d0c5b0c3f88",
+      "provenance": "Original SVG vector code for the underground spring-routing world; no original-game artwork."
+    },
+    {
+      "asset_id": "fruit-drop",
+      "content_id": 105,
+      "title": "果冻果园",
+      "file": "fruit-drop.svg",
+      "path": "public/assets/games/physics-v1/fruit-drop.svg",
+      "url": "/assets/games/physics-v1/fruit-drop.svg",
+      "bytes": 4829,
+      "sha256": "0922356796c4320e8c1dcc94e1d83ffef92123565f98f601b05d25cdfc5e8eaf",
+      "provenance": "Original SVG vector code for the fruit-drop orchard world; no original-game artwork."
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "source": "http://game.zhongyigames.com/niguolaia/",
+  "license": "Publicly served reference-game assets; reuse and commercial license not verified. Used for requested local recreation.",
+  "assets": [
+    {
+      "path": "textures/map/map_9991",
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/native/3f/3f07bcd1-10f0-4d7e-a898-a0f0423bb346.1a10f.png",
+      "file": "work/reference/map_9991.png"
+    },
+    {
+      "path": "textures/map/map_9992",
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/native/60/6025a866-ac67-44bf-a7d5-986af58972b2.a65c2.png",
+      "file": "work/reference/map_9992.png"
+    },
+    {
+      "path": "textures/map/map_9993",
+      "url": "http://game.zhongyigames.com/niguolaia/assets/resources/native/7f/7f1a7ecf-c3ac-4512-8cec-c1f8d103d30b.f312f.png",
+      "file": "work/reference/map_9993.png"
+    }
+  ]
+}

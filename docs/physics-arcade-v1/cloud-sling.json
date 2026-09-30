@@ -1,0 +1,282 @@
+{
+  "schema_version": "1.0.0",
+  "playable_id": "plb_cloud_sling",
+  "campaign_id": "physics-arcade-local-v1",
+  "contract_version": "1.0.0",
+  "version": "1.0.0",
+  "status": "draft",
+  "template_id": "physics-arcade-v1",
+  "locales": {
+    "default": "zh-CN",
+    "supported": [
+      "zh-CN"
+    ]
+  },
+  "presentation": {
+    "title": "弹射云堡",
+    "tone": "明亮饱满、卡通立体的经典休闲手游风格",
+    "theme": "cloud-sling",
+    "logo_asset_id": "cloud-sling",
+    "color_tokens": {
+      "primary": "#267EA1",
+      "secondary": "#EDB454",
+      "background": "#FFF8EA",
+      "text": "#284352"
+    },
+    "copy_pack": {
+      "title": "弹射云堡",
+      "local": "本地试玩"
+    }
+  },
+  "gameplay": {
+    "mechanic": "other",
+    "core_loop": "操作物理对象完成关卡目标，失败重试，通过五关结束",
+    "rounds": 5,
+    "target_duration_seconds": 180,
+    "difficulty": {
+      "minimum": 1,
+      "maximum": 5,
+      "default": 1
+    },
+    "input_modes": [
+      "tap",
+      "drag",
+      "swipe",
+      "keyboard"
+    ],
+    "state_transitions": [
+      {
+        "from": "intro",
+        "event": "start",
+        "to": "playing"
+      },
+      {
+        "from": "playing",
+        "event": "pause",
+        "to": "paused"
+      },
+      {
+        "from": "paused",
+        "event": "resume",
+        "to": "playing"
+      },
+      {
+        "from": "playing",
+        "event": "goal",
+        "to": "success"
+      },
+      {
+        "from": "playing",
+        "event": "lost",
+        "to": "failure"
+      },
+      {
+        "from": "failure",
+        "event": "retry",
+        "to": "playing"
+      },
+      {
+        "from": "intro",
+        "event": "close",
+        "to": "exit"
+      }
+    ],
+    "scoring": {
+      "enabled": true,
+      "rule": "以真实碰撞、收集、装水或合成为依据；分数无货币价值",
+      "minimum": 0,
+      "maximum": 100000
+    }
+  },
+  "screens": [
+    {
+      "screen_id": "intro",
+      "state": "intro",
+      "copy_keys": [
+        "title"
+      ],
+      "asset_ids": [
+        "cloud-sling",
+        "physics-casual-v2-atlas"
+      ],
+      "actions": [
+        "start"
+      ]
+    },
+    {
+      "screen_id": "playing",
+      "state": "playing",
+      "copy_keys": [
+        "title"
+      ],
+      "asset_ids": [
+        "cloud-sling",
+        "physics-casual-v2-atlas"
+      ],
+      "actions": [
+        "pause",
+        "exit"
+      ]
+    },
+    {
+      "screen_id": "paused",
+      "state": "paused",
+      "copy_keys": [
+        "title"
+      ],
+      "asset_ids": [
+        "cloud-sling",
+        "physics-casual-v2-atlas"
+      ],
+      "actions": [
+        "pause",
+        "exit"
+      ]
+    },
+    {
+      "screen_id": "success",
+      "state": "success",
+      "copy_keys": [
+        "title"
+      ],
+      "asset_ids": [
+        "cloud-sling",
+        "physics-casual-v2-atlas"
+      ],
+      "actions": [
+        "pause",
+        "exit"
+      ]
+    },
+    {
+      "screen_id": "failure",
+      "state": "failure",
+      "copy_keys": [
+        "title"
+      ],
+      "asset_ids": [
+        "cloud-sling",
+        "physics-casual-v2-atlas"
+      ],
+      "actions": [
+        "retry"
+      ]
+    }
+  ],
+  "cta": {
+    "cta_id": "none",
+    "type": "none",
+    "label_key": "",
+    "destination_id": "",
+    "allowed_states": [],
+    "open_mode": "same_context"
+  },
+  "reward_presentation": {
+    "reward_id": "none",
+    "type": "none",
+    "eligibility_copy_key": "local",
+    "terms_copy_key": "local",
+    "claim_action": ""
+  },
+  "field_authority": {
+    "locked_fields": [
+      "cta",
+      "reward_presentation",
+      "telemetry"
+    ],
+    "editable_fields": [
+      "presentation",
+      "gameplay"
+    ],
+    "agentic_fields": [],
+    "runtime_fields": [
+      "run_id",
+      "level"
+    ]
+  },
+  "runtime_policy": {
+    "segmentation_inputs": [],
+    "agentic_bounds": [],
+    "experiment_id": null,
+    "variant_id": null,
+    "fallback_behavior": "错误显示重试；失焦暂停；无外部服务依赖"
+  },
+  "telemetry": {
+    "required_events": [
+      "impression",
+      "play_start",
+      "valid_interaction",
+      "level_complete",
+      "play_complete",
+      "play_fail",
+      "replay"
+    ],
+    "common_properties": [
+      "game_key",
+      "level",
+      "run_id",
+      "version",
+      "score",
+      "status",
+      "local_demo",
+      "reward_issued",
+      "build_id",
+      "campaign_id",
+      "channel_id",
+      "consent_state",
+      "contract_version",
+      "creative_id",
+      "device_class",
+      "event_id",
+      "event_time",
+      "kol_id",
+      "link_id",
+      "locale",
+      "playable_config_version",
+      "playable_id",
+      "region",
+      "session_id"
+    ],
+    "deduplication_strategy": "每实例每关terminal once",
+    "consent_behavior": "本地运行日志，不新增外部追踪"
+  },
+  "build": {
+    "target": "web_h5",
+    "entry": "/physics-arcade.html?game=cloud-sling",
+    "asset_base": "/assets/games/physics-casual-v2/",
+    "minimum_viewport_width": 320,
+    "supported_orientations": [
+      "portrait"
+    ],
+    "dependency_lock": "package-lock.json (matter-js@0.20.0)",
+    "environment": "local"
+  },
+  "constraints": {
+    "approved_asset_ids": [
+      "cloud-sling",
+      "physics-casual-v2-atlas"
+    ],
+    "prohibited_phrases": [
+      "官方复刻",
+      "官方授权"
+    ],
+    "required_disclosures": [
+      "LOCAL"
+    ],
+    "privacy_prohibited_fields": [
+      "seed_phrase",
+      "private_key",
+      "raw_kyc_document"
+    ],
+    "manual_review_required": true
+  },
+  "metadata": {
+    "created_at": "2026-09-06T00:00:00+08:00",
+    "updated_at": "2026-09-07T00:00:00+08:00",
+    "created_by": "Codex",
+    "notes": [
+      "本地原创实现，不是原版游戏完整复刻",
+      "2026-09-07本地presentation升级：主题PNG背景及共享透明atlas来自内置图像生成工具；代码绘制仅作加载失败降级。五关规则、计分、输入、contract_version与商业边界不变。"
+    ]
+  }
+}

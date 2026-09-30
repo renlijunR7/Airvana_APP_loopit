@@ -1,0 +1,90 @@
+brief_version: "1.0.0"
+campaign:
+  campaign_id: physics-arcade-local-v1
+  working_name: 五款经典物理玩法本地接入
+  brand_legal_entity: NOT_APPLICABLE
+  market_timezone: Asia/Hong_Kong
+  target_launch_at: NOT_APPLICABLE_LOCAL
+  target_end_at: NOT_APPLICABLE_LOCAL
+owners:
+  business_owner: 本地项目用户
+  operations_owner: 本地项目用户
+  approval_owner: 待生产审核
+  kill_switch_owner: 本地项目用户
+objective:
+  primary: engagement
+  primary_success_event: play_complete
+  secondary: []
+  target_value: NOT_APPLICABLE
+  target_window: LOCAL_QA
+  funnel_boundary: 本地试玩，不新增商业转化
+audience:
+  included_regions: [] # 不新增地区白名单；沿用项目既有准入规则。
+  excluded_regions: [] # 不新增地区排除规则；不代表获准向所有地区发布。
+  languages: [zh-CN]
+  minimum_age: "NOT_APPLICABLE_LOCAL：本轮不新增年龄准入，沿用项目既有规则；未声明商业适龄评级。"
+  interests: ["ASSUMPTION：对轻量物理挑战与休闲解谜感兴趣的本地既有访问者"]
+  lifecycle_stages: ["ASSUMPTION：mixed；不基于用户生命周期新增筛选或个性化"]
+  accessibility_requirements:
+    - 核心玩法支持触控和鼠标，并提供键盘与文字按钮操作。
+    - 支持暂停、继续、重试和静音；失焦或页面隐藏时暂停物理模拟。
+    - 不以颜色或音效作为唯一操作提示；保留可读文字说明与关卡反馈。
+  device_network_assumptions:
+    - "ASSUMPTION：现代移动端浏览器或 WebView 支持 Canvas 2D、Pointer Events 和 JavaScript。"
+    - "ASSUMPTION：通过项目现有本地预览服务访问；本轮不改变认证、地区或网络准入。"
+    - 游戏代码、Matter.js 和封面均为本地资源；运行不依赖第三方游戏服务器或素材 CDN。
+channels:
+  distribution: [in_app]
+  kol_ids: []
+  landing_context: 首页前五位
+  attribution_window_days: 0
+brand_assets:
+  source_folder_or_url: public/assets/games/physics-casual-v2/
+  logo: [保留现有Logo]
+  product_images: [cloud-sling.png, candy-swing.png, happy-cup.png, spring-dig.png, fruit-drop.png, atlas.png]
+  colors: [按五款世界分别设计]
+  typography: [system-ui]
+  approved_copy: []
+  prohibited_copy: [官方复刻, 官方授权, 商业收益]
+  audio_video: [可静音合成音效]
+  authorization_status: 内置图像工具生成的本地原创风格PNG背景与透明图集；保留代码绘制降级。非参考游戏原始资产，未取得第三方游戏IP或生产发布授权。提示词见casual-art-v2-prompts.json。
+gameplay:
+  preferred_mechanics: [弹射碰撞与塔楼坍塌, 割绳摆动与星星收集, 画线引水, 挖土导流, 水果下落碰撞合成]
+  prohibited_mechanics: [赌博或现金化奖励, 强制分享, 强制购买, 未经授权使用第三方原作角色或素材]
+  target_duration_seconds: "NOT_APPLICABLE_LOCAL：不设统一会话时长；各关依照独立规则运行，并支持暂停与重试。"
+  rounds: 5 # 每款游戏各有 5 个独立关卡，不是五款共享一个关卡。
+  input_modes: [touch, mouse, keyboard, labeled_buttons]
+  required_states: [intro, playing, paused, success, failure, retry, completed]
+  tone_theme: "明亮饱满、具有卡通立体感的经典休闲手游美术；云堡弹射、甜点摆绳、工坊接水、地底泉水和果冻果园分别拥有对应的PNG场景、实时角色与道具，不复用同质背景。仅presentation升级，原五关玩法和物理参数保持不变。"
+  kol_personalization: "NOT_APPLICABLE：本轮不新增 KOL 个性化、商业推广或可修改商业条款字段。"
+cta: {type: none, label: "", destination: "", display_states: [], approval_status: not_applicable}
+reward: {type: none, value_description: 不新增奖励规则, eligibility: NOT_APPLICABLE, inventory_cap: 0, expiry: NOT_APPLICABLE, fulfillment_owner: NOT_APPLICABLE, material_terms: 分数无货币价值}
+compliance_privacy:
+  legal_entity: NOT_APPLICABLE
+  regulated_activity: NOT_APPLICABLE
+  prohibited_claims: [投资收益, 官方授权]
+  required_disclosures: [本地试玩]
+  consent_requirements: [不新增外部追踪]
+  data_collected: []
+  data_retention: NOT_APPLICABLE
+  manual_review_required: true
+  approval_evidence: 待生产审核
+measurement:
+  primary_kpi: functional_complete_over_start
+  required_events: [play_start, valid_interaction, level_complete, play_complete, play_fail, replay]
+  attribution_model: none
+  dimensions: [game_key, level, run_id]
+  exclusion_rules: [非生产]
+  reporting_cadence: 本轮交付
+commercial_delivery:
+  build_budget: NOT_APPLICABLE
+  media_budget: 0
+  reward_budget: 0
+  kol_settlement_budget: 0
+  supported_targets: [web_h5]
+  hosting_owner: 本地项目用户
+  release_owner: 本地项目用户
+  rollback_target: 移除新增入口，保留既有数据
+assumptions: [原创风格生成美术和既有原创关卡, 仅本地预览, 5关制, 资源加载失败保留代码绘制降级]
+open_questions: [生产IP及品牌审批不在本轮范围]
+evidence_sources: [用户本轮请求, casual-art-v2-brief.md, casual-art-v2-prompts.json]

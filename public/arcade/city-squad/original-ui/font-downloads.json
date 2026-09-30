@@ -1,0 +1,38 @@
+[
+  {
+    "name": "number_gold",
+    "uuid": "1c296fc7-d6f2-428a-a045-2f37849f47ef",
+    "url": "http://game.zhongyigames.com/jizhan/assets/UI/native/1c/1c296fc7-d6f2-428a-a045-2f37849f47ef.png",
+    "originalPath": "Assets/Fonts/homeUI/number_gold"
+  },
+  {
+    "name": "cost_font_gold",
+    "uuid": "1c2e445e-2ee7-4d38-a9a0-e77d3565d32b",
+    "url": "http://game.zhongyigames.com/jizhan/assets/UI/native/1c/1c2e445e-2ee7-4d38-a9a0-e77d3565d32b.png",
+    "originalPath": "Assets/Fonts/levelinfoUI/cost_font_gold"
+  },
+  {
+    "name": "font_level_lnumber",
+    "uuid": "803e190f-cfab-4cd0-8db8-6d9131b9c6ab",
+    "url": "http://game.zhongyigames.com/jizhan/assets/UI/native/80/803e190f-cfab-4cd0-8db8-6d9131b9c6ab.png",
+    "originalPath": "Assets/Fonts/levelinfoUI/font_level_lnumber"
+  },
+  {
+    "name": "fonr_sign",
+    "uuid": "940d67d6-9703-44ab-8c30-64b59713c852",
+    "url": "http://game.zhongyigames.com/jizhan/assets/UI/native/94/940d67d6-9703-44ab-8c30-64b59713c852.png",
+    "originalPath": "Assets/Fonts/siginUI/fonr_sign"
+  },
+  {
+    "name": "font_white",
+    "uuid": "d8b7cfe9-2a7f-4f20-9957-eddb1353db51",
+    "url": "http://game.zhongyigames.com/jizhan/assets/UI/native/d8/d8b7cfe9-2a7f-4f20-9957-eddb1353db51.png",
+    "originalPath": "Assets/Fonts/common/font_white"
+  },
+  {
+    "name": "UI_shuzi_002",
+    "uuid": "d99e7024-b1f9-4007-84cc-5aff29d98389",
+    "url": "http://game.zhongyigames.com/jizhan/assets/UI/native/d9/d99e7024-b1f9-4007-84cc-5aff29d98389.png",
+    "originalPath": "Assets/Fonts/homeUI/UI_shuzi_002"
+  }
+]

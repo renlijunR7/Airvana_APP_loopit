@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="key">
+<title>key — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<circle cx="20" cy="19" r="14" fill="#e4b44f" /><circle cx="20" cy="19" r="6" fill="#fff4d2" /><path d="M28 30L50 52L58 44L53 39L49 43L44 38L48 34L43 29L39 33L33 27Z" fill="#e4b44f" /><path d="M32 31L48 47" fill="none" stroke="#b47f32" stroke-width="3"/>
+</g>
+</svg>

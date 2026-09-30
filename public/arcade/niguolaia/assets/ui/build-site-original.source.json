@@ -1,0 +1,56 @@
+{
+  "asset": "build-site-original.png",
+  "kind": "static cc.Sprite; not Spine",
+  "originalAssetName": "floor_empty",
+  "atlasAssetPath": "textures/mapUp/battle_bg",
+  "spriteFrameUuid": "f6Sb0IstlLw4LFReyMDBu5",
+  "textureUuid": "4b20KyiBZM+5ng5J1OJhNK",
+  "sourcePage": "http://game.zhongyigames.com/niguolaia/",
+  "sourceTextureUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/4b/4bdb42b2-8816-4cfb-99e0-e49d4e26134a.5eae0.png",
+  "sourceMetadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/05/0526c6bbd.5deb3.json",
+  "textureSize": [
+    675,
+    510
+  ],
+  "frame": {
+    "name": "floor_empty",
+    "texture": "4b20KyiBZM+5ng5J1OJhNK",
+    "rect": [
+      501,
+      373,
+      55,
+      33
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      55,
+      33
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "outputSize": [
+    55,
+    33
+  ],
+  "anchor": [
+    0.5,
+    0.5
+  ],
+  "originalScale": [
+    1,
+    1
+  ],
+  "placement": "BattleScene.initGameTower: createTowerFloor(cc.v2(c.x-320,c.y-568)); GameMap.createTowerFloor creates a cc.Sprite and sets its position, with no scale change. Default cc.Node anchor is center.",
+  "extraction": "Exact lossless RGBA rectangular crop. No resizing, redrawing, or approximation.",
+  "sha256": "05c101b1de9b8a901dc8718baf0921543a3084f690b787ae628593011d3224ef",
+  "licenseStatus": "Publicly served original game resource. No redistribution/commercial reuse license established.",
+  "evidence": "main-decoded.txt / GameMap.createTowerFloor: this.mapCoverAtlas.getSpriteFrame(\"floor_empty\")"
+}

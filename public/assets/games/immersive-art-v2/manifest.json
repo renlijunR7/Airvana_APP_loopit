@@ -1,0 +1,322 @@
+{
+  "asset_pack": "airvana-immersive-game-art-v2",
+  "version": "2.1.0",
+  "status": "LOCAL_DEMO",
+  "source": "IMAGEGEN",
+  "authorization": "generated_for_local_airvana_demo",
+  "production_use": "requires_asset_and_brand_review",
+  "layout": {
+    "columns": 3,
+    "rows": 2,
+    "cell_count": 6,
+    "runtime_blend_mode": "screen"
+  },
+  "families": [
+    "safety",
+    "nature",
+    "motion",
+    "collection",
+    "rhythm",
+    "creation",
+    "story",
+    "stealth",
+    "economy",
+    "ocean",
+    "space",
+    "strategy"
+  ],
+  "coverage": {
+    "games": 38,
+    "complete_runtime": 32,
+    "deep_runtime": 6
+  },
+  "constraints": [
+    "No external distribution claim",
+    "No brand authorization claim",
+    "Keep LOCAL_DEMO visible",
+    "Validate mobile gameplay before release"
+  ],
+  "authorization_status": "pending_human_release_approval",
+  "locale": "zxx",
+  "expires_at": null,
+  "review_status": "technical_review_passed",
+  "release_approved": false,
+  "assets": [
+    {
+      "asset_id": "immersive_collection_kit_v2",
+      "family": "collection",
+      "type": "sprite_atlas",
+      "runtime": "runtime/collection-kit-v2.png",
+      "dimensions": {
+        "width": 1536,
+        "height": 1024
+      },
+      "sha256": "1e439b36260e63dc2bb4fd0d3376061ae4ba57c75382c4517baadbb1ca8c5435",
+      "owner": "Airvana local demo workspace",
+      "source": "OpenAI built-in ImageGen",
+      "authorization_status": "pending_human_release_approval",
+      "locale": "zxx",
+      "version": "2.1.0",
+      "expires_at": null,
+      "usage_restrictions": [
+        "LOCAL_DEMO and internal review only",
+        "No external or commercial distribution before human approval"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false
+    },
+    {
+      "asset_id": "immersive_creation_kit_v2",
+      "family": "creation",
+      "type": "sprite_atlas",
+      "runtime": "runtime/creation-kit-v2.png",
+      "dimensions": {
+        "width": 1536,
+        "height": 1024
+      },
+      "sha256": "609608821b2b55a42c83402f1de12b3f7658a3a2289776adf110af85a6b3a00d",
+      "owner": "Airvana local demo workspace",
+      "source": "OpenAI built-in ImageGen",
+      "authorization_status": "pending_human_release_approval",
+      "locale": "zxx",
+      "version": "2.1.0",
+      "expires_at": null,
+      "usage_restrictions": [
+        "LOCAL_DEMO and internal review only",
+        "No external or commercial distribution before human approval"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false
+    },
+    {
+      "asset_id": "immersive_economy_kit_v2",
+      "family": "economy",
+      "type": "sprite_atlas",
+      "runtime": "runtime/economy-kit-v2.png",
+      "dimensions": {
+        "width": 1024,
+        "height": 1536
+      },
+      "sha256": "0e55b5c337e544104d3241275deb37aacb0c6e7c9e01e5a2e82cfc2f2815d7a7",
+      "owner": "Airvana local demo workspace",
+      "source": "OpenAI built-in ImageGen",
+      "authorization_status": "pending_human_release_approval",
+      "locale": "zxx",
+      "version": "2.1.0",
+      "expires_at": null,
+      "usage_restrictions": [
+        "LOCAL_DEMO and internal review only",
+        "No external or commercial distribution before human approval"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false
+    },
+    {
+      "asset_id": "immersive_motion_kit_v2",
+      "family": "motion",
+      "type": "sprite_atlas",
+      "runtime": "runtime/motion-kit-v2.png",
+      "dimensions": {
+        "width": 1536,
+        "height": 1024
+      },
+      "sha256": "1ac48708fe5c508483b3037d528f81f0dd5117b4c1e93cff09a4b3d27fbe7c58",
+      "owner": "Airvana local demo workspace",
+      "source": "OpenAI built-in ImageGen",
+      "authorization_status": "pending_human_release_approval",
+      "locale": "zxx",
+      "version": "2.1.0",
+      "expires_at": null,
+      "usage_restrictions": [
+        "LOCAL_DEMO and internal review only",
+        "No external or commercial distribution before human approval"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false
+    },
+    {
+      "asset_id": "immersive_nature_kit_v2",
+      "family": "nature",
+      "type": "sprite_atlas",
+      "runtime": "runtime/nature-kit-v2.png",
+      "dimensions": {
+        "width": 1536,
+        "height": 1024
+      },
+      "sha256": "8e4a2f9bdf3c0b6a7d5567ea472f8ebd06e292d4f4d0a2eb82a72529437b15ba",
+      "owner": "Airvana local demo workspace",
+      "source": "OpenAI built-in ImageGen",
+      "authorization_status": "pending_human_release_approval",
+      "locale": "zxx",
+      "version": "2.1.0",
+      "expires_at": null,
+      "usage_restrictions": [
+        "LOCAL_DEMO and internal review only",
+        "No external or commercial distribution before human approval"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false
+    },
+    {
+      "asset_id": "immersive_ocean_kit_v2",
+      "family": "ocean",
+      "type": "sprite_atlas",
+      "runtime": "runtime/ocean-kit-v2.png",
+      "dimensions": {
+        "width": 1024,
+        "height": 1536
+      },
+      "sha256": "b373ed5b72c3d0fb8e4194ee33d3b321544cc40cec653f45de28c4496b5ec6e9",
+      "owner": "Airvana local demo workspace",
+      "source": "OpenAI built-in ImageGen",
+      "authorization_status": "pending_human_release_approval",
+      "locale": "zxx",
+      "version": "2.1.0",
+      "expires_at": null,
+      "usage_restrictions": [
+        "LOCAL_DEMO and internal review only",
+        "No external or commercial distribution before human approval"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false
+    },
+    {
+      "asset_id": "immersive_rhythm_kit_v2",
+      "family": "rhythm",
+      "type": "sprite_atlas",
+      "runtime": "runtime/rhythm-kit-v2.png",
+      "dimensions": {
+        "width": 1536,
+        "height": 1024
+      },
+      "sha256": "fc88453e64e20af7a0184aa3d5fdd952d97116d98277d87cf7e1a28322075e6a",
+      "owner": "Airvana local demo workspace",
+      "source": "OpenAI built-in ImageGen",
+      "authorization_status": "pending_human_release_approval",
+      "locale": "zxx",
+      "version": "2.1.0",
+      "expires_at": null,
+      "usage_restrictions": [
+        "LOCAL_DEMO and internal review only",
+        "No external or commercial distribution before human approval"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false
+    },
+    {
+      "asset_id": "immersive_safety_kit_v2",
+      "family": "safety",
+      "type": "sprite_atlas",
+      "runtime": "runtime/safety-kit-v2.png",
+      "dimensions": {
+        "width": 1536,
+        "height": 1024
+      },
+      "sha256": "e944ec1f972d1ef4c4629a2b3c56c3096fcf4f711ddacd1d30fa42f4bcc04796",
+      "owner": "Airvana local demo workspace",
+      "source": "OpenAI built-in ImageGen",
+      "authorization_status": "pending_human_release_approval",
+      "locale": "zxx",
+      "version": "2.1.0",
+      "expires_at": null,
+      "usage_restrictions": [
+        "LOCAL_DEMO and internal review only",
+        "No external or commercial distribution before human approval"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false
+    },
+    {
+      "asset_id": "immersive_space_kit_v2",
+      "family": "space",
+      "type": "sprite_atlas",
+      "runtime": "runtime/space-kit-v2.png",
+      "dimensions": {
+        "width": 1536,
+        "height": 1024
+      },
+      "sha256": "e0403f7620c2936a5175505272d79eb1f1b4eb7842b639ed201790e5c21a77ca",
+      "owner": "Airvana local demo workspace",
+      "source": "OpenAI built-in ImageGen",
+      "authorization_status": "pending_human_release_approval",
+      "locale": "zxx",
+      "version": "2.1.0",
+      "expires_at": null,
+      "usage_restrictions": [
+        "LOCAL_DEMO and internal review only",
+        "No external or commercial distribution before human approval"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false
+    },
+    {
+      "asset_id": "immersive_stealth_kit_v2",
+      "family": "stealth",
+      "type": "sprite_atlas",
+      "runtime": "runtime/stealth-kit-v2.png",
+      "dimensions": {
+        "width": 1536,
+        "height": 1024
+      },
+      "sha256": "e0d0896bb8805c08266917750bfa8131e79e2cc8f5393247933cd198006bfd28",
+      "owner": "Airvana local demo workspace",
+      "source": "OpenAI built-in ImageGen",
+      "authorization_status": "pending_human_release_approval",
+      "locale": "zxx",
+      "version": "2.1.0",
+      "expires_at": null,
+      "usage_restrictions": [
+        "LOCAL_DEMO and internal review only",
+        "No external or commercial distribution before human approval"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false
+    },
+    {
+      "asset_id": "immersive_story_kit_v2",
+      "family": "story",
+      "type": "sprite_atlas",
+      "runtime": "runtime/story-kit-v2.png",
+      "dimensions": {
+        "width": 1536,
+        "height": 1024
+      },
+      "sha256": "ba5efe10e828e35033be4efe2a8e012b69d75240e8ef69fa605f801710a0946e",
+      "owner": "Airvana local demo workspace",
+      "source": "OpenAI built-in ImageGen",
+      "authorization_status": "pending_human_release_approval",
+      "locale": "zxx",
+      "version": "2.1.0",
+      "expires_at": null,
+      "usage_restrictions": [
+        "LOCAL_DEMO and internal review only",
+        "No external or commercial distribution before human approval"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false
+    },
+    {
+      "asset_id": "immersive_strategy_kit_v2",
+      "family": "strategy",
+      "type": "sprite_atlas",
+      "runtime": "runtime/strategy-kit-v2.png",
+      "dimensions": {
+        "width": 1536,
+        "height": 1024
+      },
+      "sha256": "1b33acccbf0ef4964e15c8a24d18af3acb294cde2032fa354b214c2e1b5c5b07",
+      "owner": "Airvana local demo workspace",
+      "source": "OpenAI built-in ImageGen",
+      "authorization_status": "pending_human_release_approval",
+      "locale": "zxx",
+      "version": "2.1.0",
+      "expires_at": null,
+      "usage_restrictions": [
+        "LOCAL_DEMO and internal review only",
+        "No external or commercial distribution before human approval"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false
+    }
+  ]
+}

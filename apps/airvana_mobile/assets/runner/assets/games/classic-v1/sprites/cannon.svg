@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="cannon">
+<title>cannon — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<circle cx="18" cy="50" r="10" fill="#8b6041" /><circle cx="18" cy="50" r="4" fill="#e4b44f" /><circle cx="46" cy="50" r="10" fill="#8b6041" /><circle cx="46" cy="50" r="4" fill="#e4b44f" /><path d="M17 41L43 19L52 28L27 50Z" fill="#345276" /><path d="M42 17L48 12L60 25L54 31Z" fill="#4977a5" /><path d="M18 40L25 35L34 45L27 52Z" fill="#4977a5" /><rect x="11" y="47" width="40" height="6" rx="2" fill="#614631" /><path d="M21 36L13 29L8 30" fill="none" stroke="#8b6041" stroke-width="3"/><circle cx="7" cy="28" r="3" fill="#e4b44f" />
+</g>
+</svg>

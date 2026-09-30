@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="frost">
+<title>frost — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M32 3V61M7 18L57 46M7 46L57 18" fill="none" stroke="#243042" stroke-width="6"/><path d="M32 3V61M7 18L57 46M7 46L57 18" fill="none" stroke="#75c3c7" stroke-width="3"/><path d="M24 9L32 16L40 9M24 55L32 48L40 55M7 28L19 25L17 13M47 51L45 39L57 36M7 36L19 39L17 51M47 13L45 25L57 28" fill="none" stroke="#75c3c7" stroke-width="4"/><path d="M32 23L40 28V37L32 42L24 37V28Z" fill="#fff4d2" />
+</g>
+</svg>

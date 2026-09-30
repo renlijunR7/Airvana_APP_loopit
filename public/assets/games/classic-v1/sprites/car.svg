@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="car">
+<title>car — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M17 7L23 3H41L47 7L51 54L46 60H18L13 54Z" fill="#d95d39" /><rect x="9" y="14" width="7" height="13" rx="2" fill="#243042" /><rect x="48" y="14" width="7" height="13" rx="2" fill="#243042" /><rect x="9" y="40" width="7" height="13" rx="2" fill="#243042" /><rect x="48" y="40" width="7" height="13" rx="2" fill="#243042" /><path d="M22 18L42 18L46 31H18Z" fill="#75c3c7" /><rect x="20" y="33" width="24" height="13" rx="3" fill="#a83e33" /><path d="M21 48H43L41 54H23Z" fill="#345276" /><rect x="18" y="8" width="8" height="4" rx="1" fill="#fff4d2" /><rect x="38" y="8" width="8" height="4" rx="1" fill="#fff4d2" /><path d="M32 6V15" fill="none" stroke="#fff4d2" stroke-width="3"/>
+</g>
+</svg>

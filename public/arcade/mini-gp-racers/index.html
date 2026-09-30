@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+  <meta name="theme-color" content="#091118">
+  <meta name="description" content="Mini GP Racers 本地可玩复刻版，接入原作赛车模型和赛道材质。">
+  <link rel="icon" href="assets/original/mini-gp-racers-logo.png">
+  <title>Mini GP Racers · 本地复刻版</title>
+  <link rel="stylesheet" href="styles.css?v=20260915-final-spa1">
+</head>
+<body>
+  <div id="boot" class="boot" role="status" aria-live="polite">
+    <img class="boot-logo" src="assets/original/mini-gp-racers-logo.png" alt="Mini GP Racers">
+    <div class="boot-title">MINI GP RACERS</div>
+    <div class="boot-track"><i></i></div>
+    <div class="boot-copy">正在暖胎…</div>
+  </div>
+
+  <main id="garageScreen" class="screen garage-screen" aria-label="赛车车库">
+    <header class="topbar">
+      <div class="brand" aria-label="Mini GP Racers">
+        <img class="brand-badge" src="assets/original/mini-gp-racers-logo.png" alt="">
+        <span class="brand-copy"><b>MINI GP</b><small>RACERS</small></span>
+      </div>
+      <div class="top-actions">
+        <div class="balance-chip" title="赛车币余额"><span class="coin">●</span><strong id="balance">600</strong></div>
+        <button id="soundBtn" class="icon-btn" type="button" aria-label="切换声音" title="切换声音">♫</button>
+        <button id="resetBtn" class="icon-btn" type="button" aria-label="重置进度" title="重置进度">↻</button>
+      </div>
+    </header>
+
+    <section class="car-rail-wrap" aria-label="赛车选择">
+      <button id="railPrev" class="rail-arrow" type="button" aria-label="向前浏览赛车">‹</button>
+      <div id="carRail" class="car-rail" role="tablist" aria-label="选择你的赛车"></div>
+      <button id="railNext" class="rail-arrow" type="button" aria-label="向后浏览赛车">›</button>
+    </section>
+
+    <div class="garage-grid">
+      <section class="stage-card" aria-label="赛车展示台">
+        <canvas id="garageCanvas"></canvas>
+        <div class="stage-vignette"></div>
+        <div class="stage-label"><span>01</span> BUILD YOUR RACER</div>
+        <div class="stage-hint" aria-hidden="true">↔ 自动旋转</div>
+      </section>
+
+      <aside class="garage-sidebar">
+        <section id="carSummary" class="car-summary"></section>
+        <nav id="garageTabs" class="garage-tabs" aria-label="车库功能">
+          <button type="button" class="active" data-tab="cars">赛车</button>
+          <button type="button" data-tab="upgrades">升级</button>
+          <button type="button" data-tab="style">外观</button>
+        </nav>
+        <section id="garageContent" class="garage-content" aria-live="polite"></section>
+      </aside>
+    </div>
+
+    <footer class="garage-footer">
+      <span>A 左转 · D 右转 · W 前进 · S 刹车，停稳后倒车</span>
+      <span>Shift 漂移 · 空格 OVR · V 切换 ERS · C 切换镜头</span>
+      <span>手机支持触屏横向与竖向游玩</span>
+    </footer>
+  </main>
+
+  <section id="raceScreen" class="screen race-screen" hidden aria-label="比赛">
+    <canvas id="raceCanvas"></canvas>
+    <div class="race-shade"></div>
+
+    <div class="race-hud hud-timing">
+      <div><small>名次</small><strong id="hudPosition">P12</strong></div>
+      <div><small>圈数</small><strong id="hudLap">1/1</strong></div>
+    </div>
+
+    <div class="race-hud hud-challenge">
+      <div class="challenge-top"><span>CHALLENGE</span><span id="hudTrack">涡轮山丘</span></div>
+      <strong><span id="hudOvertakes">0</span>/<span id="hudTarget">3</span> <em>超车</em></strong>
+      <div class="challenge-bottom"><span>时间 <b id="hudTime">0:55</b></span><span>赛车币 <b class="coin">●</b> <b id="hudCoins">0</b></span></div>
+    </div>
+
+    <button id="pauseBtn" class="pause-btn" type="button" aria-label="暂停">Ⅱ</button>
+
+    <div id="raceMessage" class="race-message" role="status" aria-live="assertive"></div>
+    <div id="startLights" class="start-lights" aria-label="起步灯">
+      <span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+
+    <div class="dashboard" aria-label="速度和车辆状态">
+      <span id="driveStatus" class="drive-status" hidden>漂移中</span>
+      <div class="gear" id="hudGear">1</div>
+      <div class="speed"><b id="hudSpeed">0</b><small>KM/H</small></div>
+      <div class="meters">
+        <label>THR<i><span id="hudThr"></span></i></label>
+        <label>BRK<i><span id="hudBrk"></span></i></label>
+        <label>ERS<i class="ers"><span id="hudErs"></span></i></label>
+      </div>
+    </div>
+
+    <div class="drive-actions">
+      <button id="driftBtn" type="button" class="drift-button" data-control="drift" aria-label="按住漂移，配合转向" aria-pressed="false">
+        <svg class="drift-icon" viewBox="0 0 52 44" fill="none" aria-hidden="true">
+          <path class="skid-trail" d="M6 37c14-1-7-9 7-13M17 41c17-2-5-10 8-14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          <g transform="rotate(28 33 16)"><rect x="24" y="3" width="18" height="27" rx="5" stroke="currentColor" stroke-width="2.5"/><path d="M27 11h12M27 23h12M22 8v6m22-6v6M22 21v5m22-5v5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M28 14h10v6H28z" fill="currentColor" opacity=".45"/></g>
+        </svg>
+        <span class="drift-copy"><strong>漂移</strong><small id="driftHint">按住 + 转向</small></span>
+        <kbd>SHIFT</kbd>
+      </button>
+      <div class="drive-key-guide" aria-label="键盘操作说明">
+        <span><kbd>W</kbd> 前进</span><span><kbd>S</kbd> 刹车</span>
+        <span><kbd>A</kbd> 左转</span><span><kbd>D</kbd> 右转</span>
+      </div>
+    </div>
+
+    <div id="touchControls" class="touch-controls" aria-label="触屏驾驶控制">
+      <div class="touch-steer">
+        <button type="button" data-control="left" aria-label="向左转">◀</button>
+        <button type="button" data-control="right" aria-label="向右转">▶</button>
+      </div>
+      <button type="button" class="ers-button" data-control="boost" aria-label="启动 OVR 电动加速">OVR</button>
+      <div class="touch-pedals">
+        <button type="button" class="brake-button" data-control="brake" aria-label="刹车，停稳后继续按住倒车">刹车<br>倒车</button>
+        <button type="button" class="throttle-button" data-control="throttle" aria-label="油门">油门</button>
+      </div>
+    </div>
+
+    <div id="pausePanel" class="modal-layer" hidden>
+      <section class="modal-card compact" role="dialog" aria-modal="true" aria-labelledby="pauseTitle">
+        <span class="eyebrow">PIT WALL</span>
+        <h2 id="pauseTitle">比赛已暂停</h2>
+        <p>调整好状态，再回到赛道。</p>
+        <button id="resumeBtn" class="primary-button" type="button">继续比赛</button>
+        <button class="secondary-button" type="button" data-action="quit-race">返回车库</button>
+      </section>
+    </div>
+  </section>
+
+  <section id="resultScreen" class="screen result-screen" hidden aria-label="比赛结果">
+    <div class="result-glow"></div>
+    <section class="result-card" aria-labelledby="resultTitle">
+      <div class="result-track"><span>◆ FINISH</span><b id="resultTrack">涡轮山丘</b></div>
+      <div class="result-heading">
+        <strong id="resultScore">3</strong>
+        <div><h1 id="resultTitle">挑战完成！</h1><p id="resultSubtitle">你获得第 9 名 · 最佳连超 x3</p></div>
+      </div>
+      <div class="reward-grid">
+        <div><small>完赛奖励</small><strong><span class="coin">●</span> <span id="finishReward">180</span></strong></div>
+        <div><small>超车与赛道</small><strong><span class="coin">●</span> <span id="overtakeReward">150</span></strong></div>
+        <div><small>目标奖励</small><strong><span class="coin">●</span> <span id="targetBonus">300</span></strong></div>
+      </div>
+      <div class="result-total"><span>总计</span><strong><span class="coin">●</span> <span id="totalReward">630</span></strong></div>
+      <div class="result-balance">余额 <b class="coin">●</b> <strong id="resultBalance">1,590</strong></div>
+      <p id="unlockNotice" class="unlock-notice" hidden></p>
+      <div class="result-actions">
+        <button class="secondary-button" type="button" data-action="retry">再跑一次</button>
+        <button class="primary-button" type="button" data-action="garage">返回车库</button>
+      </div>
+    </section>
+  </section>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="vendor/three.min.js?v=20260915-final-spa1"></script>
+  <script src="original-assets.js?v=20260915-final-spa1"></script>
+  <script src="core.js?v=20260915-final-spa1"></script>
+  <script src="crypto-pickups.js?v=20260915-final-spa1"></script>
+  <script src="driver-physics.js?v=20260915-final-spa1"></script>
+  <script src="race-engine.js?v=20260915-final-spa1"></script>
+  <script src="app.js?v=20260915-final-spa1"></script>
+</body>
+</html>

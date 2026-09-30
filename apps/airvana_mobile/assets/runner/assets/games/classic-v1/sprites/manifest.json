@@ -1,0 +1,424 @@
+{
+  "pack": "classic-v1",
+  "version": "4.0.0",
+  "asset_kind": "gameplay_sprites",
+  "created_at": "2026-09-05",
+  "source": "Original repo-native SVG path, polygon, and shape definitions. No downloaded game artwork or image-generation outputs.",
+  "authorship": "Authored as editable source geometry for this project. This is not a claim that the files were drawn by a human.",
+  "owner": "Airvana project",
+  "authorization_status": "original_project_source_no_external_artwork",
+  "license": "No third-party asset license applies; project ownership and redistribution policy govern these new source files.",
+  "style": {
+    "format": "SVG",
+    "viewBox": "0 0 64 64",
+    "family": "classic flat 2D arcade",
+    "outline": "#243042",
+    "outline_width": 2.5,
+    "lighting": "none",
+    "shading": "limited flat color planes",
+    "gradients": false,
+    "filters": false,
+    "external_resources": false
+  },
+  "runtime": {
+    "global": "AirvanaPlayableAssetsV3",
+    "version": "4.0.0",
+    "keys": 64,
+    "games": 38,
+    "root": "/assets/games/classic-v1/sprites/",
+    "loading": "individual SVG images",
+    "fallback_to_previous_ai_art": false
+  },
+  "restrictions": [
+    "Not a reproduction or rip of any named classic game asset.",
+    "No assertion of third-party brand or character rights.",
+    "Review game-specific source and palette decisions before external production release."
+  ],
+  "review_status": "source and checksums validated; all 64 sprites visually reviewed in browser contact sheet with no missing images or console errors; in-game composition reviewed separately",
+  "assets": [
+    {
+      "asset_id": "amethyst",
+      "file": "amethyst.svg",
+      "bytes": 599,
+      "sha256": "be90e9207c93cada421a03bbfbf3c0d61691e0fc2373dbfb739279bbb9b99c72"
+    },
+    {
+      "asset_id": "boots",
+      "file": "boots.svg",
+      "bytes": 748,
+      "sha256": "feed45f3c4daf311ba9b5299cee5dd69928be8a6092e9ee99beebd154440155e"
+    },
+    {
+      "asset_id": "bullet",
+      "file": "bullet.svg",
+      "bytes": 460,
+      "sha256": "6e9af6e5164b3d52c3436dca062491e602559e578dc9f4c4a2675490eda7edb7"
+    },
+    {
+      "asset_id": "cannon",
+      "file": "cannon.svg",
+      "bytes": 809,
+      "sha256": "7505947b589547d6b2972d4fce7c9c725ac8a84b750ae44a319e63e5ae1bdbba"
+    },
+    {
+      "asset_id": "car",
+      "file": "car.svg",
+      "bytes": 955,
+      "sha256": "07f2f50a5caea009122f98e45a51781400a0d7a70a0f84fba82c6b8d1dc29090"
+    },
+    {
+      "asset_id": "cat",
+      "file": "cat.svg",
+      "bytes": 1214,
+      "sha256": "822e25efce076d8aa2e59858e7fb912ab4148e74dc3d4ed0c687e6cd3a972739"
+    },
+    {
+      "asset_id": "coffee",
+      "file": "coffee.svg",
+      "bytes": 846,
+      "sha256": "09541d45bcba02b879550b8dd1883a61ed1b412bf4feeefde443f269f81ab027"
+    },
+    {
+      "asset_id": "crystal",
+      "file": "crystal.svg",
+      "bytes": 601,
+      "sha256": "75aa1dccc23b9fa1ed0e80dffd55d2a38938ad532afce2d45af995fecb5b0193"
+    },
+    {
+      "asset_id": "cup",
+      "file": "cup.svg",
+      "bytes": 573,
+      "sha256": "d4407dd6f9fcd4370ab97d2f7de8d6e3f434cd047f0d782e6681fe3e99d069cb"
+    },
+    {
+      "asset_id": "dress",
+      "file": "dress.svg",
+      "bytes": 637,
+      "sha256": "98799bc7d24a6a3a009a598f7c1cda9498daf51b1a7e5076646aba6e24352efb"
+    },
+    {
+      "asset_id": "drone",
+      "file": "drone.svg",
+      "bytes": 892,
+      "sha256": "8c7670fd828a1f21f78a85c2410732e7f0c431037cc1e871dbea1252c5d49ba9"
+    },
+    {
+      "asset_id": "emerald",
+      "file": "emerald.svg",
+      "bytes": 592,
+      "sha256": "70adc6d173642a339dfdaa2fdcb4eaeafc92018d15eb5332e6ebd1acf7e1ac8f"
+    },
+    {
+      "asset_id": "enemy_ship",
+      "file": "enemy_ship.svg",
+      "bytes": 714,
+      "sha256": "835c2212e3da6774610b59a0658486d3c9564453c051ebcabf747b545a94c595"
+    },
+    {
+      "asset_id": "energy",
+      "file": "energy.svg",
+      "bytes": 402,
+      "sha256": "ddd58bf66a4adbde293fc5efdf16e15f0f22d8c3c5016aa32aed4fe5dfe8ee67"
+    },
+    {
+      "asset_id": "fire",
+      "file": "fire.svg",
+      "bytes": 491,
+      "sha256": "fbc85b4d31a4ed905fd7bae685a8be801038c6660d4dd38c2ae48924bcbdd2c0"
+    },
+    {
+      "asset_id": "fish",
+      "file": "fish.svg",
+      "bytes": 677,
+      "sha256": "9a9dd2fc6df99877c6a62ca9d01bb87879126786061e712da7be68ba723e3553"
+    },
+    {
+      "asset_id": "flower",
+      "file": "flower.svg",
+      "bytes": 625,
+      "sha256": "10471af4f8e7f3770061489d542b09d197a93ec2ba44f706829389ad12a6461f"
+    },
+    {
+      "asset_id": "frost",
+      "file": "frost.svg",
+      "bytes": 668,
+      "sha256": "4197378b70c43dfb99e830a2bfcc48b66210b7b438cbbcbc476b74a8e7d8f30a"
+    },
+    {
+      "asset_id": "glasses",
+      "file": "glasses.svg",
+      "bytes": 611,
+      "sha256": "690ebed1cef0ab67c1169f70624004c3d6529b6d21d8407c10eb9fd43a67241c"
+    },
+    {
+      "asset_id": "golden_fruit",
+      "file": "golden_fruit.svg",
+      "bytes": 689,
+      "sha256": "7c63dd3fb8827c4e14eb779a8c66bd9b8b25bc9d320cc46551db6c196346ad4a"
+    },
+    {
+      "asset_id": "green_apple",
+      "file": "green_apple.svg",
+      "bytes": 610,
+      "sha256": "edc2365b14584b113ee248811e3d8c9896f1b869bb5e3d41fae9844860c09288"
+    },
+    {
+      "asset_id": "guardian",
+      "file": "guardian.svg",
+      "bytes": 1050,
+      "sha256": "284d7748b5b70bb29d1d894c6edbb93ed9e369019a530de58c6a4913dc632917"
+    },
+    {
+      "asset_id": "hat",
+      "file": "hat.svg",
+      "bytes": 647,
+      "sha256": "bb3776734f9622629f7f9db3f9fec767b2fe306b9078ba2b7e12a28cd4d7475e"
+    },
+    {
+      "asset_id": "hero",
+      "file": "hero.svg",
+      "bytes": 1152,
+      "sha256": "b9300a98a566aebdc00c6ead1f822a12d9c8b3edc4766295dd01fb403bc5f93f"
+    },
+    {
+      "asset_id": "hook",
+      "file": "hook.svg",
+      "bytes": 621,
+      "sha256": "b9cf98c41477ae218132226c1eca137f5af3dc567de172364498a6c16842b7f9"
+    },
+    {
+      "asset_id": "house",
+      "file": "house.svg",
+      "bytes": 820,
+      "sha256": "603ecef6cc3d233affaaae7131ff43e71d0679be031ff8c773d4975eaa5491e9"
+    },
+    {
+      "asset_id": "key",
+      "file": "key.svg",
+      "bytes": 521,
+      "sha256": "63335cfec7187d41b618a5e7d5a365b44cdae9331b0aa166c188d4a15fd175ff"
+    },
+    {
+      "asset_id": "kitten",
+      "file": "kitten.svg",
+      "bytes": 1129,
+      "sha256": "faa7c8bd3c330a55aa08461dd7e27badc43221978b2a377abf2bcf766a15fe02"
+    },
+    {
+      "asset_id": "letter",
+      "file": "letter.svg",
+      "bytes": 651,
+      "sha256": "c69f301720a97c37833411099e342df2a738a0d15c074dcb5dcd2432a2e58e2f"
+    },
+    {
+      "asset_id": "mailbox",
+      "file": "mailbox.svg",
+      "bytes": 777,
+      "sha256": "61e95d41e586943d518428ccf292b85ab2b494c96f194761598a396bc9a038d5"
+    },
+    {
+      "asset_id": "microbe",
+      "file": "microbe.svg",
+      "bytes": 932,
+      "sha256": "8b1d3b98067ee9f7383f2efe902519bee605b0ef2829ef6d94e5a026b03aa786"
+    },
+    {
+      "asset_id": "microbe_enemy",
+      "file": "microbe_enemy.svg",
+      "bytes": 665,
+      "sha256": "142c6781351a6762f086b645a301a6b6437a00c9e5a2c424ea35c083d127c2cc"
+    },
+    {
+      "asset_id": "model",
+      "file": "model.svg",
+      "bytes": 972,
+      "sha256": "a647ee0a913cc17b70e4377a586672bb0188364268b36fb5434c0bc1f651b567"
+    },
+    {
+      "asset_id": "mower",
+      "file": "mower.svg",
+      "bytes": 982,
+      "sha256": "d148abbc4649b6d2e3a0c20193d4744c58c736272926dd95084b02e5f13bec83"
+    },
+    {
+      "asset_id": "orange",
+      "file": "orange.svg",
+      "bytes": 729,
+      "sha256": "64345fea66db53cafbb35f2ba10ad07a0354fcbd8cd017d8a0a7cf64eec30b6a"
+    },
+    {
+      "asset_id": "parcel",
+      "file": "parcel.svg",
+      "bytes": 643,
+      "sha256": "1af71219b6e7a40f9798543d0229ebfb3250faf11d66658888e593250fad59a3"
+    },
+    {
+      "asset_id": "pear",
+      "file": "pear.svg",
+      "bytes": 651,
+      "sha256": "9cd1ac8c97598988c2e4d7a0a685484b8b668de79d80351ebb788419c7c1d850"
+    },
+    {
+      "asset_id": "plum",
+      "file": "plum.svg",
+      "bytes": 664,
+      "sha256": "621fd1ebb6cc73d4250234a1c6274b60a9a137784f55c6de3ac089d88c50c225"
+    },
+    {
+      "asset_id": "plush",
+      "file": "plush.svg",
+      "bytes": 1296,
+      "sha256": "a4f2965e44a8c074b205ce579582477d3b71961ee49d60669ab75f6b853684ee"
+    },
+    {
+      "asset_id": "potion",
+      "file": "potion.svg",
+      "bytes": 629,
+      "sha256": "cc0b297756f46ef9e23d9d11dd73319e816f4f37a3d160687e24065be15d9579"
+    },
+    {
+      "asset_id": "predator_fish",
+      "file": "predator_fish.svg",
+      "bytes": 601,
+      "sha256": "9e593e70230cf0948c2dbaf9b14ef42adaa434c908fd8548ef912fe748ef843c"
+    },
+    {
+      "asset_id": "raider",
+      "file": "raider.svg",
+      "bytes": 932,
+      "sha256": "2e5b24c758fedddbf4a4d9841ca2836eeff5ff038779b8d771ece6efd5245564"
+    },
+    {
+      "asset_id": "red_apple",
+      "file": "red_apple.svg",
+      "bytes": 606,
+      "sha256": "dca050174e391fbc41b8aeb7beeaacfb1e78ddea6f42d9d555caf71a63a4c741"
+    },
+    {
+      "asset_id": "roadblock",
+      "file": "roadblock.svg",
+      "bytes": 773,
+      "sha256": "6f3b35d44558125117edf65a9ed685ff44194a17b8d0a541fb94fe787d9b2321"
+    },
+    {
+      "asset_id": "ruby",
+      "file": "ruby.svg",
+      "bytes": 614,
+      "sha256": "3a3d3eb1cf889aaf857a2244ac4d2fa15d122fe0913c68d0aa9107aeb7c685b8"
+    },
+    {
+      "asset_id": "runner",
+      "file": "runner.svg",
+      "bytes": 884,
+      "sha256": "9aac6690d33725b3435e3428a1fee2eaedee93d12d85d8ea7324c584e7292ab9"
+    },
+    {
+      "asset_id": "sapphire",
+      "file": "sapphire.svg",
+      "bytes": 594,
+      "sha256": "d0d305b7f78cc5cb562f7bc3b072516637ef13b72d0c4cdceb0c08f3315d2ddf"
+    },
+    {
+      "asset_id": "scroll",
+      "file": "scroll.svg",
+      "bytes": 535,
+      "sha256": "45ad3c5b9695f29f3f34ae21b55ecf03a54b817ec5b8729b3c0589f7d7e7a4a3"
+    },
+    {
+      "asset_id": "seedling",
+      "file": "seedling.svg",
+      "bytes": 652,
+      "sha256": "a9de0c38dcae24c59dd0ac786a9a1e7f2c722fe12096b16f884416fc69526ed1"
+    },
+    {
+      "asset_id": "seeds",
+      "file": "seeds.svg",
+      "bytes": 685,
+      "sha256": "aa28d6be969299e1af50af5bfc9a81c4d2e521a63e7ac508c594c33d47c8cbc5"
+    },
+    {
+      "asset_id": "sentinel",
+      "file": "sentinel.svg",
+      "bytes": 1031,
+      "sha256": "1f4297b189a5dd1bbdfad866a14270064addd14332f4a8d7deedd5c515905213"
+    },
+    {
+      "asset_id": "shield",
+      "file": "shield.svg",
+      "bytes": 583,
+      "sha256": "81744833bf07448aa6ae6373e5d17d34d7464849315ecae79411163aaa397e61"
+    },
+    {
+      "asset_id": "shoes",
+      "file": "shoes.svg",
+      "bytes": 645,
+      "sha256": "fdd179ef060b318fa3ed4473881c72048d75ad385142278e241e8d0aa579b6be"
+    },
+    {
+      "asset_id": "shovel",
+      "file": "shovel.svg",
+      "bytes": 648,
+      "sha256": "11a97ec5755bdd80e1fb192a52aa207e13f12d7c4d5958367de4ba561c5ccf60"
+    },
+    {
+      "asset_id": "spacecraft",
+      "file": "spacecraft.svg",
+      "bytes": 614,
+      "sha256": "e390686937cd13e9f155831da4a6bd2f7a4b713119b6768f236c86abdb3e130f"
+    },
+    {
+      "asset_id": "spore",
+      "file": "spore.svg",
+      "bytes": 797,
+      "sha256": "a26f441f25207bba9de0de5c291b38c44f65c8d581af03d35d7301631e214869"
+    },
+    {
+      "asset_id": "star",
+      "file": "star.svg",
+      "bytes": 430,
+      "sha256": "f5aa274d9e186e9c293143fcfcd95f87568d7065a5778c80a5effed7b2c2a887"
+    },
+    {
+      "asset_id": "sword",
+      "file": "sword.svg",
+      "bytes": 584,
+      "sha256": "69c17be6a31b207286a18f4d335e0c8a47405fe47764bc09184a23eea8adbe10"
+    },
+    {
+      "asset_id": "tea",
+      "file": "tea.svg",
+      "bytes": 838,
+      "sha256": "3a509ee0a112928cb9c522fdf16bc2e9efa1b1f753ac2b1752078d7e5106bab7"
+    },
+    {
+      "asset_id": "tent",
+      "file": "tent.svg",
+      "bytes": 596,
+      "sha256": "95e78aee235b06ae56c3be59d8f9a040681897488ec6ad2eebba645948bf1a4f"
+    },
+    {
+      "asset_id": "treasure",
+      "file": "treasure.svg",
+      "bytes": 797,
+      "sha256": "c184367af1235def2cbea895b7ebc206b06a754003ecebbb0e6d7b8f9c2efd4a"
+    },
+    {
+      "asset_id": "tree",
+      "file": "tree.svg",
+      "bytes": 691,
+      "sha256": "0be64f21f510a13ccfb1847280873ae1805e071647881096ef7f3a7002c3c1e7"
+    },
+    {
+      "asset_id": "turret",
+      "file": "turret.svg",
+      "bytes": 814,
+      "sha256": "b196cdce4bdd86b584b47fc78c718b2a28637df0e05608096fd8836f80fd78c6"
+    },
+    {
+      "asset_id": "watering_can",
+      "file": "watering_can.svg",
+      "bytes": 769,
+      "sha256": "00bac648f2212c2b5304e6f2b3a14fdb65ab603ce671a26af20a5f306415c1db"
+    }
+  ]
+}

@@ -1,0 +1,408 @@
+{
+  "coordinateSystem": {
+    "width": 640,
+    "height": 1136,
+    "units": "Original Cocos logical pixels. All provided screen centers use top-left origin and positive y downward. Multiply by outputWidth/640; bottom/right anchored nodes should track the actual stage edge.",
+    "scaleAt750": 1.171875
+  },
+  "sourcePrefabs": [
+    "GameBattleUI",
+    "waveItemRender",
+    "gameTowerControlPopUp",
+    "GameTowerControlBuildItemRender",
+    "skill",
+    "GamePausePage",
+    "guidePopup_3"
+  ],
+  "hud": {
+    "life": {
+      "center": [
+        95.644,
+        39.153
+      ],
+      "background": "Main_Money_Bg-110x38.png",
+      "backgroundOffset": [
+        -10,
+        3.084
+      ],
+      "icon": "Battle_Icon3.png",
+      "iconSize": [
+        50,
+        46
+      ],
+      "iconOffset": [
+        -60.498,
+        1.725
+      ],
+      "fontSize": 25
+    },
+    "iron": {
+      "center": [
+        95.644,
+        90.153
+      ],
+      "background": "Main_Money_Bg-110x38.png",
+      "backgroundOffset": [
+        -10,
+        3.084
+      ],
+      "icon": "Battle_Icon2.png",
+      "iconSize": [
+        50,
+        46
+      ],
+      "iconOffset": [
+        -62.428,
+        0
+      ],
+      "fontSize": 25
+    },
+    "pause": {
+      "center": [
+        596.051,
+        105.153
+      ],
+      "size": [
+        60,
+        60
+      ],
+      "file": "Battle_Pause.png"
+    },
+    "waves": {
+      "centerY": 49.291,
+      "currentCenterX": 320,
+      "current": "wave_bg_current.png",
+      "currentSize": [
+        61,
+        59
+      ],
+      "next": "wave_bg_next.png",
+      "nextSize": [
+        40,
+        40
+      ],
+      "spacing": 5,
+      "last": "wave_bg_next.png",
+      "lastScale": 1.4,
+      "labelFontSize": 25,
+      "layout": "Current stays centered; up to two previous and two future markers, plus a larger marker labeled with total wave count. The final marker is hidden when current is final. wave_bg_end exists in atlas but is not used by this prefab."
+    }
+  },
+  "buildMenu": {
+    "ring": "Battle_Circle.png",
+    "ringSize": [
+      227,
+      227
+    ],
+    "nominalRadius": 110,
+    "normalButtons": [
+      {
+        "type": "barracks",
+        "file": "Battle_TowerBuilding_icon1.png",
+        "offset": [
+          -77.7817,
+          -77.7817
+        ]
+      },
+      {
+        "type": "archer",
+        "file": "Battle_TowerBuilding_icon3.png",
+        "offset": [
+          77.7817,
+          -77.7817
+        ]
+      },
+      {
+        "type": "magic",
+        "file": "Battle_TowerBuilding_icon2.png",
+        "offset": [
+          -77.7817,
+          77.7817
+        ]
+      },
+      {
+        "type": "cannon",
+        "file": "Battle_TowerBuilding_icon4.png",
+        "offset": [
+          77.7817,
+          77.7817
+        ]
+      }
+    ],
+    "buttonSize": [
+      83,
+      87
+    ],
+    "priceRibbon": "Battle_UseMoney_Bg.png",
+    "priceRibbonSize": [
+      69,
+      24
+    ],
+    "priceRibbonOffset": [
+      0,
+      31.549
+    ],
+    "priceFontSize": 20,
+    "selected": "Battle_TowerBuilding_Choose.png",
+    "locked": "Battle_TowerBuilding_Lock.png",
+    "edgeBehavior": "Original compresses/reroutes angular spread near stage edges: standard 45+90*i degrees in y-up coordinates; upper-right 133+54*i; top 180+60*i; bottom 0+60*i; left 270+60*i; right 90+60*i."
+  },
+  "upgradeMenu": {
+    "upgrade": {
+      "file": "Battle_TowerBuilding_Upgrade.png",
+      "offset": [
+        0,
+        -99
+      ],
+      "size": [
+        83,
+        87
+      ],
+      "priceRibbonOffset": [
+        0,
+        28.963
+      ]
+    },
+    "sale": {
+      "file": "Battle_TowerBuilding_Sale.png",
+      "buttonOffset": [
+        0,
+        100
+      ],
+      "spriteOffset": [
+        0,
+        -8.538
+      ],
+      "size": [
+        75,
+        79
+      ],
+      "priceRibbonOffset": [
+        -2,
+        29.103
+      ]
+    },
+    "move": {
+      "file": "Battle_TowerBuilding_Move.png",
+      "offset": [
+        86,
+        61
+      ],
+      "size": [
+        75,
+        79
+      ]
+    },
+    "attackRange": "range_circle_attack.png",
+    "positionRange": "range_circle_position.png"
+  },
+  "bottom": {
+    "begin": {
+      "file": "Battle_Begin.png",
+      "size": [
+        96,
+        91
+      ],
+      "center": [
+        573.359,
+        1073.868
+      ],
+      "rightInset": 66.641,
+      "bottomInset": 62.132
+    },
+    "speed": {
+      "file": "Battle_Quicken1.png",
+      "size": [
+        103,
+        95
+      ],
+      "center": [
+        588.582,
+        1087.06
+      ],
+      "rightInset": 51.418,
+      "bottomInset": 48.94,
+      "numerals": [
+        "speed_01.png",
+        "speed_02.png",
+        "speed_03.png",
+        "speed_04.png"
+      ],
+      "multipliers": [
+        1,
+        1.5,
+        2,
+        2.5
+      ],
+      "note": "Spring build uses the red lantern and battle_speedUp_newYear animation, not Battle_Quicken double-arrow square."
+    },
+    "skills": {
+      "logicalSize": [
+        84,
+        84
+      ],
+      "spacing": 10,
+      "base": "HeroSkill_Icon_Bg.png",
+      "baseSize": [
+        90,
+        93
+      ],
+      "baseOffset": [
+        0.037,
+        2
+      ],
+      "iconPattern": "HeroSkill_Icon{1..8}.png",
+      "iconSize": [
+        84,
+        84
+      ],
+      "cooldownMask": "HeroSkill_Bg.png",
+      "cooldownSize": [
+        84,
+        84
+      ],
+      "namePattern": "skillName_{3201..3208}.png",
+      "nameOffset": [
+        0,
+        36.5
+      ],
+      "lock": "Battle_Skill_Lock.png",
+      "lockSize": [
+        32,
+        44
+      ]
+    }
+  },
+  "pause": {
+    "backdrop": "Black 85%, set by registerPage BLACK_NODE_TYPE_BLACK_85; no paper backdrop.",
+    "title": {
+      "text": "暂停",
+      "center": [
+        320,
+        68.916
+      ],
+      "fontSize": 50
+    },
+    "tipsTitle": {
+      "text": "已学锦囊",
+      "center": [
+        320,
+        117.659
+      ],
+      "fontSize": 30,
+      "divider": "Result_Divide.png",
+      "dividerSize": [
+        175,
+        19
+      ]
+    },
+    "switches": [
+      {
+        "type": "sound",
+        "center": [
+          146.2,
+          708.817
+        ],
+        "icon": "Result_Set_Sound.png"
+      },
+      {
+        "type": "music",
+        "center": [
+          320,
+          708.817
+        ],
+        "icon": "Result_Set_Music.png"
+      },
+      {
+        "type": "shake",
+        "center": [
+          493.8,
+          708.817
+        ],
+        "icon": "Result_Set_Shake.png"
+      }
+    ],
+    "switchBackground": "Result_Button.png",
+    "switchSize": [
+      133.8,
+      61.6
+    ],
+    "switchIconSize": [
+      61,
+      53
+    ],
+    "offOverlay": "Result_Set_OFF.png",
+    "offOverlaySize": [
+      62,
+      34
+    ],
+    "buttons": [
+      {
+        "text": "重新开始",
+        "center": [
+          188.5,
+          810.494
+        ],
+        "file": "Result_Button.png"
+      },
+      {
+        "text": "继续游戏",
+        "center": [
+          451.5,
+          810.494
+        ],
+        "file": "Result_Button1.png"
+      }
+    ],
+    "buttonSize": [
+      223,
+      88
+    ],
+    "buttonFontSize": 30,
+    "exit": {
+      "text": "放弃挑战",
+      "center": [
+        320,
+        908.124
+      ],
+      "fontSize": 30,
+      "background": null
+    }
+  },
+  "introductionPopup": {
+    "paper": "BattleEnemy_Introduce_Bg.png",
+    "paperNativeSize": [
+      252,
+      321
+    ],
+    "paperRenderedSize": [
+      541,
+      770
+    ],
+    "paperCenter": [
+      320,
+      506.411
+    ],
+    "title": "GuideIntroduce_Title_Bg.png",
+    "titleSize": [
+      299,
+      84
+    ],
+    "titleOffset": [
+      0,
+      -351.82
+    ],
+    "decoration": "BattleEnemy_Decoration.png",
+    "decorationSize": [
+      114,
+      120
+    ],
+    "decorationOffset": [
+      229.148,
+      -352.322
+    ],
+    "card": "GuideIntroduce_TowerType_Bg.png",
+    "button": "Result_Button.png",
+    "note": "This paper background belongs to the enemy/tower introduction popup, not Pause."
+  }
+}

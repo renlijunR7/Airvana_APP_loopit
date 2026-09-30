@@ -1,0 +1,29 @@
+{
+  "gate_id": "gate_game_art_fidelity_v2_20260905",
+  "technical_review": {
+    "status": "technical_review_passed",
+    "reviewed_at": "2026-09-05T17:43:00+08:00",
+    "evidence": [
+      "38/38 source PNG and runtime JPEG dimensions and SHA-256 checksums verified",
+      "Four browser contact sheets visually reviewed across all 38 scenes",
+      "Playwright runtime page: 38/38 engines mounted; 12/12 families sampled; console 0 errors and 0 warnings",
+      "Scoped Node regression: 198/198 passed",
+      "Structural verification: 30/30 passed",
+      "Flutter analyze: no issues",
+      "Flutter tests: 115/115 passed"
+    ]
+  },
+  "human_brand_review": {
+    "status": "pending",
+    "approved_by": null,
+    "approved_at": null
+  },
+  "external_release": {
+    "status": "blocked_pending_human_approval",
+    "production_enabled": false
+  },
+  "rollback": {
+    "registry_version": "3.0.0",
+    "strategy": "Restore the prior game-art registry mapping; fidelity-v2 is versioned and non-destructive."
+  }
+}

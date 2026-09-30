@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Airvana 游戏移动尺寸验收</title>
+  <style>
+    :root{font-family:Inter,-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;background:#e8ecf0;color:#152433}*{box-sizing:border-box}body{margin:0;padding:24px}h1{font-size:23px;margin:0 0 12px}p{margin:8px 0;color:#42566a;font-size:14px;line-height:1.6}.controls{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:18px 0 24px}select,button{font:inherit;border:1px solid #b6c5d1;border-radius:10px;padding:10px 13px;background:white;color:#172d3e}button{cursor:pointer;font-weight:750;background:#163e54;color:white}.stages{display:flex;gap:24px;align-items:start;overflow-x:auto;padding:0 0 16px}.stage{flex:none}h2{font-size:14px;margin:0 0 10px}iframe{display:block;border:0;border-radius:18px;background:#081019;box-shadow:0 8px 24px #11223320}.result{font:12px/1.5 ui-monospace,SFMono-Regular,monospace;white-space:pre-wrap;max-width:430px;margin-top:10px;padding:12px;border:1px solid #b5c5cf;border-radius:10px;background:#fff;overflow-wrap:anywhere}.result[data-status=pass]{border-color:#37a27e;background:#eefaf3}.result[data-status=fail]{border-color:#d77b74;background:#fff1f0}#summary{font-weight:750;color:#153c43;min-height:24px}details{margin-top:14px}summary{font-size:13px;cursor:pointer}#audit-json{font-size:12px;white-space:pre-wrap;overflow-wrap:anywhere}.note{max-width:1160px}@media(max-width:600px){body{padding:16px}.stages{gap:16px}}
+  </style>
+</head>
+<body>
+  <h1>游戏移动尺寸验收</h1>
+  <p class="note">在每个画面里直接试玩，再点击“检查当前画面”。这里只检查可见控件、开场角色、文本/提示边界与同源素材加载；通关需要实际操作。</p>
+  <div class="controls">
+    <label for="game-select">游戏</label>
+    <select id="game-select">
+      <option value="content_a0bc42ad3b35446797995df2b6562579">钱包安全互动</option>
+      <option value="content_mobilearcade_plb_star_deck">星轨牌阵</option>
+      <option value="content_mobilearcade_plb_orchard_merge">果园合合塔</option>
+    </select>
+    <button id="reload" type="button">重新载入三个画面</button>
+    <button id="run-audit" type="button">检查当前画面</button>
+    <span id="summary" role="status" aria-live="polite">等待游戏加载</span>
+  </div>
+  <main class="stages">
+    <section class="stage"><h2>360 × 480</h2><iframe id="frame-360" title="360 × 480 游戏" width="360" height="480" src="/content/content_a0bc42ad3b35446797995df2b6562579?embed=1"></iframe><div class="result" id="result-360">尚未检查</div></section>
+    <section class="stage"><h2>390 × 550</h2><iframe id="frame-390" title="390 × 550 游戏" width="390" height="550" src="/content/content_a0bc42ad3b35446797995df2b6562579?embed=1"></iframe><div class="result" id="result-390">尚未检查</div></section>
+    <section class="stage"><h2>430 × 636</h2><iframe id="frame-430" title="430 × 636 游戏" width="430" height="636" src="/content/content_a0bc42ad3b35446797995df2b6562579?embed=1"></iframe><div class="result" id="result-430">尚未检查</div></section>
+  </main>
+  <details><summary>检查详情</summary><pre id="audit-json">暂无</pre></details>
+  <script src="/playables-v3-mobile-qa.js?v=3.2.0"></script>
+</body>
+</html>

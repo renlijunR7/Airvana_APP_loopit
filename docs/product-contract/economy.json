@@ -1,0 +1,36 @@
+{
+  "contractVersion": "1.0.0",
+  "checkIn": {
+    "description": "第 N 天发放 20 + (N-1)×10 AIP，第 7 天起封顶 80。",
+    "ladder": [20, 30, 40, 50, 60, 70, 80],
+    "capFromDay": 7,
+    "capAmount": 80,
+    "serverSplit": {
+      "description": "服务端拆成两条事件入账，相加等于 ladder 对应金额。",
+      "baseRule": "daily_login",
+      "streakRulePrefix": "streak_day_"
+    }
+  },
+  "aipRewards": {
+    "registration_first_play": 100,
+    "daily_login": 20,
+    "streak_day_2": 10,
+    "streak_day_3": 20,
+    "streak_day_4": 30,
+    "streak_day_5": 40,
+    "streak_day_6": 50,
+    "streak_day_7": 60,
+    "playable_complete": 5,
+    "daily_recommendation": 20,
+    "qualified_invitation": 100,
+    "first_publish": 50,
+    "version_optimization": 20,
+    "operation_task_low": 10,
+    "operation_task_medium": 20,
+    "operation_task_high": 30
+  },
+  "boundaries": {
+    "gameCoin": "游戏金币按作品隔离，不可跨作品转移，不支持兑换 AIP/AIT 或提现。",
+    "invite": "邀请奖励为 AIP 行为积分：不可提现、不可转让；同一被邀请人仅计一次合格邀请。"
+  }
+}

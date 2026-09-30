@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <link rel="icon" href="data:,">
+  <meta charset="UTF-8">
+  <meta name="color-scheme" content="dark">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cubism 2 Runtime Validation</title>
+  <style>
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: radial-gradient(circle at 68% 36%, #274764 0, #11283a 38%, #07131f 100%);
+      color: #e8f7ff;
+      font: 16px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    .status {
+      position: fixed;
+      top: 24px;
+      left: 24px;
+      z-index: 1000;
+      min-width: 240px;
+      padding: 14px 16px;
+      border: 1px solid rgba(135, 224, 255, 0.35);
+      border-radius: 14px;
+      background: rgba(5, 18, 29, 0.72);
+      backdrop-filter: blur(12px);
+    }
+    .status strong { display: block; font-size: 22px; }
+    .status span { display: block; margin-top: 5px; color: #9ddbf0; }
+    html.embedded .status { display: none; }
+    html.embedded,
+    html.embedded body {
+      background: transparent;
+    }
+  </style>
+</head>
+<body>
+  <div class="status">
+    <strong data-model-name>Cubism 2 model</strong>
+    <span data-render-state>Loading model resources…</span>
+  </div>
+  <script src="./vendor/live2d-widget/lib/L2Dwidget.min.js"></script>
+  <script>
+    const embedded = window.parent !== window;
+    if (embedded) document.documentElement.classList.add('embedded');
+    // 透明 iframe 要求宿主与本文档 color-scheme 一致，否则浏览器会画不透明白底。
+    if (embedded) {
+      try {
+        const hostRoot = window.parent.document.documentElement;
+        const syncColorScheme = () => {
+          document.documentElement.style.colorScheme = hostRoot.dataset.uiTheme === 'light' ? 'light' : 'dark';
+        };
+        syncColorScheme();
+        new MutationObserver(syncColorScheme).observe(hostRoot, { attributes: true, attributeFilter: ['data-ui-theme'] });
+      } catch (_error) { /* 跨源宿主时保持 meta 的 dark 默认值 */ }
+    }
+    const models = {
+      Haru: './models/haru/01/assets/haru01.model.json',
+      Shizuku: './models/shizuku/assets/shizuku.model.json',
+      Wanko: './models/wanko/assets/wanko.model.json',
+      Z16: './models/z16/assets/z16.model.json',
+      Hijiki: './models/hijiki/assets/hijiki.model.json',
+      Bilibili22: './models/bilibili-22/index.json'
+    };
+    const requested = new URLSearchParams(location.search).get('model');
+    const model = Object.prototype.hasOwnProperty.call(models, requested) ? requested : 'Haru';
+    const modelIds = {
+      Haru: 'haru',
+      Shizuku: 'shizuku',
+      Wanko: 'wanko',
+      Z16: 'z16',
+      Hijiki: 'hijiki',
+      Bilibili22: 'bilibili-22'
+    };
+    const modelRoles = {
+      Bilibili22: 'historical-public-repository-model-licence-unverified-not-kai'
+    };
+    document.querySelector('[data-model-name]').textContent = `${model} · Cubism 2`;
+
+    const postToHost = message => window.parent.postMessage({
+      source: 'airvana-cubism-runtime',
+      version: 1,
+      ...message
+    }, location.origin === 'null' ? '*' : location.origin);
+
+    window.__MODEL_CHECK__ = {
+      model,
+      canvasFound: false,
+      canvasWidth: 0,
+      canvasHeight: 0,
+      nonTransparentPixels: 0,
+      distinctFrameHashes: 0,
+      rendered: false,
+      animated: false,
+      contentBounds: null,
+      errors: []
+    };
+    window.addEventListener('error', event => {
+      window.__MODEL_CHECK__.errors.push(event.message || String(event.error || 'window error'));
+    });
+    window.addEventListener('unhandledrejection', event => {
+      window.__MODEL_CHECK__.errors.push(String(event.reason || 'unhandled rejection'));
+    });
+
+    L2Dwidget.init({
+      model: { jsonPath: models[model], scale: 1 },
+      display: {
+        superSample: 1,
+        width: embedded ? window.innerWidth : 520,
+        height: embedded ? window.innerHeight : 760,
+        position: 'right',
+        hOffset: embedded ? 0 : 80,
+        vOffset: 0
+      },
+      mobile: { show: true, scale: 1, motion: true },
+      react: { opacity: 1 },
+      dev: { border: false },
+      dialog: { enable: false, hitokoto: false }
+    });
+
+    let readySent = false;
+    let boundsCaptureAttempts = 0;
+    let boundsRetryTimer = 0;
+    const readyTimeout = window.setTimeout(() => {
+      if (readySent) return;
+      postToHost({
+        type: 'airvana:cubism-error',
+        code: 'first-frame-timeout',
+        message: `${model} did not produce a captured frame in time.`
+      });
+    }, 20000);
+    const scheduleBoundsRetry = (delay = 650) => {
+      if (boundsSent || boundsCaptureAttempts >= 24) return;
+      window.clearTimeout(boundsRetryTimer);
+      boundsRetryTimer = window.setTimeout(requestCapturedFrame, delay);
+    };
+    const requestCapturedFrame = () => {
+      if (boundsSent || boundsCaptureAttempts >= 24) return;
+      boundsCaptureAttempts += 1;
+      try {
+        L2Dwidget.captureFrame(dataUrl => {
+          if (typeof dataUrl !== 'string' || dataUrl.length < 5000) {
+            scheduleBoundsRetry();
+            return;
+          }
+          inspectCapturedDataUrl(dataUrl);
+          if (!readySent) {
+            readySent = true;
+            window.clearTimeout(readyTimeout);
+            document.documentElement.dataset.runtimeReady = 'true';
+            document.querySelector('[data-render-state]').textContent = 'Rendered · motion active';
+            postToHost({
+              type: 'airvana:cubism-ready',
+              payload: {
+                runtime: 'Cubism 2 WebGL widget',
+                model,
+                modelId: modelIds[model],
+                role: modelRoles[model] || 'open-source-widget-model-not-kai',
+                firstFrame: true,
+                capabilities: {
+                  moc3: false,
+                  cubism2: true,
+                  stateGestures: false
+                }
+              }
+            });
+          }
+        });
+      } catch (_error) {
+        scheduleBoundsRetry();
+      }
+    };
+    L2Dwidget.on('create-canvas', () => window.setTimeout(requestCapturedFrame, 900));
+    window.setTimeout(requestCapturedFrame, 1500);
+
+    const hashes = new Set();
+    const boundsSamples = [];
+    let boundsSent = false;
+    const median = values => {
+      const sorted = [...values].sort((a, b) => a - b);
+      return sorted[Math.floor(sorted.length / 2)];
+    };
+    const inspectContentBounds = (pixels, width, height, originTopLeft = false) => {
+      const step = Math.max(2, Math.ceil(Math.max(width, height) / 240));
+      let minX = width;
+      let minY = height;
+      let maxX = -1;
+      let maxY = -1;
+      let visibleSamples = 0;
+      for (let y = 0; y < height; y += step) {
+        for (let x = 0; x < width; x += step) {
+          const alpha = pixels[(y * width + x) * 4 + 3];
+          if (alpha <= 12) continue;
+          visibleSamples += 1;
+          minX = Math.min(minX, x);
+          minY = Math.min(minY, y);
+          maxX = Math.max(maxX, x);
+          maxY = Math.max(maxY, y);
+        }
+      }
+      if (visibleSamples < 40 || maxX < minX || maxY < minY) return null;
+      const left = minX / width;
+      const right = Math.min(1, (maxX + step) / width);
+      const top = originTopLeft ? minY / height : 1 - Math.min(1, (maxY + step) / height);
+      const bottom = originTopLeft ? Math.min(1, (maxY + step) / height) : 1 - minY / height;
+      return {
+        left,
+        top,
+        right,
+        bottom,
+        width: right - left,
+        height: bottom - top,
+        centerX: (left + right) / 2,
+        centerY: (top + bottom) / 2
+      };
+    };
+    const collectContentBounds = bounds => {
+      if (!bounds || boundsSent) return;
+      boundsSamples.push(bounds);
+      if (boundsSamples.length < 5) return;
+      const keys = ['left', 'top', 'right', 'bottom', 'width', 'height', 'centerX', 'centerY'];
+      const stableBounds = Object.fromEntries(keys.map(key => [key, Number(median(boundsSamples.map(sample => sample[key])).toFixed(4))]));
+      boundsSent = true;
+      window.__MODEL_CHECK__.contentBounds = stableBounds;
+      if (window.parent !== window) {
+        postToHost({
+          type: 'airvana:cubism-bounds',
+          payload: {
+            modelId: modelIds[model],
+            bounds: stableBounds,
+            sampleCount: boundsSamples.length,
+            coordinateSpace: 'normalized-css-top-left'
+          }
+        });
+      }
+    };
+    const inspectCapturedDataUrl = dataUrl => {
+      const image = new Image();
+      image.onload = () => {
+        const scratch = document.createElement('canvas');
+        scratch.width = image.naturalWidth || image.width;
+        scratch.height = image.naturalHeight || image.height;
+        const context = scratch.getContext('2d', { willReadFrequently: true });
+        if (!context || !scratch.width || !scratch.height) {
+          scheduleBoundsRetry();
+          return;
+        }
+        context.clearRect(0, 0, scratch.width, scratch.height);
+        context.drawImage(image, 0, 0);
+        const pixels = context.getImageData(0, 0, scratch.width, scratch.height).data;
+        const bounds = inspectContentBounds(pixels, scratch.width, scratch.height, true);
+        if (!bounds) {
+          scheduleBoundsRetry();
+          return;
+        }
+        for (let index = 0; index < 5; index += 1) collectContentBounds(bounds);
+      };
+      image.onerror = () => {
+        window.__MODEL_CHECK__.errors.push('captured-frame-bounds-decode-failed');
+        scheduleBoundsRetry();
+      };
+      image.src = dataUrl;
+    };
+    const inspectCanvas = () => {
+      const canvas = document.querySelector('canvas');
+      if (!canvas) return;
+      const check = window.__MODEL_CHECK__;
+      check.canvasFound = true;
+      check.canvasWidth = canvas.width;
+      check.canvasHeight = canvas.height;
+      if (boundsSent) return;
+      const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+      if (!gl || !canvas.width || !canvas.height) return;
+      const pixels = new Uint8Array(canvas.width * canvas.height * 4);
+      gl.readPixels(0, 0, canvas.width, canvas.height, gl.RGBA, gl.UNSIGNED_BYTE, pixels);
+      let alphaPixels = 0;
+      let hash = 2166136261;
+      for (let i = 3; i < pixels.length; i += 40) {
+        const alpha = pixels[i];
+        if (alpha) alphaPixels++;
+        hash ^= pixels[i - 3] + (pixels[i - 2] << 1) + (pixels[i - 1] << 2) + (alpha << 3);
+        hash = Math.imul(hash, 16777619);
+      }
+      check.nonTransparentPixels = Math.max(check.nonTransparentPixels, alphaPixels);
+      if (alphaPixels > 50) hashes.add(hash >>> 0);
+      check.distinctFrameHashes = hashes.size;
+      check.rendered = check.nonTransparentPixels > 50;
+      check.animated = hashes.size > 1;
+      collectContentBounds(inspectContentBounds(pixels, canvas.width, canvas.height));
+      document.documentElement.dataset.runtimeReady = check.rendered ? 'true' : 'false';
+      document.querySelector('[data-render-state]').textContent = check.rendered
+        ? `Rendered · ${check.animated ? 'motion detected' : 'checking motion…'}`
+        : 'Loading model resources…';
+    };
+    setInterval(inspectCanvas, 250);
+  </script>
+</body>
+</html>

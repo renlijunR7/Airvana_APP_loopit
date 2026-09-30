@@ -1,0 +1,4922 @@
+[
+  {
+    "path": "sprites/TurntableUI/img_video.png",
+    "originalPath": "Assets/Images/TurntableUI/img_video/spriteFrame",
+    "uuid": "03T3ZwZRREipMcoXlsxD5m@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1713,
+      "y": 527,
+      "width": 51,
+      "height": 37
+    },
+    "rotated": false,
+    "size": [
+      51,
+      37
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "img_video"
+  },
+  {
+    "path": "sprites/sign/img_money_4.png",
+    "originalPath": "Assets/Images/sign/img_money_4/spriteFrame",
+    "uuid": "04MEGb3axPXqigDIbPAOzF@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 213,
+      "y": 1497,
+      "width": 98,
+      "height": 80
+    },
+    "rotated": false,
+    "size": [
+      98,
+      86
+    ],
+    "offset": {
+      "x": 0,
+      "y": 3
+    },
+    "name": "img_money_4"
+  },
+  {
+    "path": "sprites/homeUI/UI_zjm_sy_001.png",
+    "originalPath": "Assets/Images/homeUI/UI_zjm_sy_001/spriteFrame",
+    "uuid": "04g5/gQfhI4J7kc1skFFBW@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1410,
+      "y": 1073,
+      "width": 59,
+      "height": 63
+    },
+    "rotated": true,
+    "size": [
+      59,
+      63
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_zjm_sy_001"
+  },
+  {
+    "path": "sprites/resultUI/UI_js_gg_001.png",
+    "originalPath": "Assets/Images/resultUI/UI_js_gg_001/spriteFrame",
+    "uuid": "06EqA+cGpIWYVY2iWH5VMK@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 683,
+      "y": 359,
+      "width": 507,
+      "height": 165
+    },
+    "rotated": false,
+    "size": [
+      507,
+      165
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_js_gg_001"
+  },
+  {
+    "path": "sprites/common/img_home_finger.png",
+    "originalPath": "Assets/Images/common/img_home_finger/spriteFrame",
+    "uuid": "08+391VZ9NN7Ltzsh4HQrh@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 389,
+      "y": 792,
+      "width": 119,
+      "height": 114
+    },
+    "rotated": false,
+    "size": [
+      119,
+      114
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "img_home_finger"
+  },
+  {
+    "path": "sprites/setting/UI_ylsz_005.png",
+    "originalPath": "Assets/Images/setting/UI_ylsz_005/spriteFrame",
+    "uuid": "09BmrPcg5BBaUt8hVzmTEd@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1766,
+      "y": 900,
+      "width": 44,
+      "height": 24
+    },
+    "rotated": true,
+    "size": [
+      44,
+      24
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_ylsz_005"
+  },
+  {
+    "path": "sprites/common/UI_zi_100_001.png",
+    "originalPath": "Assets/Images/common/UI_zi_100_001/spriteFrame",
+    "uuid": "0976ymM1lAhJ8PFsaIxv30@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1769,
+      "y": 855,
+      "width": 37,
+      "height": 39
+    },
+    "rotated": false,
+    "size": [
+      37,
+      39
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_zi_100_001"
+  },
+  {
+    "path": "sprites/homeUI/frame_home_money.png",
+    "originalPath": "Assets/Images/homeUI/frame_home_money/spriteFrame",
+    "uuid": "0cQMeJpGZMnIzLfSpTbGlO@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 337,
+      "y": 1169,
+      "width": 172,
+      "height": 46
+    },
+    "rotated": true,
+    "size": [
+      172,
+      46
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "frame_home_money"
+  },
+  {
+    "path": "sprites/resultUI/UI_js_icon_002.png",
+    "originalPath": "Assets/Images/resultUI/UI_js_icon_002/spriteFrame",
+    "uuid": "0fcRfkW1JDbKO6uUYBOMfq@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 120,
+      "y": 1403,
+      "width": 87,
+      "height": 97
+    },
+    "rotated": true,
+    "size": [
+      87,
+      97
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_js_icon_002"
+  },
+  {
+    "path": "sprites/resultUI/UI_js_glow_001.png",
+    "originalPath": "Assets/Images/resultUI/UI_js_glow_001/spriteFrame",
+    "uuid": "12Cw+ptJpAOZ1MaZG0TWNA@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 978,
+      "y": 1057,
+      "width": 210,
+      "height": 211
+    },
+    "rotated": true,
+    "size": [
+      210,
+      211
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_js_glow_001"
+  },
+  {
+    "path": "sprites/resultUI/UI_js_gg_002.png",
+    "originalPath": "Assets/Images/resultUI/UI_js_gg_002/spriteFrame",
+    "uuid": "13x7GSYAVNlqwhUKeX3lE0@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 3,
+      "y": 375,
+      "width": 507,
+      "height": 165
+    },
+    "rotated": false,
+    "size": [
+      507,
+      165
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_js_gg_002"
+  },
+  {
+    "path": "sprites/setting/img_set_sound.png",
+    "originalPath": "Assets/Images/setting/img_set_sound/spriteFrame",
+    "uuid": "17ARZ8jX1CjKbTjkfoqHiP@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1353,
+      "y": 843,
+      "width": 149,
+      "height": 48
+    },
+    "rotated": false,
+    "size": [
+      149,
+      48
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "img_set_sound"
+  },
+  {
+    "path": "sprites/levelController/finger_home_1@2x.png",
+    "originalPath": "Assets/Images/levelController/finger_home_1@2x/spriteFrame",
+    "uuid": "19f7tGro9OdboHqBMWVv7T@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 389,
+      "y": 685,
+      "width": 120,
+      "height": 101
+    },
+    "rotated": false,
+    "size": [
+      120,
+      101
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "finger_home_1@2x"
+  },
+  {
+    "path": "sprites/common/UI_tlbz_005.png",
+    "originalPath": "Assets/Images/common/UI_tlbz_005/spriteFrame",
+    "uuid": "194cx13GVAa4uEkcLGGQE3@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1309,
+      "y": 3,
+      "width": 455,
+      "height": 438
+    },
+    "rotated": false,
+    "size": [
+      455,
+      438
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_tlbz_005"
+  },
+  {
+    "path": "sprites/ResurgenceUI/ic_share.png",
+    "originalPath": "Assets/Images/ResurgenceUI/ic_share/spriteFrame",
+    "uuid": "1dTLSFbQdFPIa0kZ67LdwF@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1410,
+      "y": 1201,
+      "width": 44,
+      "height": 42
+    },
+    "rotated": false,
+    "size": [
+      44,
+      42
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "ic_share"
+  },
+  {
+    "path": "sprites/homeUI/font_level.png",
+    "originalPath": "Assets/Images/homeUI/font_level/spriteFrame",
+    "uuid": "1d+vvU2yNNUbdsPRJx3Y25@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 317,
+      "y": 1497,
+      "width": 138,
+      "height": 64
+    },
+    "rotated": true,
+    "size": [
+      138,
+      64
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "font_level"
+  },
+  {
+    "path": "sprites/ResurgenceUI/btn_orange.png",
+    "originalPath": "Assets/Images/ResurgenceUI/btn_orange/spriteFrame",
+    "uuid": "20snc3CkhDZIkJafZ5eIri@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 389,
+      "y": 912,
+      "width": 290,
+      "height": 117
+    },
+    "rotated": true,
+    "size": [
+      290,
+      117
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "btn_orange"
+  },
+  {
+    "path": "sprites/resultUI/UI_js_bth_004.png",
+    "originalPath": "Assets/Images/resultUI/UI_js_bth_004/spriteFrame",
+    "uuid": "21eHo0OY9KPrlxYcb2rmSy@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 389,
+      "y": 1208,
+      "width": 272,
+      "height": 89
+    },
+    "rotated": false,
+    "size": [
+      272,
+      89
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_js_bth_004"
+  },
+  {
+    "path": "sprites/FinishAwardBoxUI/UI_gkjl_003.png",
+    "originalPath": "Assets/Images/FinishAwardBoxUI/UI_gkjl_003/spriteFrame",
+    "uuid": "220U+pC7ZMMZp4erV9+/BE@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 596,
+      "y": 1710,
+      "width": 64,
+      "height": 57
+    },
+    "rotated": false,
+    "size": [
+      64,
+      57
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_gkjl_003"
+  },
+  {
+    "path": "sprites/levelController/img_zhiyin_1@2x.png",
+    "originalPath": "Assets/Images/levelController/img_zhiyin_1@2x/spriteFrame",
+    "uuid": "24AW5okYRElpdluvSAeXzz@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 673,
+      "y": 701,
+      "width": 379,
+      "height": 190
+    },
+    "rotated": false,
+    "size": [
+      389,
+      196
+    ],
+    "offset": {
+      "x": -5,
+      "y": -1
+    },
+    "name": "img_zhiyin_1@2x"
+  },
+  {
+    "path": "sprites/awardUI/btn_blue.png",
+    "originalPath": "Assets/Images/awardUI/btn_blue/spriteFrame",
+    "uuid": "24E7AEpoZLfo/VhMCWdAO9@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 912,
+      "y": 1511,
+      "width": 289,
+      "height": 117
+    },
+    "rotated": true,
+    "size": [
+      289,
+      117
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "btn_blue"
+  },
+  {
+    "path": "sprites/setting/btn_set_open.png",
+    "originalPath": "Assets/Images/setting/btn_set_open/spriteFrame",
+    "uuid": "252v20KoZPzLa69hNtOp3W@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 515,
+      "y": 589,
+      "width": 157,
+      "height": 47
+    },
+    "rotated": false,
+    "size": [
+      157,
+      47
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "btn_set_open"
+  },
+  {
+    "path": "sprites/TurntableUI/btn_orange.png",
+    "originalPath": "Assets/Images/TurntableUI/btn_orange/spriteFrame",
+    "uuid": "2aQC15J0lMM5KBH3pT2LBW@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 219,
+      "y": 1684,
+      "width": 289,
+      "height": 117
+    },
+    "rotated": false,
+    "size": [
+      289,
+      117
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "btn_orange"
+  },
+  {
+    "path": "sprites/awardUI/btn_orange.png",
+    "originalPath": "Assets/Images/awardUI/btn_orange/spriteFrame",
+    "uuid": "2e0F/By25IQZ6qt/Y9tQls@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1035,
+      "y": 1507,
+      "width": 289,
+      "height": 117
+    },
+    "rotated": true,
+    "size": [
+      289,
+      117
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "btn_orange"
+  },
+  {
+    "path": "sprites/levelinfoUI/UI_yxjm_bth_qd_002.png",
+    "originalPath": "Assets/Images/levelinfoUI/UI_yxjm_bth_qd_002/spriteFrame",
+    "uuid": "31baDD9ltLjIYhFY0KEqbA@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1519,
+      "y": 1365,
+      "width": 255,
+      "height": 94
+    },
+    "rotated": false,
+    "size": [
+      255,
+      94
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_yxjm_bth_qd_002"
+  },
+  {
+    "path": "sprites/winui/btn_orange2.png",
+    "originalPath": "Assets/Images/winui/btn_orange2/spriteFrame",
+    "uuid": "34A8K9+FNGkLBnR03EOHCj@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1158,
+      "y": 1500,
+      "width": 289,
+      "height": 117
+    },
+    "rotated": true,
+    "size": [
+      289,
+      117
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "btn_orange2"
+  },
+  {
+    "path": "sprites/sign/frame_sign_3.png",
+    "originalPath": "Assets/Images/sign/frame_sign_3/spriteFrame",
+    "uuid": "35qD84PY9Hmri8PV+4qWPG@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1306,
+      "y": 900,
+      "width": 167,
+      "height": 167
+    },
+    "rotated": false,
+    "size": [
+      170,
+      170
+    ],
+    "offset": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "name": "frame_sign_3"
+  },
+  {
+    "path": "sprites/common/UI_tlbz_002.png",
+    "originalPath": "Assets/Images/common/UI_tlbz_002/spriteFrame",
+    "uuid": "3cMvmjws9O0YZPD7C08j70@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1677,
+      "y": 1738,
+      "width": 64,
+      "height": 57
+    },
+    "rotated": true,
+    "size": [
+      64,
+      57
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_tlbz_002"
+  },
+  {
+    "path": "sprites/levelinfoUI/UI_yxjm_zi_001.png",
+    "originalPath": "Assets/Images/levelinfoUI/UI_yxjm_zi_001/spriteFrame",
+    "uuid": "3dNkoJpGhCFoZUlpT4iyX7@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1713,
+      "y": 839,
+      "width": 43,
+      "height": 50
+    },
+    "rotated": true,
+    "size": [
+      43,
+      50
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_yxjm_zi_001"
+  },
+  {
+    "path": "sprites/setting/frame_pop_set.png",
+    "originalPath": "Assets/Images/setting/frame_pop_set/spriteFrame",
+    "uuid": "3dQdpjZAFOA7sYUEnJDIiA@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 683,
+      "y": 3,
+      "width": 620,
+      "height": 350
+    },
+    "rotated": false,
+    "size": [
+      632,
+      356
+    ],
+    "offset": {
+      "x": 0,
+      "y": -3
+    },
+    "name": "frame_pop_set"
+  },
+  {
+    "path": "sprites/levelController/levelinfo_(13).png",
+    "originalPath": "Assets/Images/levelController/levelinfo_(13)/spriteFrame",
+    "uuid": "41NdAJfmZMWIkDxv59ehJP@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 3,
+      "y": 1497,
+      "width": 84,
+      "height": 84
+    },
+    "rotated": false,
+    "size": [
+      84,
+      84
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "levelinfo_(13)"
+  },
+  {
+    "path": "sprites/common/btn_money.png",
+    "originalPath": "Assets/Images/common/btn_money/spriteFrame",
+    "uuid": "41frAjuJtIj5YYCHMY9yxq@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 418,
+      "y": 1588,
+      "width": 76,
+      "height": 78
+    },
+    "rotated": false,
+    "size": [
+      76,
+      78
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "btn_money"
+  },
+  {
+    "path": "sprites/sign/img_signed.png",
+    "originalPath": "Assets/Images/sign/img_signed/spriteFrame",
+    "uuid": "413gwSFjlLP6PPmy5s6REp@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 516,
+      "y": 375,
+      "width": 161,
+      "height": 161
+    },
+    "rotated": false,
+    "size": [
+      168,
+      168
+    ],
+    "offset": {
+      "x": -0.5,
+      "y": 0.5
+    },
+    "name": "img_signed"
+  },
+  {
+    "path": "sprites/winui/btn_orange.png",
+    "originalPath": "Assets/Images/winui/btn_orange/spriteFrame",
+    "uuid": "49RYQfWhRNDZx0EELHDhFa@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 666,
+      "y": 1511,
+      "width": 290,
+      "height": 117
+    },
+    "rotated": true,
+    "size": [
+      290,
+      117
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "btn_orange"
+  },
+  {
+    "path": "sprites/ResurgenceUI/font_1.png",
+    "originalPath": "Assets/Images/ResurgenceUI/font_1/spriteFrame",
+    "uuid": "54gatJgGdGgKj8PTdJbyQD@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1769,
+      "y": 579,
+      "width": 138,
+      "height": 37
+    },
+    "rotated": true,
+    "size": [
+      142,
+      40
+    ],
+    "offset": {
+      "x": 0,
+      "y": -0.5
+    },
+    "name": "font_1"
+  },
+  {
+    "path": "sprites/levelinfoUI/font_record_1.png",
+    "originalPath": "Assets/Images/levelinfoUI/font_record_1/spriteFrame",
+    "uuid": "55nJLIVJxMdLv5Hy8xRVK8@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 387,
+      "y": 1588,
+      "width": 47,
+      "height": 25
+    },
+    "rotated": true,
+    "size": [
+      51,
+      29
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "font_record_1"
+  },
+  {
+    "path": "sprites/winui/img_video .png",
+    "originalPath": "Assets/Images/winui/img_video /spriteFrame",
+    "uuid": "55r45IPIpK8JnD1klgdDc/@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1713,
+      "y": 720,
+      "width": 59,
+      "height": 50
+    },
+    "rotated": true,
+    "size": [
+      59,
+      50
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "img_video "
+  },
+  {
+    "path": "sprites/awardUI/font_+.png",
+    "originalPath": "Assets/Images/awardUI/font_+/spriteFrame",
+    "uuid": "55sgGApOZCzK2KsW4JeKmV@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 364,
+      "y": 1641,
+      "width": 29,
+      "height": 29
+    },
+    "rotated": false,
+    "size": [
+      29,
+      29
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "font_+"
+  },
+  {
+    "path": "sprites/winui/ic_end_share.png",
+    "originalPath": "Assets/Images/winui/ic_end_share/spriteFrame",
+    "uuid": "5dl+OOWlVLbbvhcw6G5Uee@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1404,
+      "y": 1483,
+      "width": 103,
+      "height": 101
+    },
+    "rotated": false,
+    "size": [
+      103,
+      101
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "ic_end_share"
+  },
+  {
+    "path": "sprites/sign/frame_sign_2.png",
+    "originalPath": "Assets/Images/sign/frame_sign_2/spriteFrame",
+    "uuid": "65tcfhJ9JMRbz6bGxpKFSd@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1519,
+      "y": 1465,
+      "width": 167,
+      "height": 167
+    },
+    "rotated": false,
+    "size": [
+      168,
+      168
+    ],
+    "offset": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "name": "frame_sign_2"
+  },
+  {
+    "path": "sprites/homeUI/ic_home_set.png",
+    "originalPath": "Assets/Images/homeUI/ic_home_set/spriteFrame",
+    "uuid": "66o+Yw94NJJYSyE36EfSje@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 980,
+      "y": 897,
+      "width": 74,
+      "height": 72
+    },
+    "rotated": true,
+    "size": [
+      74,
+      72
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "ic_home_set"
+  },
+  {
+    "path": "sprites/resultUI/UI_js_zi_002.png",
+    "originalPath": "Assets/Images/resultUI/UI_js_zi_002/spriteFrame",
+    "uuid": "669iI3xKhCr6hadfscQq/C@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1770,
+      "y": 3,
+      "width": 128,
+      "height": 36
+    },
+    "rotated": true,
+    "size": [
+      128,
+      36
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_js_zi_002"
+  },
+  {
+    "path": "sprites/homeUI/img_home_skill_3.png",
+    "originalPath": "Assets/Images/homeUI/img_home_skill_3/spriteFrame",
+    "uuid": "67ULfoGpxEWIJwWW9eLjvR@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 3,
+      "y": 932,
+      "width": 231,
+      "height": 363
+    },
+    "rotated": true,
+    "size": [
+      231,
+      363
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "img_home_skill_3"
+  },
+  {
+    "path": "sprites/FinishAwardBoxUI/UI_gkjl_baoxiang_001.png",
+    "originalPath": "Assets/Images/FinishAwardBoxUI/UI_gkjl_baoxiang_001/spriteFrame",
+    "uuid": "6aHuO+gP9Dl65yFxxqUmxF@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 514,
+      "y": 1588,
+      "width": 140,
+      "height": 116
+    },
+    "rotated": false,
+    "size": [
+      169,
+      158
+    ],
+    "offset": {
+      "x": -2.5,
+      "y": -9
+    },
+    "name": "UI_gkjl_baoxiang_001"
+  },
+  {
+    "path": "sprites/setting/img_set_shock.png",
+    "originalPath": "Assets/Images/setting/img_set_shock/spriteFrame",
+    "uuid": "6ccII8l/RFhoVtsIyoakwP@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1713,
+      "y": 570,
+      "width": 144,
+      "height": 50
+    },
+    "rotated": true,
+    "size": [
+      144,
+      50
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "img_set_shock"
+  },
+  {
+    "path": "sprites/common/UI_zi_xx_001.png",
+    "originalPath": "Assets/Images/common/UI_zi_xx_001/spriteFrame",
+    "uuid": "71VHhgeNdBxJ6AxonqOjd3@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1157,
+      "y": 1011,
+      "width": 28,
+      "height": 31
+    },
+    "rotated": true,
+    "size": [
+      28,
+      31
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_zi_xx_001"
+  },
+  {
+    "path": "sprites/setting/UI_ylsz_002.png",
+    "originalPath": "Assets/Images/setting/UI_ylsz_002/spriteFrame",
+    "uuid": "71oqn6dRZFpY0zrYfcjLQC@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1513,
+      "y": 1638,
+      "width": 70,
+      "height": 53
+    },
+    "rotated": false,
+    "size": [
+      70,
+      53
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_ylsz_002"
+  },
+  {
+    "path": "sprites/common/UI_tlbz_003.png",
+    "originalPath": "Assets/Images/common/UI_tlbz_003/spriteFrame",
+    "uuid": "72fYngy2RFArwZXAr+Z/n2@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 389,
+      "y": 546,
+      "width": 120,
+      "height": 133
+    },
+    "rotated": false,
+    "size": [
+      120,
+      133
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_tlbz_003"
+  },
+  {
+    "path": "sprites/winui/font_continue@2x.png",
+    "originalPath": "Assets/Images/winui/font_continue@2x/spriteFrame",
+    "uuid": "78I+9b4R1DIZMJVbQZ+6WS@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 337,
+      "y": 1402,
+      "width": 89,
+      "height": 45
+    },
+    "rotated": true,
+    "size": [
+      89,
+      45
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "font_continue@2x"
+  },
+  {
+    "path": "sprites/levelinfoUI/ic_video_2.png",
+    "originalPath": "Assets/Images/levelinfoUI/ic_video_2/spriteFrame",
+    "uuid": "7cWaXry7BCqoyjXK5X/w7u@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1589,
+      "y": 1638,
+      "width": 68,
+      "height": 44
+    },
+    "rotated": false,
+    "size": [
+      68,
+      44
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "ic_video_2"
+  },
+  {
+    "path": "sprites/resultUI/UI_js_gg_003.png",
+    "originalPath": "Assets/Images/resultUI/UI_js_gg_003/spriteFrame",
+    "uuid": "7d3tZAlA5FCpD5R/vjTf3K@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 683,
+      "y": 530,
+      "width": 507,
+      "height": 165
+    },
+    "rotated": false,
+    "size": [
+      507,
+      165
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_js_gg_003"
+  },
+  {
+    "path": "sprites/resultUI/UI_js_bth_001.png",
+    "originalPath": "Assets/Images/resultUI/UI_js_bth_001/spriteFrame",
+    "uuid": "7fv/d1MgRKHoPpwn2AXR1A@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 389,
+      "y": 1303,
+      "width": 272,
+      "height": 89
+    },
+    "rotated": false,
+    "size": [
+      272,
+      89
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_js_bth_001"
+  },
+  {
+    "path": "sprites/levelinfoUI/ic_video.png",
+    "originalPath": "Assets/Images/levelinfoUI/ic_video/spriteFrame",
+    "uuid": "80N5SugSVN/b/HW+PzQBeU@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1617,
+      "y": 1688,
+      "width": 68,
+      "height": 44
+    },
+    "rotated": false,
+    "size": [
+      68,
+      44
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "ic_video"
+  },
+  {
+    "path": "sprites/common/img_video.png",
+    "originalPath": "Assets/Images/common/img_video/spriteFrame",
+    "uuid": "826nn1FDpPCqfUFUQgV54t@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1769,
+      "y": 723,
+      "width": 60,
+      "height": 37
+    },
+    "rotated": true,
+    "size": [
+      60,
+      37
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "img_video"
+  },
+  {
+    "path": "sprites/setting/UI_ylsz_003.png",
+    "originalPath": "Assets/Images/setting/UI_ylsz_003/spriteFrame",
+    "uuid": "83wcT0t0pDD6yvuddFKnSf@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1713,
+      "y": 447,
+      "width": 74,
+      "height": 51
+    },
+    "rotated": true,
+    "size": [
+      74,
+      51
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_ylsz_003"
+  },
+  {
+    "path": "sprites/ResurgenceUI/frame_stop_1.png",
+    "originalPath": "Assets/Images/ResurgenceUI/frame_stop_1/spriteFrame",
+    "uuid": "8aTqbb8hRPuazaRkp2M9Rp@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1306,
+      "y": 447,
+      "width": 390,
+      "height": 401
+    },
+    "rotated": true,
+    "size": [
+      394,
+      403
+    ],
+    "offset": {
+      "x": 0,
+      "y": -1
+    },
+    "name": "frame_stop_1"
+  },
+  {
+    "path": "sprites/resultUI/UI_js_skin_002.png",
+    "originalPath": "Assets/Images/resultUI/UI_js_skin_002/spriteFrame",
+    "uuid": "8cnQfGJIBHNrclvIWNPtnE@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 515,
+      "y": 747,
+      "width": 245,
+      "height": 150
+    },
+    "rotated": true,
+    "size": [
+      245,
+      150
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_js_skin_002"
+  },
+  {
+    "path": "sprites/winui/ic_end_arrow.png",
+    "originalPath": "Assets/Images/winui/ic_end_arrow/spriteFrame",
+    "uuid": "90o2xl0FdLF4qNPTGa0nr3@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1058,
+      "y": 1011,
+      "width": 46,
+      "height": 38
+    },
+    "rotated": false,
+    "size": [
+      46,
+      38
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "ic_end_arrow"
+  },
+  {
+    "path": "sprites/common/ic_shop_back.png",
+    "originalPath": "Assets/Images/common/ic_shop_back/spriteFrame",
+    "uuid": "91GMADIB9AtrsfwPbId39J@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 980,
+      "y": 977,
+      "width": 74,
+      "height": 72
+    },
+    "rotated": true,
+    "size": [
+      74,
+      72
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "ic_shop_back"
+  },
+  {
+    "path": "sprites/freeGoldUI/free_gold.png",
+    "originalPath": "Assets/Images/freeGoldUI/free_gold/spriteFrame",
+    "uuid": "91zMAk3PlBQYf44CxcWfZU@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 516,
+      "y": 542,
+      "width": 158,
+      "height": 41
+    },
+    "rotated": false,
+    "size": [
+      163,
+      45
+    ],
+    "offset": {
+      "x": 0.5,
+      "y": 0
+    },
+    "name": "free_gold"
+  },
+  {
+    "path": "sprites/homeUI/img_home_skill_1.png",
+    "originalPath": "Assets/Images/homeUI/img_home_skill_1/spriteFrame",
+    "uuid": "95aP2NdKdJ/p3lC9vDcle0@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 3,
+      "y": 1169,
+      "width": 228,
+      "height": 328
+    },
+    "rotated": true,
+    "size": [
+      228,
+      328
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "img_home_skill_1"
+  },
+  {
+    "path": "sprites/setting/UI_ylsz_007.png",
+    "originalPath": "Assets/Images/setting/UI_ylsz_007/spriteFrame",
+    "uuid": "967/AALVZHkLXl2KjmtXem@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1766,
+      "y": 950,
+      "width": 44,
+      "height": 24
+    },
+    "rotated": true,
+    "size": [
+      44,
+      24
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_ylsz_007"
+  },
+  {
+    "path": "sprites/common/ic_home_add.png",
+    "originalPath": "Assets/Images/common/ic_home_add/spriteFrame",
+    "uuid": "98gOqnfENACp1sUdcC03aH@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1770,
+      "y": 401,
+      "width": 36,
+      "height": 36
+    },
+    "rotated": false,
+    "size": [
+      36,
+      36
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "ic_home_add"
+  },
+  {
+    "path": "sprites/ResurgenceUI/frame_stop_2.png",
+    "originalPath": "Assets/Images/ResurgenceUI/frame_stop_2/spriteFrame",
+    "uuid": "980DBpPXBAJrvJ3hOj0zNE@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 3,
+      "y": 546,
+      "width": 380,
+      "height": 380
+    },
+    "rotated": false,
+    "size": [
+      380,
+      380
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "frame_stop_2"
+  },
+  {
+    "path": "sprites/homeUI/ic_home_turntable.png",
+    "originalPath": "Assets/Images/homeUI/ic_home_turntable/spriteFrame",
+    "uuid": "9bT5M1aJFG4KWSjI/inwA9@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1404,
+      "y": 1697,
+      "width": 103,
+      "height": 100
+    },
+    "rotated": true,
+    "size": [
+      103,
+      100
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "ic_home_turntable"
+  },
+  {
+    "path": "sprites/TurntableUI/btn_blue.png",
+    "originalPath": "Assets/Images/TurntableUI/btn_blue/spriteFrame",
+    "uuid": "a1YglAaONMt5cpeq3i+Jam@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1281,
+      "y": 1500,
+      "width": 289,
+      "height": 117
+    },
+    "rotated": true,
+    "size": [
+      289,
+      117
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "btn_blue"
+  },
+  {
+    "path": "sprites/resultUI/UI_js_icon_001.png",
+    "originalPath": "Assets/Images/resultUI/UI_js_icon_001/spriteFrame",
+    "uuid": "a4re4IlqhEA7neRyQ8bHsw@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 223,
+      "y": 1403,
+      "width": 73,
+      "height": 100
+    },
+    "rotated": true,
+    "size": [
+      73,
+      100
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_js_icon_001"
+  },
+  {
+    "path": "sprites/awardUI/img_pop_title.png",
+    "originalPath": "Assets/Images/awardUI/img_pop_title/spriteFrame",
+    "uuid": "abBbV8m7ZNSr0u0W9R1jny@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1196,
+      "y": 359,
+      "width": 378,
+      "height": 104
+    },
+    "rotated": true,
+    "size": [
+      378,
+      104
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "img_pop_title"
+  },
+  {
+    "path": "sprites/homeUI/ic_home_arms.png",
+    "originalPath": "Assets/Images/homeUI/ic_home_arms/spriteFrame",
+    "uuid": "aeQIljfORMCqmKRNnOHpXB@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1058,
+      "y": 752,
+      "width": 103,
+      "height": 128
+    },
+    "rotated": true,
+    "size": [
+      103,
+      128
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "ic_home_arms"
+  },
+  {
+    "path": "sprites/TurntableUI/font_luck.png",
+    "originalPath": "Assets/Images/TurntableUI/font_luck/spriteFrame",
+    "uuid": "afBglpGH1LCJLFsUk2u6bU@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 219,
+      "y": 1583,
+      "width": 89,
+      "height": 45
+    },
+    "rotated": false,
+    "size": [
+      93,
+      49
+    ],
+    "offset": {
+      "x": 0,
+      "y": -1
+    },
+    "name": "font_luck"
+  },
+  {
+    "path": "sprites/sign/img_money_5.png",
+    "originalPath": "Assets/Images/sign/img_money_5/spriteFrame",
+    "uuid": "afv7ZKpjRK8ozy4Cx2M0WJ@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 93,
+      "y": 1496,
+      "width": 114,
+      "height": 86
+    },
+    "rotated": false,
+    "size": [
+      114,
+      92
+    ],
+    "offset": {
+      "x": 0,
+      "y": 3
+    },
+    "name": "img_money_5"
+  },
+  {
+    "path": "sprites/sign/img_money_3.png",
+    "originalPath": "Assets/Images/sign/img_money_3/spriteFrame",
+    "uuid": "b1FkVZpnxAVL6r2Q2Uf9Ce@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1519,
+      "y": 1264,
+      "width": 71,
+      "height": 77
+    },
+    "rotated": false,
+    "size": [
+      71,
+      83
+    ],
+    "offset": {
+      "x": 0,
+      "y": 3
+    },
+    "name": "img_money_3"
+  },
+  {
+    "path": "sprites/FinishAwardBoxUI/UI_gkjl_key_001.png",
+    "originalPath": "Assets/Images/FinishAwardBoxUI/UI_gkjl_key_001/spriteFrame",
+    "uuid": "b1Nr93C59K9Iz/JLtj72m9@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 314,
+      "y": 1641,
+      "width": 44,
+      "height": 30
+    },
+    "rotated": false,
+    "size": [
+      44,
+      30
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_gkjl_key_001"
+  },
+  {
+    "path": "sprites/FinishAwardBoxUI/UI_gkjl_di_001.png",
+    "originalPath": "Assets/Images/FinishAwardBoxUI/UI_gkjl_di_001/spriteFrame",
+    "uuid": "b3eV6qTAZI842NDsFuTiTp@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1195,
+      "y": 1074,
+      "width": 190,
+      "height": 209
+    },
+    "rotated": true,
+    "size": [
+      190,
+      209
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_gkjl_di_001"
+  },
+  {
+    "path": "sprites/awardUI/img_pop_money.png",
+    "originalPath": "Assets/Images/awardUI/img_pop_money/spriteFrame",
+    "uuid": "b6sUj2PB5ERq5O+pAblYXX@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 671,
+      "y": 983,
+      "width": 301,
+      "height": 223
+    },
+    "rotated": false,
+    "size": [
+      301,
+      223
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "img_pop_money"
+  },
+  {
+    "path": "sprites/levelinfoUI/UI_yxjm_ts_002.png",
+    "originalPath": "Assets/Images/levelinfoUI/UI_yxjm_ts_002/spriteFrame",
+    "uuid": "b800rxmEJCLoQXgjIPaR9+@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1770,
+      "y": 539,
+      "width": 34,
+      "height": 34
+    },
+    "rotated": false,
+    "size": [
+      34,
+      34
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_yxjm_ts_002"
+  },
+  {
+    "path": "sprites/homeUI/ic_home_add.png",
+    "originalPath": "Assets/Images/homeUI/ic_home_add/spriteFrame",
+    "uuid": "baY6i8KoVItaLmQUmXdikt@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1770,
+      "y": 443,
+      "width": 36,
+      "height": 36
+    },
+    "rotated": false,
+    "size": [
+      36,
+      36
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "ic_home_add"
+  },
+  {
+    "path": "sprites/ResurgenceUI/font_not.png",
+    "originalPath": "Assets/Images/ResurgenceUI/font_not/spriteFrame",
+    "uuid": "babA2SzjVLgKgUkgxb3don@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1058,
+      "y": 701,
+      "width": 132,
+      "height": 45
+    },
+    "rotated": false,
+    "size": [
+      136,
+      49
+    ],
+    "offset": {
+      "x": -1,
+      "y": 0
+    },
+    "name": "font_not"
+  },
+  {
+    "path": "sprites/levelController/levelinfo_(14).png",
+    "originalPath": "Assets/Images/levelController/levelinfo_(14)/spriteFrame",
+    "uuid": "bd7n2L05BKwJHxWyE+Ueh6@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1479,
+      "y": 1059,
+      "width": 199,
+      "height": 199
+    },
+    "rotated": false,
+    "size": [
+      203,
+      203
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "levelinfo_(14)"
+  },
+  {
+    "path": "sprites/winui/btn_money.png",
+    "originalPath": "Assets/Images/winui/btn_money/spriteFrame",
+    "uuid": "bellr2R95GXLH8nQyYrcY+@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 514,
+      "y": 1710,
+      "width": 76,
+      "height": 78
+    },
+    "rotated": false,
+    "size": [
+      76,
+      78
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "btn_money"
+  },
+  {
+    "path": "sprites/FinishAwardBoxUI/UI_gkjl_di_004.png",
+    "originalPath": "Assets/Images/FinishAwardBoxUI/UI_gkjl_di_004/spriteFrame",
+    "uuid": "c1K7B+3fpK2ozL7MmX7P27@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 515,
+      "y": 695,
+      "width": 152,
+      "height": 46
+    },
+    "rotated": false,
+    "size": [
+      152,
+      46
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_gkjl_di_004"
+  },
+  {
+    "path": "sprites/guide/UI_shouzhi_001.png",
+    "originalPath": "Assets/Images/guide/UI_shouzhi_001/spriteFrame",
+    "uuid": "c19p20tK9Pz4lA2gAY+/MQ@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1692,
+      "y": 1569,
+      "width": 100,
+      "height": 123
+    },
+    "rotated": false,
+    "size": [
+      100,
+      123
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_shouzhi_001"
+  },
+  {
+    "path": "sprites/sign/img_money_2.png",
+    "originalPath": "Assets/Images/sign/img_money_2/spriteFrame",
+    "uuid": "c3GN9EaShLO778q1MC1czf@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1596,
+      "y": 1264,
+      "width": 75,
+      "height": 73
+    },
+    "rotated": false,
+    "size": [
+      75,
+      79
+    ],
+    "offset": {
+      "x": 0,
+      "y": 3
+    },
+    "name": "img_money_2"
+  },
+  {
+    "path": "sprites/setting/ic_set_closes.png",
+    "originalPath": "Assets/Images/setting/ic_set_closes/spriteFrame",
+    "uuid": "c3hQ9MYn5IxazKHlzUfgug@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1770,
+      "y": 357,
+      "width": 38,
+      "height": 36
+    },
+    "rotated": true,
+    "size": [
+      39,
+      37
+    ],
+    "offset": {
+      "x": -0.5,
+      "y": 0.5
+    },
+    "name": "ic_set_closes"
+  },
+  {
+    "path": "sprites/FinishAwardBoxUI/UI_gkjl_di_002.png",
+    "originalPath": "Assets/Images/FinishAwardBoxUI/UI_gkjl_di_002/spriteFrame",
+    "uuid": "c6LV648N1PYpf5CG69eEsf@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1323,
+      "y": 1270,
+      "width": 190,
+      "height": 207
+    },
+    "rotated": false,
+    "size": [
+      190,
+      207
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_gkjl_di_002"
+  },
+  {
+    "path": "sprites/ResurgenceUI/font_continue.png",
+    "originalPath": "Assets/Images/ResurgenceUI/font_continue/spriteFrame",
+    "uuid": "c6dZCaNjNA/pMYCxovSC82@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 219,
+      "y": 1634,
+      "width": 89,
+      "height": 44
+    },
+    "rotated": false,
+    "size": [
+      93,
+      49
+    ],
+    "offset": {
+      "x": 0,
+      "y": -0.5
+    },
+    "name": "font_continue"
+  },
+  {
+    "path": "sprites/resultUI/UI_js_bth_002.png",
+    "originalPath": "Assets/Images/resultUI/UI_js_bth_002/spriteFrame",
+    "uuid": "c8fg+fHBFHhKS96KSKnRTH@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 389,
+      "y": 1398,
+      "width": 272,
+      "height": 89
+    },
+    "rotated": false,
+    "size": [
+      272,
+      89
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_js_bth_002"
+  },
+  {
+    "path": "sprites/resultUI/UI_js_bth_003.png",
+    "originalPath": "Assets/Images/resultUI/UI_js_bth_003/spriteFrame",
+    "uuid": "c9rYfAR+VFCrw4U7i22wl1@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 388,
+      "y": 1493,
+      "width": 272,
+      "height": 89
+    },
+    "rotated": false,
+    "size": [
+      272,
+      89
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_js_bth_003"
+  },
+  {
+    "path": "sprites/winui/btn_blue.png",
+    "originalPath": "Assets/Images/winui/btn_blue/spriteFrame",
+    "uuid": "caNqzkM0FCcJu3OxhLO+OA@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1684,
+      "y": 1070,
+      "width": 289,
+      "height": 117
+    },
+    "rotated": true,
+    "size": [
+      289,
+      117
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "btn_blue"
+  },
+  {
+    "path": "sprites/common/font_k.png",
+    "originalPath": "Assets/Images/common/font_k/spriteFrame",
+    "uuid": "cbwOzl8AJPNqzNZT7kJLnf@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1479,
+      "y": 897,
+      "width": 23,
+      "height": 21
+    },
+    "rotated": false,
+    "size": [
+      24,
+      22
+    ],
+    "offset": {
+      "x": 0.5,
+      "y": -0.5
+    },
+    "name": "font_k"
+  },
+  {
+    "path": "sprites/resultUI/UI_js_di_001.png",
+    "originalPath": "Assets/Images/resultUI/UI_js_di_001/spriteFrame",
+    "uuid": "ccB+pFQ6VFLodLZSOANBcP@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 3,
+      "y": 3,
+      "width": 674,
+      "height": 366
+    },
+    "rotated": false,
+    "size": [
+      674,
+      366
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_js_di_001"
+  },
+  {
+    "path": "sprites/homeUI/ic_home_reward.png",
+    "originalPath": "Assets/Images/homeUI/ic_home_reward/spriteFrame",
+    "uuid": "ccva88R+dK6pHFiQ4K0emh@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1510,
+      "y": 1697,
+      "width": 102,
+      "height": 101
+    },
+    "rotated": true,
+    "size": [
+      102,
+      101
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "ic_home_reward"
+  },
+  {
+    "path": "sprites/sign/img_money_6.png",
+    "originalPath": "Assets/Images/sign/img_money_6/spriteFrame",
+    "uuid": "cf1UdeaZdM7auz4Plh68fx@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 3,
+      "y": 1403,
+      "width": 111,
+      "height": 87
+    },
+    "rotated": false,
+    "size": [
+      111,
+      93
+    ],
+    "offset": {
+      "x": 0,
+      "y": 3
+    },
+    "name": "img_money_6"
+  },
+  {
+    "path": "sprites/homeUI/img_home_skill_2.png",
+    "originalPath": "Assets/Images/homeUI/img_home_skill_2/spriteFrame",
+    "uuid": "d0Ke2u9tZCdZlbTKwZquqm@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1048,
+      "y": 1273,
+      "width": 221,
+      "height": 269
+    },
+    "rotated": true,
+    "size": [
+      221,
+      269
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "img_home_skill_2"
+  },
+  {
+    "path": "sprites/setting/UI_ylsz_001.png",
+    "originalPath": "Assets/Images/setting/UI_ylsz_001/spriteFrame",
+    "uuid": "d1gxeyjfRBpJZ41bkbFCQl@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1617,
+      "y": 1738,
+      "width": 67,
+      "height": 54
+    },
+    "rotated": true,
+    "size": [
+      67,
+      54
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_ylsz_001"
+  },
+  {
+    "path": "sprites/ResurgenceUI/btn_purple.png",
+    "originalPath": "Assets/Images/ResurgenceUI/btn_purple/spriteFrame",
+    "uuid": "d29b6g1JtFg6+yg2piC1zQ@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 789,
+      "y": 1511,
+      "width": 290,
+      "height": 117
+    },
+    "rotated": true,
+    "size": [
+      290,
+      117
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "btn_purple"
+  },
+  {
+    "path": "sprites/FinishAwardBoxUI/UI_gkjl_key_002.png",
+    "originalPath": "Assets/Images/FinishAwardBoxUI/UI_gkjl_key_002/spriteFrame",
+    "uuid": "d3bPKA0NpI775gcTt/yUMB@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1410,
+      "y": 1138,
+      "width": 57,
+      "height": 61
+    },
+    "rotated": true,
+    "size": [
+      57,
+      61
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_gkjl_key_002"
+  },
+  {
+    "path": "sprites/TurntableUI/font_double.png",
+    "originalPath": "Assets/Images/TurntableUI/font_double/spriteFrame",
+    "uuid": "d3q2kx1ClCFrmWgkcVLIqP@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 620,
+      "y": 998,
+      "width": 176,
+      "height": 45
+    },
+    "rotated": true,
+    "size": [
+      180,
+      50
+    ],
+    "offset": {
+      "x": 0,
+      "y": -0.5
+    },
+    "name": "font_double"
+  },
+  {
+    "path": "sprites/sign/img_video.png",
+    "originalPath": "Assets/Images/sign/img_video/spriteFrame",
+    "uuid": "d5ieQdV0JAfIR5v6iMjn70@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1769,
+      "y": 789,
+      "width": 60,
+      "height": 37
+    },
+    "rotated": true,
+    "size": [
+      60,
+      37
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "img_video"
+  },
+  {
+    "path": "sprites/TurntableUI/img_lucky_arrow.png",
+    "originalPath": "Assets/Images/TurntableUI/img_lucky_arrow/spriteFrame",
+    "uuid": "d7FOb5GuxPp5z0afFY3arm@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1058,
+      "y": 861,
+      "width": 126,
+      "height": 144
+    },
+    "rotated": false,
+    "size": [
+      126,
+      144
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "img_lucky_arrow"
+  },
+  {
+    "path": "sprites/common/font_g.png",
+    "originalPath": "Assets/Images/common/font_g/spriteFrame",
+    "uuid": "d9HtFcxkxPoYFpsobiPAG+@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 620,
+      "y": 1180,
+      "width": 22,
+      "height": 21
+    },
+    "rotated": true,
+    "size": [
+      24,
+      22
+    ],
+    "offset": {
+      "x": 0,
+      "y": -0.5
+    },
+    "name": "font_g"
+  },
+  {
+    "path": "sprites/resultUI/UI_js_bth_005.png",
+    "originalPath": "Assets/Images/resultUI/UI_js_bth_005/spriteFrame",
+    "uuid": "danqubpptB9a9VBMaZkqGc@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1196,
+      "y": 743,
+      "width": 325,
+      "height": 104
+    },
+    "rotated": true,
+    "size": [
+      325,
+      104
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_js_bth_005"
+  },
+  {
+    "path": "sprites/homeUI/img_home_money_1.png",
+    "originalPath": "Assets/Images/homeUI/img_home_money_1/spriteFrame",
+    "uuid": "db1uA7U2ZKhqmhCIfjTFIH@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1740,
+      "y": 1698,
+      "width": 42,
+      "height": 43
+    },
+    "rotated": true,
+    "size": [
+      42,
+      43
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "img_home_money_1"
+  },
+  {
+    "path": "sprites/levelinfoUI/UI_yxjm_zi_002.png",
+    "originalPath": "Assets/Images/levelinfoUI/UI_yxjm_zi_002/spriteFrame",
+    "uuid": "dfPrpZqzxIFZITLpKPgaRc@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1306,
+      "y": 843,
+      "width": 41,
+      "height": 50
+    },
+    "rotated": false,
+    "size": [
+      41,
+      50
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_yxjm_zi_002"
+  },
+  {
+    "path": "sprites/TurntableUI/font_get.png",
+    "originalPath": "Assets/Images/TurntableUI/font_get/spriteFrame",
+    "uuid": "dfy3LtH7ZO+648Ke8Y0uYf@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1713,
+      "y": 888,
+      "width": 176,
+      "height": 47
+    },
+    "rotated": true,
+    "size": [
+      180,
+      51
+    ],
+    "offset": {
+      "x": 1,
+      "y": 0
+    },
+    "name": "font_get"
+  },
+  {
+    "path": "sprites/winui/share@2x.png",
+    "originalPath": "Assets/Images/winui/share@2x/spriteFrame",
+    "uuid": "e0VQNUPWFNzYUe4MsVMIBo@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1713,
+      "y": 785,
+      "width": 50,
+      "height": 48
+    },
+    "rotated": false,
+    "size": [
+      50,
+      48
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "share@2x"
+  },
+  {
+    "path": "sprites/resultUI/UI_js_glow_003.png",
+    "originalPath": "Assets/Images/resultUI/UI_js_glow_003/spriteFrame",
+    "uuid": "e0k9vQ1c1Pkp51xuAzYCEe@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 3,
+      "y": 1588,
+      "width": 210,
+      "height": 211
+    },
+    "rotated": false,
+    "size": [
+      210,
+      211
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_js_glow_003"
+  },
+  {
+    "path": "sprites/resultUI/UI_js_zi_003.png",
+    "originalPath": "Assets/Images/resultUI/UI_js_zi_003/spriteFrame",
+    "uuid": "e8PGh3LJJLrY77U+0WiGhB@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1770,
+      "y": 137,
+      "width": 128,
+      "height": 36
+    },
+    "rotated": true,
+    "size": [
+      128,
+      36
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_js_zi_003"
+  },
+  {
+    "path": "sprites/ResurgenceUI/font_resurrection.png",
+    "originalPath": "Assets/Images/ResurgenceUI/font_resurrection/spriteFrame",
+    "uuid": "e9gWQzD29DwKBxnHgkbG8v@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 512,
+      "y": 998,
+      "width": 200,
+      "height": 102
+    },
+    "rotated": true,
+    "size": [
+      203,
+      104
+    ],
+    "offset": {
+      "x": -0.5,
+      "y": -1
+    },
+    "name": "font_resurrection"
+  },
+  {
+    "path": "sprites/common/UI_sp_bth_ty_001.png",
+    "originalPath": "Assets/Images/common/UI_sp_bth_ty_001/spriteFrame",
+    "uuid": "eaNBzvoDBP5o54Ijby/2Ir@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 337,
+      "y": 1347,
+      "width": 49,
+      "height": 46
+    },
+    "rotated": true,
+    "size": [
+      49,
+      46
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_sp_bth_ty_001"
+  },
+  {
+    "path": "sprites/ResurgenceUI/img_paly.png",
+    "originalPath": "Assets/Images/ResurgenceUI/img_paly/spriteFrame",
+    "uuid": "ea+jIigjJHxoyUPzK+zgd5@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1508,
+      "y": 843,
+      "width": 210,
+      "height": 199
+    },
+    "rotated": true,
+    "size": [
+      210,
+      199
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "img_paly"
+  },
+  {
+    "path": "sprites/FinishAwardBoxUI/UI_gkjl_sp_001.png",
+    "originalPath": "Assets/Images/FinishAwardBoxUI/UI_gkjl_sp_001/spriteFrame",
+    "uuid": "eblou9gYJAsa3tqNe4A6nw@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1110,
+      "y": 1011,
+      "width": 41,
+      "height": 32
+    },
+    "rotated": false,
+    "size": [
+      41,
+      32
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_gkjl_sp_001"
+  },
+  {
+    "path": "sprites/setting/btn_set_shut.png",
+    "originalPath": "Assets/Images/setting/btn_set_shut/spriteFrame",
+    "uuid": "eeu14nOtZJCY9/sPY4vr2l@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 515,
+      "y": 642,
+      "width": 157,
+      "height": 47
+    },
+    "rotated": false,
+    "size": [
+      157,
+      47
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "btn_set_shut"
+  },
+  {
+    "path": "sprites/homeUI/ic_home_sign.png",
+    "originalPath": "Assets/Images/homeUI/ic_home_sign/spriteFrame",
+    "uuid": "f0nOTjGYtD3ZHauVCPvZFM@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1692,
+      "y": 1465,
+      "width": 102,
+      "height": 98
+    },
+    "rotated": false,
+    "size": [
+      102,
+      98
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "ic_home_sign"
+  },
+  {
+    "path": "sprites/TurntableUI/font_lucky.png",
+    "originalPath": "Assets/Images/TurntableUI/font_lucky/spriteFrame",
+    "uuid": "f4G9xKi5FO0b0mEU/Ly5+n@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 671,
+      "y": 897,
+      "width": 303,
+      "height": 80
+    },
+    "rotated": false,
+    "size": [
+      306,
+      82
+    ],
+    "offset": {
+      "x": 0.5,
+      "y": -1
+    },
+    "name": "font_lucky"
+  },
+  {
+    "path": "sprites/freeGoldUI/UI_tlbz_001.png",
+    "originalPath": "Assets/Images/freeGoldUI/UI_tlbz_001/spriteFrame",
+    "uuid": "f5ctkpBuBOprDbe2K/QuuN@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 966,
+      "y": 1273,
+      "width": 228,
+      "height": 76
+    },
+    "rotated": true,
+    "size": [
+      228,
+      76
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_tlbz_001"
+  },
+  {
+    "path": "sprites/sign/font_day_3.png",
+    "originalPath": "Assets/Images/sign/font_day_3/spriteFrame",
+    "uuid": "fcTL6Ts+RFZLHfpHT6vpEJ@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1770,
+      "y": 485,
+      "width": 34,
+      "height": 48
+    },
+    "rotated": false,
+    "size": [
+      54,
+      54
+    ],
+    "offset": {
+      "x": 0,
+      "y": 1
+    },
+    "name": "font_day_3"
+  },
+  {
+    "path": "sprites/tipUI/UI_ts_zi_001.png",
+    "originalPath": "Assets/Images/tipUI/UI_ts_zi_001/spriteFrame",
+    "uuid": "fcukAU7ZdIJKDN+3JZl0J0@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1770,
+      "y": 271,
+      "width": 80,
+      "height": 36
+    },
+    "rotated": true,
+    "size": [
+      80,
+      36
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_ts_zi_001"
+  },
+  {
+    "path": "sprites/resultUI/UI_js_glow_002.png",
+    "originalPath": "Assets/Images/resultUI/UI_js_glow_002/spriteFrame",
+    "uuid": "fc1/fRVjFGL7MeD2yXmTT2@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 667,
+      "y": 1212,
+      "width": 293,
+      "height": 293
+    },
+    "rotated": false,
+    "size": [
+      293,
+      293
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_js_glow_002"
+  },
+  {
+    "path": "sprites/loseui/ic_end_share.png",
+    "originalPath": "Assets/Images/loseui/ic_end_share/spriteFrame",
+    "uuid": "fd4IEM1ZVJh50NyTNXhEEx@f9941",
+    "pack": "04eb2c5c3",
+    "atlas": "14eb2c5c3.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/14/14eb2c5c3.png",
+    "rect": {
+      "x": 1404,
+      "y": 1590,
+      "width": 103,
+      "height": 101
+    },
+    "rotated": false,
+    "size": [
+      103,
+      101
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "ic_end_share"
+  },
+  {
+    "path": "sprites/levelinfoUI/UI_yxjm_cxks_zi_001.png",
+    "originalPath": "Assets/Images/levelinfoUI/UI_yxjm_cxks_zi_001/spriteFrame",
+    "uuid": "014tZHdL5CMJwLJngT3Tm4@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 805,
+      "y": 1980,
+      "width": 248,
+      "height": 58
+    },
+    "rotated": false,
+    "size": [
+      248,
+      58
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_yxjm_cxks_zi_001"
+  },
+  {
+    "path": "sprites/resultUI/UI_js_zi_001.png",
+    "originalPath": "Assets/Images/resultUI/UI_js_zi_001/spriteFrame",
+    "uuid": "09h0ctf5xExoHeSRLzWP9A@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 3,
+      "y": 2002,
+      "width": 256,
+      "height": 32
+    },
+    "rotated": false,
+    "size": [
+      256,
+      32
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_js_zi_001"
+  },
+  {
+    "path": "sprites/levelinfoUI/UI_yxjm_fhzy_di_001.png",
+    "originalPath": "Assets/Images/levelinfoUI/UI_yxjm_fhzy_di_001/spriteFrame",
+    "uuid": "0eoihBE29Mebx7J8daEacJ@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 3,
+      "y": 1410,
+      "width": 675,
+      "height": 468
+    },
+    "rotated": false,
+    "size": [
+      675,
+      468
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_yxjm_fhzy_di_001"
+  },
+  {
+    "path": "sprites/awardUI/frame_pop.png",
+    "originalPath": "Assets/Images/awardUI/frame_pop/spriteFrame",
+    "uuid": "12P2cya+VDere1OMIdQxRi@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 1373,
+      "y": 1557,
+      "width": 620,
+      "height": 420
+    },
+    "rotated": false,
+    "size": [
+      632,
+      426
+    ],
+    "offset": {
+      "x": 0,
+      "y": -3
+    },
+    "name": "frame_pop"
+  },
+  {
+    "path": "sprites/sign/font_day_6.png",
+    "originalPath": "Assets/Images/sign/font_day_6/spriteFrame",
+    "uuid": "12rL9SF+NKn4UjW2sDsNf0@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 2010,
+      "y": 1397,
+      "width": 34,
+      "height": 48
+    },
+    "rotated": false,
+    "size": [
+      54,
+      54
+    ],
+    "offset": {
+      "x": 0,
+      "y": 1
+    },
+    "name": "font_day_6"
+  },
+  {
+    "path": "sprites/homeUI/frame_home_skill.png",
+    "originalPath": "Assets/Images/homeUI/frame_home_skill/spriteFrame",
+    "uuid": "14sYjk+WRNIqtI3KWzO2S3@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 778,
+      "y": 1693,
+      "width": 112,
+      "height": 34
+    },
+    "rotated": true,
+    "size": [
+      116,
+      38
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "frame_home_skill"
+  },
+  {
+    "path": "sprites/setting/img_set_title.png",
+    "originalPath": "Assets/Images/setting/img_set_title/spriteFrame",
+    "uuid": "15UbaKfJZBIZryv9I2Taeg@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 1895,
+      "y": 835,
+      "width": 378,
+      "height": 104
+    },
+    "rotated": true,
+    "size": [
+      378,
+      104
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "img_set_title"
+  },
+  {
+    "path": "sprites/ResurgenceUI/font_share.png",
+    "originalPath": "Assets/Images/ResurgenceUI/font_share/spriteFrame",
+    "uuid": "1d9Rvdry1H1YCqrvkqikY0@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 2005,
+      "y": 991,
+      "width": 138,
+      "height": 37
+    },
+    "rotated": true,
+    "size": [
+      142,
+      40
+    ],
+    "offset": {
+      "x": 0,
+      "y": -0.5
+    },
+    "name": "font_share"
+  },
+  {
+    "path": "sprites/levelinfoUI/UI_yxjm_ts_003.png",
+    "originalPath": "Assets/Images/levelinfoUI/UI_yxjm_ts_003/spriteFrame",
+    "uuid": "1etqFKKaZCtqHJ8QQbYFYV@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 1147,
+      "y": 2025,
+      "width": 26,
+      "height": 20
+    },
+    "rotated": false,
+    "size": [
+      26,
+      20
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_yxjm_ts_003"
+  },
+  {
+    "path": "sprites/setting/UI_ylsz_009.png",
+    "originalPath": "Assets/Images/setting/UI_ylsz_009/spriteFrame",
+    "uuid": "22AiHre3xFY4eQABPKHF2A@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 2005,
+      "y": 1135,
+      "width": 78,
+      "height": 36
+    },
+    "rotated": true,
+    "size": [
+      78,
+      36
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_ylsz_009"
+  },
+  {
+    "path": "sprites/winui/font_share.png",
+    "originalPath": "Assets/Images/winui/font_share/spriteFrame",
+    "uuid": "24TiWR0zdFIakmy5eJLOwS@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 1999,
+      "y": 1919,
+      "width": 103,
+      "height": 37
+    },
+    "rotated": true,
+    "size": [
+      107,
+      41
+    ],
+    "offset": {
+      "x": 0,
+      "y": -1
+    },
+    "name": "font_share"
+  },
+  {
+    "path": "sprites/freeGoldUI/UI_tlbz_006.png",
+    "originalPath": "Assets/Images/freeGoldUI/UI_tlbz_006/spriteFrame",
+    "uuid": "29CaGW1mRLwp1ByYRw3OSz@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 1518,
+      "y": 835,
+      "width": 108,
+      "height": 26
+    },
+    "rotated": false,
+    "size": [
+      108,
+      26
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_tlbz_006"
+  },
+  {
+    "path": "sprites/levelinfoUI/UI_yxjm_bth_qd_001.png",
+    "originalPath": "Assets/Images/levelinfoUI/UI_yxjm_bth_qd_001/spriteFrame",
+    "uuid": "2blrogv75KeIJlEW9E7Zdj@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 1950,
+      "y": 559,
+      "width": 255,
+      "height": 94
+    },
+    "rotated": true,
+    "size": [
+      255,
+      94
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_yxjm_bth_qd_001"
+  },
+  {
+    "path": "sprites/winui/light_money.png",
+    "originalPath": "Assets/Images/winui/light_money/spriteFrame",
+    "uuid": "2eQ07MfF1FNr+opDDcebPn@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 819,
+      "y": 1477,
+      "width": 548,
+      "height": 497
+    },
+    "rotated": false,
+    "size": [
+      548,
+      497
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "light_money"
+  },
+  {
+    "path": "sprites/sign/font_get.png",
+    "originalPath": "Assets/Images/sign/font_get/spriteFrame",
+    "uuid": "2fKcFIcHtInoIY+tnoeOFn@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 1557,
+      "y": 1983,
+      "width": 176,
+      "height": 47
+    },
+    "rotated": false,
+    "size": [
+      180,
+      51
+    ],
+    "offset": {
+      "x": 1,
+      "y": 0
+    },
+    "name": "font_get"
+  },
+  {
+    "path": "sprites/setting/UI_ylsz_008.png",
+    "originalPath": "Assets/Images/setting/UI_ylsz_008/spriteFrame",
+    "uuid": "31ryNbl3lEAo6eqozERB6n@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 1798,
+      "y": 835,
+      "width": 63,
+      "height": 24
+    },
+    "rotated": false,
+    "size": [
+      63,
+      24
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_ylsz_008"
+  },
+  {
+    "path": "sprites/levelinfoUI/font_record_2.png",
+    "originalPath": "Assets/Images/levelinfoUI/font_record_2/spriteFrame",
+    "uuid": "34fDklAZlBHL+V//ulDVgX@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 1632,
+      "y": 835,
+      "width": 91,
+      "height": 25
+    },
+    "rotated": false,
+    "size": [
+      95,
+      29
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "font_record_2"
+  },
+  {
+    "path": "sprites/tipUI/UI_ts_di_001.png",
+    "originalPath": "Assets/Images/tipUI/UI_ts_di_001/spriteFrame",
+    "uuid": "37Z3uGkdpDyr1FaOcktQiJ@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 3,
+      "y": 895,
+      "width": 811,
+      "height": 509
+    },
+    "rotated": false,
+    "size": [
+      811,
+      509
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_ts_di_001"
+  },
+  {
+    "path": "sprites/freeGoldUI/UI_zi_YM_001.png",
+    "originalPath": "Assets/Images/freeGoldUI/UI_zi_YM_001/spriteFrame",
+    "uuid": "37m/Ex1kVN0LvMc/TnH+14@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 778,
+      "y": 1811,
+      "width": 65,
+      "height": 32
+    },
+    "rotated": true,
+    "size": [
+      65,
+      32
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_zi_YM_001"
+  },
+  {
+    "path": "sprites/levelinfoUI/font_lev_white.png",
+    "originalPath": "Assets/Images/levelinfoUI/font_lev_white/spriteFrame",
+    "uuid": "38bh7xze9IQo714dOx+aWU@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 1981,
+      "y": 350,
+      "width": 139,
+      "height": 64
+    },
+    "rotated": true,
+    "size": [
+      142,
+      68
+    ],
+    "offset": {
+      "x": 0.5,
+      "y": 0
+    },
+    "name": "font_lev_white"
+  },
+  {
+    "path": "sprites/winui/font_get.png",
+    "originalPath": "Assets/Images/winui/font_get/spriteFrame",
+    "uuid": "395vjcjhVOFIXm4iUF9Wj3@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 1739,
+      "y": 1983,
+      "width": 176,
+      "height": 47
+    },
+    "rotated": false,
+    "size": [
+      180,
+      51
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "font_get"
+  },
+  {
+    "path": "sprites/homeUI/font_attack.png",
+    "originalPath": "Assets/Images/homeUI/font_attack/spriteFrame",
+    "uuid": "3awXhfedZJ7YwatxrThbm1@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 778,
+      "y": 1552,
+      "width": 135,
+      "height": 34
+    },
+    "rotated": true,
+    "size": [
+      137,
+      38
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "font_attack"
+  },
+  {
+    "path": "sprites/levelinfoUI/UI_yxjm_di_001.png",
+    "originalPath": "Assets/Images/levelinfoUI/UI_yxjm_di_001/spriteFrame",
+    "uuid": "40xmrH74tA5ruQjTwgtbdx@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 1895,
+      "y": 1219,
+      "width": 330,
+      "height": 109
+    },
+    "rotated": true,
+    "size": [
+      330,
+      109
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_yxjm_di_001"
+  },
+  {
+    "path": "sprites/sign/font_day_4.png",
+    "originalPath": "Assets/Images/sign/font_day_4/spriteFrame",
+    "uuid": "47kVMWvopMVrjGdI0isX/y@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 2010,
+      "y": 1288,
+      "width": 35,
+      "height": 49
+    },
+    "rotated": false,
+    "size": [
+      54,
+      54
+    ],
+    "offset": {
+      "x": -0.5,
+      "y": 0.5
+    },
+    "name": "font_day_4"
+  },
+  {
+    "path": "sprites/levelinfoUI/ic_video_3.png",
+    "originalPath": "Assets/Images/levelinfoUI/ic_video_3/spriteFrame",
+    "uuid": "47p/sCaHRLfJKdjHIrV2A1@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 1237,
+      "y": 2025,
+      "width": 15,
+      "height": 15
+    },
+    "rotated": false,
+    "size": [
+      15,
+      18
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0.5
+    },
+    "name": "ic_video_3"
+  },
+  {
+    "path": "sprites/FinishAwardBoxUI/UI_gkjl_zi_002.png",
+    "originalPath": "Assets/Images/FinishAwardBoxUI/UI_gkjl_zi_002/spriteFrame",
+    "uuid": "4c9Sv8VRVNW4OIjiPMMKQe@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 1179,
+      "y": 2025,
+      "width": 17,
+      "height": 23
+    },
+    "rotated": true,
+    "size": [
+      17,
+      23
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_gkjl_zi_002"
+  },
+  {
+    "path": "sprites/resultUI/UI_js_sb_003.png",
+    "originalPath": "Assets/Images/resultUI/UI_js_sb_003/spriteFrame",
+    "uuid": "4dOLkC1wJKAJpXMXvkDp2j@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 437,
+      "y": 2002,
+      "width": 19,
+      "height": 39
+    },
+    "rotated": false,
+    "size": [
+      19,
+      39
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_js_sb_003"
+  },
+  {
+    "path": "sprites/resultUI/UI_js_skin_001.png",
+    "originalPath": "Assets/Images/resultUI/UI_js_skin_001/spriteFrame",
+    "uuid": "54ynv6DSdP6aUOE6jmpqmk@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 465,
+      "y": 1884,
+      "width": 198,
+      "height": 146
+    },
+    "rotated": false,
+    "size": [
+      198,
+      146
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_js_skin_001"
+  },
+  {
+    "path": "sprites/ResurgenceUI/font_+.png",
+    "originalPath": "Assets/Images/ResurgenceUI/font_+/spriteFrame",
+    "uuid": "56U9HqMytG/L9pB0qhoyp9@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 3,
+      "y": 1884,
+      "width": 456,
+      "height": 112
+    },
+    "rotated": false,
+    "size": [
+      464,
+      121
+    ],
+    "offset": {
+      "x": 0,
+      "y": -0.5
+    },
+    "name": "font_+"
+  },
+  {
+    "path": "sprites/sign/font_day_5.png",
+    "originalPath": "Assets/Images/sign/font_day_5/spriteFrame",
+    "uuid": "59p7MgWEFMQ42ue1YzInOL@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 2010,
+      "y": 1451,
+      "width": 34,
+      "height": 48
+    },
+    "rotated": false,
+    "size": [
+      54,
+      54
+    ],
+    "offset": {
+      "x": 0,
+      "y": 1
+    },
+    "name": "font_day_5"
+  },
+  {
+    "path": "sprites/sign/font_day_2.png",
+    "originalPath": "Assets/Images/sign/font_day_2/spriteFrame",
+    "uuid": "5dt72KwPJBQ4FO7m3s68k7@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 2010,
+      "y": 1343,
+      "width": 35,
+      "height": 48
+    },
+    "rotated": false,
+    "size": [
+      54,
+      54
+    ],
+    "offset": {
+      "x": -0.5,
+      "y": 1
+    },
+    "name": "font_day_2"
+  },
+  {
+    "path": "sprites/levelinfoUI/UI_yxjm_cxks_di_001.png",
+    "originalPath": "Assets/Images/levelinfoUI/UI_yxjm_cxks_di_001/spriteFrame",
+    "uuid": "61wBBrmYlLsr3drbslT+3J@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 1421,
+      "y": 876,
+      "width": 675,
+      "height": 468
+    },
+    "rotated": true,
+    "size": [
+      675,
+      468
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_yxjm_cxks_di_001"
+  },
+  {
+    "path": "sprites/common/UI_zi_jj_002.png",
+    "originalPath": "Assets/Images/common/UI_zi_jj_002/spriteFrame",
+    "uuid": "69geBODWhGka8+X9UCMGeg@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 651,
+      "y": 877,
+      "width": 17,
+      "height": 7
+    },
+    "rotated": false,
+    "size": [
+      23,
+      13
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_zi_jj_002"
+  },
+  {
+    "path": "sprites/sign/frame_sign_7.png",
+    "originalPath": "Assets/Images/sign/frame_sign_7/spriteFrame",
+    "uuid": "69tU6UXnxJc6bQbW66u8Ih@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 1377,
+      "y": 567,
+      "width": 567,
+      "height": 262
+    },
+    "rotated": false,
+    "size": [
+      567,
+      262
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "frame_sign_7"
+  },
+  {
+    "path": "sprites/FinishAwardBoxUI/UI_gkjl_baoxiang_002.png",
+    "originalPath": "Assets/Images/FinishAwardBoxUI/UI_gkjl_baoxiang_002/spriteFrame",
+    "uuid": "706W4j7+ZCSbrZKFS3vHGX@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 669,
+      "y": 1892,
+      "width": 149,
+      "height": 130
+    },
+    "rotated": true,
+    "size": [
+      169,
+      158
+    ],
+    "offset": {
+      "x": 2,
+      "y": -2
+    },
+    "name": "UI_gkjl_baoxiang_002"
+  },
+  {
+    "path": "sprites/freeGoldUI/font_free1.png",
+    "originalPath": "Assets/Images/freeGoldUI/font_free1/spriteFrame",
+    "uuid": "71p9i3VC1EgpagQPdRUidw@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 1059,
+      "y": 1980,
+      "width": 197,
+      "height": 39
+    },
+    "rotated": false,
+    "size": [
+      197,
+      39
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "font_free1"
+  },
+  {
+    "path": "sprites/sign/img_title_sign.png",
+    "originalPath": "Assets/Images/sign/img_title_sign/spriteFrame",
+    "uuid": "72jtomH/FL7rqXlKA+wKeJ@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 651,
+      "y": 3,
+      "width": 558,
+      "height": 759
+    },
+    "rotated": true,
+    "size": [
+      558,
+      765
+    ],
+    "offset": {
+      "x": 0,
+      "y": 3
+    },
+    "name": "img_title_sign"
+  },
+  {
+    "path": "sprites/awardUI/font_double.png",
+    "originalPath": "Assets/Images/awardUI/font_double/spriteFrame",
+    "uuid": "7bT8/0Qx5El54Pbm5BLlCU@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 1999,
+      "y": 1555,
+      "width": 176,
+      "height": 45
+    },
+    "rotated": true,
+    "size": [
+      180,
+      50
+    ],
+    "offset": {
+      "x": 0,
+      "y": -0.5
+    },
+    "name": "font_double"
+  },
+  {
+    "path": "sprites/common/font_m.png",
+    "originalPath": "Assets/Images/common/font_m/spriteFrame",
+    "uuid": "7c/PFrLVBBTovS1+GAxUM2@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 1867,
+      "y": 835,
+      "width": 24,
+      "height": 21
+    },
+    "rotated": true,
+    "size": [
+      24,
+      22
+    ],
+    "offset": {
+      "x": 0,
+      "y": -0.5
+    },
+    "name": "font_m"
+  },
+  {
+    "path": "sprites/homeUI/font_people.png",
+    "originalPath": "Assets/Images/homeUI/font_people/spriteFrame",
+    "uuid": "82qMFELMJN8YjpFhshZHCq@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 778,
+      "y": 1410,
+      "width": 136,
+      "height": 35
+    },
+    "rotated": true,
+    "size": [
+      138,
+      39
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "font_people"
+  },
+  {
+    "path": "sprites/common/UI_zi_jj_001.png",
+    "originalPath": "Assets/Images/common/UI_zi_jj_001/spriteFrame",
+    "uuid": "8aBOUJRyBEuqAHPnJmrkFn@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 1208,
+      "y": 2025,
+      "width": 23,
+      "height": 13
+    },
+    "rotated": false,
+    "size": [
+      23,
+      13
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_zi_jj_001"
+  },
+  {
+    "path": "sprites/winui/img_fail_victory.png",
+    "originalPath": "Assets/Images/winui/img_fail_victory/spriteFrame",
+    "uuid": "8cD1wTh7BGqorznTQwhfFe@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 651,
+      "y": 567,
+      "width": 720,
+      "height": 149
+    },
+    "rotated": false,
+    "size": [
+      720,
+      149
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "img_fail_victory"
+  },
+  {
+    "path": "sprites/homeUI/font_speed.png",
+    "originalPath": "Assets/Images/homeUI/font_speed/spriteFrame",
+    "uuid": "8eeAySS3dOWpBrKTWisPUs@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 1377,
+      "y": 835,
+      "width": 135,
+      "height": 35
+    },
+    "rotated": false,
+    "size": [
+      138,
+      39
+    ],
+    "offset": {
+      "x": -0.5,
+      "y": 0
+    },
+    "name": "font_speed"
+  },
+  {
+    "path": "sprites/levelinfoUI/UI_yxjm_fhzy_zi_001.png",
+    "originalPath": "Assets/Images/levelinfoUI/UI_yxjm_fhzy_zi_001/spriteFrame",
+    "uuid": "8f3Vctd3dBXKzqHs7y6sbi@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 1981,
+      "y": 3,
+      "width": 341,
+      "height": 51
+    },
+    "rotated": true,
+    "size": [
+      341,
+      51
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_yxjm_fhzy_zi_001"
+  },
+  {
+    "path": "sprites/common/UI_zi_mh_001.png",
+    "originalPath": "Assets/Images/common/UI_zi_mh_001/spriteFrame",
+    "uuid": "97EagILP1DwYwEbg66y1JK@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 1114,
+      "y": 2025,
+      "width": 16,
+      "height": 27
+    },
+    "rotated": true,
+    "size": [
+      16,
+      27
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_zi_mh_001"
+  },
+  {
+    "path": "sprites/common/img_home_video.png",
+    "originalPath": "Assets/Images/common/img_home_video/spriteFrame",
+    "uuid": "99DQzwAjRCr4j9TVYHAzse@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 2010,
+      "y": 1505,
+      "width": 43,
+      "height": 35
+    },
+    "rotated": true,
+    "size": [
+      43,
+      35
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "img_home_video"
+  },
+  {
+    "path": "sprites/FinishAwardBoxUI/UI_gkjl_di_003.png",
+    "originalPath": "Assets/Images/FinishAwardBoxUI/UI_gkjl_di_003/spriteFrame",
+    "uuid": "9bgHy5HmNCfoF2cJfX9OZO@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 3,
+      "y": 3,
+      "width": 642,
+      "height": 886
+    },
+    "rotated": false,
+    "size": [
+      642,
+      886
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_gkjl_di_003"
+  },
+  {
+    "path": "sprites/freeGoldUI/UI_tlbz_zi_004.png",
+    "originalPath": "Assets/Images/freeGoldUI/UI_tlbz_zi_004/spriteFrame",
+    "uuid": "a3Kom4CAhCx6/odKtnhJwX@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 265,
+      "y": 2002,
+      "width": 166,
+      "height": 40
+    },
+    "rotated": false,
+    "size": [
+      166,
+      40
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_tlbz_zi_004"
+  },
+  {
+    "path": "sprites/homeUI/ic_home_money.png",
+    "originalPath": "Assets/Images/homeUI/ic_home_money/spriteFrame",
+    "uuid": "b7/kafkxxFQJEAQC3JFuqj@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 1921,
+      "y": 1983,
+      "width": 62,
+      "height": 64
+    },
+    "rotated": true,
+    "size": [
+      62,
+      64
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "ic_home_money"
+  },
+  {
+    "path": "sprites/FinishAwardBoxUI/UI_di_002.png",
+    "originalPath": "Assets/Images/FinishAwardBoxUI/UI_di_002/spriteFrame",
+    "uuid": "b85HdtbhpH9JkAOtJj1Or3@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 1866,
+      "y": 504,
+      "width": 175,
+      "height": 49
+    },
+    "rotated": false,
+    "size": [
+      175,
+      49
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_di_002"
+  },
+  {
+    "path": "sprites/homeUI/font_home_level.png",
+    "originalPath": "Assets/Images/homeUI/font_home_level/spriteFrame",
+    "uuid": "c0VDa8aoZLUo0zv2eKx6Ch@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 1729,
+      "y": 835,
+      "width": 63,
+      "height": 28
+    },
+    "rotated": false,
+    "size": [
+      66,
+      32
+    ],
+    "offset": {
+      "x": 0.5,
+      "y": 0
+    },
+    "name": "font_home_level"
+  },
+  {
+    "path": "sprites/ResurgenceUI/img_video.png",
+    "originalPath": "Assets/Images/ResurgenceUI/img_video/spriteFrame",
+    "uuid": "c4sfRUPd1CnoxnX3xcTmRY@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 1416,
+      "y": 3,
+      "width": 559,
+      "height": 495
+    },
+    "rotated": false,
+    "size": [
+      559,
+      495
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "img_video"
+  },
+  {
+    "path": "sprites/ResurgenceUI/img_character.png",
+    "originalPath": "Assets/Images/ResurgenceUI/img_character/spriteFrame",
+    "uuid": "cez9BqDONAu79OIqz7ieIJ@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 1373,
+      "y": 1477,
+      "width": 67,
+      "height": 40
+    },
+    "rotated": true,
+    "size": [
+      67,
+      40
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "img_character"
+  },
+  {
+    "path": "sprites/sign/font_double.png",
+    "originalPath": "Assets/Images/sign/font_double/spriteFrame",
+    "uuid": "cfft20Ie1H+I8DrbeAbZBQ@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 1999,
+      "y": 1737,
+      "width": 176,
+      "height": 45
+    },
+    "rotated": true,
+    "size": [
+      180,
+      50
+    ],
+    "offset": {
+      "x": 0,
+      "y": -0.5
+    },
+    "name": "font_double"
+  },
+  {
+    "path": "sprites/TurntableUI/img_lucky_turntable.png",
+    "originalPath": "Assets/Images/TurntableUI/img_lucky_turntable/spriteFrame",
+    "uuid": "d81rNn7i5NZYt8p3fC5YPP@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 820,
+      "y": 877,
+      "width": 594,
+      "height": 595
+    },
+    "rotated": true,
+    "size": [
+      594,
+      595
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "img_lucky_turntable"
+  },
+  {
+    "path": "sprites/loseui/img_fail_title.png",
+    "originalPath": "Assets/Images/loseui/img_fail_title/spriteFrame",
+    "uuid": "dcC6Urr0dODaH3+pSrU8v3@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 651,
+      "y": 722,
+      "width": 720,
+      "height": 149
+    },
+    "rotated": false,
+    "size": [
+      720,
+      149
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "img_fail_title"
+  },
+  {
+    "path": "sprites/setting/UI_ylsz_006.png",
+    "originalPath": "Assets/Images/setting/UI_ylsz_006/spriteFrame",
+    "uuid": "e0jRymY3RCqYTiML13a6bd@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 2010,
+      "y": 1219,
+      "width": 63,
+      "height": 24
+    },
+    "rotated": true,
+    "size": [
+      63,
+      24
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_ylsz_006"
+  },
+  {
+    "path": "sprites/awardUI/font_get.png",
+    "originalPath": "Assets/Images/awardUI/font_get/spriteFrame",
+    "uuid": "e6G+NuXKZOjqiRsUCdqKM/@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 1262,
+      "y": 1980,
+      "width": 90,
+      "height": 45
+    },
+    "rotated": false,
+    "size": [
+      93,
+      49
+    ],
+    "offset": {
+      "x": 0.5,
+      "y": 0
+    },
+    "name": "font_get"
+  },
+  {
+    "path": "sprites/common/img_line.png",
+    "originalPath": "Assets/Images/common/img_line/spriteFrame",
+    "uuid": "ebvS97cjNMAqdrb3azs9An@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 684,
+      "y": 1410,
+      "width": 476,
+      "height": 88
+    },
+    "rotated": true,
+    "size": [
+      476,
+      88
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "img_line"
+  },
+  {
+    "path": "sprites/sign/font_day_1.png",
+    "originalPath": "Assets/Images/sign/font_day_1/spriteFrame",
+    "uuid": "ecVo8Tc8pNMqM9PcMFLCbq@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 1059,
+      "y": 2025,
+      "width": 18,
+      "height": 49
+    },
+    "rotated": true,
+    "size": [
+      54,
+      54
+    ],
+    "offset": {
+      "x": 1,
+      "y": 0.5
+    },
+    "name": "font_day_1"
+  },
+  {
+    "path": "sprites/winui/img_end_double.png",
+    "originalPath": "Assets/Images/winui/img_end_double/spriteFrame",
+    "uuid": "f2ZGW6nghOJbNPDM0bULLd@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 1416,
+      "y": 504,
+      "width": 444,
+      "height": 46
+    },
+    "rotated": false,
+    "size": [
+      444,
+      46
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "img_end_double"
+  },
+  {
+    "path": "sprites/freeGoldUI/UI_tlbz_004.png",
+    "originalPath": "Assets/Images/freeGoldUI/UI_tlbz_004/spriteFrame",
+    "uuid": "f9tETYrZhP+oemLEyyNihi@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 2005,
+      "y": 820,
+      "width": 165,
+      "height": 37
+    },
+    "rotated": true,
+    "size": [
+      165,
+      37
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_tlbz_004"
+  },
+  {
+    "path": "sprites/setting/UI_ylsz_004.png",
+    "originalPath": "Assets/Images/setting/UI_ylsz_004/spriteFrame",
+    "uuid": "fcGnO+1VFMBZJHdT/uMbrv@f9941",
+    "pack": "0f0709741",
+    "atlas": "1f0709741.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1f0709741.png",
+    "rect": {
+      "x": 1358,
+      "y": 1983,
+      "width": 193,
+      "height": 57
+    },
+    "rotated": false,
+    "size": [
+      193,
+      57
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "UI_ylsz_004"
+  },
+  {
+    "path": "sprites/ShopUI/btn_shop_expect.png",
+    "originalPath": "Assets/Images/ShopUI/btn_shop_expect/spriteFrame",
+    "uuid": "039dik/cRLpL6hkZM7DNbq@f9941",
+    "pack": "0fca82b4d",
+    "atlas": "1fca82b4d.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1fca82b4d.png",
+    "rect": {
+      "x": 300,
+      "y": 781,
+      "width": 290,
+      "height": 74
+    },
+    "rotated": false,
+    "size": [
+      290,
+      74
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "btn_shop_expect"
+  },
+  {
+    "path": "sprites/ShopUI/ic_home_add.png",
+    "originalPath": "Assets/Images/ShopUI/ic_home_add/spriteFrame",
+    "uuid": "23guzfkqdCGKsGN/A9T79s@f9941",
+    "pack": "0fca82b4d",
+    "atlas": "1fca82b4d.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1fca82b4d.png",
+    "rect": {
+      "x": 723,
+      "y": 781,
+      "width": 36,
+      "height": 36
+    },
+    "rotated": false,
+    "size": [
+      36,
+      36
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "ic_home_add"
+  },
+  {
+    "path": "sprites/ShopUI/img_shop_video.png",
+    "originalPath": "Assets/Images/ShopUI/img_shop_video/spriteFrame",
+    "uuid": "309T0di39FZZ+YTr/Q32M+@f9941",
+    "pack": "0fca82b4d",
+    "atlas": "1fca82b4d.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1fca82b4d.png",
+    "rect": {
+      "x": 729,
+      "y": 694,
+      "width": 37,
+      "height": 28
+    },
+    "rotated": true,
+    "size": [
+      37,
+      28
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "img_shop_video"
+  },
+  {
+    "path": "sprites/ShopUI/frame_home_money.png",
+    "originalPath": "Assets/Images/ShopUI/frame_home_money/spriteFrame",
+    "uuid": "34SMwDl+pBbLf/Bvusw2um@f9941",
+    "pack": "0fca82b4d",
+    "atlas": "1fca82b4d.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1fca82b4d.png",
+    "rect": {
+      "x": 3,
+      "y": 879,
+      "width": 172,
+      "height": 46
+    },
+    "rotated": false,
+    "size": [
+      172,
+      46
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "frame_home_money"
+  },
+  {
+    "path": "sprites/ShopUI/goods/1.png",
+    "originalPath": "Assets/Images/ShopUI/goods/1/spriteFrame",
+    "uuid": "38spvHLsVI2qU/5mo76ztT@f9941",
+    "pack": "0fca82b4d",
+    "atlas": "1fca82b4d.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1fca82b4d.png",
+    "rect": {
+      "x": 847,
+      "y": 563,
+      "width": 117,
+      "height": 89
+    },
+    "rotated": true,
+    "size": [
+      140,
+      140
+    ],
+    "offset": {
+      "x": 0.5,
+      "y": -0.5
+    },
+    "name": "1"
+  },
+  {
+    "path": "sprites/ShopUI/goods/5.png",
+    "originalPath": "Assets/Images/ShopUI/goods/5/spriteFrame",
+    "uuid": "3c22L2eStFAJ0wfzRW9xkV@f9941",
+    "pack": "0fca82b4d",
+    "atlas": "1fca82b4d.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1fca82b4d.png",
+    "rect": {
+      "x": 643,
+      "y": 829,
+      "width": 140,
+      "height": 112
+    },
+    "rotated": false,
+    "size": [
+      140,
+      140
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "5"
+  },
+  {
+    "path": "sprites/ShopUI/goods/4.png",
+    "originalPath": "Assets/Images/ShopUI/goods/4/spriteFrame",
+    "uuid": "44NaBH3D5JBbqE25y23iuV@f9941",
+    "pack": "0fca82b4d",
+    "atlas": "1fca82b4d.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1fca82b4d.png",
+    "rect": {
+      "x": 729,
+      "y": 563,
+      "width": 112,
+      "height": 125
+    },
+    "rotated": false,
+    "size": [
+      140,
+      140
+    ],
+    "offset": {
+      "x": 7,
+      "y": -1.5
+    },
+    "name": "4"
+  },
+  {
+    "path": "sprites/ShopUI/btn_shop_green.png",
+    "originalPath": "Assets/Images/ShopUI/btn_shop_green/spriteFrame",
+    "uuid": "4bk/1PWPZGnbGyVLVbj1ed@f9941",
+    "pack": "0fca82b4d",
+    "atlas": "1fca82b4d.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1fca82b4d.png",
+    "rect": {
+      "x": 181,
+      "y": 879,
+      "width": 152,
+      "height": 52
+    },
+    "rotated": false,
+    "size": [
+      156,
+      56
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "btn_shop_green"
+  },
+  {
+    "path": "sprites/ShopUI/frame_shop_skill_use.png",
+    "originalPath": "Assets/Images/ShopUI/frame_shop_skill_use/spriteFrame",
+    "uuid": "5dS4Yk0YJAQZwdPPLQDV73@f9941",
+    "pack": "0fca82b4d",
+    "atlas": "1fca82b4d.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1fca82b4d.png",
+    "rect": {
+      "x": 729,
+      "y": 190,
+      "width": 184,
+      "height": 181
+    },
+    "rotated": false,
+    "size": [
+      195,
+      191
+    ],
+    "offset": {
+      "x": 0.5,
+      "y": 0
+    },
+    "name": "frame_shop_skill_use"
+  },
+  {
+    "path": "sprites/ShopUI/goods/0.png",
+    "originalPath": "Assets/Images/ShopUI/goods/0/spriteFrame",
+    "uuid": "61foDjgqdBWqKGMhm7aU+B@f9941",
+    "pack": "0fca82b4d",
+    "atlas": "1fca82b4d.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1fca82b4d.png",
+    "rect": {
+      "x": 765,
+      "y": 694,
+      "width": 106,
+      "height": 121
+    },
+    "rotated": false,
+    "size": [
+      140,
+      140
+    ],
+    "offset": {
+      "x": -1,
+      "y": -2.5
+    },
+    "name": "0"
+  },
+  {
+    "path": "sprites/ShopUI/font_shop_get.png",
+    "originalPath": "Assets/Images/ShopUI/font_shop_get/spriteFrame",
+    "uuid": "6beQE8ygdHRZwAliSBSuNV@f9941",
+    "pack": "0fca82b4d",
+    "atlas": "1fca82b4d.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1fca82b4d.png",
+    "rect": {
+      "x": 596,
+      "y": 781,
+      "width": 60,
+      "height": 31
+    },
+    "rotated": true,
+    "size": [
+      64,
+      35
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "font_shop_get"
+  },
+  {
+    "path": "sprites/ShopUI/btn_shop_arms.png",
+    "originalPath": "Assets/Images/ShopUI/btn_shop_arms/spriteFrame",
+    "uuid": "89PN9p8LFMA4rkK3uTdOjA@f9941",
+    "pack": "0fca82b4d",
+    "atlas": "1fca82b4d.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1fca82b4d.png",
+    "rect": {
+      "x": 3,
+      "y": 781,
+      "width": 291,
+      "height": 92
+    },
+    "rotated": false,
+    "size": [
+      291,
+      92
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "btn_shop_arms"
+  },
+  {
+    "path": "sprites/ShopUI/goods/3.png",
+    "originalPath": "Assets/Images/ShopUI/goods/3/spriteFrame",
+    "uuid": "8bkFD/ytRL3oZU9PlG3sN2@f9941",
+    "pack": "0fca82b4d",
+    "atlas": "1fca82b4d.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1fca82b4d.png",
+    "rect": {
+      "x": 339,
+      "y": 861,
+      "width": 140,
+      "height": 76
+    },
+    "rotated": false,
+    "size": [
+      140,
+      140
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "3"
+  },
+  {
+    "path": "sprites/ShopUI/img_shop_money.png",
+    "originalPath": "Assets/Images/ShopUI/img_shop_money/spriteFrame",
+    "uuid": "9083Bw9KxDDJ1SIOT6qU2a@f9941",
+    "pack": "0fca82b4d",
+    "atlas": "1fca82b4d.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1fca82b4d.png",
+    "rect": {
+      "x": 633,
+      "y": 781,
+      "width": 42,
+      "height": 40
+    },
+    "rotated": true,
+    "size": [
+      42,
+      40
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "img_shop_money"
+  },
+  {
+    "path": "sprites/ShopUI/btn_shop_yellow.png",
+    "originalPath": "Assets/Images/ShopUI/btn_shop_yellow/spriteFrame",
+    "uuid": "b1MP1CGiBF65x2eeDOuGQq@f9941",
+    "pack": "0fca82b4d",
+    "atlas": "1fca82b4d.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1fca82b4d.png",
+    "rect": {
+      "x": 485,
+      "y": 861,
+      "width": 152,
+      "height": 52
+    },
+    "rotated": false,
+    "size": [
+      156,
+      56
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "btn_shop_yellow"
+  },
+  {
+    "path": "sprites/ShopUI/font_shop_unlock.png",
+    "originalPath": "Assets/Images/ShopUI/font_shop_unlock/spriteFrame",
+    "uuid": "b2F9pf5NxIf79oG4o959qV@f9941",
+    "pack": "0fca82b4d",
+    "atlas": "1fca82b4d.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1fca82b4d.png",
+    "rect": {
+      "x": 549,
+      "y": 919,
+      "width": 21,
+      "height": 21
+    },
+    "rotated": false,
+    "size": [
+      21,
+      21
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "font_shop_unlock"
+  },
+  {
+    "path": "sprites/ShopUI/frame_shop_skill_have.png",
+    "originalPath": "Assets/Images/ShopUI/frame_shop_skill_have/spriteFrame",
+    "uuid": "bcfWQbA39D8Za36i1P20HN@f9941",
+    "pack": "0fca82b4d",
+    "atlas": "1fca82b4d.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1fca82b4d.png",
+    "rect": {
+      "x": 729,
+      "y": 3,
+      "width": 185,
+      "height": 181
+    },
+    "rotated": false,
+    "size": [
+      195,
+      191
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "frame_shop_skill_have"
+  },
+  {
+    "path": "sprites/ShopUI/frame_shop.png",
+    "originalPath": "Assets/Images/ShopUI/frame_shop/spriteFrame",
+    "uuid": "c6DJDibTlKipJIqc43ftwN@f9941",
+    "pack": "0fca82b4d",
+    "atlas": "1fca82b4d.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1fca82b4d.png",
+    "rect": {
+      "x": 3,
+      "y": 3,
+      "width": 720,
+      "height": 772
+    },
+    "rotated": false,
+    "size": [
+      720,
+      772
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "frame_shop"
+  },
+  {
+    "path": "sprites/ShopUI/goods/2.png",
+    "originalPath": "Assets/Images/ShopUI/goods/2/spriteFrame",
+    "uuid": "cc1FFkudhAIKptroMAfTkT@f9941",
+    "pack": "0fca82b4d",
+    "atlas": "1fca82b4d.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1fca82b4d.png",
+    "rect": {
+      "x": 789,
+      "y": 821,
+      "width": 129,
+      "height": 92
+    },
+    "rotated": false,
+    "size": [
+      140,
+      140
+    ],
+    "offset": {
+      "x": 0.5,
+      "y": 0
+    },
+    "name": "2"
+  },
+  {
+    "path": "sprites/ShopUI/font_shop_pass.png",
+    "originalPath": "Assets/Images/ShopUI/font_shop_pass/spriteFrame",
+    "uuid": "d8loO9gVVPSKOvowUvCtki@f9941",
+    "pack": "0fca82b4d",
+    "atlas": "1fca82b4d.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1fca82b4d.png",
+    "rect": {
+      "x": 485,
+      "y": 919,
+      "width": 58,
+      "height": 22
+    },
+    "rotated": false,
+    "size": [
+      58,
+      22
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "font_shop_pass"
+  },
+  {
+    "path": "sprites/ShopUI/frame_shop_skill_mask.png",
+    "originalPath": "Assets/Images/ShopUI/frame_shop_skill_mask/spriteFrame",
+    "uuid": "d9v41EMJROh7k/1rEgYzp9@f9941",
+    "pack": "0fca82b4d",
+    "atlas": "1fca82b4d.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1fca82b4d.png",
+    "rect": {
+      "x": 729,
+      "y": 377,
+      "width": 184,
+      "height": 180
+    },
+    "rotated": false,
+    "size": [
+      184,
+      180
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "frame_shop_skill_mask"
+  },
+  {
+    "path": "sprites/ShopUI/img_shop_skill_lock.png",
+    "originalPath": "Assets/Images/ShopUI/img_shop_skill_lock/spriteFrame",
+    "uuid": "edyRrCvT1BYLul7DHFKjWs@f9941",
+    "pack": "0fca82b4d",
+    "atlas": "1fca82b4d.png",
+    "sourceUrl": "http://game.zhongyigames.com/jizhan/assets/UI/native/1f/1fca82b4d.png",
+    "rect": {
+      "x": 679,
+      "y": 781,
+      "width": 38,
+      "height": 38
+    },
+    "rotated": false,
+    "size": [
+      38,
+      38
+    ],
+    "offset": {
+      "x": 0,
+      "y": 0
+    },
+    "name": "img_shop_skill_lock"
+  }
+]

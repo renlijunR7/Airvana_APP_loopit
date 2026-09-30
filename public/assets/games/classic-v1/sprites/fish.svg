@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="fish">
+<title>fish — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M17 24L5 15V48L17 39Q33 56 55 35Q61 30 55 26Q34 9 17 24Z" fill="#e4b44f" /><path d="M30 16L32 7L41 20M29 46L33 55L42 42" fill="#d95d39" /><path d="M18 27L29 25L25 39L17 36Z" fill="#b47f32" stroke="none"/><circle cx="47" cy="28" r="5" fill="#fff4d2" /><circle cx="49" cy="28" r="2" fill="#243042" stroke="none"/><path d="M42 24Q38 31 42 38M53 36L57 35" fill="none" stroke="#243042" stroke-width="2"/>
+</g>
+</svg>

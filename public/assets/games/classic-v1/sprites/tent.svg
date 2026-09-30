@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="tent">
+<title>tent — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M31 8L60 55H4Z" fill="#e4b44f" /><path d="M31 8L48 55H60Z" fill="#b47f32" /><path d="M31 21L43 54H17Z" fill="#614631" /><path d="M31 21V54H17Z" fill="#fff4d2" /><path d="M5 48L2 60M59 49L62 60M29 7L35 3" fill="none" stroke="#8b6041" stroke-width="3"/><path d="M11 55H55" fill="none" stroke="#614631" stroke-width="3"/>
+</g>
+</svg>

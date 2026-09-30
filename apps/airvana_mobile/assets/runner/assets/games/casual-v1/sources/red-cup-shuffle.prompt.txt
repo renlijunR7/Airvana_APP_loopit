@@ -1,0 +1,9 @@
+Game: red-cup-shuffle
+Generator: OpenAI built-in ImageGen
+Reference role: style only
+Original file: /Users/lijunren/.codex/generated_images/01a0722a-cd21-7871-b0c6-5c67239a7801/exec-01260884-a92c-4122-8999-ac160c82bff4.png
+Visual QA: reviewed individually; independent game world; clear central playfield; no baked UI or live character
+
+Use case: stylized-concept. Asset type: unique portrait gameplay environment for one named mobile game, aspect ratio 360:560. The attached image is STYLE REFERENCE ONLY: use its mature high-quality casual mobile-game 2.5D rendering, saturated but harmonious colors, clearly modeled rounded materials, polished hand-painted textures and soft readable lighting. Create an original new world, NOT the reference farm/people/train. No phone frame, text, letters, numbers, signs, logos, UI panels, controls, buttons, or characters/gameplay items baked into the scene. No flat vector art, pixel-art rendering, low-poly primitive placeholder shapes, photorealism, ornate filigree, random surreal fantasy details. Environment belongs to the specific game world below and should look distinct from every other game's world. Camera elevated three-quarter top view, central 60% width and 75% height left relatively empty and low-contrast for separately animated game objects. Frame with relevant dimensional environmental props at edges/corners only. Output a finished polished raster game background, no typography.
+Game: Red Cup Shuffle, following a hidden ball under moving cups. World: a charming travelling carnival magician's booth. Huge clean burgundy felt game table at center, with thick softly beveled warm golden wood rim. At far upper corners only: cropped red-and-cream striped canopy, curled brass curtain tiebacks, a folded magician's satin cloth on an outer edge, small warm round marquee bulbs at borders. Intimate tabletop perspective, not a shop room. No cups, ball, playing cards, people, text or interface.
+

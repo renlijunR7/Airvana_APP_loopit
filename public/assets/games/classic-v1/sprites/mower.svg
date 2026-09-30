@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="mower">
+<title>mower — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M26 29L16 6H6" fill="none" stroke="#243042" stroke-width="5"/><path d="M28 27L18 4H7" fill="none" stroke="#fff4d2" stroke-width="2"/><path d="M15 29H48L57 39V50H8V39Z" fill="#689754" /><rect x="23" y="24" width="22" height="16" rx="3" fill="#d95d39" /><rect x="26" y="21" width="15" height="7" rx="1" fill="#243042" /><rect x="6" y="44" width="9" height="15" rx="3" fill="#243042" /><rect x="49" y="44" width="9" height="15" rx="3" fill="#243042" /><rect x="14" y="50" width="36" height="7" rx="1" fill="#416b47" /><path d="M18 42H46" fill="none" stroke="#fff4d2" stroke-width="3"/><circle cx="10" cy="51" r="2" fill="#e4b44f" stroke="none"/><circle cx="54" cy="51" r="2" fill="#e4b44f" stroke="none"/>
+</g>
+</svg>

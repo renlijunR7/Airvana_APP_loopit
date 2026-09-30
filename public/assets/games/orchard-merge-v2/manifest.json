@@ -1,0 +1,64 @@
+{
+  "schema": "airvana.game-art-manifest.v1",
+  "playable_id": "plb_orchard_merge",
+  "version": "2.1.0-local-demo",
+  "status": "LOCAL_DEMO",
+  "figma": {
+    "file_key": "WA3MynAwQekRNIY1s7cWX3",
+    "url": "https://www.figma.com/design/WA3MynAwQekRNIY1s7cWX3",
+    "screen_node_id": "2:2"
+  },
+  "assets": [
+    {
+      "asset_id": "orchard_bg_v2",
+      "kind": "background",
+      "source": "ImageGen",
+      "authorization_status": "pending_human_release_approval",
+      "source_file": "source/orchard-background-v1.png",
+      "runtime_file": "runtime/orchard-background-v2.jpg",
+      "dimensions": "706x1254",
+      "restrictions": [
+        "not_approved_for_commercial_campaign",
+        "no_external_distribution"
+      ],
+      "source_sha256": "f1b5c46398eebbbdcef4934315836832db20cf07a916df810d4f2550953ef5f6",
+      "runtime_sha256": "7a264e6cde0f62baef6924f8234c33ce2c88eeefd5b1004a6c5afd78641e4812",
+      "owner": "Airvana local demo workspace",
+      "locale": "zxx",
+      "expires_at": null,
+      "review_status": "technical_review_passed",
+      "release_approved": false
+    },
+    {
+      "asset_id": "orchard_fruit_atlas_v2",
+      "kind": "sprite_atlas",
+      "source": "ImageGen",
+      "authorization_status": "pending_human_release_approval",
+      "source_file": "source/orchard-fruit-atlas-v1.png",
+      "runtime_file": "runtime/orchard-fruit-atlas-v2.png",
+      "dimensions": "2172x724",
+      "frames": 6,
+      "layout": "horizontal_equal_cells",
+      "restrictions": [
+        "not_approved_for_commercial_campaign",
+        "no_external_distribution"
+      ],
+      "source_sha256": "3b24e7dc1a696a4508d4a5ac337afe78491f6e9c3b98b65ed28adbedb0958c1d",
+      "runtime_sha256": "3b24e7dc1a696a4508d4a5ac337afe78491f6e9c3b98b65ed28adbedb0958c1d",
+      "owner": "Airvana local demo workspace",
+      "locale": "zxx",
+      "expires_at": null,
+      "review_status": "technical_review_passed",
+      "release_approved": false
+    }
+  ],
+  "release_review": {
+    "status": "blocked_pending_human_approval",
+    "required_roles": [
+      "art director",
+      "brand/IP owner",
+      "channel owner",
+      "release owner"
+    ]
+  }
+}

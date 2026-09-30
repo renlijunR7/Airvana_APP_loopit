@@ -1,0 +1,62 @@
+.physics-host{position:relative;isolation:isolate;background:var(--physics-paper,#fff8ed)}
+.physics-host canvas{display:block;width:100%;height:100%;touch-action:none}
+.physics-controls{position:absolute;inset:auto 0 0;min-height:12.86%;height:auto;padding:3px 10px;background:var(--physics-paper,#fff8ed);display:flex;flex-direction:column;justify-content:center;gap:2px;color:#264352}
+.physics-hint{margin:0;font:650 10px/1.35 system-ui,sans-serif;text-align:center;overflow-wrap:anywhere}
+.physics-buttons{display:flex;gap:6px;justify-content:center}
+.physics-buttons button,.physics-result button{border:0;border-radius:11px;background:var(--physics-color,#267ea1);color:white;min-height:44px;min-width:44px;padding:6px 11px;font:800 12px/1.25 system-ui,sans-serif;cursor:pointer;box-shadow:inset 0 1px #ffffff44,0 2px #19373f30}
+.physics-buttons button:disabled{opacity:.45;cursor:default}
+.physics-buttons button:focus-visible,.physics-result button:focus-visible{outline:3px solid #f5be43;outline-offset:2px}
+.physics-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:22px;background:#17363e77;backdrop-filter:blur(3px);z-index:3}
+.physics-overlay[hidden],.physics-controls[hidden]{display:none}
+.physics-result{width:100%;max-width:290px;text-align:center;padding:24px 18px;background:var(--physics-paper,#fff8ed);border:3px solid #fff;border-radius:24px;box-shadow:0 10px 0 #173c3e22,0 20px 40px #173c3e33;color:#264352}
+.physics-result>span{font:800 10px system-ui,sans-serif;letter-spacing:2px;color:var(--physics-color,#267ea1)}
+.physics-result h2{font:900 25px system-ui,sans-serif;margin:12px 0}
+.physics-result p{font:500 13px/1.7 system-ui,sans-serif;margin:0 0 16px}
+.physics-result button{display:block;width:100%;min-height:44px;margin-top:10px}
+.physics-result button+button{background:#fff;color:var(--physics-color,#267ea1);box-shadow:inset 0 0 0 1px #b9ccd0}
+.feed-mini-game.is-physics{--game-frame:#277f9d;--game-paper:#f4faf6;--game-rim:#d3e6e8;--game-badge:#2c92b4;background:#edf5f1;padding:0 6px 6px}
+.feed-mini-game.is-physics .feed-mini-game__topline{background:#edf5f1;color:#284853}
+.feed-mini-game.is-physics .feed-mini-game__sound,.feed-mini-game.is-physics .feed-mini-game__close,.feed-mini-game.is-physics .airvana-deep-game-control>span{color:#284853;text-shadow:none}
+.feed-mini-game.is-physics.state-idle{background:linear-gradient(180deg,#ffffff00 30%,#193e4855)}
+.feed-mini-game.is-physics.state-idle .feed-mini-game__intro{justify-content:flex-end;padding:0 18px 22px}
+.feed-mini-game.is-physics.state-idle .feed-mini-game__intro h2{margin:0;background:#fff;color:#284853;text-shadow:none;border:0}
+.feed-mini-game.is-physics.state-idle .feed-mini-game__intro p{background:#fffdf4f5;color:#36505a;border:0}
+.feed-mini-game.is-physics.state-idle .feed-mini-game__intro small{color:#fff;text-shadow:0 1px 3px #000}
+@media(max-width:375px){.physics-hint{font-size:9px}.physics-buttons button{padding:5px 7px;font-size:11px}}
+
+/* The painted physics collection is opt-in; registered reference games keep their own skin. */
+.physics-host.is-casual{background:var(--physics-color,#427b76)}
+.physics-host.is-casual .physics-controls{left:7px;right:7px;bottom:5px;min-height:0;padding:4px 7px 5px;gap:3px;border:1px solid #d7b980;border-radius:15px;box-sizing:border-box;background:linear-gradient(180deg,#fffbeeeb,#f3e4c9f0);box-shadow:inset 0 1px #fffdf2,0 3px 9px #503d2526;color:#536148}
+.physics-host.is-casual .physics-hint{font:700 10px/1.3 system-ui,sans-serif;color:#58634e;text-shadow:0 1px #fff9e6;letter-spacing:0}
+.physics-host.is-casual .physics-buttons{gap:6px}
+.physics-host.is-casual .physics-buttons button{flex:1;max-width:154px;min-width:44px;min-height:44px;box-sizing:border-box;padding:6px 8px;border:1px solid #b88643;border-radius:11px;background:linear-gradient(180deg,#ffe9a4,#f4c86c 58%,#e5a84d);color:#68451f;font:900 12px/1.2 system-ui,sans-serif;text-shadow:0 1px #fff1bd;box-shadow:inset 0 2px #fff5c6,0 2px 0 #b6813e,0 3px 5px #75512e25}
+.physics-host.is-casual .physics-buttons button:active:not(:disabled){transform:translateY(1px);box-shadow:inset 0 1px #fff5c6,0 1px 0 #b6813e}
+.physics-host.is-casual .physics-buttons button:disabled{opacity:.52;filter:saturate(.45);box-shadow:inset 0 1px #fff4ca}
+.physics-host.is-casual .physics-overlay{background:#302b265c;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.physics-host.is-casual .physics-result{background:linear-gradient(180deg,#fffbed,#f4e4bd);border:3px solid #ffe5a7;border-radius:26px;box-shadow:inset 0 1px #fff,0 6px 0 #987243,0 15px 35px #281d3050;color:#465449}
+.physics-host.is-casual .physics-result>span{color:var(--physics-color,#4f826f);letter-spacing:1.8px}
+.physics-host.is-casual .physics-result h2{text-shadow:0 1px #fff6d9}
+.physics-host.is-casual .physics-result button{border:1px solid #ae7e3a;border-radius:13px;background:linear-gradient(180deg,#ffe49a,#efb959);color:#65451f;text-shadow:0 1px #fff0b4;box-shadow:inset 0 2px #fff2c6,0 3px 0 #b0803c}
+.physics-host.is-casual .physics-result button+button{border-color:#d2b689;background:#fff7df;color:#786341;box-shadow:inset 0 1px #fffdf1,0 2px 0 #ceb78c}
+.physics-host.is-casual .physics-buttons button:focus-visible,.physics-host.is-casual .physics-result button:focus-visible{outline:3px solid #277db0;outline-offset:2px}
+
+.feed-mini-game.is-physics.is-casual{background:var(--game-frame,#426d65);isolation:isolate}
+.feed-mini-game.is-physics.is-casual .feed-mini-game__topline{position:relative;z-index:3;background:transparent;color:#fff8df}
+.feed-mini-game.is-physics.is-casual .feed-mini-game__sound,.feed-mini-game.is-physics.is-casual .feed-mini-game__close{width:44px;height:44px;min-width:44px;min-height:44px;border:1px solid #fff5d08c;border-radius:50%;background:#38544885;color:#fffae9;box-shadow:inset 0 1px #ffffff29,0 2px 4px #23332926;text-shadow:0 1px 2px #314d44}
+.feed-mini-game.is-physics.is-casual .airvana-deep-game-control>span{background:#fff2d2eb;color:#536343;box-shadow:inset 0 1px #fffbe8,0 2px 0 #a99061;border-radius:10px;text-shadow:0 1px #fffbe8}
+.feed-mini-game.is-physics.is-casual .airvana-deep-game-shell{border:1px solid #d9c692;border-radius:19px;box-shadow:0 3px 7px #35403538}
+.feed-mini-game.is-physics.is-casual airvana-physics-poster{position:absolute;inset:0;z-index:0;display:block;width:100%;height:100%;pointer-events:none}
+.feed-mini-game.is-physics.is-casual airvana-physics-poster canvas{display:block;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.feed-mini-game.is-physics.is-casual.state-idle{padding:0;background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none}
+.feed-mini-game.is-physics.is-casual.state-idle::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(180deg,#1d354a12 0%,#22372b00 28%,#22372b00 51%,#22372b29 69%,#193b30b8 100%)}
+.feed-mini-game.is-physics.is-casual.state-idle .feed-mini-game__topline{padding:6px 8px 0;min-height:44px;gap:8px}
+.feed-mini-game.is-physics.is-casual.state-idle .feed-mini-game__topline>span{display:inline-flex;align-items:center;max-width:calc(100% - 104px);min-height:23px;padding:4px 9px;border:1px solid #ffebbd70;border-radius:999px;background:#355743a6;color:#fff4d0;font:800 9px/1.25 system-ui,sans-serif;letter-spacing:.5px;box-shadow:inset 0 1px #ffffff1a;box-sizing:border-box}
+.feed-mini-game.is-physics.is-casual.state-idle .feed-mini-game__intro{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(12px,1fr) auto auto auto;justify-items:center;align-items:center;justify-content:stretch;gap:0;min-height:0;padding:10px 22px 20px;text-shadow:none}
+.feed-mini-game.is-physics.is-casual.state-idle .feed-mini-game__intro h2{grid-row:1;max-width:100%;margin:0;padding:0 2px;border:0;border-radius:0;background:none;box-shadow:none;color:#fffdf1;font:1000 clamp(30px,8vw,39px)/1.15 system-ui,sans-serif;letter-spacing:.5px;-webkit-text-stroke:1.3px #496048;paint-order:stroke fill;text-shadow:0 3px 0 #48614d,0 5px 9px #1f3b4247}
+.feed-mini-game.is-physics.is-casual.state-idle .feed-mini-game__intro p{grid-row:3;max-width:300px;margin:0;padding:5px 0;border:0;background:transparent;box-shadow:none;color:#fff7e1;font:750 12px/1.55 system-ui,sans-serif;text-shadow:0 1px 3px #16382bd9,0 2px 7px #16382b9c}
+.feed-mini-game.is-physics.is-casual.state-idle .feed-mini-game__primary{grid-row:4;min-width:205px;min-height:52px;margin:11px 0 0;padding:8px 28px;border:2px solid #fff0b4;border-radius:18px;background:linear-gradient(180deg,#ffe8a0 0%,#ffd06e 52%,#ecad44 100%);box-shadow:inset 0 2px #fff8c9,0 5px 0 #a87231,0 9px 16px #29412c3d;color:#73501e;font:1000 18px/1.1 system-ui,sans-serif;text-shadow:0 1px #fff3c2}
+.feed-mini-game.is-physics.is-casual.state-idle .feed-mini-game__primary:active{transform:translateY(2px);box-shadow:inset 0 2px #fff8c9,0 3px 0 #a87231,0 5px 10px #29412c3d}
+.feed-mini-game.is-physics.is-casual.state-idle .feed-mini-game__intro small{grid-row:5;max-width:100%;margin-top:13px;color:#fff8e7;font:650 10px/1.45 system-ui,sans-serif;text-shadow:0 1px 3px #193b30}
+.feed-mini-game.is-physics.is-casual .feed-mini-game__primary:focus-visible,.feed-mini-game.is-physics.is-casual .feed-mini-game__sound:focus-visible,.feed-mini-game.is-physics.is-casual .feed-mini-game__close:focus-visible{outline:3px solid #fff2a1;outline-offset:3px}
+@media(max-height:720px){.feed-mini-game.is-physics.is-casual.state-idle .feed-mini-game__intro{padding-top:5px;padding-bottom:13px}.feed-mini-game.is-physics.is-casual.state-idle .feed-mini-game__intro h2{font-size:30px}.feed-mini-game.is-physics.is-casual.state-idle .feed-mini-game__intro p{font-size:11px}.feed-mini-game.is-physics.is-casual.state-idle .feed-mini-game__primary{min-height:48px;margin-top:7px}}
+@media(prefers-reduced-motion:reduce){.physics-host.is-casual .physics-buttons button:active:not(:disabled),.feed-mini-game.is-physics.is-casual.state-idle .feed-mini-game__primary:active{transform:none}}

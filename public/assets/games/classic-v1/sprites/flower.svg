@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="flower">
+<title>flower — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M32 33V59" fill="none" stroke="#416b47" stroke-width="5"/><path d="M30 47Q14 29 10 42Q13 54 31 52M34 43Q50 25 56 38Q49 51 33 50" fill="#689754" /><path d="M25 17Q20 4 31 3Q43 3 40 17Q53 12 57 23Q60 34 45 35Q55 45 46 51Q36 56 31 43Q24 57 14 50Q7 41 19 34Q3 33 7 22Q11 12 25 17Z" fill="#db8ca1" /><circle cx="32" cy="28" r="10" fill="#e4b44f" />
+</g>
+</svg>

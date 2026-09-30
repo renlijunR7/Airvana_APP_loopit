@@ -6,10 +6,14 @@ import { openDatabase, closeDatabase, transaction } from './db.mjs';
 import { createAiService } from './ai.mjs';
 import { createWorker } from './worker.mjs';
 import { saveArtifact } from './artifact.mjs';
+import { serverCasualBackground, upgradeServerGameRuntimeReferences } from './game-artifact-v3.mjs';
+import { assertOptimizable, assignVariant, assignmentCounts, resolveContentVariant } from './experiments.mjs';
 import {
   AIP_REWARD_RULES, ECONOMY_VERSION, activateSubscription, awardAipRule, completePaymentSettlement,
   consumeAip, consumeCreation, createAitEntitlement, economySnapshot, ensureEconomyAccount,
-  grantAip, quoteCreation, requestAitSettlement, reviewAitEntitlement, reviewBenefitClaim,
+  grantAip, inviteSummary, listGameCoinLedgers, qualifyInvite, quoteCreation, recordGameCompletion,
+  redeemInvite, requestAitSettlement, reviewAitEntitlement, reviewBenefitClaim,
+  GAME_COIN_BOUNDARY,
   reviewCreatorApplication, reviewLedgerAppeal, reviewPaymentSettlement, seedEconomyPlans,
   submitCreatorApplication, submitLedgerAppeal, upsertCampaignEconomyRule,
 } from './economy.mjs';
@@ -19,12 +23,12 @@ import {
   sendJson, sha256, uid,
 } from './utils.mjs';
 
-const MIME = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.json': 'application/json; charset=utf-8', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp', '.mp4': 'video/mp4', '.ico': 'image/x-icon' };
+const MIME = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.gif': 'image/gif', '.webp': 'image/webp', '.avif': 'image/avif', '.mp4': 'video/mp4', '.webm': 'video/webm', '.woff2': 'font/woff2', '.json': 'application/json; charset=utf-8', '.ico': 'image/x-icon' };
 const CONTENT_TYPES = new Set(['game', 'video', 'article']);
 const AGENT_TYPES = new Set(['game', 'video', 'article', 'all']);
 const PERMISSION_KEYS = ['draft', 'readAnalytics', 'useBrandAssets', 'publish'];
 const ACTIVE_TASKS = ['queued', 'running', 'review_pending'];
-const REWARD_RULES = { share: 0, save: 0 };
+const REWARD_RULES = { share: 0, save: 0, like: 0 };
 const WALLET_NETWORKS = new Map([
   [1, { key: 'eip155:1', label: 'Ethereum' }],
   [8453, { key: 'eip155:8453', label: 'Base' }],
@@ -83,13 +87,40 @@ function validateCampaignBrief(brief) {
   }
 }
 
-function ipFor(req) {
-  return String(req.headers['x-forwarded-for'] || req.socket.remoteAddress || 'unknown').split(',')[0].trim();
+function firstForwardedValue(value) {
+  return String(value || '').split(',')[0].trim();
 }
 
-function requestContext(req, secret) {
+function ipFor(req, trustProxy) {
+  if (trustProxy) {
+    const forwarded = firstForwardedValue(req.headers['x-forwarded-for']);
+    if (forwarded) return forwarded;
+  }
+  return String(req.socket.remoteAddress || 'unknown');
+}
+
+function protocolFor(req, trustProxy) {
+  if (trustProxy) {
+    const forwarded = firstForwardedValue(req.headers['x-forwarded-proto']).toLowerCase();
+    if (forwarded === 'http' || forwarded === 'https') return forwarded;
+  }
+  return req.socket.encrypted ? 'https' : 'http';
+}
+
+function hostFor(req, trustProxy) {
+  const candidate = trustProxy
+    ? firstForwardedValue(req.headers['x-forwarded-host']) || String(req.headers.host || '')
+    : String(req.headers.host || '');
+  return /^[A-Za-z0-9.-]+(?::\d+)?$/.test(candidate) ? candidate : 'localhost';
+}
+
+function originFor(req, trustProxy) {
+  return `${protocolFor(req, trustProxy)}://${hostFor(req, trustProxy)}`;
+}
+
+function requestContext(req, secret, trustProxy) {
   return {
-    ipHash: sha256(`${secret}:ip:${ipFor(req)}`),
+    ipHash: sha256(`${secret}:ip:${ipFor(req, trustProxy)}`),
     deviceHash: sha256(`${secret}:device:${String(req.headers['x-airvana-device'] || 'missing')}`),
   };
 }
@@ -143,6 +174,13 @@ function getSessionUser(db, req) {
     WHERE s.token_hash=? AND s.expires_at > ?`).get(sha256(token), isoNow()) || null;
 }
 
+// 当前 ready 成品是否声明了 variantAware：旧成品无消费代码，投放层据此如实告知而不是假定生效
+function artifactVariantAware(db, contentId) {
+  const row = db.prepare(`SELECT a.manifest_json FROM content_artifacts a JOIN contents c ON c.id=a.content_id
+    WHERE a.content_id=? AND a.version=c.current_version AND a.status='ready'`).get(contentId);
+  return Boolean(row && safeJson(row.manifest_json)?.variantAware);
+}
+
 function requireUser(db, req, roles) {
   const user = getSessionUser(db, req);
   if (!user) throw new HttpError(401, '请先登录', 'unauthorized');
@@ -192,6 +230,67 @@ function createOrGetDemoUser(db, role, persona = 'primary') {
   return user;
 }
 
+const EMAIL_RE = /^[A-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?(?:\.[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?)+$/i;
+
+function normalizeEmail(value) {
+  const email = String(value || '').trim().toLowerCase();
+  if (!EMAIL_RE.test(email) || email.length > 254) throw new HttpError(400, '邮箱地址无效', 'invalid_email');
+  return email;
+}
+
+function issueLoginCode(db, { provider, identifier, purpose, userId = null }) {
+  const code = String(crypto.randomInt(100000, 1000000));
+  const now = isoNow();
+  db.prepare(`UPDATE login_challenges SET used_at=? WHERE provider=? AND identifier=? AND purpose=? AND used_at IS NULL`)
+    .run(now, provider, identifier, purpose);
+  db.prepare(`INSERT INTO login_challenges (id,provider,identifier,code_hash,purpose,user_id,expires_at,created_at)
+    VALUES (?,?,?,?,?,?,?,?)`)
+    .run(uid('login_code'), provider, identifier, sha256(code), purpose, userId, plusMinutes(10), now);
+  return code;
+}
+
+function consumeLoginCode(db, { provider, identifier, purpose, code }) {
+  const challenge = db.prepare(`SELECT * FROM login_challenges
+    WHERE provider=? AND identifier=? AND purpose=? AND used_at IS NULL ORDER BY created_at DESC LIMIT 1`)
+    .get(provider, identifier, purpose);
+  if (!challenge || challenge.expires_at <= isoNow()) throw new HttpError(401, '验证码已过期，请重新发送', 'code_expired');
+  if (challenge.attempts >= 5) throw new HttpError(429, '验证码错误次数过多，请重新发送', 'code_locked');
+  if (challenge.code_hash !== sha256(String(code || ''))) {
+    db.prepare('UPDATE login_challenges SET attempts=attempts+1 WHERE id=?').run(challenge.id);
+    throw new HttpError(401, '验证码不正确', 'code_invalid');
+  }
+  db.prepare('UPDATE login_challenges SET used_at=? WHERE id=? AND used_at IS NULL').run(isoNow(), challenge.id);
+  return challenge;
+}
+
+function resolveIdentityUser(db, { provider, identifier, displayName, ipHash }) {
+  const existing = db.prepare('SELECT u.* FROM login_identities i JOIN users u ON u.id=i.user_id WHERE i.provider=? AND i.identifier=?')
+    .get(provider, identifier);
+  if (existing) return { user: existing, created: false };
+  const now = isoNow();
+  // Google 身份携带已验证邮箱：若同邮箱已有 email 身份，自动关联到同一账号（账号合并规则 1）
+  if (provider === 'google') {
+    const sibling = db.prepare(`SELECT u.* FROM login_identities i JOIN users u ON u.id=i.user_id WHERE i.provider='email' AND i.identifier=?`).get(identifier);
+    if (sibling) {
+      db.prepare(`INSERT INTO login_identities (id,user_id,provider,identifier,verified_at,created_at) VALUES (?,?,?,?,?,?)`)
+        .run(uid('identity'), sibling.id, 'google', identifier, now, now);
+      audit(db, { actorUserId: sibling.id, action: 'auth.identity_linked', subjectType: 'user', subjectId: sibling.id, after: { provider: 'google', identifier }, ipHash });
+      return { user: sibling, created: false };
+    }
+  }
+  const userId = uid('usr');
+  db.prepare(`INSERT INTO users (id,role,display_name,email,created_at,updated_at) VALUES (?,?,?,?,?,?)`)
+    .run(userId, 'creator', clampText(displayName || identifier.split('@')[0], 60, '显示名称'), identifier, now, now);
+  const user = db.prepare('SELECT * FROM users WHERE id=?').get(userId);
+  ensureCreatorWorkspace(db, user);
+  // 新身份注册账号不继承 legacy 豁免：创作者资格必须走申请 → KYC → 审批链
+  ensureEconomyAccount(db, user, { forcePlayer: true });
+  db.prepare(`INSERT INTO login_identities (id,user_id,provider,identifier,verified_at,created_at) VALUES (?,?,?,?,?,?)`)
+    .run(uid('identity'), userId, provider, identifier, now, now);
+  audit(db, { actorUserId: userId, action: 'auth.identity_registered', subjectType: 'user', subjectId: userId, after: { provider, identifier }, ipHash });
+  return { user, created: true };
+}
+
 function pointSummary(db, userId) {
   const rows = db.prepare(`SELECT currency, COALESCE(SUM(amount),0) balance FROM point_events
     WHERE user_id=? AND status='posted' AND (expires_at IS NULL OR expires_at>?) GROUP BY currency`).all(userId, isoNow());
@@ -226,6 +325,30 @@ function serializeDeliverable(row) {
     artifactStatus: row.artifact_status, artifactValidation: safeJson(row.validation_json),
     submissionNote: row.submission_note, reviewNote: row.review_note, submittedAt: row.submitted_at,
     reviewedAt: row.reviewed_at, updatedAt: row.updated_at,
+  };
+}
+
+function serializeFeedContent(db, row) {
+  const counts = db.prepare(`SELECT
+    SUM(CASE WHEN event_type='like' AND status='eligible' THEN 1 ELSE 0 END) likes,
+    SUM(CASE WHEN event_type='save' AND status='eligible' THEN 1 ELSE 0 END) saves
+    FROM engagement_events WHERE content_id=?`).get(row.id) || {};
+  const comments = Number(db.prepare(`SELECT COUNT(*) n FROM content_comments WHERE content_id=? AND status='visible'`).get(row.id)?.n || 0);
+  const currentArt = safeJson(db.prepare("SELECT manifest_json FROM content_artifacts WHERE content_id=? AND version=? AND status='ready'").get(row.id, row.current_version)?.manifest_json || '{}');
+  const deliveredBackground = row.content_type === 'game' && currentArt.runtime === 'server-game-v3'
+    ? serverCasualBackground(currentArt.mechanic) || currentArt.background : currentArt.background;
+  const gameBackground = typeof deliveredBackground === 'string'
+    && (/^\/assets\/games\/casual-v1\/scenes\/[a-z-]+\.webp$/.test(deliveredBackground)
+      || /^\/assets\/games\/server-casual-v4\/(?:security-world|memory-world)\.png$/.test(deliveredBackground)) ? deliveredBackground : null;
+  return {
+    ...mapContent(row),
+    authorName: row.author_name,
+    gameBackground,
+    boostedUntil: row.boost_expires_at,
+    likes: Number(counts.likes || 0),
+    saves: Number(counts.saves || 0),
+    comments,
+    publicUrl: `/content/${row.id}`,
   };
 }
 
@@ -280,9 +403,11 @@ function loadBootstrap(db, user, ai) {
   const settlements = (user.role === 'admin' ? db.prepare(settlementSql).all() : db.prepare(settlementSql).all(user.id)).map(row => serializeSettlement(row, db));
   const feed = user.role === 'creator' ? db.prepare(`SELECT c.*,u.display_name author_name,MAX(b.expires_at) boost_expires_at FROM contents c JOIN users u ON u.id=c.owner_user_id
     LEFT JOIN content_boosts b ON b.content_id=c.id AND b.status='active' AND b.expires_at>?
-    WHERE c.status='published' AND c.owner_user_id<>? GROUP BY c.id ORDER BY boost_expires_at IS NOT NULL DESC,c.published_at DESC LIMIT 30`).all(isoNow(), user.id).map(row => ({ ...mapContent(row), authorName: row.author_name, boostedUntil: row.boost_expires_at })) : [];
+    WHERE c.status='published' AND c.owner_user_id<>? GROUP BY c.id ORDER BY boost_expires_at IS NOT NULL DESC,c.published_at DESC LIMIT 60`).all(isoNow(), user.id).map(row => serializeFeedContent(db, row)) : [];
   const stats = {
     publishedContents: Number(db.prepare(`SELECT COUNT(*) n FROM contents WHERE owner_user_id=? AND status='published'`).get(user.id)?.n || 0),
+    likesReceived: Number(db.prepare(`SELECT COUNT(*) n FROM engagement_events e JOIN contents c ON c.id=e.content_id
+      WHERE c.owner_user_id=? AND e.event_type='like' AND e.status='eligible'`).get(user.id)?.n || 0),
     activeTasks: Number(db.prepare(`SELECT COUNT(*) n FROM agent_tasks WHERE owner_user_id=? AND status IN ('queued','running','review_pending')`).get(user.id)?.n || 0),
     pendingDeliverables: deliverables.filter(item => item.status === 'submitted').length,
   };
@@ -340,10 +465,56 @@ function loadBootstrap(db, user, ai) {
   const benefitClaims = db.prepare(`SELECT * FROM benefit_claims WHERE user_id=? ORDER BY created_at DESC LIMIT 100`).all(user.id).map(row => ({ id: row.id, entitlementId: row.entitlement_id, benefitType: row.benefit_type, status: row.status, fulfillmentReference: row.fulfillment_reference, reviewNote: row.review_note, createdAt: row.created_at, updatedAt: row.updated_at }));
   const paymentSettlements = db.prepare(`SELECT * FROM payment_settlements WHERE user_id=? ORDER BY created_at DESC LIMIT 100`).all(user.id).map(row => ({ id: row.id, entitlementId: row.entitlement_id, currency: row.currency, grossAmount: row.gross_amount, feeAmount: row.fee_amount, status: row.status, paymentReference: row.payment_reference, receiptReference: row.receipt_reference, paidAt: row.paid_at, createdAt: row.created_at, updatedAt: row.updated_at }));
   const ledgerAppeals = db.prepare(`SELECT * FROM ledger_appeals WHERE user_id=? ORDER BY created_at DESC LIMIT 100`).all(user.id).map(row => ({ id: row.id, subjectType: row.subject_type, subjectId: row.subject_id, reason: row.reason, status: row.status, resolutionNote: row.resolution_note, createdAt: row.created_at, updatedAt: row.updated_at }));
+  const economyContractRows = user.role === 'brand'
+    ? db.prepare(`SELECT r.*,c.title campaign_title FROM campaign_economy_rules r JOIN campaigns c ON c.id=r.campaign_id WHERE c.brand_user_id=? ORDER BY r.updated_at DESC LIMIT 100`).all(user.id)
+    : user.role === 'admin'
+      ? db.prepare(`SELECT r.*,c.title campaign_title FROM campaign_economy_rules r JOIN campaigns c ON c.id=r.campaign_id ORDER BY CASE r.status WHEN 'pending_review' THEN 0 ELSE 1 END,r.updated_at DESC LIMIT 100`).all()
+      : db.prepare(`SELECT DISTINCT r.*,c.title campaign_title FROM campaign_economy_rules r JOIN campaigns c ON c.id=r.campaign_id JOIN campaign_participants p ON p.campaign_id=r.campaign_id AND p.creator_user_id=? WHERE r.status='approved' ORDER BY r.updated_at DESC LIMIT 100`).all(user.id);
+  const economyContracts = economyContractRows.map(row => ({
+    id: row.id, campaignId: row.campaign_id, campaignTitle: row.campaign_title, contractVersion: row.contract_version,
+    status: row.status, primarySuccessEvent: row.primary_success_event,
+    playerRule: safeJson(row.player_rule_json), creatorRule: safeJson(row.creator_rule_json),
+    attribution: safeJson(row.attribution_json), eligibility: safeJson(row.eligibility_json),
+    budget: safeJson(row.budget_json), settlement: safeJson(row.settlement_json),
+    lockedFields: safeJson(row.locked_fields_json, []), approvedAt: row.approved_at, expiresAt: row.expires_at,
+    createdAt: row.created_at, updatedAt: row.updated_at,
+  }));
+  const managedAitEntitlements = user.role === 'admin' ? db.prepare(`SELECT e.*,u.display_name user_name,c.title campaign_title FROM ait_entitlements e JOIN users u ON u.id=e.user_id JOIN campaigns c ON c.id=e.campaign_id ORDER BY CASE e.status WHEN 'pending' THEN 0 ELSE 1 END,e.created_at DESC LIMIT 100`).all().map(row => ({
+    id: row.id, userId: row.user_id, userName: row.user_name, campaignId: row.campaign_id, campaignTitle: row.campaign_title,
+    contractVersion: row.contract_version, sourceType: row.source_type, sourceEventType: row.source_event_type, sourceEventId: row.source_event_id,
+    amount: row.amount, status: row.status, attributionReference: row.attribution_reference, reasonCode: row.reason_code,
+    expiresAt: row.expires_at, createdAt: row.created_at, updatedAt: row.updated_at,
+  })) : [];
+  const managedBenefitClaims = user.role === 'admin' ? db.prepare(`SELECT b.*,u.display_name user_name FROM benefit_claims b JOIN users u ON u.id=b.user_id ORDER BY CASE b.status WHEN 'submitted' THEN 0 WHEN 'approved' THEN 1 ELSE 2 END,b.created_at DESC LIMIT 100`).all().map(row => ({
+    id: row.id, entitlementId: row.entitlement_id, userId: row.user_id, userName: row.user_name, benefitType: row.benefit_type,
+    status: row.status, fulfillmentReference: row.fulfillment_reference, reviewNote: row.review_note, createdAt: row.created_at, updatedAt: row.updated_at,
+  })) : [];
+  const managedPaymentSettlements = user.role === 'admin' ? db.prepare(`SELECT p.*,u.display_name user_name FROM payment_settlements p JOIN users u ON u.id=p.user_id ORDER BY CASE p.status WHEN 'submitted' THEN 0 WHEN 'approved' THEN 1 WHEN 'processing' THEN 2 ELSE 3 END,p.created_at DESC LIMIT 100`).all().map(row => ({
+    id: row.id, entitlementId: row.entitlement_id, userId: row.user_id, userName: row.user_name,
+    payerSubject: row.payer_subject, payeeSubject: row.payee_subject, currency: row.currency, grossAmount: row.gross_amount,
+    feeAmount: row.fee_amount, status: row.status, paymentReference: row.payment_reference, receiptReference: row.receipt_reference,
+    reviewNote: row.review_note, paidAt: row.paid_at, createdAt: row.created_at, updatedAt: row.updated_at,
+  })) : [];
+  const managedLedgerAppeals = user.role === 'admin' ? db.prepare(`SELECT a.*,u.display_name user_name FROM ledger_appeals a JOIN users u ON u.id=a.user_id ORDER BY CASE a.status WHEN 'submitted' THEN 0 ELSE 1 END,a.created_at DESC LIMIT 100`).all().map(row => ({
+    id: row.id, userId: row.user_id, userName: row.user_name, subjectType: row.subject_type, subjectId: row.subject_id,
+    reason: row.reason, status: row.status, resolutionNote: row.resolution_note, createdAt: row.created_at, updatedAt: row.updated_at,
+  })) : [];
   const creatorApplications = user.role === 'admin'
     ? db.prepare(`SELECT a.*,u.display_name user_name FROM creator_applications a JOIN users u ON u.id=a.user_id ORDER BY a.created_at DESC LIMIT 100`).all()
     : db.prepare(`SELECT * FROM creator_applications WHERE user_id=? ORDER BY created_at DESC LIMIT 20`).all(user.id);
-  return { me: publicEconomyUser(db, user), ai: ai.info, points: { AIP: economy.aip.available, AIT: economy.ait.available }, economy, creatorApplications, aitEntitlements, benefitClaims, paymentSettlements, ledgerAppeals, walletBindings, stats, organization: organization && { id: organization.id, name: organization.name, verificationStatus: organization.verification_status, verificationNote: organization.verification_note }, organizations, participants, attribution, runtimeEnabled, agents, agentMemories, contents, artifacts, activeBoosts, feed, tasks, taskSteps, ledger, managedPointEvents, campaigns, deliverables, settlements, notifications, sessions, termsAcceptances, deletionRequest, riskCases, reports, contentAppeals, appealableContentIds, auditLogs };
+  const following = db.prepare(`SELECT f.followee_user_id,u.display_name,f.created_at FROM user_follows f JOIN users u ON u.id=f.followee_user_id WHERE f.follower_user_id=? ORDER BY f.created_at DESC LIMIT 200`).all(user.id)
+    .map(row => ({ userId: row.followee_user_id, displayName: row.display_name, followedAt: row.created_at }));
+  const engagementState = db.prepare(`SELECT content_id,event_type FROM engagement_events
+    WHERE user_id=? AND status='eligible' AND event_type IN ('like','save','share')
+    ORDER BY created_at`).all(user.id).reduce((state, row) => {
+      state[row.content_id] ||= [];
+      if (!state[row.content_id].includes(row.event_type)) state[row.content_id].push(row.event_type);
+      return state;
+    }, {});
+  const followerCount = Number(db.prepare('SELECT COUNT(*) n FROM user_follows WHERE followee_user_id=?').get(user.id)?.n || 0);
+  const loginIdentities = db.prepare('SELECT provider,identifier,verified_at FROM login_identities WHERE user_id=? ORDER BY created_at').all(user.id)
+    .map(row => ({ provider: row.provider, identifier: row.identifier, verifiedAt: row.verified_at }));
+  return { me: publicEconomyUser(db, user), ai: ai.info, loginIdentities, following, engagementState, followerCount, points: { AIP: economy.aip.available, AIT: economy.ait.available }, economy, creatorApplications, aitEntitlements, benefitClaims, paymentSettlements, ledgerAppeals, economyContracts, managedAitEntitlements, managedBenefitClaims, managedPaymentSettlements, managedLedgerAppeals, walletBindings, stats, organization: organization && { id: organization.id, name: organization.name, verificationStatus: organization.verification_status, verificationNote: organization.verification_note }, organizations, participants, attribution, runtimeEnabled, agents, agentMemories, contents, artifacts, activeBoosts, feed, tasks, taskSteps, ledger, managedPointEvents, campaigns, deliverables, settlements, notifications, sessions, termsAcceptances, deletionRequest, riskCases, reports, contentAppeals, appealableContentIds, auditLogs };
 }
 
 function requireOwnedAgent(db, id, user) {
@@ -368,7 +539,7 @@ function validateAgentForTask(agent, contentType) {
 }
 
 function serveStatic(publicDir, pathname, res) {
-  const requested = pathname === '/' ? '/index.html' : pathname;
+  const requested = pathname === '/' ? '/index.html' : pathname.endsWith('/') ? pathname + 'index.html' : pathname;
   const decoded = decodeURIComponent(requested);
   const file = path.resolve(publicDir, `.${decoded}`);
   if (!file.startsWith(path.resolve(publicDir) + path.sep) && file !== path.join(path.resolve(publicDir), 'index.html')) return false;
@@ -391,14 +562,27 @@ export function createApp(options = {}) {
   const db = options.db || openDatabase(options.dbFile || env.DATABASE_PATH || path.join(root, 'data', 'airvana.db'));
   seedEconomyPlans(db);
   const ai = options.ai || createAiService(env);
+  // 回填历史 Artifact 的 checksum（新列迁移后仅新构建有值）
+  for (const row of db.prepare('SELECT id,html_text FROM content_artifacts WHERE checksum IS NULL').all()) {
+    db.prepare('UPDATE content_artifacts SET checksum=? WHERE id=?').run(sha256(row.html_text), row.id);
+  }
   for (const content of db.prepare(`SELECT c.* FROM contents c LEFT JOIN content_artifacts a ON a.content_id=c.id AND a.version=c.current_version WHERE c.current_version>0 AND a.id IS NULL`).all()) {
     try { saveArtifact(db, { content, payload: safeJson(content.payload_json), version: content.current_version }); } catch (error) { console.error('Artifact backfill failed', content.id, error); }
   }
   const worker = createWorker({ db, ai, pollMs: Number(env.WORKER_POLL_MS || 350) });
+  // 静态资源默认仍由本进程托管，方便本地开发与测试一条命令跑起来；
+  // 生产部署把 SERVE_STATIC=false 打开，让 nginx/CDN 直接发 public/，
+  // Node 只留 /api，前后端成为两个可独立发布、独立回滚的部署单元。
+  const serveStaticAssets = options.serveStatic ?? (env.SERVE_STATIC !== 'false');
   const secret = env.APP_SECRET || 'airvana-development-secret-change-me';
   if (env.NODE_ENV === 'production' && secret === 'airvana-development-secret-change-me') throw new Error('APP_SECRET must be configured in production');
   const allowDemo = options.allowDemo ?? (env.NODE_ENV !== 'production' && env.ALLOW_DEMO_AUTH !== 'false');
   const cookieSecure = env.COOKIE_SECURE === 'true';
+  const trustProxy = env.TRUST_PROXY === 'loopback';
+  const corsAllowedOrigins = new Set(String(env.CORS_ALLOWED_ORIGINS || (env.NODE_ENV === 'production'
+    ? ''
+    : 'http://127.0.0.1:8083,http://localhost:8083,http://127.0.0.1:8084,http://localhost:8084,http://127.0.0.1:8085,http://localhost:8085'))
+    .split(',').map(value => value.trim()).filter(Boolean));
   const runtimeMinDurationMs = Number(env.RUNTIME_MIN_DURATION_MS || 2_000);
   const rateBuckets = new Map();
   let lastCleanup = 0;
@@ -407,16 +591,37 @@ export function createApp(options = {}) {
   async function handler(req, res) {
     const url = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
     const pathname = url.pathname;
-    const ctx = requestContext(req, secret);
+    const ctx = requestContext(req, secret, trustProxy);
     try {
+      const requestOrigin = String(req.headers.origin || '');
+      const corsAllowed = requestOrigin && corsAllowedOrigins.has(requestOrigin);
+      if (corsAllowed) {
+        res.setHeader('Access-Control-Allow-Origin', requestOrigin);
+        res.setHeader('Access-Control-Allow-Credentials', 'true');
+        res.setHeader('Access-Control-Allow-Headers', 'Content-Type, X-Airvana-Device');
+        res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, OPTIONS');
+        res.setHeader('Vary', 'Origin');
+      }
+      if (req.method === 'OPTIONS') {
+        if (!corsAllowed) throw new HttpError(403, '请求来源未在允许列表', 'origin_mismatch');
+        res.writeHead(204);
+        res.end();
+        return;
+      }
       res.setHeader('X-Content-Type-Options', 'nosniff');
       res.setHeader('Referrer-Policy', 'same-origin');
       // Sensor Playables may request the microphone from this same-origin shell
       // after a deliberate user action. Camera and location stay unavailable.
       res.setHeader('Permissions-Policy', 'camera=(), microphone=(self), geolocation=()');
-      res.setHeader('X-Frame-Options', 'DENY');
+      const tokenHarborArcade = /^\/arcade\/token-harbor(?:\/|$)/.test(pathname);
+      const bundledArcade = /^\/arcade\/(risk-run|coin-castle|lucky-fruit|htx-quest|coin-dozer|city-squad|niguolaia|token-harbor|mini-gp-racers|street-gold-rush|star-table|sud-texas|kol-town)(?:\/|$)/.test(pathname);
+      res.setHeader('X-Frame-Options', bundledArcade ? 'SAMEORIGIN' : 'DENY');
       const mobileShell = pathname === '/' || pathname === '/index.html';
-      res.setHeader('Content-Security-Policy', mobileShell
+      res.setHeader('Content-Security-Policy', tokenHarborArcade
+        ? "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob:; style-src 'self' 'unsafe-inline'; connect-src 'self' blob:; img-src 'self' data: blob:; media-src 'self' blob:; worker-src 'self' blob:; frame-ancestors 'self'; base-uri 'self'; form-action 'self'"
+        : bundledArcade
+        ? "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; connect-src 'self' blob:; img-src 'self' data: blob:; media-src 'self' blob:; worker-src 'self' blob:; frame-ancestors 'self'; base-uri 'self'; form-action 'self'"
+        : mobileShell
         ? "default-src 'self'; script-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; connect-src 'self'; img-src 'self' data:; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
         : "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self'; img-src 'self' data:; frame-ancestors 'none'; base-uri 'self'; form-action 'self'");
       if (Date.now() - lastCleanup > 3_600_000) {
@@ -432,8 +637,8 @@ export function createApp(options = {}) {
       if (!currentBucket || currentBucket.resetAt < Date.now()) rateBuckets.set(bucketKey, { count: 1, resetAt: Date.now() + windowMs });
       else if (++currentBucket.count > limit) throw new HttpError(429, '请求过于频繁，请稍后重试', 'rate_limited');
       if (!['GET', 'HEAD', 'OPTIONS'].includes(req.method) && req.headers.origin) {
-        const expectedOrigin = `${req.socket.encrypted ? 'https' : 'http'}://${req.headers.host}`;
-        if (req.headers.origin !== expectedOrigin) throw new HttpError(403, '请求来源验证失败', 'origin_mismatch');
+        const expectedOrigin = originFor(req, trustProxy);
+        if (req.headers.origin !== expectedOrigin && !corsAllowed) throw new HttpError(403, '请求来源验证失败', 'origin_mismatch');
       }
       if (pathname === '/api/health' && req.method === 'GET') {
         return sendJson(res, 200, { ok: true, service: 'airvana-v5.3-economy-v1', economyVersion: 'airvana-economy-v1.0', ai: ai.info, deferred: ['external-kyc-provider', 'authoritative-attribution-provider', 'payment-provider', 'production-infrastructure', 'legal-approval'], time: isoNow() });
@@ -449,8 +654,8 @@ export function createApp(options = {}) {
         const nonce = randomToken(12);
         const issuedAt = isoNow();
         const expiresAt = plusMinutes(10);
-        const origin = `${req.socket.encrypted ? 'https' : 'http'}://${req.headers.host}`;
-        const domain = String(req.headers.host || 'localhost');
+        const origin = originFor(req, trustProxy);
+        const domain = hostFor(req, trustProxy);
         const message = `${domain} wants you to sign in with your Ethereum account:\n${address}\n\nSign in to Airvana as ${role}. This request does not trigger a blockchain transaction or token transfer.\n\nURI: ${origin}\nVersion: 1\nChain ID: ${chainId}\nNonce: ${nonce}\nIssued At: ${issuedAt}\nExpiration Time: ${expiresAt}`;
         db.prepare(`INSERT INTO auth_challenges (id,address,chain_id,requested_role,message,nonce,expires_at,created_at) VALUES (?,?,?,?,?,?,?,?)`)
           .run(uid('challenge'), address.toLowerCase(), chainId, role, message, nonce, expiresAt, issuedAt);
@@ -499,6 +704,61 @@ export function createApp(options = {}) {
         });
         const session = createSession(db, user.id, cookieSecure);
         return sendJson(res, 200, { me: publicEconomyUser(db, user), expiresAt: session.expiresAt }, { 'Set-Cookie': session.cookie });
+      }
+
+      if (pathname === '/api/auth/email/challenge' && req.method === 'POST') {
+        const body = await readJson(req);
+        const email = normalizeEmail(body.email);
+        const code = issueLoginCode(db, { provider: 'email', identifier: email, purpose: 'login' });
+        // 本地适配器：无邮件服务商时验证码随响应返回；接入真实邮件服务后此字段必须移除
+        return sendJson(res, 200, { sent: true, expiresInMinutes: 10, delivery: allowDemo ? 'local_adapter_inline' : 'deferred_no_provider', ...(allowDemo ? { demoCode: code } : {}) });
+      }
+
+      if (pathname === '/api/auth/email/verify' && req.method === 'POST') {
+        const body = await readJson(req);
+        const email = normalizeEmail(body.email);
+        consumeLoginCode(db, { provider: 'email', identifier: email, purpose: 'login', code: body.code });
+        const { user, created } = transaction(db, () => resolveIdentityUser(db, { provider: 'email', identifier: email, ipHash: ctx.ipHash }));
+        audit(db, { actorUserId: user.id, action: 'auth.email_login', subjectType: 'user', subjectId: user.id, after: { email, created }, ipHash: ctx.ipHash });
+        const session = createSession(db, user.id, cookieSecure);
+        return sendJson(res, 200, { me: publicEconomyUser(db, user), created, expiresAt: session.expiresAt }, { 'Set-Cookie': session.cookie });
+      }
+
+      if (pathname === '/api/auth/google/local' && req.method === 'POST') {
+        if (!allowDemo) throw new HttpError(404, '本地 Google 适配器未启用；生产环境需接入真实 OAuth', 'not_found');
+        const body = await readJson(req);
+        const email = normalizeEmail(body.email || 'kai.chen@airvana-demo.local');
+        const { user, created } = transaction(db, () => resolveIdentityUser(db, { provider: 'google', identifier: email, displayName: body.displayName, ipHash: ctx.ipHash }));
+        audit(db, { actorUserId: user.id, action: 'auth.google_local_login', subjectType: 'user', subjectId: user.id, after: { email, created, adapter: 'local' }, ipHash: ctx.ipHash });
+        const session = createSession(db, user.id, cookieSecure);
+        return sendJson(res, 200, { me: publicEconomyUser(db, user), created, adapter: 'local', expiresAt: session.expiresAt }, { 'Set-Cookie': session.cookie });
+      }
+
+      if (pathname === '/api/account/identities/email/challenge' && req.method === 'POST') {
+        const user = requireUser(db, req);
+        const body = await readJson(req);
+        const email = normalizeEmail(body.email);
+        const owner = db.prepare(`SELECT user_id FROM login_identities WHERE provider='email' AND identifier=?`).get(email);
+        if (owner && owner.user_id !== user.id) throw new HttpError(409, '该邮箱已绑定到其他账号', 'identity_conflict');
+        const code = issueLoginCode(db, { provider: 'email', identifier: email, purpose: 'bind', userId: user.id });
+        return sendJson(res, 200, { sent: true, expiresInMinutes: 10, delivery: allowDemo ? 'local_adapter_inline' : 'deferred_no_provider', ...(allowDemo ? { demoCode: code } : {}) });
+      }
+
+      if (pathname === '/api/account/identities/email/verify' && req.method === 'POST') {
+        const user = requireUser(db, req);
+        const body = await readJson(req);
+        const email = normalizeEmail(body.email);
+        const challenge = consumeLoginCode(db, { provider: 'email', identifier: email, purpose: 'bind', code: body.code });
+        if (challenge.user_id && challenge.user_id !== user.id) throw new HttpError(403, '验证码不属于当前账号', 'forbidden');
+        const owner = db.prepare(`SELECT user_id FROM login_identities WHERE provider='email' AND identifier=?`).get(email);
+        if (owner && owner.user_id !== user.id) throw new HttpError(409, '该邮箱已绑定到其他账号', 'identity_conflict');
+        if (!owner) {
+          db.prepare(`INSERT INTO login_identities (id,user_id,provider,identifier,verified_at,created_at) VALUES (?,?,?,?,?,?)`)
+            .run(uid('identity'), user.id, 'email', email, isoNow(), isoNow());
+          audit(db, { actorUserId: user.id, action: 'auth.identity_bound', subjectType: 'user', subjectId: user.id, after: { provider: 'email', identifier: email }, ipHash: ctx.ipHash });
+        }
+        const identities = db.prepare('SELECT provider,identifier,verified_at FROM login_identities WHERE user_id=? ORDER BY created_at').all(user.id);
+        return sendJson(res, 200, { bound: true, identities });
       }
 
       if (pathname === '/api/auth/demo' && req.method === 'POST') {
@@ -552,6 +812,47 @@ export function createApp(options = {}) {
           if (AIP_REWARD_RULES[streakRule]) streakReward = awardAipRule(db, { userId: user.id, ruleKey: streakRule, eventKey: `login-streak:${user.id}:${day}`, metadata: { streak } });
         }
         return sendJson(res, base.idempotent ? 200 : 201, { idempotent: base.idempotent, streak, baseReward: AIP_REWARD_RULES.daily_login.amount, streakReward: streakReward ? AIP_REWARD_RULES[`streak_day_${Math.min(streak, 7)}`].amount : 0, economy: economySnapshot(db, user) });
+      }
+
+      if (pathname === '/api/games/coins' && req.method === 'GET') {
+        const user = requireUser(db, req);
+        return sendJson(res, 200, { ledgers: listGameCoinLedgers(db, user.id), boundary: GAME_COIN_BOUNDARY });
+      }
+
+      if (pathname === '/api/games/complete' && req.method === 'POST') {
+        const user = requireUser(db, req);
+        const body = await readJson(req);
+        const result = recordGameCompletion(db, {
+          userId: user.id,
+          playableId: body.playableId,
+          title: String(body.title || '').slice(0, 120),
+          success: body.success === true,
+          score: asInt(body.score ?? 0, 0, 1_000_000, '游戏得分'),
+          stage: String(body.stage || ''),
+          summary: String(body.summary || ''),
+        });
+        audit(db, { actorUserId: user.id, action: 'game.completion_recorded', subjectType: 'playable', subjectId: result.ledger.playableId, after: { success: result.success, coinsEarned: result.coinsEarned, earnedAip: result.earnedAip }, ipHash: ctx.ipHash });
+        return sendJson(res, result.earnedAip > 0 ? 201 : 200, { ...result, economy: economySnapshot(db, user) });
+      }
+
+      if (pathname === '/api/invites/summary' && req.method === 'GET') {
+        const user = requireUser(db, req);
+        return sendJson(res, 200, { invite: inviteSummary(db, user) });
+      }
+
+      if (pathname === '/api/invites/redeem' && req.method === 'POST') {
+        const user = requireUser(db, req);
+        const body = await readJson(req);
+        const result = redeemInvite(db, { inviteeUserId: user.id, inviteCode: body.inviteCode });
+        if (!result.idempotent) audit(db, { actorUserId: user.id, action: 'invite.redeemed', subjectType: 'invite_redemption', subjectId: result.redemptionId, ipHash: ctx.ipHash });
+        return sendJson(res, result.idempotent ? 200 : 201, result);
+      }
+
+      if (pathname === '/api/invites/qualify' && req.method === 'POST') {
+        const user = requireUser(db, req);
+        const result = qualifyInvite(db, { inviteeUserId: user.id });
+        if (!result.idempotent) audit(db, { actorUserId: user.id, action: 'invite.qualified', subjectType: 'invite_redemption', subjectId: result.redemptionId, after: { inviterUserId: result.inviterUserId, earnedAip: result.earnedAip }, ipHash: ctx.ipHash });
+        return sendJson(res, result.idempotent ? 200 : 201, result);
       }
 
       if (pathname === '/api/economy/creation/quote' && req.method === 'GET') {
@@ -761,8 +1062,8 @@ export function createApp(options = {}) {
         const nonce = randomToken(12);
         const issuedAt = isoNow();
         const expiresAt = plusMinutes(10);
-        const origin = `${req.socket.encrypted ? 'https' : 'http'}://${req.headers.host}`;
-        const domain = String(req.headers.host || 'localhost');
+        const origin = originFor(req, trustProxy);
+        const domain = hostFor(req, trustProxy);
         const message = `${domain} requests a wallet binding signature:\n${address}\n\nBind this wallet to Airvana account ${user.id}. This request does not trigger a blockchain transaction, token approval, or asset transfer.\n\nURI: ${origin}\nPurpose: bind-wallet\nChain ID: ${chainId}\nNonce: ${nonce}\nIssued At: ${issuedAt}\nExpiration Time: ${expiresAt}`;
         db.prepare(`INSERT INTO wallet_binding_challenges (id,user_id,address,chain_id,message,nonce,expires_at,created_at)
           VALUES (?,?,?,?,?,?,?,?)`).run(uid('wallet_challenge'), user.id, normalized, chainId, message, nonce, expiresAt, issuedAt);
@@ -902,13 +1203,22 @@ export function createApp(options = {}) {
         const contentId = uid('content');
         const taskId = uid('task');
         const usageType = body.creationMode === 'deep' ? 'deep_creation' : 'light_creation';
+        let campaignStamp = { campaignId: null, contractVersion: null };
+        if (body.campaignId) {
+          const stampVersion = String(body.contractVersion || '');
+          const rule = db.prepare(`SELECT * FROM campaign_economy_rules WHERE campaign_id=? AND contract_version=? AND status='approved'`).get(String(body.campaignId), stampVersion);
+          if (!rule) throw new HttpError(409, '引用的 Campaign Contract 尚未获批', 'campaign_rule_not_approved');
+          const eligible = db.prepare(`SELECT id FROM campaign_participants WHERE campaign_id=? AND creator_user_id=? AND status='eligible'`).get(String(body.campaignId), user.id);
+          if (!eligible) throw new HttpError(403, '需要先获得该 Campaign 的参与资格', 'not_eligible');
+          campaignStamp = { campaignId: String(body.campaignId), contractVersion: stampVersion };
+        }
         let usage;
         transaction(db, () => {
           usage = consumeCreation(db, { userId: user.id, usageType, units: 1, idempotencyKey: String(body.idempotencyKey || `task:${taskId}`), subjectType: 'content', subjectId: contentId, metadata: { taskId, contentType: body.contentType } });
-          db.prepare(`INSERT INTO contents (id,owner_user_id,agent_id,title,content_type,status,created_at,updated_at) VALUES (?,?,?,?,?,'generating',?,?)`)
-            .run(contentId, user.id, agent.id, clampText(body.title, 80, '内容标题'), body.contentType, now, now);
-          db.prepare(`INSERT INTO agent_tasks (id,owner_user_id,agent_id,content_id,task_type,status,progress,prompt,created_at,updated_at) VALUES (?,?,?,?,?,'queued',0,?,?,?)`)
-            .run(taskId, user.id, agent.id, contentId, 'generate', clampText(body.prompt, 3000, '创作目标'), now, now);
+          db.prepare(`INSERT INTO contents (id,owner_user_id,agent_id,title,content_type,status,campaign_id,contract_version,created_at,updated_at) VALUES (?,?,?,?,?,'generating',?,?,?,?)`)
+            .run(contentId, user.id, agent.id, clampText(body.title, 80, '内容标题'), body.contentType, campaignStamp.campaignId, campaignStamp.contractVersion, now, now);
+          db.prepare(`INSERT INTO agent_tasks (id,owner_user_id,agent_id,content_id,task_type,status,progress,prompt,campaign_id,contract_version,created_at,updated_at) VALUES (?,?,?,?,?,'queued',0,?,?,?,?,?)`)
+            .run(taskId, user.id, agent.id, contentId, 'generate', clampText(body.prompt, 3000, '创作目标'), campaignStamp.campaignId, campaignStamp.contractVersion, now, now);
           db.prepare(`INSERT INTO task_runtime (task_id,attempt,max_attempts) VALUES (?,0,3)`).run(taskId);
           audit(db, { actorUserId: user.id, action: 'agent.task_queued', subjectType: 'task', subjectId: taskId, after: { contentId, agentId: agent.id, contentType: body.contentType }, ipHash: ctx.ipHash });
         });
@@ -944,6 +1254,15 @@ export function createApp(options = {}) {
           audit(db, { actorUserId: user.id, action: `agent.task_${decision}d`, subjectType: 'task', subjectId: task.id, before: { status: task.status }, after: { note: body.note || '' }, ipHash: ctx.ipHash });
         });
         return sendJson(res, 200, { task: mapTask(db.prepare('SELECT * FROM agent_tasks WHERE id=?').get(task.id)), content: mapContent(db.prepare('SELECT * FROM contents WHERE id=?').get(content.id)) });
+      }
+
+      params = routeMatch(pathname, '/api/tasks/:id');
+      if (params && req.method === 'GET') {
+        const user = requireUser(db, req);
+        const task = db.prepare('SELECT * FROM agent_tasks WHERE id=?').get(params.id);
+        if (!task || task.owner_user_id !== user.id) throw new HttpError(404, '任务不存在', 'not_found');
+        const content = db.prepare('SELECT * FROM contents WHERE id=?').get(task.content_id);
+        return sendJson(res, 200, { task: mapTask(task), content: content ? mapContent(content) : null });
       }
 
       params = routeMatch(pathname, '/api/tasks/:id/cancel');
@@ -998,6 +1317,9 @@ export function createApp(options = {}) {
         if (content.status !== 'draft' || content.moderation_status !== 'passed' || content.current_version < 1) throw new HttpError(409, '只有审核通过且有正式版本的草稿可以发布', 'invalid_state');
         const artifact = db.prepare(`SELECT id FROM content_artifacts WHERE content_id=? AND version=? AND status='ready'`).get(content.id, content.current_version);
         if (!artifact) throw new HttpError(409, '当前版本成品构建未通过，不能发布', 'artifact_not_ready');
+        const blockedAsset = db.prepare(`SELECT a.id,a.name,a.status,a.expires_at FROM content_asset_links l JOIN assets a ON a.id=l.asset_id
+          WHERE l.content_id=? AND (a.status<>'authorized' OR (a.expires_at IS NOT NULL AND a.expires_at<=?)) LIMIT 1`).get(content.id, isoNow());
+        if (blockedAsset) throw new HttpError(409, `素材「${blockedAsset.name}」授权${blockedAsset.status === 'revoked' ? '已撤销' : '已到期或待确认'}，发布被阻止`, 'asset_authorization_required');
         const now = isoNow();
         transaction(db, () => {
           db.prepare(`UPDATE contents SET status='published',published_at=?,scheduled_at=NULL,updated_at=? WHERE id=?`).run(now, now, content.id);
@@ -1051,6 +1373,30 @@ export function createApp(options = {}) {
         return sendJson(res, 200, { content: mapContent(db.prepare('SELECT * FROM contents WHERE id=?').get(content.id)) });
       }
 
+      if (pathname === '/api/runtime/history' && req.method === 'GET') {
+        const user = requireUser(db, req);
+        const limit = asInt(url.searchParams.get('limit') || 50, 1, 100, '体验记录数量');
+        const rows = db.prepare(`SELECT s.id,s.content_id,s.status,s.reward_eligible,s.started_at,s.completed_at,s.created_at,
+          c.title,c.content_type,c.current_version
+          FROM runtime_sessions s JOIN contents c ON c.id=s.content_id
+          WHERE s.user_id=?
+          ORDER BY COALESCE(s.completed_at,s.started_at,s.created_at) DESC,s.created_at DESC
+          LIMIT ?`).all(user.id, limit);
+        return sendJson(res, 200, { history: rows.map(row => ({
+          id: row.id,
+          contentId: row.content_id,
+          title: row.title,
+          contentType: row.content_type,
+          version: Number(row.current_version || 1),
+          status: row.status,
+          rewardEligible: Boolean(row.reward_eligible),
+          startedAt: row.started_at,
+          completedAt: row.completed_at,
+          createdAt: row.created_at,
+          publicUrl: `/content/${row.content_id}`,
+        })) });
+      }
+
       if (pathname === '/api/runtime/sessions' && req.method === 'POST') {
         const user = requireUser(db, req);
         const body = await readJson(req);
@@ -1069,7 +1415,17 @@ export function createApp(options = {}) {
           (id,token_hash,user_id,content_id,device_hash,ip_hash,status,reward_eligible,next_sequence,expires_at,created_at)
           VALUES (?,?,?,?,?,?,'created',?,1,?,?)`)
           .run(id, sha256(token), user.id, content.id, ctx.deviceHash, ctx.ipHash, rewardEligible ? 1 : 0, plusMinutes(30), now);
-        if (body.campaignId) {
+        if (body.linkId) {
+          const link = db.prepare('SELECT * FROM tracking_links WHERE id=?').get(String(body.linkId));
+          const campaign = link ? db.prepare(`SELECT * FROM campaigns WHERE id=? AND status='active' AND starts_at<=? AND ends_at>=?`).get(link.campaign_id, now, now) : null;
+          const participant = campaign ? db.prepare(`SELECT id FROM campaign_participants WHERE campaign_id=? AND creator_user_id=? AND status='eligible'`).get(campaign.id, link.kol_user_id) : null;
+          if (link && link.content_id === content.id && campaign && participant) {
+            const activeRule = db.prepare(`SELECT contract_version FROM campaign_economy_rules WHERE campaign_id=? AND status='approved' ORDER BY updated_at DESC LIMIT 1`).get(campaign.id);
+            db.prepare('UPDATE runtime_sessions SET campaign_id=?,contract_version=? WHERE id=?').run(campaign.id, activeRule ? activeRule.contract_version : null, id);
+            db.prepare(`INSERT INTO attribution_touches (id,session_id,user_id,content_id,campaign_id,creator_user_id,channel_code,event_type,link_id,created_at) VALUES (?,?,?,?,?,?,?,'impression',?,?)`)
+              .run(uid('touch'), id, user.id, content.id, campaign.id, link.kol_user_id, link.channel_code, link.id, now);
+          }
+        } else if (body.campaignId) {
           const campaign = db.prepare(`SELECT * FROM campaigns WHERE id=? AND status='active' AND starts_at<=? AND ends_at>=?`).get(String(body.campaignId), now, now);
           const ref = String(body.ref || body.creatorUserId || '');
           const creator = ref ? db.prepare(`SELECT * FROM users WHERE id=? AND role='creator'`).get(ref) : null;
@@ -1133,6 +1489,586 @@ export function createApp(options = {}) {
         return sendJson(res, 201, { accepted: true, sequence, nextSequence: sequence + 1, points, rewardStatus, balance: pointSummary(db, user.id) });
       }
 
+      params = routeMatch(pathname, '/api/contents/:id/comments');
+      if (params && req.method === 'GET') {
+        requireUser(db, req);
+        const rows = db.prepare(`SELECT c.id,c.body,c.created_at,u.display_name author_name,c.user_id
+          FROM content_comments c JOIN users u ON u.id=c.user_id
+          WHERE c.content_id=? AND c.status='visible' ORDER BY c.created_at DESC LIMIT 100`).all(params.id);
+        return sendJson(res, 200, { comments: rows.map(row => ({ id: row.id, body: row.body, authorName: row.author_name, authorUserId: row.user_id, createdAt: row.created_at })) });
+      }
+      if (params && req.method === 'POST') {
+        const user = requireUser(db, req);
+        const body = await readJson(req);
+        const text = clampText(body.body, 300, '评论内容');
+        if (!text.trim()) throw new HttpError(400, '评论内容不能为空', 'validation_error');
+        const content = db.prepare('SELECT * FROM contents WHERE id=?').get(params.id);
+        if (!content || content.status !== 'published') throw new HttpError(409, '只能评论已发布内容', 'content_not_published');
+        const since = new Date(Date.now() - 60_000).toISOString();
+        const recent = Number(db.prepare('SELECT COUNT(*) n FROM content_comments WHERE user_id=? AND created_at>?').get(user.id, since)?.n || 0);
+        if (recent >= 10) throw new HttpError(429, '评论频率过高，请稍后再试', 'rate_limited');
+        const id = uid('comment');
+        const now = isoNow();
+        db.prepare(`INSERT INTO content_comments (id,content_id,user_id,body,status,created_at,updated_at) VALUES (?,?,?,?,'visible',?,?)`)
+          .run(id, content.id, user.id, text.trim(), now, now);
+        if (content.owner_user_id !== user.id) notify(db, content.owner_user_id, 'engagement', '收到新评论', `${user.display_name}：${text.trim().slice(0, 60)}`, 'content', content.id);
+        audit(db, { actorUserId: user.id, action: 'content.comment_created', subjectType: 'content', subjectId: content.id, after: { commentId: id }, ipHash: ctx.ipHash });
+        return sendJson(res, 201, { comment: { id, body: text.trim(), authorName: user.display_name, authorUserId: user.id, createdAt: now } });
+      }
+
+      params = routeMatch(pathname, '/api/comments/:id');
+      if (params && req.method === 'DELETE') {
+        const user = requireUser(db, req);
+        const comment = db.prepare('SELECT * FROM content_comments WHERE id=?').get(params.id);
+        if (!comment || comment.status !== 'visible') throw new HttpError(404, '评论不存在', 'not_found');
+        if (comment.user_id !== user.id && user.role !== 'admin') throw new HttpError(403, '只能删除自己的评论', 'forbidden');
+        db.prepare(`UPDATE content_comments SET status='deleted',updated_at=? WHERE id=?`).run(isoNow(), params.id);
+        audit(db, { actorUserId: user.id, action: 'content.comment_deleted', subjectType: 'content', subjectId: comment.content_id, after: { commentId: params.id }, ipHash: ctx.ipHash });
+        return sendJson(res, 200, { deleted: true });
+      }
+
+      if (pathname === '/api/follows' && req.method === 'POST') {
+        const user = requireUser(db, req);
+        const body = await readJson(req);
+        let followee = null;
+        if (body.contentId) {
+          const content = db.prepare('SELECT owner_user_id FROM contents WHERE id=?').get(String(body.contentId));
+          if (!content) throw new HttpError(404, '内容不存在', 'not_found');
+          followee = db.prepare('SELECT * FROM users WHERE id=?').get(content.owner_user_id);
+        } else {
+          followee = db.prepare('SELECT * FROM users WHERE id=?').get(String(body.userId || ''));
+        }
+        if (!followee) throw new HttpError(404, '关注对象不存在', 'not_found');
+        if (followee.id === user.id) throw new HttpError(409, '不能关注自己', 'self_follow');
+        const existing = db.prepare('SELECT id FROM user_follows WHERE follower_user_id=? AND followee_user_id=?').get(user.id, followee.id);
+        if (existing) return sendJson(res, 200, { idempotent: true, followeeUserId: followee.id, followeeName: followee.display_name });
+        db.prepare(`INSERT INTO user_follows (id,follower_user_id,followee_user_id,created_at) VALUES (?,?,?,?)`)
+          .run(uid('follow'), user.id, followee.id, isoNow());
+        notify(db, followee.id, 'engagement', '新粉丝', `${user.display_name} 关注了你`, 'user', user.id);
+        audit(db, { actorUserId: user.id, action: 'social.followed', subjectType: 'user', subjectId: followee.id, ipHash: ctx.ipHash });
+        return sendJson(res, 201, { followeeUserId: followee.id, followeeName: followee.display_name });
+      }
+
+      if (pathname === '/api/follows/remove' && req.method === 'POST') {
+        const user = requireUser(db, req);
+        const body = await readJson(req);
+        let followeeId = String(body.userId || '');
+        if (body.contentId) {
+          const content = db.prepare('SELECT owner_user_id FROM contents WHERE id=?').get(String(body.contentId));
+          if (content) followeeId = content.owner_user_id;
+        }
+        const removed = db.prepare('DELETE FROM user_follows WHERE follower_user_id=? AND followee_user_id=?').run(user.id, followeeId);
+        if (removed.changes) audit(db, { actorUserId: user.id, action: 'social.unfollowed', subjectType: 'user', subjectId: followeeId, ipHash: ctx.ipHash });
+        return sendJson(res, 200, { removed: removed.changes > 0 });
+      }
+
+      if (pathname === '/api/assets' && req.method === 'GET') {
+        const user = requireUser(db, req);
+        const rows = db.prepare('SELECT * FROM assets WHERE owner_user_id=? ORDER BY created_at DESC LIMIT 100').all(user.id);
+        return sendJson(res, 200, { assets: rows.map(row => ({ id: row.id, name: row.name, kind: row.kind, checksum: row.checksum, source: row.source, licenseType: row.license_type, licenseRef: row.license_ref, status: row.status, expiresAt: row.expires_at, createdAt: row.created_at })) });
+      }
+      if (pathname === '/api/assets' && req.method === 'POST') {
+        const user = requireUser(db, req);
+        const body = await readJson(req);
+        const kind = ['image', 'video', 'audio', 'font', 'other'].includes(body.kind) ? body.kind : 'other';
+        const licenseType = ['original', 'licensed', 'brand_supplied', 'cc0'].includes(body.licenseType) ? body.licenseType : null;
+        if (!licenseType) throw new HttpError(400, '素材必须声明授权类型（original/licensed/brand_supplied/cc0）', 'license_type_required');
+        const checksum = String(body.checksum || '').trim();
+        if (checksum.length < 8) throw new HttpError(400, '素材必须提供内容校验和（checksum）', 'checksum_required');
+        if ((licenseType === 'licensed' || licenseType === 'brand_supplied') && !String(body.licenseRef || '').trim()) throw new HttpError(400, '第三方或品牌素材必须提供授权凭证引用', 'license_ref_required');
+        const id = uid('asset');
+        const now = isoNow();
+        db.prepare(`INSERT INTO assets (id,owner_user_id,name,kind,checksum,source,license_type,license_ref,status,expires_at,created_at,updated_at)
+          VALUES (?,?,?,?,?,?,?,?, 'authorized',?,?,?)`)
+          .run(id, user.id, clampText(body.name, 120, '素材名称'), kind, checksum.slice(0, 128), String(body.source || '').slice(0, 240) || null, licenseType, String(body.licenseRef || '').slice(0, 240) || null, body.expiresAt ? String(body.expiresAt) : null, now, now);
+        audit(db, { actorUserId: user.id, action: 'asset.registered', subjectType: 'asset', subjectId: id, after: { kind, licenseType }, ipHash: ctx.ipHash });
+        return sendJson(res, 201, { asset: db.prepare('SELECT * FROM assets WHERE id=?').get(id) });
+      }
+
+      params = routeMatch(pathname, '/api/assets/:id/revoke');
+      if (params && req.method === 'POST') {
+        const user = requireUser(db, req);
+        const asset = db.prepare('SELECT * FROM assets WHERE id=?').get(params.id);
+        if (!asset) throw new HttpError(404, '素材不存在', 'not_found');
+        if (asset.owner_user_id !== user.id && user.role !== 'admin') throw new HttpError(403, '只能撤销自己的素材授权', 'forbidden');
+        db.prepare(`UPDATE assets SET status='revoked',updated_at=? WHERE id=?`).run(isoNow(), params.id);
+        const affected = db.prepare(`SELECT DISTINCT content_id FROM content_asset_links WHERE asset_id=?`).all(params.id).map(row => row.content_id);
+        audit(db, { actorUserId: user.id, action: 'asset.revoked', subjectType: 'asset', subjectId: params.id, after: { affectedContents: affected }, ipHash: ctx.ipHash });
+        return sendJson(res, 200, { revoked: true, affectedContents: affected });
+      }
+
+      params = routeMatch(pathname, '/api/contents/:id/assets');
+      if (params && req.method === 'GET') {
+        const user = requireUser(db, req);
+        requireOwnedContent(db, params.id, user);
+        const rows = db.prepare(`SELECT l.usage,a.* FROM content_asset_links l JOIN assets a ON a.id=l.asset_id WHERE l.content_id=?`).all(params.id);
+        return sendJson(res, 200, { assets: rows.map(row => ({ id: row.id, name: row.name, kind: row.kind, usage: row.usage, status: row.status, licenseType: row.license_type, expiresAt: row.expires_at })) });
+      }
+      if (params && req.method === 'POST') {
+        const user = requireUser(db, req);
+        const content = requireOwnedContent(db, params.id, user);
+        const body = await readJson(req);
+        const asset = db.prepare('SELECT * FROM assets WHERE id=?').get(String(body.assetId || ''));
+        if (!asset || asset.owner_user_id !== user.id) throw new HttpError(404, '素材不存在', 'not_found');
+        if (asset.status !== 'authorized') throw new HttpError(409, '素材授权已撤销或待确认，不能挂载', 'asset_not_authorized');
+        if (asset.expires_at && asset.expires_at <= isoNow()) throw new HttpError(409, '素材授权已到期', 'asset_expired');
+        db.prepare(`INSERT INTO content_asset_links (id,content_id,asset_id,usage,created_at) VALUES (?,?,?,?,?)
+          ON CONFLICT(content_id,asset_id) DO UPDATE SET usage=excluded.usage`)
+          .run(uid('asset_link'), content.id, asset.id, clampText(body.usage || 'general', 60, '用途'), isoNow());
+        return sendJson(res, 200, { attached: true });
+      }
+
+      params = routeMatch(pathname, '/api/contents/:id/remix');
+      if (params && req.method === 'POST') {
+        const user = requireUser(db, req, ['creator']);
+        const source = db.prepare('SELECT * FROM contents WHERE id=?').get(params.id);
+        if (!source || source.status !== 'published') throw new HttpError(409, '只有已发布内容可以 Remix', 'content_not_published');
+        const sourceVersion = db.prepare('SELECT * FROM content_versions WHERE content_id=? AND version=?').get(source.id, source.current_version);
+        if (!sourceVersion) throw new HttpError(409, '来源版本不存在', 'source_version_missing');
+        const payload = safeJson(sourceVersion.payload_json);
+        payload.remixNote = `Remix 自「${source.title}」v${source.current_version}；商业字段已重置，需重新绑定 Contract 与授权。`;
+        const moderation = await ai.moderate({ title: `Remix：${source.title}`, prompt: payload.summary || '', payload });
+        const contentId = uid('content');
+        const now = isoNow();
+        transaction(db, () => {
+          db.prepare(`INSERT INTO contents (id,owner_user_id,title,content_type,status,moderation_status,moderation_json,payload_json,current_version,remix_of_content_id,remix_of_version,created_at,updated_at)
+            VALUES (?,?,?,?,?,?,?,?,1,?,?,?,?)`)
+            .run(contentId, user.id, clampText(`Remix：${source.title}`, 100, '标题'), source.content_type, moderation.passed ? 'draft' : 'review_pending', moderation.passed ? 'passed' : 'blocked', jsonString(moderation), jsonString(payload), source.id, String(source.current_version), now, now);
+          db.prepare(`INSERT INTO content_versions (id,content_id,version,title,payload_json,created_by,campaign_id,contract_version,created_at) VALUES (?,?,1,?,?,?,NULL,NULL,?)`)
+            .run(uid('ver'), contentId, `Remix：${source.title}`, jsonString(payload), user.id, now);
+          const content = db.prepare('SELECT * FROM contents WHERE id=?').get(contentId);
+          saveArtifact(db, { content, payload, version: 1 });
+          audit(db, { actorUserId: user.id, action: 'content.remixed', subjectType: 'content', subjectId: contentId, after: { sourceContentId: source.id, sourceVersion: source.current_version }, ipHash: ctx.ipHash });
+        });
+        notify(db, source.owner_user_id, 'engagement', '你的作品被 Remix', `${user.display_name} 基于「${source.title}」创建了新草稿`, 'content', source.id);
+        return sendJson(res, 201, { content: mapContent(db.prepare('SELECT * FROM contents WHERE id=?').get(contentId)), remixOf: { contentId: source.id, version: source.current_version } });
+      }
+
+      if (pathname === '/api/ai-twin' && req.method === 'GET') {
+        const user = requireUser(db, req);
+        const twin = db.prepare('SELECT * FROM ai_twins WHERE owner_user_id=?').get(user.id);
+        return sendJson(res, 200, { twin: twin ? { id: twin.id, displayName: twin.display_name, persona: safeJson(twin.persona_json), status: twin.status, version: twin.version, voiceConsentAt: twin.voice_consent_at, likenessConsentAt: twin.likeness_consent_at, updatedAt: twin.updated_at } : null });
+      }
+      if (pathname === '/api/ai-twin' && req.method === 'POST') {
+        const user = requireUser(db, req);
+        const body = await readJson(req);
+        const displayName = clampText(body.displayName || `${user.display_name} 的 AI 分身`, 60, '分身名称');
+        const persona = body.persona && typeof body.persona === 'object' ? body.persona : {};
+        if (JSON.stringify(persona).length > 4000) throw new HttpError(413, '人设配置过大', 'payload_too_large');
+        const now = isoNow();
+        const existing = db.prepare('SELECT * FROM ai_twins WHERE owner_user_id=?').get(user.id);
+        if (existing) {
+          db.prepare(`UPDATE ai_twins SET display_name=?,persona_json=?,voice_consent_at=?,likeness_consent_at=?,status='active',version=version+1,updated_at=? WHERE id=?`)
+            .run(displayName, jsonString(persona), body.voiceConsent === true ? (existing.voice_consent_at || now) : null, body.likenessConsent === true ? (existing.likeness_consent_at || now) : null, now, existing.id);
+        } else {
+          db.prepare(`INSERT INTO ai_twins (id,owner_user_id,display_name,persona_json,voice_consent_at,likeness_consent_at,status,version,created_at,updated_at)
+            VALUES (?,?,?,?,?,?,'active',1,?,?)`)
+            .run(uid('twin'), user.id, displayName, jsonString(persona), body.voiceConsent === true ? now : null, body.likenessConsent === true ? now : null, now, now);
+        }
+        const twin = db.prepare('SELECT * FROM ai_twins WHERE owner_user_id=?').get(user.id);
+        audit(db, { actorUserId: user.id, action: existing ? 'ai_twin.updated' : 'ai_twin.created', subjectType: 'ai_twin', subjectId: twin.id, after: { version: twin.version, voiceConsent: !!twin.voice_consent_at, likenessConsent: !!twin.likeness_consent_at }, ipHash: ctx.ipHash });
+        return sendJson(res, existing ? 200 : 201, { twin: { id: twin.id, displayName: twin.display_name, status: twin.status, version: twin.version } });
+      }
+      params = routeMatch(pathname, '/api/ai-twin/:action');
+      if (params && req.method === 'POST' && ['pause', 'resume'].includes(params.action)) {
+        const user = requireUser(db, req);
+        const twin = db.prepare('SELECT * FROM ai_twins WHERE owner_user_id=?').get(user.id);
+        if (!twin) throw new HttpError(404, 'AI 分身不存在', 'not_found');
+        const next = params.action === 'pause' ? 'paused' : 'active';
+        db.prepare('UPDATE ai_twins SET status=?,updated_at=? WHERE id=?').run(next, isoNow(), twin.id);
+        audit(db, { actorUserId: user.id, action: `ai_twin.${params.action}`, subjectType: 'ai_twin', subjectId: twin.id, ipHash: ctx.ipHash });
+        return sendJson(res, 200, { status: next });
+      }
+
+      if (pathname === '/api/policies/minor-mode' && req.method === 'GET') {
+        requireUser(db, req);
+        const stored = safeJson(db.prepare(`SELECT value_json FROM app_settings WHERE setting_key='minor_mode_policy'`).get()?.value_json, null);
+        return sendJson(res, 200, { policy: stored || { enabled: false, note: '未成年人模式策略未配置；启用前不提供未成年人专属限制。' } });
+      }
+      if (pathname === '/api/admin/policies/minor-mode' && req.method === 'POST') {
+        const user = requireUser(db, req, ['admin']);
+        const body = await readJson(req);
+        const policy = {
+          enabled: body.enabled === true,
+          dailyMinutes: Math.max(0, Math.min(240, Number(body.dailyMinutes || 0))),
+          curfew: String(body.curfew || '22:00-08:00').slice(0, 20),
+          paymentsBlocked: body.paymentsBlocked !== false,
+          socialRestricted: body.socialRestricted !== false,
+          updatedAt: isoNow(), updatedBy: user.id,
+        };
+        db.prepare(`INSERT INTO app_settings (setting_key,value_json,updated_at) VALUES ('minor_mode_policy',?,?)
+          ON CONFLICT(setting_key) DO UPDATE SET value_json=excluded.value_json,updated_at=excluded.updated_at`)
+          .run(jsonString(policy), isoNow());
+        audit(db, { actorUserId: user.id, action: 'policy.minor_mode_updated', subjectType: 'policy', subjectId: 'minor_mode_policy', after: policy, ipHash: ctx.ipHash });
+        return sendJson(res, 200, { policy });
+      }
+
+      // ===== AI 分身场景隔离 =====
+      if (pathname === '/api/ai-twin/scenes' && req.method === 'GET') {
+        const user = requireUser(db, req);
+        const twin = db.prepare('SELECT * FROM ai_twins WHERE owner_user_id=?').get(user.id);
+        if (!twin) return sendJson(res, 200, { scenes: [] });
+        const rows = db.prepare('SELECT * FROM ai_twin_scenes WHERE twin_id=? ORDER BY created_at').all(twin.id);
+        return sendJson(res, 200, { scenes: rows.map(row => ({ id: row.id, name: row.name, kind: row.kind, campaignId: row.campaign_id, contractVersion: row.contract_version, locale: row.locale, knowledge: safeJson(row.knowledge_json), status: row.status, version: row.version, updatedAt: row.updated_at })) });
+      }
+      if (pathname === '/api/ai-twin/scenes' && req.method === 'POST') {
+        const user = requireUser(db, req);
+        const twin = db.prepare('SELECT * FROM ai_twins WHERE owner_user_id=?').get(user.id);
+        if (!twin) throw new HttpError(409, '请先创建 AI 分身', 'twin_required');
+        const body = await readJson(req);
+        const name = clampText(body.name, 60, '场景名称');
+        if (!name.trim()) throw new HttpError(400, '场景名称不能为空', 'validation_error');
+        const kind = body.campaignId ? 'campaign' : 'general';
+        let campaignId = null;
+        let contractVersion = null;
+        if (kind === 'campaign') {
+          const rule = db.prepare(`SELECT * FROM campaign_economy_rules WHERE campaign_id=? AND contract_version=? AND status='approved'`).get(String(body.campaignId), String(body.contractVersion || ''));
+          if (!rule) throw new HttpError(409, 'Campaign 场景必须绑定获批 Contract 版本', 'campaign_rule_not_approved');
+          const eligible = db.prepare(`SELECT id FROM campaign_participants WHERE campaign_id=? AND creator_user_id=? AND status='eligible'`).get(String(body.campaignId), user.id);
+          if (!eligible) throw new HttpError(403, '需要先获得该 Campaign 的参与资格', 'not_eligible');
+          campaignId = String(body.campaignId);
+          contractVersion = String(body.contractVersion);
+        }
+        const knowledge = body.knowledge && typeof body.knowledge === 'object' ? body.knowledge : {};
+        if (JSON.stringify(knowledge).length > 8000) throw new HttpError(413, '场景知识过大', 'payload_too_large');
+        const existing = db.prepare('SELECT * FROM ai_twin_scenes WHERE twin_id=? AND name=?').get(twin.id, name.trim());
+        const now = isoNow();
+        if (existing) {
+          db.prepare(`UPDATE ai_twin_scenes SET kind=?,campaign_id=?,contract_version=?,locale=?,knowledge_json=?,version=version+1,updated_at=? WHERE id=?`)
+            .run(kind, campaignId, contractVersion, String(body.locale || 'zh-CN').slice(0, 12), jsonString(knowledge), now, existing.id);
+          return sendJson(res, 200, { scene: db.prepare('SELECT * FROM ai_twin_scenes WHERE id=?').get(existing.id), updated: true });
+        }
+        const id = uid('scene');
+        db.prepare(`INSERT INTO ai_twin_scenes (id,twin_id,name,kind,campaign_id,contract_version,locale,knowledge_json,status,version,created_at,updated_at)
+          VALUES (?,?,?,?,?,?,?,?, 'active',1,?,?)`)
+          .run(id, twin.id, name.trim(), kind, campaignId, contractVersion, String(body.locale || 'zh-CN').slice(0, 12), jsonString(knowledge), now, now);
+        audit(db, { actorUserId: user.id, action: 'ai_twin.scene_created', subjectType: 'ai_twin_scene', subjectId: id, after: { kind, campaignId }, ipHash: ctx.ipHash });
+        return sendJson(res, 201, { scene: db.prepare('SELECT * FROM ai_twin_scenes WHERE id=?').get(id) });
+      }
+      params = routeMatch(pathname, '/api/ai-twin/scenes/:id/knowledge');
+      if (params && req.method === 'GET') {
+        const user = requireUser(db, req);
+        const scene = db.prepare(`SELECT s.* FROM ai_twin_scenes s JOIN ai_twins t ON t.id=s.twin_id WHERE s.id=? AND t.owner_user_id=?`).get(params.id, user.id);
+        if (!scene) throw new HttpError(404, '场景不存在', 'not_found');
+        // 知识隔离：只返回该场景自身知识，绝不跨场景合并
+        return sendJson(res, 200, { sceneId: scene.id, kind: scene.kind, campaignId: scene.campaign_id, contractVersion: scene.contract_version, locale: scene.locale, knowledge: safeJson(scene.knowledge_json) });
+      }
+
+      // ===== Contract 签署与变更单 =====
+      params = routeMatch(pathname, '/api/campaigns/:id/contract-signatures');
+      if (params && req.method === 'GET') {
+        requireUser(db, req);
+        const rows = db.prepare(`SELECT s.*,u.display_name signer_name FROM contract_signatures s JOIN users u ON u.id=s.signer_user_id WHERE s.campaign_id=? ORDER BY s.signed_at`).all(params.id);
+        return sendJson(res, 200, { signatures: rows.map(row => ({ id: row.id, contractVersion: row.contract_version, signerName: row.signer_name, signerRole: row.signer_role, statement: row.statement, signedAt: row.signed_at })) });
+      }
+      if (params && req.method === 'POST') {
+        const user = requireUser(db, req);
+        const body = await readJson(req);
+        const contractVersion = String(body.contractVersion || '');
+        const rule = db.prepare(`SELECT * FROM campaign_economy_rules WHERE campaign_id=? AND contract_version=?`).get(params.id, contractVersion);
+        if (!rule) throw new HttpError(404, 'Contract 版本不存在', 'not_found');
+        const campaign = db.prepare('SELECT * FROM campaigns WHERE id=?').get(params.id);
+        const signerRole = user.role === 'admin' ? 'platform' : campaign.brand_user_id === user.id ? 'brand' : 'creator';
+        if (signerRole === 'creator') {
+          const eligible = db.prepare(`SELECT id FROM campaign_participants WHERE campaign_id=? AND creator_user_id=? AND status='eligible'`).get(params.id, user.id);
+          if (!eligible) throw new HttpError(403, '需要先获得参与资格才能签署', 'not_eligible');
+        }
+        const existing = db.prepare('SELECT * FROM contract_signatures WHERE campaign_id=? AND contract_version=? AND signer_user_id=?').get(params.id, contractVersion, user.id);
+        if (existing) return sendJson(res, 200, { signature: existing, idempotent: true });
+        const id = uid('signature');
+        const statement = clampText(body.statement || `本人以 ${signerRole} 身份确认接受 Contract ${contractVersion} 的锁定字段与结算规则。`, 500, '签署声明');
+        db.prepare(`INSERT INTO contract_signatures (id,campaign_id,contract_version,signer_user_id,signer_role,statement,signed_at) VALUES (?,?,?,?,?,?,?)`)
+          .run(id, params.id, contractVersion, user.id, signerRole, statement, isoNow());
+        audit(db, { actorUserId: user.id, action: 'contract.signed', subjectType: 'campaign', subjectId: params.id, after: { contractVersion, signerRole }, ipHash: ctx.ipHash });
+        return sendJson(res, 201, { signature: db.prepare('SELECT * FROM contract_signatures WHERE id=?').get(id) });
+      }
+
+      params = routeMatch(pathname, '/api/campaigns/:id/contract-change-orders');
+      if (params && req.method === 'GET') {
+        requireUser(db, req);
+        const rows = db.prepare(`SELECT c.*,u.display_name requester_name FROM contract_change_orders c JOIN users u ON u.id=c.requested_by WHERE c.campaign_id=? ORDER BY c.created_at DESC`).all(params.id);
+        return sendJson(res, 200, { changeOrders: rows.map(row => ({ id: row.id, fromVersion: row.from_version, toVersion: row.to_version, requesterName: row.requester_name, changedFields: safeJson(row.changed_fields_json, []), reason: row.reason, status: row.status, reviewNote: row.review_note, createdAt: row.created_at })) });
+      }
+      if (params && req.method === 'POST') {
+        const user = requireUser(db, req, ['brand']);
+        const body = await readJson(req);
+        const campaign = db.prepare('SELECT * FROM campaigns WHERE id=? AND brand_user_id=?').get(params.id, user.id);
+        if (!campaign) throw new HttpError(404, 'Campaign 不存在', 'not_found');
+        const fromVersion = String(body.fromVersion || '');
+        const current = db.prepare(`SELECT * FROM campaign_economy_rules WHERE campaign_id=? AND contract_version=? AND status='approved'`).get(params.id, fromVersion);
+        if (!current) throw new HttpError(409, '只能对已获批版本发起变更', 'source_version_not_approved');
+        const changedFields = Array.isArray(body.changedFields) ? body.changedFields.slice(0, 20).map(String) : [];
+        if (!changedFields.length) throw new HttpError(400, '必须声明变更字段', 'changed_fields_required');
+        const reason = clampText(body.reason, 800, '变更原因');
+        if (reason.trim().length < 8) throw new HttpError(400, '请填写至少 8 个字符的变更原因', 'reason_required');
+        const id = uid('change_order');
+        const now = isoNow();
+        db.prepare(`INSERT INTO contract_change_orders (id,campaign_id,from_version,to_version,requested_by,changed_fields_json,reason,status,created_at,updated_at)
+          VALUES (?,?,?,?,?,?,?, 'pending',?,?)`)
+          .run(id, params.id, fromVersion, clampText(body.toVersion, 60, '目标版本'), user.id, jsonString(changedFields), reason.trim(), now, now);
+        audit(db, { actorUserId: user.id, action: 'contract.change_order_submitted', subjectType: 'campaign', subjectId: params.id, after: { fromVersion, toVersion: body.toVersion, changedFields }, ipHash: ctx.ipHash });
+        return sendJson(res, 201, { changeOrder: db.prepare('SELECT * FROM contract_change_orders WHERE id=?').get(id) });
+      }
+
+      params = routeMatch(pathname, '/api/admin/contract-change-orders/:id/review');
+      if (params && req.method === 'POST') {
+        const user = requireUser(db, req, ['admin']);
+        const body = await readJson(req);
+        const order = db.prepare('SELECT * FROM contract_change_orders WHERE id=?').get(params.id);
+        if (!order) throw new HttpError(404, '变更单不存在', 'not_found');
+        if (order.status !== 'pending') throw new HttpError(409, '变更单已处理', 'invalid_state');
+        const decision = body.decision === 'approve' ? 'approved' : body.decision === 'reject' ? 'rejected' : null;
+        if (!decision) throw new HttpError(400, '变更决定无效', 'validation_error');
+        const now = isoNow();
+        db.prepare(`UPDATE contract_change_orders SET status=?,review_note=?,reviewed_by=?,updated_at=? WHERE id=?`)
+          .run(decision, clampText(body.note || '', 800, '复核意见'), user.id, now, params.id);
+        // 批准变更不自动改写旧版本：旧版本只读保留，新版本需品牌另行提交并审批
+        audit(db, { actorUserId: user.id, action: `contract.change_order_${decision}`, subjectType: 'campaign', subjectId: order.campaign_id, after: { changeOrderId: params.id, toVersion: order.to_version }, ipHash: ctx.ipHash });
+        return sendJson(res, 200, { changeOrder: db.prepare('SELECT * FROM contract_change_orders WHERE id=?').get(params.id) });
+      }
+
+      // ===== 受控实验与灰度 =====
+      params = routeMatch(pathname, '/api/contents/:id/experiments');
+      if (params && req.method === 'GET') {
+        const user = requireUser(db, req);
+        requireOwnedContent(db, params.id, user);
+        const rows = db.prepare('SELECT * FROM experiments WHERE content_id=? ORDER BY created_at DESC').all(params.id);
+        return sendJson(res, 200, { experiments: rows.map(row => ({
+          id: row.id, name: row.name, hypothesis: row.hypothesis, variantField: row.variant_field,
+          controlValue: row.control_value, variantValue: row.variant_value, rolloutPercent: row.rollout_percent,
+          status: row.status, createdAt: row.created_at,
+          assignmentCounts: assignmentCounts(db, row.id),
+          assignments: Number(db.prepare('SELECT COUNT(*) n FROM experiment_assignments WHERE experiment_id=?').get(row.id)?.n || 0),
+        })), runtimeVariantAware: artifactVariantAware(db, params.id) });
+      }
+      if (params && req.method === 'POST') {
+        const user = requireUser(db, req);
+        const content = requireOwnedContent(db, params.id, user);
+        const body = await readJson(req);
+        // 只允许在 Agent 可优化字段内做实验：锁定字段不可进入灰度
+        const field = assertOptimizable(String(body.variantField || ''));
+        const rollout = Math.max(0, Math.min(100, Number(body.rolloutPercent ?? 10)));
+        const id = uid('experiment');
+        const now = isoNow();
+        db.prepare(`INSERT INTO experiments (id,content_id,name,hypothesis,variant_field,control_value,variant_value,rollout_percent,status,created_by,created_at,updated_at)
+          VALUES (?,?,?,?,?,?,?,?, 'draft',?,?,?)`)
+          .run(id, content.id, clampText(body.name, 80, '实验名称'), clampText(body.hypothesis, 400, '实验假设'), field,
+            clampText(body.controlValue, 200, '对照值'), clampText(body.variantValue, 200, '实验值'), rollout, user.id, now, now);
+        audit(db, { actorUserId: user.id, action: 'experiment.created', subjectType: 'content', subjectId: content.id, after: { experimentId: id, field, rollout }, ipHash: ctx.ipHash });
+        return sendJson(res, 201, { experiment: db.prepare('SELECT * FROM experiments WHERE id=?').get(id) });
+      }
+
+      params = routeMatch(pathname, '/api/experiments/:id/status');
+      if (params && req.method === 'POST') {
+        const user = requireUser(db, req);
+        const experiment = db.prepare('SELECT * FROM experiments WHERE id=?').get(params.id);
+        if (!experiment) throw new HttpError(404, '实验不存在', 'not_found');
+        requireOwnedContent(db, experiment.content_id, user);
+        const body = await readJson(req);
+        const next = ['running', 'paused', 'rolled_back', 'completed'].includes(body.status) ? body.status : null;
+        if (!next) throw new HttpError(400, '实验状态无效', 'validation_error');
+        const allowed = { draft: ['running'], running: ['paused', 'rolled_back', 'completed'], paused: ['running', 'rolled_back'], rolled_back: [], completed: [] };
+        if (!allowed[experiment.status].includes(next)) throw new HttpError(409, `实验状态不能从 ${experiment.status} 变为 ${next}`, 'invalid_state');
+        db.prepare('UPDATE experiments SET status=?,updated_at=? WHERE id=?').run(next, isoNow(), params.id);
+        audit(db, { actorUserId: user.id, action: `experiment.${next}`, subjectType: 'content', subjectId: experiment.content_id, after: { experimentId: params.id }, ipHash: ctx.ipHash });
+        return sendJson(res, 200, { experiment: db.prepare('SELECT * FROM experiments WHERE id=?').get(params.id) });
+      }
+
+      params = routeMatch(pathname, '/api/experiments/:id/assignment');
+      if (params && req.method === 'GET') {
+        const user = requireUser(db, req);
+        const experiment = db.prepare('SELECT * FROM experiments WHERE id=?').get(params.id);
+        if (!experiment) throw new HttpError(404, '实验不存在', 'not_found');
+        const assignment = assignVariant(db, experiment, user.id);
+        return sendJson(res, 200, { ...assignment, appliedField: experiment.variant_field,
+          appliedValue: assignment.variant === 'variant' ? experiment.variant_value : experiment.control_value,
+          runtimeVariantAware: artifactVariantAware(db, experiment.content_id) });
+      }
+
+      if (pathname === '/api/dm/conversations' && req.method === 'GET') {
+        const user = requireUser(db, req);
+        const rows = db.prepare(`SELECT c.*,ul.display_name low_name,uh.display_name high_name FROM dm_conversations c
+          JOIN users ul ON ul.id=c.user_low JOIN users uh ON uh.id=c.user_high
+          WHERE c.user_low=? OR c.user_high=? ORDER BY c.updated_at DESC LIMIT 50`).all(user.id, user.id);
+        const conversations = rows.map(row => {
+          const isLow = row.user_low === user.id;
+          const peerId = isLow ? row.user_high : row.user_low;
+          const peerName = isLow ? row.high_name : row.low_name;
+          const myReadAt = isLow ? row.low_read_at : row.high_read_at;
+          const unread = Number(db.prepare(`SELECT COUNT(*) n FROM dm_messages WHERE conversation_id=? AND sender_user_id<>? AND status='visible' AND created_at>?`)
+            .get(row.id, user.id, myReadAt || '1970-01-01')?.n || 0);
+          const last = db.prepare(`SELECT body,status,sender_user_id,created_at FROM dm_messages WHERE conversation_id=? ORDER BY created_at DESC LIMIT 1`).get(row.id);
+          return { id: row.id, peerId, peerName, unread, updatedAt: row.updated_at,
+            lastMessage: last ? (last.status === 'recalled' ? '（消息已撤回）' : last.body) : '', lastFromMe: last ? last.sender_user_id === user.id : false };
+        });
+        return sendJson(res, 200, { conversations });
+      }
+
+      if (pathname === '/api/dm/conversations' && req.method === 'POST') {
+        const user = requireUser(db, req);
+        const body = await readJson(req);
+        let peerId = String(body.userId || '');
+        if (body.contentId) {
+          const content = db.prepare('SELECT owner_user_id FROM contents WHERE id=?').get(String(body.contentId));
+          if (content) peerId = content.owner_user_id;
+        }
+        const peer = db.prepare('SELECT * FROM users WHERE id=?').get(peerId);
+        if (!peer) throw new HttpError(404, '私信对象不存在', 'not_found');
+        if (peer.id === user.id) throw new HttpError(409, '不能与自己建立会话', 'self_conversation');
+        const [low, high] = [user.id, peer.id].sort();
+        let conversation = db.prepare('SELECT * FROM dm_conversations WHERE user_low=? AND user_high=?').get(low, high);
+        if (!conversation) {
+          const now = isoNow();
+          db.prepare(`INSERT INTO dm_conversations (id,user_low,user_high,created_at,updated_at) VALUES (?,?,?,?,?)`).run(uid('dm'), low, high, now, now);
+          conversation = db.prepare('SELECT * FROM dm_conversations WHERE user_low=? AND user_high=?').get(low, high);
+        }
+        return sendJson(res, 200, { conversation: { id: conversation.id, peerId: peer.id, peerName: peer.display_name } });
+      }
+
+      params = routeMatch(pathname, '/api/dm/conversations/:id/messages');
+      if (params && req.method === 'GET') {
+        const user = requireUser(db, req);
+        const conversation = db.prepare('SELECT * FROM dm_conversations WHERE id=?').get(params.id);
+        if (!conversation || (conversation.user_low !== user.id && conversation.user_high !== user.id)) throw new HttpError(404, '会话不存在', 'not_found');
+        const now = isoNow();
+        db.prepare(`UPDATE dm_conversations SET ${conversation.user_low === user.id ? 'low_read_at' : 'high_read_at'}=? WHERE id=?`).run(now, conversation.id);
+        const rows = db.prepare(`SELECT m.*,u.display_name sender_name FROM dm_messages m JOIN users u ON u.id=m.sender_user_id WHERE m.conversation_id=? ORDER BY m.created_at ASC LIMIT 200`).all(conversation.id);
+        return sendJson(res, 200, { messages: rows.map(row => ({ id: row.id, senderUserId: row.sender_user_id, senderName: row.sender_name, fromMe: row.sender_user_id === user.id, body: row.status === 'recalled' ? '' : row.body, recalled: row.status === 'recalled', createdAt: row.created_at })) });
+      }
+      if (params && req.method === 'POST') {
+        const user = requireUser(db, req);
+        const conversation = db.prepare('SELECT * FROM dm_conversations WHERE id=?').get(params.id);
+        if (!conversation || (conversation.user_low !== user.id && conversation.user_high !== user.id)) throw new HttpError(404, '会话不存在', 'not_found');
+        const body = await readJson(req);
+        const text = clampText(body.body, 500, '私信内容');
+        if (!text.trim()) throw new HttpError(400, '私信内容不能为空', 'validation_error');
+        const since = new Date(Date.now() - 60_000).toISOString();
+        const recent = Number(db.prepare('SELECT COUNT(*) n FROM dm_messages WHERE sender_user_id=? AND created_at>?').get(user.id, since)?.n || 0);
+        if (recent >= 20) throw new HttpError(429, '发送频率过高，请稍后再试', 'rate_limited');
+        const id = uid('dm_msg');
+        const now = isoNow();
+        db.prepare(`INSERT INTO dm_messages (id,conversation_id,sender_user_id,body,status,created_at) VALUES (?,?,?,?,'visible',?)`).run(id, conversation.id, user.id, text.trim(), now);
+        db.prepare('UPDATE dm_conversations SET updated_at=? WHERE id=?').run(now, conversation.id);
+        const peerId = conversation.user_low === user.id ? conversation.user_high : conversation.user_low;
+        notify(db, peerId, 'message', '收到新私信', `${user.display_name}：${text.trim().slice(0, 60)}`, 'dm_conversation', conversation.id);
+        return sendJson(res, 201, { message: { id, fromMe: true, body: text.trim(), recalled: false, createdAt: now } });
+      }
+
+      params = routeMatch(pathname, '/api/dm/messages/:id/recall');
+      if (params && req.method === 'POST') {
+        const user = requireUser(db, req);
+        const message = db.prepare('SELECT * FROM dm_messages WHERE id=?').get(params.id);
+        if (!message || message.sender_user_id !== user.id) throw new HttpError(404, '私信不存在', 'not_found');
+        if (message.status !== 'visible') return sendJson(res, 200, { recalled: true, idempotent: true });
+        if (Date.now() - new Date(message.created_at).getTime() > 120_000) throw new HttpError(409, '超过 2 分钟的私信不能撤回', 'recall_window_expired');
+        db.prepare(`UPDATE dm_messages SET status='recalled' WHERE id=?`).run(message.id);
+        return sendJson(res, 200, { recalled: true });
+      }
+
+      if (pathname === '/api/support-tickets' && req.method === 'GET') {
+        const user = requireUser(db, req);
+        const rows = user.role === 'admin'
+          ? db.prepare(`SELECT t.*,u.display_name user_name FROM support_tickets t JOIN users u ON u.id=t.user_id ORDER BY CASE t.status WHEN 'open' THEN 0 ELSE 1 END,t.created_at DESC LIMIT 100`).all()
+          : db.prepare('SELECT * FROM support_tickets WHERE user_id=? ORDER BY created_at DESC LIMIT 50').all(user.id);
+        return sendJson(res, 200, { tickets: rows.map(row => ({ id: row.id, userName: row.user_name || null, category: row.category, subject: row.subject, body: row.body, status: row.status, replyBody: row.reply_body, createdAt: row.created_at, updatedAt: row.updated_at })) });
+      }
+      if (pathname === '/api/support-tickets' && req.method === 'POST') {
+        const user = requireUser(db, req);
+        const body = await readJson(req);
+        const category = ['account', 'content', 'points', 'campaign', 'bug', 'other'].includes(body.category) ? body.category : 'other';
+        const subject = clampText(body.subject, 120, '工单主题');
+        const detail = clampText(body.body, 2000, '工单内容');
+        if (!subject.trim() || !detail.trim()) throw new HttpError(400, '工单主题和内容不能为空', 'validation_error');
+        const id = uid('ticket');
+        const now = isoNow();
+        db.prepare(`INSERT INTO support_tickets (id,user_id,category,subject,body,status,created_at,updated_at) VALUES (?,?,?,?,?,'open',?,?)`)
+          .run(id, user.id, category, subject.trim(), detail.trim(), now, now);
+        audit(db, { actorUserId: user.id, action: 'support.ticket_created', subjectType: 'support_ticket', subjectId: id, ipHash: ctx.ipHash });
+        return sendJson(res, 201, { ticket: { id, category, subject: subject.trim(), status: 'open', createdAt: now } });
+      }
+
+      params = routeMatch(pathname, '/api/admin/support-tickets/:id/reply');
+      if (params && req.method === 'POST') {
+        const user = requireUser(db, req, ['admin']);
+        const body = await readJson(req);
+        const ticket = db.prepare('SELECT * FROM support_tickets WHERE id=?').get(params.id);
+        if (!ticket) throw new HttpError(404, '工单不存在', 'not_found');
+        const reply = clampText(body.reply, 2000, '回复内容');
+        const close = body.close === true;
+        const now = isoNow();
+        db.prepare(`UPDATE support_tickets SET status=?,reply_body=?,replied_by=?,updated_at=? WHERE id=?`)
+          .run(close ? 'closed' : 'replied', reply.trim() || ticket.reply_body, user.id, now, params.id);
+        notify(db, ticket.user_id, 'support', close ? '工单已处理并关闭' : '客服已回复你的工单', reply.trim().slice(0, 80) || ticket.subject, 'support_ticket', ticket.id);
+        return sendJson(res, 200, { ticket: db.prepare('SELECT * FROM support_tickets WHERE id=?').get(params.id) });
+      }
+
+      params = routeMatch(pathname, '/api/campaigns/:id/tracking-links');
+      if (params && req.method === 'POST') {
+        const user = requireUser(db, req, ['creator']);
+        const body = await readJson(req);
+        const campaign = db.prepare('SELECT * FROM campaigns WHERE id=?').get(params.id);
+        if (!campaign) throw new HttpError(404, 'Campaign 不存在', 'not_found');
+        const participant = db.prepare(`SELECT id FROM campaign_participants WHERE campaign_id=? AND creator_user_id=? AND status='eligible'`).get(campaign.id, user.id);
+        if (!participant) throw new HttpError(403, '需要先获得该 Campaign 的参与资格', 'not_eligible');
+        const content = requireOwnedContent(db, String(body.contentId || ''), user);
+        if (content.status !== 'published') throw new HttpError(409, '只有已发布内容可以生成归因链接', 'content_not_published');
+        const channelCode = clampText(body.channelCode || 'creator-link', 60, '渠道代码').trim() || 'creator-link';
+        const existing = db.prepare(`SELECT * FROM tracking_links WHERE campaign_id=? AND content_id=? AND kol_user_id=? AND channel_code=?`).get(campaign.id, content.id, user.id, channelCode);
+        if (existing) return sendJson(res, 200, { link: { linkId: existing.id, url: `/l/${existing.id}`, channelCode, idempotent: true } });
+        const linkId = uid('link');
+        db.prepare(`INSERT INTO tracking_links (id,campaign_id,content_id,kol_user_id,channel_code,created_at) VALUES (?,?,?,?,?,?)`)
+          .run(linkId, campaign.id, content.id, user.id, channelCode, isoNow());
+        audit(db, { actorUserId: user.id, action: 'campaign.tracking_link_created', subjectType: 'campaign', subjectId: campaign.id, after: { linkId, contentId: content.id, channelCode }, ipHash: ctx.ipHash });
+        return sendJson(res, 201, { link: { linkId, url: `/l/${linkId}`, channelCode } });
+      }
+
+      if (pathname === '/api/growth-nodes' && req.method === 'GET') {
+        const user = requireUser(db, req);
+        const memberships = db.prepare(`SELECT n.*,m.seat,m.role my_role FROM growth_node_members m JOIN growth_nodes n ON n.id=m.node_id WHERE m.user_id=? ORDER BY n.created_at DESC LIMIT 10`).all(user.id);
+        const nodes = memberships.map(row => ({
+          id: row.id, name: row.name, status: row.status, inviteCode: row.invite_code, mySeat: row.seat, myRole: row.my_role,
+          members: db.prepare(`SELECT m.seat,m.role,u.display_name FROM growth_node_members m JOIN users u ON u.id=m.user_id WHERE m.node_id=? ORDER BY m.seat`).all(row.id)
+            .map(member => ({ seat: member.seat, role: member.role, displayName: member.display_name })),
+        }));
+        return sendJson(res, 200, { nodes });
+      }
+      if (pathname === '/api/growth-nodes' && req.method === 'POST') {
+        const user = requireUser(db, req);
+        const body = await readJson(req);
+        const name = clampText(body.name || '我的五人协作节点', 60, '节点名称');
+        const existing = db.prepare(`SELECT n.id FROM growth_node_members m JOIN growth_nodes n ON n.id=m.node_id WHERE m.user_id=? AND m.role='primary' LIMIT 1`).get(user.id);
+        if (existing) throw new HttpError(409, '每个账号只能作为一个节点的主节点', 'primary_node_exists');
+        const id = uid('node');
+        const inviteCode = randomToken(6).toUpperCase().replace(/[^A-Z0-9]/g, 'X').slice(0, 8);
+        const now = isoNow();
+        transaction(db, () => {
+          db.prepare(`INSERT INTO growth_nodes (id,owner_user_id,name,invite_code,status,created_at,updated_at) VALUES (?,?,?,?,'forming',?,?)`).run(id, user.id, name.trim(), inviteCode, now, now);
+          db.prepare(`INSERT INTO growth_node_members (id,node_id,user_id,seat,role,created_at) VALUES (?,?,?,1,'primary',?)`).run(uid('seat'), id, user.id, now);
+        });
+        audit(db, { actorUserId: user.id, action: 'growth_node.created', subjectType: 'growth_node', subjectId: id, ipHash: ctx.ipHash });
+        return sendJson(res, 201, { node: { id, name: name.trim(), inviteCode, status: 'forming', mySeat: 1 } });
+      }
+      if (pathname === '/api/growth-nodes/join' && req.method === 'POST') {
+        const user = requireUser(db, req);
+        const body = await readJson(req);
+        const node = db.prepare('SELECT * FROM growth_nodes WHERE invite_code=?').get(String(body.inviteCode || '').trim().toUpperCase());
+        if (!node) throw new HttpError(404, '邀请码无效', 'invalid_invite_code');
+        if (node.status === 'paused') throw new HttpError(409, '该节点已暂停，暂不能加入', 'node_paused');
+        const already = db.prepare('SELECT seat FROM growth_node_members WHERE node_id=? AND user_id=?').get(node.id, user.id);
+        if (already) return sendJson(res, 200, { joined: true, seat: already.seat, idempotent: true, nodeId: node.id });
+        const seats = db.prepare('SELECT seat FROM growth_node_members WHERE node_id=?').all(node.id).map(row => row.seat);
+        if (seats.length >= 5) throw new HttpError(409, '该节点五个席位已满', 'node_full');
+        const seat = [1, 2, 3, 4, 5].find(index => !seats.includes(index));
+        const now = isoNow();
+        transaction(db, () => {
+          db.prepare(`INSERT INTO growth_node_members (id,node_id,user_id,seat,role,created_at) VALUES (?,?,?,?,'member',?)`).run(uid('seat'), node.id, user.id, seat, now);
+          if (seats.length + 1 >= 5) db.prepare(`UPDATE growth_nodes SET status='active',updated_at=? WHERE id=?`).run(now, node.id);
+        });
+        notify(db, node.owner_user_id, 'engagement', '节点新成员加入', `${user.display_name} 加入席位 ${seat}`, 'growth_node', node.id);
+        audit(db, { actorUserId: user.id, action: 'growth_node.joined', subjectType: 'growth_node', subjectId: node.id, after: { seat }, ipHash: ctx.ipHash });
+        return sendJson(res, 200, { joined: true, seat, nodeId: node.id });
+      }
+
       if (pathname === '/api/engagements' && req.method === 'POST') {
         const user = requireUser(db, req, ['creator']);
         const body = await readJson(req);
@@ -1165,6 +2101,23 @@ export function createApp(options = {}) {
           audit(db, { actorUserId: user.id, action: `engagement.${status}`, subjectType: 'content', subjectId: content.id, after: { eventType, points, reason }, ipHash: ctx.ipHash });
         });
         return sendJson(res, status === 'eligible' ? 201 : 200, { idempotent: false, status, points, reason, balance: pointSummary(db, user.id) });
+      }
+
+      if (pathname === '/api/engagements/remove' && req.method === 'POST') {
+        const user = requireUser(db, req);
+        const body = await readJson(req);
+        const eventType = String(body.eventType || '');
+        if (!['like', 'save'].includes(eventType)) throw new HttpError(400, '只能取消点赞或收藏', 'validation_error');
+        const contentId = String(body.contentId || '');
+        const content = db.prepare('SELECT id FROM contents WHERE id=?').get(contentId);
+        if (!content) throw new HttpError(404, '内容不存在', 'not_found');
+        const rows = db.prepare(`SELECT id,event_key FROM engagement_events
+          WHERE user_id=? AND content_id=? AND event_type=? AND status='eligible'`).all(user.id, contentId, eventType);
+        transaction(db, () => {
+          for (const row of rows) db.prepare('DELETE FROM engagement_events WHERE id=?').run(row.id);
+          if (rows.length) audit(db, { actorUserId: user.id, action: `engagement.${eventType}_removed`, subjectType: 'content', subjectId: contentId, after: { removed: rows.length }, ipHash: ctx.ipHash });
+        });
+        return sendJson(res, 200, { removed: rows.length, active: false });
       }
 
       if (pathname === '/api/demo/seed-workflow' && req.method === 'POST') {
@@ -1208,13 +2161,65 @@ export function createApp(options = {}) {
           db.prepare(`INSERT INTO campaign_deliverables (id,campaign_id,creator_user_id,content_id,status,submission_note,submitted_at,updated_at) VALUES (?,?,?,?,'submitted','[演示] 等待品牌核对 Campaign 要求',?,?)`).run(submittedId, campaignId, creator.id, contentId, now, now);
           db.prepare(`INSERT INTO campaign_deliverables (id,campaign_id,creator_user_id,content_id,status,submission_note,review_note,submitted_at,reviewed_at,updated_at) VALUES (?,?,?,?,'changes_requested','[演示] 首次交付','请补充 CTA 说明并重新提交',?,?,?)`).run(changesId, campaignId, creator.id, contentId, now, now, now);
           db.prepare(`INSERT INTO campaign_deliverables (id,campaign_id,creator_user_id,content_id,status,submission_note,review_note,submitted_at,reviewed_at,updated_at) VALUES (?,?,?,?,'approved','[演示] 已完成品牌要求','品牌交付检查通过',?,?,?)`).run(approvedId, campaignId, creator.id, contentId, now, now, now);
+          const contractVersion = 'demo-contract-v1';
+          upsertCampaignEconomyRule(db, {
+            campaignId, contractVersion, primarySuccessEvent: 'playable_complete',
+            playerRule: { amountAit: 5 }, creatorRule: { amountAit: 500 },
+            attribution: { model: 'last_touch', windowDays: 7 }, eligibility: { requiresEligibleParticipant: true },
+            budget: { totalAit: 1000, perUserCapAit: 0 },
+            settlement: { benefitTypes: ['contract_defined_non_financial'], cashEnabled: true, currencies: ['USDT'] },
+            lockedFields: ['commercial', 'audience.included_regions', 'audience.excluded_regions', 'audience.minimum_age', 'cta.destination', 'reward', 'compliance', 'data_policy', 'attribution.model', 'attribution.window_days', 'measurement.primary_success_event', 'approval', 'release.kill_switch'],
+            approve: true, approvedBy: user.id,
+          });
           const settlementId = uid('settlement');
           db.prepare(`INSERT INTO settlements (id,campaign_id,deliverable_id,user_id,currency,amount,status,approved_at,created_at,updated_at) VALUES (?,?,?,?,'AIT',500,'payment_pending',?,?,?)`).run(settlementId, campaignId, approvedId, creator.id, now, now, now);
           db.prepare(`INSERT INTO settlement_approvals (id,settlement_id,approver_user_id,decision,note,created_at) VALUES (?,?,?,'brand_confirmed','[演示] 品牌已确认并提交平台复核',?)`).run(uid('settlement_approval'), settlementId, user.id, now);
+          createAitEntitlement(db, { userId: creator.id, campaignId, contractVersion, sourceType: 'creator_delivery', sourceEventType: 'delivery_approved', sourceEventId: approvedId, amount: 500, attributionReference: `deliverable:${approvedId}` });
           notify(db, user.id, 'campaign', '[演示] 工作流已载入', '包含待审批、需修改、已批准交付与待复核 AIT 结算。', 'campaign', campaignId);
           audit(db, { actorUserId: user.id, action: 'demo.workflow_seeded', subjectType: 'campaign', subjectId: campaignId, after: { demo: true }, ipHash: ctx.ipHash });
         });
         return sendJson(res, 201, { campaignId, contentId, idempotent: false });
+      }
+
+      if (pathname === '/api/demo/mobile-playables' && req.method === 'POST') {
+        if (!allowDemo) throw new HttpError(404, '演示注册入口未启用', 'not_found');
+        requireUser(db, req);
+        const body = await readJson(req);
+        const items = Array.isArray(body.playables) ? body.playables.slice(0, 50) : [];
+        if (!items.length) throw new HttpError(400, '缺少待注册的移动端 Playable', 'validation_error');
+        const arcadeOwner = createOrGetDemoUser(db, 'creator', 'arcade');
+        const mapping = {};
+        transaction(db, () => {
+          for (const item of items) {
+            const key = String(item.key || '').toLowerCase().replace(/[^a-z0-9_-]/g, '').slice(0, 60);
+            if (!key) continue;
+            const contentId = `content_mobilearcade_${key}`;
+            const existing = db.prepare('SELECT id FROM contents WHERE id=?').get(contentId);
+            if (existing) { mapping[item.key] = contentId; continue; }
+            const title = clampText(item.title || key, 100, 'Playable 标题');
+            const now = isoNow();
+            const payload = {
+              title, summary: `Airvana 移动端本地完整游戏「${title}」的服务端运行登记。`,
+              hook: '三阶段完整试玩，有效完成经服务端运行证明后记录 AIP。',
+              sections: [
+                { heading: '玩法', body: '在移动端完成该游戏的完整三阶段挑战。' },
+                { heading: '运行证明', body: '开始、步骤与完成事件按顺序上报服务端，乱序或重复会被拒绝。' },
+              ],
+              interactions: [{ trigger: '完成完整试玩', result: '服务端校验会话时长与顺序后记录有效完成' }],
+              assets: ['移动端内置游戏资源'], safetyNotes: ['演示内容 · 不构成投资建议'],
+            };
+            db.prepare(`INSERT INTO contents (id,owner_user_id,title,content_type,status,moderation_status,moderation_json,payload_json,current_version,published_at,created_at,updated_at)
+              VALUES (?,?,?,?, 'published','passed',?,?,1,?,?,?)`)
+              .run(contentId, arcadeOwner.id, title, ['game', 'video', 'article'].includes(item.contentType) ? item.contentType : 'game',
+                jsonString({ passed: true, provider: 'local-policy', note: 'mobile-arcade-demo' }), jsonString(payload), now, now, now);
+            db.prepare(`INSERT INTO content_versions (id,content_id,version,title,payload_json,created_by,created_at) VALUES (?,?,1,?,?,?,?)`)
+              .run(uid('ver'), contentId, title, jsonString(payload), arcadeOwner.id, now);
+            const content = db.prepare('SELECT * FROM contents WHERE id=?').get(contentId);
+            saveArtifact(db, { content, payload, version: 1 });
+            mapping[item.key] = contentId;
+          }
+        });
+        return sendJson(res, 200, { mapping, owner: arcadeOwner.id });
       }
 
       if (pathname === '/api/campaigns' && req.method === 'POST') {
@@ -1398,8 +2403,9 @@ export function createApp(options = {}) {
         if (!allowed.includes(content.content_type)) throw new HttpError(409, '内容类型不符合 Campaign 要求', 'content_type_mismatch');
         const id = uid('delivery');
         const now = isoNow();
-        db.prepare(`INSERT INTO campaign_deliverables (id,campaign_id,creator_user_id,content_id,status,submission_note,submitted_at,updated_at) VALUES (?,?,?,?,'submitted',?,?,?)`)
-          .run(id, campaign.id, user.id, content.id, clampText(body.note, 800, '交付说明'), now, now);
+        const activeRule = db.prepare(`SELECT contract_version FROM campaign_economy_rules WHERE campaign_id=? AND status='approved' ORDER BY updated_at DESC LIMIT 1`).get(campaign.id);
+        db.prepare(`INSERT INTO campaign_deliverables (id,campaign_id,creator_user_id,content_id,status,submission_note,contract_version,submitted_at,updated_at) VALUES (?,?,?,?,'submitted',?,?,?,?)`)
+          .run(id, campaign.id, user.id, content.id, clampText(body.note, 800, '交付说明'), activeRule ? activeRule.contract_version : null, now, now);
         audit(db, { actorUserId: user.id, action: 'campaign.deliverable_submitted', subjectType: 'deliverable', subjectId: id, after: { campaignId: campaign.id, contentId: content.id }, ipHash: ctx.ipHash });
         notify(db, campaign.brand_user_id, 'deliverable', '收到新的 Campaign 交付', `${user.display_name} 已提交 ${content.title}`, 'deliverable', id);
         return sendJson(res, 201, { id, status: 'submitted' });
@@ -1509,6 +2515,24 @@ export function createApp(options = {}) {
         const query = String(url.searchParams.get('q') || '').trim();
         const rows = query ? db.prepare(`SELECT id,display_name,wallet_address,created_at FROM users WHERE role='creator' AND display_name LIKE ? ORDER BY created_at DESC LIMIT 30`).all(`%${query}%`) : db.prepare(`SELECT id,display_name,wallet_address,created_at FROM users WHERE role='creator' ORDER BY created_at DESC LIMIT 30`).all();
         return sendJson(res, 200, { creators: rows.map(row => ({ id: row.id, displayName: row.display_name, walletAddress: row.wallet_address, createdAt: row.created_at })) });
+      }
+
+      if (pathname === '/api/notifications' && req.method === 'GET') {
+        const user = requireUser(db, req);
+        const rows = db.prepare('SELECT * FROM notifications WHERE user_id=? ORDER BY created_at DESC LIMIT 50').all(user.id);
+        return sendJson(res, 200, {
+          notifications: rows.map(row => ({ id: row.id, category: row.category, title: row.title, body: row.body, subjectType: row.subject_type, subjectId: row.subject_id, readAt: row.read_at, createdAt: row.created_at })),
+          unread: rows.filter(row => !row.read_at).length,
+        });
+      }
+
+      if (pathname === '/api/social/summary' && req.method === 'GET') {
+        const user = requireUser(db, req);
+        const followerCount = Number(db.prepare('SELECT COUNT(*) n FROM user_follows WHERE followee_user_id=?').get(user.id)?.n || 0);
+        const followingCount = Number(db.prepare('SELECT COUNT(*) n FROM user_follows WHERE follower_user_id=?').get(user.id)?.n || 0);
+        const likesReceived = Number(db.prepare(`SELECT COUNT(*) n FROM engagement_events e JOIN contents c ON c.id=e.content_id
+          WHERE c.owner_user_id=? AND e.event_type='like' AND e.status='eligible'`).get(user.id)?.n || 0);
+        return sendJson(res, 200, { followerCount, followingCount, likesReceived });
       }
 
       params = routeMatch(pathname, '/api/notifications/:id/read');
@@ -1752,7 +2776,7 @@ export function createApp(options = {}) {
         if (query) { clauses.push('(c.title LIKE ? OR u.display_name LIKE ?)'); values.push(`%${query}%`, `%${query}%`); }
         if (CONTENT_TYPES.has(type)) { clauses.push('c.content_type=?'); values.push(type); }
         const rows = db.prepare(`SELECT c.*,u.display_name author_name,MAX(b.expires_at) boost_expires_at FROM contents c JOIN users u ON u.id=c.owner_user_id LEFT JOIN content_boosts b ON b.content_id=c.id AND b.status='active' AND b.expires_at>? WHERE ${clauses.join(' AND ')} GROUP BY c.id ORDER BY boost_expires_at IS NOT NULL DESC,c.published_at DESC LIMIT 60`).all(isoNow(), ...values);
-        return sendJson(res, 200, { results: rows.map(row => ({ ...mapContent(row), authorName: row.author_name, boostedUntil: row.boost_expires_at, publicUrl: `/content/${row.id}` })) });
+        return sendJson(res, 200, { results: rows.map(row => serializeFeedContent(db, row)) });
       }
 
       params = routeMatch(pathname, '/api/contents/:id/boost');
@@ -1819,14 +2843,36 @@ export function createApp(options = {}) {
         return sendJson(res, 200, { content: mapContent(db.prepare('SELECT * FROM contents WHERE id=?').get(content.id)) });
       }
 
+      params = routeMatch(pathname, '/l/:linkId');
+      if (params && (req.method === 'GET' || req.method === 'HEAD')) {
+        const link = db.prepare('SELECT * FROM tracking_links WHERE id=?').get(params.linkId);
+        if (!link) throw new HttpError(404, '归因链接不存在', 'not_found');
+        db.prepare('UPDATE tracking_links SET visits=visits+1 WHERE id=?').run(link.id);
+        res.writeHead(302, { Location: `/content/${link.content_id}?link=${encodeURIComponent(link.id)}` });
+        return res.end();
+      }
+
       params = routeMatch(pathname, '/content/:id');
       if (params && (req.method === 'GET' || req.method === 'HEAD')) {
         const content = db.prepare('SELECT * FROM contents WHERE id=?').get(params.id);
         if (!content || content.status !== 'published') throw new HttpError(404, '公开内容不存在', 'not_found');
         const artifact = db.prepare(`SELECT * FROM content_artifacts WHERE content_id=? AND version=? AND status='ready'`).get(content.id, content.current_version);
         if (!artifact) throw new HttpError(404, '内容成品不存在', 'not_found');
-        res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=60', 'X-Content-Type-Options': 'nosniff', 'Content-Security-Policy': "default-src 'self'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'self'; img-src 'self' data:; frame-ancestors 'self'" });
-        return res.end(req.method === 'HEAD' ? '' : artifact.html_text);
+        // 灰度投放：分桶在服务端解析并落真实分配记录，注入到投放副本，存量成品与 checksum 不变
+        const running = db.prepare(`SELECT id FROM experiments WHERE content_id=? AND status='running' LIMIT 1`).get(content.id);
+        // HEAD is a read-only availability probe, not a delivered experiment exposure.
+        const viewer = req.method === 'GET' ? getSessionUser(db, req) : null;
+        const variant = running && req.method === 'GET' ? resolveContentVariant(db, content.id, viewer?.id || null) : null;
+        let html = upgradeServerGameRuntimeReferences(artifact.html_text);
+        if (variant && artifactVariantAware(db, content.id)) {
+          const payload = jsonString(variant).replaceAll('<', '\\u003c').replaceAll('>', '\\u003e').replaceAll('&', '\\u0026');
+          html = html.replace('<body>', `<body><script>globalThis.__AIRVANA_VARIANT__=${payload};</script>`);
+        }
+        res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8',
+          // 内容处于灰度时按人投放，禁止任何共享缓存复用他人分支
+          'Cache-Control': running ? 'private, no-store' : 'public, max-age=60', Vary: 'Cookie',
+          'X-Frame-Options': 'SAMEORIGIN', 'X-Content-Type-Options': 'nosniff', 'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src 'self'; img-src 'self' data:; frame-ancestors 'self'" });
+        return res.end(req.method === 'HEAD' ? '' : html);
       }
 
       params = routeMatch(pathname, '/preview/:id');
@@ -1835,11 +2881,17 @@ export function createApp(options = {}) {
         const content = requireOwnedContent(db, params.id, user);
         const artifact = db.prepare(`SELECT * FROM content_artifacts WHERE content_id=? AND version=? AND status='ready'`).get(content.id, content.current_version);
         if (!artifact) throw new HttpError(404, '内容成品不存在', 'not_found');
-        res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff' });
-        return res.end(req.method === 'HEAD' ? '' : artifact.html_text);
+        res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store',
+          // Only the authenticated owner's successful preview may run in the same-origin shell.
+          'X-Frame-Options': 'SAMEORIGIN', 'X-Content-Type-Options': 'nosniff', 'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src 'self'; img-src 'self' data:; frame-ancestors 'self'" });
+        return res.end(req.method === 'HEAD' ? '' : upgradeServerGameRuntimeReferences(artifact.html_text));
       }
 
       if (pathname.startsWith('/api/')) throw new HttpError(404, '接口不存在', 'not_found');
+      // 关掉静态托管后，非 API 路径一律不由本服务处理——由 nginx/CDN 负责。
+      if (!serveStaticAssets) {
+        throw new HttpError(404, '该服务只提供 /api 接口，静态资源由前端托管层提供', 'api_only');
+      }
       if ((req.method === 'GET' || req.method === 'HEAD') && pathname === '/workspace') {
         return serveStatic(publicDir, '/workspace.html', res);
       }

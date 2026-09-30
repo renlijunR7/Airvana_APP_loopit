@@ -1,0 +1,21 @@
+{
+  "id": "./",
+  "name": "街区淘金大冲刺",
+  "short_name": "淘金冲刺",
+  "description": "原创三跑道街区追逐跑酷游戏",
+  "lang": "zh-CN",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#5ec8ff",
+  "theme_color": "#5ec8ff",
+  "icons": [
+    {
+      "src": "./icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

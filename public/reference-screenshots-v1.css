@@ -1,0 +1,14 @@
+.reference-shot{position:relative;overflow:hidden;background:#fff;width:100%;min-height:0;display:grid;place-items:center;isolation:isolate}
+.reference-shot__crop{position:relative;overflow:hidden;flex:none}
+.reference-shot__image{position:absolute;display:block;pointer-events:none;user-select:none;filter:none!important;opacity:1!important;transform:none!important}
+airvana-reference-shot{display:flex;flex-direction:column;position:absolute;inset:0;width:100%;height:100%;z-index:3;background:#fff;overflow:hidden;color:#222}
+airvana-reference-shot>.reference-shot{flex:1;width:100%;height:0;min-height:0;aspect-ratio:auto!important}
+airvana-reference-shot.is-compact{pointer-events:none;z-index:0}
+.reference-shot-controls{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:2px 8px;padding:2px 10px;background:#fff;border-top:1px solid #eee;flex:none;font:600 11px/1.35 system-ui,sans-serif}
+.reference-shot-controls span{font-size:10px;color:#767676}
+.reference-shot-controls a,.reference-shot-controls button{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;padding:4px 7px;margin:0;border:0;border-radius:8px;background:transparent;color:#333;text-decoration:none;font:600 11px/1.35 system-ui,sans-serif;cursor:pointer}
+.reference-shot-controls a:focus-visible,.reference-shot-controls button:focus-visible{outline:2px solid #222;outline-offset:-2px}
+.reference-shot-controls button:last-child{color:#676767}
+.reference-shot[data-load-error=true]::after{content:'原图加载失败，请刷新重试';position:absolute;background:#fff;color:#222;padding:16px;font:14px system-ui}
+.playable-detail-hero.is-reference>.playable-detail-hero__shade,.playable-detail-hero.is-reference>.playable-detail-hero__badges,.playable-detail-hero.is-reference>.playable-detail-hero__content{display:none}
+.playable-detail-hero.is-reference{background:#fff}

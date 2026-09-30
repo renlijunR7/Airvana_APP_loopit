@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="treasure">
+<title>treasure — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M7 31H57V56L52 60H12L7 56Z" fill="#8b6041" /><path d="M7 31V21Q7 9 20 9H44Q57 9 57 21V31Z" fill="#d95d39" /><rect x="5" y="29" width="54" height="7" rx="1" fill="#e4b44f" /><path d="M15 10H22V59H15ZM42 10H49V59H42Z" fill="#e4b44f" /><rect x="27" y="29" width="11" height="14" rx="2" fill="#e4b44f" /><circle cx="32" cy="34" r="2" fill="#243042" stroke="none"/><path d="M32 35V39" fill="none" stroke="#243042" stroke-width="2"/><path d="M9 49H15M23 49H41M49 49H55" fill="none" stroke="#614631" stroke-width="2"/>
+</g>
+</svg>

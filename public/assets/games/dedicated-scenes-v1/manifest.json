@@ -1,0 +1,878 @@
+{
+  "schema": "airvana.game-art-manifest.v1",
+  "version": "1.0.0",
+  "generated_at": "2026-08-24T00:00:00+08:00",
+  "status": "LOCAL_DEMO",
+  "scope": "17 new dedicated gameplay scenes plus 7 non-destructive visual refinements",
+  "campaign_contracts": [
+    "docs/playable-demos/category-expansion/campaign-contract.json",
+    "docs/playable-demos/home-store-fidelity-v4/campaign-contract.json"
+  ],
+  "source": "OpenAI built-in ImageGen",
+  "prompt_set": "docs/game-assets/production-fidelity-v1/prompt-set.md",
+  "authorization_status": "pending_human_release_approval",
+  "technical_review": {
+    "status": "passed",
+    "checked_at": "2026-08-24",
+    "gates": [
+      "unique gameplay scene",
+      "visual fidelity",
+      "gameplay readability",
+      "no text or logo",
+      "runtime path exists",
+      "SHA-256 recorded"
+    ]
+  },
+  "release_review": {
+    "status": "blocked_pending_human_approval",
+    "required_roles": [
+      "art director",
+      "brand/IP owner",
+      "channel or store owner",
+      "legal and compliance",
+      "release owner"
+    ]
+  },
+  "assets": [
+    {
+      "asset_id": "art_safety_workshop_scene_v1",
+      "game_key": "safety-workshop",
+      "role": "new_dedicated_scene",
+      "source": {
+        "path": "public/assets/games/dedicated-scenes-v1/source/safety-workshop-gameplay-v1.png",
+        "sha256": "bf41113e290535e98ccdc3ed7e56beb1656626e0fb2e97b4ee8282a025c321d5",
+        "width": 941,
+        "height": 1672,
+        "format": "png"
+      },
+      "runtime": {
+        "path": "public/assets/games/dedicated-scenes-v1/runtime/safety-workshop-gameplay-v1.jpg",
+        "sha256": "a25ab37f3ddc09a0a78497fee5144e038c42620e773609b8ab0a5e66ca04813a",
+        "width": 941,
+        "height": 1672,
+        "format": "jpeg"
+      },
+      "owner": "Airvana local demo workspace",
+      "provenance": {
+        "generator": "OpenAI built-in ImageGen",
+        "prompt_set": "docs/game-assets/production-fidelity-v1/prompt-set.md",
+        "reference_policy": "Project-owned cover used only as theme and palette reference; no third-party art or UI copied."
+      },
+      "authorization_status": "pending_human_release_approval",
+      "locale": "zxx",
+      "version": "1.0.0",
+      "expires_at": null,
+      "usage_restrictions": [
+        "LOCAL_DEMO and internal review only",
+        "No external or commercial distribution before human art, brand, channel and compliance approval"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false
+    },
+    {
+      "asset_id": "art_stellar_farm_scene_v1",
+      "game_key": "stellar-farm",
+      "role": "new_dedicated_scene",
+      "source": {
+        "path": "public/assets/games/dedicated-scenes-v1/source/stellar-farm-gameplay-v1.png",
+        "sha256": "21440184fe41180be52f0847b9949389687b081b7184040f4abe4a87d1967472",
+        "width": 941,
+        "height": 1672,
+        "format": "png"
+      },
+      "runtime": {
+        "path": "public/assets/games/dedicated-scenes-v1/runtime/stellar-farm-gameplay-v1.jpg",
+        "sha256": "992bc17f523a1d1ec8e54d153da6f9f3d913442f0704166aba56a9f791990aa6",
+        "width": 941,
+        "height": 1672,
+        "format": "jpeg"
+      },
+      "owner": "Airvana local demo workspace",
+      "provenance": {
+        "generator": "OpenAI built-in ImageGen",
+        "prompt_set": "docs/game-assets/production-fidelity-v1/prompt-set.md",
+        "reference_policy": "Project-owned cover used only as theme and palette reference; no third-party art or UI copied."
+      },
+      "authorization_status": "pending_human_release_approval",
+      "locale": "zxx",
+      "version": "1.0.0",
+      "expires_at": null,
+      "usage_restrictions": [
+        "LOCAL_DEMO and internal review only",
+        "No external or commercial distribution before human art, brand, channel and compliance approval"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false
+    },
+    {
+      "asset_id": "art_stardust_island_scene_v1",
+      "game_key": "stardust-island",
+      "role": "new_dedicated_scene",
+      "source": {
+        "path": "public/assets/games/dedicated-scenes-v1/source/stardust-island-gameplay-v1.png",
+        "sha256": "9966a627f17a750dfabd9d7c3c214cde2840be39008c03a3a8d16bff60104c9e",
+        "width": 941,
+        "height": 1672,
+        "format": "png"
+      },
+      "runtime": {
+        "path": "public/assets/games/dedicated-scenes-v1/runtime/stardust-island-gameplay-v1.jpg",
+        "sha256": "89e10e980bb9e3da2051b8bf27720c04ef6c4ab7b97e957416fc842e264f3342",
+        "width": 941,
+        "height": 1672,
+        "format": "jpeg"
+      },
+      "owner": "Airvana local demo workspace",
+      "provenance": {
+        "generator": "OpenAI built-in ImageGen",
+        "prompt_set": "docs/game-assets/production-fidelity-v1/prompt-set.md",
+        "reference_policy": "Project-owned cover used only as theme and palette reference; no third-party art or UI copied."
+      },
+      "authorization_status": "pending_human_release_approval",
+      "locale": "zxx",
+      "version": "1.0.0",
+      "expires_at": null,
+      "usage_restrictions": [
+        "LOCAL_DEMO and internal review only",
+        "No external or commercial distribution before human art, brand, channel and compliance approval"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false
+    },
+    {
+      "asset_id": "art_pixel_quest_scene_v1",
+      "game_key": "pixel-quest",
+      "role": "new_dedicated_scene",
+      "source": {
+        "path": "public/assets/games/dedicated-scenes-v1/source/pixel-quest-gameplay-v1.png",
+        "sha256": "a2599db9640568d12da3138a1390ce0142167040ddef57073a9a333adefb62bf",
+        "width": 941,
+        "height": 1672,
+        "format": "png"
+      },
+      "runtime": {
+        "path": "public/assets/games/dedicated-scenes-v1/runtime/pixel-quest-gameplay-v1.jpg",
+        "sha256": "dcebcee98efa52fb7a4e1d131db4412f603c96fd6894428c3a962dfb7fdbdce6",
+        "width": 941,
+        "height": 1672,
+        "format": "jpeg"
+      },
+      "owner": "Airvana local demo workspace",
+      "provenance": {
+        "generator": "OpenAI built-in ImageGen",
+        "prompt_set": "docs/game-assets/production-fidelity-v1/prompt-set.md",
+        "reference_policy": "Project-owned cover used only as theme and palette reference; no third-party art or UI copied."
+      },
+      "authorization_status": "pending_human_release_approval",
+      "locale": "zxx",
+      "version": "1.0.0",
+      "expires_at": null,
+      "usage_restrictions": [
+        "LOCAL_DEMO and internal review only",
+        "No external or commercial distribution before human art, brand, channel and compliance approval"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false
+    },
+    {
+      "asset_id": "art_city_rush_scene_v1",
+      "game_key": "city-rush",
+      "role": "new_dedicated_scene",
+      "source": {
+        "path": "public/assets/games/dedicated-scenes-v1/source/city-rush-gameplay-v1.png",
+        "sha256": "38082f41b0db08d35a517d515e06506012d4f17b56f13740bdd2b503f6f680b0",
+        "width": 941,
+        "height": 1672,
+        "format": "png"
+      },
+      "runtime": {
+        "path": "public/assets/games/dedicated-scenes-v1/runtime/city-rush-gameplay-v1.jpg",
+        "sha256": "3ae3b52d2a64057906bd7ca1b3d8c9eadba800e097a91c0f972584637485b067",
+        "width": 941,
+        "height": 1672,
+        "format": "jpeg"
+      },
+      "owner": "Airvana local demo workspace",
+      "provenance": {
+        "generator": "OpenAI built-in ImageGen",
+        "prompt_set": "docs/game-assets/production-fidelity-v1/prompt-set.md",
+        "reference_policy": "Project-owned cover used only as theme and palette reference; no third-party art or UI copied."
+      },
+      "authorization_status": "pending_human_release_approval",
+      "locale": "zxx",
+      "version": "1.0.0",
+      "expires_at": null,
+      "usage_restrictions": [
+        "LOCAL_DEMO and internal review only",
+        "No external or commercial distribution before human art, brand, channel and compliance approval"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false
+    },
+    {
+      "asset_id": "art_red_cup_shuffle_scene_v1",
+      "game_key": "red-cup-shuffle",
+      "role": "new_dedicated_scene",
+      "source": {
+        "path": "public/assets/games/dedicated-scenes-v1/source/red-cup-shuffle-gameplay-v1.png",
+        "sha256": "f876742ebf16eea0fcf6f2da542fcba716404e02237b8a5736ec84436d69bc9d",
+        "width": 941,
+        "height": 1672,
+        "format": "png"
+      },
+      "runtime": {
+        "path": "public/assets/games/dedicated-scenes-v1/runtime/red-cup-shuffle-gameplay-v1.jpg",
+        "sha256": "42f26892632584fa0d06732aabb6dc5f37efa488dceebfaa77a525072197f78d",
+        "width": 941,
+        "height": 1672,
+        "format": "jpeg"
+      },
+      "owner": "Airvana local demo workspace",
+      "provenance": {
+        "generator": "OpenAI built-in ImageGen",
+        "prompt_set": "docs/game-assets/production-fidelity-v1/prompt-set.md",
+        "reference_policy": "Project-owned cover used only as theme and palette reference; no third-party art or UI copied."
+      },
+      "authorization_status": "pending_human_release_approval",
+      "locale": "zxx",
+      "version": "1.0.0",
+      "expires_at": null,
+      "usage_restrictions": [
+        "LOCAL_DEMO and internal review only",
+        "No external or commercial distribution before human art, brand, channel and compliance approval"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false
+    },
+    {
+      "asset_id": "art_galaxy_toy_shop_scene_v1",
+      "game_key": "galaxy-toy-shop",
+      "role": "new_dedicated_scene",
+      "source": {
+        "path": "public/assets/games/dedicated-scenes-v1/source/galaxy-toy-shop-gameplay-v1.png",
+        "sha256": "024e37c8afdad723838b92488c16291dda5d3b5720eec3d5941536934e822600",
+        "width": 941,
+        "height": 1672,
+        "format": "png"
+      },
+      "runtime": {
+        "path": "public/assets/games/dedicated-scenes-v1/runtime/galaxy-toy-shop-gameplay-v1.jpg",
+        "sha256": "7aca185ad6cd81255f1f5921b69bec63cdaf966c5ceb6c5fa81d95bf0a37fcd9",
+        "width": 941,
+        "height": 1672,
+        "format": "jpeg"
+      },
+      "owner": "Airvana local demo workspace",
+      "provenance": {
+        "generator": "OpenAI built-in ImageGen",
+        "prompt_set": "docs/game-assets/production-fidelity-v1/prompt-set.md",
+        "reference_policy": "Project-owned cover used only as theme and palette reference; no third-party art or UI copied."
+      },
+      "authorization_status": "pending_human_release_approval",
+      "locale": "zxx",
+      "version": "1.0.0",
+      "expires_at": null,
+      "usage_restrictions": [
+        "LOCAL_DEMO and internal review only",
+        "No external or commercial distribution before human art, brand, channel and compliance approval"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false
+    },
+    {
+      "asset_id": "art_magic_choir_scene_v1",
+      "game_key": "magic-choir",
+      "role": "new_dedicated_scene",
+      "source": {
+        "path": "public/assets/games/dedicated-scenes-v1/source/magic-choir-gameplay-v1.png",
+        "sha256": "94bc21b1141c5453082dfe24c1e65e45c613111d27d560314c0c0b76da997df5",
+        "width": 941,
+        "height": 1672,
+        "format": "png"
+      },
+      "runtime": {
+        "path": "public/assets/games/dedicated-scenes-v1/runtime/magic-choir-gameplay-v1.jpg",
+        "sha256": "e0f15cea5fabfd21cea5132d637a6c9fe212b584b56202b66bcbce6dd657992c",
+        "width": 941,
+        "height": 1672,
+        "format": "jpeg"
+      },
+      "owner": "Airvana local demo workspace",
+      "provenance": {
+        "generator": "OpenAI built-in ImageGen",
+        "prompt_set": "docs/game-assets/production-fidelity-v1/prompt-set.md",
+        "reference_policy": "Project-owned cover used only as theme and palette reference; no third-party art or UI copied."
+      },
+      "authorization_status": "pending_human_release_approval",
+      "locale": "zxx",
+      "version": "1.0.0",
+      "expires_at": null,
+      "usage_restrictions": [
+        "LOCAL_DEMO and internal review only",
+        "No external or commercial distribution before human art, brand, channel and compliance approval"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false
+    },
+    {
+      "asset_id": "art_paws_stage_scene_v1",
+      "game_key": "paws-stage",
+      "role": "new_dedicated_scene",
+      "source": {
+        "path": "public/assets/games/dedicated-scenes-v1/source/paws-stage-gameplay-v1.png",
+        "sha256": "57a07000a01fcac71eb4f6160ac10f6fc9e6e419a823676e19bac2fad7ee1955",
+        "width": 941,
+        "height": 1672,
+        "format": "png"
+      },
+      "runtime": {
+        "path": "public/assets/games/dedicated-scenes-v1/runtime/paws-stage-gameplay-v1.jpg",
+        "sha256": "8fdbc11ffddfc67be59cc399c421a5e7342e94b95919b2207fa2a15927ce79ea",
+        "width": 941,
+        "height": 1672,
+        "format": "jpeg"
+      },
+      "owner": "Airvana local demo workspace",
+      "provenance": {
+        "generator": "OpenAI built-in ImageGen",
+        "prompt_set": "docs/game-assets/production-fidelity-v1/prompt-set.md",
+        "reference_policy": "Project-owned cover used only as theme and palette reference; no third-party art or UI copied."
+      },
+      "authorization_status": "pending_human_release_approval",
+      "locale": "zxx",
+      "version": "1.0.0",
+      "expires_at": null,
+      "usage_restrictions": [
+        "LOCAL_DEMO and internal review only",
+        "No external or commercial distribution before human art, brand, channel and compliance approval"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false
+    },
+    {
+      "asset_id": "art_puppet_studio_scene_v1",
+      "game_key": "puppet-studio",
+      "role": "new_dedicated_scene",
+      "source": {
+        "path": "public/assets/games/dedicated-scenes-v1/source/puppet-studio-gameplay-v1.png",
+        "sha256": "7dd4291b4a92238c7b64d3cba081d87bd09eb0df9f2c8d94733da2d0c7f4e8ea",
+        "width": 941,
+        "height": 1672,
+        "format": "png"
+      },
+      "runtime": {
+        "path": "public/assets/games/dedicated-scenes-v1/runtime/puppet-studio-gameplay-v1.jpg",
+        "sha256": "6c4ac870f3cb4245a349ab6620593dcbdfd07d703aa37ed4650d32b0b40d08d6",
+        "width": 941,
+        "height": 1672,
+        "format": "jpeg"
+      },
+      "owner": "Airvana local demo workspace",
+      "provenance": {
+        "generator": "OpenAI built-in ImageGen",
+        "prompt_set": "docs/game-assets/production-fidelity-v1/prompt-set.md",
+        "reference_policy": "Project-owned cover used only as theme and palette reference; no third-party art or UI copied."
+      },
+      "authorization_status": "pending_human_release_approval",
+      "locale": "zxx",
+      "version": "1.0.0",
+      "expires_at": null,
+      "usage_restrictions": [
+        "LOCAL_DEMO and internal review only",
+        "No external or commercial distribution before human art, brand, channel and compliance approval"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false
+    },
+    {
+      "asset_id": "art_firefly_mail_scene_v1",
+      "game_key": "firefly-mail",
+      "role": "new_dedicated_scene",
+      "source": {
+        "path": "public/assets/games/dedicated-scenes-v1/source/firefly-mail-gameplay-v1.png",
+        "sha256": "1a91a67a1d532b710dbaf370e1a27824e116097dbd0fab04fbffa98d18530876",
+        "width": 941,
+        "height": 1672,
+        "format": "png"
+      },
+      "runtime": {
+        "path": "public/assets/games/dedicated-scenes-v1/runtime/firefly-mail-gameplay-v1.jpg",
+        "sha256": "f4bdb866e0681e2305cf32e1ff036268c8695ea4862035578099400be285237f",
+        "width": 941,
+        "height": 1672,
+        "format": "jpeg"
+      },
+      "owner": "Airvana local demo workspace",
+      "provenance": {
+        "generator": "OpenAI built-in ImageGen",
+        "prompt_set": "docs/game-assets/production-fidelity-v1/prompt-set.md",
+        "reference_policy": "Project-owned cover used only as theme and palette reference; no third-party art or UI copied."
+      },
+      "authorization_status": "pending_human_release_approval",
+      "locale": "zxx",
+      "version": "1.0.0",
+      "expires_at": null,
+      "usage_restrictions": [
+        "LOCAL_DEMO and internal review only",
+        "No external or commercial distribution before human art, brand, channel and compliance approval"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false
+    },
+    {
+      "asset_id": "art_whisker_escape_scene_v1",
+      "game_key": "whisker-escape",
+      "role": "new_dedicated_scene",
+      "source": {
+        "path": "public/assets/games/dedicated-scenes-v1/source/whisker-escape-gameplay-v1.png",
+        "sha256": "5931c7de3c88b49b72a9dc5755daabdeeda0c36bfb3dc06a7e42e58b21e2d809",
+        "width": 941,
+        "height": 1672,
+        "format": "png"
+      },
+      "runtime": {
+        "path": "public/assets/games/dedicated-scenes-v1/runtime/whisker-escape-gameplay-v1.jpg",
+        "sha256": "53874b0f4c201a3452e1bc7f6f4008e7b1a194f029217b1301b72c1dce3bc5bb",
+        "width": 941,
+        "height": 1672,
+        "format": "jpeg"
+      },
+      "owner": "Airvana local demo workspace",
+      "provenance": {
+        "generator": "OpenAI built-in ImageGen",
+        "prompt_set": "docs/game-assets/production-fidelity-v1/prompt-set.md",
+        "reference_policy": "Project-owned cover used only as theme and palette reference; no third-party art or UI copied."
+      },
+      "authorization_status": "pending_human_release_approval",
+      "locale": "zxx",
+      "version": "1.0.0",
+      "expires_at": null,
+      "usage_restrictions": [
+        "LOCAL_DEMO and internal review only",
+        "No external or commercial distribution before human art, brand, channel and compliance approval"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false
+    },
+    {
+      "asset_id": "art_coin_journey_scene_v1",
+      "game_key": "coin-journey",
+      "role": "new_dedicated_scene",
+      "source": {
+        "path": "public/assets/games/dedicated-scenes-v1/source/coin-journey-gameplay-v1.png",
+        "sha256": "5f3e30e8f41e8e05155b495fdd78db8fba905014353d24c668b3795013494ee7",
+        "width": 941,
+        "height": 1672,
+        "format": "png"
+      },
+      "runtime": {
+        "path": "public/assets/games/dedicated-scenes-v1/runtime/coin-journey-gameplay-v1.jpg",
+        "sha256": "6ce437651311772c62bdfd8986e667c81bf0b0c05ed57fb62b353d731e415739",
+        "width": 941,
+        "height": 1672,
+        "format": "jpeg"
+      },
+      "owner": "Airvana local demo workspace",
+      "provenance": {
+        "generator": "OpenAI built-in ImageGen",
+        "prompt_set": "docs/game-assets/production-fidelity-v1/prompt-set.md",
+        "reference_policy": "Project-owned cover used only as theme and palette reference; no third-party art or UI copied."
+      },
+      "authorization_status": "pending_human_release_approval",
+      "locale": "zxx",
+      "version": "1.0.0",
+      "expires_at": null,
+      "usage_restrictions": [
+        "LOCAL_DEMO and internal review only",
+        "No external or commercial distribution before human art, brand, channel and compliance approval"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false
+    },
+    {
+      "asset_id": "art_jungle_dive_scene_v1",
+      "game_key": "jungle-dive",
+      "role": "new_dedicated_scene",
+      "source": {
+        "path": "public/assets/games/dedicated-scenes-v1/source/jungle-dive-gameplay-v1.png",
+        "sha256": "8a8be2a4026261ef818110d1291f19b084460bac631c6411c4b8f0013b7e5fd5",
+        "width": 941,
+        "height": 1672,
+        "format": "png"
+      },
+      "runtime": {
+        "path": "public/assets/games/dedicated-scenes-v1/runtime/jungle-dive-gameplay-v1.jpg",
+        "sha256": "dbf1a8ffdf1b57dabdfbcce3ebfba7306df178af4e6ffb454a4f7d058b1e2008",
+        "width": 941,
+        "height": 1672,
+        "format": "jpeg"
+      },
+      "owner": "Airvana local demo workspace",
+      "provenance": {
+        "generator": "OpenAI built-in ImageGen",
+        "prompt_set": "docs/game-assets/production-fidelity-v1/prompt-set.md",
+        "reference_policy": "Project-owned cover used only as theme and palette reference; no third-party art or UI copied."
+      },
+      "authorization_status": "pending_human_release_approval",
+      "locale": "zxx",
+      "version": "1.0.0",
+      "expires_at": null,
+      "usage_restrictions": [
+        "LOCAL_DEMO and internal review only",
+        "No external or commercial distribution before human art, brand, channel and compliance approval"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false
+    },
+    {
+      "asset_id": "art_rift_strike_scene_v1",
+      "game_key": "rift-strike",
+      "role": "new_dedicated_scene",
+      "source": {
+        "path": "public/assets/games/dedicated-scenes-v1/source/rift-strike-gameplay-v1.png",
+        "sha256": "382dada1e750c9d65370364706e765ee4e72714b197ad05ed17c573d078a47db",
+        "width": 941,
+        "height": 1672,
+        "format": "png"
+      },
+      "runtime": {
+        "path": "public/assets/games/dedicated-scenes-v1/runtime/rift-strike-gameplay-v1.jpg",
+        "sha256": "d9776718ddc7ab763fd92e1b785f48ca7cdf6c5391b63be5d718eaea80840cb6",
+        "width": 941,
+        "height": 1672,
+        "format": "jpeg"
+      },
+      "owner": "Airvana local demo workspace",
+      "provenance": {
+        "generator": "OpenAI built-in ImageGen",
+        "prompt_set": "docs/game-assets/production-fidelity-v1/prompt-set.md",
+        "reference_policy": "Project-owned cover used only as theme and palette reference; no third-party art or UI copied."
+      },
+      "authorization_status": "pending_human_release_approval",
+      "locale": "zxx",
+      "version": "1.0.0",
+      "expires_at": null,
+      "usage_restrictions": [
+        "LOCAL_DEMO and internal review only",
+        "No external or commercial distribution before human art, brand, channel and compliance approval"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false
+    },
+    {
+      "asset_id": "art_formation_knights_scene_v1",
+      "game_key": "formation-knights",
+      "role": "new_dedicated_scene",
+      "source": {
+        "path": "public/assets/games/dedicated-scenes-v1/source/formation-knights-gameplay-v1.png",
+        "sha256": "a40fc93e7f4963e138606e7a8cd1c506c63af7d02e6bddb11538a52815e24699",
+        "width": 941,
+        "height": 1672,
+        "format": "png"
+      },
+      "runtime": {
+        "path": "public/assets/games/dedicated-scenes-v1/runtime/formation-knights-gameplay-v1.jpg",
+        "sha256": "f9d23d8b5ec57036f2840cef251213d9b758a6d63ff67910c1653901aa494944",
+        "width": 941,
+        "height": 1672,
+        "format": "jpeg"
+      },
+      "owner": "Airvana local demo workspace",
+      "provenance": {
+        "generator": "OpenAI built-in ImageGen",
+        "prompt_set": "docs/game-assets/production-fidelity-v1/prompt-set.md",
+        "reference_policy": "Project-owned cover used only as theme and palette reference; no third-party art or UI copied."
+      },
+      "authorization_status": "pending_human_release_approval",
+      "locale": "zxx",
+      "version": "1.0.0",
+      "expires_at": null,
+      "usage_restrictions": [
+        "LOCAL_DEMO and internal review only",
+        "No external or commercial distribution before human art, brand, channel and compliance approval"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false
+    },
+    {
+      "asset_id": "art_sky_cannon_scene_v1",
+      "game_key": "sky-cannon",
+      "role": "new_dedicated_scene",
+      "source": {
+        "path": "public/assets/games/dedicated-scenes-v1/source/sky-cannon-gameplay-v1.png",
+        "sha256": "2d596c85a23bf7555cac4c4e90e92cf26200eee76fb2070c54c145c2cf8f4548",
+        "width": 941,
+        "height": 1672,
+        "format": "png"
+      },
+      "runtime": {
+        "path": "public/assets/games/dedicated-scenes-v1/runtime/sky-cannon-gameplay-v1.jpg",
+        "sha256": "b6a14b6d136e92c4ae6a2d72bcd24a71df60d9f46af496725729b97be972302b",
+        "width": 941,
+        "height": 1672,
+        "format": "jpeg"
+      },
+      "owner": "Airvana local demo workspace",
+      "provenance": {
+        "generator": "OpenAI built-in ImageGen",
+        "prompt_set": "docs/game-assets/production-fidelity-v1/prompt-set.md",
+        "reference_policy": "Project-owned cover used only as theme and palette reference; no third-party art or UI copied."
+      },
+      "authorization_status": "pending_human_release_approval",
+      "locale": "zxx",
+      "version": "1.0.0",
+      "expires_at": null,
+      "usage_restrictions": [
+        "LOCAL_DEMO and internal review only",
+        "No external or commercial distribution before human art, brand, channel and compliance approval"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false
+    },
+    {
+      "asset_id": "art_star_mower_refined_v1",
+      "game_key": "star-mower",
+      "role": "visual_refinement",
+      "source": {
+        "path": "public/assets/games/dedicated-scenes-v1/source/star-mower-gameplay-refined-v1.png",
+        "sha256": "98e9bcbd3554b92a5cfea168eca41a6aef979122a474b35c15bc94210592daaa",
+        "width": 1024,
+        "height": 1536,
+        "format": "png"
+      },
+      "runtime": {
+        "path": "public/assets/games/dedicated-scenes-v1/runtime/star-mower-gameplay-refined-v1.jpg",
+        "sha256": "e8511be70bd2a687b77b26fe6c77afe3a688f907e131daa224310f461d241f57",
+        "width": 941,
+        "height": 1672,
+        "format": "jpeg"
+      },
+      "owner": "Airvana local demo workspace",
+      "provenance": {
+        "generator": "OpenAI built-in ImageGen",
+        "prompt_set": "docs/game-assets/production-fidelity-v1/prompt-set.md",
+        "reference_policy": "Project-owned local gameplay image used as an edit target; original file retained."
+      },
+      "authorization_status": "pending_human_release_approval",
+      "locale": "zxx",
+      "version": "1.0.0",
+      "expires_at": null,
+      "usage_restrictions": [
+        "LOCAL_DEMO and internal review only",
+        "No external or commercial distribution before human art, brand, channel and compliance approval"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false
+    },
+    {
+      "asset_id": "art_deep_catch_refined_v1",
+      "game_key": "deep-catch",
+      "role": "visual_refinement",
+      "source": {
+        "path": "public/assets/games/dedicated-scenes-v1/source/deep-catch-gameplay-refined-v1.png",
+        "sha256": "f4e7f4de27da142ef66a56e5f8e8e99751cad6b4736a0fd00674014e89cbd7fa",
+        "width": 941,
+        "height": 1672,
+        "format": "png"
+      },
+      "runtime": {
+        "path": "public/assets/games/dedicated-scenes-v1/runtime/deep-catch-gameplay-refined-v1.jpg",
+        "sha256": "777276b5b59e83108529479c83f1e37cf7cc2fc3a8710e0f696862a1244a50c7",
+        "width": 941,
+        "height": 1672,
+        "format": "jpeg"
+      },
+      "owner": "Airvana local demo workspace",
+      "provenance": {
+        "generator": "OpenAI built-in ImageGen",
+        "prompt_set": "docs/game-assets/production-fidelity-v1/prompt-set.md",
+        "reference_policy": "Project-owned local gameplay image used as an edit target; original file retained."
+      },
+      "authorization_status": "pending_human_release_approval",
+      "locale": "zxx",
+      "version": "1.0.0",
+      "expires_at": null,
+      "usage_restrictions": [
+        "LOCAL_DEMO and internal review only",
+        "No external or commercial distribution before human art, brand, channel and compliance approval"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false
+    },
+    {
+      "asset_id": "art_void_squadron_refined_v1",
+      "game_key": "void-squadron",
+      "role": "visual_refinement",
+      "source": {
+        "path": "public/assets/games/dedicated-scenes-v1/source/void-squadron-gameplay-refined-v1.png",
+        "sha256": "f2dcf2078147e4c7d57ef6acb93d88bc10d96fd5beb5cd9f9010559e1e7a206d",
+        "width": 941,
+        "height": 1672,
+        "format": "png"
+      },
+      "runtime": {
+        "path": "public/assets/games/dedicated-scenes-v1/runtime/void-squadron-gameplay-refined-v1.jpg",
+        "sha256": "476266852f3813d4028635e3f3ae74a827b5b4d6da43cd9c022b0b7cea8d51dc",
+        "width": 941,
+        "height": 1672,
+        "format": "jpeg"
+      },
+      "owner": "Airvana local demo workspace",
+      "provenance": {
+        "generator": "OpenAI built-in ImageGen",
+        "prompt_set": "docs/game-assets/production-fidelity-v1/prompt-set.md",
+        "reference_policy": "Project-owned local gameplay image used as an edit target; original file retained."
+      },
+      "authorization_status": "pending_human_release_approval",
+      "locale": "zxx",
+      "version": "1.0.0",
+      "expires_at": null,
+      "usage_restrictions": [
+        "LOCAL_DEMO and internal review only",
+        "No external or commercial distribution before human art, brand, channel and compliance approval"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false
+    },
+    {
+      "asset_id": "art_pulse_forge_refined_v1",
+      "game_key": "pulse-forge",
+      "role": "visual_refinement",
+      "source": {
+        "path": "public/assets/games/dedicated-scenes-v1/source/pulse-forge-gameplay-refined-v1.png",
+        "sha256": "4aee53a06947ff6567e9a0047d54b9fff351b68142b4d663ae73591fe691b6da",
+        "width": 941,
+        "height": 1672,
+        "format": "png"
+      },
+      "runtime": {
+        "path": "public/assets/games/dedicated-scenes-v1/runtime/pulse-forge-gameplay-refined-v1.jpg",
+        "sha256": "003515c599d4f5e1a207e5d8cb66a89e3fe3f095138d56cd6885142d769c02a5",
+        "width": 941,
+        "height": 1672,
+        "format": "jpeg"
+      },
+      "owner": "Airvana local demo workspace",
+      "provenance": {
+        "generator": "OpenAI built-in ImageGen",
+        "prompt_set": "docs/game-assets/production-fidelity-v1/prompt-set.md",
+        "reference_policy": "Project-owned local gameplay image used as an edit target; original file retained."
+      },
+      "authorization_status": "pending_human_release_approval",
+      "locale": "zxx",
+      "version": "1.0.0",
+      "expires_at": null,
+      "usage_restrictions": [
+        "LOCAL_DEMO and internal review only",
+        "No external or commercial distribution before human art, brand, channel and compliance approval"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false
+    },
+    {
+      "asset_id": "art_studio_wardrobe_refined_v1",
+      "game_key": "studio-wardrobe",
+      "role": "visual_refinement",
+      "source": {
+        "path": "public/assets/games/dedicated-scenes-v1/source/studio-wardrobe-gameplay-refined-v1.png",
+        "sha256": "38527e42d3c94f67b8122416d6cfc2362446b6f06cfee49b07f6e97465c0a29c",
+        "width": 941,
+        "height": 1672,
+        "format": "png"
+      },
+      "runtime": {
+        "path": "public/assets/games/dedicated-scenes-v1/runtime/studio-wardrobe-gameplay-refined-v1.jpg",
+        "sha256": "b6cbcc43c44760d81875827f3e8cd40f21ee23bda9e28ecbd68a820c8ab3c3c4",
+        "width": 941,
+        "height": 1672,
+        "format": "jpeg"
+      },
+      "owner": "Airvana local demo workspace",
+      "provenance": {
+        "generator": "OpenAI built-in ImageGen",
+        "prompt_set": "docs/game-assets/production-fidelity-v1/prompt-set.md",
+        "reference_policy": "Project-owned local gameplay image used as an edit target; original file retained."
+      },
+      "authorization_status": "pending_human_release_approval",
+      "locale": "zxx",
+      "version": "1.0.0",
+      "expires_at": null,
+      "usage_restrictions": [
+        "LOCAL_DEMO and internal review only",
+        "No external or commercial distribution before human art, brand, channel and compliance approval"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false
+    },
+    {
+      "asset_id": "art_microbe_arena_refined_v1",
+      "game_key": "microbe-arena",
+      "role": "visual_refinement",
+      "source": {
+        "path": "public/assets/games/dedicated-scenes-v1/source/microbe-arena-gameplay-refined-v1.png",
+        "sha256": "b2c0367fb22bbf5d5a4c9cf46e89160dd92672baf0cf586ea1f8d6290e5d3f7f",
+        "width": 941,
+        "height": 1672,
+        "format": "png"
+      },
+      "runtime": {
+        "path": "public/assets/games/dedicated-scenes-v1/runtime/microbe-arena-gameplay-refined-v1.jpg",
+        "sha256": "9692e46f48b976db53a8950a734fd586ca223a858c2991fafd617cba78f537a6",
+        "width": 941,
+        "height": 1672,
+        "format": "jpeg"
+      },
+      "owner": "Airvana local demo workspace",
+      "provenance": {
+        "generator": "OpenAI built-in ImageGen",
+        "prompt_set": "docs/game-assets/production-fidelity-v1/prompt-set.md",
+        "reference_policy": "Project-owned local gameplay image used as an edit target; original file retained."
+      },
+      "authorization_status": "pending_human_release_approval",
+      "locale": "zxx",
+      "version": "1.0.0",
+      "expires_at": null,
+      "usage_restrictions": [
+        "LOCAL_DEMO and internal review only",
+        "No external or commercial distribution before human art, brand, channel and compliance approval"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false
+    },
+    {
+      "asset_id": "art_crystal_bastion_refined_v1",
+      "game_key": "crystal-bastion",
+      "role": "visual_refinement",
+      "source": {
+        "path": "public/assets/games/dedicated-scenes-v1/source/crystal-bastion-gameplay-refined-v1.png",
+        "sha256": "6a421f75f7e085b8b443c6696365b57f6553e29afd860034e73f0c0aa2993dc7",
+        "width": 941,
+        "height": 1672,
+        "format": "png"
+      },
+      "runtime": {
+        "path": "public/assets/games/dedicated-scenes-v1/runtime/crystal-bastion-gameplay-refined-v1.jpg",
+        "sha256": "4d3cbfd3656a91aa832a3b3ebcaacbf37a603fcd376edacb72f112e6fda01118",
+        "width": 941,
+        "height": 1672,
+        "format": "jpeg"
+      },
+      "owner": "Airvana local demo workspace",
+      "provenance": {
+        "generator": "OpenAI built-in ImageGen",
+        "prompt_set": "docs/game-assets/production-fidelity-v1/prompt-set.md",
+        "reference_policy": "Project-owned local gameplay image used as an edit target; original file retained."
+      },
+      "authorization_status": "pending_human_release_approval",
+      "locale": "zxx",
+      "version": "1.0.0",
+      "expires_at": null,
+      "usage_restrictions": [
+        "LOCAL_DEMO and internal review only",
+        "No external or commercial distribution before human art, brand, channel and compliance approval"
+      ],
+      "review_status": "technical_review_passed",
+      "release_approved": false
+    }
+  ]
+}

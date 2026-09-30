@@ -1,0 +1,32 @@
+[Unit]
+Description=Airvana v5 fullstack server
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=airvana
+Group=airvana
+WorkingDirectory=/opt/airvana/current
+EnvironmentFile=/opt/airvana/.env
+ExecStartPre=/usr/bin/test -f /opt/airvana/current/server.mjs
+ExecStart=/usr/bin/node server.mjs
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=20
+UMask=0077
+
+NoNewPrivileges=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectHome=true
+ProtectSystem=strict
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+ReadWritePaths=/var/lib/airvana
+LimitNOFILE=8192
+
+[Install]
+WantedBy=multi-user.target

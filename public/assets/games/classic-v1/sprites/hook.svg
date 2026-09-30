@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="hook">
+<title>hook — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M33 3V26M33 43Q32 58 44 58Q57 58 56 44V34" fill="none" stroke="#243042" stroke-width="5"/><path d="M33 3V26M33 43Q32 58 44 58Q57 58 56 44V34" fill="none" stroke="#fff4d2" stroke-width="2"/><path d="M56 29L47 39H56Z" fill="#fff4d2" /><ellipse cx="32" cy="32" rx="8" ry="13" fill="#d95d39" /><path d="M24 32H40V39Q32 51 24 39Z" fill="#fff4d2" />
+</g>
+</svg>

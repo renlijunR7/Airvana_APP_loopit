@@ -1,0 +1,275 @@
+{
+  "schema_version": "1.0.0",
+  "playable_id": "plb_island_sling",
+  "campaign_id": "reference-arcade-local-v1",
+  "contract_version": "1.0.0",
+  "version": "1.0.0",
+  "status": "draft",
+  "template_id": "reference-arcade-v1",
+  "locales": {
+    "default": "zh-CN",
+    "supported": [
+      "zh-CN"
+    ]
+  },
+  "presentation": {
+    "title": "浮岛弹射队",
+    "tone": "明亮原创休闲手游",
+    "theme": "island-sling",
+    "logo_asset_id": "island-sling",
+    "color_tokens": {
+      "primary": "#238B98",
+      "secondary": "#EDB454",
+      "background": "#E6F9F6",
+      "text": "#284352"
+    },
+    "copy_pack": {
+      "title": "浮岛弹射队",
+      "local": "本地试玩"
+    }
+  },
+  "gameplay": {
+    "mechanic": "other",
+    "core_loop": "瞄准弹射、碰撞摧毁、清除守卫；失败重试，完成三关结束",
+    "rounds": 3,
+    "target_duration_seconds": 180,
+    "difficulty": {
+      "minimum": 1,
+      "maximum": 3,
+      "default": 1
+    },
+    "input_modes": [
+      "tap",
+      "drag",
+      "swipe",
+      "keyboard"
+    ],
+    "state_transitions": [
+      {
+        "from": "intro",
+        "event": "start",
+        "to": "playing"
+      },
+      {
+        "from": "playing",
+        "event": "pause",
+        "to": "paused"
+      },
+      {
+        "from": "paused",
+        "event": "resume",
+        "to": "playing"
+      },
+      {
+        "from": "playing",
+        "event": "goal",
+        "to": "success"
+      },
+      {
+        "from": "playing",
+        "event": "lost",
+        "to": "failure"
+      },
+      {
+        "from": "failure",
+        "event": "retry",
+        "to": "playing"
+      },
+      {
+        "from": "intro",
+        "event": "close",
+        "to": "exit"
+      }
+    ],
+    "scoring": {
+      "enabled": true,
+      "rule": "依据本游戏真实操作及关卡目标计分；分数及资源无货币价值",
+      "minimum": 0,
+      "maximum": 100000
+    }
+  },
+  "screens": [
+    {
+      "screen_id": "intro",
+      "state": "intro",
+      "copy_keys": [
+        "title"
+      ],
+      "asset_ids": [
+        "island-sling"
+      ],
+      "actions": [
+        "start"
+      ]
+    },
+    {
+      "screen_id": "playing",
+      "state": "playing",
+      "copy_keys": [
+        "title"
+      ],
+      "asset_ids": [
+        "island-sling"
+      ],
+      "actions": [
+        "pause",
+        "exit"
+      ]
+    },
+    {
+      "screen_id": "paused",
+      "state": "paused",
+      "copy_keys": [
+        "title"
+      ],
+      "asset_ids": [
+        "island-sling"
+      ],
+      "actions": [
+        "pause",
+        "exit"
+      ]
+    },
+    {
+      "screen_id": "success",
+      "state": "success",
+      "copy_keys": [
+        "title"
+      ],
+      "asset_ids": [
+        "island-sling"
+      ],
+      "actions": [
+        "pause",
+        "exit"
+      ]
+    },
+    {
+      "screen_id": "failure",
+      "state": "failure",
+      "copy_keys": [
+        "title"
+      ],
+      "asset_ids": [
+        "island-sling"
+      ],
+      "actions": [
+        "retry"
+      ]
+    }
+  ],
+  "cta": {
+    "cta_id": "none",
+    "type": "none",
+    "label_key": "",
+    "destination_id": "",
+    "allowed_states": [],
+    "open_mode": "same_context"
+  },
+  "reward_presentation": {
+    "reward_id": "none",
+    "type": "none",
+    "eligibility_copy_key": "local",
+    "terms_copy_key": "local",
+    "claim_action": ""
+  },
+  "field_authority": {
+    "locked_fields": [
+      "cta",
+      "reward_presentation",
+      "telemetry"
+    ],
+    "editable_fields": [
+      "presentation",
+      "gameplay"
+    ],
+    "agentic_fields": [],
+    "runtime_fields": [
+      "run_id",
+      "level"
+    ]
+  },
+  "runtime_policy": {
+    "segmentation_inputs": [],
+    "agentic_bounds": [],
+    "experiment_id": null,
+    "variant_id": null,
+    "fallback_behavior": "错误显示重试；失焦暂停；无外部服务依赖"
+  },
+  "telemetry": {
+    "required_events": [
+      "impression",
+      "play_start",
+      "valid_interaction",
+      "level_complete",
+      "play_complete",
+      "play_fail",
+      "replay"
+    ],
+    "common_properties": [
+      "game_key",
+      "level",
+      "run_id",
+      "version",
+      "score",
+      "status",
+      "local_demo",
+      "reward_issued",
+      "build_id",
+      "campaign_id",
+      "channel_id",
+      "consent_state",
+      "contract_version",
+      "creative_id",
+      "device_class",
+      "event_id",
+      "event_time",
+      "kol_id",
+      "link_id",
+      "locale",
+      "playable_config_version",
+      "playable_id",
+      "region",
+      "session_id"
+    ],
+    "deduplication_strategy": "每实例每关terminal once",
+    "consent_behavior": "本地运行日志，不新增外部追踪"
+  },
+  "build": {
+    "target": "web_h5",
+    "entry": "/reference-arcade.html?game=island-sling",
+    "asset_base": "/assets/games/reference-v1/",
+    "minimum_viewport_width": 320,
+    "supported_orientations": [
+      "portrait"
+    ],
+    "dependency_lock": "package-lock.json (matter-js@0.20.0)",
+    "environment": "local"
+  },
+  "constraints": {
+    "approved_asset_ids": [
+      "island-sling"
+    ],
+    "prohibited_phrases": [
+      "官方复刻",
+      "官方授权"
+    ],
+    "required_disclosures": [
+      "LOCAL"
+    ],
+    "privacy_prohibited_fields": [
+      "seed_phrase",
+      "private_key",
+      "raw_kyc_document"
+    ],
+    "manual_review_required": true
+  },
+  "metadata": {
+    "created_at": "2026-09-07T00:00:00+08:00",
+    "updated_at": "2026-09-07T00:00:00+08:00",
+    "created_by": "Codex",
+    "notes": [
+      "本地原创实现，不是原版游戏完整复刻"
+    ]
+  }
+}

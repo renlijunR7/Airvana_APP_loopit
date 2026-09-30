@@ -1,0 +1,1525 @@
+{
+  "pack": "casual-v1",
+  "version": "5.0.0",
+  "asset_kind": "gameplay_sprites",
+  "reference_role": "style only; user supplied farm-game screenshot",
+  "reference": "/var/folders/2b/ynzvsrxj3y35t269xzsm7hj80000gn/T/codex-clipboard-4d370e2b-e554-4440-b330-cd61b0a9c51c.jpg",
+  "style": "bright polished 2.5D casual mobile game",
+  "generation": "built-in image_gen tool",
+  "count": 64,
+  "processing": "Built-in ImageGen made all artwork and the uniform magenta source matte. Deterministic game import removes that chroma-key background, mathematically unmixes only boundary pixels, extracts reviewed sprite cells and trims transparent margins. No paintover, shape redesign, resynthesis, or previous-art fallback.",
+  "authorization_status": "user-requested new game art; reference artwork is not copied into output",
+  "production_status": "LOCAL_DEMO",
+  "source_assets": [
+    {
+      "family": "action",
+      "source_file": "sources/sprites/action-atlas.png",
+      "original_generated_path": "/Users/lijunren/.codex/generated_images/01a0722a-895a-70f1-8466-167e27ac3cd9/exec-fb3bb2c5-e382-4e9c-8cd3-c12a673768f5.png",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 1666047,
+      "sha256": "8cbc84a0448cea7b6fe48ff4cb0b087b089944998eda036628efe97d85b72794",
+      "has_generated_alpha": false,
+      "alpha_import": "uniform-magenta-key-boundary-unmix",
+      "prompt": "Use case: stylized-concept.\nAsset type: Production gameplay sprite sheet, not a screenshot or UI mockup.\nInput image 1 is STYLE REFERENCE ONLY: the bright polished 2.5D casual farm mobile-game scene. Create new original objects, do not reproduce its characters, train, UI or composition.\nArt direction: Charming premium casual mobile-game artwork, rounded toy-like sculpted volumes, cheerful saturated greens, warm golds and clear blues, hand-painted 3D cartoon finish, soft controlled shading and clear readable silhouettes. Consistent soft light from upper left. Rendered-painting quality like the reference game assets, not realistic photos or shiny AI fantasy art.\nLayout is TECHNICAL: square canvas, exactly 4 columns × 4 rows of equally sized invisible cells. One distinct complete isolated object centered inside EACH cell. Each sprite must fit within the central 70% of its cell, leaving at least 15% empty transparent padding on all four sides. Never touch or cross cell boundaries. No panels, no labels, no letters, no numbers, no grid lines, no UI, no watermark.\nBackground: genuine transparent alpha channel everywhere outside the 16 objects; no white backdrop, no checkerboard painted into image, no floor, no scene, no shadow extending outside a cell.\nAvoid: flat vector illustration, black outlines, pixel art, thick comic contour, photorealistic material, cinematic light, lens flare, glow halo, dark purple fantasy mood, hyper-detailed ornate filigree, generic emoji.\nExactly 16 DIFFERENT action-game sprites, reading order left-to-right top-to-bottom:\nROW 1: (1) full-body cheerful young runner in red cap blue outfit, side-facing right in a running pose; (2) orange-and-white road barricade with two feet; (3) chunky golden lightning-bolt energy pickup; (4) cute compact red racing car, top-down angled slightly so front faces up.\nROW 2: (5) friendly white-blue toy spaceship, nose upwards; (6) red-orange enemy toy spaceship, nose downwards, distinct from player ship; (7) small rounded golden projectile capsule; (8) cheerful blue four-rotor delivery drone.\nROW 3: (9) cute orange fish swimming right; (10) larger blue predatory fish swimming right with a few cartoon teeth, not frightening; (11) fishing hook on short line with red-white float; (12) friendly green round microbe with face.\nROW 4: (13) grumpy reddish round enemy microbe; (14) green-red push lawnmower seen three-quarter top; (15) red mushroom with cream spots; (16) friendly wheeled toy cannon pointing upper-right.\nAll characters have complete bodies and naturally joined limbs. All 16 objects readable at 64 px.",
+      "background_edit_prompt": "Use case: precise-object-edit.\nChange ONLY the background of this production 4×4 sprite sheet.\nReplace every visible white and gray checkerboard square with one perfectly uniform flat chroma-key MAGENTA background, exact RGB (255,0,255), hex #FF00FF. All gaps between sprites, enclosed negative spaces, outer margins and cell padding must have that exact same solid magenta color.\nPreserve all 16 existing objects EXACTLY: same positions, sizes, colors, shapes, expressions, poses, fine details, hand-painted 2.5D rendering, soft shading on the objects. Do not move or regenerate objects. No cropping. Keep full bodies, leaves, antennae, handles, holes and all separated components.\nRemove the background contact shadows only so the magenta backdrop is fully flat. No checkerboard, no white/gray/black background, no alpha simulation. No text, no grid lines, no labels, no framing. The result will undergo deterministic chroma-key import into a game engine.",
+      "source_history": [
+        {
+          "path": "/Users/lijunren/.codex/generated_images/01a0722a-895a-70f1-8466-167e27ac3cd9/exec-11e24070-6174-4c3e-8391-365c4b1b8ab4.png",
+          "role": "original-generation-with-baked-checkerboard",
+          "prompt": "Use case: stylized-concept.\nAsset type: Production gameplay sprite sheet, not a screenshot or UI mockup.\nInput image 1 is STYLE REFERENCE ONLY: the bright polished 2.5D casual farm mobile-game scene. Create new original objects, do not reproduce its characters, train, UI or composition.\nArt direction: Charming premium casual mobile-game artwork, rounded toy-like sculpted volumes, cheerful saturated greens, warm golds and clear blues, hand-painted 3D cartoon finish, soft controlled shading and clear readable silhouettes. Consistent soft light from upper left. Rendered-painting quality like the reference game assets, not realistic photos or shiny AI fantasy art.\nLayout is TECHNICAL: square canvas, exactly 4 columns × 4 rows of equally sized invisible cells. One distinct complete isolated object centered inside EACH cell. Each sprite must fit within the central 70% of its cell, leaving at least 15% empty transparent padding on all four sides. Never touch or cross cell boundaries. No panels, no labels, no letters, no numbers, no grid lines, no UI, no watermark.\nBackground: genuine transparent alpha channel everywhere outside the 16 objects; no white backdrop, no checkerboard painted into image, no floor, no scene, no shadow extending outside a cell.\nAvoid: flat vector illustration, black outlines, pixel art, thick comic contour, photorealistic material, cinematic light, lens flare, glow halo, dark purple fantasy mood, hyper-detailed ornate filigree, generic emoji.\nExactly 16 DIFFERENT action-game sprites, reading order left-to-right top-to-bottom:\nROW 1: (1) full-body cheerful young runner in red cap blue outfit, side-facing right in a running pose; (2) orange-and-white road barricade with two feet; (3) chunky golden lightning-bolt energy pickup; (4) cute compact red racing car, top-down angled slightly so front faces up.\nROW 2: (5) friendly white-blue toy spaceship, nose upwards; (6) red-orange enemy toy spaceship, nose downwards, distinct from player ship; (7) small rounded golden projectile capsule; (8) cheerful blue four-rotor delivery drone.\nROW 3: (9) cute orange fish swimming right; (10) larger blue predatory fish swimming right with a few cartoon teeth, not frightening; (11) fishing hook on short line with red-white float; (12) friendly green round microbe with face.\nROW 4: (13) grumpy reddish round enemy microbe; (14) green-red push lawnmower seen three-quarter top; (15) red mushroom with cream spots; (16) friendly wheeled toy cannon pointing upper-right.\nAll characters have complete bodies and naturally joined limbs. All 16 objects readable at 64 px.",
+          "source_file": "sources/sprites/action-source-0.png",
+          "bytes": 1655168,
+          "sha256": "a2f7408614588c57d158e7f67999647604817a8e56b12ffc2530dbf246c4db73"
+        },
+        {
+          "path": "/Users/lijunren/.codex/generated_images/01a0722a-895a-70f1-8466-167e27ac3cd9/exec-1000b02a-c37a-428b-9d83-c91223dbcd3f.png",
+          "role": "unsuccessful-native-alpha-edit-rgb-result",
+          "prompt": "Use case: background-extraction.\nEdit the attached sprite sheet only by removing the white/light-gray checkerboard background. The checkerboard is currently baked into the pixels and is NOT transparency.\nCreate a PNG with a GENUINE transparent ALPHA channel outside all 16 objects. The whole canvas background including all gaps and cell padding must be alpha=0, not white, gray, black, checkerboard, or another painted color.\nKeep all 16 sprites, exact 4×4 cell positions, their full shapes, colors, proportions, lighting and painted rendering unchanged. Preserve every complete object, antenna, fingers, hooks, wings and wheels. Remove the floor contact shadows as part of the background extraction.\nThis is production asset extraction, not a mockup of transparency. No other edits. No grid, no text, no frame. Output real RGBA transparency.",
+          "source_file": "sources/sprites/action-source-1.png",
+          "bytes": 1659529,
+          "sha256": "e0ca3d14245a8d1970cfbe2c85979cc9c698193469a9da8cc840d9a5c9d0c8b1"
+        }
+      ]
+    },
+    {
+      "family": "puzzle",
+      "source_file": "sources/sprites/puzzle-atlas.png",
+      "original_generated_path": "/Users/lijunren/.codex/generated_images/01a0722a-895a-70f1-8466-167e27ac3cd9/exec-5f4236f0-8279-4201-bb32-f5ad9a887957.png",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 1643907,
+      "sha256": "47d9aac203a8531041e2a2523a9c9c54a3649c976a55a437665d401476da0349",
+      "has_generated_alpha": false,
+      "alpha_import": "uniform-magenta-key-boundary-unmix",
+      "prompt": "Use case: stylized-concept.\nAsset type: Production gameplay sprite sheet, not a screenshot or UI mockup.\nInput image 1 is STYLE REFERENCE ONLY: the bright polished 2.5D casual farm mobile-game scene. Create new original objects, do not reproduce its characters, train, UI or composition.\nArt direction: Charming premium casual mobile-game artwork, rounded toy-like sculpted volumes, cheerful saturated greens, warm golds and clear blues, hand-painted 3D cartoon finish, soft controlled shading and clear readable silhouettes. Consistent soft light from upper left. Rendered-painting quality like the reference game assets, not realistic photos or shiny AI fantasy art.\nLayout is TECHNICAL: square canvas, exactly 4 columns × 4 rows of equally sized invisible cells. One distinct complete isolated object centered inside EACH cell. Each sprite must fit within the central 70% of its cell, leaving at least 15% empty transparent padding on all four sides. Never touch or cross cell boundaries. No panels, no labels, no letters, no numbers, no grid lines, no UI, no watermark.\nBackground: genuine transparent alpha channel everywhere outside the 16 objects; no white backdrop, no checkerboard painted into image, no floor, no scene, no shadow extending outside a cell.\nAvoid: flat vector illustration, black outlines, pixel art, thick comic contour, photorealistic material, cinematic light, lens flare, glow halo, dark purple fantasy mood, hyper-detailed ornate filigree, generic emoji.\nExactly 16 DIFFERENT puzzle-game sprites, reading order left-to-right top-to-bottom:\nROW 1: (1) plump green apple with leaf; (2) yellow pear with leaf; (3) plump red apple with leaf; (4) ripe orange fruit with leaf.\nROW 2: (5) purple plum with leaf; (6) golden apple wearing a small gold crown, the final evolved fruit; (7) chunky green emerald gem; (8) chunky red ruby gem.\nROW 3: (9) chunky blue sapphire gem; (10) chunky purple amethyst gem; (11) upside-down red game cup, simple complete shell shape with no handle; (12) plump gold five-point star.\nROW 4: (13) wrapped cardboard parcel box with string; (14) rolled cream parchment scroll with no writing; (15) large gold old-fashioned key; (16) pink daisy flower with green stem and two leaves.\nFruit are plump hand-painted game items, not photographic fruit. Gems are simple bright toy facets, no sparkling halo. All 16 objects readable at 64 px.",
+      "background_edit_prompt": "Use case: precise-object-edit.\nChange ONLY the background of this production 4×4 sprite sheet.\nReplace every visible white and gray checkerboard square with one perfectly uniform flat chroma-key MAGENTA background, exact RGB (255,0,255), hex #FF00FF. All gaps between sprites, enclosed negative spaces, outer margins and cell padding must have that exact same solid magenta color.\nPreserve all 16 existing objects EXACTLY: same positions, sizes, colors, shapes, expressions, poses, fine details, hand-painted 2.5D rendering, soft shading on the objects. Do not move or regenerate objects. No cropping. Keep full bodies, leaves, antennae, handles, holes and all separated components.\nRemove the background contact shadows only so the magenta backdrop is fully flat. No checkerboard, no white/gray/black background, no alpha simulation. No text, no grid lines, no labels, no framing. The result will undergo deterministic chroma-key import into a game engine.",
+      "source_history": [
+        {
+          "path": "/Users/lijunren/.codex/generated_images/01a0722a-895a-70f1-8466-167e27ac3cd9/exec-b33bd8e4-2756-4f2a-bba9-185cd6e6ffe6.png",
+          "role": "original-generation-with-baked-checkerboard",
+          "prompt": "Use case: stylized-concept.\nAsset type: Production gameplay sprite sheet, not a screenshot or UI mockup.\nInput image 1 is STYLE REFERENCE ONLY: the bright polished 2.5D casual farm mobile-game scene. Create new original objects, do not reproduce its characters, train, UI or composition.\nArt direction: Charming premium casual mobile-game artwork, rounded toy-like sculpted volumes, cheerful saturated greens, warm golds and clear blues, hand-painted 3D cartoon finish, soft controlled shading and clear readable silhouettes. Consistent soft light from upper left. Rendered-painting quality like the reference game assets, not realistic photos or shiny AI fantasy art.\nLayout is TECHNICAL: square canvas, exactly 4 columns × 4 rows of equally sized invisible cells. One distinct complete isolated object centered inside EACH cell. Each sprite must fit within the central 70% of its cell, leaving at least 15% empty transparent padding on all four sides. Never touch or cross cell boundaries. No panels, no labels, no letters, no numbers, no grid lines, no UI, no watermark.\nBackground: genuine transparent alpha channel everywhere outside the 16 objects; no white backdrop, no checkerboard painted into image, no floor, no scene, no shadow extending outside a cell.\nAvoid: flat vector illustration, black outlines, pixel art, thick comic contour, photorealistic material, cinematic light, lens flare, glow halo, dark purple fantasy mood, hyper-detailed ornate filigree, generic emoji.\nExactly 16 DIFFERENT puzzle-game sprites, reading order left-to-right top-to-bottom:\nROW 1: (1) plump green apple with leaf; (2) yellow pear with leaf; (3) plump red apple with leaf; (4) ripe orange fruit with leaf.\nROW 2: (5) purple plum with leaf; (6) golden apple wearing a small gold crown, the final evolved fruit; (7) chunky green emerald gem; (8) chunky red ruby gem.\nROW 3: (9) chunky blue sapphire gem; (10) chunky purple amethyst gem; (11) upside-down red game cup, simple complete shell shape with no handle; (12) plump gold five-point star.\nROW 4: (13) wrapped cardboard parcel box with string; (14) rolled cream parchment scroll with no writing; (15) large gold old-fashioned key; (16) pink daisy flower with green stem and two leaves.\nFruit are plump hand-painted game items, not photographic fruit. Gems are simple bright toy facets, no sparkling halo. All 16 objects readable at 64 px.",
+          "source_file": "sources/sprites/puzzle-source-0.png",
+          "bytes": 1564728,
+          "sha256": "5e71d5516aea805a3584d2747d015727da2a42495b43e8c94788f67f26e6eabb"
+        }
+      ]
+    },
+    {
+      "family": "strategy",
+      "source_file": "sources/sprites/strategy-atlas.png",
+      "original_generated_path": "/Users/lijunren/.codex/generated_images/01a0722a-895a-70f1-8466-167e27ac3cd9/exec-d0ddb98e-1058-48a4-b125-8d041412db54.png",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 1794129,
+      "sha256": "273b47d52c7b2843d2cee19a1ac008ce8a2275f4ec68a4b7d8eb18f59003c5a6",
+      "has_generated_alpha": false,
+      "alpha_import": "uniform-magenta-key-boundary-unmix",
+      "prompt": "Use case: stylized-concept.\nAsset type: Production gameplay sprite sheet, not a screenshot or UI mockup.\nInput image 1 is STYLE REFERENCE ONLY: the bright polished 2.5D casual farm mobile-game scene. Create new original objects, do not reproduce its characters, train, UI or composition.\nArt direction: Charming premium casual mobile-game artwork, rounded toy-like sculpted volumes, cheerful saturated greens, warm golds and clear blues, hand-painted 3D cartoon finish, soft controlled shading and clear readable silhouettes. Consistent soft light from upper left. Rendered-painting quality like the reference game assets, not realistic photos or shiny AI fantasy art.\nLayout is TECHNICAL: square canvas, exactly 4 columns × 4 rows of equally sized invisible cells. One distinct complete isolated object centered inside EACH cell. Each sprite must fit within the central 70% of its cell, leaving at least 15% empty transparent padding on all four sides. Never touch or cross cell boundaries. No panels, no labels, no letters, no numbers, no grid lines, no UI, no watermark.\nBackground: genuine transparent alpha channel everywhere outside the 16 objects; no white backdrop, no checkerboard painted into image, no floor, no scene, no shadow extending outside a cell.\nAvoid: flat vector illustration, black outlines, pixel art, thick comic contour, photorealistic material, cinematic light, lens flare, glow halo, dark purple fantasy mood, hyper-detailed ornate filigree, generic emoji.\nExactly 16 DIFFERENT adventure/strategy game sprites, reading order left-to-right top-to-bottom:\nROW 1: (1) full-body friendly blue-clad adventurer with red scarf and small brown boots; (2) stout friendly red robot sentinel with two arms and two feet; (3) full-body brave gold-blue knight guardian with small shield; (4) upright chunky sky-blue crystal.\nROW 2: (5) compact blue toy turret on a little mechanical base; (6) full-body cartoon masked bandit with orange jacket and brown boots, playful not scary; (7) single rounded steel sword with golden hilt; (8) rounded blue shield with gold border.\nROW 3: (9) small round red healing potion bottle with cork; (10) chunky pale-blue snowflake frost token; (11) friendly orange flame-shaped fire token; (12) pair of brown explorer boots.\nROW 4: (13) orange camping tent; (14) cozy small cream farm cottage with red roof; (15) lush rounded green fruit tree with brown trunk; (16) open wooden treasure chest filled with gold coins.\nThe human and robot actors must be full-body isolated sprites with legs visible, no portrait framing. Props must be charming farm-adventure toys, no ornate dark fantasy. All 16 objects readable at 64 px.",
+      "background_edit_prompt": "Use case: precise-object-edit.\nChange ONLY the background of this production 4×4 sprite sheet.\nReplace every visible white and gray checkerboard square with one perfectly uniform flat chroma-key MAGENTA background, exact RGB (255,0,255), hex #FF00FF. All gaps between sprites, enclosed negative spaces, outer margins and cell padding must have that exact same solid magenta color.\nPreserve all 16 existing objects EXACTLY: same positions, sizes, colors, shapes, expressions, poses, fine details, hand-painted 2.5D rendering, soft shading on the objects. Do not move or regenerate objects. No cropping. Keep full bodies, leaves, antennae, handles, holes and all separated components.\nRemove the background contact shadows only so the magenta backdrop is fully flat. No checkerboard, no white/gray/black background, no alpha simulation. No text, no grid lines, no labels, no framing. The result will undergo deterministic chroma-key import into a game engine.",
+      "source_history": [
+        {
+          "path": "/Users/lijunren/.codex/generated_images/01a0722a-895a-70f1-8466-167e27ac3cd9/exec-021485d3-e264-4912-be19-f92aeaf7276c.png",
+          "role": "original-generation-with-baked-checkerboard",
+          "prompt": "Use case: stylized-concept.\nAsset type: Production gameplay sprite sheet, not a screenshot or UI mockup.\nInput image 1 is STYLE REFERENCE ONLY: the bright polished 2.5D casual farm mobile-game scene. Create new original objects, do not reproduce its characters, train, UI or composition.\nArt direction: Charming premium casual mobile-game artwork, rounded toy-like sculpted volumes, cheerful saturated greens, warm golds and clear blues, hand-painted 3D cartoon finish, soft controlled shading and clear readable silhouettes. Consistent soft light from upper left. Rendered-painting quality like the reference game assets, not realistic photos or shiny AI fantasy art.\nLayout is TECHNICAL: square canvas, exactly 4 columns × 4 rows of equally sized invisible cells. One distinct complete isolated object centered inside EACH cell. Each sprite must fit within the central 70% of its cell, leaving at least 15% empty transparent padding on all four sides. Never touch or cross cell boundaries. No panels, no labels, no letters, no numbers, no grid lines, no UI, no watermark.\nBackground: genuine transparent alpha channel everywhere outside the 16 objects; no white backdrop, no checkerboard painted into image, no floor, no scene, no shadow extending outside a cell.\nAvoid: flat vector illustration, black outlines, pixel art, thick comic contour, photorealistic material, cinematic light, lens flare, glow halo, dark purple fantasy mood, hyper-detailed ornate filigree, generic emoji.\nExactly 16 DIFFERENT adventure/strategy game sprites, reading order left-to-right top-to-bottom:\nROW 1: (1) full-body friendly blue-clad adventurer with red scarf and small brown boots; (2) stout friendly red robot sentinel with two arms and two feet; (3) full-body brave gold-blue knight guardian with small shield; (4) upright chunky sky-blue crystal.\nROW 2: (5) compact blue toy turret on a little mechanical base; (6) full-body cartoon masked bandit with orange jacket and brown boots, playful not scary; (7) single rounded steel sword with golden hilt; (8) rounded blue shield with gold border.\nROW 3: (9) small round red healing potion bottle with cork; (10) chunky pale-blue snowflake frost token; (11) friendly orange flame-shaped fire token; (12) pair of brown explorer boots.\nROW 4: (13) orange camping tent; (14) cozy small cream farm cottage with red roof; (15) lush rounded green fruit tree with brown trunk; (16) open wooden treasure chest filled with gold coins.\nThe human and robot actors must be full-body isolated sprites with legs visible, no portrait framing. Props must be charming farm-adventure toys, no ornate dark fantasy. All 16 objects readable at 64 px.",
+          "source_file": "sources/sprites/strategy-source-0.png",
+          "bytes": 1734457,
+          "sha256": "a4830bb0d5303214cef7abb4f67f18632cd07db1110a3c485ed6718bfcefb41d"
+        }
+      ]
+    },
+    {
+      "family": "lifestyle",
+      "source_file": "sources/sprites/lifestyle-atlas.png",
+      "original_generated_path": "/Users/lijunren/.codex/generated_images/01a0722a-895a-70f1-8466-167e27ac3cd9/exec-06791b7a-5fd8-45bf-ab38-f730e4340993.png",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 1748859,
+      "sha256": "bd4c08f4a75ed0675348377041ee4c53616fb846f23070bcc4287d0ebeecd712",
+      "has_generated_alpha": false,
+      "alpha_import": "uniform-magenta-key-boundary-unmix",
+      "prompt": "Use case: stylized-concept.\nAsset type: Production gameplay sprite sheet, not a screenshot or UI mockup.\nInput image 1 is STYLE REFERENCE ONLY: the bright polished 2.5D casual farm mobile-game scene. Create new original objects, do not reproduce its characters, train, UI or composition.\nArt direction: Charming premium casual mobile-game artwork, rounded toy-like sculpted volumes, cheerful saturated greens, warm golds and clear blues, hand-painted 3D cartoon finish, soft controlled shading and clear readable silhouettes. Consistent soft light from upper left. Rendered-painting quality like the reference game assets, not realistic photos or shiny AI fantasy art.\nLayout is TECHNICAL: square canvas, exactly 4 columns × 4 rows of equally sized invisible cells. One distinct complete isolated object centered inside EACH cell. Each sprite must fit within the central 70% of its cell, leaving at least 15% empty transparent padding on all four sides. Never touch or cross cell boundaries. No panels, no labels, no letters, no numbers, no grid lines, no UI, no watermark.\nBackground: genuine transparent alpha channel everywhere outside the 16 objects; no white backdrop, no checkerboard painted into image, no floor, no scene, no shadow extending outside a cell.\nAvoid: flat vector illustration, black outlines, pixel art, thick comic contour, photorealistic material, cinematic light, lens flare, glow halo, dark purple fantasy mood, hyper-detailed ornate filigree, generic emoji.\nExactly 16 DIFFERENT cozy casual-game sprites, reading order left-to-right top-to-bottom:\nROW 1: (1) cute orange tabby cat sitting with full body and tail; (2) little white-and-gray kitten sitting with full body and tail; (3) brown plush teddy bear with red bow, full body; (4) full-body cheerful female fashion model wearing a simple blue dress and shoes, neutral standing pose, not the reference character.\nROW 2: (5) standalone red summer dress hanging without hanger; (6) straw sunhat with orange ribbon; (7) pair of blue-red sneakers; (8) rounded blue sunglasses.\nROW 3: (9) cream ceramic teacup on saucer containing green tea with tiny green tea leaf motif; (10) warm red coffee cup on saucer containing brown coffee with cream foam; (11) green seedling in terracotta flowerpot; (12) green garden watering can.\nROW 4: (13) cream seed packet with tiny plant illustration but NO TEXT; (14) small gardener shovel with wooden handle and steel blade; (15) blue country mailbox on a short wooden post with red flag; (16) cream folded envelope sealed with red heart wax.\nTea and coffee are clearly different drinks, not potion bottles. All 16 objects readable at 64 px.",
+      "background_edit_prompt": "Use case: precise-object-edit.\nChange ONLY the background of this production 4×4 sprite sheet.\nReplace every visible white and gray checkerboard square with one perfectly uniform flat chroma-key MAGENTA background, exact RGB (255,0,255), hex #FF00FF. All gaps between sprites, enclosed negative spaces, outer margins and cell padding must have that exact same solid magenta color.\nPreserve all 16 existing objects EXACTLY: same positions, sizes, colors, shapes, expressions, poses, fine details, hand-painted 2.5D rendering, soft shading on the objects. Do not move or regenerate objects. No cropping. Keep full bodies, leaves, antennae, handles, holes and all separated components.\nRemove the background contact shadows only so the magenta backdrop is fully flat. No checkerboard, no white/gray/black background, no alpha simulation. No text, no grid lines, no labels, no framing. The result will undergo deterministic chroma-key import into a game engine.",
+      "source_history": [
+        {
+          "path": "/Users/lijunren/.codex/generated_images/01a0722a-895a-70f1-8466-167e27ac3cd9/exec-02db17dd-6167-4d09-96aa-aa1b6431afdb.png",
+          "role": "original-generation-with-baked-checkerboard",
+          "prompt": "Use case: stylized-concept.\nAsset type: Production gameplay sprite sheet, not a screenshot or UI mockup.\nInput image 1 is STYLE REFERENCE ONLY: the bright polished 2.5D casual farm mobile-game scene. Create new original objects, do not reproduce its characters, train, UI or composition.\nArt direction: Charming premium casual mobile-game artwork, rounded toy-like sculpted volumes, cheerful saturated greens, warm golds and clear blues, hand-painted 3D cartoon finish, soft controlled shading and clear readable silhouettes. Consistent soft light from upper left. Rendered-painting quality like the reference game assets, not realistic photos or shiny AI fantasy art.\nLayout is TECHNICAL: square canvas, exactly 4 columns × 4 rows of equally sized invisible cells. One distinct complete isolated object centered inside EACH cell. Each sprite must fit within the central 70% of its cell, leaving at least 15% empty transparent padding on all four sides. Never touch or cross cell boundaries. No panels, no labels, no letters, no numbers, no grid lines, no UI, no watermark.\nBackground: genuine transparent alpha channel everywhere outside the 16 objects; no white backdrop, no checkerboard painted into image, no floor, no scene, no shadow extending outside a cell.\nAvoid: flat vector illustration, black outlines, pixel art, thick comic contour, photorealistic material, cinematic light, lens flare, glow halo, dark purple fantasy mood, hyper-detailed ornate filigree, generic emoji.\nExactly 16 DIFFERENT cozy casual-game sprites, reading order left-to-right top-to-bottom:\nROW 1: (1) cute orange tabby cat sitting with full body and tail; (2) little white-and-gray kitten sitting with full body and tail; (3) brown plush teddy bear with red bow, full body; (4) full-body cheerful female fashion model wearing a simple blue dress and shoes, neutral standing pose, not the reference character.\nROW 2: (5) standalone red summer dress hanging without hanger; (6) straw sunhat with orange ribbon; (7) pair of blue-red sneakers; (8) rounded blue sunglasses.\nROW 3: (9) cream ceramic teacup on saucer containing green tea with tiny green tea leaf motif; (10) warm red coffee cup on saucer containing brown coffee with cream foam; (11) green seedling in terracotta flowerpot; (12) green garden watering can.\nROW 4: (13) cream seed packet with tiny plant illustration but NO TEXT; (14) small gardener shovel with wooden handle and steel blade; (15) blue country mailbox on a short wooden post with red flag; (16) cream folded envelope sealed with red heart wax.\nTea and coffee are clearly different drinks, not potion bottles. All 16 objects readable at 64 px.",
+          "source_file": "sources/sprites/lifestyle-source-0.png",
+          "bytes": 1679190,
+          "sha256": "60484a4a52bb92c9ae72b14a00d392e0a7bc2043cb08c4d5072e6f9922132aa8"
+        }
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "asset_id": "runner",
+      "family": "action",
+      "file": "runner.png",
+      "width": 205,
+      "height": 270,
+      "source_cell": {
+        "left": 0,
+        "top": 0,
+        "width": 318,
+        "height": 331
+      },
+      "source_crop": {
+        "left": 67,
+        "top": 45,
+        "width": 205,
+        "height": 270
+      },
+      "transparent_fraction": 0.7228,
+      "bytes": 93499,
+      "sha256": "856d2c9c3d3742d960679bf6dcc4e3f87cdb8672c72b28a58478577e80184161"
+    },
+    {
+      "asset_id": "roadblock",
+      "family": "action",
+      "file": "roadblock.png",
+      "width": 236,
+      "height": 247,
+      "source_cell": {
+        "left": 318,
+        "top": 0,
+        "width": 312,
+        "height": 331
+      },
+      "source_crop": {
+        "left": 358,
+        "top": 59,
+        "width": 236,
+        "height": 247
+      },
+      "transparent_fraction": 0.6908,
+      "bytes": 94033,
+      "sha256": "a30960869d421ce3fedfe99ab562b7adbd21599d4bbed7fda4469f4018aadd28"
+    },
+    {
+      "asset_id": "energy",
+      "family": "action",
+      "file": "energy.png",
+      "width": 159,
+      "height": 223,
+      "source_cell": {
+        "left": 630,
+        "top": 0,
+        "width": 275,
+        "height": 331
+      },
+      "source_crop": {
+        "left": 701,
+        "top": 75,
+        "width": 159,
+        "height": 223
+      },
+      "transparent_fraction": 0.7655,
+      "bytes": 52277,
+      "sha256": "d6bcd73067de5ade7a7c5cf9319e0beddc8891146ad03beee8f707599727a53e"
+    },
+    {
+      "asset_id": "car",
+      "family": "action",
+      "file": "car.png",
+      "width": 231,
+      "height": 243,
+      "source_cell": {
+        "left": 905,
+        "top": 0,
+        "width": 349,
+        "height": 331
+      },
+      "source_crop": {
+        "left": 959,
+        "top": 58,
+        "width": 231,
+        "height": 243
+      },
+      "transparent_fraction": 0.6962,
+      "bytes": 109864,
+      "sha256": "e2de8d826f53df74e8dc85b2e3758a6b64e8e1731317fd624f9fde281a3d0618"
+    },
+    {
+      "asset_id": "spacecraft",
+      "family": "action",
+      "file": "spacecraft.png",
+      "width": 226,
+      "height": 248,
+      "source_cell": {
+        "left": 0,
+        "top": 331,
+        "width": 318,
+        "height": 296
+      },
+      "source_crop": {
+        "left": 47,
+        "top": 359,
+        "width": 226,
+        "height": 248
+      },
+      "transparent_fraction": 0.7114,
+      "bytes": 84506,
+      "sha256": "c2e56eb03686ae271302a302e24c5fa30ac09e38e9d2c7fe197a6cd11a48f635"
+    },
+    {
+      "asset_id": "enemy_ship",
+      "family": "action",
+      "file": "enemy_ship.png",
+      "width": 248,
+      "height": 255,
+      "source_cell": {
+        "left": 318,
+        "top": 331,
+        "width": 312,
+        "height": 296
+      },
+      "source_crop": {
+        "left": 352,
+        "top": 357,
+        "width": 248,
+        "height": 255
+      },
+      "transparent_fraction": 0.6823,
+      "bytes": 93566,
+      "sha256": "c38258cc5fd9838e0b43f4781791631a1827fe10aa1ec7db926d1b79e71589f9"
+    },
+    {
+      "asset_id": "bullet",
+      "family": "action",
+      "file": "bullet.png",
+      "width": 169,
+      "height": 137,
+      "source_cell": {
+        "left": 630,
+        "top": 331,
+        "width": 275,
+        "height": 296
+      },
+      "source_crop": {
+        "left": 683,
+        "top": 426,
+        "width": 169,
+        "height": 137
+      },
+      "transparent_fraction": 0.8218,
+      "bytes": 44383,
+      "sha256": "a74314a0938fbb12dabdb7f4a21d647425a06a87de6e76422952535c7971baf1"
+    },
+    {
+      "asset_id": "drone",
+      "family": "action",
+      "file": "drone.png",
+      "width": 284,
+      "height": 220,
+      "source_cell": {
+        "left": 905,
+        "top": 331,
+        "width": 349,
+        "height": 296
+      },
+      "source_crop": {
+        "left": 913,
+        "top": 374,
+        "width": 284,
+        "height": 220
+      },
+      "transparent_fraction": 0.6675,
+      "bytes": 113567,
+      "sha256": "032b2a32e16b88451a26d5d3d9b5330cbb7e8e1279f2d611613ef5cafdf88940"
+    },
+    {
+      "asset_id": "fish",
+      "family": "action",
+      "file": "fish.png",
+      "width": 220,
+      "height": 169,
+      "source_cell": {
+        "left": 0,
+        "top": 627,
+        "width": 318,
+        "height": 284
+      },
+      "source_crop": {
+        "left": 48,
+        "top": 694,
+        "width": 220,
+        "height": 169
+      },
+      "transparent_fraction": 0.7631,
+      "bytes": 62883,
+      "sha256": "7aedb5749c1af1aa6cb09a9a1ecf4f63f602fa4a9aea2201bcd4f598affe86c2"
+    },
+    {
+      "asset_id": "predator_fish",
+      "family": "action",
+      "file": "predator_fish.png",
+      "width": 286,
+      "height": 166,
+      "source_cell": {
+        "left": 318,
+        "top": 627,
+        "width": 312,
+        "height": 284
+      },
+      "source_crop": {
+        "left": 331,
+        "top": 692,
+        "width": 286,
+        "height": 166
+      },
+      "transparent_fraction": 0.6953,
+      "bytes": 80485,
+      "sha256": "8f8bd8865545ba00c59113d33696a699eb19f5e95a1df94d3f51fd947221aeaf"
+    },
+    {
+      "asset_id": "hook",
+      "family": "action",
+      "file": "hook.png",
+      "width": 168,
+      "height": 249,
+      "source_cell": {
+        "left": 630,
+        "top": 627,
+        "width": 275,
+        "height": 284
+      },
+      "source_crop": {
+        "left": 683,
+        "top": 634,
+        "width": 168,
+        "height": 249
+      },
+      "transparent_fraction": 0.8563,
+      "bytes": 38470,
+      "sha256": "0cc1863fa888462471d9533b863df01773234aefd1bafd14779025cb8a13f9f7"
+    },
+    {
+      "asset_id": "microbe",
+      "family": "action",
+      "file": "microbe.png",
+      "width": 213,
+      "height": 214,
+      "source_cell": {
+        "left": 905,
+        "top": 627,
+        "width": 349,
+        "height": 284
+      },
+      "source_crop": {
+        "left": 961,
+        "top": 669,
+        "width": 213,
+        "height": 214
+      },
+      "transparent_fraction": 0.7298,
+      "bytes": 83651,
+      "sha256": "fab8906de79d5b3ce8ad1cc53f16382d9d9fb7eff685dd446bd4a445a765b267"
+    },
+    {
+      "asset_id": "microbe_enemy",
+      "family": "action",
+      "file": "microbe_enemy.png",
+      "width": 217,
+      "height": 227,
+      "source_cell": {
+        "left": 0,
+        "top": 911,
+        "width": 318,
+        "height": 343
+      },
+      "source_crop": {
+        "left": 49,
+        "top": 932,
+        "width": 217,
+        "height": 227
+      },
+      "transparent_fraction": 0.7444,
+      "bytes": 83975,
+      "sha256": "b74416d5d7f3c2b3ee6c8487f512f3ef1ddddffb95be96e76933515296a0069f"
+    },
+    {
+      "asset_id": "mower",
+      "family": "action",
+      "file": "mower.png",
+      "width": 252,
+      "height": 269,
+      "source_cell": {
+        "left": 318,
+        "top": 911,
+        "width": 312,
+        "height": 343
+      },
+      "source_crop": {
+        "left": 346,
+        "top": 919,
+        "width": 252,
+        "height": 269
+      },
+      "transparent_fraction": 0.6958,
+      "bytes": 102086,
+      "sha256": "db1b709dcf123126ef16fc7b670d32d9539eedd0be0b0ed6915981d1f01bc9a4"
+    },
+    {
+      "asset_id": "spore",
+      "family": "action",
+      "file": "spore.png",
+      "width": 209,
+      "height": 230,
+      "source_cell": {
+        "left": 630,
+        "top": 911,
+        "width": 275,
+        "height": 343
+      },
+      "source_crop": {
+        "left": 659,
+        "top": 934,
+        "width": 209,
+        "height": 230
+      },
+      "transparent_fraction": 0.6741,
+      "bytes": 90603,
+      "sha256": "7a2713212fc07fcea24d9d68c9533c4ea0b52e45688a18524e29bcc79500e302"
+    },
+    {
+      "asset_id": "cannon",
+      "family": "action",
+      "file": "cannon.png",
+      "width": 221,
+      "height": 254,
+      "source_cell": {
+        "left": 905,
+        "top": 911,
+        "width": 349,
+        "height": 343
+      },
+      "source_crop": {
+        "left": 941,
+        "top": 921,
+        "width": 221,
+        "height": 254
+      },
+      "transparent_fraction": 0.7122,
+      "bytes": 103799,
+      "sha256": "874d63bb2e19d6d43b1446ab941c7bf2d6db89d27c455dc138771a78a2cbddcb"
+    },
+    {
+      "asset_id": "green_apple",
+      "family": "puzzle",
+      "file": "green_apple.png",
+      "width": 230,
+      "height": 255,
+      "source_cell": {
+        "left": 0,
+        "top": 0,
+        "width": 321,
+        "height": 341
+      },
+      "source_crop": {
+        "left": 64,
+        "top": 56,
+        "width": 230,
+        "height": 255
+      },
+      "transparent_fraction": 0.6208,
+      "bytes": 101715,
+      "sha256": "6fa51eee5db0018c4865d60e24ea3157d3a9baef69056efdca712d5479441189"
+    },
+    {
+      "asset_id": "pear",
+      "family": "puzzle",
+      "file": "pear.png",
+      "width": 216,
+      "height": 263,
+      "source_cell": {
+        "left": 321,
+        "top": 0,
+        "width": 308,
+        "height": 341
+      },
+      "source_crop": {
+        "left": 386,
+        "top": 56,
+        "width": 216,
+        "height": 263
+      },
+      "transparent_fraction": 0.6532,
+      "bytes": 91324,
+      "sha256": "d350165d583ddc6b5cfba87fbd71a3cd916e70050875d54cee93ab21be402657"
+    },
+    {
+      "asset_id": "red_apple",
+      "family": "puzzle",
+      "file": "red_apple.png",
+      "width": 231,
+      "height": 251,
+      "source_cell": {
+        "left": 629,
+        "top": 0,
+        "width": 301,
+        "height": 341
+      },
+      "source_crop": {
+        "left": 667,
+        "top": 60,
+        "width": 231,
+        "height": 251
+      },
+      "transparent_fraction": 0.598,
+      "bytes": 104955,
+      "sha256": "a8b80f2c347192f3583d95ecc549266c807b58f2d6ad8d855bcf323c3c9a57f7"
+    },
+    {
+      "asset_id": "orange",
+      "family": "puzzle",
+      "file": "orange.png",
+      "width": 230,
+      "height": 228,
+      "source_cell": {
+        "left": 930,
+        "top": 0,
+        "width": 324,
+        "height": 341
+      },
+      "source_crop": {
+        "left": 966,
+        "top": 84,
+        "width": 230,
+        "height": 228
+      },
+      "transparent_fraction": 0.6513,
+      "bytes": 98606,
+      "sha256": "6b82f1cbd70fb4f3d98b0be22a875f16a0bf3139b3cba4fdcd7c987d58289849"
+    },
+    {
+      "asset_id": "plum",
+      "family": "puzzle",
+      "file": "plum.png",
+      "width": 210,
+      "height": 233,
+      "source_cell": {
+        "left": 0,
+        "top": 341,
+        "width": 321,
+        "height": 303
+      },
+      "source_crop": {
+        "left": 77,
+        "top": 383,
+        "width": 210,
+        "height": 233
+      },
+      "transparent_fraction": 0.6464,
+      "bytes": 97937,
+      "sha256": "98c12b5c31eddd8fccdf332bb371d2fc599646800d0ca1138eb3e04b2920b7ac"
+    },
+    {
+      "asset_id": "golden_fruit",
+      "family": "puzzle",
+      "file": "golden_fruit.png",
+      "width": 243,
+      "height": 271,
+      "source_cell": {
+        "left": 321,
+        "top": 341,
+        "width": 308,
+        "height": 303
+      },
+      "source_crop": {
+        "left": 363,
+        "top": 359,
+        "width": 243,
+        "height": 271
+      },
+      "transparent_fraction": 0.5368,
+      "bytes": 113711,
+      "sha256": "84ea507d2887d96bcabe8db62ac77ecec3d841de0c78c91ce38645d8fdf143b7"
+    },
+    {
+      "asset_id": "emerald",
+      "family": "puzzle",
+      "file": "emerald.png",
+      "width": 202,
+      "height": 212,
+      "source_cell": {
+        "left": 629,
+        "top": 341,
+        "width": 301,
+        "height": 303
+      },
+      "source_crop": {
+        "left": 676,
+        "top": 405,
+        "width": 202,
+        "height": 212
+      },
+      "transparent_fraction": 0.66,
+      "bytes": 84473,
+      "sha256": "afcd18bb68377b290541a3fded5e5003b47eae10c47f4343d532943c0028a856"
+    },
+    {
+      "asset_id": "ruby",
+      "family": "puzzle",
+      "file": "ruby.png",
+      "width": 197,
+      "height": 214,
+      "source_cell": {
+        "left": 930,
+        "top": 341,
+        "width": 324,
+        "height": 303
+      },
+      "source_crop": {
+        "left": 976,
+        "top": 407,
+        "width": 197,
+        "height": 214
+      },
+      "transparent_fraction": 0.7,
+      "bytes": 76271,
+      "sha256": "015cfa970707749e5241b1a6ff2ac55fe51108f139c7bbb966b5208c8900d8b7"
+    },
+    {
+      "asset_id": "sapphire",
+      "family": "puzzle",
+      "file": "sapphire.png",
+      "width": 195,
+      "height": 204,
+      "source_cell": {
+        "left": 0,
+        "top": 644,
+        "width": 321,
+        "height": 283
+      },
+      "source_crop": {
+        "left": 83,
+        "top": 691,
+        "width": 195,
+        "height": 204
+      },
+      "transparent_fraction": 0.6832,
+      "bytes": 77180,
+      "sha256": "a73fc93e7e0a83f3637715df6086435960e7bfc79f7e86ee3ed10eb797ecccd7"
+    },
+    {
+      "asset_id": "amethyst",
+      "family": "puzzle",
+      "file": "amethyst.png",
+      "width": 196,
+      "height": 203,
+      "source_cell": {
+        "left": 321,
+        "top": 644,
+        "width": 308,
+        "height": 283
+      },
+      "source_crop": {
+        "left": 375,
+        "top": 695,
+        "width": 196,
+        "height": 203
+      },
+      "transparent_fraction": 0.6694,
+      "bytes": 81805,
+      "sha256": "87bdfb4fd93cf8526c82c8f51c93e77e4178e1f3e96856350261f728f5a9cf82"
+    },
+    {
+      "asset_id": "cup",
+      "family": "puzzle",
+      "file": "cup.png",
+      "width": 210,
+      "height": 233,
+      "source_cell": {
+        "left": 629,
+        "top": 644,
+        "width": 301,
+        "height": 283
+      },
+      "source_crop": {
+        "left": 664,
+        "top": 678,
+        "width": 210,
+        "height": 233
+      },
+      "transparent_fraction": 0.572,
+      "bytes": 88439,
+      "sha256": "e0db4979f6c1c3b8d34ee109c6de8a196853b653c03c2b32f51af795fee01395"
+    },
+    {
+      "asset_id": "star",
+      "family": "puzzle",
+      "file": "star.png",
+      "width": 213,
+      "height": 212,
+      "source_cell": {
+        "left": 930,
+        "top": 644,
+        "width": 324,
+        "height": 283
+      },
+      "source_crop": {
+        "left": 950,
+        "top": 696,
+        "width": 213,
+        "height": 212
+      },
+      "transparent_fraction": 0.7385,
+      "bytes": 62166,
+      "sha256": "002c7dfec1cb3b9d8f86e3ec21f3e39796c27ab4198f9e6b3ef56b758e185464"
+    },
+    {
+      "asset_id": "parcel",
+      "family": "puzzle",
+      "file": "parcel.png",
+      "width": 222,
+      "height": 237,
+      "source_cell": {
+        "left": 0,
+        "top": 927,
+        "width": 321,
+        "height": 327
+      },
+      "source_crop": {
+        "left": 65,
+        "top": 948,
+        "width": 222,
+        "height": 237
+      },
+      "transparent_fraction": 0.6396,
+      "bytes": 102492,
+      "sha256": "4993ec2505873ef54e46541a4a4964a09f47feb3cc3ff559a73842a40564cf2a"
+    },
+    {
+      "asset_id": "scroll",
+      "family": "puzzle",
+      "file": "scroll.png",
+      "width": 212,
+      "height": 224,
+      "source_cell": {
+        "left": 321,
+        "top": 927,
+        "width": 308,
+        "height": 327
+      },
+      "source_crop": {
+        "left": 368,
+        "top": 955,
+        "width": 212,
+        "height": 224
+      },
+      "transparent_fraction": 0.7656,
+      "bytes": 63660,
+      "sha256": "613eeb7bfec48fb27d8438e6b18d66120eb0310bded979fb41ccea382e89e77f"
+    },
+    {
+      "asset_id": "key",
+      "family": "puzzle",
+      "file": "key.png",
+      "width": 218,
+      "height": 241,
+      "source_cell": {
+        "left": 629,
+        "top": 927,
+        "width": 301,
+        "height": 327
+      },
+      "source_crop": {
+        "left": 656,
+        "top": 948,
+        "width": 218,
+        "height": 241
+      },
+      "transparent_fraction": 0.8069,
+      "bytes": 61668,
+      "sha256": "98a34b7d16c6b29141b12414f8c2cf281ae85caa730ad093eaee3a0736d23c7b"
+    },
+    {
+      "asset_id": "flower",
+      "family": "puzzle",
+      "file": "flower.png",
+      "width": 223,
+      "height": 252,
+      "source_cell": {
+        "left": 930,
+        "top": 927,
+        "width": 324,
+        "height": 327
+      },
+      "source_crop": {
+        "left": 951,
+        "top": 940,
+        "width": 223,
+        "height": 252
+      },
+      "transparent_fraction": 0.7046,
+      "bytes": 94516,
+      "sha256": "be65e75b46dfb2869b375cdd891306510d7f075872408da875f9c96735ad829a"
+    },
+    {
+      "asset_id": "hero",
+      "family": "strategy",
+      "file": "hero.png",
+      "width": 144,
+      "height": 289,
+      "source_cell": {
+        "left": 0,
+        "top": 0,
+        "width": 309,
+        "height": 355
+      },
+      "source_crop": {
+        "left": 104,
+        "top": 54,
+        "width": 144,
+        "height": 289
+      },
+      "transparent_fraction": 0.7648,
+      "bytes": 82533,
+      "sha256": "23cb9f4fe2abd6fdacb9e69412f9a9592a8fe373a0798fedf09e3acbeae7c53e"
+    },
+    {
+      "asset_id": "sentinel",
+      "family": "strategy",
+      "file": "sentinel.png",
+      "width": 264,
+      "height": 282,
+      "source_cell": {
+        "left": 309,
+        "top": 0,
+        "width": 316,
+        "height": 355
+      },
+      "source_crop": {
+        "left": 322,
+        "top": 60,
+        "width": 264,
+        "height": 282
+      },
+      "transparent_fraction": 0.6693,
+      "bytes": 120624,
+      "sha256": "f6fd5bb95fc56c18b4f01ddfed2077104aab33f2fa27f8c55aa0fb39f0f80805"
+    },
+    {
+      "asset_id": "guardian",
+      "family": "strategy",
+      "file": "guardian.png",
+      "width": 246,
+      "height": 291,
+      "source_cell": {
+        "left": 625,
+        "top": 0,
+        "width": 284,
+        "height": 355
+      },
+      "source_crop": {
+        "left": 639,
+        "top": 60,
+        "width": 246,
+        "height": 291
+      },
+      "transparent_fraction": 0.6318,
+      "bytes": 124619,
+      "sha256": "c23935d4ccf638d3ab3e88f65ba35fc9d7cbf01ff7a4a46ea5648bc18f24cb61"
+    },
+    {
+      "asset_id": "crystal",
+      "family": "strategy",
+      "file": "crystal.png",
+      "width": 199,
+      "height": 255,
+      "source_cell": {
+        "left": 909,
+        "top": 0,
+        "width": 345,
+        "height": 355
+      },
+      "source_crop": {
+        "left": 960,
+        "top": 82,
+        "width": 199,
+        "height": 255
+      },
+      "transparent_fraction": 0.7394,
+      "bytes": 90520,
+      "sha256": "153570ab879e53eb4102d3080a8a49266ba4dd372de3904803f2aa056018862b"
+    },
+    {
+      "asset_id": "turret",
+      "family": "strategy",
+      "file": "turret.png",
+      "width": 191,
+      "height": 235,
+      "source_cell": {
+        "left": 0,
+        "top": 355,
+        "width": 309,
+        "height": 280
+      },
+      "source_crop": {
+        "left": 64,
+        "top": 390,
+        "width": 191,
+        "height": 235
+      },
+      "transparent_fraction": 0.6946,
+      "bytes": 86570,
+      "sha256": "a3ebb5fad1bee462a011e379bd2afe0fb5ecfeb7976ae1b7da793f1af7e60085"
+    },
+    {
+      "asset_id": "raider",
+      "family": "strategy",
+      "file": "raider.png",
+      "width": 210,
+      "height": 252,
+      "source_cell": {
+        "left": 309,
+        "top": 355,
+        "width": 316,
+        "height": 280
+      },
+      "source_crop": {
+        "left": 349,
+        "top": 379,
+        "width": 210,
+        "height": 252
+      },
+      "transparent_fraction": 0.6698,
+      "bytes": 92215,
+      "sha256": "0f8063e076bfe9c2f827a76b609efc12188a3471bad6e05da3cbc795708fb2c5"
+    },
+    {
+      "asset_id": "sword",
+      "family": "strategy",
+      "file": "sword.png",
+      "width": 172,
+      "height": 229,
+      "source_cell": {
+        "left": 625,
+        "top": 355,
+        "width": 284,
+        "height": 280
+      },
+      "source_crop": {
+        "left": 663,
+        "top": 394,
+        "width": 172,
+        "height": 229
+      },
+      "transparent_fraction": 0.8281,
+      "bytes": 42346,
+      "sha256": "2466a00564445d92fc2cd8ce592ad33be709a119620893d3e182a17717e8c11a"
+    },
+    {
+      "asset_id": "shield",
+      "family": "strategy",
+      "file": "shield.png",
+      "width": 186,
+      "height": 228,
+      "source_cell": {
+        "left": 909,
+        "top": 355,
+        "width": 345,
+        "height": 280
+      },
+      "source_crop": {
+        "left": 970,
+        "top": 390,
+        "width": 186,
+        "height": 228
+      },
+      "transparent_fraction": 0.7035,
+      "bytes": 85204,
+      "sha256": "04509ff8a6ed657f348ebf33e957ee3c47c16bfeadcdea88f5b34e0988f30b14"
+    },
+    {
+      "asset_id": "potion",
+      "family": "strategy",
+      "file": "potion.png",
+      "width": 170,
+      "height": 222,
+      "source_cell": {
+        "left": 0,
+        "top": 635,
+        "width": 309,
+        "height": 280
+      },
+      "source_crop": {
+        "left": 80,
+        "top": 669,
+        "width": 170,
+        "height": 222
+      },
+      "transparent_fraction": 0.7282,
+      "bytes": 73056,
+      "sha256": "420b1977c89e62cf42be2ed5ba5d46dbb10bbb7ec0259835b0022127bdff4216"
+    },
+    {
+      "asset_id": "frost",
+      "family": "strategy",
+      "file": "frost.png",
+      "width": 207,
+      "height": 225,
+      "source_cell": {
+        "left": 309,
+        "top": 635,
+        "width": 316,
+        "height": 280
+      },
+      "source_crop": {
+        "left": 351,
+        "top": 668,
+        "width": 207,
+        "height": 225
+      },
+      "transparent_fraction": 0.7108,
+      "bytes": 74327,
+      "sha256": "661a2d0f55792e213e1b976e39f1ba0d6e6f39fc725eafdb10e98c6e837c7533"
+    },
+    {
+      "asset_id": "fire",
+      "family": "strategy",
+      "file": "fire.png",
+      "width": 179,
+      "height": 231,
+      "source_cell": {
+        "left": 625,
+        "top": 635,
+        "width": 284,
+        "height": 280
+      },
+      "source_crop": {
+        "left": 670,
+        "top": 659,
+        "width": 179,
+        "height": 231
+      },
+      "transparent_fraction": 0.6908,
+      "bytes": 65764,
+      "sha256": "32340fb3c8f2390d7797a46e141cafcf704b15b8dcf8474d35037d556f1f3351"
+    },
+    {
+      "asset_id": "boots",
+      "family": "strategy",
+      "file": "boots.png",
+      "width": 241,
+      "height": 222,
+      "source_cell": {
+        "left": 909,
+        "top": 635,
+        "width": 345,
+        "height": 280
+      },
+      "source_crop": {
+        "left": 923,
+        "top": 682,
+        "width": 241,
+        "height": 222
+      },
+      "transparent_fraction": 0.6167,
+      "bytes": 108048,
+      "sha256": "1a6a39a5736262af02aa854b96c529609444daed11a54cd3da48f2cb0690cd9a"
+    },
+    {
+      "asset_id": "tent",
+      "family": "strategy",
+      "file": "tent.png",
+      "width": 246,
+      "height": 243,
+      "source_cell": {
+        "left": 0,
+        "top": 915,
+        "width": 309,
+        "height": 339
+      },
+      "source_crop": {
+        "left": 42,
+        "top": 930,
+        "width": 246,
+        "height": 243
+      },
+      "transparent_fraction": 0.7691,
+      "bytes": 73031,
+      "sha256": "1f27b08a8cb8d116aa04f2440fe88571e3cadbc026fff45019508e757022b876"
+    },
+    {
+      "asset_id": "house",
+      "family": "strategy",
+      "file": "house.png",
+      "width": 229,
+      "height": 246,
+      "source_cell": {
+        "left": 309,
+        "top": 915,
+        "width": 316,
+        "height": 339
+      },
+      "source_crop": {
+        "left": 339,
+        "top": 929,
+        "width": 229,
+        "height": 246
+      },
+      "transparent_fraction": 0.6296,
+      "bytes": 125603,
+      "sha256": "0fdac4b1d20959988ae9b79f1f4d01349659c3bd90debd0c48af3606aad117cb"
+    },
+    {
+      "asset_id": "tree",
+      "family": "strategy",
+      "file": "tree.png",
+      "width": 221,
+      "height": 255,
+      "source_cell": {
+        "left": 625,
+        "top": 915,
+        "width": 284,
+        "height": 339
+      },
+      "source_crop": {
+        "left": 636,
+        "top": 927,
+        "width": 221,
+        "height": 255
+      },
+      "transparent_fraction": 0.6263,
+      "bytes": 113274,
+      "sha256": "62b3b479793819bd86629c3f939aee41b2d31d9e0951cb53602e5a01793a0a2d"
+    },
+    {
+      "asset_id": "treasure",
+      "family": "strategy",
+      "file": "treasure.png",
+      "width": 230,
+      "height": 250,
+      "source_cell": {
+        "left": 909,
+        "top": 915,
+        "width": 345,
+        "height": 339
+      },
+      "source_crop": {
+        "left": 931,
+        "top": 940,
+        "width": 230,
+        "height": 250
+      },
+      "transparent_fraction": 0.6605,
+      "bytes": 123493,
+      "sha256": "8a9ec6cbcbdef7f548d0c8b4621fef0ca2e7303771144781b3302801c43331c1"
+    },
+    {
+      "asset_id": "cat",
+      "family": "lifestyle",
+      "file": "cat.png",
+      "width": 189,
+      "height": 298,
+      "source_cell": {
+        "left": 0,
+        "top": 0,
+        "width": 301,
+        "height": 370
+      },
+      "source_crop": {
+        "left": 54,
+        "top": 40,
+        "width": 189,
+        "height": 298
+      },
+      "transparent_fraction": 0.7069,
+      "bytes": 105538,
+      "sha256": "c8f2e988e9dcd2fa7a729590615a7de414d640bc283313bf9ab4cfa3af1746b3"
+    },
+    {
+      "asset_id": "kitten",
+      "family": "lifestyle",
+      "file": "kitten.png",
+      "width": 189,
+      "height": 261,
+      "source_cell": {
+        "left": 301,
+        "top": 0,
+        "width": 324,
+        "height": 370
+      },
+      "source_crop": {
+        "left": 395,
+        "top": 70,
+        "width": 189,
+        "height": 261
+      },
+      "transparent_fraction": 0.7448,
+      "bytes": 92223,
+      "sha256": "772dfee1cd3fcb85e018809c97c7eb06bae04b74304d53ba423f02f348b6dfd3"
+    },
+    {
+      "asset_id": "plush",
+      "family": "lifestyle",
+      "file": "plush.png",
+      "width": 231,
+      "height": 282,
+      "source_cell": {
+        "left": 625,
+        "top": 0,
+        "width": 287,
+        "height": 370
+      },
+      "source_crop": {
+        "left": 646,
+        "top": 59,
+        "width": 231,
+        "height": 282
+      },
+      "transparent_fraction": 0.6002,
+      "bytes": 127682,
+      "sha256": "3b7ecb3465bfe8dfd218ae8d0044e1a6a7b3e40fbf60aea39da3610ddd756966"
+    },
+    {
+      "asset_id": "model",
+      "family": "lifestyle",
+      "file": "model.png",
+      "width": 130,
+      "height": 343,
+      "source_cell": {
+        "left": 912,
+        "top": 0,
+        "width": 342,
+        "height": 370
+      },
+      "source_crop": {
+        "left": 1021,
+        "top": 21,
+        "width": 130,
+        "height": 343
+      },
+      "transparent_fraction": 0.7907,
+      "bytes": 85972,
+      "sha256": "d34eae8e7e37377c52a2750d9add7ccc3160d0288c2c0248bbb6507def4886cf"
+    },
+    {
+      "asset_id": "dress",
+      "family": "lifestyle",
+      "file": "dress.png",
+      "width": 211,
+      "height": 271,
+      "source_cell": {
+        "left": 0,
+        "top": 370,
+        "width": 301,
+        "height": 290
+      },
+      "source_crop": {
+        "left": 50,
+        "top": 378,
+        "width": 211,
+        "height": 271
+      },
+      "transparent_fraction": 0.6664,
+      "bytes": 90643,
+      "sha256": "747f5b007c9d261fe7f151ba919ab4df10e77791267785c7661516b4694f3ca6"
+    },
+    {
+      "asset_id": "hat",
+      "family": "lifestyle",
+      "file": "hat.png",
+      "width": 285,
+      "height": 211,
+      "source_cell": {
+        "left": 301,
+        "top": 370,
+        "width": 324,
+        "height": 290
+      },
+      "source_crop": {
+        "left": 309,
+        "top": 416,
+        "width": 285,
+        "height": 211
+      },
+      "transparent_fraction": 0.586,
+      "bytes": 119265,
+      "sha256": "f3b15aed51203f786d0c125fefa0b5b354378f1da568e6cc963e652dbed297fb"
+    },
+    {
+      "asset_id": "shoes",
+      "family": "lifestyle",
+      "file": "shoes.png",
+      "width": 255,
+      "height": 187,
+      "source_cell": {
+        "left": 625,
+        "top": 370,
+        "width": 287,
+        "height": 290
+      },
+      "source_crop": {
+        "left": 629,
+        "top": 433,
+        "width": 255,
+        "height": 187
+      },
+      "transparent_fraction": 0.6434,
+      "bytes": 95163,
+      "sha256": "a3e7879466a360abc45d2556f42e38a0469afa9b2bad08da35fd279625171e78"
+    },
+    {
+      "asset_id": "glasses",
+      "family": "lifestyle",
+      "file": "glasses.png",
+      "width": 290,
+      "height": 157,
+      "source_cell": {
+        "left": 912,
+        "top": 370,
+        "width": 342,
+        "height": 290
+      },
+      "source_crop": {
+        "left": 941,
+        "top": 455,
+        "width": 290,
+        "height": 157
+      },
+      "transparent_fraction": 0.8142,
+      "bytes": 56098,
+      "sha256": "2ec6495f273fcccb345cc8461574f9dfb5e885538cf3b15a0d39416028fe260e"
+    },
+    {
+      "asset_id": "tea",
+      "family": "lifestyle",
+      "file": "tea.png",
+      "width": 258,
+      "height": 212,
+      "source_cell": {
+        "left": 0,
+        "top": 660,
+        "width": 301,
+        "height": 278
+      },
+      "source_crop": {
+        "left": 24,
+        "top": 707,
+        "width": 258,
+        "height": 212
+      },
+      "transparent_fraction": 0.5338,
+      "bytes": 106861,
+      "sha256": "cc14f30d58a076fbfd16a66706dda7d6311acf4c1f1f874386ebe383916f4870"
+    },
+    {
+      "asset_id": "coffee",
+      "family": "lifestyle",
+      "file": "coffee.png",
+      "width": 252,
+      "height": 216,
+      "source_cell": {
+        "left": 301,
+        "top": 660,
+        "width": 324,
+        "height": 278
+      },
+      "source_crop": {
+        "left": 339,
+        "top": 706,
+        "width": 252,
+        "height": 216
+      },
+      "transparent_fraction": 0.5719,
+      "bytes": 106190,
+      "sha256": "ee92a5d362ac7b91d93e8ae7f057b8da4c75d4c9f5e23c696f2dc90ab8665e93"
+    },
+    {
+      "asset_id": "seedling",
+      "family": "lifestyle",
+      "file": "seedling.png",
+      "width": 180,
+      "height": 249,
+      "source_cell": {
+        "left": 625,
+        "top": 660,
+        "width": 287,
+        "height": 278
+      },
+      "source_crop": {
+        "left": 667,
+        "top": 669,
+        "width": 180,
+        "height": 249
+      },
+      "transparent_fraction": 0.6225,
+      "bytes": 85248,
+      "sha256": "2f8e6ffa25ae0e1e9b42d20cc116e7b64ae08869fb614efae905bbd41b993f30"
+    },
+    {
+      "asset_id": "watering_can",
+      "family": "lifestyle",
+      "file": "watering_can.png",
+      "width": 296,
+      "height": 216,
+      "source_cell": {
+        "left": 912,
+        "top": 660,
+        "width": 342,
+        "height": 278
+      },
+      "source_crop": {
+        "left": 923,
+        "top": 700,
+        "width": 296,
+        "height": 216
+      },
+      "transparent_fraction": 0.6329,
+      "bytes": 99226,
+      "sha256": "df892f89eacac35ddda35e3ec66a7f13e72b3c319b90e0873b800b8f8f3c57e7"
+    },
+    {
+      "asset_id": "seeds",
+      "family": "lifestyle",
+      "file": "seeds.png",
+      "width": 189,
+      "height": 236,
+      "source_cell": {
+        "left": 0,
+        "top": 938,
+        "width": 301,
+        "height": 316
+      },
+      "source_crop": {
+        "left": 57,
+        "top": 964,
+        "width": 189,
+        "height": 236
+      },
+      "transparent_fraction": 0.6395,
+      "bytes": 94438,
+      "sha256": "4cf0c5581c8915fb8636bcbab93fbc8987adbb147e16b01b6e8df301746dfdef"
+    },
+    {
+      "asset_id": "shovel",
+      "family": "lifestyle",
+      "file": "shovel.png",
+      "width": 211,
+      "height": 241,
+      "source_cell": {
+        "left": 301,
+        "top": 938,
+        "width": 324,
+        "height": 316
+      },
+      "source_crop": {
+        "left": 345,
+        "top": 956,
+        "width": 211,
+        "height": 241
+      },
+      "transparent_fraction": 0.8228,
+      "bytes": 53857,
+      "sha256": "ac484435ae5c5588363223bc30e0b12b43f5009589af5cfe2149fbf53c87b3b8"
+    },
+    {
+      "asset_id": "mailbox",
+      "family": "lifestyle",
+      "file": "mailbox.png",
+      "width": 203,
+      "height": 262,
+      "source_cell": {
+        "left": 625,
+        "top": 938,
+        "width": 287,
+        "height": 316
+      },
+      "source_crop": {
+        "left": 653,
+        "top": 945,
+        "width": 203,
+        "height": 262
+      },
+      "transparent_fraction": 0.6423,
+      "bytes": 91100,
+      "sha256": "0169e326a123615f61ffb4231436436a46009fafcc979460ad06d55f0a5f808e"
+    },
+    {
+      "asset_id": "letter",
+      "family": "lifestyle",
+      "file": "letter.png",
+      "width": 253,
+      "height": 208,
+      "source_cell": {
+        "left": 912,
+        "top": 938,
+        "width": 342,
+        "height": 316
+      },
+      "source_crop": {
+        "left": 944,
+        "top": 991,
+        "width": 253,
+        "height": 208
+      },
+      "transparent_fraction": 0.6673,
+      "bytes": 87448,
+      "sha256": "386bddd6f84e7546953dedcba974601c9faa1ebe5721dd08e18d76cb64cacb04"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "id": "/arcade/coin-dozer/",
+  "name": "Coin Dozer · 口袋推金币",
+  "short_name": "推金币",
+  "description": "轻点投币，长按连投，收集属于你的宝石。",
+  "lang": "zh-CN",
+  "start_url": "/arcade/coin-dozer/",
+  "scope": "/arcade/coin-dozer/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#151617",
+  "theme_color": "#151617",
+  "categories": ["games", "entertainment"],
+  "icons": [
+    {
+      "src": "/arcade/coin-dozer/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/arcade/coin-dozer/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/arcade/coin-dozer/icons/maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

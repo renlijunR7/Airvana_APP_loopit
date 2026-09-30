@@ -9,6 +9,7 @@ for (const file of required) {
 
 const app = fs.readFileSync(path.join(root, 'src/app.mjs'), 'utf8');
 const frontend = fs.readFileSync(path.join(root, 'public/app.js'), 'utf8');
+const mobileEntry = fs.readFileSync(path.join(root, 'public/index.html'), 'utf8');
 const ui = fs.readFileSync(path.join(root, 'public/ui.js'), 'utf8');
 const artifact = fs.readFileSync(path.join(root, 'src/artifact.mjs'), 'utf8');
 const checks = [
@@ -41,6 +42,7 @@ const checks = [
   ['accessible dialogs', ui.includes("event.key === 'Escape'") && ui.includes('previousFocus.focus()') && ui.includes("event.key !== 'Tab'")],
   ['artifact completion actions', ['重新体验','返回内容广场','保存到本设备','分享 / 复制链接'].every(text => artifact.includes(text))],
   ['terminology alignment', frontend.includes('互动故事') && !frontend.includes('短视频') && frontend.includes('运行记录')],
+  ['legal texts carry a real operating entity', !mobileEntry.includes('【上线前补充】') && mobileEntry.includes('Cerdar Ai Limited')],
 ];
 for (const [name, ok] of checks) if (!ok) throw new Error(`Verification failed: ${name}`);
 console.log(`Airvana v5.3 P0/P1/P2 structural verification passed (${checks.length} checks)`);

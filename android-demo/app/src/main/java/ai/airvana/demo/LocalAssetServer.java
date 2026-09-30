@@ -151,6 +151,7 @@ final class LocalAssetServer {
         if (lower.endsWith(".jpg") || lower.endsWith(".jpeg")) return "image/jpeg";
         if (lower.endsWith(".gif")) return "image/gif";
         if (lower.endsWith(".webp")) return "image/webp";
+        if (lower.endsWith(".avif")) return "image/avif";
         if (lower.endsWith(".mp4")) return "video/mp4";
         if (lower.endsWith(".webm")) return "video/webm";
         if (lower.endsWith(".woff2")) return "font/woff2";

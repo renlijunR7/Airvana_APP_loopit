@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="predator fish">
+<title>predator fish — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M17 24L3 16L8 32L3 49L18 39Q38 58 60 31Q41 10 17 24Z" fill="#345276" /><path d="M27 19L36 5L42 21M31 43L38 57L45 42" fill="#4977a5" /><path d="M28 38L58 31L50 43L40 47Z" fill="#fff4d2" /><path d="M36 37L39 43L42 36L46 39L49 34" fill="#243042" stroke="none"/><path d="M46 24L52 27L46 29Z" fill="#d95d39" />
+</g>
+</svg>

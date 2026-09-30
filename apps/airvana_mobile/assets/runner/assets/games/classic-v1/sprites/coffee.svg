@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="coffee">
+<title>coffee — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<ellipse cx="29" cy="54" rx="26" ry="7" fill="#fff4d2" /><path d="M42 23H52Q62 24 57 37Q53 44 43 42V35Q51 37 52 29H44Z" fill="#d95d39" /><path d="M8 23H45V38Q43 51 27 51Q10 49 8 38Z" fill="#d95d39" /><ellipse cx="27" cy="23" rx="19" ry="6" fill="#fff4d2" /><ellipse cx="27" cy="23" rx="14" ry="3" fill="#614631" stroke="none"/><path d="M25 31Q17 33 20 41Q23 47 30 42Q36 37 30 32Z" fill="#fff4d2" stroke="none"/><path d="M29 33L24 42" fill="none" stroke="#8b6041" stroke-width="1.5"/><path d="M21 14Q14 9 21 4M34 14Q27 9 34 4" fill="none" stroke="#8b6041" stroke-width="2"/>
+</g>
+</svg>

@@ -1,0 +1,53 @@
+{
+  "retrieved": "2026-09-08",
+  "source": "http://game.zhongyigames.com/jizhan/",
+  "purpose": "User-requested local reproduction with original game art",
+  "conversion": "Original Cocos Mesh BIN + Skeleton bind poses + original CCON animation -> glTF 2.0 with embedded unchanged source texture and unchanged original UV coordinates",
+  "runtime": "Standard Three GLTFLoader, original animation baked to 16 reusable frames at startup",
+  "limitations": [
+    "Original custom Cocos toon shader converted to rough standard material",
+    "Giant-player and brute variants remain scaled approximations; the original enemyNormal and enemyBoss share the same Boss_B mesh and texture."
+  ],
+  "models": [
+    {
+      "file": "original-police.glb",
+      "mesh": "http://game.zhongyigames.com/jizhan/assets/Game/native/a4/a46a2bf4-ccdd-4dc1-b5bd-deacfd5b67d5@50caa.bin",
+      "texture": "http://game.zhongyigames.com/jizhan/assets/Game/native/2b/2b569921-4884-413b-85da-e68df5e02ea5.png",
+      "metadata": "http://game.zhongyigames.com/jizhan/assets/Game/import/0c/0ce2527af.json",
+      "animations": [
+        "idle",
+        "shootBack",
+        "standShoot"
+      ],
+      "heightInReplica": 1.7,
+      "bytes": 367772,
+      "sha256": "becd929ab0163fa65d27a42f3ba5dbe6dadb265b54a402f080516e438b843a01"
+    },
+    {
+      "file": "original-zombie.glb",
+      "mesh": "http://game.zhongyigames.com/jizhan/assets/Game/native/3a/3ada0ba0-0d15-4ff2-9fb0-98e65db4e223@67c7e.bin",
+      "texture": "http://game.zhongyigames.com/jizhan/assets/Game/native/8c/8c6d42b1-237c-44dd-926e-34f535b5a417.png",
+      "metadata": "http://game.zhongyigames.com/jizhan/assets/Game/import/08/0888769c0.json",
+      "prefabProof": "http://game.zhongyigames.com/jizhan/assets/Game/import/37/372f19e3-a0f9-4f73-a6e3-430871c0e922.json",
+      "animations": [
+        "run"
+      ],
+      "heightInReplica": 1.5,
+      "originalInternalMeshName": "Boss_B",
+      "roleInOriginal": "enemyNormal",
+      "bytes": 79260,
+      "sha256": "387f1846b4cff8edf24732cd85f29859f508d0e7ba7a99eafa52d6c5e96fbe37"
+    }
+  ],
+  "uvVerification": "Police nose UV(.2876,.8786) samples face pixel(74,225); zombie front UV v~.15 samples eye region at atlas top. V must remain unchanged.",
+  "weapons": {
+    "models": [
+      "original-pistol.glb",
+      "original-machinegun.glb",
+      "original-shotgun.glb"
+    ],
+    "sourceManifest": "../weapon-sources.json",
+    "attachment": "Original RoleHandCfg p/r/scale; YZX socket Euler; socket world Euler plus original offset; final ZYX weapon shader rotation",
+    "baking": "16 original animation frames per clip and weapon variant"
+  }
+}

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="cat">
+<title>cat — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M46 43Q62 48 55 30" fill="none" stroke="#243042" stroke-width="10"/><path d="M46 43Q62 48 55 30" fill="none" stroke="#e4b44f" stroke-width="6"/><path d="M20 28H41Q50 36 46 51L40 58H19Q11 48 14 37Z" fill="#e4b44f" /><path d="M14 26L13 7L25 13H37L48 6L49 26Q47 36 32 36Q17 36 14 26Z" fill="#e4b44f" /><path d="M17 12L18 22L24 17M44 12L44 22L38 17" fill="#db8ca1" stroke="none"/><rect x="21" y="22" width="3" height="4" rx="1" fill="#243042" stroke="none"/><rect x="39" y="22" width="3" height="4" rx="1" fill="#243042" stroke="none"/><path d="M29 27H35L32 30Z" fill="#a83e33" stroke="none"/><path d="M32 30L28 32M32 30L36 32M15 27H6M15 31L7 34M48 27H57M48 31L56 34" fill="none" stroke="#243042" stroke-width="2"/><path d="M24 37Q32 32 39 39V53H23Z" fill="#fff4d2" stroke="none"/><path d="M24 45V57M39 45V57" fill="none" stroke="#243042" stroke-width="2"/><path d="M27 14V19M33 13V18M38 14V19" fill="none" stroke="#b47f32" stroke-width="2"/>
+</g>
+</svg>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="watering can">
+<title>watering can — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M16 25Q3 12 10 6Q20 1 25 20" fill="#fff4d2" /><path d="M19 29Q10 17 13 12Q17 9 20 21" fill="#689754" /><path d="M13 27H39L43 48Q30 60 12 50Z" fill="#689754" /><path d="M38 30L50 18L57 22L41 45Z" fill="#689754" /><path d="M49 18L54 12L62 19L58 25Z" fill="#e4b44f" /><ellipse cx="25" cy="27" rx="14" ry="5" fill="#416b47" /><path d="M19 34H30V47H19Z" fill="#fff4d2" stroke="none"/><path d="M54 30L52 35M59 33L57 38M61 27L59 30" fill="none" stroke="#4977a5" stroke-width="2.5"/>
+</g>
+</svg>

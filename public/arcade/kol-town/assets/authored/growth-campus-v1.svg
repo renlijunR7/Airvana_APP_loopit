@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="520" viewBox="0 0 720 520" role="img" aria-labelledby="title desc">
+  <title id="title">交易所增长园区</title>
+  <desc id="desc">使用统一石材、砖墙和墨蓝屋顶绘制的五阶段等距增长园区，不含真实交易所标识。</desc>
+  <rect width="720" height="520" fill="#d7d9d4"/>
+  <path d="M360 38 688 218 360 486 32 306Z" fill="#c9d2c4" stroke="#667060" stroke-width="4"/>
+  <path d="M360 64 650 223 360 458 70 299Z" fill="#e6e1d6"/>
+  <path d="M335 76 385 76 385 446 335 446Z" fill="#a9afa9" transform="rotate(28 360 261)"/>
+  <path d="M335 76 385 76 385 446 335 446Z" fill="#b7bbb4" transform="rotate(-29 360 261)"/>
+  <path d="M344 90 376 90 376 432 344 432Z" fill="#ece9e0" transform="rotate(28 360 261)"/>
+  <path d="M344 90 376 90 376 432 344 432Z" fill="#f1eee6" transform="rotate(-29 360 261)"/>
+
+  <g fill="#65745f">
+    <circle cx="126" cy="150" r="18"/><circle cx="604" cy="194" r="17"/><circle cx="108" cy="355" r="18"/>
+    <circle cx="590" cy="376" r="18"/><circle cx="224" cy="105" r="13"/><circle cx="500" cy="105" r="13"/>
+  </g>
+  <g fill="#3f4e3d">
+    <rect x="122" y="150" width="8" height="26"/><rect x="600" y="194" width="8" height="25"/>
+    <rect x="104" y="355" width="8" height="25"/><rect x="586" y="376" width="8" height="25"/>
+    <rect x="221" y="105" width="6" height="19"/><rect x="497" y="105" width="6" height="19"/>
+  </g>
+
+  <g id="building-acquisition" transform="translate(118 112)">
+    <path d="M0 54 88 8 154 44 66 91Z" fill="#748596"/>
+    <path d="M0 54 66 91 66 163 0 126Z" fill="#535f6c"/>
+    <path d="M66 91 154 44 154 116 66 163Z" fill="#344353"/>
+    <path d="M22 56 88 22 133 47 67 81Z" fill="#e4dfd2"/>
+    <path d="M22 56 67 81 67 117 22 92Z" fill="#c8c0b1"/>
+    <path d="M67 81 133 47 133 83 67 117Z" fill="#9eaaae"/>
+    <path d="M45 82 61 91 61 108 45 99ZM88 72 105 63 105 82 88 91ZM113 59 126 52 126 69 113 76Z" fill="#415f6d"/>
+    <rect x="64" y="117" width="23" height="37" fill="#b98a3e"/>
+    <circle cx="75" cy="52" r="13" fill="#2f4156"/><path d="M68 52h14M75 45v14" stroke="#f4f1e8" stroke-width="3"/>
+  </g>
+
+  <g id="building-conversion" transform="translate(452 112)">
+    <path d="M0 52 80 10 144 44 64 87Z" fill="#8c7c6b"/>
+    <path d="M0 52 64 87 64 157 0 122Z" fill="#746655"/>
+    <path d="M64 87 144 44 144 114 64 157Z" fill="#574c41"/>
+    <path d="M19 54 80 22 125 47 64 78Z" fill="#e8e2d7"/>
+    <path d="M19 54 64 78 64 116 19 91Z" fill="#c9c0b2"/>
+    <path d="M64 78 125 47 125 85 64 116Z" fill="#a89c8b"/>
+    <path d="M36 76 53 85 53 103 36 94ZM78 73 96 64 96 83 78 92ZM103 60 117 53 117 70 103 77Z" fill="#56636b"/>
+    <path d="M59 116h26v36H59z" fill="#56674f"/>
+    <path d="M72 39 82 44 72 49 62 44Z" fill="#344353"/>
+  </g>
+
+  <g id="building-activation" transform="translate(275 205)">
+    <path d="M0 60 88 12 170 57 82 105Z" fill="#5f6b7b"/>
+    <path d="M0 60 82 105 82 190 0 145Z" fill="#424d5b"/>
+    <path d="M82 105 170 57 170 142 82 190Z" fill="#303b49"/>
+    <path d="M23 62 88 27 145 59 81 94Z" fill="#efe9dd"/>
+    <path d="M23 62 81 94 81 139 23 107Z" fill="#cfc6b7"/>
+    <path d="M81 94 145 59 145 104 81 139Z" fill="#abb5b5"/>
+    <path d="M42 89 61 99 61 119 42 109ZM98 88 119 77 119 98 98 109Z" fill="#3b5968"/>
+    <rect x="69" y="139" width="28" height="43" fill="#a76555"/>
+    <path d="M69 53 88 43 107 53 88 63Z" fill="#b98a3e"/>
+    <path d="M75 55v16l13 7 13-7V55l-13 7Z" fill="#6b593d"/>
+  </g>
+
+  <g id="building-retention" transform="translate(465 318)">
+    <path d="M0 46 73 8 132 40 59 79Z" fill="#6f8177"/>
+    <path d="M0 46 59 79 59 137 0 104Z" fill="#526258"/>
+    <path d="M59 79 132 40 132 98 59 137Z" fill="#38493f"/>
+    <path d="M18 47 73 19 114 41 59 70Z" fill="#e9e3d8"/>
+    <path d="M18 47 59 70 59 99 18 76Z" fill="#c9c2b4"/>
+    <path d="M59 70 114 41 114 70 59 99Z" fill="#a9b4ad"/>
+    <path d="M33 69 49 78 49 92 33 83ZM76 65 93 56 93 72 76 81Z" fill="#3e5f55"/>
+    <rect x="50" y="99" width="22" height="32" fill="#8f6b45"/>
+  </g>
+
+  <g id="building-reactivation" transform="translate(117 324)">
+    <path d="M0 44 73 6 132 38 59 77Z" fill="#756a80"/>
+    <path d="M0 44 59 77 59 137 0 104Z" fill="#5d5367"/>
+    <path d="M59 77 132 38 132 98 59 137Z" fill="#463d50"/>
+    <path d="M18 45 73 17 114 39 59 68Z" fill="#ece5da"/>
+    <path d="M18 45 59 68 59 98 18 75Z" fill="#ccc2b4"/>
+    <path d="M59 68 114 39 114 69 59 98Z" fill="#aea6b1"/>
+    <path d="M32 68 48 77 48 91 32 82ZM76 63 93 54 93 71 76 80Z" fill="#51445e"/>
+    <rect x="50" y="98" width="23" height="33" fill="#9c6b5e"/>
+  </g>
+
+  <g id="wayfinding" fill="#f7f3e9" stroke="#2f3540" stroke-width="3">
+    <path d="M190 93h58v28h-58z"/><path d="M478 91h58v28h-58z"/>
+    <path d="M331 187h58v28h-58z"/><path d="M493 305h58v28h-58z"/>
+    <path d="M164 309h58v28h-58z"/>
+  </g>
+  <g fill="#2f3540" font-family="system-ui,sans-serif" font-size="13" font-weight="700" text-anchor="middle">
+    <text x="219" y="112">01 获客</text><text x="507" y="110">02 转化</text>
+    <text x="360" y="206">03 激活</text><text x="522" y="324">04 留存</text>
+    <text x="193" y="328">05 召回</text>
+  </g>
+  <g fill="#344353">
+    <circle cx="360" cy="448" r="18"/><path d="M354 448h12M360 442v12" stroke="#f7f3e9" stroke-width="3"/>
+  </g>
+</svg>

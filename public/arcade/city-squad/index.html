@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#192f44" />
+  <meta name="description" content="左右滑动，穿过算术门集结小队，在城市公路迎战敌群。" />
+  <title>激战 · 城市突围</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23297fc3'/%3E%3Cpath d='M32 10 51 17v15c0 13-19 23-19 23S13 45 13 32V17Z' fill='%23fff'/%3E%3Cpath d='m32 19 4 9 10 1-7 7 2 10-9-5-9 5 2-10-7-7 10-1Z' fill='%23ffc943'/%3E%3C/svg%3E" />
+  <script type="module" crossorigin src="/arcade/city-squad/assets/index-CSruwq6w.js?v=2"></script>
+  <link rel="modulepreload" crossorigin href="/arcade/city-squad/assets/three-Af4S0xWF.js">
+  <link rel="stylesheet" crossorigin href="/arcade/city-squad/assets/index-Dh_3Zx8A.css">
+</head>
+<body>
+<svg class="filter-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="0" height="0"><defs>
+  <!-- Original HomeUI cc.Label color: ABGR 0xff1cf5ff = RGBA(255,245,28,255). -->
+  <filter id="original-label-gold" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="1 0 0 0 0  0 0.960784314 0 0 0  0 0 0.109803922 0 0  0 0 0 1 0"/></filter>
+</defs></svg>
+<main id="game" aria-label="激战城市突围游戏">
+  <div id="scene" aria-label="城市公路战场"></div>
+  <div id="loading"><div class="loading-badge">★</div><strong>正在集结小队</strong><span>城市突围</span></div>
+  <div id="hud">
+    <div id="level-title"><img class="level-title-art" src="/arcade/city-squad/original-ui/selected/level-title.png" alt="关卡"><strong id="level-number" aria-label="关卡 1">1</strong></div>
+    <div id="battle-header" hidden><span id="battle-level">关卡 1</span><div class="progress"><i id="progress-fill"></i><b>⚑</b></div></div>
+    <button id="settings" class="square utility" aria-label="设置"><img src="/arcade/city-squad/original-ui/selected/settings-icon.png" alt=""></button>
+    <button id="pause" class="square utility" aria-label="暂停游戏" hidden>Ⅱ</button>
+    <div id="wallet" aria-label="金币"><span id="cash-icon"></span><strong id="coins">500</strong><button id="supplies" aria-label="领取补给"><img src="/arcade/city-squad/original-ui/selected/add-icon.png" alt=""></button></div>
+    <div id="menu-tools">
+      <button class="side-tool daily-tool" id="daily" aria-label="签到"><img src="/arcade/city-squad/original-ui/selected/sign-icon.png" alt=""><i class="dot" id="daily-dot"></i></button>
+      <button class="side-tool wheel-tool" id="wheel" aria-label="转盘"><img src="/arcade/city-squad/original-ui/selected/wheel-icon.png" alt=""></button>
+      <button class="side-tool weapon-tool" id="weapons" aria-label="武器"><img src="/arcade/city-squad/original-ui/selected/weapons-icon.png" alt=""></button>
+      <button class="side-tool reward-tool" id="reward" aria-label="领取补给"><img src="/arcade/city-squad/original-ui/selected/reward-icon.png" alt=""></button>
+    </div>
+    <div id="squad-label"><strong id="squad-count">1</strong></div>
+    <div id="combo" hidden></div>
+    <div id="start-area">
+      <img class="swipe-arrows" src="/arcade/city-squad/original-ui/selected/swipe-arrows.png" alt="">
+      <img class="swipe-hand" src="/arcade/city-squad/original-ui/selected/hand.png" alt="">
+      <button id="start" class="start-touch" aria-label="开始突围，左右拖动控制小队"><span class="sr-only">开始突围</span></button>
+    </div>
+    <div id="upgrades">
+      <button id="upgrade-squad" class="upgrade-card green" aria-label="升级队伍人数">
+        <img class="card-art" id="squad-art" src="/arcade/city-squad/original-ui/selected/squad-card.png" alt="">
+        <span class="card-level" id="squad-level">1 人</span>
+        <img class="card-title" src="/arcade/city-squad/original-ui/selected/squad-title.png" alt="队伍人数">
+        <span class="price" id="squad-price"></span>
+      </button>
+      <button id="upgrade-income" class="upgrade-card amber" aria-label="升级金币加成">
+        <img class="card-art" id="income-art" src="/arcade/city-squad/original-ui/selected/coins-card.png" alt="">
+        <span class="card-level" id="income-level">Lv. 1</span>
+        <img class="card-title" src="/arcade/city-squad/original-ui/selected/coins-title.png" alt="金币加成">
+        <span class="price" id="income-price"></span>
+      </button>
+      <button id="upgrade-giant" class="upgrade-card purple" aria-label="升级巨人助力">
+        <img class="card-art" id="giant-art" src="/arcade/city-squad/original-ui/selected/giant-card.png" alt="">
+        <span class="card-level" id="giant-level">Lv. 0</span>
+        <img class="card-title" src="/arcade/city-squad/original-ui/selected/giant-title.png" alt="巨人助力">
+        <span class="price" id="giant-price"></span>
+      </button>
+    </div>
+    <div id="battle-footer" hidden><span>左右滑动移动 · 自动射击</span><b id="kill-count">击退 0</b></div>
+  </div>
+  <div id="toast" role="status" aria-live="polite" hidden></div>
+  <div id="modal-shade" hidden><section id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"></section></div>
+</main>
+</body>
+</html>

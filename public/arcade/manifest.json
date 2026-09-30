@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 1,
+  "localPreviewOnly": true,
+  "commercialReleaseApproved": false,
+  "notes": "Thirteen existing local games are embedded without changing their gameplay, local saves, touch controls, or internal UI. External rewards, real-money play, wallet actions, and Campaign delivery remain disabled.",
+  "games": [
+    {
+      "id": 132,
+      "slug": "kol-town",
+      "title": "Luna 小镇 · KOL Town",
+      "entry": "/arcade/kol-town/",
+      "source": "/Users/lijunren/Documents/Codex/2026-09-02/referenced-chatgpt-conversation-this-is-an/outputs/kol-town-interactive-game",
+      "sourceVersion": "0.16.1",
+      "rightsStatus": "local-project-review-only",
+      "storage": "kol_town_state_v1",
+      "rewardPolicy": "local-virtual-bricks-and-commemorative-tokens-only"
+    },
+    {
+      "id": 126,
+      "slug": "risk-run",
+      "title": "Risk Run 风险突围",
+      "entry": "/arcade/risk-run/",
+      "source": "/Users/lijunren/Documents/Codex/2026-08-31/yun-x/work/airdrop-final/docs/playable-demos/airdrop-r7-v62-adaptive-upper-body/demo",
+      "sourceVersion": "v62-adaptive-upper-body",
+      "rightsStatus": "local-project-review-only",
+      "storage": "original-browser-local-storage",
+      "rewardPolicy": "campaign-points-only-no-transfer"
+    },
+    {
+      "id": 125,
+      "slug": "coin-castle",
+      "title": "金币城堡 Coin Castle",
+      "entry": "/arcade/coin-castle/",
+      "source": "/Users/lijunren/Documents/Codex/2026-09-07/bang-w-2/coin-castle",
+      "sourceCommit": "c2f00d2",
+      "rightsStatus": "local-project-review-only",
+      "storage": "original-browser-local-storage",
+      "rewardPolicy": "local-virtual-coins-only"
+    },
+    {
+      "id": 120,
+      "slug": "lucky-fruit",
+      "title": "经典水果机 Lucky Arcade",
+      "entry": "/arcade/lucky-fruit/",
+      "source": "/Users/lijunren/Documents/Codex/2026-09-07/can-k/work/fruit-arcade",
+      "rightsStatus": "local-project",
+      "storage": "original-browser-local-storage"
+    },
+    {
+      "id": 121,
+      "slug": "htx-quest",
+      "title": "HTX QUEST 创世云谷",
+      "entry": "/arcade/htx-quest/",
+      "source": "/Users/lijunren/Documents/Codex/2026-09-05/zhi/outputs/coin-sprint",
+      "rightsStatus": "local-project",
+      "storage": "original-browser-local-storage"
+    },
+    {
+      "id": 122,
+      "slug": "coin-dozer",
+      "title": "Coin Dozer 黄金街机",
+      "entry": "/arcade/coin-dozer/",
+      "source": "/Users/lijunren/Documents/Codex/2026-09-06/coin-dozer/outputs/game/public/play",
+      "rightsStatus": "local-project",
+      "storage": "original-browser-local-storage"
+    },
+    {
+      "id": 123,
+      "slug": "city-squad",
+      "title": "城市突围 Squad Rush",
+      "entry": "/arcade/city-squad/",
+      "source": "/Users/lijunren/Documents/Codex/2026-09-08/http-game-zhongyigames-com-jizhan-http/outputs/game/dist",
+      "rightsStatus": "local-project",
+      "storage": "original-browser-local-storage"
+    },
+    {
+      "id": 124,
+      "slug": "niguolaia",
+      "title": "你过来呀 三国塔防",
+      "entry": "/arcade/niguolaia/",
+      "source": "/Users/lijunren/Documents/Codex/2026-09-08/http-game-zhongyigames-com-niguolaia-http/outputs/game",
+      "rightsStatus": "unverified-local-review-only",
+      "storage": "original-browser-local-storage"
+    },
+    {
+      "id": 127,
+      "slug": "token-harbor",
+      "title": "Token Harbor 代币港湾",
+      "entry": "/arcade/token-harbor/",
+      "source": "/Users/lijunren/Documents/Codex/2026-09-07/da-k/outputs/token-harbor-adventurer.html",
+      "rightsStatus": "local-project-review-only",
+      "storage": "original-browser-local-storage",
+      "rewardPolicy": "local-virtual-tokens-only-no-chain"
+    },
+    {
+      "id": 128,
+      "slug": "mini-gp-racers",
+      "title": "Mini GP Racers",
+      "entry": "/arcade/mini-gp-racers/",
+      "source": "/Users/lijunren/Documents/Codex/2026-09-15/https-poki-com-zh-g-mini/outputs/game",
+      "rightsStatus": "local-project-review-only",
+      "storage": "original-browser-local-storage",
+      "rewardPolicy": "local-arcade-coins-only"
+    },
+    {
+      "id": 129,
+      "slug": "street-gold-rush",
+      "title": "街区淘金大冲刺",
+      "entry": "/arcade/street-gold-rush/",
+      "source": "/Users/lijunren/Documents/Codex/2026-09-15/https-poki-com-zh-g-talking/outputs/game",
+      "rightsStatus": "local-project-review-only",
+      "storage": "original-browser-local-storage",
+      "rewardPolicy": "local-virtual-gold-only"
+    },
+    {
+      "id": 130,
+      "slug": "star-table",
+      "title": "星桌竞猜 Star Table",
+      "entry": "/arcade/star-table/",
+      "source": "/Users/lijunren/Documents/Codex/2026-09-15/fu-ke/outputs/game",
+      "rightsStatus": "local-project-review-only",
+      "storage": "original-browser-local-storage",
+      "rewardPolicy": "local-virtual-star-coins-only"
+    },
+    {
+      "id": 131,
+      "slug": "sud-texas",
+      "title": "SUD 德州扑克",
+      "entry": "/arcade/sud-texas/",
+      "source": "/Users/lijunren/Documents/Codex/2026-09-15/https-www-sud-tech-cn-gamedetail/outputs/game",
+      "rightsStatus": "local-project-review-only",
+      "storage": "original-browser-local-storage",
+      "rewardPolicy": "local-demo-chips-only-no-cash"
+    }
+  ]
+}

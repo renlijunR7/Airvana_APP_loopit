@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="hero">
+<title>hero — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M18 23H41L48 55H12Z" fill="#a83e33" /><path d="M20 5L28 2H37L43 8V19L36 25H25L19 18Z" fill="#e8b88e" /><path d="M20 13L17 10L21 4L31 2L41 5L44 14H36L33 9L28 13Z" fill="#8b6041" /><rect x="23" y="24" width="17" height="19" rx="2" fill="#4977a5" /><rect x="22" y="39" width="19" height="5" fill="#8b6041" /><path d="M24 44H31V56H20V51ZM33 44H40L43 56H33Z" fill="#345276" /><rect x="18" y="55" width="14" height="6" rx="1" fill="#8b6041" /><rect x="32" y="55" width="15" height="6" rx="1" fill="#8b6041" /><path d="M11 27H23V44L17 50L11 44Z" fill="#fff4d2" /><path d="M16 31H20V42L18 45L16 42Z" fill="#d95d39" stroke="none"/><path d="M47 39V13" fill="none" stroke="#fff4d2" stroke-width="4"/><path d="M42 35H53" fill="none" stroke="#e4b44f" stroke-width="3"/><circle cx="45" cy="31" r="3" fill="#e8b88e" /><rect x="33" y="14" width="3" height="4" fill="#243042" stroke="none"/>
+</g>
+</svg>

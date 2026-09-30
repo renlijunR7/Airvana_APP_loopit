@@ -1,0 +1,9 @@
+Game: pixel-quest
+Generator: OpenAI built-in ImageGen
+Reference role: style only
+Original file: /Users/lijunren/.codex/generated_images/01a0722a-cd21-7871-b0c6-5c67239a7801/exec-b0e1c417-c0bf-4541-992e-5d438603e2a2.png
+Visual QA: reviewed individually; independent game world; clear central playfield; no baked UI or live character
+
+Use case: stylized-concept. Asset type: unique portrait gameplay environment for one named mobile game, aspect ratio 360:560. The attached image is STYLE REFERENCE ONLY: use its mature high-quality casual mobile-game 2.5D rendering, saturated but harmonious colors, clearly modeled rounded materials, polished hand-painted textures and soft readable lighting. Create an original new world, NOT the reference farm/people/train. No phone frame, text, letters, numbers, signs, logos, UI panels, controls, buttons, or characters/gameplay items baked into the scene. No flat vector art, pixel-art rendering, low-poly primitive placeholder shapes, photorealism, ornate filigree, random surreal fantasy details. Environment belongs to the specific game world below and should look distinct from every other game's world. Camera elevated three-quarter top view, central 60% width and 75% height left relatively empty and low-contrast for separately animated game objects. Frame with relevant dimensional environmental props at edges/corners only. Output a finished polished raster game background, no typography.
+Game: Pixel Quest, three-lane running adventure. World: a playful polished storybook block-ruin valley, dimensional carved stone blocks and rounded moss inspired by retro platform-adventure level design but rendered as richly painted 2.5D, NOT pixel art. Broad sandy trail running vertically through center. Only at side edges: small stepped sandstone ruins, square-cut mossy hedge walls, cropped wooden bridge rails, cyan waterfalls glimpsed at top corners. Bright adventurous day, no city architecture, no enemies or coins.
+

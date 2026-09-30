@@ -1,0 +1,159 @@
+{
+  "schema_version": "1.0.0",
+  "playable_id": "plb_kol_town_demo",
+  "campaign_id": "cmp_kol_town_demo",
+  "contract_version": "0.10.0",
+  "version": "0.16.1",
+  "status": "draft",
+  "template_id": "kol_town_isometric_v23_safe_routes_token_wallet",
+  "locales": {"default": "zh-Hans", "supported": ["zh-Hans"]},
+  "presentation": {
+    "title": "KOL 小镇",
+      "tone": "成熟休闲经营手游、统一等距切面建筑、暖色实体材质、克制光照与清晰交互层级",
+    "theme": "Luna 城市经营小镇，可切换 Vera 深海青主题",
+    "logo_asset_id": "asset_demo_logo",
+    "color_tokens": {
+      "primary": "#7357F5",
+      "secondary": "#FFBF5B",
+      "background": "#F3F0FF",
+      "text": "#27233A"
+    },
+    "copy_pack": {
+      "intro_title": "欢迎来到 Luna 的 KOL 小镇",
+      "intro_body": "经营拉新、转化、促活、留存与召回增长航线，让每个 Campaign 的玩法证据和交易所 KPI 保持可核验分离。",
+      "access_title": "游客进入或创建本地演示账号",
+      "access_terms": "本地账号仅保存别名、PIN 哈希、进度与事件；不是品牌真实账号。",
+      "kol_chat_title": "和 Luna AI 分身聊聊",
+      "kol_chat_disclosure": "本地规则回复 · 非本人实时发言 · 聊天原文仅用于本次回答且不落库",
+      "kol_chat_placeholder": "问当前 Campaign、KPI 来源或下一步…",
+      "player_identity_copy": "玩家以独立居民身份进入 Luna 小镇；居民换装不会改变主理人 Luna 或她的 AI 分身。",
+      "kol_profile_disclosure": "主理人档案只读；Luna 是 KOL 创作者、所有者和运营者，AI 分身不是本人实时在线。",
+      "live2d_disclosure": "Live2D 官方示例 Mao · 技术预览 · 非 Luna 数字孪生",
+      "start_label": "开始建设",
+      "success_title": "小镇今日繁荣度达成！",
+      "failure_title": "差一点，再试一次",
+      "replay_label": "再玩一轮",
+      "cta_label": "DEMO：查看活动说明",
+      "reward_eligibility": "本地演示不提供真实奖励",
+      "reward_terms": "砖块、经营金与主题纪念 Token 均为本地模拟数据，无现金、数字货币、投资、提现、转让或兑换价值。",
+      "growth_measurement_disclosure": "本地过关不等于下载、注册、入金、交易、D7 留存或召回确认；真实 KPI 必须由批准的外部服务端回传。",
+      "disclaimer": "DEMO / LOCAL · 不执行真实 App 下载、开户、KYC、钱包、入金或交易；行情预测不构成投资建议。"
+    }
+  },
+  "gameplay": {
+    "mechanic": "scenario_choice",
+    "core_loop": "玩家以独立居民身份沿不可穿越建筑的道路导航网步行并进入建筑 → 与固定主理人 Luna、居民 NPC 和 AI 分身分别互动 → 抵达功能热点 → 经营单主 KPI Campaign → 完成合规与测量决策 → 生成并提交本地玩法证据 → 获得无价值模拟经营金与运营评级 → 在主题飞机经过时点击领取本地纪念 Token，并同步获得 5 枚无价值虚拟砖块 → 在本地钱包查看收藏和账本 → 查看外部 KPI 仍为未确认",
+    "rounds": 6,
+    "target_duration_seconds": 240,
+    "difficulty": {"minimum": 1, "maximum": 5, "default": 2},
+    "input_modes": ["tap", "drag", "keyboard"],
+    "state_transitions": [
+      {"from": "intro", "event": "choose_local_identity", "to": "consent", "guard": "guest OR explicit_local_storage_consent"},
+      {"from": "consent", "event": "guest_or_auth_success", "to": "playing", "guard": "local_session_available OR browser_fallback"},
+      {"from": "playing", "event": "open_building", "to": "playing", "guard": null},
+      {"from": "playing", "event": "map_pan", "to": "playing", "guard": "bounded local visual navigation only; does not mutate Campaign, reward, CTA or commercial fields"},
+      {"from": "playing", "event": "building_scene_move", "to": "playing", "guard": "local visual navigation only; no geolocation or external request"},
+      {"from": "playing", "event": "airdrop_token_claim", "to": "playing", "guard": "browser-local commemorative collectible plus exactly 5 local virtual bricks; monetary_value=0; external_confirmation=false; reward_event=false; not transferable or withdrawable"},
+      {"from": "playing", "event": "open_kol_chat", "to": "playing", "guard": "local rules only; no raw transcript retention"},
+      {"from": "playing", "event": "open_kol_profile", "to": "playing", "guard": "read-only KOL profile; player role and KOL host identity remain separate"},
+      {"from": "playing", "event": "live2d_greet", "to": "playing", "guard": "official sample Mao local technical preview only"},
+      {"from": "playing", "event": "kol_chat_action", "to": "playing", "guard": "allowlisted in-game navigation only"},
+      {"from": "playing", "event": "growth_campaign_accept", "to": "playing", "guard": "one active fictional exchange Campaign; exactly one primary KPI; commercial fields locked"},
+      {"from": "playing", "event": "growth_decision", "to": "playing", "guard": "local scenario choice only; wrong answer can retry without penalty"},
+      {"from": "playing", "event": "growth_local_proof_complete", "to": "playing", "guard": "three approved decisions complete; external_confirmation remains false"},
+      {"from": "playing", "event": "growth_campaign_local_acceptance", "to": "playing", "guard": "local proof complete; simulated no-value settlement only; external KPI remains unconfirmed"},
+      {"from": "playing", "event": "task_complete", "to": "playing", "guard": "completed_tasks < 3"},
+      {"from": "playing", "event": "goal_reached", "to": "success", "guard": "completed_tasks >= 3 && prosperity >= 100"},
+      {"from": "playing", "event": "task_failed", "to": "failure", "guard": null},
+      {"from": "playing", "event": "open_wallet", "to": "reward", "guard": null},
+      {"from": "reward", "event": "close", "to": "playing", "guard": null},
+      {"from": "playing", "event": "exit", "to": "exit", "guard": null},
+      {"from": "failure", "event": "retry", "to": "playing", "guard": null},
+      {"from": "success", "event": "replay", "to": "replay", "guard": null},
+      {"from": "replay", "event": "restart", "to": "playing", "guard": null},
+      {"from": "success", "event": "share", "to": "share", "guard": null},
+      {"from": "success", "event": "view_info", "to": "cta", "guard": null}
+    ],
+    "scoring": {
+      "enabled": true,
+      "rule": "Each unique completed task grants 20–45 virtual bricks and 25–40 prosperity; upgrade consumes local bricks only.",
+      "minimum": 0,
+      "maximum": 9999
+    }
+  },
+  "screens": [
+    {"screen_id": "access", "state": "consent", "copy_keys": ["access_title", "access_terms"], "asset_ids": ["asset_user_luna_avatar"], "actions": ["guest_entry", "local_register", "local_login"]},
+    {"screen_id": "onboarding", "state": "intro", "copy_keys": ["intro_title", "intro_body", "start_label"], "asset_ids": ["asset_user_luna_avatar"], "actions": ["start", "skip"]},
+    {"screen_id": "town", "state": "playing", "copy_keys": ["disclaimer", "reward_terms", "player_identity_copy", "kol_chat_title", "kol_chat_disclosure"], "asset_ids": ["asset_imagegen_luna_town_citybuilder_v3", "asset_user_luna_avatar", "asset_imagegen_town_cloud_bank_v1", "asset_imagegen_town_airdrop_plane_v1", "asset_imagegen_town_airdrop_token_v1", "asset_imagegen_luna_walk_strip_v1", "asset_optimized_webp_runtime_set"], "actions": ["pan_large_map_canvas", "reset_map_view", "walk_player_road_graph_with_fail_closed_collision", "view_fixed_kol_host", "enter_building_scene", "claim_local_airdrop_collectible_and_credit_five_virtual_bricks", "open_tasks", "open_ranking", "open_avatar", "open_wallet", "open_kol_chat", "open_kol_profile", "change_theme", "pause"]},
+    {"screen_id": "kol_chat", "state": "playing", "copy_keys": ["kol_chat_title", "kol_chat_disclosure", "kol_chat_placeholder", "live2d_disclosure"], "asset_ids": ["asset_user_luna_avatar", "asset_live2d_mao_official_sample"], "actions": ["live2d_greet", "toggle_local_speech", "ask_quick_prompt", "send_session_message", "open_allowlisted_screen", "close"]},
+    {"screen_id": "building_interior", "state": "playing", "copy_keys": ["disclaimer", "growth_measurement_disclosure"], "asset_ids": ["asset_imagegen_interior_growth_center_v2", "asset_optimized_webp_runtime_set", "asset_imagegen_interior_video_v1", "asset_imagegen_interior_live_v1", "asset_imagegen_interior_quiz_v1", "asset_imagegen_interior_predict_v1", "asset_imagegen_interior_community_v1", "asset_imagegen_interior_shop_v1", "asset_imagegen_interior_memorial_v1"], "actions": ["move_scene_avatar", "explore_scene_zone", "start_task", "open_growth_campaign_lab", "upgrade_building", "return_to_town"]},
+    {"screen_id": "task_center", "state": "playing", "copy_keys": ["growth_measurement_disclosure"], "asset_ids": ["asset_janachumi_isometric_city_cc0"], "actions": ["view_five_stage_resident_growth_journey", "start_task", "claim_local_progress", "close"]},
+    {"screen_id": "ranking", "state": "playing", "copy_keys": [], "asset_ids": ["asset_user_luna_avatar", "asset_imagegen_rank_avatar_rain_v1", "asset_imagegen_rank_avatar_mika_v1", "asset_imagegen_rank_avatar_kiki_v1", "asset_imagegen_rank_avatar_vera_v1", "asset_imagegen_rank_avatar_wen_v1", "asset_imagegen_luna_town_citybuilder_v3"], "actions": ["load_local_sqlite_rank", "change_tab", "close"]},
+    {"screen_id": "avatar", "state": "playing", "copy_keys": ["player_identity_copy"], "asset_ids": ["asset_user_luna_avatar", "asset_imagegen_avatar_material_atlas", "asset_imagegen_avatar_material_atlas_v2", "asset_imagegen_luna_complete_looks_atlas_v1", "asset_imagegen_luna_mint_mayor_crystal_v1"], "actions": ["apply_complete_look", "select_item_and_auto_coordinate", "save_player_avatar_only", "open_kol_profile", "close"]},
+    {"screen_id": "host_profile", "state": "playing", "copy_keys": ["kol_profile_disclosure", "growth_measurement_disclosure"], "asset_ids": ["asset_user_luna_avatar"], "actions": ["view_read_only_profile", "view_relationship_progress", "open_kol_chat", "open_tasks", "close"]},
+    {"screen_id": "flagship", "state": "playing", "copy_keys": ["disclaimer", "reward_terms", "growth_measurement_disclosure"], "asset_ids": ["asset_user_luna_avatar", "asset_authored_growth_campus_v1"], "actions": ["navigate_lifecycle_campus", "filter_lifecycle_stage", "view_exchange_growth_campaigns", "accept_one_local_campaign", "open_growth_scenario", "complete_local_proof", "submit_local_acceptance", "view_business_ledger", "copy_demo_code", "bind_local_invite", "view_perks", "close"]},
+    {"screen_id": "wallet", "state": "reward", "copy_keys": ["reward_eligibility", "reward_terms"], "asset_ids": ["asset_janachumi_isometric_city_cc0", "asset_web3icons_ht_token_icon"], "actions": ["simulate_connect", "view_local_airdrop_collection_and_brick_ledger", "server_validate_demo_card", "view_cards", "close"]},
+    {"screen_id": "success", "state": "success", "copy_keys": ["success_title", "replay_label", "cta_label", "reward_terms"], "asset_ids": ["asset_user_luna_avatar"], "actions": ["replay", "share", "view_info"]},
+    {"screen_id": "failure", "state": "failure", "copy_keys": ["failure_title"], "asset_ids": ["asset_user_luna_avatar"], "actions": ["retry", "exit"]}
+  ],
+  "cta": {
+    "cta_id": "cta_demo_info",
+    "type": "none",
+    "label_key": "cta_label",
+    "destination_id": "DISABLED_PENDING_APPROVAL",
+    "allowed_states": ["success", "cta", "exit"],
+    "open_mode": "same_context"
+  },
+  "reward_presentation": {
+    "reward_id": "reward_none_demo",
+    "type": "none",
+    "eligibility_copy_key": "reward_eligibility",
+    "terms_copy_key": "reward_terms",
+    "claim_action": "browser_local_no_value_demo_card_only"
+  },
+  "field_authority": {
+    "locked_fields": ["cta.type", "cta.destination_id", "reward_presentation.type", "constraints", "telemetry.consent_behavior", "runtime_policy.kol_chat_identity_disclosure", "runtime_policy.kol_chat_safety", "runtime_policy.kol_chat_action_allowlist", "runtime_policy.live2d_model_identity", "runtime_policy.live2d_license_boundary"],
+    "editable_fields": ["presentation.copy_pack", "presentation.theme", "presentation.kol_chat_approved_copy", "gameplay.optional_tasks", "screens", "presentation.player_role_labels", "presentation.kol_profile_copy"],
+    "agentic_fields": ["presentation.theme", "gameplay.task_order", "gameplay.hint_frequency"],
+    "runtime_fields": ["session_id", "guest_id", "privacy_safe_user_id", "consent_state", "screen_id", "actor_role", "subject_role", "score", "bricks", "prosperity", "completed_tasks", "resident_growth_stage", "airdrop_tokens", "airdrop_brick_credits", "airdrop_flights_seen", "outdoor_route_direction", "outdoor_face_direction", "outdoor_route_heading", "outdoor_route_collision_audit", "business_revenue", "brand_reputation", "brand_order_status", "growth_proof_status", "lifecycle_stage_filter", "current_campaign_context", "map_pan_x", "map_pan_y", "interior_x", "interior_y", "theme", "chat_intent", "chat_mode", "chat_safety_outcome", "live2d_state", "live2d_model_id"]
+  },
+  "runtime_policy": {
+    "segmentation_inputs": ["theme_preference", "completed_tasks", "reduced_motion", "lifecycle_stage"],
+    "agentic_bounds": [
+      {"field": "presentation.theme", "allowed_values": ["luna", "vera"]},
+      {"field": "gameplay.task_order", "allowed_values": ["default", "community_first"]},
+      {"field": "gameplay.hint_frequency", "allowed_values": ["normal", "helpful"]}
+    ],
+    "experiment_id": null,
+    "variant_id": "luna_default",
+    "fallback_behavior": "If localhost API is unavailable, allow guest browser-only gameplay and bounded in-browser KOL chat rules, but block local account, invite binding and demo-card redemption; never enable external CTA or real reward. Raw chat text is never persisted."
+  },
+  "telemetry": {
+    "required_events": ["impression", "play_start", "valid_interaction", "level_start", "level_complete", "play_complete", "play_fail", "replay", "share", "cta_view", "cta_click", "registration_complete", "reward_eligible", "reward_claim", "consent_granted", "return_session", "error"],
+    "common_properties": ["event_id", "event_time", "timestamp", "campaign_id", "playable_id", "contract_version", "playable_version", "playable_config_version", "build_id", "session_id", "screen_id", "actor_role", "subject_role", "task_id", "building_id", "brand_campaign_id", "lifecycle_stage", "growth_kpi", "local_proof_complete", "external_confirmation", "theme", "viewport", "is_test", "channel_id", "creative_id", "kol_id", "link_id", "locale", "region", "device_class", "consent_state", "interaction_type", "chat_intent", "chat_mode", "chat_safety_outcome"],
+    "deduplication_strategy": "Generate one event_id per local emission and enforce SQLite uniqueness. Local alias registration_complete is not an external exchange registration. External KPIs require independent approved server-side deduplication and confirmation.",
+    "consent_behavior": "Guest events use a pseudonymous guest session. Local alias registration requires explicit local-storage consent. KOL AI chat text is processed on localhost or in browser memory and discarded; telemetry stores only intent, length, mode and safety outcome. Persist only allowed data to localhost SQLite; remote analytics is disabled."
+  },
+  "build": {
+    "target": "web_h5",
+    "entry": "index.html",
+    "asset_base": "./assets/",
+    "minimum_viewport_width": 320,
+    "supported_orientations": ["portrait"],
+    "dependency_lock": "Static local HTML/CSS/JavaScript + consistent isometric interior renders + authored lifecycle SVG + optimized AVIF/WebP derivatives + vendored MIT-licensed Web3 Icons HT.svg + bundled Cubism SDK for Web 5-r.5 runtime and Mao sample; Python server is an optional same-origin file host; no runtime network dependency",
+    "environment": "local"
+  },
+  "constraints": {
+    "approved_asset_ids": ["asset_demo_logo", "asset_demo_mayor", "asset_demo_vector_town", "asset_demo_buildings", "asset_demo_icons", "asset_demo_avatars", "asset_demo_avatar_parts", "asset_demo_flagship", "asset_demo_wallet", "asset_demo_success", "asset_demo_failure", "asset_janachumi_isometric_city_cc0", "asset_user_luna_avatar", "asset_imagegen_avatar_material_atlas", "asset_imagegen_avatar_material_atlas_v2", "asset_imagegen_luna_complete_looks_atlas_v1", "asset_imagegen_luna_mint_mayor_crystal_v1", "asset_imagegen_rank_avatar_rain_v1", "asset_imagegen_rank_avatar_mika_v1", "asset_imagegen_rank_avatar_kiki_v1", "asset_imagegen_rank_avatar_vera_v1", "asset_imagegen_rank_avatar_wen_v1", "asset_imagegen_luna_town_citybuilder_v3", "asset_imagegen_town_cloud_bank_v1", "asset_imagegen_town_airdrop_plane_v1", "asset_imagegen_town_airdrop_token_v1", "asset_web3icons_ht_token_icon", "asset_imagegen_luna_walk_strip_v1", "asset_authored_growth_campus_v1", "asset_imagegen_interior_growth_center_v2", "asset_optimized_webp_runtime_set", "asset_imagegen_interior_video_v1", "asset_imagegen_interior_live_v1", "asset_imagegen_interior_quiz_v1", "asset_imagegen_interior_predict_v1", "asset_imagegen_interior_community_v1", "asset_imagegen_interior_shop_v1", "asset_imagegen_interior_memorial_v1", "asset_live2d_mao_official_sample"],
+    "prohibited_phrases": ["稳赚", "保本", "保证收益", "提现", "真实代币奖励", "本地过关等于真实入金", "本地过关等于真实交易"],
+    "required_disclosures": ["DEMO / LOCAL", "本地玩法证据与交易所真实 KPI 分离。", "下载、注册、首次入金、首次现货交易、D7 留存与召回均未接入外部确认。", "不执行真实 App 下载、开户、KYC、钱包、入金或交易。", "Luna AI 分身为本地规则回复，不代表本人实时发言。", "Live2D 使用官方示例 Mao，仅为技术预览，不是 Luna 数字孪生。", "聊天原文仅用于本次回答且不落库。", "砖块、经营金与带 HT 图标的主题纪念 Token 均为本地模拟数据，无现金、数字货币、投资、提现、转让或兑换价值。", "HT 图标来自 MIT 许可的 Web3 Icons 素材库；其演示使用不代表火币或 HTX 品牌授权、赞助、真实空投或真实奖励。", "行情预测仅为互动玩法，不构成投资建议。"],
+    "privacy_prohibited_fields": ["KYC documents", "government ID", "real name", "wallet address", "wallet private key", "seed phrase", "precise location", "email", "phone", "private_key", "raw_kyc_document", "seed_phrase"],
+    "manual_review_required": true
+  },
+  "metadata": {
+    "created_at": "2026-09-03T00:00:00+08:00",
+    "updated_at": "2026-09-15T16:00:00+08:00",
+    "created_by": "Codex using Claude Design reference",
+    "notes": ["Version 0.15.1 increases the complete draggable town world canvas from 146% to 176%, creating visibly larger spacing between buildings while preserving one shared coordinate system for scene art, road nodes, character paths and building hotspots.", "Version 0.15.0 adds bounded pointer, touch and keyboard panning, a recenter control and drag-click suppression.", "Map panning is local visual navigation and does not change Campaign, reward, CTA, external KPI or commercial fields.", "Version 0.13.0 replaces the flat CSS clouds with optimized volumetric cloud sprites, redraws the outdoor road graph against the current map, adds foot-anchored full-body Luna walking and depth-aware NPC gait, and adds a three-drop Huobi-themed commemorative Token sky event.", "The Huobi-themed plane and collectible contain no copied brand logo asset and do not imply authorization; every collectible is browser-local with monetary_value=0, external_confirmation=false, transferable=false and withdrawable=false.", "Version 0.12.2 replaces the growth-center interior SVG with a portrait isometric cutaway render matched to the other seven building interiors; navigation, hotspots and Campaign logic are unchanged.", "Version 0.12.1 adds tap, D-pad and keyboard navigation to all eight layered 2.5D interiors.", "The authored growth campus SVG remains in the flagship lifecycle overview and Campaign mission backdrop; the earlier generated exterior growth scene remains rollback-only.", "Large town, interior and avatar atlases have AVIF-first and WebP-second runtime derivatives with original files retained as fallbacks.", "Luna local rules now answer from current Campaign, lifecycle stage, unfinished decisions, KPI source and next action, and refuse requests to change Contract-locked fields.", "Each Campaign contains one primary KPI, three deterministic decisions, one local proof and an explicit external confirmation source.", "External KPI confirmation is fail-closed and remains zero in this build.", "Deposit and trade marketing require separate legal, compliance and risk approval before production use.", "The current renderer uses official sample Mao and labels it as not Luna; production Luna model creation and authorization remain out of scope.", "Structural baseline: KOL小镇 设计稿 v2.dc.html."]
+  }
+}

@@ -1,0 +1,181 @@
+{
+  "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/d0/d0c3078e-8ccc-4e5e-89ef-5f6ce5afdb7c.79405.png",
+  "textureUuid": "d0c3078e-8ccc-4e5e-89ef-5f6ce5afdb7c",
+  "sourceSha256": "cfa54a4de3bc4f1740144bead16f4d9285cedc3bdb5a7f104910759ab3f24118",
+  "sourceSize": [
+    1024,
+    1024
+  ],
+  "frames": {
+    "loading_bg_big": {
+      "file": "loading_bg_big.png",
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/d0/d0c3078e-8ccc-4e5e-89ef-5f6ce5afdb7c.79405.png",
+      "rect": [
+        0,
+        0,
+        439,
+        1024
+      ],
+      "width": 439,
+      "height": 1024,
+      "originalSize": [
+        439,
+        1024
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "capInsets": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "sha256": "9cc4495346a2320481643a68e7660403849fca704a8cf4e8d6850d9fe802dbb4",
+      "rgbaSha256": "0e881449274fd768c5d823b0a9b8f9823a7a48305c0352e8075813ec67adadf0"
+    },
+    "health_advice": {
+      "file": "health_advice.png",
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/d0/d0c3078e-8ccc-4e5e-89ef-5f6ce5afdb7c.79405.png",
+      "rect": [
+        440,
+        254,
+        471,
+        43
+      ],
+      "width": 471,
+      "height": 43,
+      "originalSize": [
+        471,
+        43
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "capInsets": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "sha256": "04e09566528f0a9705a7494a0fa3fc1ce7a88e2c592e3efeccd141f068304630",
+      "rgbaSha256": "21ec75726cd365df4b6cac60909046c13d78ae806506d38ec88c2575cf52b9d6"
+    },
+    "loading_spring_font": {
+      "file": "loading_spring_font.png",
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/d0/d0c3078e-8ccc-4e5e-89ef-5f6ce5afdb7c.79405.png",
+      "rect": [
+        440,
+        298,
+        48,
+        92
+      ],
+      "width": 48,
+      "height": 92,
+      "originalSize": [
+        48,
+        92
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "capInsets": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "sha256": "077f2aaf40dc4e666f5da4bce583fa9017b4840c0abab126d7a02ecd09d92287",
+      "rgbaSha256": "490e0589f983eda6d027abda1baa02131cf7835f29fed7d7c547509ae12168cc"
+    },
+    "logo": {
+      "file": "logo.png",
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/d0/d0c3078e-8ccc-4e5e-89ef-5f6ce5afdb7c.79405.png",
+      "rect": [
+        440,
+        0,
+        575,
+        253
+      ],
+      "width": 575,
+      "height": 253,
+      "originalSize": [
+        575,
+        253
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "capInsets": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "sha256": "c5e4b464ce83d174f3dc88d2b966d8db7647511a21232d6c379ecc3b6e96f906",
+      "rgbaSha256": "7bda80304818b548724074c1131d4724e3853abba34ea385813cd2f98e5f8e97"
+    },
+    "loading_bg": {
+      "file": "loading_bg.png",
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/d0/d0c3078e-8ccc-4e5e-89ef-5f6ce5afdb7c.79405.png",
+      "rect": [
+        440,
+        391,
+        37,
+        19
+      ],
+      "width": 37,
+      "height": 19,
+      "originalSize": [
+        37,
+        19
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "capInsets": [
+        18,
+        0,
+        18,
+        0
+      ],
+      "sha256": "c789e44594a911c1ac2a64ec27b95367edf356725b85457abd266bc7c69c9614",
+      "rgbaSha256": "8bfd17b36dbdef06a240c77f20e39f90b6d39322c566c638ef4b65d3d0bd5d27"
+    },
+    "loading_progress": {
+      "file": "loading_progress.png",
+      "sourceUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/d0/d0c3078e-8ccc-4e5e-89ef-5f6ce5afdb7c.79405.png",
+      "rect": [
+        912,
+        254,
+        37,
+        19
+      ],
+      "width": 37,
+      "height": 19,
+      "originalSize": [
+        37,
+        19
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "capInsets": [
+        18,
+        0,
+        18,
+        0
+      ],
+      "sha256": "98bd9ba922408aa6e3eb42d827f5dd91b411d7e06014d5f0ee9f29f6931030d2",
+      "rgbaSha256": "02ad5e043cb5e391b76b66c03a1b3b7d31326ddd72f0d897ed1bba811bba789c"
+    }
+  },
+  "layout": "original-layout.json",
+  "sourceNotes": "SOURCE-NOTES.md"
+}

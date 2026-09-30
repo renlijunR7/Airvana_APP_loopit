@@ -1,0 +1,269 @@
+{
+  "reference": "http://game.zhongyigames.com/niguolaia/",
+  "licenseVerified": false,
+  "retrieved": "2026-09-08",
+  "assets": [
+    {
+      "appearance": "effect/battle/tower/tower2_1",
+      "type": "cc.Texture2D",
+      "nativeUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/01/0171fbbb-5153-4d14-8ca9-1c3bf6f1ab9c.45126.png",
+      "sha256": "cd53c232e429cc8f3b91447e211ed7ce38abb62e474a7c358bf30bdeedb61f63"
+    },
+    {
+      "appearance": "effect/battle/enemy/enemy5_1",
+      "type": "cc.Texture2D",
+      "nativeUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/06/0661399f-191c-4855-820b-307d6e666d71.31c4c.png",
+      "sha256": "1ec4bd60d02a84df5913214f1aa8d6964721e527046409893dc8b08e6782d97c"
+    },
+    {
+      "appearance": "effect/battle/tower/tower2_3",
+      "type": "sp.SkeletonData",
+      "nativeUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/0a/0a8c7c81-a66e-4fe1-8817-5c29eab823d7.dd6d7.bin",
+      "sha256": "e0c74e0285ce63cf6465b76e1643455b5a8562d5816b047c3553e7da4ffd90df",
+      "metadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/0a/0a8c7c81-a66e-4fe1-8817-5c29eab823d7.682af.json"
+    },
+    {
+      "appearance": "effect/battle/tower/tower3_3",
+      "type": "cc.Texture2D",
+      "nativeUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/12/12b142d7-b650-4969-90d5-83d53d6d7743.06322.png",
+      "sha256": "1ca05a173731c5379ef86c519022c3b8b9cb32174cbfe8570bdbef6d65a00762"
+    },
+    {
+      "appearance": "effect/battle/tower/tower2_2",
+      "type": "sp.SkeletonData",
+      "nativeUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/1f/1fe4d837-a616-4ddf-a398-edf36376c0d4.883c8.bin",
+      "sha256": "4a8006efbfebe0008b46aa8dea482ffbe1219f74e33bc345350c3aafba9fe2d4",
+      "metadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/1f/1fe4d837-a616-4ddf-a398-edf36376c0d4.8d7e3.json"
+    },
+    {
+      "appearance": "effect/battle/hero/tower3_3_soldier",
+      "type": "sp.SkeletonData",
+      "nativeUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/20/20f7f8ba-505d-4741-b50c-cd2c14bc55ab.1db66.bin",
+      "sha256": "205173e48b363d17fdd2f50c0b2b9896c5816a13e0ca0e4cb18a8311882bc95a",
+      "metadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/20/20f7f8ba-505d-4741-b50c-cd2c14bc55ab.396ec.json"
+    },
+    {
+      "appearance": "effect/battle/enemy/enemy1_1",
+      "type": "cc.Texture2D",
+      "nativeUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/21/21f9161a-86fe-4f9e-9af1-90f0cefdb4b9.c3f60.png",
+      "sha256": "374e2e35a6114f0af77d0e041de986671661812ac55a224c511a71f13f853636"
+    },
+    {
+      "appearance": "effect/battle/hero/tower3_2_soldier",
+      "type": "cc.Texture2D",
+      "nativeUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/26/26f51e9b-e807-4e47-b454-10b0253e2ef7.dc932.png",
+      "sha256": "d897581e867264c7d644a692704cfa93af27a3cdac58431d0ca096622a3cd6a5"
+    },
+    {
+      "appearance": "effect/battle/hero/tower3_1_soldier",
+      "type": "sp.SkeletonData",
+      "nativeUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/2d/2dbaecae-e36a-43aa-bead-c48925e5142b.0b021.bin",
+      "sha256": "776939a0aeee45328c3a5efef90367632b91165264f2fd2c54bcde17b306381b",
+      "metadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/2d/2dbaecae-e36a-43aa-bead-c48925e5142b.63314.json"
+    },
+    {
+      "appearance": "effect/battle/tower/tower4_2",
+      "type": "sp.SkeletonData",
+      "nativeUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/36/36746a33-740e-40a9-96ad-869ea4e32f20.b08c3.bin",
+      "sha256": "af41146b118e496a5c0dd9cb1e59aafd65b06387e42b8a40dac2546957b7d247",
+      "metadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/36/36746a33-740e-40a9-96ad-869ea4e32f20.fe7d4.json"
+    },
+    {
+      "appearance": "effect/battle/enemy/enemy1_1",
+      "type": "sp.SkeletonData",
+      "nativeUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/39/3944157a-c09f-4abd-b129-979f2ecfc901.56bd4.bin",
+      "sha256": "eaf9b4a68e9087d0433f54849d1c412a4123171e1410c1641904e2058392a9b1",
+      "metadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/39/3944157a-c09f-4abd-b129-979f2ecfc901.e149c.json"
+    },
+    {
+      "appearance": "effect/battle/enemy/enemy7_1",
+      "type": "sp.SkeletonData",
+      "nativeUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/3e/3eeb46c9-cb7a-4081-b24c-e11095919706.71264.bin",
+      "sha256": "bce57dd5058b3dfdde30750a1dac418fba49c8f954d054d0568d7065591733a0",
+      "metadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/3e/3eeb46c9-cb7a-4081-b24c-e11095919706.bd173.json"
+    },
+    {
+      "appearance": "effect/battle/tower/tower3_2",
+      "type": "cc.Texture2D",
+      "nativeUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/65/65da054f-844b-4eb7-baa5-3bc825eeccd2.ae6bc.png",
+      "sha256": "e544ea88f7fbf6b3f295f0a2d3f358a39258944a34a6e1a2ef6077fc496c82be"
+    },
+    {
+      "appearance": "effect/battle/tower/tower4_1",
+      "type": "cc.Texture2D",
+      "nativeUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/69/69bd8f82-6aaa-4f34-9279-b2f40e0b82d8.6ccfe.png",
+      "sha256": "7d80108fdda4a6e2135de12caa325c0c8081710263754927b8744240b425636c"
+    },
+    {
+      "appearance": "effect/battle/enemy/enemy5_1",
+      "type": "sp.SkeletonData",
+      "nativeUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/70/70a742b7-b0b1-40d3-95a6-b616defc9983.ebc1b.bin",
+      "sha256": "2c9eb88c4560eb32034e1b8c6b291444f42513bfd1f3b98d098bf8dcfc09f3ed",
+      "metadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/70/70a742b7-b0b1-40d3-95a6-b616defc9983.eec05.json"
+    },
+    {
+      "appearance": "effect/battle/tower/tower1_1",
+      "type": "sp.SkeletonData",
+      "nativeUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/72/721bf8b6-d85f-4e67-af8e-6419035094c7.0ec48.bin",
+      "sha256": "dd3277b2ba4f5a490ed09c8455a11010e1db8bd4e9358299d38807155301d889",
+      "metadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/72/721bf8b6-d85f-4e67-af8e-6419035094c7.c8ad6.json"
+    },
+    {
+      "appearance": "effect/battle/tower/tower1_2",
+      "type": "sp.SkeletonData",
+      "nativeUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/86/86982f05-08d6-41c3-9648-5db2ecf20e72.8570e.bin",
+      "sha256": "29e73e800287d70f93e8f683747377791c77a5e5fb44592de74de42954b91e40",
+      "metadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/86/86982f05-08d6-41c3-9648-5db2ecf20e72.4e999.json"
+    },
+    {
+      "appearance": "effect/battle/tower/tower3_2",
+      "type": "sp.SkeletonData",
+      "nativeUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/94/940f8676-5f23-47d4-9744-ff8dcffb8435.7869d.bin",
+      "sha256": "2f0f3bb31504dfe37b4b8c65d23e9f21f88719811bd8b377297657e7c498b69f",
+      "metadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/94/940f8676-5f23-47d4-9744-ff8dcffb8435.73a1d.json"
+    },
+    {
+      "appearance": "effect/battle/tower/tower4_3",
+      "type": "cc.Texture2D",
+      "nativeUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/96/96a8617e-9499-4f56-9433-b6b534789a95.a1741.png",
+      "sha256": "19cff4026c80b0a81bd6f8e0e7ebf55f68388e801f4695ee5a07a54ad1ca01cf"
+    },
+    {
+      "appearance": "effect/battle/tower/tower3_3",
+      "type": "sp.SkeletonData",
+      "nativeUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/98/98601856-451b-42f1-a35d-fdd9495230ee.c5197.bin",
+      "sha256": "ac6aab8d769eedc7ad5930652ce34a94ff31ea36b064e1d3d7a988c906035b61",
+      "metadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/98/98601856-451b-42f1-a35d-fdd9495230ee.f56e2.json"
+    },
+    {
+      "appearance": "effect/battle/tower/tower2_3",
+      "type": "cc.Texture2D",
+      "nativeUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/99/99ef8d58-e68d-49af-8308-62f1c99f0937.7a97d.png",
+      "sha256": "d007ac030a33fc53235b7ce1ca7be1b3d753ccb3faaa98cf07c18ffa4d210a0d"
+    },
+    {
+      "appearance": "effect/battle/hero/tower3_3_soldier",
+      "type": "cc.Texture2D",
+      "nativeUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/ac/ac4849f3-a978-4f75-a5e3-164b857e6964.c79a5.png",
+      "sha256": "3aef8e11674fc9a08d6cbfb15e1f9c1c1e969ce335d4119d5ee12a69cc8fa138"
+    },
+    {
+      "appearance": "effect/battle/hero/tower3_1_soldier",
+      "type": "cc.Texture2D",
+      "nativeUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/b0/b056a9ab-6e9a-4da7-b7c5-c5f35d37db5c.d094b.png",
+      "sha256": "57ccc47654cd6008ea82e80f2c37781118a04d2a1e7db5437f5daabf8442ea4d"
+    },
+    {
+      "appearance": "effect/battle/enemy/enemy12_1",
+      "type": "cc.Texture2D",
+      "nativeUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/b1/b14fc5e6-61f7-46ba-9097-bb22527e64df.533ec.png",
+      "sha256": "71d1210c6f6469013036818e95ab8e3f1c94d6a8c7f79badf9eb9241ac216757"
+    },
+    {
+      "appearance": "effect/battle/enemy/enemy12_1",
+      "type": "sp.SkeletonData",
+      "nativeUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/b2/b240fce7-3599-4352-9709-1c20ef8e25dc.082bc.bin",
+      "sha256": "8a6e76e201acbb2950a16275266e1e3b879e8a1ba12978b68c5c55d3b0a729cd",
+      "metadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/b2/b240fce7-3599-4352-9709-1c20ef8e25dc.21c26.json"
+    },
+    {
+      "appearance": "effect/battle/tower/tower1_1",
+      "type": "cc.Texture2D",
+      "nativeUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/b3/b315edac-c437-4d3b-8c96-17102a8b9ae9.f7ec6.png",
+      "sha256": "f48733ae8bd86927ec3fba8e6d1736035160a3acf092ed26d49a0e6087383839"
+    },
+    {
+      "appearance": "effect/battle/enemy/enemy7_1",
+      "type": "cc.Texture2D",
+      "nativeUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/b3/b3b0cb69-baad-42a3-8bef-e0d0b8f630e3.4e1a6.png",
+      "sha256": "f024a70d41beb97fd9ebd372f4569b11be69e1cd0b9ae72931510c71c83fa134"
+    },
+    {
+      "appearance": "effect/battle/tower/tower4_2",
+      "type": "cc.Texture2D",
+      "nativeUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/bc/bcd6e111-5bae-4be9-bf88-e07436e56b7f.d44e8.png",
+      "sha256": "c1beaf1755684e25103f88df5489a9559117175f1eaa369e66be8b3b3c7b8e20"
+    },
+    {
+      "appearance": "effect/battle/tower/tower1_2",
+      "type": "cc.Texture2D",
+      "nativeUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/c2/c2df695c-f7df-40d3-9976-284d7369a716.49f27.png",
+      "sha256": "090308e32d81a5eb8fb57e8aec9b6fd636405cd06e8832ecd8bed48f3406e0ad"
+    },
+    {
+      "appearance": "effect/battle/tower/tower3_1",
+      "type": "sp.SkeletonData",
+      "nativeUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/cc/cca41d17-95fb-4275-adc3-e6954749948b.d4ae6.bin",
+      "sha256": "ca20cc1dd720fd3f073162af783fbe7edbb6e4cdc8209efa45623fe782394952",
+      "metadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/cc/cca41d17-95fb-4275-adc3-e6954749948b.ad71f.json"
+    },
+    {
+      "appearance": "effect/battle/tower/tower2_1",
+      "type": "sp.SkeletonData",
+      "nativeUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/d1/d161d905-f22c-41dc-bf06-4e56ff4658ce.f117c.bin",
+      "sha256": "19de79ef1743d0ac62266d016138bf311cbc49c4484921ececdd20319a403f0c",
+      "metadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/d1/d161d905-f22c-41dc-bf06-4e56ff4658ce.cd221.json"
+    },
+    {
+      "appearance": "effect/battle/tower/tower4_1",
+      "type": "sp.SkeletonData",
+      "nativeUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/d9/d906772c-fe72-40d6-8ae4-1b4e6d58bfb7.630e3.bin",
+      "sha256": "04715db159117f7d588c5f33d82942d361e5dc5564a252c72311dc82de8363b7",
+      "metadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/d9/d906772c-fe72-40d6-8ae4-1b4e6d58bfb7.84e01.json"
+    },
+    {
+      "appearance": "effect/battle/hero/tower3_2_soldier",
+      "type": "sp.SkeletonData",
+      "nativeUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/dd/dd1d33de-1e7d-4eb0-b4ba-14bef49ab176.e7944.bin",
+      "sha256": "86694b5b85ec5315092c0c45e620aac54e74771a5ad27534fae2a88225e96b50",
+      "metadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/dd/dd1d33de-1e7d-4eb0-b4ba-14bef49ab176.c3161.json"
+    },
+    {
+      "appearance": "effect/battle/tower/tower1_3",
+      "type": "sp.SkeletonData",
+      "nativeUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/df/dfd121c8-e13a-44d0-ab74-0faeeb443573.8b783.bin",
+      "sha256": "3023d2590349352275cfc099ca8d4cfd70b41adb2dd335bb4deba8bedcaa29a5",
+      "metadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/df/dfd121c8-e13a-44d0-ab74-0faeeb443573.9b8d9.json"
+    },
+    {
+      "appearance": "effect/battle/tower/tower3_1",
+      "type": "cc.Texture2D",
+      "nativeUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/ec/ecbc15ea-7045-4115-b546-45c851464646.b9d63.png",
+      "sha256": "501d45a49189d9e1b8acf58b96a854371717d64589292803458995817c1f4d76"
+    },
+    {
+      "appearance": "effect/battle/tower/tower2_2",
+      "type": "cc.Texture2D",
+      "nativeUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/f3/f37333a8-35fa-4917-ac2c-37c6c8edb892.f71aa.png",
+      "sha256": "017e99e537e7044f3fca88366fa92f83995e27e0cba5e58ffaca8cee717122de"
+    },
+    {
+      "appearance": "effect/battle/tower/tower4_3",
+      "type": "sp.SkeletonData",
+      "nativeUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/ff/ff27d6ef-95fb-4015-8912-3688e5dfbfea.57b96.bin",
+      "sha256": "3e2447a7213fe8b44896415fb7f137f3336d725cc0c0455615ce774683e352b9",
+      "metadataUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/import/ff/ff27d6ef-95fb-4015-8912-3688e5dfbfea.599c7.json"
+    },
+    {
+      "appearance": "effect/battle/tower/tower1_3",
+      "type": "cc.Texture2D",
+      "nativeUrl": "http://game.zhongyigames.com/niguolaia/assets/resources/native/ff/ff8b4b1b-b360-4058-b7d0-8a336f0fbf56.b1be9.png",
+      "sha256": "d7a9bb7dc6b733431204f4d91f55ebdc705b1c655ac011a3fc8a5fa54887d43d"
+    }
+  ],
+  "scales": {
+    "tower": {
+      "scale": 0.36,
+      "evidence": "main-uipack GameTower/spine _trs scale .36"
+    },
+    "units": {
+      "scale": 0.36,
+      "evidence": "Enemy.scaling 3600; Json_Soldier 41001/41002/41003 scaling 3600; assigned by GameEnemy/GameHero"
+    },
+    "externalUnitShadow": {
+      "scale": 0.32,
+      "file": "unit-shadow-original.png",
+      "evidence": "BattleScene initShadowPool/getCacheShadow; shadowScaling3200; original enemy_shadow texture"
+    }
+  }
+}

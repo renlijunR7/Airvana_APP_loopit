@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="scroll">
+<title>scroll — original classic 2D game sprite</title>
+<g stroke="#243042" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M16 8H48Q58 8 58 17H49V47Q49 58 39 58H16V21H7Q7 8 16 8Z" fill="#fff4d2" /><path d="M16 8Q24 8 24 17V21H7Q7 8 16 8ZM16 47H39Q33 58 42 58H17Q7 56 9 47Z" fill="#e4b44f" /><path d="M29 23H42M23 31H42M23 39H38" fill="none" stroke="#8b6041" stroke-width="3"/>
+</g>
+</svg>
