@@ -122,7 +122,7 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    expect(find.bySemanticsLabel('获取积分'), findsOneWidget);
+    expect(find.bySemanticsLabel('奖励中心'), findsOneWidget);
     expect(find.bySemanticsLabel('通知'), findsOneWidget);
     expect(find.bySemanticsLabel('设置与更多'), findsOneWidget);
     expect(find.bySemanticsLabel('查看订阅与额度，当前 Free'), findsNothing);
@@ -158,7 +158,7 @@ void main() {
       expect(divider.color, const Color(0xFFEDEDF3));
       expect(divider.thickness, 1);
     }
-    for (final label in ['获取积分', '通知', '设置与更多', '创作者中心']) {
+    for (final label in ['奖励中心', '通知', '设置与更多', '创作者中心']) {
       expect(
         tester
             .getSemantics(find.bySemanticsLabel(label))

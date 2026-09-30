@@ -146,10 +146,7 @@ class _LaunchSplashScreenState extends ConsumerState<LaunchSplashScreen>
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // .launch-splash__brand
-                    const AirvanaLogo(
-                      width: 112,
-                      backgroundColor: Colors.white,
-                    ),
+                    const AirvanaLogo(width: 112),
                     const SizedBox(height: 7),
                     const Padding(
                       padding: EdgeInsets.only(left: 1),

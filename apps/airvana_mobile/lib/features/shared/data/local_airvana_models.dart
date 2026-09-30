@@ -1,4 +1,5 @@
 import 'package:airvana_mobile/features/network/domain/growth_node_state.dart';
+import 'package:airvana_mobile/features/ai_twin/domain/twin_demo.dart';
 
 enum LocalDataMode { local, demo }
 
@@ -473,6 +474,7 @@ class LocalWalletTxn {
 /// 关键动作全部写入 [audit]；对外能力受执行边界约束。
 class LocalAiTwinState {
   const LocalAiTwinState({
+    this.demo,
     this.status = 'not_created',
     this.name = '',
     this.tagline = '',
@@ -496,6 +498,11 @@ class LocalAiTwinState {
 
   factory LocalAiTwinState.fromJson(Map<String, dynamic> json) =>
       LocalAiTwinState(
+        demo: json['demo'] is Map
+            ? TwinDemoState.fromJson(
+                Map<String, dynamic>.from(json['demo'] as Map),
+              )
+            : null,
         status:
             const [
               'not_created',
@@ -552,6 +559,7 @@ class LocalAiTwinState {
             : const [],
       );
 
+  final TwinDemoState? demo;
   final String status;
   final String name;
   final String tagline;
@@ -582,6 +590,7 @@ class LocalAiTwinState {
   final List<({String label, String time, String scene})> versions;
 
   LocalAiTwinState copyWith({
+    TwinDemoState? demo,
     String? status,
     String? name,
     String? tagline,
@@ -602,6 +611,7 @@ class LocalAiTwinState {
     bool? copyProfileOnCreate,
     List<String>? scenes,
   }) => LocalAiTwinState(
+    demo: demo ?? this.demo,
     status: status ?? this.status,
     name: name ?? this.name,
     tagline: tagline ?? this.tagline,
@@ -624,6 +634,7 @@ class LocalAiTwinState {
   );
 
   Map<String, dynamic> toJson() => {
+    if (demo != null) 'demo': demo!.toJson(),
     'status': status,
     'name': name,
     'tagline': tagline,

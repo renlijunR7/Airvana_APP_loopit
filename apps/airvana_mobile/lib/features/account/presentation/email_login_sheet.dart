@@ -14,6 +14,7 @@
 library;
 
 import 'dart:async';
+import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -194,7 +195,12 @@ class _EmailLoginSheetState extends ConsumerState<EmailLoginSheet> {
         20,
         0,
         20,
-        20 + MediaQuery.viewInsetsOf(context).bottom,
+        // Do not stack the navigation inset on top of the keyboard inset.
+        20 +
+            math.max(
+              MediaQuery.viewInsetsOf(context).bottom,
+              MediaQuery.viewPaddingOf(context).bottom,
+            ),
       ),
       child: SingleChildScrollView(
         child: Column(

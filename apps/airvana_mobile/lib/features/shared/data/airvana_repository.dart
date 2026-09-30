@@ -1,4 +1,5 @@
 import 'package:airvana_mobile/features/network/domain/growth_node_state.dart';
+import 'package:airvana_mobile/features/ai_twin/domain/twin_demo.dart';
 import 'dart:async';
 
 import 'package:airvana_mobile/core/config/app_environment.dart';
@@ -12,6 +13,7 @@ import 'package:airvana_mobile/features/runtime/domain/server_runtime_proof.dart
 import 'package:airvana_mobile/features/shared/data/local_airvana_models.dart';
 import 'package:airvana_mobile/features/shared/data/local_airvana_store.dart';
 import 'package:airvana_mobile/features/shared/domain/airvana_models.dart';
+import 'package:airvana_mobile/features/shared/domain/comment_report.dart';
 
 class AirvanaRepository {
   AirvanaRepository({
@@ -841,6 +843,53 @@ class AirvanaRepository {
     return ContentReportResult(status: '${response['status'] ?? 'open'}');
   }
 
+  /// 评论举报必须拿到服务端回执，不能静默降级为本地成功。
+  Future<CommentReportReceipt> reportComment({
+    required String playableKey,
+    required String title,
+    required CommentReportReason reason,
+    String? commentId,
+    String? demoCommentKey,
+    String details = '',
+  }) async {
+    if ((commentId == null) == (demoCommentKey == null)) {
+      throw ApiException('举报对象无效');
+    }
+    if (details.trim().length > 500 ||
+        (reason == CommentReportReason.other && details.trim().isEmpty)) {
+      throw ApiException('请填写 500 字以内的举报说明');
+    }
+    await _ensureLocalDemoSession();
+    final contentId = await resolveServerContentId(
+      playableKey: playableKey,
+      title: title,
+    );
+    if (contentId == null) throw ApiException('未找到对应作品，举报未提交');
+    final response = await api.postJson('/api/comment-reports', {
+      'contentId': contentId,
+      if (commentId != null) 'commentId': commentId,
+      if (demoCommentKey != null) 'demoCommentKey': demoCommentKey,
+      'reason': reason.name,
+      'details': details.trim(),
+    });
+    final report = response['report'];
+    if (report is! Map<String, dynamic> ||
+        report['id'] is! String ||
+        (report['id'] as String).isEmpty ||
+        !['open', 'resolved'].contains(report['status']) ||
+        report['demo'] is! bool ||
+        report['demo'] != (demoCommentKey != null) ||
+        report['alreadyReported'] is! bool) {
+      throw ApiException('未收到有效的举报回执，请重试确认');
+    }
+    return CommentReportReceipt(
+      id: report['id'] as String,
+      status: report['status'] as String,
+      demo: report['demo'] as bool,
+      alreadyReported: report['alreadyReported'] as bool,
+    );
+  }
+
   /// 客服工单列表（当前账号）。
   Future<List<SupportTicket>> loadSupportTickets() async {
     await _ensureLocalDemoSession();
@@ -1439,6 +1488,9 @@ class AirvanaRepository {
       _localStore.loadGameCoinLedgers();
 
   Future<LocalAiTwinState> loadAiTwinState() => _localStore.loadAiTwinState();
+
+  Future<TwinDemoState> saveTwinDemo(TwinDemoState demo) =>
+      _localStore.saveTwinDemo(demo);
 
   Future<LocalAiTwinState> saveAiTwinState(
     LocalAiTwinState state, {

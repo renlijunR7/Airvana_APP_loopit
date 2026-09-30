@@ -10,6 +10,7 @@ import 'package:airvana_mobile/features/shared/data/airvana_repository.dart';
 import 'package:airvana_mobile/features/shared/data/legacy_demo_catalog.dart';
 import 'package:airvana_mobile/features/shared/domain/airvana_models.dart';
 import 'package:airvana_mobile/features/shared/presentation/content_report_sheet.dart';
+import 'package:airvana_mobile/features/shared/presentation/comment_report_sheet.dart';
 import 'package:airvana_mobile/features/shared/presentation/playable_social_sheets.dart';
 import 'package:airvana_mobile/shared/presentation/airvana_logo.dart';
 import 'package:flutter/material.dart';
@@ -506,11 +507,7 @@ class _LegacyHeader extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(14, 4, 10, 4),
           child: Row(
             children: [
-              const AirvanaLogo(
-                width: 76,
-                backgroundColor: background,
-                dark: true,
-              ),
+              const AirvanaLogo(width: 76, dark: true),
               const Spacer(),
               Stack(
                 clipBehavior: Clip.none,
@@ -654,14 +651,15 @@ class _LegacyPlayablePage extends StatelessWidget {
                         onExit: onClose,
                       ),
                     ),
+                  // 圆画 32px、触控区 44px：定位往外挪 6px，让看得见的圆仍落在
+                  // 距卡片右上角 14/12 的位置；两颗的触控区相邻，圆与圆间隔 12px。
                   Positioned(
-                    left: 14,
-                    right: 14,
-                    top: 12,
+                    left: 8,
+                    right: 8,
+                    top: 6,
                     child: Row(
                       children: [
                         const Spacer(),
-                        const SizedBox(width: 8),
                         _CircleGlass(
                           icon: muted
                               ? Icons.volume_off_outlined
@@ -669,7 +667,6 @@ class _LegacyPlayablePage extends StatelessWidget {
                           label: muted ? '开启作品音效' : '静音作品音效',
                           onTap: onMute,
                         ),
-                        const SizedBox(width: 8),
                         // 未开始时这里原来是个 × ——点了只弹一句「已退出当前作品」，
                         // 实际什么都没发生。改成进入全屏运行页；游戏跑起来后仍要
                         // 保留退出口，因为播放中信息流是锁死的。
@@ -706,9 +703,15 @@ class _LegacyPlayablePage extends StatelessWidget {
                                 style: FilledButton.styleFrom(
                                   backgroundColor: Colors.white,
                                   foregroundColor: const Color(0xFF111111),
-                                  minimumSize: const Size(156, 44),
+                                  minimumSize: const Size(128, 36),
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 18,
+                                    vertical: 8,
+                                  ),
+                                  tapTargetSize: MaterialTapTargetSize.padded,
                                   shape: const StadiumBorder(),
                                   textStyle: const TextStyle(
+                                    fontSize: 13,
                                     fontWeight: FontWeight.w900,
                                   ),
                                 ),
@@ -2120,7 +2123,9 @@ class _SocialFooter extends StatelessWidget {
       key: const ValueKey('feed-social-footer'),
       // The 430×932 Web baseline reserves the floating navigation's visual
       // height inside the action panel, rather than shrinking the media.
-      height: proportionalFooter + safeFooterExtra,
+      // Lift the author and social rows by 8 logical pixels without moving
+      // the navigation dock or changing their own sizes/touch targets.
+      height: proportionalFooter + safeFooterExtra + 8,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(16, 8, 14, 4),
         child: Column(
@@ -2294,7 +2299,7 @@ class _SocialFooter extends StatelessWidget {
             ),
             const SizedBox(
               key: ValueKey('feed-bottom-nav-reserve'),
-              height: 65,
+              height: 73,
             ),
           ],
         ),
@@ -2356,20 +2361,46 @@ class _CircleGlass extends StatelessWidget {
   final String label;
   final VoidCallback onTap;
 
+  /// 看得见的圆：32px，对齐 Web `.feed-mini-game__sound / __close`
+  /// （32×32、1px rgba(255,255,255,.24) 边、rgba(6,8,10,.34) 底）。
+  static const visualSize = 32.0;
+
+  /// 点得到的范围仍是 44px（HIG / Material 的最小触控尺寸），
+  /// 只是圆画小了——所以两颗之间不再额外加间距，外层定位也相应往外挪 6px。
+  static const hitSize = 44.0;
+
   @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: Colors.black.withValues(alpha: .36),
-      shape: const CircleBorder(side: BorderSide(color: Colors.white30)),
-      child: IconButton(
-        tooltip: label,
-        onPressed: onTap,
-        padding: EdgeInsets.zero,
-        constraints: const BoxConstraints.tightFor(width: 44, height: 44),
-        icon: Icon(icon, semanticLabel: label, color: Colors.white, size: 22),
+  Widget build(BuildContext context) => Tooltip(
+    message: label,
+    child: Semantics(
+      button: true,
+      label: label,
+      onTap: onTap,
+      excludeSemantics: true,
+      child: InkResponse(
+        onTap: onTap,
+        radius: hitSize / 2,
+        child: SizedBox.square(
+          dimension: hitSize,
+          child: Center(
+            child: DecoratedBox(
+              decoration: const BoxDecoration(
+                color: Color(0x5706080A),
+                shape: BoxShape.circle,
+                border: Border.fromBorderSide(
+                  BorderSide(color: Color(0x3DFFFFFF)),
+                ),
+              ),
+              child: SizedBox.square(
+                dimension: visualSize,
+                child: Icon(icon, color: Colors.white, size: 17),
+              ),
+            ),
+          ),
+        ),
       ),
-    );
-  }
+    ),
+  );
 }
 
 class _ServerCommentSheet extends StatefulWidget {
@@ -2384,6 +2415,8 @@ class _ServerCommentSheet extends StatefulWidget {
 
 class _ServerCommentSheetState extends State<_ServerCommentSheet> {
   final _controller = TextEditingController();
+  final _reported = <String>{};
+  bool _reportOpen = false;
   late Future<List<ContentComment>> _comments;
   bool _submitting = false;
   String? _submitError;
@@ -2471,9 +2504,40 @@ class _ServerCommentSheetState extends State<_ServerCommentSheet> {
                 return ListView.builder(
                   shrinkWrap: true,
                   itemCount: items.length,
-                  itemBuilder: (context, index) => _DemoComment(
-                    author: items[index].authorName,
-                    body: items[index].body,
+                  itemBuilder: (context, index) => Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _DemoComment(
+                        author: items[index].authorName,
+                        body: items[index].body,
+                      ),
+                      if (!items[index].owned)
+                        TextButton(
+                          key: ValueKey('report-comment-${items[index].id}'),
+                          onPressed: () async {
+                            if (_reportOpen) return;
+                            _reportOpen = true;
+                            try {
+                              final receipt = await showCommentReportSheet(
+                                context,
+                                repository: widget.repository,
+                                playable: widget.playable,
+                                author: items[index].authorName,
+                                body: items[index].body,
+                                commentId: items[index].id,
+                              );
+                              if (mounted && receipt != null) {
+                                setState(() => _reported.add(items[index].id));
+                              }
+                            } finally {
+                              _reportOpen = false;
+                            }
+                          },
+                          child: Text(
+                            _reported.contains(items[index].id) ? '已举报' : '举报',
+                          ),
+                        ),
+                    ],
                   ),
                 );
               },

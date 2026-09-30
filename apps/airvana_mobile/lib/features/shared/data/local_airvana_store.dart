@@ -1,4 +1,5 @@
 import 'package:airvana_mobile/features/network/domain/growth_node_state.dart';
+import 'package:airvana_mobile/features/ai_twin/domain/twin_demo.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
@@ -1122,6 +1123,30 @@ class LocalAirvanaStore {
     final snapshot = await loadWorkspace();
     return snapshot.aiTwinState;
   }
+
+  /// Commit the demo and its profile summary together; no server writes.
+  Future<TwinDemoState> saveTwinDemo(TwinDemoState demo) => _serial(() async {
+    final snapshot = await _readWorkspaceUnlocked();
+    final old = snapshot.aiTwinState;
+    await _writeWorkspaceUnlocked(
+      snapshot.copyWith(
+        aiTwinState: old.copyWith(
+          demo: demo,
+          status: demo.legacyStatus,
+          name: demo.config.name,
+          tagline: demo.config.tagline,
+          language: demo.config.language,
+          customStyle: demo.config.style,
+          customLook: demo.config.look,
+          customMotion: demo.config.motion,
+          customSaved: demo.revision > 0,
+          blockedTopics: demo.config.blockedTopics,
+          consent: demo.consent,
+        ),
+      ),
+    );
+    return demo;
+  });
 
   /// 保存 AI 分身状态；[auditTitle] 非空时同步追加一条审计记录。
   Future<LocalAiTwinState> saveAiTwinState(

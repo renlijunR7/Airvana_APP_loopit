@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:airvana_mobile/features/history/presentation/record_manager_page.dart';
 import 'package:airvana_mobile/features/history/presentation/ai_workspace_page.dart';
 import 'package:airvana_mobile/app/providers.dart';
@@ -11,12 +13,12 @@ import 'package:airvana_mobile/features/ai_twin/presentation/ai_twin_page_body.d
 import 'package:airvana_mobile/features/creator_center/presentation/creator_center_page_body.dart';
 import 'package:airvana_mobile/features/history/presentation/profile_settings_parity_pages.dart';
 import 'package:airvana_mobile/features/wallet/presentation/wallet_page_body.dart';
+import 'package:airvana_mobile/features/rewards/presentation/rewards_page_body.dart';
 import 'package:airvana_mobile/shared/presentation/destructive_confirm.dart';
 import 'package:airvana_mobile/features/history/presentation/agent_manager_page.dart';
 import 'package:airvana_mobile/features/history/presentation/kol_activation_page.dart';
 import 'package:airvana_mobile/features/history/presentation/web_parity_panels.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -120,10 +122,15 @@ class ProfileSecondaryScreen extends ConsumerWidget {
                   : destination == ProfileSecondaryDestination.settings
                   ? _ProfileSettingsPage(account: account)
                   : destination == ProfileSecondaryDestination.checkIn
-                  ? const SingleChildScrollView(
-                      key: ValueKey('profile-secondary-scroll-checkIn'),
-                      padding: EdgeInsets.fromLTRB(18, 18, 18, 32),
-                      child: _EarnTasksPageBody(),
+                  ? SingleChildScrollView(
+                      key: const ValueKey('profile-secondary-scroll-checkIn'),
+                      padding: const EdgeInsets.fromLTRB(18, 18, 18, 32),
+                      child: RewardsPageBody(
+                        onInvite: () => _openProfileSecondary(
+                          context,
+                          ProfileSecondaryDestination.invite,
+                        ),
+                      ),
                     )
                   : destination == ProfileSecondaryDestination.wallet
                   ? const WalletPageBody()
@@ -1389,7 +1396,7 @@ _ProfileSecondarySpec _profileSecondarySpec(
   ),
   ProfileSecondaryDestination.checkIn => const _ProfileSecondarySpec(
     icon: Icons.event_available_outlined,
-    title: '获取积分',
+    title: '奖励中心',
     description: '完成站内任务，持续获得 AIP。',
   ),
   ProfileSecondaryDestination.notifications => const _ProfileSecondarySpec(
@@ -1542,986 +1549,6 @@ String _allowanceName(String key) => switch (key) {
   'remix' => 'Remix',
   _ => key,
 };
-
-class _EarnTasksPageBody extends ConsumerWidget {
-  const _EarnTasksPageBody();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final reward = ref.watch(rewardStateProvider);
-    final checkInMeta = reward.when(
-      loading: () => '正在读取签到状态…',
-      error: (_, _) => '签到状态暂不可用',
-      data: (state) {
-        final now = DateTime.now();
-        final dateKey =
-            '${now.year.toString().padLeft(4, '0')}-'
-            '${now.month.toString().padLeft(2, '0')}-'
-            '${now.day.toString().padLeft(2, '0')}';
-        return state.isCheckedInOn(dateKey)
-            ? '今日已签到 ✓'
-            : '签到领 ${state.nextCheckInReward} AIP';
-      },
-    );
-
-    return Column(
-      key: const ValueKey('earn-tasks-list'),
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Container(
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            gradient: const LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [Color(0xFFFFEFF1), Colors.white],
-            ),
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: const Color(0xFFFFD6DA)),
-          ),
-          child: const Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                '完成任务，持续获得 AIP',
-                style: TextStyle(fontSize: 13, fontWeight: FontWeight.w800),
-              ),
-              SizedBox(height: 6),
-              Text(
-                'AIP 仅记录本地站内互动贡献，不代表现金、收入或已验证商业转化。',
-                style: TextStyle(
-                  color: AirvanaColors.muted,
-                  fontSize: 11,
-                  height: 1.6,
-                ),
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 14),
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: AirvanaColors.line),
-          ),
-          clipBehavior: Clip.antiAlias,
-          child: Column(
-            children: [
-              _EarnTaskRow(
-                key: const ValueKey('earn-task-check-in'),
-                icon: Icons.event_available_outlined,
-                label: '每日签到',
-                meta: checkInMeta,
-                onTap: () => _showCheckInSheet(context),
-              ),
-              _EarnTaskRow(
-                key: const ValueKey('earn-task-create'),
-                icon: Icons.add_rounded,
-                label: '创作 Agentic Playable',
-                meta: '发布游戏即可获得 AIP',
-                onTap: () => context.push('/create'),
-              ),
-              _EarnTaskRow(
-                key: const ValueKey('earn-task-invite'),
-                icon: Icons.person_add_alt_1_outlined,
-                label: '邀请好友',
-                meta: '好友完成注册并配置 Agent 后领取奖励',
-                showDivider: false,
-                onTap: () => _showInviteTaskSheet(context),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class _EarnTaskRow extends StatelessWidget {
-  const _EarnTaskRow({
-    required this.icon,
-    required this.label,
-    required this.meta,
-    required this.onTap,
-    this.showDivider = true,
-    super.key,
-  });
-
-  final IconData icon;
-  final String label;
-  final String meta;
-  final VoidCallback onTap;
-  final bool showDivider;
-
-  @override
-  Widget build(BuildContext context) => Semantics(
-    button: true,
-    label: '$label，$meta',
-    child: InkWell(
-      onTap: onTap,
-      child: Container(
-        height: 66,
-        padding: const EdgeInsets.symmetric(horizontal: 15),
-        decoration: BoxDecoration(
-          border: showDivider
-              ? const Border(
-                  bottom: BorderSide(color: Color(0xFFF1F1F6), width: 1),
-                )
-              : null,
-        ),
-        child: Row(
-          children: [
-            Container(
-              width: 38,
-              height: 38,
-              decoration: BoxDecoration(
-                color: const Color(0xFFFFF0F1),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Icon(icon, color: AirvanaColors.accent, size: 19),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    label,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      fontSize: 13,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                  const SizedBox(height: 3),
-                  Text(
-                    meta,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      color: AirvanaColors.muted,
-                      fontSize: 10,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(width: 8),
-            const Icon(
-              Icons.chevron_right_rounded,
-              color: Color(0xFFC7C7CC),
-              size: 24,
-            ),
-          ],
-        ),
-      ),
-    ),
-  );
-}
-
-Future<void> _showCheckInSheet(BuildContext context) {
-  return showModalBottomSheet<void>(
-    context: context,
-    isScrollControlled: true,
-    useSafeArea: true,
-    backgroundColor: AirvanaColors.canvas,
-    shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
-    ),
-    builder: (context) => DraggableScrollableSheet(
-      key: const ValueKey('earn-task-check-in-sheet'),
-      expand: false,
-      initialChildSize: .74,
-      minChildSize: .58,
-      maxChildSize: .92,
-      builder: (context, scrollController) {
-        final safeBottom = MediaQuery.viewPaddingOf(context).bottom;
-        return Column(
-          children: [
-            const SizedBox(height: 10),
-            Container(
-              width: 38,
-              height: 4,
-              decoration: BoxDecoration(
-                color: const Color(0xFF4A4447),
-                borderRadius: BorderRadius.circular(999),
-              ),
-            ),
-            Expanded(
-              child: SingleChildScrollView(
-                key: const ValueKey('earn-task-check-in-scroll'),
-                controller: scrollController,
-                padding: EdgeInsets.fromLTRB(18, 14, 18, 24 + safeBottom),
-                child: const _CheckInPageBody(),
-              ),
-            ),
-          ],
-        );
-      },
-    ),
-  );
-}
-
-Future<void> _showInviteTaskSheet(BuildContext context) {
-  return showModalBottomSheet<void>(
-    context: context,
-    isScrollControlled: true,
-    useSafeArea: true,
-    backgroundColor: Colors.transparent,
-    builder: (context) => DraggableScrollableSheet(
-      key: const ValueKey('earn-task-invite-bottom-sheet'),
-      expand: false,
-      initialChildSize: .9,
-      minChildSize: .72,
-      maxChildSize: .95,
-      builder: (context, scrollController) =>
-          _InviteTaskSheet(scrollController: scrollController),
-    ),
-  );
-}
-
-class _InviteTaskSheet extends StatefulWidget {
-  const _InviteTaskSheet({required this.scrollController});
-
-  final ScrollController scrollController;
-
-  @override
-  State<_InviteTaskSheet> createState() => _InviteTaskSheetState();
-}
-
-class _InviteTaskSheetState extends State<_InviteTaskSheet> {
-  bool _completed = false;
-
-  @override
-  Widget build(BuildContext context) {
-    final safeBottom = MediaQuery.viewPaddingOf(context).bottom;
-    return Material(
-      key: const ValueKey('earn-task-invite-sheet'),
-      color: Colors.white,
-      clipBehavior: Clip.antiAlias,
-      borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
-      child: CustomScrollView(
-        controller: widget.scrollController,
-        slivers: [
-          SliverToBoxAdapter(
-            child: _InviteHero(onClose: () => Navigator.of(context).pop()),
-          ),
-          SliverPadding(
-            key: const ValueKey('earn-task-invite-content'),
-            padding: EdgeInsets.fromLTRB(18, 18, 18, 24 + safeBottom),
-            sliver: SliverList.list(
-              children: [
-                const _InviteCodeCard(),
-                const SizedBox(height: 12),
-                SizedBox(
-                  width: double.infinity,
-                  height: 48,
-                  child: FilledButton.icon(
-                    key: const ValueKey('copy-invite-link'),
-                    style: _earnPrimaryActionStyle(),
-                    onPressed: () => _copyInvite(
-                      context,
-                      'https://airvana.ai/?invite=AIR-KAI-4821',
-                      '邀请链接已复制',
-                    ),
-                    icon: const Icon(Icons.link_rounded, size: 18),
-                    label: const Text('复制邀请链接'),
-                  ),
-                ),
-                const SizedBox(height: 12),
-                _InviteStats(completed: _completed),
-                const SizedBox(height: 18),
-                const _InviteSteps(),
-                const SizedBox(height: 16),
-                const _InviteBoundaryNote(),
-                const SizedBox(height: 12),
-                SizedBox(
-                  width: double.infinity,
-                  height: 48,
-                  child: OutlinedButton(
-                    key: const ValueKey('simulate-invite-complete'),
-                    style: _earnSecondaryActionStyle(),
-                    onPressed: _completed
-                        ? null
-                        : () {
-                            setState(() => _completed = true);
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('已记录本机邀请任务演示')),
-                            );
-                          },
-                    child: Text(_completed ? '邀请任务已完成' : '模拟完成（本机）'),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Future<void> _copyInvite(
-    BuildContext context,
-    String value,
-    String notice,
-  ) async {
-    await Clipboard.setData(ClipboardData(text: value));
-    if (!context.mounted) return;
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(notice)));
-  }
-}
-
-class _InviteHero extends StatelessWidget {
-  const _InviteHero({required this.onClose});
-
-  final VoidCallback onClose;
-
-  @override
-  Widget build(BuildContext context) => Container(
-    key: const ValueKey('invite-hero'),
-    height: 238,
-    decoration: const BoxDecoration(
-      gradient: LinearGradient(
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-        colors: [Color(0xFFFF3B4A), Color(0xFFFF7180)],
-      ),
-    ),
-    child: Stack(
-      children: [
-        const Positioned(
-          top: -68,
-          right: -34,
-          child: _InviteGlow(size: 174, opacity: .12),
-        ),
-        const Positioned(
-          bottom: -82,
-          left: -52,
-          child: _InviteGlow(size: 190, opacity: .08),
-        ),
-        Positioned(
-          top: 12,
-          left: 0,
-          right: 0,
-          child: Center(
-            child: Container(
-              width: 38,
-              height: 4,
-              decoration: BoxDecoration(
-                color: Colors.white.withValues(alpha: .76),
-                borderRadius: BorderRadius.circular(999),
-              ),
-            ),
-          ),
-        ),
-        Positioned(
-          top: 18,
-          right: 14,
-          child: IconButton.filled(
-            tooltip: '关闭邀请好友',
-            onPressed: onClose,
-            style: IconButton.styleFrom(
-              backgroundColor: Colors.white.withValues(alpha: .14),
-              foregroundColor: Colors.white,
-            ),
-            icon: const Icon(Icons.close_rounded),
-          ),
-        ),
-        const Positioned.fill(
-          child: Padding(
-            padding: EdgeInsets.fromLTRB(24, 36, 24, 20),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _InviteGiftIcon(),
-                SizedBox(height: 12),
-                Text(
-                  '邀请好友，双方各得',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 17,
-                    fontWeight: FontWeight.w900,
-                  ),
-                ),
-                SizedBox(height: 3),
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      '1,000',
-                      key: ValueKey('invite-reward-value'),
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 36,
-                        height: 1.1,
-                        fontWeight: FontWeight.w900,
-                        letterSpacing: -.8,
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(bottom: 4, left: 5),
-                      child: Text(
-                        'AIP',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 9),
-                Text(
-                  '好友完成外部 KYC 状态确认后，本地演示记账',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Color(0xFFFFF1F2),
-                    fontSize: 11,
-                    height: 1.4,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ],
-    ),
-  );
-}
-
-class _InviteGlow extends StatelessWidget {
-  const _InviteGlow({required this.size, required this.opacity});
-
-  final double size;
-  final double opacity;
-
-  @override
-  Widget build(BuildContext context) => Container(
-    width: size,
-    height: size,
-    decoration: BoxDecoration(
-      shape: BoxShape.circle,
-      color: Colors.white.withValues(alpha: opacity),
-    ),
-  );
-}
-
-class _InviteGiftIcon extends StatelessWidget {
-  const _InviteGiftIcon();
-
-  @override
-  Widget build(BuildContext context) => Container(
-    width: 48,
-    height: 48,
-    decoration: BoxDecoration(
-      color: Colors.white.withValues(alpha: .18),
-      borderRadius: BorderRadius.circular(15),
-      border: Border.all(color: Colors.white.withValues(alpha: .16)),
-    ),
-    child: const Icon(
-      Icons.card_giftcard_rounded,
-      color: Colors.white,
-      size: 27,
-    ),
-  );
-}
-
-class _InviteCodeCard extends StatelessWidget {
-  const _InviteCodeCard();
-
-  @override
-  Widget build(BuildContext context) => CustomPaint(
-    key: const ValueKey('invite-code-card'),
-    painter: const _InviteDashedBorderPainter(),
-    child: Padding(
-      padding: const EdgeInsets.fromLTRB(14, 12, 10, 12),
-      child: Row(
-        children: [
-          const Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  '我的邀请码',
-                  style: TextStyle(color: AirvanaColors.muted, fontSize: 10),
-                ),
-                SizedBox(height: 3),
-                Text(
-                  'AIR-KAI-4821',
-                  style: TextStyle(
-                    color: AirvanaColors.ink,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w900,
-                    letterSpacing: 1.5,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          OutlinedButton.icon(
-            key: const ValueKey('copy-invite-code'),
-            onPressed: () async {
-              await Clipboard.setData(
-                const ClipboardData(text: 'AIR-KAI-4821'),
-              );
-              if (!context.mounted) return;
-              ScaffoldMessenger.of(
-                context,
-              ).showSnackBar(const SnackBar(content: Text('邀请码已复制')));
-            },
-            style: OutlinedButton.styleFrom(
-              foregroundColor: AirvanaColors.ink,
-              minimumSize: const Size(82, 42),
-              side: const BorderSide(color: AirvanaColors.line),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(14),
-              ),
-              textStyle: const TextStyle(
-                fontSize: 11,
-                fontWeight: FontWeight.w900,
-              ),
-            ),
-            icon: const Icon(Icons.content_copy_rounded, size: 16),
-            label: const Text('复制'),
-          ),
-        ],
-      ),
-    ),
-  );
-}
-
-class _InviteStats extends StatelessWidget {
-  const _InviteStats({required this.completed});
-
-  final bool completed;
-
-  @override
-  Widget build(BuildContext context) => Row(
-    key: const ValueKey('invite-stats'),
-    children: [
-      Expanded(
-        child: _InviteStatCard(value: completed ? '1' : '0', label: '已邀请好友'),
-      ),
-      const SizedBox(width: 10),
-      Expanded(
-        child: _InviteStatCard(
-          value: completed ? '1,000' : '0',
-          label: '本机演示 AIP',
-        ),
-      ),
-    ],
-  );
-}
-
-class _InviteStatCard extends StatelessWidget {
-  const _InviteStatCard({required this.value, required this.label});
-
-  final String value;
-  final String label;
-
-  @override
-  Widget build(BuildContext context) => Container(
-    height: 82,
-    decoration: BoxDecoration(
-      color: const Color(0xFFFFF7F8),
-      borderRadius: BorderRadius.circular(18),
-      border: Border.all(color: const Color(0xFFFFD6DA)),
-    ),
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          value,
-          style: const TextStyle(
-            color: AirvanaColors.accent,
-            fontSize: 20,
-            fontWeight: FontWeight.w900,
-          ),
-        ),
-        const SizedBox(height: 5),
-        Text(
-          label,
-          style: const TextStyle(color: AirvanaColors.muted, fontSize: 10),
-        ),
-      ],
-    ),
-  );
-}
-
-class _InviteSteps extends StatelessWidget {
-  const _InviteSteps();
-
-  @override
-  Widget build(BuildContext context) => const Column(
-    children: [
-      _InviteStep(
-        key: ValueKey('invite-step-1'),
-        number: '1',
-        icon: Icons.send_outlined,
-        label: '分享邀请码或链接给好友',
-      ),
-      SizedBox(height: 10),
-      _InviteStep(
-        key: ValueKey('invite-step-2'),
-        number: '2',
-        icon: Icons.person_add_alt_1_outlined,
-        label: '好友注册并填写你的邀请码',
-      ),
-      SizedBox(height: 10),
-      _InviteStep(
-        key: ValueKey('invite-step-3'),
-        number: '3',
-        icon: Icons.verified_user_outlined,
-        label: '外部 KYC 状态确认后显示演示奖励',
-      ),
-    ],
-  );
-}
-
-class _InviteStep extends StatelessWidget {
-  const _InviteStep({
-    required this.number,
-    required this.icon,
-    required this.label,
-    super.key,
-  });
-
-  final String number;
-  final IconData icon;
-  final String label;
-
-  @override
-  Widget build(BuildContext context) => Row(
-    children: [
-      Container(
-        width: 38,
-        height: 38,
-        decoration: BoxDecoration(
-          color: const Color(0xFFFFEFF1),
-          borderRadius: BorderRadius.circular(12),
-        ),
-        child: Icon(icon, color: AirvanaColors.accent, size: 19),
-      ),
-      const SizedBox(width: 10),
-      Text(
-        number,
-        style: const TextStyle(
-          color: AirvanaColors.accent,
-          fontSize: 15,
-          fontWeight: FontWeight.w900,
-        ),
-      ),
-      const SizedBox(width: 8),
-      Expanded(
-        child: Text(
-          label,
-          style: const TextStyle(
-            color: AirvanaColors.ink,
-            fontSize: 12,
-            height: 1.4,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-      ),
-    ],
-  );
-}
-
-class _InviteBoundaryNote extends StatelessWidget {
-  const _InviteBoundaryNote();
-
-  @override
-  Widget build(BuildContext context) => Container(
-    key: const ValueKey('invite-boundary-note'),
-    padding: const EdgeInsets.all(13),
-    decoration: BoxDecoration(
-      color: const Color(0xFFFFF7F8),
-      borderRadius: BorderRadius.circular(16),
-      border: Border.all(color: const Color(0xFFFFD6DA)),
-    ),
-    child: const Text(
-      'DEMO · 奖励仅记录为本机 AIP，不代表现金、收入或已验证转化。'
-      'KYC 由合规第三方完成，App 不采集证件原始数据；'
-      '正式奖励、资格与地区以 Campaign Contract 为准。',
-      style: TextStyle(color: AirvanaColors.muted, fontSize: 10, height: 1.55),
-    ),
-  );
-}
-
-class _InviteDashedBorderPainter extends CustomPainter {
-  const _InviteDashedBorderPainter();
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final path = Path()
-      ..addRRect(
-        RRect.fromRectAndRadius(Offset.zero & size, const Radius.circular(18)),
-      );
-    final paint = Paint()
-      ..color = const Color(0xFFD8D8DE)
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 1;
-    for (final metric in path.computeMetrics()) {
-      var distance = 0.0;
-      while (distance < metric.length) {
-        canvas.drawPath(metric.extractPath(distance, distance + 5), paint);
-        distance += 9;
-      }
-    }
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
-}
-
-class _CheckInPageBody extends ConsumerWidget {
-  const _CheckInPageBody();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final reward = ref.watch(rewardStateProvider);
-    final localMode = ref
-        .watch(airvanaRepositoryProvider)
-        .environment
-        .preferLocalData;
-    return Container(
-      padding: const EdgeInsets.all(18),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: AirvanaColors.line),
-      ),
-      child: reward.when(
-        loading: () => const SizedBox(
-          height: 180,
-          child: Center(child: CircularProgressIndicator()),
-        ),
-        error: (error, _) => SizedBox(
-          height: 180,
-          child: Center(
-            child: Text(
-              '签到状态加载失败：$error',
-              style: const TextStyle(color: AirvanaColors.muted),
-            ),
-          ),
-        ),
-        data: (state) {
-          final now = DateTime.now();
-          final dateKey =
-              '${now.year.toString().padLeft(4, '0')}-'
-              '${now.month.toString().padLeft(2, '0')}-'
-              '${now.day.toString().padLeft(2, '0')}';
-          final checkedIn = state.isCheckedInOn(dateKey);
-          return Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                'AIP 与每日签到',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
-              ),
-              const SizedBox(height: 6),
-              const Text(
-                'AIP 仅记录本地站内互动贡献，不代表现金、收入或已验证商业转化。',
-                style: TextStyle(
-                  color: AirvanaColors.muted,
-                  fontSize: 11,
-                  height: 1.5,
-                ),
-              ),
-              const SizedBox(height: 16),
-              Row(
-                children: [
-                  Expanded(
-                    child: _CheckInStat(
-                      label: 'AIP 余额',
-                      value: '${state.aipBalance}',
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: _CheckInStat(
-                      label: '连续签到',
-                      value: '${state.checkInStreak} 天',
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 18),
-              const Text(
-                '连续签到，AIP 越领越多',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w900),
-              ),
-              const SizedBox(height: 10),
-              _CheckInDaysGrid(
-                streak: state.checkInStreak,
-                checkedInToday: checkedIn,
-              ),
-              const SizedBox(height: 16),
-              SizedBox(
-                width: double.infinity,
-                height: 48,
-                child: FilledButton(
-                  key: const ValueKey('daily-check-in'),
-                  style: _earnPrimaryActionStyle(),
-                  onPressed: checkedIn
-                      ? null
-                      : () async {
-                          final result = await ref
-                              .read(airvanaRepositoryProvider)
-                              .checkInDaily();
-                          ref.invalidate(rewardStateProvider);
-                          ref.invalidate(walletTxnsProvider);
-                          ref.invalidate(accountProvider);
-                          ref.invalidate(homeProvider);
-                          if (!context.mounted) return;
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                result.idempotent
-                                    ? '今日已签到'
-                                    : '签到成功 +${result.earned} AIP',
-                              ),
-                            ),
-                          );
-                        },
-                  child: Text(
-                    checkedIn
-                        ? '今日已签到 ✓'
-                        : localMode
-                        ? '签到领 ${state.nextCheckInReward} AIP'
-                        : '签到并由服务端结算 AIP',
-                  ),
-                ),
-              ),
-            ],
-          );
-        },
-      ),
-    );
-  }
-}
-
-ButtonStyle _earnPrimaryActionStyle() => AirvanaButtonStyles.primary();
-
-ButtonStyle _earnSecondaryActionStyle() => OutlinedButton.styleFrom(
-  backgroundColor: Colors.white,
-  foregroundColor: AirvanaColors.ink,
-  disabledBackgroundColor: Colors.white,
-  disabledForegroundColor: AirvanaColors.muted,
-  overlayColor: AirvanaColors.accent.withValues(alpha: .06),
-  side: const BorderSide(color: AirvanaColors.line, width: 1),
-  shape: const StadiumBorder(),
-  textStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.w800),
-);
-
-class _CheckInDaysGrid extends StatelessWidget {
-  const _CheckInDaysGrid({required this.streak, required this.checkedInToday});
-
-  final int streak;
-  final bool checkedInToday;
-
-  @override
-  Widget build(BuildContext context) {
-    final completed = streak.clamp(0, 7);
-    return GridView.builder(
-      key: const ValueKey('check-in-days'),
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 4,
-        crossAxisSpacing: 8,
-        mainAxisSpacing: 8,
-        childAspectRatio: .94,
-      ),
-      itemCount: 7,
-      itemBuilder: (context, index) {
-        final past = index < completed;
-        final next = index == completed && completed < 7;
-        return Container(
-          decoration: BoxDecoration(
-            color: past || (next && checkedInToday)
-                ? const Color(0x1FFF3B4A)
-                : const Color(0xFFF7F7FA),
-            borderRadius: BorderRadius.circular(14),
-            border: Border.all(
-              color: next && !checkedInToday
-                  ? const Color(0xFFFFD6DA)
-                  : Colors.transparent,
-            ),
-          ),
-          padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 9),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                '第${index + 1}天',
-                style: TextStyle(
-                  color: past || next
-                      ? AirvanaColors.accent
-                      : AirvanaColors.muted,
-                  fontSize: 9,
-                  fontWeight: FontWeight.w800,
-                ),
-              ),
-              const SizedBox(height: 7),
-              CircleAvatar(
-                radius: 14,
-                backgroundColor: Colors.white,
-                child: Text(
-                  past ? '✓' : '+${20 + index * 10}',
-                  style: TextStyle(
-                    color: past ? AirvanaColors.accent : AirvanaColors.ink,
-                    fontSize: 10,
-                    fontWeight: FontWeight.w900,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
-}
-
-class _CheckInStat extends StatelessWidget {
-  const _CheckInStat({required this.label, required this.value});
-
-  final String label;
-  final String value;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(
-        color: const Color(0xFFF7F7FA),
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            label,
-            style: const TextStyle(color: AirvanaColors.muted, fontSize: 10),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            value,
-            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w900),
-          ),
-        ],
-      ),
-    );
-  }
-}
 
 List<List<_ProfileDrawerItem>> _profileSettingsGroups(
   AccountSnapshot? account,
@@ -3150,9 +2177,7 @@ class _ProfileAndHistoryScreenState
                           : account?.followingCount ?? 0,
                     ),
                   ),
-                  const SizedBox(height: 12),
-                  // Web 的「我的」页有订阅卡，不是只在设置里。
-                  const _ProfileSubscriptionCard(),
+                  // 订阅入口在昵称旁的 VIP 标上，这里不再单独占一张卡。
                   const SizedBox(height: 12),
                   const _CreatorShortcuts(),
                 ],
@@ -3259,7 +2284,7 @@ class _TopActions extends StatelessWidget {
                 size: Size.square(24),
                 painter: _WebProfileCalendarPainter(),
               ),
-              label: '获取积分',
+              label: '奖励中心',
               accent: true,
               onTap: () => _openProfileSecondary(
                 context,
@@ -3535,8 +2560,8 @@ class _ProfileCard extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const SizedBox(width: 7),
-                      const _LevelChip(),
+                      const SizedBox(width: 6),
+                      const _VipChip(),
                       SizedBox(
                         width: 44,
                         height: 44,
@@ -3647,28 +2672,153 @@ class _WebProfileEditPainter extends CustomPainter {
   bool shouldRepaint(covariant _WebProfileEditPainter oldDelegate) => false;
 }
 
-class _LevelChip extends StatelessWidget {
-  const _LevelChip();
+/// 昵称旁的 VIP 标：订阅入口。
+///
+/// 原来这里是一枚写死的「L3」等级章，不可点、也没有数据来源；「我的」页下方
+/// 另有一张 Free 订阅卡。两者合成这一枚：点它进「订阅与额度」。
+/// 已订阅（Creator Pro / Brand）是实心金色，Free 是浅金描边——一眼看出状态，
+/// 文字始终只有「VIP」，皇冠叠在字母上而不另占宽度，不把昵称挤短。
+class _VipChip extends ConsumerWidget {
+  const _VipChip();
+
+  static const _goldDeep = Color(0xFF8A5A12);
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3),
-      decoration: BoxDecoration(
-        color: const Color(0xFFFFF0F2),
-        borderRadius: BorderRadius.circular(999),
-        border: Border.all(color: const Color(0xFFFFCDD2)),
-      ),
-      child: const Text(
-        'L3',
-        style: TextStyle(
-          color: AirvanaColors.accent,
-          fontSize: 9,
-          fontWeight: FontWeight.w900,
+  Widget build(BuildContext context, WidgetRef ref) {
+    final plan = ref
+        .watch(profileFeatureStateProvider)
+        .value
+        ?.subscriptionPlanKey;
+    final subscribed = plan == 'creator_pro' || plan == 'brand_campaign';
+    final planName = switch (plan) {
+      'creator_pro' => 'Creator Pro',
+      'brand_campaign' => 'Brand / Campaign',
+      _ => 'Free',
+    };
+    final label = plan == null
+        ? '查看 VIP 订阅'
+        : subscribed
+        ? '管理 VIP 订阅，当前 $planName'
+        : '开通 VIP 订阅，当前 Free';
+    void open() => _openProfileSecondary(
+      context,
+      ProfileSecondaryDestination.subscription,
+    );
+    return Semantics(
+      button: true,
+      label: label,
+      onTap: open,
+      excludeSemantics: true,
+      child: Tooltip(
+        message: label,
+        child: InkWell(
+          key: const ValueKey('profile-vip-entry'),
+          onTap: open,
+          borderRadius: BorderRadius.circular(999),
+          // 保持小章视觉尺寸，同时提供完整的 44×44 触控区。
+          child: SizedBox(
+            width: 44,
+            height: 44,
+            child: Center(
+              child: Container(
+                key: const ValueKey('profile-vip-chip'),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 5,
+                  vertical: 2.5,
+                ),
+                decoration: BoxDecoration(
+                  gradient: subscribed
+                      ? const LinearGradient(
+                          colors: [Color(0xFFFBE3A6), Color(0xFFEBBE62)],
+                        )
+                      : null,
+                  color: subscribed ? null : const Color(0xFFFFF7E6),
+                  borderRadius: BorderRadius.circular(999),
+                  border: Border.all(
+                    color: subscribed
+                        ? const Color(0xFFD9A441)
+                        : const Color(0xFFF0D39A),
+                  ),
+                ),
+                // 皇冠压在「V」左上角、不占宽度：昵称旁空间紧，这枚章只能比
+                // 原来的「L3」宽一点点，360px 屏上昵称仍要有 110px 完整显示。
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    const Text(
+                      'VIP',
+                      textScaler: TextScaler.noScaling,
+                      style: TextStyle(
+                        color: _goldDeep,
+                        fontSize: 9.5,
+                        height: 1.2,
+                        fontWeight: FontWeight.w900,
+                        fontStyle: FontStyle.italic,
+                        letterSpacing: .2,
+                      ),
+                    ),
+                    Positioned(
+                      left: -7,
+                      top: -9,
+                      child: Transform.rotate(
+                        angle: -.4,
+                        child: const SizedBox(
+                          width: 10,
+                          height: 10,
+                          child: CustomPaint(
+                            painter: _VipCrownPainter(Color(0xFFD08A1C)),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
         ),
       ),
     );
   }
+}
+
+/// 皇冠：三个尖 + 尖顶小圆点 + 底座。12px 下与系统图标同等清晰，不依赖图标字体。
+class _VipCrownPainter extends CustomPainter {
+  const _VipCrownPainter(this.color);
+
+  final Color color;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    canvas.save();
+    canvas.scale(size.width / 24, size.height / 24);
+    final fill = Paint()..color = color;
+    final crown = Path()
+      ..moveTo(3, 8.5)
+      ..lineTo(7.8, 12.6)
+      ..lineTo(12, 5.5)
+      ..lineTo(16.2, 12.6)
+      ..lineTo(21, 8.5)
+      ..lineTo(19.2, 18)
+      ..lineTo(4.8, 18)
+      ..close();
+    canvas.drawPath(crown, fill);
+    for (final (x, y) in const [(3.0, 7.2), (12.0, 4.0), (21.0, 7.2)]) {
+      canvas.drawCircle(Offset(x, y), 1.8, fill);
+    }
+    canvas.drawRRect(
+      RRect.fromRectAndRadius(
+        const Rect.fromLTWH(4.8, 19.4, 14.4, 2.2),
+        const Radius.circular(1.1),
+      ),
+      fill,
+    );
+    canvas.restore();
+  }
+
+  @override
+  bool shouldRepaint(covariant _VipCrownPainter oldDelegate) =>
+      oldDelegate.color != color;
 }
 
 class _ProfileMetric extends StatelessWidget {
@@ -4798,70 +3948,6 @@ class _InlineHistoryState extends StatelessWidget {
           ],
         ],
       ),
-    );
-  }
-}
-
-/// 「我的」页的订阅与额度卡，对应 Web profile 页上的同名区块。
-class _ProfileSubscriptionCard extends ConsumerWidget {
-  const _ProfileSubscriptionCard();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final feature = ref.watch(profileFeatureStateProvider);
-    return feature.when(
-      loading: () => const SizedBox.shrink(),
-      error: (_, _) => const SizedBox.shrink(),
-      data: (state) {
-        final planName = switch (state.subscriptionPlanKey) {
-          'creator_pro' => 'Creator Pro',
-          'brand_campaign' => 'Brand / Campaign',
-          _ => 'Free',
-        };
-        return Container(
-          key: const ValueKey('profile-subscription-card'),
-          padding: const EdgeInsets.all(13),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(15),
-            border: Border.all(color: AirvanaColors.line),
-          ),
-          child: Row(
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      planName,
-                      style: const TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w900,
-                      ),
-                    ),
-                    const SizedBox(height: 3),
-                    Text(
-                      state.subscriptionCancelAtPeriodEnd
-                          ? '本周期结束后不再续订'
-                          : '订阅只提供功能与周期额度，不直接发放 AIP 或 AIT',
-                      style: const TextStyle(
-                        fontSize: 9,
-                        color: AirvanaColors.muted,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              TextButton(
-                key: const ValueKey('profile-subscription-manage'),
-                onPressed: () =>
-                    context.push('/profile/secondary/subscription'),
-                child: const Text('管理'),
-              ),
-            ],
-          ),
-        );
-      },
     );
   }
 }

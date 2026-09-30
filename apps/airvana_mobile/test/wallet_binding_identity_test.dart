@@ -100,81 +100,20 @@ void main() {
     );
   });
 
-  testWidgets(
-    'ai twin scenes languages stage and versions mirror the Web behaviors',
-    (tester) async {
-      final harness = TestCreateWorkflowHarness();
-      tester.view.physicalSize = const Size(430, 932);
-      tester.view.devicePixelRatio = 1;
-      addTearDown(tester.view.resetPhysicalSize);
-      addTearDown(tester.view.resetDevicePixelRatio);
-
-      await tester.pumpWidget(_app(harness, '/profile/secondary/aiTwin'));
-      await tester.pumpAndSettle();
-
-      // configurator 常驻在 tab 之上，先把 tab 条滚进视口。
-      await tester.scrollUntilVisible(
-        find.byKey(const ValueKey('ai-twin-tab-scroll')),
-        300,
-        scrollable: find
-            .descendant(
-              of: find.byKey(const ValueKey('ai-twin-scroll')),
-              matching: find.byType(Scrollable),
-            )
-            .first,
-      );
-      await tester.pumpAndSettle();
-
-      // 场景切换：整组替换人格并写审计 + 版本
-      await tester.tap(find.byKey(const ValueKey('ai-twin-tab-scenes')));
-      await tester.pumpAndSettle();
-      expect(find.text('当前场景'), findsOneWidget);
-      await tester.tap(find.byKey(const ValueKey('ai-twin-scene-brand')));
-      await tester.pumpAndSettle();
-      final afterScene = await harness.repository.loadAiTwinState();
-      expect(afterScene.sceneId, 'brand');
-      expect(afterScene.name, 'Kai · 品牌讲解人');
-      expect(afterScene.versions.first.label, '切换场景 · 品牌讲解');
-      expect(afterScene.audit.first.title, '切换场景 · 品牌讲解');
-
-      // 语言切换
-      await tester.tap(find.byKey(const ValueKey('ai-twin-tab-languages')));
-      await tester.pumpAndSettle();
-      await tester.tap(find.byKey(const ValueKey('ai-twin-language-en')));
-      await tester.pumpAndSettle();
-      expect((await harness.repository.loadAiTwinState()).language, 'en');
-
-      // 舞台：语音状态流 + 静音 + 降级
-      await tester.tap(find.byKey(const ValueKey('ai-twin-tab-stage')));
-      await tester.pumpAndSettle();
-      expect(find.text('待机'), findsOneWidget);
-      await tester.ensureVisible(
-        find.byKey(const ValueKey('ai-twin-voice-toggle')),
-      );
-      await tester.pumpAndSettle();
-      await tester.tap(find.byKey(const ValueKey('ai-twin-voice-toggle')));
-      await tester.pump(const Duration(milliseconds: 1000));
-      expect(find.text('思考中…'), findsOneWidget);
-      await tester.pump(const Duration(milliseconds: 1200));
-      expect(find.text('讲解中'), findsOneWidget);
-      expect(find.textContaining('AI twin'), findsOneWidget);
-      await tester.tap(find.byKey(const ValueKey('ai-twin-voice-toggle')));
-      await tester.pump();
-      expect(find.text('待机'), findsOneWidget);
-      await tester.tap(find.byKey(const ValueKey('ai-twin-fallback-toggle')));
-      await tester.pump();
-      expect(find.textContaining('已降级为静态身份卡'), findsOneWidget);
-
-      // 版本记录（Tab 条横滑后再点）
-      await tester.drag(
-        find.byKey(const ValueKey('ai-twin-tab-scroll')),
-        const Offset(-260, 0),
-      );
-      await tester.pump();
-      await tester.tap(find.byKey(const ValueKey('ai-twin-tab-versions')));
-      await tester.pumpAndSettle();
-      expect(find.text('版本记录（1）'), findsOneWidget);
-      expect(find.text('切换场景 · 品牌讲解'), findsOneWidget);
-    },
-  );
+  testWidgets('KOL twin route opens the local workbench without server controls', (tester) async {
+    final harness = TestCreateWorkflowHarness();
+    tester.view.physicalSize = const Size(430, 932);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+    await tester.pumpWidget(_app(harness, '/profile/secondary/aiTwin'));
+    await tester.pumpAndSettle();
+    expect(find.byKey(const ValueKey('twin-demo-banner')), findsOneWidget);
+    expect(find.byKey(const ValueKey('twin-preview')), findsOneWidget);
+    expect(find.byKey(const ValueKey('ai-twin-server-save')), findsNothing);
+    await tester.tap(find.byKey(const ValueKey('twin-tab-3')));
+    await tester.pumpAndSettle();
+    expect(find.textContaining('尚未保存分身'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
 }

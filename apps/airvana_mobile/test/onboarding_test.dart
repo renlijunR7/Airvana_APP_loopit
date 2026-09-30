@@ -23,17 +23,17 @@ void main() {
     ]);
   });
 
-  test('第 2、3 页各有一张插图，第一页没有（显示 logo）', () {
-    expect(kOnboardingSlides.first.image, isNull);
-    expect(kOnboardingSlides.map((s) => s.image).skip(1), [
+  test('三页都有同套插图，第一页为 KOL 与 Playable 而非品牌 logo', () {
+    expect(kOnboardingSlides.map((s) => s.image), [
+      'assets/legacy/onboarding/kol-playables.png',
       'assets/legacy/onboarding/attribute-results.png',
       'assets/legacy/onboarding/compound-value.png',
     ]);
   });
 
   test('插图位图与 SVG 源文件都在，1x/2x/3x 齐全，且已在 pubspec 登记', () {
-    for (final slide in kOnboardingSlides.skip(1)) {
-      final path = slide.image!;
+    for (final slide in kOnboardingSlides) {
+      final path = slide.image;
       final name = path.split('/').last;
       expect(File(path).existsSync(), isTrue, reason: '缺 $path');
       expect(

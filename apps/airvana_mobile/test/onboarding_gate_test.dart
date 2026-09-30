@@ -1,6 +1,7 @@
 import 'package:airvana_mobile/app/airvana_app.dart';
 import 'package:airvana_mobile/app/providers.dart';
 import 'package:airvana_mobile/features/account/presentation/launch_splash_screen.dart';
+import 'package:airvana_mobile/shared/presentation/airvana_logo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -26,6 +27,7 @@ Future<void> _coldStart(
   await tester.pumpWidget(_app(harness));
   await tester.pump();
   expect(find.byKey(const ValueKey('launch-splash')), findsOneWidget);
+  expect(find.byType(AirvanaLogo), findsOneWidget);
   await tester.pump(
     kLaunchSplashFirstFrameCap +
         kLaunchSplashMinimum +
@@ -42,6 +44,18 @@ void main() {
 
     expect(find.byKey(const ValueKey('onboarding-pager')), findsOneWidget);
     expect(find.text('Every KOL Owns'), findsOneWidget);
+    final illustration = find.byKey(
+      const ValueKey(
+        'onboarding-image-assets/legacy/onboarding/kol-playables.png',
+      ),
+    );
+    expect(illustration, findsOneWidget);
+    expect(tester.getSize(illustration), const Size(180, 180));
+    expect(find.byType(AirvanaLogo), findsNothing);
+    expect(
+      find.text('让每一位 KOL 都能创建并运营属于自己的 Agentic Playable 智能营销体。'),
+      findsNothing,
+    );
     expect(find.text('继续'), findsOneWidget);
     expect(find.text('跳过'), findsOneWidget);
     expect(find.byKey(const ValueKey('primary-navigation')), findsNothing);
@@ -79,11 +93,37 @@ void main() {
     await tester.tap(find.byKey(const ValueKey('onboarding-next')));
     await tester.pumpAndSettle();
     expect(find.text('Create, Interact,'), findsOneWidget);
+    expect(find.text('Attribute Results'), findsOneWidget);
+    expect(
+      find.text('从内容生成到互动转化，以 KOL 专属链接、版本和获批事件构建可审核的归因链路。'),
+      findsNothing,
+    );
+    expect(
+      find.byKey(
+        const ValueKey(
+          'onboarding-image-assets/legacy/onboarding/attribute-results.png',
+        ),
+      ),
+      findsOneWidget,
+    );
     expect(find.text('继续'), findsOneWidget);
 
     await tester.tap(find.byKey(const ValueKey('onboarding-next')));
     await tester.pumpAndSettle();
     expect(find.text('Operate, Settle,'), findsOneWidget);
+    expect(find.text('Compound Value'), findsOneWidget);
+    expect(
+      find.text('持续优化、交付与结算，并把 Playable、运营规则、受众洞察和归因记录沉淀为长期资产。'),
+      findsNothing,
+    );
+    expect(
+      find.byKey(
+        const ValueKey(
+          'onboarding-image-assets/legacy/onboarding/compound-value.png',
+        ),
+      ),
+      findsOneWidget,
+    );
     expect(find.text('开始'), findsOneWidget);
     expect(find.text('继续'), findsNothing);
 
@@ -100,6 +140,30 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('Operate, Settle,'), findsOneWidget);
     expect(find.text('开始'), findsOneWidget);
+  });
+
+  testWidgets('小屏与放大字号下插图可滚动，继续和跳过仍可用', (tester) async {
+    tester.view.physicalSize = const Size(320, 568);
+    tester.view.devicePixelRatio = 1;
+    tester.platformDispatcher.textScaleFactorTestValue = 1.5;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+    addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
+    final harness = TestCreateWorkflowHarness();
+    await _coldStart(tester, harness);
+
+    expect(tester.takeException(), isNull);
+    expect(
+      find.byKey(const ValueKey('onboarding-next')).hitTestable(),
+      findsOneWidget,
+    );
+    await tester.tap(find.byKey(const ValueKey('onboarding-next')));
+    await tester.pumpAndSettle();
+    expect(find.text('Create, Interact,'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+    await tester.tap(find.byKey(const ValueKey('onboarding-skip')));
+    await tester.pumpAndSettle();
+    expect(find.byKey(const ValueKey('sign-in-screen')), findsOneWidget);
   });
 
   testWidgets('末页连点「开始」只跳一次，登录页不会被压两层', (tester) async {

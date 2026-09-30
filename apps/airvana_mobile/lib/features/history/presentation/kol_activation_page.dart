@@ -1,5 +1,6 @@
 import 'package:airvana_mobile/design_system/airvana_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 /// 复刻 Web 的 `kolActivation` overlay：5 步开通向导。
 /// 校验口径与 Web 一致：商业档案四项必填、协议必须勾选才能继续。
@@ -309,7 +310,7 @@ class InvitePageBody extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: const [
             Text(
-              '邀请好友',
+              '邀请规则 · 演示',
               style: TextStyle(
                 fontSize: 11,
                 fontWeight: FontWeight.w800,
@@ -327,7 +328,7 @@ class InvitePageBody extends StatelessWidget {
             ),
             SizedBox(height: 6),
             Text(
-              '好友完成注册并配置 Agent 后，奖励才会入账。',
+              '仅预览邀请规则，当前页面不会登记真实邀请或发放奖励。',
               style: TextStyle(
                 fontSize: 11,
                 height: 1.6,
@@ -353,7 +354,7 @@ class InvitePageBody extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '我的邀请码',
+                    '示例邀请码 · 不用于真实注册',
                     style: TextStyle(fontSize: 10, color: AirvanaColors.muted),
                   ),
                   SizedBox(height: 5),
@@ -370,9 +371,22 @@ class InvitePageBody extends StatelessWidget {
             ),
             OutlinedButton(
               key: const ValueKey('invite-page-copy'),
-              onPressed: () => ScaffoldMessenger.of(
-                context,
-              ).showSnackBar(const SnackBar(content: Text('邀请码已复制'))),
+              onPressed: () async {
+                try {
+                  await Clipboard.setData(
+                    const ClipboardData(text: 'AIR-KAI-4821'),
+                  );
+                  if (!context.mounted) return;
+                  ScaffoldMessenger.of(
+                    context,
+                  ).showSnackBar(const SnackBar(content: Text('示例邀请码已复制')));
+                } catch (_) {
+                  if (!context.mounted) return;
+                  ScaffoldMessenger.of(
+                    context,
+                  ).showSnackBar(const SnackBar(content: Text('复制失败，请重试')));
+                }
+              },
               child: const Text('复制'),
             ),
           ],
