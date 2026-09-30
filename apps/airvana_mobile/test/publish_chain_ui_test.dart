@@ -14,6 +14,42 @@ import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
 
 void main() {
+  test('published legacy game reuses its bundled cover and runtime', () async {
+    final store = LocalAirvanaStore(
+      persistence: MemoryLocalAirvanaPersistence(),
+    );
+    final draft = await store.saveDraft(
+      ownerId: LegacyDemoCatalog.user.id,
+      idea: '德州扑克新手训练桌 Free Training',
+      deepMode: false,
+      selectedPowerIds: const ['touchControls'],
+    );
+    final task = await store.startGeneration(draft.draftId);
+    await store.updateGeneration(task.taskId, LocalGenerationStatus.completed);
+    await store.publishRelease(
+      LocalReleaseRequest(
+        generationTaskId: task.taskId,
+        title: '德州扑克新手训练桌 Free Training',
+        summary: '本地发布副本',
+        contentType: 'game',
+        authorName: LegacyDemoCatalog.user.displayName,
+        visibility: LocalVisibility.publicLocal,
+        remixPolicy: LocalRemixPolicy.disabled,
+        localReviewPassed: true,
+      ),
+    );
+
+    final home = await _repository(store).loadHome();
+    final poker = home.playables.first;
+    expect(poker.title, '德州扑克新手训练桌 Free Training');
+    expect(poker.coverAsset, 'assets/featured-originals-v2/poker-training.png');
+    expect(poker.standaloneAsset, 'assets/arcade/poker-training/index.html');
+    expect(
+      home.playables.where((item) => item.title == poker.title),
+      hasLength(1),
+    );
+  });
+
   testWidgets(
     'home profile runtime and history keep one published playable_id',
     (tester) async {

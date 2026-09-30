@@ -45,7 +45,7 @@ class AirvanaRepository {
   Future<HomeSnapshot> _localHome() async {
     try {
       final workspace = await _localStore.loadWorkspace();
-      final persisted = workspace.playables
+      final publishedLocal = workspace.playables
           .where((item) => item.status == LocalPlayableStatus.publishedLocal)
           .where((item) {
             final release = workspace.releases.where(
@@ -54,7 +54,20 @@ class AirvanaRepository {
             return release.isNotEmpty &&
                 release.first.visibility == LocalVisibility.publicLocal;
           })
+          .toList(growable: false);
+      final persisted = publishedLocal
           .map(_domainPlayable)
+          .toList(growable: false);
+      // A local publish may be a persisted copy of one of the bundled games.
+      // Keep that copy's identity/social state, but restore the catalog cover
+      // and standalone entry so it does not regress to a generated placeholder.
+      final shadowedLegacyIds = publishedLocal
+          .map(_legacyForLocalPlayable)
+          .whereType<Playable>()
+          .map((item) => item.id)
+          .toSet();
+      final catalog = LegacyDemoCatalog.legacyWebPlayables
+          .where((item) => !shadowedLegacyIds.contains(item.id))
           .toList(growable: false);
       // 收藏 / 点赞与 Web 一样按作品 id 持久化，冷启动后仍然保留。
       final social = workspace.socialState;
@@ -67,7 +80,7 @@ class AirvanaRepository {
       }
       return HomeSnapshot(
         user: LegacyDemoCatalog.user,
-        playables: [...persisted, ...LegacyDemoCatalog.legacyWebPlayables],
+        playables: [...persisted, ...catalog],
         localDemo: true,
         account: _localAccount,
         engagementsByContent: engagements,
@@ -113,18 +126,43 @@ class AirvanaRepository {
     }
   }
 
-  Playable _domainPlayable(LocalPlayable playable) => Playable(
-    id: playable.playableId,
-    title: playable.title,
-    authorName: playable.authorName,
-    contentType: playable.contentType,
-    version: playable.currentVersionNumber,
-    summary: playable.summary,
-    stage: playable.dataMode == LocalDataMode.demo
-        ? 'DEMO · LOCAL PUBLISHED'
-        : 'LOCAL PUBLISHED',
-    localDemo: true,
-  );
+  Playable _domainPlayable(LocalPlayable playable) {
+    final legacy = _legacyForLocalPlayable(playable);
+    return Playable(
+      id: playable.playableId,
+      title: playable.title,
+      authorName: playable.authorName,
+      contentType: playable.contentType,
+      version: playable.currentVersionNumber,
+      summary: playable.summary.isEmpty
+          ? (legacy?.summary ?? '')
+          : playable.summary,
+      coverAsset: legacy?.coverAsset ?? '',
+      ownerUserId: playable.ownerId,
+      stage:
+          legacy?.stage ??
+          (playable.dataMode == LocalDataMode.demo
+              ? 'DEMO · LOCAL PUBLISHED'
+              : 'LOCAL PUBLISHED'),
+      agentName: legacy?.agentName ?? 'Nova',
+      ownerHandle: legacy?.ownerHandle ?? '@airvana.arcade',
+      category: legacy?.category ?? '原创互动',
+      instruction: legacy?.instruction ?? '完成互动目标并保存本机体验记录。',
+      localDemo: true,
+      standaloneAsset: legacy?.standaloneAsset ?? '',
+    );
+  }
+
+  Playable? _legacyForLocalPlayable(LocalPlayable playable) {
+    final byId = LegacyDemoCatalog.byId(playable.playableId);
+    if (byId != null) return byId;
+    final title = playable.title.trim().toLowerCase();
+    if (title.isEmpty) return null;
+    for (final candidate in LegacyDemoCatalog.legacyWebPlayables) {
+      if (candidate.title.trim().toLowerCase() == title) return candidate;
+    }
+    return null;
+  }
 
   Playable _serverPlayable(Map<String, dynamic> json) {
     final base = Playable.fromJson(json);
